@@ -1,6 +1,6 @@
-### 用**git pull**来更新代码的时候，遇到了下面的问题：
+## 用**git pull**来更新代码的时候，遇到了下面的问题：
 
-```javascript
+```shell
 error:
 Your local changes to the following files would be overwritten by merge:
 xxx/xxx/xxx.(冲突的文件)
@@ -9,7 +9,7 @@ Please, commit your changes or stash them before you can merge. Aborting
 
 从sourceTree打开终端，可以直接进入你当前项目所在目录下，在终端输入下面代码：
 
-```javascript
+```shell
 git stash 
 git pull
 git stash pop
@@ -22,3 +22,11 @@ git stash pop
 2.https://www.jianshu.com/p/920ad324fe64
 
 3.https://blog.csdn.net/qq_32452623/article/details/75645578
+
+
+## SourceTree 强制覆盖 Pull
+```shell
+git fetch --all
+git reset --hard origin/master
+git pull
+```
