@@ -1,18 +1,6 @@
-### QT加载静态链接库（.Lib，.a，.os）,以及关于LIBS +=的用法
+# QT加载静态链接库（.Lib，.a，.os）,以及关于LIBS +=的用法
 
--   -   [.pro 文件中写入](https://blog.csdn.net/weixin_42156552/article/details/121871417#pro__4)
-    -   -   -   [在前面加上 Release： 或 Debug: 的区别](https://blog.csdn.net/weixin_42156552/article/details/121871417#__Release___Debug__18)
-            -   [LIBS+= 与 LIBPATH +=](https://blog.csdn.net/weixin_42156552/article/details/121871417#LIBS____LIBPATH__26)
-        -   [库路径](https://blog.csdn.net/weixin_42156552/article/details/121871417#_35)
-        -   -   [QT内的特殊表示](https://blog.csdn.net/weixin_42156552/article/details/121871417#QT_45)
-            -   [不同操作系统下的静态库](https://blog.csdn.net/weixin_42156552/article/details/121871417#_75)
-        -   [库文件](https://blog.csdn.net/weixin_42156552/article/details/121871417#_86)
-    -   [添加.h文件进入项目](https://blog.csdn.net/weixin_42156552/article/details/121871417#h_130)
-    -   -   -   [添加头文件（或者直接通过右键添加现有文件就好了）](https://blog.csdn.net/weixin_42156552/article/details/121871417#_133)
-
-以下内容由本人收集资料重新编辑的内容
-
-## .pro 文件中写入
+## .pro 文件中
 
 _**需要在项目的 .pro 文件中写入加载lib，并且要添加相应的 .h文件进入项目,并引用**_
 
@@ -34,7 +22,7 @@ _**需要在项目的 .pro 文件中写入加载lib，并且要添加相应的 .
 代码如下（示例）：
 
 ```javascript
-Release：LIBS+=-L  folderPath // release 版引入的lib文件路径
+Release：LIBS+= -L folderPath // release 版引入的lib文件路径
 Debug:   LIBS+= -L folderPath // Debug 版引入的lib文件路径
 ```
 
@@ -63,29 +51,29 @@ ___
 指的是当前正在解析的.pro文件的目录的完整路径。 在编写支持影子构建的项目文件时，PWD很有用。  
 代码如下（示例）：
 
-```cpp
-LIBS += -L$$PWD/.......
+```javascript
+LIBS += -L$$PWD/......
 ```
 
 **OUT\_PWD**  
 指的是qmake生成的Makefile的目录的完整路径。即构建目录，例如build-??-Desktop\_Qt\_5\_12\_8\_MSVC2017\_64bit-Debug
 
-```cpp
-LIBS += -L$$OUT_PWD/.......
+```javascript
+LIBS += -L$$OUT_PWD/......
 ```
 
 **_PRO\_FILE_**  
 正在使用的项目文件的路径。
 
-```cpp
+```javascript
 LIBS += -L$$_PRO_FILE_/......
 ```
 
 **_PRO\_FILE\_PWD_**  
 包含目录的路径，该目录包含正在使用的项目文件。
 
-```cpp
-LIBS += -L$$_PRO_FILE_PWD_/....
+```javascript
+LIBS += -L$$_PRO_FILE_PWD_/......
 ```
 
 #### 不同操作系统下的静态库

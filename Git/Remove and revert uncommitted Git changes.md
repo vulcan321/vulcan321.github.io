@@ -6,17 +6,17 @@ GPT.display('mu-top')
 
 The commands to discard all local changes in Git are:
 
-1.  git reset –hard
-2.  git clean -fxd
+1. git reset -–hard
+2. git clean --fxd
 
 ### Uncommitted Git change types
 
 To understand why these two commands are required to locally remove uncommitted Git changes, you need to understand the four different types of uncommitted changes that exist in Git. They are:
 
--   updated files that have been added to the index
--   newly created files that have been added to the index
--   updated files that have _not_ been added to the index
--   newly created files that have _not_ been added to the index
+- updated files that have been added to the index
+- newly created files that have been added to the index
+- updated files that have _not_ been added to the index
+- newly created files that have _not_ been added to the index
 
 There are four types of files to think about when you remove and discard local Git changes.
 

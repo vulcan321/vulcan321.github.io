@@ -23,8 +23,8 @@ git stash pop
 
 3.https://blog.csdn.net/qq_32452623/article/details/75645578
 
-
 ## SourceTree 强制覆盖 Pull
+
 ```shell
 git fetch --all
 git reset --hard origin/master
