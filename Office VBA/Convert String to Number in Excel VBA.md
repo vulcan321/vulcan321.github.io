@@ -16,7 +16,6 @@ End Sub
 
 Press **F5** to **run** the **code**. The output is shown in the **MsgBox**.
 
-
 The CInt function **converted** the **numeric string** value **(“12.3”**) to an **integer** **12.  
 **To understand more about the **CInt function**, run the following code in the code editor and **observe** the **results**.
 
@@ -32,7 +31,6 @@ Copy
 
 ![convert string to number in Excel VBA](https://www.exceldemy.com/wp-content/uploads/2022/03/convert-string-to-number-3.png)
 
-
 **Code Explanation**
 
 In this code, we used the  [](https://www.exceldemy.com/for-next-loop-excel-vba/)[**For…Next loop**](https://www.exceldemy.com/for-next-loop-excel-vba/) to apply the **CInt function** on the strings of cells **B3:B7.** The **outputs** are printed in cells **C3:C7.** We used the [**Cells function**](https://docs.microsoft.com/en-us/office/vba/api/excel.cells) to specify the input values and where to print the output values.
@@ -44,7 +42,6 @@ The CInt function **converted 25.5** to the **next integer number 26**. On the o
 **Note**
 
 The integer value has a range between **\-32,768** to **32,767**. If we put a numeric value that is **out of this range**, Excel will show an **error**.
-
 
 ___
 
@@ -61,8 +58,8 @@ Next
 End Sub
 ```
 
-
 Here, cells **B3:B9** contain some **numerical string value**, and **converted** l**ong numbers** are in cells **C3:C9.** The **CLng function** **converted** **\-32800** and **32800** successfully to **long numbers** which the **CInt function** couldn’t. But it’ll also get an **error** if the input **numeric value** is **out of range.**
+
 ___
 
 #### **1.3 String to Decimal**
@@ -76,6 +73,7 @@ Cells(i, 3).Value = CDec(Cells(i, 2))
 Next
 End Sub
 ```
+
 ___
 
 #### **1.4 String to Single**
@@ -95,9 +93,7 @@ Next
 End Sub
 ```
 
-
 In the output, cells **B3:B9** contain some **numerical string value,** and **converted single datatype numbers** are in cells **C3:C9.**  But it’ll also get an **error** if the input **numeric value** is **out of range.**
-
 
 #### **1.5 String to Double**
 
@@ -133,6 +129,7 @@ Cells(i, 3).Value = CCur(Cells(i, 2))
 Next
 End Sub
 ```
+
 ___
 
 #### **1.7 String to Byte**
