@@ -196,7 +196,34 @@ int main(int argc, char *argv[])
 }
 
 ```
+## 调用shell脚本并监控返回的方法
 
+```c++
+QProcess process =new QProcess(this);
+
+//调用过程输出的监控
+    connect(process, SIGNAL(readyRead()), this, SLOT(readProcess()));
+    connect(process, SIGNAL(finished(int)), this, SLOT(finishedProcess()));
+```
+
+然后在readProcess()和finishedProcess()中进行分析
+```c++
+void MainWindow::executeProcess(const char *shell){
+    shellOutput="";
+    process->start(shell);
+}
+
+void MainWindow::readProcess(){
+    QString output=process->readAll();
+     shellOutput+=output;
+     //do something
+}
+
+void MainWindow::finishedProcess(){
+    qDebug()<<shellOutput;
+     //do something
+}
+```
 ## 向sh文件输入参数
 
 有时需要向sh文件中输入参数，这时可以用‘$1’’$2’等占位  
@@ -252,3 +279,5 @@ exit 0
 如果不加“source /opt/ros/melodic/setup.bash”  
 虽然能直接在终端运行bagplay.sh  
 但是通过qt运行时会报错
+
+
