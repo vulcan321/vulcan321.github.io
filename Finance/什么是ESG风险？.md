@@ -1,0 +1,1 @@
+ESG是环境Environment、社会Social Responsibility、公司治理Corporate Governance加起来的缩写，把环境、社会及公司治理的风险综合起来，就是ESG风险。

@@ -1,11 +1,5 @@
 # SmartGit/SmartSVN/SmartSynchronize 激活教程
 
-[![](https://upload.jianshu.io/users/upload_avatars/26019002/64b4536d-84d2-4f69-98ad-8434376df019?imageMogr2/auto-orient/strip|imageView2/1/w/96/h/96/format/webp)](https://www.jianshu.com/u/a72b3f4b7bf1)
-
-[top\_51be](https://www.jianshu.com/u/a72b3f4b7bf1)关注
-
-2021.12.16 09:54:23字数 421阅读 1,261
-
 ## 下载
 
 | 名称 | 下载地址 |
