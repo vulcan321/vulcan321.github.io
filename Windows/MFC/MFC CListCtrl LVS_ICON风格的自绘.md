@@ -52,9 +52,6 @@ END_MESSAGE_MAP()
 
 // CListCtrlEx 消息处理程序
 
-
-
-
 void CListCtrlEx::OnNMCustomdraw(NMHDR *pNMHDR, LRESULT *pResult)
 {
     NMLVCUSTOMDRAW* pLVCD = reinterpret_cast<NMLVCUSTOMDRAW*>(pNMHDR);
