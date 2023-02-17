@@ -1,13 +1,5 @@
 [Windows消息处理](https://www.cnblogs.com/lidabo/p/3523088.html)
 
-由于看了一下，比较好理解，暂时先放到这里，待有空再翻译。只是在每节后大致介绍一下讲的内容。
-
-感觉写的比较全，无论从消息的原理还是从MFC操作上来说，值得一看，我也在此做个收藏。
-
-# (一)
-
-说明：以下首先对消息进行介绍，然后在消息处理中，使用类向导创建消息循环，这个操作是在vc6.0（或者之下版本）操作的。
-
 ## Introduction
 
 Perhaps one of the most important means of communication in windows is Messages. The traditional program starts at your`main()` function, moves down line-by-line in your code, and eventually exits. The Windows concept is different. The way you program in windows is by responding to events. These events are called messages.

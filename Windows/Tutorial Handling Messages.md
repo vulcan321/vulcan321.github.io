@@ -1,11 +1,5 @@
 # Handling Messages
 
-Example: window\_click
-
-![[images/window_click.gif]](http://www.winprog.org/tutorial/window_click.htmlimages/window_click.gif) Alright, we've got a window, but it doesn't do anything except what `DefWindowProc()` allows it to, like be sized, maximised, etc... Not really all that exciting.
-
-In the next section I am going to show you how to modify what you already have to do something new. This way I can just tell you _"Handle this message, and do this in it..."_ and you will know what I mean and be able to do so without seeing an entire example. That's the hope anyway, so pay attention :P
-
 Okay for starters take the example code for the last window we worked on and make sure it compiles and runs as expected. Then you can either keep working on it for the next little bit or copy it to a new project to modify.
 
 We're going to add the capability to show the user what the name of our program is when they click on our window. Not very exciting, it's basically to get the hang of handling messages. Lets look at what we have in our `WndProc()`:
@@ -33,7 +27,7 @@ If we want to handle mouse clicks, we need to add a `WM_LBUTTONDOWN` handler (or
 
 If I or someone else refers to _handling a message_ they mean to add it into the `WndProc()` of your window class as follows:
 
-```
+```c++
 LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
    switch(msg)
