@@ -1,0 +1,102 @@
+auto func_write_read = [](const QString qstrPath, const std::string& str)
+        {
+            QFile file1(qstrPath);
+            file1.open(QIODevice::WriteOnly | QIODevice::Text | QIODevice::Truncate);
+            QByteArray byte1 = QByteArray::fromStdString(str);
+            qDebug() << "Write Byte Array Size: " << byte1.size();
+            file1.write(byte1);
+            file1.close();
+
+            QByteArray byte2;
+            QFile file2(qstrPath);
+            file2.open(QIODevice::ReadOnly);
+            byte2 = file2.readAll();
+            qDebug() << "Read Byte Array Size: " << byte2.size();
+            file2.close();
+
+            return byte2.toStdString();
+        };
+        auto func_rc4_crypt = [](FX_BYTE* pBuffer, FX_DWORD size)
+        {
+            if (pBuffer)
+            {
+                FX_BYTE SIG_RC4KEY[] = { 0x9c,0x09,0x28,0x19,0x33,0xd7,0xa4,0x06,0xef,0x93,
+                    0x28,0x43,0x0f,0x28,0xbc,0x13,0x6c,0xcb,0x27,0xaa,
+                    0x17,0x0d,0x53,0xc6,0xa0,0xae,0x49,0x15,0x5e,0x3d,
+                    0x83,0x0d,0x08,0xfb,0xb2,0xdf,0x6f,0x8d,0x5a,0x0e,
+                    0xc7,0x02,0x34,0x71,0x9a,0xa1,0xd4,0xb1,0x03,0x2e,
+                    0x8d,0x6b,0x43,0xe1,0x65,0x0e,0xb4,0x70,0xc3,0xb6,
+                    0xcd,0x4c,0x14,0x0d,0x9f,0xf3,0x03,0x59,0x93,0x90,
+                    0xa2,0xf1,0xcc,0x9f,0x8c,0x21,0xe9,0xfa,0x4e,0xaa,
+                    0x99,0x6c,0xbf,0x99,0x36,0x31,0x91,0xec,0x58,0x09,
+                    0xa6,0xd7,0x19,0xc0,0x09,0x29,0xfa,0xcf,0x9d,0x10
+                };
+                CRYPT_ArcFourCryptBlock(pBuffer, size * sizeof(FX_CHAR), SIG_RC4KEY, sizeof(SIG_RC4KEY));
+            }
+        };
+        auto func_decode = [&](const std::string& base64_str){
+            std::string str;
+            CFX_Base64Decoder fxBase64Decoder;
+            FX_INT32 len = fxBase64Decoder.Decode((FX_LPCSTR)base64_str.c_str(), base64_str.size(), (FX_LPBYTE)nullptr);
+            str.resize(len, 0);
+            fxBase64Decoder.Decode((FX_LPCSTR)base64_str.c_str(), base64_str.size(), (FX_LPBYTE)str.data());
+
+            qDebug() << "RC4 Decode String Size: " << str.size();
+            func_rc4_crypt((FX_BYTE*)str.data(), str.size());
+            qDebug() << "RC4 Decode String Size: " << str.size();
+
+            qDebug() << QString::fromStdString(str);
+            qDebug() << "String Size: " << str.size();
+            return str;
+        };
+
+        auto func_encode = [&](const std::string& str){
+
+            string temp_str = str;
+            qDebug() << "RC4 Encode String Size: " << temp_str.size();
+            func_rc4_crypt((FX_BYTE*)temp_str.data(), temp_str.size());
+            qDebug() << "RC4 Encode String Size: " << temp_str.size();
+
+            CFX_Base64Encoder fxBase64Encoder;
+
+            auto pData = std::make_unique<FX_CHAR[]>(temp_str.size());
+            memset(pData.get(), 0, temp_str.size());
+            memcpy(pData.get(), temp_str.c_str(), temp_str.size());
+
+            std::string base64_str;
+            FX_INT32 len = fxBase64Encoder.Encode((FX_LPCBYTE)temp_str.c_str(), temp_str.size(), (FX_LPSTR)nullptr);
+            base64_str.resize(len, 0);
+            fxBase64Encoder.Encode((FX_LPCBYTE)temp_str.c_str(), temp_str.size(), (FX_LPSTR)base64_str.data());
+
+            qDebug() << QString::fromStdString(base64_str);
+            qDebug() << "Base64 String Size: " << base64_str.size();
+            return base64_str;
+        };
+
+        QString qstrPath;
+
+
+        std::string str0 = "Jy8u+fOveU7Ks4+GxukMaSN35hN3kBQde8htFblolnsnVd4rG+yOWUZ1WWSmeBXfC9o0ztr9/Dbo07tv5krzUa3ykhtPrimQEnzueV2eP46ukUQoQdlfPfvOgaMpvoMjJWsOvBl/g2REOSk0+LtS6fYObXwX+9BJgboqiSKQSRwCnIzbhKfVLZBsC85UQqK92fHVvrGt38g9+hbWrk82AdNlHbdEL+5bd9oBQSlDD8e40Csmj0yfArbIAIEPaMVfqwacjKd8kvACV/zvX19r/Q49a3jzbVLypjODIzsnsUJ3a43BjfUjWQ8PFDkouOnyikztEWZAvpOcdSAHIWUll9FXy3Wxuk4iOOLTyuB/jNB7Szv/X7EaVrI2lKfmJWHA8xJPsBxAA8LKupP/1EVeRoNysiHq2+rUSomZgvAW+ajZHXyH8jX2jE0RI4SipTRZSJVLrzw7mv/VwOcBxIyH3nygSdazBZ+/FcthOaiEiXPliD4GKo4C5pboZnfa3fZGrvjj8HUY1txOrYPUYUia5rYaYTgZK8k+O41o5wuQCQjmRzqVTzfqk84U1XfMJpR7VKk6yWxZxZ+MxxhI+ozqoJzu0PNTvKPyoO+cU54r0297TiIZNmQO20Z0o3INYg5dD+1BcRjb3Rvc06dMOZM94acG8aLf6FkQNI6xqnoClpgNg55Vki2k6HaDGa8Rb54ZmPSqQgNHqy5enVZunSYh4fRQhvKHrIyZ0dae1a7CBt51vlD4xyW9BOYcnZjk8OI1GbML/2o=";
+        std::string base64_str0 = func_encode(str0);
+        qstrPath = "/Users/mujing/Documents/1111.txt";
+        auto base64_str00 = func_write_read(qstrPath, base64_str0);
+
+        std::string str1 = func_decode(base64_str00);
+        std::string base64_str1 = func_encode(str1);
+
+        qstrPath = "/Users/mujing/Documents/1112.txt";
+        auto base64_str11 = func_write_read(qstrPath, base64_str1);
+        std::string str2 = func_decode(base64_str11);
+
+        if (str0 == str1)
+        {
+            qDebug() << "Str 0 Str 1 Equal";
+        }
+        if (str0 == str2)
+        {
+            qDebug() << "Str 0 Str 2 Equal";
+        }
+        if (str1 == str2)
+        {
+            qDebug() << "Str 1 Str 2 Equal";
+        }
