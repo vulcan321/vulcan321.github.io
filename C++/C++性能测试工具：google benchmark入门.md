@@ -311,7 +311,7 @@ BENCHMARK(bench_array_ring_insert_int)->RangeMultiplier(10)->Range(10, 1000);
 使用Ranges可以处理多个参数的情况：
 
 ```c++
-BENCHMARK(func)->RangeMultiplier(10)->Ranges({{10, 1000}, {128， 256}});
+BENCHMARK(func)->RangeMultiplier(10)->Ranges(\{\{10, 1000\}, \{128， 256\}\});
 ```
 
 第一个范围指定了测试用例的第一个传入参数的范围，而第二个范围指定了第二个传入参数可能的值（注意这里不是范围了）。
