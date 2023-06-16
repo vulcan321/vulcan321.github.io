@@ -1,0 +1,3 @@
+[submodule "d2l-ai"]
+	path = d2l-ai
+	url = git@github.com:d2l-ai/d2l-zh.git
