@@ -1,3 +1,5 @@
+
+```cpp
 void MultipleFilesThumbnailView::OnPaint()
 {
 	CString csLog;
@@ -200,3 +202,4 @@ void MultipleFilesThumbnailView::OnPaint()
 
 	// Do not call CWnd::OnPaint() for painting messages
 }
+```

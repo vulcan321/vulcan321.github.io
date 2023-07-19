@@ -185,13 +185,3 @@ EndPaint(pDC, &ps);
 
 }
 ```
-
- 
-
-$(function() { setTimeout(function () { var mathcodeList = document.querySelectorAll('.htmledit\_views img.mathcode'); if (mathcodeList.length > 0) { for (let i = 0; i < mathcodeList.length; i++) { if (mathcodeList\[i\].naturalWidth === 0 || mathcodeList\[i\].naturalHeight === 0) { var alt = mathcodeList\[i\].alt; alt = '\\\\(' + alt + '\\\\)'; var curSpan = $('<span class="img-codecogs"></span>'); curSpan.text(alt); $(mathcodeList\[i\]).before(curSpan); $(mathcodeList\[i\]).remove(); } } MathJax.Hub.Queue(\["Typeset",MathJax.Hub\]); } }, 1000) });
-
- [![](https://profile-avatar.csdnimg.cn/1d280a0b0d9840359313bd72a2e0b1cf_zjy1175044232.jpg!1) Zhninu](https://blog.csdn.net/zjy1175044232)
-
-[关注](javascript:;) 关注
-
--    ![](https://csdnimg.cn/release/blogv2/dist/pc/img/tobarThumbUpactive.png) ![](https://csdnimg.cn/release/blogv2/dist/pc/img/newHeart2021Active.png)
