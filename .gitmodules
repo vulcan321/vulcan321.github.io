@@ -1,3 +1,6 @@
 [submodule "d2l-ai"]
 	path = d2l-ai
 	url = git@github.com:d2l-ai/d2l-zh.git
+[submodule "apachecn-c-cpp-zh-pt2"]
+	path = apachecn-c-cpp-zh-pt2
+	url = https://github.com/apachecn/apachecn-c-cpp-zh-pt2.git
