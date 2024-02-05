@@ -1,194 +1,646 @@
-<mxfile host="Electron" modified="2023-07-21T11:01:16.060Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.2.1 Chrome/112.0.5615.87 Electron/24.1.2 Safari/537.36" etag="40gaO8wf58DhsyVOKwL4" version="21.2.1" type="device">
-  <diagram name="Page-1" id="j1iiFht7UFW3FdYnTq30">
-    <mxGraphModel dx="2419" dy="2209" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+<mxfile host="Electron" modified="2024-02-05T08:30:35.997Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.2.1 Chrome/112.0.5615.87 Electron/24.1.2 Safari/537.36" etag="kfcv9stCNsA0Eg41SKlN" version="21.2.1" type="device" pages="3">
+  <diagram name="General Modules" id="j1iiFht7UFW3FdYnTq30">
+    <mxGraphModel dx="3457" dy="2635" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="iG0wlQvIGRCRvuXxt9ED-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="iG0wlQvIGRCRvuXxt9ED-2" target="iG0wlQvIGRCRvuXxt9ED-6">
+        <mxCell id="iG0wlQvIGRCRvuXxt9ED-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="iG0wlQvIGRCRvuXxt9ED-2" target="iG0wlQvIGRCRvuXxt9ED-6" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="iG0wlQvIGRCRvuXxt9ED-2" value="Word/Excel/Powerpoint" style="html=1;dropTarget=0;whiteSpace=wrap;" vertex="1" parent="1">
+        <mxCell id="iG0wlQvIGRCRvuXxt9ED-2" value="Word/Excel/Powerpoint" style="html=1;dropTarget=0;whiteSpace=wrap;" parent="1" vertex="1">
           <mxGeometry x="-60" y="170" width="180" height="90" as="geometry" />
         </mxCell>
-        <mxCell id="iG0wlQvIGRCRvuXxt9ED-3" value="" style="shape=module;jettyWidth=8;jettyHeight=4;" vertex="1" parent="iG0wlQvIGRCRvuXxt9ED-2">
+        <mxCell id="iG0wlQvIGRCRvuXxt9ED-3" value="" style="shape=module;jettyWidth=8;jettyHeight=4;" parent="iG0wlQvIGRCRvuXxt9ED-2" vertex="1">
           <mxGeometry x="1" width="20" height="20" relative="1" as="geometry">
             <mxPoint x="-27" y="7" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="iG0wlQvIGRCRvuXxt9ED-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="iG0wlQvIGRCRvuXxt9ED-6" target="iG0wlQvIGRCRvuXxt9ED-9">
+        <mxCell id="iG0wlQvIGRCRvuXxt9ED-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="iG0wlQvIGRCRvuXxt9ED-6" target="iG0wlQvIGRCRvuXxt9ED-9" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="iG0wlQvIGRCRvuXxt9ED-29" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="iG0wlQvIGRCRvuXxt9ED-6" target="iG0wlQvIGRCRvuXxt9ED-12">
+        <mxCell id="iG0wlQvIGRCRvuXxt9ED-29" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="iG0wlQvIGRCRvuXxt9ED-6" target="iG0wlQvIGRCRvuXxt9ED-12" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="iG0wlQvIGRCRvuXxt9ED-6" value="Office Addins&lt;br&gt;Word/Excel/PowerPoint&amp;nbsp;" style="html=1;dropTarget=0;whiteSpace=wrap;" vertex="1" parent="1">
+        <mxCell id="iG0wlQvIGRCRvuXxt9ED-6" value="Office Addins&lt;br&gt;Word/Excel/PowerPoint&amp;nbsp;" style="html=1;dropTarget=0;whiteSpace=wrap;" parent="1" vertex="1">
           <mxGeometry x="230" y="170" width="180" height="90" as="geometry" />
         </mxCell>
-        <mxCell id="iG0wlQvIGRCRvuXxt9ED-7" value="" style="shape=module;jettyWidth=8;jettyHeight=4;" vertex="1" parent="iG0wlQvIGRCRvuXxt9ED-6">
+        <mxCell id="iG0wlQvIGRCRvuXxt9ED-7" value="" style="shape=module;jettyWidth=8;jettyHeight=4;" parent="iG0wlQvIGRCRvuXxt9ED-6" vertex="1">
           <mxGeometry x="1" width="20" height="20" relative="1" as="geometry">
             <mxPoint x="-27" y="7" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="iG0wlQvIGRCRvuXxt9ED-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="iG0wlQvIGRCRvuXxt9ED-9" target="iG0wlQvIGRCRvuXxt9ED-14">
+        <mxCell id="iG0wlQvIGRCRvuXxt9ED-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="iG0wlQvIGRCRvuXxt9ED-9" target="iG0wlQvIGRCRvuXxt9ED-14" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="iG0wlQvIGRCRvuXxt9ED-9" value="FoxitUtils.applescript" style="html=1;dropTarget=0;whiteSpace=wrap;" vertex="1" parent="1">
+        <mxCell id="iG0wlQvIGRCRvuXxt9ED-9" value="FoxitUtils.applescript" style="html=1;dropTarget=0;whiteSpace=wrap;" parent="1" vertex="1">
           <mxGeometry x="570" y="270" width="180" height="90" as="geometry" />
         </mxCell>
-        <mxCell id="iG0wlQvIGRCRvuXxt9ED-10" value="" style="shape=module;jettyWidth=8;jettyHeight=4;" vertex="1" parent="iG0wlQvIGRCRvuXxt9ED-9">
+        <mxCell id="iG0wlQvIGRCRvuXxt9ED-10" value="" style="shape=module;jettyWidth=8;jettyHeight=4;" parent="iG0wlQvIGRCRvuXxt9ED-9" vertex="1">
           <mxGeometry x="1" width="20" height="20" relative="1" as="geometry">
             <mxPoint x="-27" y="7" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="iG0wlQvIGRCRvuXxt9ED-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="iG0wlQvIGRCRvuXxt9ED-12" target="iG0wlQvIGRCRvuXxt9ED-14">
+        <mxCell id="iG0wlQvIGRCRvuXxt9ED-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="iG0wlQvIGRCRvuXxt9ED-12" target="iG0wlQvIGRCRvuXxt9ED-14" edge="1">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
               <mxPoint x="910" y="425" />
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="iG0wlQvIGRCRvuXxt9ED-32" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;entryX=0.017;entryY=0.328;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="iG0wlQvIGRCRvuXxt9ED-12" target="iG0wlQvIGRCRvuXxt9ED-50">
+        <mxCell id="iG0wlQvIGRCRvuXxt9ED-32" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;entryX=0.017;entryY=0.328;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="iG0wlQvIGRCRvuXxt9ED-12" target="iG0wlQvIGRCRvuXxt9ED-50" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="iG0wlQvIGRCRvuXxt9ED-12" value="AddinPrinterUI.framework" style="html=1;dropTarget=0;whiteSpace=wrap;" vertex="1" parent="1">
+        <mxCell id="iG0wlQvIGRCRvuXxt9ED-12" value="AddinPrinterUI.framework" style="html=1;dropTarget=0;whiteSpace=wrap;" parent="1" vertex="1">
           <mxGeometry x="230" y="380" width="180" height="90" as="geometry" />
         </mxCell>
-        <mxCell id="iG0wlQvIGRCRvuXxt9ED-13" value="" style="shape=module;jettyWidth=8;jettyHeight=4;" vertex="1" parent="iG0wlQvIGRCRvuXxt9ED-12">
+        <mxCell id="iG0wlQvIGRCRvuXxt9ED-13" value="" style="shape=module;jettyWidth=8;jettyHeight=4;" parent="iG0wlQvIGRCRvuXxt9ED-12" vertex="1">
           <mxGeometry x="1" width="20" height="20" relative="1" as="geometry">
             <mxPoint x="-27" y="7" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="iG0wlQvIGRCRvuXxt9ED-54" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="iG0wlQvIGRCRvuXxt9ED-14" target="iG0wlQvIGRCRvuXxt9ED-51">
+        <mxCell id="iG0wlQvIGRCRvuXxt9ED-54" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="iG0wlQvIGRCRvuXxt9ED-14" target="iG0wlQvIGRCRvuXxt9ED-51" edge="1">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
               <mxPoint x="940" y="90" />
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="iG0wlQvIGRCRvuXxt9ED-56" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="iG0wlQvIGRCRvuXxt9ED-14" target="iG0wlQvIGRCRvuXxt9ED-52">
+        <mxCell id="iG0wlQvIGRCRvuXxt9ED-56" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="iG0wlQvIGRCRvuXxt9ED-14" target="iG0wlQvIGRCRvuXxt9ED-52" edge="1">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
               <mxPoint x="940" y="700" />
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="iG0wlQvIGRCRvuXxt9ED-14" value="Foxit PDF Editor.app" style="html=1;dropTarget=0;whiteSpace=wrap;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+        <mxCell id="iG0wlQvIGRCRvuXxt9ED-14" value="Foxit PDF Editor.app" style="html=1;dropTarget=0;whiteSpace=wrap;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
           <mxGeometry x="850" y="270" width="180" height="90" as="geometry" />
         </mxCell>
-        <mxCell id="iG0wlQvIGRCRvuXxt9ED-15" value="" style="shape=module;jettyWidth=8;jettyHeight=4;" vertex="1" parent="iG0wlQvIGRCRvuXxt9ED-14">
+        <mxCell id="iG0wlQvIGRCRvuXxt9ED-15" value="" style="shape=module;jettyWidth=8;jettyHeight=4;" parent="iG0wlQvIGRCRvuXxt9ED-14" vertex="1">
           <mxGeometry x="1" width="20" height="20" relative="1" as="geometry">
             <mxPoint x="-27" y="7" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="iG0wlQvIGRCRvuXxt9ED-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="iG0wlQvIGRCRvuXxt9ED-13" target="iG0wlQvIGRCRvuXxt9ED-9">
+        <mxCell id="iG0wlQvIGRCRvuXxt9ED-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="iG0wlQvIGRCRvuXxt9ED-13" target="iG0wlQvIGRCRvuXxt9ED-9" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="iG0wlQvIGRCRvuXxt9ED-17" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;" edge="1" parent="1" source="iG0wlQvIGRCRvuXxt9ED-18" target="iG0wlQvIGRCRvuXxt9ED-6">
+        <mxCell id="iG0wlQvIGRCRvuXxt9ED-17" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;" parent="1" source="iG0wlQvIGRCRvuXxt9ED-18" target="iG0wlQvIGRCRvuXxt9ED-6" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="iG0wlQvIGRCRvuXxt9ED-18" value="&lt;div&gt;&lt;/div&gt;读取Advanced Settings Dialog写入的&lt;span style=&quot;background-color: initial;&quot;&gt;XML配置信息；&lt;br&gt;将Word、Excel、PowerPoint文档转换成PDF；&lt;br&gt;&lt;/span&gt;&lt;div&gt;通过FoxitUtils.applescript调用Editor对转换后的PDF进一步处理；&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="shape=note2;boundedLbl=1;whiteSpace=wrap;html=1;size=25;verticalAlign=top;align=center;dashed=1;" vertex="1" parent="1">
-          <mxGeometry x="190" y="-50" width="420" height="90" as="geometry" />
+        <mxCell id="iG0wlQvIGRCRvuXxt9ED-18" value="&lt;div&gt;&lt;/div&gt;读取Advanced Settings Dialog写入的&lt;span style=&quot;background-color: initial;&quot;&gt;XML配置信息；&lt;br&gt;将Word、Excel、PowerPoint文档转换成PDF；&lt;br&gt;&lt;/span&gt;&lt;div&gt;通过FoxitUtils.applescript调用Editor对转换后的PDF进一步处理；&lt;/div&gt;&lt;div&gt;&lt;p style=&quot;box-sizing: border-box; margin: 0px; padding: 0px; color: rgb(16, 18, 20); font-size: var(--main-font-size); line-height: 21px; font-family: &amp;quot;PingFang SC&amp;quot;, &amp;quot;Segoe UI&amp;quot;, Arial, &amp;quot;Microsoft YaHei&amp;quot;, 微软雅黑, 宋体, &amp;quot;Malgun Gothic&amp;quot;, sans-serif; text-align: start; background-color: rgb(255, 255, 255);&quot; class=&quot;tgt color_text_0 un-step-trans&quot; data-section=&quot;0&quot;&gt;Read XML configuration information written by the Advanced Settings Dialog&lt;br/&gt;&lt;/p&gt;&lt;p style=&quot;box-sizing: border-box; margin: 0px; padding: 0px; color: rgb(16, 18, 20); font-size: var(--main-font-size); line-height: 21px; font-family: &amp;quot;PingFang SC&amp;quot;, &amp;quot;Segoe UI&amp;quot;, Arial, &amp;quot;Microsoft YaHei&amp;quot;, 微软雅黑, 宋体, &amp;quot;Malgun Gothic&amp;quot;, sans-serif; text-align: start; background-color: rgb(255, 255, 255);&quot; class=&quot;tgt color_text_0 un-step-trans&quot; data-section=&quot;1&quot;&gt;&lt;span style=&quot;box-sizing: border-box; font-size: var(--main-font-size); line-height: 21px; display: inline;&quot; class=&quot;tgt color_text_0&quot; data-group=&quot;1-0&quot; data-sentence=&quot;0&quot; data-section=&quot;1&quot;&gt;Convert Word, Excel, PowerPoint documents to PDF&lt;br/&gt;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;box-sizing: border-box; margin: 0px; padding: 0px; color: rgb(16, 18, 20); font-size: var(--main-font-size); line-height: 21px; font-family: &amp;quot;PingFang SC&amp;quot;, &amp;quot;Segoe UI&amp;quot;, Arial, &amp;quot;Microsoft YaHei&amp;quot;, 微软雅黑, 宋体, &amp;quot;Malgun Gothic&amp;quot;, sans-serif; text-align: start; background-color: rgb(255, 255, 255);&quot; class=&quot;tgt color_text_0 un-step-trans&quot; data-section=&quot;2&quot;&gt;&lt;span style=&quot;box-sizing: border-box; font-size: var(--main-font-size); line-height: 21px; display: inline;&quot; class=&quot;tgt color_text_0&quot; data-group=&quot;2-0&quot; data-sentence=&quot;0&quot; data-section=&quot;2&quot;&gt;Call Editor via FoxitUtils.applescript to postprocess the converted PDFs.&lt;/span&gt;&lt;/p&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="shape=note2;boundedLbl=1;whiteSpace=wrap;html=1;size=25;verticalAlign=top;align=center;dashed=1;" parent="1" vertex="1">
+          <mxGeometry x="40" y="-110" width="420" height="150" as="geometry" />
         </mxCell>
-        <mxCell id="iG0wlQvIGRCRvuXxt9ED-19" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="iG0wlQvIGRCRvuXxt9ED-20" target="iG0wlQvIGRCRvuXxt9ED-12">
+        <mxCell id="iG0wlQvIGRCRvuXxt9ED-19" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;" parent="1" source="iG0wlQvIGRCRvuXxt9ED-20" target="iG0wlQvIGRCRvuXxt9ED-12" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="iG0wlQvIGRCRvuXxt9ED-20" value="&lt;div&gt;&lt;/div&gt;Office Addins中需要使用的对话框；&lt;br&gt;本地化词条；&lt;br&gt;Advanced Settings Dialog 中&lt;span style=&quot;background-color: initial;&quot;&gt;配置信息的读取及写入；&lt;br&gt;(Excel)Create PDF Dialog；&lt;br&gt;&lt;/span&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="shape=note2;boundedLbl=1;whiteSpace=wrap;html=1;size=25;verticalAlign=top;align=center;dashed=1;" vertex="1" parent="1">
-          <mxGeometry x="-150" y="560" width="300" height="90" as="geometry" />
+        <mxCell id="iG0wlQvIGRCRvuXxt9ED-20" value="&lt;div&gt;&lt;/div&gt;Office Addins中需要使用的对话框；&lt;br&gt;本地化词条；&lt;br&gt;Advanced Settings Dialog 中配置信息的读取及写入；&lt;br&gt;&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;(Excel)Create PDF Dialog；&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;br&gt;&lt;/div&gt;&lt;p style=&quot;box-sizing: border-box; margin: 0px; padding: 0px; color: rgb(16, 18, 20); font-size: var(--main-font-size); line-height: 21px; font-family: &amp;quot;PingFang SC&amp;quot;, &amp;quot;Segoe UI&amp;quot;, Arial, &amp;quot;Microsoft YaHei&amp;quot;, 微软雅黑, 宋体, &amp;quot;Malgun Gothic&amp;quot;, sans-serif; background-color: rgb(255, 255, 255);&quot; class=&quot;tgt color_text_0 un-step-trans&quot; data-section=&quot;0&quot;&gt;prompt dialog advanced settings dialogs&amp;nbsp;&lt;/p&gt;&lt;span style=&quot;color: rgb(16, 18, 20); font-family: &amp;quot;PingFang SC&amp;quot;, &amp;quot;Segoe UI&amp;quot;, Arial, &amp;quot;Microsoft YaHei&amp;quot;, 微软雅黑, 宋体, &amp;quot;Malgun Gothic&amp;quot;, sans-serif; background-color: rgb(255, 255, 255);&quot;&gt;(Excel) create PDF dialog&lt;/span&gt;&lt;span style=&quot;font-size: var(--main-font-size); background-color: rgb(255, 255, 255); color: rgb(16, 18, 20); font-family: &amp;quot;PingFang SC&amp;quot;, &amp;quot;Segoe UI&amp;quot;, Arial, &amp;quot;Microsoft YaHei&amp;quot;, 微软雅黑, 宋体, &amp;quot;Malgun Gothic&amp;quot;, sans-serif;&quot;&gt;&amp;nbsp;to be used in Office Addins&lt;/span&gt;&lt;span style=&quot;color: rgb(16, 18, 20); font-family: &amp;quot;PingFang SC&amp;quot;, &amp;quot;Segoe UI&amp;quot;, Arial, &amp;quot;Microsoft YaHei&amp;quot;, 微软雅黑, 宋体, &amp;quot;Malgun Gothic&amp;quot;, sans-serif; background-color: rgb(255, 255, 255);&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;p style=&quot;box-sizing: border-box; margin: 0px; padding: 0px; color: rgb(16, 18, 20); font-size: var(--main-font-size); line-height: 21px; font-family: &amp;quot;PingFang SC&amp;quot;, &amp;quot;Segoe UI&amp;quot;, Arial, &amp;quot;Microsoft YaHei&amp;quot;, 微软雅黑, 宋体, &amp;quot;Malgun Gothic&amp;quot;, sans-serif; background-color: rgb(255, 255, 255);&quot; class=&quot;tgt color_text_0 un-step-trans&quot; data-section=&quot;1&quot;&gt;&lt;span style=&quot;box-sizing: border-box; font-size: var(--main-font-size); line-height: 21px; display: inline;&quot; class=&quot;tgt color_text_0&quot; data-group=&quot;1-0&quot; data-sentence=&quot;0&quot; data-section=&quot;1&quot;&gt;Localized Strings;&lt;br&gt;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;box-sizing: border-box; margin: 0px; padding: 0px; color: rgb(16, 18, 20); font-size: var(--main-font-size); line-height: 21px; font-family: &amp;quot;PingFang SC&amp;quot;, &amp;quot;Segoe UI&amp;quot;, Arial, &amp;quot;Microsoft YaHei&amp;quot;, 微软雅黑, 宋体, &amp;quot;Malgun Gothic&amp;quot;, sans-serif; background-color: rgb(255, 255, 255);&quot; class=&quot;tgt color_text_0 un-step-trans&quot; data-section=&quot;2&quot;&gt;&lt;span style=&quot;box-sizing: border-box; background-color: rgba(255, 228, 181, 0.7); font-size: var(--main-font-size); line-height: 21px; display: inline;&quot; class=&quot;tgt color_text_0 highlight&quot; data-group=&quot;2-0&quot; data-sentence=&quot;0&quot; data-section=&quot;2&quot;&gt;Reading and writing configuration information(xml file structure)&lt;/span&gt;&lt;/p&gt;" style="shape=note2;boundedLbl=1;whiteSpace=wrap;html=1;size=25;verticalAlign=top;align=left;dashed=1;" parent="1" vertex="1">
+          <mxGeometry x="-230" y="390" width="380" height="200" as="geometry" />
         </mxCell>
-        <mxCell id="iG0wlQvIGRCRvuXxt9ED-21" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.75;entryY=0;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="iG0wlQvIGRCRvuXxt9ED-22" target="iG0wlQvIGRCRvuXxt9ED-9">
+        <mxCell id="iG0wlQvIGRCRvuXxt9ED-21" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.75;entryY=0;entryDx=0;entryDy=0;dashed=1;" parent="1" source="iG0wlQvIGRCRvuXxt9ED-22" target="iG0wlQvIGRCRvuXxt9ED-9" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="iG0wlQvIGRCRvuXxt9ED-22" value="&lt;div&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;文件夹操作（创建、删除．复制)&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;Choose File/Folder操作&lt;/span&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;div&gt;Open PDF File&lt;/div&gt;&lt;div&gt;调用Foxit PDF Editor.app处理转换后的PDF&lt;/div&gt;&lt;div&gt;调用Foxit PDF Editor.app合并每个Excel Sheet转换后的PDF&lt;/div&gt;&lt;/div&gt;&lt;div&gt;Check License等Commands&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="shape=note2;boundedLbl=1;whiteSpace=wrap;html=1;size=25;verticalAlign=top;align=center;dashed=1;" vertex="1" parent="1">
-          <mxGeometry x="840" y="-65" width="360" height="120" as="geometry" />
+        <mxCell id="iG0wlQvIGRCRvuXxt9ED-22" value="&lt;div&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;文件夹操作（创建、删除．复制)&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;Choose File/Folder操作&lt;/span&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;Open PDF File&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;调用Foxit PDF Editor.app处理转换后的PDF&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;调用Foxit PDF Editor.app合并每个Excel Sheet转换后的PDF&lt;/div&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;Check License等Commands&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;p style=&quot;text-align: left; box-sizing: border-box; margin: 0px; padding: 0px; color: rgb(16, 18, 20); font-size: var(--main-font-size); line-height: 21px; font-family: &amp;quot;PingFang SC&amp;quot;, &amp;quot;Segoe UI&amp;quot;, Arial, &amp;quot;Microsoft YaHei&amp;quot;, 微软雅黑, 宋体, &amp;quot;Malgun Gothic&amp;quot;, sans-serif; background-color: rgb(255, 255, 255);&quot; class=&quot;tgt color_text_0 un-step-trans&quot; data-section=&quot;0&quot;&gt;Folder operations (create, delete.&lt;span style=&quot;box-sizing: border-box; font-size: var(--main-font-size); line-height: 21px; display: inline;&quot; class=&quot;tgt color_text_0&quot; data-group=&quot;0-1&quot; data-sentence=&quot;1&quot; data-section=&quot;0&quot;&gt; Copy)&lt;br/&gt;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align: left; box-sizing: border-box; margin: 0px; padding: 0px; color: rgb(16, 18, 20); font-size: var(--main-font-size); line-height: 21px; font-family: &amp;quot;PingFang SC&amp;quot;, &amp;quot;Segoe UI&amp;quot;, Arial, &amp;quot;Microsoft YaHei&amp;quot;, 微软雅黑, 宋体, &amp;quot;Malgun Gothic&amp;quot;, sans-serif; background-color: rgb(255, 255, 255);&quot; class=&quot;tgt color_text_0 un-step-trans&quot; data-section=&quot;1&quot;&gt;&lt;span style=&quot;box-sizing: border-box; font-size: var(--main-font-size); line-height: 21px; display: inline;&quot; class=&quot;tgt color_text_0&quot; data-group=&quot;1-0&quot; data-sentence=&quot;0&quot; data-section=&quot;1&quot;&gt;Choose File/Folder operation&lt;br/&gt;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align: left; box-sizing: border-box; margin: 0px; padding: 0px; color: rgb(16, 18, 20); font-size: var(--main-font-size); line-height: 21px; font-family: &amp;quot;PingFang SC&amp;quot;, &amp;quot;Segoe UI&amp;quot;, Arial, &amp;quot;Microsoft YaHei&amp;quot;, 微软雅黑, 宋体, &amp;quot;Malgun Gothic&amp;quot;, sans-serif; background-color: rgb(255, 255, 255);&quot; class=&quot;tgt color_text_0 un-step-trans&quot; data-section=&quot;2&quot;&gt;&lt;span style=&quot;box-sizing: border-box; font-size: var(--main-font-size); line-height: 21px; display: inline;&quot; class=&quot;tgt color_text_0&quot; data-group=&quot;2-0&quot; data-sentence=&quot;0&quot; data-section=&quot;2&quot;&gt;Open PDF File&lt;br/&gt;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align: left; box-sizing: border-box; margin: 0px; padding: 0px; color: rgb(16, 18, 20); font-size: var(--main-font-size); line-height: 21px; font-family: &amp;quot;PingFang SC&amp;quot;, &amp;quot;Segoe UI&amp;quot;, Arial, &amp;quot;Microsoft YaHei&amp;quot;, 微软雅黑, 宋体, &amp;quot;Malgun Gothic&amp;quot;, sans-serif; background-color: rgb(255, 255, 255);&quot; class=&quot;tgt color_text_0 un-step-trans&quot; data-section=&quot;3&quot;&gt;&lt;span style=&quot;box-sizing: border-box; background-color: rgba(255, 228, 181, 0.7); font-size: var(--main-font-size); line-height: 21px; display: inline;&quot; class=&quot;tgt color_text_0 highlight&quot; data-group=&quot;3-0&quot; data-sentence=&quot;0&quot; data-section=&quot;3&quot;&gt;Call Foxit PDF Editor.app to process the converted PDF&lt;br/&gt;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align: left; box-sizing: border-box; margin: 0px; padding: 0px; color: rgb(16, 18, 20); font-size: var(--main-font-size); line-height: 21px; font-family: &amp;quot;PingFang SC&amp;quot;, &amp;quot;Segoe UI&amp;quot;, Arial, &amp;quot;Microsoft YaHei&amp;quot;, 微软雅黑, 宋体, &amp;quot;Malgun Gothic&amp;quot;, sans-serif; background-color: rgb(255, 255, 255);&quot; class=&quot;tgt color_text_0 un-step-trans&quot; data-section=&quot;4&quot;&gt;&lt;span style=&quot;box-sizing: border-box; font-size: var(--main-font-size); line-height: 21px; display: inline;&quot; class=&quot;tgt color_text_0&quot; data-group=&quot;4-0&quot; data-sentence=&quot;0&quot; data-section=&quot;4&quot;&gt;Call Foxit PDF Editor.app to merge the converted PDF of each Excel Sheet&lt;br/&gt;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align: left; box-sizing: border-box; margin: 0px; padding: 0px; color: rgb(16, 18, 20); font-size: var(--main-font-size); line-height: 21px; font-family: &amp;quot;PingFang SC&amp;quot;, &amp;quot;Segoe UI&amp;quot;, Arial, &amp;quot;Microsoft YaHei&amp;quot;, 微软雅黑, 宋体, &amp;quot;Malgun Gothic&amp;quot;, sans-serif; background-color: rgb(255, 255, 255);&quot; class=&quot;tgt color_text_0 un-step-trans&quot; data-section=&quot;5&quot;&gt;&lt;span style=&quot;box-sizing: border-box; font-size: var(--main-font-size); line-height: 21px; display: inline;&quot; class=&quot;tgt color_text_0&quot; data-group=&quot;5-0&quot; data-sentence=&quot;0&quot; data-section=&quot;5&quot;&gt;Check License and other Commands&lt;/span&gt;&lt;/p&gt;&lt;/div&gt;" style="shape=note2;boundedLbl=1;whiteSpace=wrap;html=1;size=25;verticalAlign=top;align=center;dashed=1;" parent="1" vertex="1">
+          <mxGeometry x="840" y="-240" width="360" height="295" as="geometry" />
         </mxCell>
-        <mxCell id="iG0wlQvIGRCRvuXxt9ED-30" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="iG0wlQvIGRCRvuXxt9ED-24" target="iG0wlQvIGRCRvuXxt9ED-12">
+        <mxCell id="iG0wlQvIGRCRvuXxt9ED-30" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="iG0wlQvIGRCRvuXxt9ED-24" target="iG0wlQvIGRCRvuXxt9ED-12" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="iG0wlQvIGRCRvuXxt9ED-24" value="SaveAsPDF.app" style="html=1;dropTarget=0;whiteSpace=wrap;" vertex="1" parent="1">
+        <mxCell id="iG0wlQvIGRCRvuXxt9ED-24" value="SaveAsPDF.app" style="html=1;dropTarget=0;whiteSpace=wrap;" parent="1" vertex="1">
           <mxGeometry x="230" y="560" width="180" height="90" as="geometry" />
         </mxCell>
-        <mxCell id="iG0wlQvIGRCRvuXxt9ED-25" value="" style="shape=module;jettyWidth=8;jettyHeight=4;" vertex="1" parent="iG0wlQvIGRCRvuXxt9ED-24">
+        <mxCell id="iG0wlQvIGRCRvuXxt9ED-25" value="" style="shape=module;jettyWidth=8;jettyHeight=4;" parent="iG0wlQvIGRCRvuXxt9ED-24" vertex="1">
           <mxGeometry x="1" width="20" height="20" relative="1" as="geometry">
             <mxPoint x="-27" y="7" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="iG0wlQvIGRCRvuXxt9ED-26" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;" edge="1" parent="1" source="iG0wlQvIGRCRvuXxt9ED-27" target="iG0wlQvIGRCRvuXxt9ED-14">
+        <mxCell id="iG0wlQvIGRCRvuXxt9ED-26" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;" parent="1" source="iG0wlQvIGRCRvuXxt9ED-27" target="iG0wlQvIGRCRvuXxt9ED-14" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="iG0wlQvIGRCRvuXxt9ED-27" value="&lt;div&gt;&lt;/div&gt;&lt;div&gt;根据命令参数及配置信息，处理转换后的PDF；&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;(Excel)合并每个ExcelSheet转换后的PDF；&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;获取RMS、Certificate 相关信息；&lt;/span&gt;&lt;br&gt;&lt;/div&gt;Check License&lt;span style=&quot;background-color: initial;&quot;&gt;等操作；&lt;/span&gt;" style="shape=note2;boundedLbl=1;whiteSpace=wrap;html=1;size=25;verticalAlign=top;align=center;dashed=1;" vertex="1" parent="1">
-          <mxGeometry x="1090" y="220" width="300" height="100" as="geometry" />
+        <mxCell id="iG0wlQvIGRCRvuXxt9ED-27" value="&lt;div&gt;&lt;/div&gt;&lt;div&gt;根据命令参数及配置信息，处理转换后的PDF；&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;(Excel)合并每个ExcelSheet转换后的PDF；&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;获取RMS、Certificate 相关信息；&lt;/span&gt;&lt;br&gt;&lt;/div&gt;Check License等操作；&lt;br&gt;&lt;p style=&quot;box-sizing: border-box; margin: 0px; padding: 0px; color: rgb(16, 18, 20); font-size: var(--main-font-size); line-height: 21px; font-family: &amp;quot;PingFang SC&amp;quot;, &amp;quot;Segoe UI&amp;quot;, Arial, &amp;quot;Microsoft YaHei&amp;quot;, 微软雅黑, 宋体, &amp;quot;Malgun Gothic&amp;quot;, sans-serif; background-color: rgb(255, 255, 255);&quot; class=&quot;tgt color_text_0 un-step-trans&quot; data-section=&quot;0&quot;&gt;&lt;span style=&quot;box-sizing: border-box; font-size: var(--main-font-size); line-height: 21px; display: inline;&quot; class=&quot;tgt color_text_0&quot; data-group=&quot;0-0&quot; data-sentence=&quot;0&quot; data-section=&quot;0&quot;&gt;According to the command parameters and configuration information, process the converted PDF;&lt;br&gt;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;box-sizing: border-box; margin: 0px; padding: 0px; color: rgb(16, 18, 20); font-size: var(--main-font-size); line-height: 21px; font-family: &amp;quot;PingFang SC&amp;quot;, &amp;quot;Segoe UI&amp;quot;, Arial, &amp;quot;Microsoft YaHei&amp;quot;, 微软雅黑, 宋体, &amp;quot;Malgun Gothic&amp;quot;, sans-serif; background-color: rgb(255, 255, 255);&quot; class=&quot;tgt color_text_0 un-step-trans&quot; data-section=&quot;1&quot;&gt;&lt;span style=&quot;box-sizing: border-box; background-color: rgba(255, 228, 181, 0.7); font-size: var(--main-font-size); line-height: 21px; display: inline;&quot; class=&quot;tgt color_text_0 highlight&quot; data-group=&quot;1-0&quot; data-sentence=&quot;0&quot; data-section=&quot;1&quot;&gt;(Excel) Merge the converted PDF of each ExcelSheet;&lt;br&gt;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;box-sizing: border-box; margin: 0px; padding: 0px; color: rgb(16, 18, 20); font-size: var(--main-font-size); line-height: 21px; font-family: &amp;quot;PingFang SC&amp;quot;, &amp;quot;Segoe UI&amp;quot;, Arial, &amp;quot;Microsoft YaHei&amp;quot;, 微软雅黑, 宋体, &amp;quot;Malgun Gothic&amp;quot;, sans-serif; background-color: rgb(255, 255, 255);&quot; class=&quot;tgt color_text_0 un-step-trans&quot; data-section=&quot;2&quot;&gt;&lt;span style=&quot;box-sizing: border-box; font-size: var(--main-font-size); line-height: 21px; display: inline;&quot; class=&quot;tgt color_text_0&quot; data-group=&quot;2-0&quot; data-sentence=&quot;0&quot; data-section=&quot;2&quot;&gt;Get RMS, Certificate related information;&lt;br&gt;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;box-sizing: border-box; margin: 0px; padding: 0px; color: rgb(16, 18, 20); font-size: var(--main-font-size); line-height: 21px; font-family: &amp;quot;PingFang SC&amp;quot;, &amp;quot;Segoe UI&amp;quot;, Arial, &amp;quot;Microsoft YaHei&amp;quot;, 微软雅黑, 宋体, &amp;quot;Malgun Gothic&amp;quot;, sans-serif; background-color: rgb(255, 255, 255);&quot; class=&quot;tgt color_text_0 un-step-trans&quot; data-section=&quot;3&quot;&gt;&lt;span style=&quot;box-sizing: border-box; font-size: var(--main-font-size); line-height: 21px; display: inline;&quot; class=&quot;tgt color_text_0&quot; data-group=&quot;3-0&quot; data-sentence=&quot;0&quot; data-section=&quot;3&quot;&gt;Check License and other operations;&lt;/span&gt;&lt;/p&gt;" style="shape=note2;boundedLbl=1;whiteSpace=wrap;html=1;size=25;verticalAlign=top;align=left;dashed=1;" parent="1" vertex="1">
+          <mxGeometry x="1080" y="115" width="300" height="200" as="geometry" />
         </mxCell>
-        <mxCell id="iG0wlQvIGRCRvuXxt9ED-47" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.75;entryY=1;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="iG0wlQvIGRCRvuXxt9ED-50" target="iG0wlQvIGRCRvuXxt9ED-35">
+        <mxCell id="iG0wlQvIGRCRvuXxt9ED-47" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.75;entryY=1;entryDx=0;entryDy=0;dashed=1;" parent="1" source="iG0wlQvIGRCRvuXxt9ED-50" target="iG0wlQvIGRCRvuXxt9ED-35" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="iG0wlQvIGRCRvuXxt9ED-48" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;dashed=1;exitX=0.017;exitY=0.652;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="iG0wlQvIGRCRvuXxt9ED-50" target="iG0wlQvIGRCRvuXxt9ED-39">
+        <mxCell id="iG0wlQvIGRCRvuXxt9ED-48" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;dashed=1;exitX=0.017;exitY=0.652;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="iG0wlQvIGRCRvuXxt9ED-50" target="iG0wlQvIGRCRvuXxt9ED-39" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="iG0wlQvIGRCRvuXxt9ED-49" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.75;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="iG0wlQvIGRCRvuXxt9ED-50" target="iG0wlQvIGRCRvuXxt9ED-14">
+        <mxCell id="iG0wlQvIGRCRvuXxt9ED-49" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.75;entryDx=0;entryDy=0;dashed=1;" parent="1" source="iG0wlQvIGRCRvuXxt9ED-50" target="iG0wlQvIGRCRvuXxt9ED-14" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="iG0wlQvIGRCRvuXxt9ED-33" value="Word/Excel/Powerpoint" style="html=1;dropTarget=0;whiteSpace=wrap;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+        <mxCell id="iG0wlQvIGRCRvuXxt9ED-33" value="Word/Excel/Powerpoint" style="html=1;dropTarget=0;whiteSpace=wrap;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
           <mxGeometry x="-60" y="170" width="180" height="90" as="geometry" />
         </mxCell>
-        <mxCell id="iG0wlQvIGRCRvuXxt9ED-34" value="" style="shape=module;jettyWidth=8;jettyHeight=4;" vertex="1" parent="iG0wlQvIGRCRvuXxt9ED-33">
+        <mxCell id="iG0wlQvIGRCRvuXxt9ED-34" value="" style="shape=module;jettyWidth=8;jettyHeight=4;" parent="iG0wlQvIGRCRvuXxt9ED-33" vertex="1">
           <mxGeometry x="1" width="20" height="20" relative="1" as="geometry">
             <mxPoint x="-27" y="7" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="iG0wlQvIGRCRvuXxt9ED-53" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="iG0wlQvIGRCRvuXxt9ED-35" target="iG0wlQvIGRCRvuXxt9ED-51">
+        <mxCell id="iG0wlQvIGRCRvuXxt9ED-53" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="iG0wlQvIGRCRvuXxt9ED-35" target="iG0wlQvIGRCRvuXxt9ED-51" edge="1">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
               <mxPoint x="320" y="90" />
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="iG0wlQvIGRCRvuXxt9ED-35" value="Office Addins&lt;br&gt;Word/Excel/PowerPoint&amp;nbsp;" style="html=1;dropTarget=0;whiteSpace=wrap;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+        <mxCell id="iG0wlQvIGRCRvuXxt9ED-35" value="Office Addins&lt;br&gt;Word/Excel/PowerPoint&amp;nbsp;" style="html=1;dropTarget=0;whiteSpace=wrap;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
           <mxGeometry x="230" y="170" width="180" height="90" as="geometry" />
         </mxCell>
-        <mxCell id="iG0wlQvIGRCRvuXxt9ED-36" value="" style="shape=module;jettyWidth=8;jettyHeight=4;" vertex="1" parent="iG0wlQvIGRCRvuXxt9ED-35">
+        <mxCell id="iG0wlQvIGRCRvuXxt9ED-36" value="" style="shape=module;jettyWidth=8;jettyHeight=4;" parent="iG0wlQvIGRCRvuXxt9ED-35" vertex="1">
           <mxGeometry x="1" width="20" height="20" relative="1" as="geometry">
             <mxPoint x="-27" y="7" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="iG0wlQvIGRCRvuXxt9ED-37" value="AddinPrinterUI.framework" style="html=1;dropTarget=0;whiteSpace=wrap;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+        <mxCell id="iG0wlQvIGRCRvuXxt9ED-37" value="AddinPrinterUI.framework" style="html=1;dropTarget=0;whiteSpace=wrap;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
           <mxGeometry x="230" y="380" width="180" height="90" as="geometry" />
         </mxCell>
-        <mxCell id="iG0wlQvIGRCRvuXxt9ED-38" value="" style="shape=module;jettyWidth=8;jettyHeight=4;" vertex="1" parent="iG0wlQvIGRCRvuXxt9ED-37">
+        <mxCell id="iG0wlQvIGRCRvuXxt9ED-38" value="" style="shape=module;jettyWidth=8;jettyHeight=4;" parent="iG0wlQvIGRCRvuXxt9ED-37" vertex="1">
           <mxGeometry x="1" width="20" height="20" relative="1" as="geometry">
             <mxPoint x="-27" y="7" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="iG0wlQvIGRCRvuXxt9ED-55" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="iG0wlQvIGRCRvuXxt9ED-39" target="iG0wlQvIGRCRvuXxt9ED-52">
+        <mxCell id="iG0wlQvIGRCRvuXxt9ED-55" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="iG0wlQvIGRCRvuXxt9ED-39" target="iG0wlQvIGRCRvuXxt9ED-52" edge="1">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
               <mxPoint x="320" y="700" />
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="iG0wlQvIGRCRvuXxt9ED-39" value="SaveAsPDF.app" style="html=1;dropTarget=0;whiteSpace=wrap;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+        <mxCell id="iG0wlQvIGRCRvuXxt9ED-39" value="SaveAsPDF.app" style="html=1;dropTarget=0;whiteSpace=wrap;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
           <mxGeometry x="230" y="560" width="180" height="90" as="geometry" />
         </mxCell>
-        <mxCell id="iG0wlQvIGRCRvuXxt9ED-40" value="" style="shape=module;jettyWidth=8;jettyHeight=4;" vertex="1" parent="iG0wlQvIGRCRvuXxt9ED-39">
+        <mxCell id="iG0wlQvIGRCRvuXxt9ED-40" value="" style="shape=module;jettyWidth=8;jettyHeight=4;" parent="iG0wlQvIGRCRvuXxt9ED-39" vertex="1">
           <mxGeometry x="1" width="20" height="20" relative="1" as="geometry">
             <mxPoint x="-27" y="7" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="iG0wlQvIGRCRvuXxt9ED-41" value="FoxitUtils.applescript" style="html=1;dropTarget=0;whiteSpace=wrap;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+        <mxCell id="iG0wlQvIGRCRvuXxt9ED-41" value="FoxitUtils.applescript" style="html=1;dropTarget=0;whiteSpace=wrap;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
           <mxGeometry x="570" y="270" width="180" height="90" as="geometry" />
         </mxCell>
-        <mxCell id="iG0wlQvIGRCRvuXxt9ED-42" value="" style="shape=module;jettyWidth=8;jettyHeight=4;" vertex="1" parent="iG0wlQvIGRCRvuXxt9ED-41">
+        <mxCell id="iG0wlQvIGRCRvuXxt9ED-42" value="" style="shape=module;jettyWidth=8;jettyHeight=4;" parent="iG0wlQvIGRCRvuXxt9ED-41" vertex="1">
           <mxGeometry x="1" width="20" height="20" relative="1" as="geometry">
             <mxPoint x="-27" y="7" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="iG0wlQvIGRCRvuXxt9ED-50" value="配置信息&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;Advanced Preset Settings&lt;br&gt;Word/Excel/PowerPoint Custom Settings&lt;br&gt;Save As PDF Custom Settings" style="whiteSpace=wrap;html=1;shape=mxgraph.basic.cloud_rect" vertex="1" parent="1">
+        <mxCell id="iG0wlQvIGRCRvuXxt9ED-50" value="Configuration&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;Advanced Preset Settings&lt;br&gt;Word/Excel/PowerPoint Custom Settings&lt;br&gt;Save As PDF Custom Settings" style="whiteSpace=wrap;html=1;shape=mxgraph.basic.cloud_rect" parent="1" vertex="1">
           <mxGeometry x="580" y="475" width="240" height="150" as="geometry" />
         </mxCell>
-        <mxCell id="iG0wlQvIGRCRvuXxt9ED-51" value="Target PDF Document" style="whiteSpace=wrap;html=1;shape=mxgraph.basic.document;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" vertex="1" parent="1">
+        <mxCell id="iG0wlQvIGRCRvuXxt9ED-51" value="Target PDF Document" style="whiteSpace=wrap;html=1;shape=mxgraph.basic.document;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" parent="1" vertex="1">
           <mxGeometry x="650" y="40" width="100" height="100" as="geometry" />
         </mxCell>
-        <mxCell id="iG0wlQvIGRCRvuXxt9ED-52" value="Target PDF Document" style="whiteSpace=wrap;html=1;shape=mxgraph.basic.document;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" vertex="1" parent="1">
+        <mxCell id="iG0wlQvIGRCRvuXxt9ED-52" value="Target PDF Document" style="whiteSpace=wrap;html=1;shape=mxgraph.basic.document;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" parent="1" vertex="1">
           <mxGeometry x="650" y="650" width="100" height="100" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="5HRwmcrvmyjFlEMr1RHF" name="Create PDF">
+    <mxGraphModel dx="2359" dy="888" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="jegqf5xUdXMS9VD_2-n5-1" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="8uimUKd4d11v4i9m4UNQ-1" target="8uimUKd4d11v4i9m4UNQ-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="8uimUKd4d11v4i9m4UNQ-1" value="" style="ellipse;fillColor=strokeColor;html=1;" vertex="1" parent="1">
+          <mxGeometry x="260" y="110" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="8uimUKd4d11v4i9m4UNQ-2" value="" style="ellipse;html=1;shape=endState;fillColor=strokeColor;" vertex="1" parent="1">
+          <mxGeometry x="260" y="689" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="3ij_WoWTnR6jwO7pMajT-4" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;" edge="1" parent="1" source="8uimUKd4d11v4i9m4UNQ-3" target="8uimUKd4d11v4i9m4UNQ-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="jegqf5xUdXMS9VD_2-n5-2" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="8uimUKd4d11v4i9m4UNQ-3" target="8uimUKd4d11v4i9m4UNQ-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="8uimUKd4d11v4i9m4UNQ-3" value="Get conversion settings by reading xml file" style="html=1;align=center;verticalAlign=top;rounded=1;absoluteArcSize=1;arcSize=10;dashed=0;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="135" y="180" width="280" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="8uimUKd4d11v4i9m4UNQ-4" value="&amp;nbsp;a xml file which is created by Advanced Setting Dialog&lt;br&gt;~/Library/Containers/com.microsoft.Word/Data/Foxit Software/WordSetting.xml" style="shape=note2;boundedLbl=1;whiteSpace=wrap;html=1;size=25;verticalAlign=top;align=center;" vertex="1" parent="1">
+          <mxGeometry x="-350" y="60" width="410" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="3ij_WoWTnR6jwO7pMajT-2" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="jegqf5xUdXMS9VD_2-n5-7" target="3ij_WoWTnR6jwO7pMajT-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="jegqf5xUdXMS9VD_2-n5-3" value="" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="8uimUKd4d11v4i9m4UNQ-5" target="8uimUKd4d11v4i9m4UNQ-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="8uimUKd4d11v4i9m4UNQ-5" value="create the document info for the active document" style="html=1;align=center;verticalAlign=top;rounded=1;absoluteArcSize=1;arcSize=10;dashed=0;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="135" y="250" width="280" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="jegqf5xUdXMS9VD_2-n5-5" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="jegqf5xUdXMS9VD_2-n5-7" target="8uimUKd4d11v4i9m4UNQ-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="8uimUKd4d11v4i9m4UNQ-6" value="based on the document info, convert the document to PDF(MS VBA reference SaveAs or ExportedAsFixedFormat)" style="html=1;align=center;verticalAlign=top;rounded=1;absoluteArcSize=1;arcSize=10;dashed=0;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="97.5" y="429" width="355" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="jegqf5xUdXMS9VD_2-n5-6" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="8uimUKd4d11v4i9m4UNQ-7" target="8uimUKd4d11v4i9m4UNQ-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="8uimUKd4d11v4i9m4UNQ-7" value="Call FoxitPDFEditor.app via FoxitUtil.applescript to further process the converted PDF document" style="html=1;align=center;verticalAlign=top;rounded=1;absoluteArcSize=1;arcSize=10;dashed=0;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="135" y="599" width="280" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="jegqf5xUdXMS9VD_2-n5-4" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="8uimUKd4d11v4i9m4UNQ-8" target="8uimUKd4d11v4i9m4UNQ-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="jegqf5xUdXMS9VD_2-n5-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="8uimUKd4d11v4i9m4UNQ-8" target="8uimUKd4d11v4i9m4UNQ-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="8uimUKd4d11v4i9m4UNQ-8" value="need convert comments?" style="rhombus;" vertex="1" parent="1">
+          <mxGeometry x="188.75" y="320" width="172.5" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="jegqf5xUdXMS9VD_2-n5-10" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="8uimUKd4d11v4i9m4UNQ-9" target="jegqf5xUdXMS9VD_2-n5-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="jegqf5xUdXMS9VD_2-n5-39" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;" edge="1" parent="1" source="8uimUKd4d11v4i9m4UNQ-9" target="jegqf5xUdXMS9VD_2-n5-38">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="8uimUKd4d11v4i9m4UNQ-9" value="collect comments to the document info" style="html=1;align=center;verticalAlign=top;rounded=1;absoluteArcSize=1;arcSize=10;dashed=0;whiteSpace=wrap;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="540" y="519" width="140" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="3ij_WoWTnR6jwO7pMajT-1" value="a temporary file,&amp;nbsp;&lt;br&gt;~/Library/Containers/com.microsoft.Word/Data/Foxit Software/tmp/2B307A-43F3-E640-5D95-07BC6E94589C.xml" style="shape=note2;boundedLbl=1;whiteSpace=wrap;html=1;size=25;verticalAlign=top;align=center;" vertex="1" parent="1">
+          <mxGeometry x="-370" y="404" width="420" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="jegqf5xUdXMS9VD_2-n5-8" value="" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="8uimUKd4d11v4i9m4UNQ-6" target="jegqf5xUdXMS9VD_2-n5-7">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="275" y="469" as="sourcePoint" />
+            <mxPoint x="275" y="599" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="jegqf5xUdXMS9VD_2-n5-7" value="save the document info to an temporary xml file" style="html=1;align=center;verticalAlign=top;rounded=1;absoluteArcSize=1;arcSize=10;dashed=0;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="97.5" y="519" width="355" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="jegqf5xUdXMS9VD_2-n5-11" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="jegqf5xUdXMS9VD_2-n5-12" target="jegqf5xUdXMS9VD_2-n5-16">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="jegqf5xUdXMS9VD_2-n5-12" value="" style="ellipse;fillColor=strokeColor;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1560" y="40" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="jegqf5xUdXMS9VD_2-n5-13" value="" style="ellipse;html=1;shape=endState;fillColor=strokeColor;" vertex="1" parent="1">
+          <mxGeometry x="1560" y="719" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="jegqf5xUdXMS9VD_2-n5-14" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="jegqf5xUdXMS9VD_2-n5-33" target="jegqf5xUdXMS9VD_2-n5-17">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="jegqf5xUdXMS9VD_2-n5-15" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="jegqf5xUdXMS9VD_2-n5-16" target="jegqf5xUdXMS9VD_2-n5-33">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="jegqf5xUdXMS9VD_2-n5-16" value="open Create PDF Dialog, select sheets need converting" style="html=1;align=center;verticalAlign=top;rounded=1;absoluteArcSize=1;arcSize=10;dashed=0;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="1435" y="110" width="280" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="jegqf5xUdXMS9VD_2-n5-17" value="&amp;nbsp;a xml file which is created by Advanced Setting Dialog&lt;br&gt;~/Library/Containers/com.microsoft.Excel/Data/Foxit Software/ExcelSetting.xml" style="shape=note2;boundedLbl=1;whiteSpace=wrap;html=1;size=25;verticalAlign=top;align=center;" vertex="1" parent="1">
+          <mxGeometry x="960" y="100" width="410" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="jegqf5xUdXMS9VD_2-n5-18" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="jegqf5xUdXMS9VD_2-n5-32" target="jegqf5xUdXMS9VD_2-n5-30">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="jegqf5xUdXMS9VD_2-n5-19" value="" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="jegqf5xUdXMS9VD_2-n5-20" target="jegqf5xUdXMS9VD_2-n5-27">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="jegqf5xUdXMS9VD_2-n5-20" value="create the document info for the active document, include selected sheets and other info" style="html=1;align=center;verticalAlign=top;rounded=1;absoluteArcSize=1;arcSize=10;dashed=0;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="1435" y="280" width="280" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="jegqf5xUdXMS9VD_2-n5-21" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="jegqf5xUdXMS9VD_2-n5-32" target="jegqf5xUdXMS9VD_2-n5-24">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="jegqf5xUdXMS9VD_2-n5-22" value="based on the document info, convert the each sheet to PDF(MS VBA reference ExportedAsFixedFormat) to an temporary PDF file, then save the sheet name and PDF file path to the document info" style="html=1;align=center;verticalAlign=top;rounded=1;absoluteArcSize=1;arcSize=10;dashed=0;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="1397.5" y="458" width="355" height="61" as="geometry" />
+        </mxCell>
+        <mxCell id="jegqf5xUdXMS9VD_2-n5-23" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="jegqf5xUdXMS9VD_2-n5-24" target="jegqf5xUdXMS9VD_2-n5-13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="jegqf5xUdXMS9VD_2-n5-24" value="Call FoxitPDFEditor.app via FoxitUtil.applescript to further process the converted PDF document" style="html=1;align=center;verticalAlign=top;rounded=1;absoluteArcSize=1;arcSize=10;dashed=0;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="1435" y="629" width="280" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="jegqf5xUdXMS9VD_2-n5-25" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="jegqf5xUdXMS9VD_2-n5-27" target="jegqf5xUdXMS9VD_2-n5-22">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="jegqf5xUdXMS9VD_2-n5-26" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="jegqf5xUdXMS9VD_2-n5-27" target="jegqf5xUdXMS9VD_2-n5-29">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="jegqf5xUdXMS9VD_2-n5-27" value="need convert comments?" style="rhombus;" vertex="1" parent="1">
+          <mxGeometry x="1488.75" y="350" width="172.5" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="jegqf5xUdXMS9VD_2-n5-28" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="jegqf5xUdXMS9VD_2-n5-29" target="jegqf5xUdXMS9VD_2-n5-32">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="jegqf5xUdXMS9VD_2-n5-37" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;dashed=1;" edge="1" parent="1" source="jegqf5xUdXMS9VD_2-n5-29" target="jegqf5xUdXMS9VD_2-n5-36">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="jegqf5xUdXMS9VD_2-n5-29" value="collect comments to the document info" style="html=1;align=center;verticalAlign=top;rounded=1;absoluteArcSize=1;arcSize=10;dashed=0;whiteSpace=wrap;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="1840" y="549" width="140" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="jegqf5xUdXMS9VD_2-n5-30" value="a temporary file,&amp;nbsp;&lt;br&gt;~/Library/Containers/com.microsoft.Excel/Data/Foxit Software/tmp/2B307A-43F3-E640-5D95-07BC6E94589C.xml" style="shape=note2;boundedLbl=1;whiteSpace=wrap;html=1;size=25;verticalAlign=top;align=center;" vertex="1" parent="1">
+          <mxGeometry x="950" y="434" width="420" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="jegqf5xUdXMS9VD_2-n5-31" value="" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="jegqf5xUdXMS9VD_2-n5-22" target="jegqf5xUdXMS9VD_2-n5-32">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1575" y="499" as="sourcePoint" />
+            <mxPoint x="1575" y="629" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="jegqf5xUdXMS9VD_2-n5-32" value="save the document info to an temporary xml file" style="html=1;align=center;verticalAlign=top;rounded=1;absoluteArcSize=1;arcSize=10;dashed=0;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="1397.5" y="549" width="355" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="jegqf5xUdXMS9VD_2-n5-34" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="jegqf5xUdXMS9VD_2-n5-33" target="jegqf5xUdXMS9VD_2-n5-20">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="jegqf5xUdXMS9VD_2-n5-33" value="Get conversion settings by reading xml file" style="html=1;align=center;verticalAlign=top;rounded=1;absoluteArcSize=1;arcSize=10;dashed=0;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="1435" y="190" width="280" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="jegqf5xUdXMS9VD_2-n5-36" value="No Support" style="shape=note2;boundedLbl=1;whiteSpace=wrap;html=1;size=25;verticalAlign=top;align=center;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="2000" y="479" width="100" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="jegqf5xUdXMS9VD_2-n5-38" value="No Support" style="shape=note2;boundedLbl=1;whiteSpace=wrap;html=1;size=25;verticalAlign=top;align=center;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="680" y="434" width="100" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="jegqf5xUdXMS9VD_2-n5-40" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="jegqf5xUdXMS9VD_2-n5-41" target="jegqf5xUdXMS9VD_2-n5-45">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="jegqf5xUdXMS9VD_2-n5-41" value="" style="ellipse;fillColor=strokeColor;html=1;" vertex="1" parent="1">
+          <mxGeometry x="310" y="1020" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="jegqf5xUdXMS9VD_2-n5-42" value="" style="ellipse;html=1;shape=endState;fillColor=strokeColor;" vertex="1" parent="1">
+          <mxGeometry x="310" y="1599" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="jegqf5xUdXMS9VD_2-n5-43" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;" edge="1" parent="1" source="jegqf5xUdXMS9VD_2-n5-45" target="jegqf5xUdXMS9VD_2-n5-46">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="jegqf5xUdXMS9VD_2-n5-44" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="jegqf5xUdXMS9VD_2-n5-45" target="jegqf5xUdXMS9VD_2-n5-49">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="jegqf5xUdXMS9VD_2-n5-45" value="Get conversion settings by reading xml file" style="html=1;align=center;verticalAlign=top;rounded=1;absoluteArcSize=1;arcSize=10;dashed=0;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="185" y="1090" width="280" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="jegqf5xUdXMS9VD_2-n5-46" value="&amp;nbsp;a xml file which is created by Advanced Setting Dialog&lt;br&gt;~/Library/Containers/com.microsoft.Powerpoint/Data/Foxit Software/PowerpointSetting.xml" style="shape=note2;boundedLbl=1;whiteSpace=wrap;html=1;size=25;verticalAlign=top;align=center;" vertex="1" parent="1">
+          <mxGeometry x="-300" y="970" width="410" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="jegqf5xUdXMS9VD_2-n5-47" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="jegqf5xUdXMS9VD_2-n5-62" target="jegqf5xUdXMS9VD_2-n5-60">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="jegqf5xUdXMS9VD_2-n5-48" value="" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="jegqf5xUdXMS9VD_2-n5-49" target="jegqf5xUdXMS9VD_2-n5-56">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="jegqf5xUdXMS9VD_2-n5-49" value="create the document info for the active document" style="html=1;align=center;verticalAlign=top;rounded=1;absoluteArcSize=1;arcSize=10;dashed=0;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="185" y="1160" width="280" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="jegqf5xUdXMS9VD_2-n5-50" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="jegqf5xUdXMS9VD_2-n5-62" target="jegqf5xUdXMS9VD_2-n5-53">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="jegqf5xUdXMS9VD_2-n5-51" value="based on the document info, convert the document to PDF(MS VBA reference SaveAs or ExportedAsFixedFormat)" style="html=1;align=center;verticalAlign=top;rounded=1;absoluteArcSize=1;arcSize=10;dashed=0;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="147.5" y="1339" width="355" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="jegqf5xUdXMS9VD_2-n5-52" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="jegqf5xUdXMS9VD_2-n5-53" target="jegqf5xUdXMS9VD_2-n5-42">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="jegqf5xUdXMS9VD_2-n5-53" value="Call FoxitPDFEditor.app via FoxitUtil.applescript to further process the converted PDF document" style="html=1;align=center;verticalAlign=top;rounded=1;absoluteArcSize=1;arcSize=10;dashed=0;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="185" y="1509" width="280" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="jegqf5xUdXMS9VD_2-n5-54" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="jegqf5xUdXMS9VD_2-n5-56" target="jegqf5xUdXMS9VD_2-n5-51">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="jegqf5xUdXMS9VD_2-n5-55" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="jegqf5xUdXMS9VD_2-n5-56" target="jegqf5xUdXMS9VD_2-n5-59">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="jegqf5xUdXMS9VD_2-n5-56" value="need convert comments?" style="rhombus;" vertex="1" parent="1">
+          <mxGeometry x="238.75" y="1230" width="172.5" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="jegqf5xUdXMS9VD_2-n5-57" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="jegqf5xUdXMS9VD_2-n5-59" target="jegqf5xUdXMS9VD_2-n5-62">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="jegqf5xUdXMS9VD_2-n5-58" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;" edge="1" parent="1" source="jegqf5xUdXMS9VD_2-n5-59" target="jegqf5xUdXMS9VD_2-n5-63">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="jegqf5xUdXMS9VD_2-n5-59" value="collect comments to the document info" style="html=1;align=center;verticalAlign=top;rounded=1;absoluteArcSize=1;arcSize=10;dashed=0;whiteSpace=wrap;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="590" y="1429" width="140" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="jegqf5xUdXMS9VD_2-n5-60" value="a temporary file,&amp;nbsp;&lt;br&gt;~/Library/Containers/com.microsoft.Powerpoint/Data/Foxit Software/tmp/2B307A-43F3-E640-5D95-07BC6E94589C.xml" style="shape=note2;boundedLbl=1;whiteSpace=wrap;html=1;size=25;verticalAlign=top;align=center;" vertex="1" parent="1">
+          <mxGeometry x="-320" y="1314" width="420" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="jegqf5xUdXMS9VD_2-n5-61" value="" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="jegqf5xUdXMS9VD_2-n5-51" target="jegqf5xUdXMS9VD_2-n5-62">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="325" y="1379" as="sourcePoint" />
+            <mxPoint x="325" y="1509" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="jegqf5xUdXMS9VD_2-n5-62" value="save the document info to an temporary xml file" style="html=1;align=center;verticalAlign=top;rounded=1;absoluteArcSize=1;arcSize=10;dashed=0;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="147.5" y="1429" width="355" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="jegqf5xUdXMS9VD_2-n5-63" value="No Support" style="shape=note2;boundedLbl=1;whiteSpace=wrap;html=1;size=25;verticalAlign=top;align=center;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="730" y="1344" width="100" height="70" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="dag28aIx1HjFIBJHNow1" name="Post Process in Editor">
+    <mxGraphModel dx="4033" dy="3757" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="oF7XTZTeLyg2k_VHSUsC-30" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=-0.001;entryY=0.035;entryDx=0;entryDy=0;exitX=0.488;exitY=1.122;exitDx=0;exitDy=0;entryPerimeter=0;exitPerimeter=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="oF7XTZTeLyg2k_VHSUsC-52" target="oF7XTZTeLyg2k_VHSUsC-4">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="65.04761904761881" y="174" as="sourcePoint" />
+            <mxPoint x="319" y="649" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="-75" y="623" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="oF7XTZTeLyg2k_VHSUsC-4" value="PresetSettingsImpl" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="319" y="610" width="561" height="374" as="geometry">
+            <mxRectangle x="319" y="610" width="150" height="30" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="oF7XTZTeLyg2k_VHSUsC-6" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="oF7XTZTeLyg2k_VHSUsC-4">
+          <mxGeometry y="26" width="561" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="oF7XTZTeLyg2k_VHSUsC-7" value="long Process(CReader_Document* pDocument);" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="oF7XTZTeLyg2k_VHSUsC-4">
+          <mxGeometry y="34" width="561" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="oF7XTZTeLyg2k_VHSUsC-72" value="long ProcessGeneral(CReader_Document* pDocument);&#xa;&#xa;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="oF7XTZTeLyg2k_VHSUsC-4">
+          <mxGeometry y="60" width="561" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="oF7XTZTeLyg2k_VHSUsC-73" value="std::pair&lt;CReader_Document*, long&gt; ProcessPDFVersion(CReader_Document* pDocument);" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="oF7XTZTeLyg2k_VHSUsC-4">
+          <mxGeometry y="86" width="561" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="oF7XTZTeLyg2k_VHSUsC-74" value="std::pair&lt;CReader_Document*, long&gt; ProcessPDFStandard(CReader_Document* pDocument);" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="oF7XTZTeLyg2k_VHSUsC-4">
+          <mxGeometry y="112" width="561" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="oF7XTZTeLyg2k_VHSUsC-75" value="long ProcessFont(CReader_Document* pDocument);" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="oF7XTZTeLyg2k_VHSUsC-4">
+          <mxGeometry y="138" width="561" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="oF7XTZTeLyg2k_VHSUsC-76" value="long ProcessHeaderFooter(CReader_Document* pDocument);" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="oF7XTZTeLyg2k_VHSUsC-4">
+          <mxGeometry y="164" width="561" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="oF7XTZTeLyg2k_VHSUsC-77" value="long ProcessWatermark(CReader_Document* pDocument);" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="oF7XTZTeLyg2k_VHSUsC-4">
+          <mxGeometry y="190" width="561" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="oF7XTZTeLyg2k_VHSUsC-78" value="std::pair&lt;CReader_Document*, long&gt; ProcessSecurity(CReader_Document* pDocument);" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="oF7XTZTeLyg2k_VHSUsC-4">
+          <mxGeometry y="216" width="561" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="oF7XTZTeLyg2k_VHSUsC-79" value="bool ProcessMetadata(CReader_Document* pDocument);" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="oF7XTZTeLyg2k_VHSUsC-4">
+          <mxGeometry y="242" width="561" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="oF7XTZTeLyg2k_VHSUsC-80" value="std::pair&lt;CReader_Document*, long&gt; OptimizePDF(CReader_Document* pDocument);" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="oF7XTZTeLyg2k_VHSUsC-4">
+          <mxGeometry y="268" width="561" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="oF7XTZTeLyg2k_VHSUsC-81" value="CReader_Document* ProcessPasswordProtection(CReader_Document* pDocument, long&amp; nRet);" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="oF7XTZTeLyg2k_VHSUsC-4">
+          <mxGeometry y="294" width="561" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="oF7XTZTeLyg2k_VHSUsC-82" value="CReader_Document* ProcessCertificateProtection(CReader_Document* pDocument, long&amp; nRet);" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="oF7XTZTeLyg2k_VHSUsC-4">
+          <mxGeometry y="320" width="561" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="oF7XTZTeLyg2k_VHSUsC-83" value="CReader_Document* ProcessRMSProtection(CReader_Document* pDocument, long&amp; nRet);" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="oF7XTZTeLyg2k_VHSUsC-4">
+          <mxGeometry y="346" width="561" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="oF7XTZTeLyg2k_VHSUsC-8" value="WordConvertor" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="319" y="-90" width="451" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="oF7XTZTeLyg2k_VHSUsC-9" value="+ field: type" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="oF7XTZTeLyg2k_VHSUsC-8">
+          <mxGeometry y="26" width="451" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="oF7XTZTeLyg2k_VHSUsC-10" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="oF7XTZTeLyg2k_VHSUsC-8">
+          <mxGeometry y="52" width="451" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="oF7XTZTeLyg2k_VHSUsC-11" value="bool ProcessPagesRange(CReader_Document* pDocument)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="oF7XTZTeLyg2k_VHSUsC-8">
+          <mxGeometry y="60" width="451" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="oF7XTZTeLyg2k_VHSUsC-53" value="void ApplyPagesRange(CReader_Document* pDocument, int nPagesRange, int nPageFrom, int nPageTo);" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="oF7XTZTeLyg2k_VHSUsC-8">
+          <mxGeometry y="86" width="451" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="oF7XTZTeLyg2k_VHSUsC-12" value="ExcelConvertor" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="319" y="110" width="361" height="112" as="geometry" />
+        </mxCell>
+        <mxCell id="oF7XTZTeLyg2k_VHSUsC-13" value="+ field: type" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="oF7XTZTeLyg2k_VHSUsC-12">
+          <mxGeometry y="26" width="361" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="oF7XTZTeLyg2k_VHSUsC-14" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="oF7XTZTeLyg2k_VHSUsC-12">
+          <mxGeometry y="52" width="361" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="oF7XTZTeLyg2k_VHSUsC-15" value="long MergeToPDFImpl();" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="oF7XTZTeLyg2k_VHSUsC-12">
+          <mxGeometry y="60" width="361" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="oF7XTZTeLyg2k_VHSUsC-54" value="long CollectCommentsInfo();" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="oF7XTZTeLyg2k_VHSUsC-12">
+          <mxGeometry y="86" width="361" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="oF7XTZTeLyg2k_VHSUsC-16" value="PowerPointConvertor" style="swimlane;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="319" y="260" width="411" height="256" as="geometry" />
+        </mxCell>
+        <mxCell id="oF7XTZTeLyg2k_VHSUsC-17" value="+ field: type" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="oF7XTZTeLyg2k_VHSUsC-16">
+          <mxGeometry y="26" width="411" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="oF7XTZTeLyg2k_VHSUsC-18" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="oF7XTZTeLyg2k_VHSUsC-16">
+          <mxGeometry y="52" width="411" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="oF7XTZTeLyg2k_VHSUsC-19" value="long MergeToPDFImpl();" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="oF7XTZTeLyg2k_VHSUsC-16">
+          <mxGeometry y="60" width="411" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="oF7XTZTeLyg2k_VHSUsC-56" value="bool ProcessPagesRange(CReader_Document* pDocument)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="oF7XTZTeLyg2k_VHSUsC-16">
+          <mxGeometry y="86" width="411" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="oF7XTZTeLyg2k_VHSUsC-57" value="bool ProcessMediaBox(CPDF_Document* pPDFDoc)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="oF7XTZTeLyg2k_VHSUsC-16">
+          <mxGeometry y="112" width="411" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="oF7XTZTeLyg2k_VHSUsC-58" value="void InsertBookmarks(const std::shared_ptr&lt;CPowerPointDocumentInfo&gt;&amp; pInfo, CPDF_Document* pPDFDoc)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="oF7XTZTeLyg2k_VHSUsC-16">
+          <mxGeometry y="138" width="411" height="42" as="geometry" />
+        </mxCell>
+        <mxCell id="oF7XTZTeLyg2k_VHSUsC-59" value="bool AddNotesToPage(const CFX_WideString&amp; wsNoteText, CPDF_Dictionary* pPageDict, CPDF_Document* pPDFDoc)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="oF7XTZTeLyg2k_VHSUsC-16">
+          <mxGeometry y="180" width="411" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="oF7XTZTeLyg2k_VHSUsC-60" value="bool AddTransitionToPage(const CTransitionInfo&amp; transtonInfo, CPDF_Dictionary* pPageDict, CPDF_Document* pPDFDoc)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="oF7XTZTeLyg2k_VHSUsC-16">
+          <mxGeometry y="216" width="411" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="oF7XTZTeLyg2k_VHSUsC-21" value="" style="endArrow=block;endSize=16;endFill=0;html=1;rounded=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="oF7XTZTeLyg2k_VHSUsC-9" target="oF7XTZTeLyg2k_VHSUsC-37">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="270" y="110" as="sourcePoint" />
+            <mxPoint x="120" y="149" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="oF7XTZTeLyg2k_VHSUsC-22" value="" style="endArrow=block;endSize=16;endFill=0;html=1;rounded=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="oF7XTZTeLyg2k_VHSUsC-13" target="oF7XTZTeLyg2k_VHSUsC-37">
+          <mxGeometry x="-0.003" width="160" relative="1" as="geometry">
+            <mxPoint x="280" y="120" as="sourcePoint" />
+            <mxPoint x="120" y="149" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="oF7XTZTeLyg2k_VHSUsC-23" value="" style="endArrow=block;endSize=16;endFill=0;html=1;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;edgeStyle=orthogonalEdgeStyle;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="oF7XTZTeLyg2k_VHSUsC-17" target="oF7XTZTeLyg2k_VHSUsC-37">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="290" y="130" as="sourcePoint" />
+            <mxPoint x="120" y="149" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="oF7XTZTeLyg2k_VHSUsC-24" value="CPDFMeger" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="880" y="110" width="160" height="86" as="geometry" />
+        </mxCell>
+        <mxCell id="oF7XTZTeLyg2k_VHSUsC-25" value="+ field: type" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="oF7XTZTeLyg2k_VHSUsC-24">
+          <mxGeometry y="26" width="160" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="oF7XTZTeLyg2k_VHSUsC-26" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="oF7XTZTeLyg2k_VHSUsC-24">
+          <mxGeometry y="52" width="160" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="oF7XTZTeLyg2k_VHSUsC-27" value="+ method(type): type" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="oF7XTZTeLyg2k_VHSUsC-24">
+          <mxGeometry y="60" width="160" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="oF7XTZTeLyg2k_VHSUsC-29" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="oF7XTZTeLyg2k_VHSUsC-13" target="oF7XTZTeLyg2k_VHSUsC-25">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="oF7XTZTeLyg2k_VHSUsC-31" value="OfficeConversion" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-680" y="93" width="318" height="112" as="geometry">
+            <mxRectangle x="-610" y="100" width="140" height="30" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="oF7XTZTeLyg2k_VHSUsC-33" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="oF7XTZTeLyg2k_VHSUsC-31">
+          <mxGeometry y="26" width="318" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="oF7XTZTeLyg2k_VHSUsC-34" value="long Process(const QString&amp; qsCmd)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="oF7XTZTeLyg2k_VHSUsC-31">
+          <mxGeometry y="34" width="318" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="oF7XTZTeLyg2k_VHSUsC-41" value="bool CheckLicense()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="oF7XTZTeLyg2k_VHSUsC-31">
+          <mxGeometry y="60" width="318" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="oF7XTZTeLyg2k_VHSUsC-42" value="void SaveLicenseFile(QString qsFilePath, bool bLicense)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="oF7XTZTeLyg2k_VHSUsC-31">
+          <mxGeometry y="86" width="318" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="oF7XTZTeLyg2k_VHSUsC-35" value="" style="endArrow=diamondThin;endFill=1;endSize=24;html=1;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="oF7XTZTeLyg2k_VHSUsC-37" target="oF7XTZTeLyg2k_VHSUsC-31">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="118" y="149" as="sourcePoint" />
+            <mxPoint x="-430" y="130" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="oF7XTZTeLyg2k_VHSUsC-36" value="Convertor" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-280" y="110" width="420" height="190" as="geometry">
+            <mxRectangle x="58" y="134" width="100" height="30" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="oF7XTZTeLyg2k_VHSUsC-37" value="+ field: type" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="oF7XTZTeLyg2k_VHSUsC-36">
+          <mxGeometry y="26" width="420" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="oF7XTZTeLyg2k_VHSUsC-38" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="oF7XTZTeLyg2k_VHSUsC-36">
+          <mxGeometry y="52" width="420" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="oF7XTZTeLyg2k_VHSUsC-39" value="long Process();" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="oF7XTZTeLyg2k_VHSUsC-36">
+          <mxGeometry y="60" width="420" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="oF7XTZTeLyg2k_VHSUsC-49" value="virtual long ProcessImpl(CReader_Document* pDocument);" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="oF7XTZTeLyg2k_VHSUsC-36">
+          <mxGeometry y="86" width="420" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="oF7XTZTeLyg2k_VHSUsC-50" value="virtual bool ProcessPagesRange(CReader_Document* pDocument);" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="oF7XTZTeLyg2k_VHSUsC-36">
+          <mxGeometry y="112" width="420" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="oF7XTZTeLyg2k_VHSUsC-51" value="bool ProcessDocumentProperties(CReader_Document* pDocument);&#xa;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="oF7XTZTeLyg2k_VHSUsC-36">
+          <mxGeometry y="138" width="420" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="oF7XTZTeLyg2k_VHSUsC-52" value="long ProcessPresetSettings(CReader_Document* pDocument);" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="oF7XTZTeLyg2k_VHSUsC-36">
+          <mxGeometry y="164" width="420" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="oF7XTZTeLyg2k_VHSUsC-68" value="«interface»&lt;br&gt;&lt;b&gt;IFX_MergeHandler&lt;/b&gt;" style="html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="905" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="oF7XTZTeLyg2k_VHSUsC-71" value="" style="endArrow=block;endSize=16;endFill=0;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="oF7XTZTeLyg2k_VHSUsC-24" target="oF7XTZTeLyg2k_VHSUsC-68">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="1040" y="190" as="sourcePoint" />
+            <mxPoint x="1120" y="40" as="targetPoint" />
+          </mxGeometry>
         </mxCell>
       </root>
     </mxGraphModel>
