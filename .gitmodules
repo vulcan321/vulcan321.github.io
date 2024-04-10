@@ -4,3 +4,9 @@
 [submodule "apachecn-c-cpp-zh-pt2"]
 	path = apachecn-c-cpp-zh-pt2
 	url = https://github.com/apachecn/apachecn-c-cpp-zh-pt2.git
+[submodule "multi_threading"]
+	path = multi_threading
+	url = git@github.com:xuyicpp/multi_threading.git
+[submodule "Cpp-Concurrency-in-Action-2ed"]
+	path = Cpp-Concurrency-in-Action-2ed
+	url = https://github.com/downdemo/Cpp-Concurrency-in-Action-2ed
