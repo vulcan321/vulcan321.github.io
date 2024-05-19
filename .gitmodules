@@ -10,3 +10,6 @@
 [submodule "Cpp-Concurrency-in-Action-2ed"]
 	path = Cpp-Concurrency-in-Action-2ed
 	url = https://github.com/downdemo/Cpp-Concurrency-in-Action-2ed
+[submodule "cpp_new_features"]
+	path = cpp_new_features
+	url = git@github.com:0voice/cpp_new_features.git

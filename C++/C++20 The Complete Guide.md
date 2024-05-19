@@ -67,11 +67,14 @@ void foo() override; // ERROR：不能重载
 对于标准库类型特
 征std::is_function<>的定义，主模板的定义如下，该模板用于匹配T不是函数的情况：
 //主模板（匹配泛型类型T不是函数的情况） ：
+
 ```cpp
 template<typename T> struct is_function : std::false_type { };
 ```
+
 该模板从std::false_type派生，因此is_function<T>::value对任何类型T都会返回false。
 对于任何是函数的类型，存在从std::true_type派生的部分特化版，因此成员value总是返回true：
+
 ```cpp
 //对所有函数类型的部分特化版
 
@@ -84,11 +87,13 @@ struct is_function<Ret (Params...) &> : std::true_type { };
 template<typename Ret, typename... Params>
 struct is_function<Ret (Params...) const &> : std::true_type { };
 ...
-```cpp
+```
+
 在C++17之前该特征总共有24个部分特化版本：因为函数类型可以用const和volatile修饰符修饰，另外还
 可能有左值引用(&)或右值引用(&&)修饰符，还需要重载可变参数列表的版本。
 现在在C++17中部分特化版本的数量变为了两倍，因为还需要为所有版本添加一个带noexcept修饰符的版
 本：
+
 ```cpp
 
 //对所有带有noexcept声明的函数类型的部分特化版本
@@ -102,11 +107,14 @@ struct is_function<Ret (Params...) & noexcept> : std::true_type { };
 template<typename Ret, typename... Params>
 struct is_function<Ret (Params...) const & noexcept> : std::true_type { };
 
-```cpp
+```
+
+
 那些没有实现noexcept重载的库可能在需要使用带有noexcept的函数的场景中不能通过编译了。
 
 8.8 单参数 static_assert
 自从 C++17 起，以前 static_assert()要求的用作错误信息的参数变为可选的了。
+
 ```cpp
 #include <type_traits>
 template<typename t>
@@ -119,10 +127,12 @@ static_assert(std::is_default_constructible_v<T>);
 ...
 };
 ```
+
 不带错误信息参数的新版本静态断言的示例也使用了类型特征后缀 _v。
 
 8.9 预处理条件__has_include
 C++17扩展了预处理，增加了一个检查某个头文件是否可以被包含的宏。例如：
+
 ```cpp
 #if __has_include(<filesystem>)
 # include <filesystem>
@@ -139,4 +149,6 @@ C++17扩展了预处理，增加了一个检查某个头文件是否可以被包
 # define HAS_FILESYSTEM 0
 #endif
 ```
-当相应的#include指令有效时__has_include(...)会被求值为1。
+
+当相应的#include指令有效时__has_include(...)会被求值为1。  
+
