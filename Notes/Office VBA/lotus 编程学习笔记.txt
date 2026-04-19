@@ -1,0 +1,270 @@
+lotus 编程学习笔记
+
+用NotesDatabase.search方法来统计符合条件的文档个数
+-------------
+Sub Click(Source As Button)
+	Dim session As New NotesSession
+	Dim db As NotesDatabase
+	Dim collection As NotesDocumentCollection
+	'要搜索的文档的起始时间
+	Dim dateTime As New NotesDateTime("01/01/96")	
+	Set db = session.CurrentDatabase
+	'Search 的第一个参数是用公式语言表达的搜索条件
+	Set collection = db.Search("Form = 'qj'",dateTime,0)
+	Messagebox collection.Count 
+End Sub  
+
+
+
+提示邮箱信息的代码
+------------------------------
+	Dim s As New NotesSession
+        Dim db As NotesDatabase
+        Dim uname As String
+        Dim mailfileloc As Variant
+        Const MB_OK = 1
+        Const MB_ICONINFORMATION=64
+        boxtype& = MB_OK + MB_ICONINFORMATION
+        
+        Set db=s.CurrentDatabase
+        
+        uname = s.CommonUserName
+        srvname = Evaluate("@Name([CN];@Subset(@MailDBName;1))") 
+        mailfileloc = Evaluate("@Subset(@MailDBName;-1)")
+        
+        Dim mydb As New NotesDatabase( Cstr(srvname(0)), Cstr(mailfileloc(0)))
+        
+        Msgbox "Server: " & srvname(0) & Chr$(13) _
+        & "Db directory and db name: " & mailfileloc(0) & Chr$(13) & Chr$(13)_
+        & "The size of your mail file is: " _
+        & Round(mydb.Size/1048576, 2) & "Mb", boxtype&, "Mail file of " & uname & "..." 
+
+
+建立/获取/修改简要表文档
+-----------------------------------
+示例4-2展示了怎样建立、获取、和修改简要表文档的示例。如果没有找到这个描述文
+档 docProfile 那么就会建立它，然后，它就会检查这个文档中的值 Company字段。
+如果没有设置这个字段，那么就会对其进行更新，并且保存新值。如果已经进行了设置
+那么就不会再进行更多的处理。
+示例4-2  建立/获取/修改简要表文档 
+Sub Initialize 
+  Dim session As New NotesSession 
+  Dim db As NotesDatabase 
+  Dim docProfile As NotesDocument 
+  Dim sAuthor As String 
+  Dim itemCompany As NotesItem  
+  Set db = session.CurrentDatabase 
+  Set docProfile = db.GetProfileDocument("Profiles", session.UserName) 
+  Set itemCompany = docProfile.GetFirstItem("Company") 
+  If itemCompany Is Nothing Then 
+    docProfile.Company = "ConCrea" 
+    Call docProfile.save(True, False) 
+  End If 
+End Sub 
+
+
+
+用公式打开“关于数据库”、“使用数据库”文档
+-----------------------------------------
+@Command([HelpAboutDatabase])
+@Command([HelpUsingDatabase])
+
+
+
+让组合框下拉时有一个空值可以选
+--------------------------------
+@Explode(@Char(255):"男":"女")
+
+
+
+用Messagebox判断用户做出的选择
+--------------------------------
+Sub Click(Source As Button)
+	answer% = Messagebox("Do you want to continue?", 36, "Continue?")
+	If answer% = 6 Then
+		Messagebox "You cliked OK!"
+	Else
+		Messagebox "You cliked NO!"
+	End If
+End Sub
+
+
+@IsDocBeingEdited  
+-------------------------
+检查文档的当前状态，如果文档正在被编辑，则返回 1 (True)；否则返回 0 (False)。
+语法
+@IsDocBeingEdited
+返回值
+flag
+布尔型
+1 (True) 表示正在编辑该文档
+0 (False) 表示不在编辑该文档
+
+用法
+该函数不能用于列公式、选择公式、代理、表单公式或视图操作公式中。常用于按钮公式、隐藏公式、域公式和表单操作公式中。
+
+例：
+tmp := @if(@IsDocBeingEdited; "在编辑状态";"不在编辑状态");
+@prompt([OK]; "提示是否在编辑状态";tmp )
+
+相关主题
+@IsDocBeingLoaded
+@IsDocBeingMailed
+@IsDocBeingRecalculated
+@IsDocBeingSaved
+
+
+
+用NotesDocument后台类改变UI文档的域值
+-------------------------------------------
+Sub Click(Source As Button)
+	'改变当前文档中的Main_Status域值
+	Dim workspace As New NotesUIWorkspace
+	Dim uidoc As NotesUIDocument
+	Dim doc As NotesDocument
+	Set uidoc = workspace.CurrentDocument
+	Set doc = uidoc.Document
+	doc.Main_Status = "5"
+	Call doc.Save( True, True )
+End Sub
+
+
+将当前文档置于编辑模式中
+-----------------------------
+@Command([EditDocument];"1")
+
+
+使用LotusScript获得群组中的用户列表
+---------------------------------------
+Declarations
+
+Dim count As Integer
+Dim persons List As String
+Dim groups List
+Dim tg As Integer
+Dim xy As Integer
+
+
+Sub Initialize
+'The advantate of this code is that we can process any nested groups without any size limitaions.
+Dim session As New notessession
+Dim ws As New notesuiworkspace
+Dim uidoc As NotesUIDocument
+
+Dim db As notesdatabase
+Dim namesdb As notesdatabase
+Dim groupdoc As notesdocument
+Dim groupview As notesview
+Dim insidegroupdoc As notesdocument
+Dim insidegroups As notesview
+Dim doc As notesdocument
+Dim curview As notesview
+Dim newlist List
+
+Set db=session.CurrentDatabase
+Set namesdb=session.GetDatabase(db.Server,"names.nsf")
+Set groupview=namesdb.GetView("($Users)")
+Set insidegroups=namesdb.getview("($VIMGroups)")
+Set curview=db.getview("second")
+Set uidoc=ws.CurrentDocument
+
+Set doc=curview.getfirstdocument 'you can set your own doc here. This the backend document for the currently opened uidoc. You can find other alternatives to run this agent.
+groupName$ =uidoc.FieldGetText("names") ' Here we are entering the group or person names.
+
+Dim ritem As Variant
+Set ritem = doc.GetFirstItem( "all" ) ' Here we are going to store the group extracted people's name
+
+'Call uidoc.FieldSetText("saveoptions","1")
+Call uidoc.FieldSetText("Total","") ' Here we will list the total participant list.
+Call uidoc.FieldSetText("all","") ' making the field null to print a new value.
+Call uidoc.Save
+Call uidoc.reload
+Call uidoc.save
+
+Forall entry In doc.names
+gtype=group(entry) 'Checking whether the entry is a group or People.
+If gtype="Group" Then
+tg=tg+1
+groups(tg)=entry
+Else
+Call addtolist(entry) ' If entry is a person, then adding to a list called People.
+End If
+End Forall
+
+
+
+'now we have got two lists one is person and another one is group
+'This loop will returns you a list in the people's view. and remove the each group entry after processing.
+xy=0
+Do Until xy = tg
+xy=xy+1
+et=groupget(groupview,groups(xy))
+Erase groups(xy)
+Loop
+
+If ( ritem.Type <> RICHTEXT ) Then
+Exit Sub
+End If
+
+'Iam adding the list to another array, because iam not getting the list with unique values. You can try some other code if you can retruns the list as unique
+Dim nar() As String
+Forall nvals In Persons
+newcount=newcount+1
+Redim Preserve nar(newcount)
+nar(newcount)=Persons(newcount)
+End Forall
+
+'Then make the array as unique
+finarray=Arrayunique(nar,0)
+
+'Now print the values one by one in an array. See if you want to process the contents of this rtfield.
+' Use the item.values and split the values using newline. So you will get an array.
+
+Forall fins In finarray
+If fins <> "" Then
+fin=fin+1
+Call ritem.Appendtext(fins)
+Call ritem.addnewline(1)
+End If
+End Forall
+
+
+'This code will close the doc without saving and re-open it.
+Call doc.ReplaceItemValue("Total",Cstr(fin))
+Call doc.save(True,True)
+doc.saveoptions="0"
+Call uidoc.close
+Call ws.EditDocument(False,doc)
+'You can use the notesname class to format the contents and use the evaluate to sort the contents. The code you can get it from my 'Other agent in the same db.
+End Sub
+
+
+Function group(entry As Variant) As String
+'Getting first 3 characters will give u an idea whether it is a group or person. In our case every user will have a heirarhical name. In your case you can use ur own code to get this info.
+If Left(entry,3)="CN=" Then
+group="Person"
+Else
+group="Group"
+End If
+End Function
+
+
+Function addtolist(entry As Variant)
+count=count+1
+If Isarray(entry) Then ' In some rare cases by mistake or so we have two entries in a document. So run this check before proceed.
+Forall ad In entry
+persons(count)=ad
+End Forall
+Else
+persons(count)=entry
+End If
+End Function
+
+
+Function groupget(gview As notesview,entry As Variant) As String
+'here first we are getting group name. Then get the group document and get the members for the group. Then add the person entries to Person array.
+'Rest group entries will add to group list.
+
+Set groupdoc=gview.GetDocumentByKey(entry,True)
+If Not groupdoc Is Nothing Then
+allentries=groupdoc.GetItemVal
