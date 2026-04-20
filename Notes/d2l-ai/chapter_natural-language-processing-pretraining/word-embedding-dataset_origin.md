@@ -1,12 +1,12 @@
 # The Dataset for Pretraining Word Embeddings
-:label:`sec_word2vec_data`
+:label:`sec*word2vec*data`
 
 Now that we know the technical details of 
 the word2vec models and approximate training methods,
 let us walk through their implementations. 
 Specifically,
 we will take the skip-gram model in :numref:`sec_word2vec`
-and negative sampling in :numref:`sec_approx_train`
+and negative sampling in :numref:`sec*approx*train`
 as an example.
 In this section,
 we begin with the dataset
@@ -25,7 +25,7 @@ import random
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 from d2l import torch as d2l
 import math
 import torch
@@ -33,7 +33,7 @@ import os
 import random
 ```
 
-## Reading the Dataset
+# # Reading the Dataset
 
 The dataset that we use here
 is [Penn Tree Bank (PTB)]( https://catalog.ldc.upenn.edu/LDC99T42). 
@@ -46,15 +46,15 @@ represents a sentence of words that are separated by spaces.
 Here we treat each word as a token.
 
 ```{.python .input}
-#@tab all
-#@save
-d2l.DATA_HUB['ptb'] = (d2l.DATA_URL + 'ptb.zip',
+# @tab all
+# @save
+d2l.DATA*HUB['ptb'] = (d2l.DATA*URL + 'ptb.zip',
                        '319d85e578af0cdc590547f26231e4e31cdf1e42')
 
-#@save
+# @save
 def read_ptb():
     """Load the PTB dataset into a list of text lines."""
-    data_dir = d2l.download_extract('ptb')
+    data*dir = d2l.download*extract('ptb')
     # Read the training set.
     with open(os.path.join(data_dir, 'ptb.train.txt')) as f:
         raw_text = f.read()
@@ -73,12 +73,12 @@ Note that the original dataset
 also contains "&lt;unk&gt;" tokens that represent rare (unknown) words.
 
 ```{.python .input}
-#@tab all
+# @tab all
 vocab = d2l.Vocab(sentences, min_freq=10)
 f'vocab size: {len(vocab)}'
 ```
 
-## Subsampling
+# # Subsampling
 
 Text data
 typically have high-frequency words
@@ -105,7 +105,7 @@ each indexed word $w_i$
 in the dataset will be discarded with probability
 
 
-$$ P(w_i) = \max\left(1 - \sqrt{\frac{t}{f(w_i)}}, 0\right),$$
+$$ P(w*i) = \max\left(1 - \sqrt{\frac{t}{f(w*i)}}, 0\right),$$
 
 where $f(w_i)$ is the ratio of 
 the number of words $w_i$
@@ -114,13 +114,13 @@ and the constant $t$ is a hyperparameter
 ($10^{-4}$ in the experiment). 
 We can see that only when
 the relative frequency
-$f(w_i) > t$  can the (high-frequency) word $w_i$ be discarded, 
+$f(w*i) > t$  can the (high-frequency) word $w*i$ be discarded, 
 and the higher the relative frequency of the word, 
 the greater the probability of being discarded.
 
 ```{.python .input}
-#@tab all
-#@save
+# @tab all
+# @save
 def subsample(sentences, vocab):
     """Subsample high-frequency words."""
     # Exclude unknown tokens '<unk>'
@@ -150,15 +150,15 @@ by dropping high-frequency words,
 which will lead to training speedup.
 
 ```{.python .input}
-#@tab all
-d2l.show_list_len_pair_hist(['origin', 'subsampled'], '# tokens per sentence',
+# @tab all
+d2l.show*list*len*pair*hist(['origin', 'subsampled'], '# tokens per sentence',
                             'count', sentences, subsampled);
 ```
 
 For individual tokens, the sampling rate of the high-frequency word "the" is less than 1/20.
 
 ```{.python .input}
-#@tab all
+# @tab all
 def compare_counts(token):
     return (f'# of "{token}": '
             f'before={sum([l.count(token) for l in sentences])}, '
@@ -171,26 +171,26 @@ In contrast,
 low-frequency words "join" are completely kept.
 
 ```{.python .input}
-#@tab all
+# @tab all
 compare_counts('join')
 ```
 
 After subsampling, we map tokens to their indices for the corpus.
 
 ```{.python .input}
-#@tab all
+# @tab all
 corpus = [vocab[line] for line in subsampled]
 corpus[:3]
 ```
 
-## Extracting Center Words and Context Words
+# # Extracting Center Words and Context Words
 
 
-The following `get_centers_and_contexts`
+The following `get*centers*and_contexts`
 function extracts all the 
 center words and their context words
 from `corpus`.
-It uniformly samples an integer between 1 and `max_window_size`
+It uniformly samples an integer between 1 and `max*window*size`
 at random as the context window size.
 For any center word,
 those words 
@@ -200,9 +200,9 @@ context window size
 are its context words.
 
 ```{.python .input}
-#@tab all
-#@save
-def get_centers_and_contexts(corpus, max_window_size):
+# @tab all
+# @save
+def get*centers*and*contexts(corpus, max*window_size):
     """Return center words and context words in skip-gram."""
     centers, contexts = [], []
     for line in corpus:
@@ -212,7 +212,7 @@ def get_centers_and_contexts(corpus, max_window_size):
             continue
         centers += line
         for i in range(len(line)):  # Context window centered at `i`
-            window_size = random.randint(1, max_window_size)
+            window*size = random.randint(1, max*window_size)
             indices = list(range(max(0, i - window_size),
                                  min(len(line), i + 1 + window_size)))
             # Exclude the center word from the context words
@@ -226,10 +226,10 @@ Let the maximum context window size be 2
 and print all the center words and their context words.
 
 ```{.python .input}
-#@tab all
+# @tab all
 tiny_dataset = [list(range(7)), list(range(7, 10))]
 print('dataset', tiny_dataset)
-for center, context in zip(*get_centers_and_contexts(tiny_dataset, 2)):
+for center, context in zip(*get*centers*and*contexts(tiny*dataset, 2)):
     print('center', center, 'has contexts', context)
 ```
 
@@ -238,12 +238,12 @@ we set the maximum context window size to 5.
 The following extracts all the center words and their context words in the dataset.
 
 ```{.python .input}
-#@tab all
-all_centers, all_contexts = get_centers_and_contexts(corpus, 5)
+# @tab all
+all*centers, all*contexts = get*centers*and_contexts(corpus, 5)
 f'# center-context pairs: {sum([len(contexts) for contexts in all_contexts])}'
 ```
 
-## Negative Sampling
+# # Negative Sampling
 
 We use negative sampling for approximate training. 
 To sample noise words according to 
@@ -253,14 +253,14 @@ where the (possibly unnormalized) sampling distribution is passed
 via the argument `sampling_weights`.
 
 ```{.python .input}
-#@tab all
-#@save
+# @tab all
+# @save
 class RandomGenerator:
     """Randomly draw among {1, ..., n} according to n sampling weights."""
-    def __init__(self, sampling_weights):
+    def **init**(self, sampling_weights):
         # Exclude 
         self.population = list(range(1, len(sampling_weights) + 1))
-        self.sampling_weights = sampling_weights
+        self.sampling*weights = sampling*weights
         self.candidates = []
         self.i = 0
 
@@ -295,15 +295,15 @@ raised to
 the power of 0.75 :cite:`Mikolov.Sutskever.Chen.ea.2013`.
 
 ```{.python .input}
-#@tab all
-#@save
-def get_negatives(all_contexts, vocab, counter, K):
+# @tab all
+# @save
+def get*negatives(all*contexts, vocab, counter, K):
     """Return noise words in negative sampling."""
     # Sampling weights for words with indices 1, 2, ... (index 0 is the
     # excluded unknown token) in the vocabulary
-    sampling_weights = [counter[vocab.to_tokens(i)]**0.75
+    sampling*weights = [counter[vocab.to*tokens(i)]**0.75
                         for i in range(1, len(vocab))]
-    all_negatives, generator = [], RandomGenerator(sampling_weights)
+    all*negatives, generator = [], RandomGenerator(sampling*weights)
     for contexts in all_contexts:
         negatives = []
         while len(negatives) < len(contexts) * K:
@@ -314,10 +314,10 @@ def get_negatives(all_contexts, vocab, counter, K):
         all_negatives.append(negatives)
     return all_negatives
 
-all_negatives = get_negatives(all_contexts, vocab, counter, 5)
+all*negatives = get*negatives(all_contexts, vocab, counter, 5)
 ```
 
-## Loading Training Examples in Minibatches
+# # Loading Training Examples in Minibatches
 :label:`subsec_word2vec-minibatch-loading`
 
 After
@@ -333,15 +333,15 @@ during training.
 
 In a minibatch,
 the $i^\mathrm{th}$ example includes a center word
-and its $n_i$ context words and $m_i$ noise words. 
+and its $n*i$ context words and $m*i$ noise words. 
 Due to varying context window sizes,
-$n_i+m_i$ varies for different $i$.
+$n*i+m*i$ varies for different $i$.
 Thus,
 for each example
 we concatenate its context words and noise words in 
 the `contexts_negatives` variable,
 and pad zeros until the concatenation length
-reaches $\max_i n_i+m_i$ (`max_len`).
+reaches $\max*i n*i+m*i$ (`max*len`).
 To exclude paddings
 in the calculation of the loss,
 we define a mask variable `masks`.
@@ -370,17 +370,17 @@ during training,
 such as including the mask variable.
 
 ```{.python .input}
-#@tab all
-#@save
+# @tab all
+# @save
 def batchify(data):
     """Return a minibatch of examples for skip-gram with negative sampling."""
-    max_len = max(len(c) + len(n) for _, c, n in data)
+    max*len = max(len(c) + len(n) for *, c, n in data)
     centers, contexts_negatives, masks, labels = [], [], [], []
     for center, context, negative in data:
         cur_len = len(context) + len(negative)
         centers += [center]
-        contexts_negatives += [context + negative + [0] * (max_len - cur_len)]
-        masks += [[1] * cur_len + [0] * (max_len - cur_len)]
+        contexts*negatives += [context + negative + [0] * (max*len - cur_len)]
+        masks += [[1] * cur*len + [0] * (max*len - cur_len)]
         labels += [[1] * len(context) + [0] * (max_len - len(context))]
     return (d2l.reshape(d2l.tensor(centers), (-1, 1)), d2l.tensor(
         contexts_negatives), d2l.tensor(masks), d2l.tensor(labels))
@@ -389,96 +389,96 @@ def batchify(data):
 Let us test this function using a minibatch of two examples.
 
 ```{.python .input}
-#@tab all
+# @tab all
 x_1 = (1, [2, 2], [3, 3, 3, 3])
 x_2 = (1, [2, 2, 2], [3, 3])
-batch = batchify((x_1, x_2))
+batch = batchify((x*1, x*2))
 
 names = ['centers', 'contexts_negatives', 'masks', 'labels']
 for name, data in zip(names, batch):
     print(name, '=', data)
 ```
 
-## Putting All Things Together
+# # Putting All Things Together
 
-Last, we define the `load_data_ptb` function that reads the PTB dataset and returns the data iterator and the vocabulary.
+Last, we define the `load*data*ptb` function that reads the PTB dataset and returns the data iterator and the vocabulary.
 
 ```{.python .input}
-#@save
-def load_data_ptb(batch_size, max_window_size, num_noise_words):
+# @save
+def load*data*ptb(batch*size, max*window*size, num*noise_words):
     """Download the PTB dataset and then load it into memory."""
     sentences = read_ptb()
     vocab = d2l.Vocab(sentences, min_freq=10)
     subsampled, counter = subsample(sentences, vocab)
     corpus = [vocab[line] for line in subsampled]
-    all_centers, all_contexts = get_centers_and_contexts(
-        corpus, max_window_size)
-    all_negatives = get_negatives(
-        all_contexts, vocab, counter, num_noise_words)
+    all*centers, all*contexts = get*centers*and_contexts(
+        corpus, max*window*size)
+    all*negatives = get*negatives(
+        all*contexts, vocab, counter, num*noise_words)
     dataset = gluon.data.ArrayDataset(
-        all_centers, all_contexts, all_negatives)
+        all*centers, all*contexts, all_negatives)
     data_iter = gluon.data.DataLoader(
-        dataset, batch_size, shuffle=True,batchify_fn=batchify,
-        num_workers=d2l.get_dataloader_workers())
+        dataset, batch*size, shuffle=True,batchify*fn=batchify,
+        num*workers=d2l.get*dataloader_workers())
     return data_iter, vocab
 ```
 
 ```{.python .input}
-#@tab pytorch
-#@save
-def load_data_ptb(batch_size, max_window_size, num_noise_words):
+# @tab pytorch
+# @save
+def load*data*ptb(batch*size, max*window*size, num*noise_words):
     """Download the PTB dataset and then load it into memory."""
-    num_workers = d2l.get_dataloader_workers()
+    num*workers = d2l.get*dataloader_workers()
     sentences = read_ptb()
     vocab = d2l.Vocab(sentences, min_freq=10)
     subsampled, counter = subsample(sentences, vocab)
     corpus = [vocab[line] for line in subsampled]
-    all_centers, all_contexts = get_centers_and_contexts(
-        corpus, max_window_size)
-    all_negatives = get_negatives(
-        all_contexts, vocab, counter, num_noise_words)
+    all*centers, all*contexts = get*centers*and_contexts(
+        corpus, max*window*size)
+    all*negatives = get*negatives(
+        all*contexts, vocab, counter, num*noise_words)
 
     class PTBDataset(torch.utils.data.Dataset):
-        def __init__(self, centers, contexts, negatives):
+        def **init**(self, centers, contexts, negatives):
             assert len(centers) == len(contexts) == len(negatives)
             self.centers = centers
             self.contexts = contexts
             self.negatives = negatives
 
-        def __getitem__(self, index):
+        def **getitem**(self, index):
             return (self.centers[index], self.contexts[index],
                     self.negatives[index])
 
-        def __len__(self):
+        def **len**(self):
             return len(self.centers)
 
-    dataset = PTBDataset(all_centers, all_contexts, all_negatives)
+    dataset = PTBDataset(all*centers, all*contexts, all_negatives)
 
-    data_iter = torch.utils.data.DataLoader(dataset, batch_size, shuffle=True,
+    data*iter = torch.utils.data.DataLoader(dataset, batch*size, shuffle=True,
                                       collate_fn=batchify,
-                                      num_workers=num_workers)
+                                      num*workers=num*workers)
     return data_iter, vocab
 ```
 
 Let us print the first minibatch of the data iterator.
 
 ```{.python .input}
-#@tab all
-data_iter, vocab = load_data_ptb(512, 5, 5)
+# @tab all
+data*iter, vocab = load*data_ptb(512, 5, 5)
 for batch in data_iter:
     for name, data in zip(names, batch):
         print(name, 'shape:', data.shape)
     break
 ```
 
-## Summary
+# # Summary
 
 * High-frequency words may not be so useful in training. We can subsample them for speedup in training.
 * For computational efficiency, we load examples in minibatches. We can define other variables to distinguish paddings from non-paddings, and positive examples from negative ones.
 
 
 
-## Exercises
+# # Exercises
 
 1. How does the running time of code in this section changes if not using subsampling?
 1. The `RandomGenerator` class caches `k` random sampling results. Set `k` to other values and see how it affects the data loading speed.

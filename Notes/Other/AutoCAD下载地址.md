@@ -1,36 +1,36 @@
-http://download.autodesk.com/esd/objectarx/2021/objectarx_for_autocad_2021_win_64bit_dlm.sfx.exe
-http://download.autodesk.com/esd/objectarx/2020/objectarx_for_autocad_2020_win_64_bit.sfx.exe
-http://download.autodesk.com/esd/objectarx/2019/Autodesk_ObjectARX_2019_Win_64_and_32_Bit.sfx.exe
+http://download.autodesk.com/esd/objectarx/2021/objectarx*for*autocad*2021*win*64bit*dlm.sfx.exe
+http://download.autodesk.com/esd/objectarx/2020/objectarx*for*autocad*2020*win*64*bit.sfx.exe
+http://download.autodesk.com/esd/objectarx/2019/Autodesk*ObjectARX*2019*Win*64*and*32_Bit.sfx.exe
 
 
 
 转自明经CAD社区
 AutoCAD2021简体中文版：
-http://trial2.autodesk.com/NetSWDLD/2021/ACD/9046B381-E756-4D38-A7EF-FAD07F4456E6/SFX/AutoCAD_2021_Simplified_Chinese_Win_64bit_dlm.sfx.exe
+http://trial2.autodesk.com/NetSWDLD/2021/ACD/9046B381-E756-4D38-A7EF-FAD07F4456E6/SFX/AutoCAD*2021*Simplified*Chinese*Win*64bit*dlm.sfx.exe
 
 
 AutoCAD2021繁体中文版：
-http://trial2.autodesk.com/NetSWDLD/2021/ACD/4E66C052-5E85-44E6-830E-542B29E6CEE0/SFX/AutoCAD_2021_Traditional_Chinese_Win_64bit_dlm.sfx.exe
+http://trial2.autodesk.com/NetSWDLD/2021/ACD/4E66C052-5E85-44E6-830E-542B29E6CEE0/SFX/AutoCAD*2021*Traditional*Chinese*Win*64bit*dlm.sfx.exe
 
 
 
 AutoCAD2021英文版：
-http://trial2.autodesk.com/NetSWDLD/2021/ACD/80A03A2D-8FA9-43FD-9B26-1604CAD1D9CF/SFX/AutoCAD_2021_English_Win_64bit_dlm.sfx.exe
+http://trial2.autodesk.com/NetSWDLD/2021/ACD/80A03A2D-8FA9-43FD-9B26-1604CAD1D9CF/SFX/AutoCAD*2021*English*Win*64bit_dlm.sfx.exe
 
 
 
 AutoCAD2021 LT 简体中文版：
-http://trial2.autodesk.com/NetSWDLD/2021/ACDLT/225B5D59-0972-4964-9856-007DA55E074D/SFX/AutoCAD_LT_2021_SWL_Simplified_Chinese_Win_64bit_dlm.sfx.exe
+http://trial2.autodesk.com/NetSWDLD/2021/ACDLT/225B5D59-0972-4964-9856-007DA55E074D/SFX/AutoCAD*LT*2021*SWL*Simplified*Chinese*Win*64bit*dlm.sfx.exe
 
 
 
 AutoCAD2021 LT 繁体中文版：
-http://trial2.autodesk.com/NetSWDLD/2021/ACDLT/C1332325-F457-415F-AE33-457AB55EA332/SFX/AutoCAD_LT_2021_SWL_Traditional_Chinese_Win_64bit_dlm.sfx.exe
+http://trial2.autodesk.com/NetSWDLD/2021/ACDLT/C1332325-F457-415F-AE33-457AB55EA332/SFX/AutoCAD*LT*2021*SWL*Traditional*Chinese*Win*64bit*dlm.sfx.exe
 
 
 
 AutoCAD2021 LT 英文版：
-http://trial2.autodesk.com/NetSWDLD/2021/ACDLT/B1A1D73D-D894-441D-803D-BFFCF11A1340/SFX/AutoCAD_LT_2021_SWL_English_Win_64bit_dlm.sfx.exe
+http://trial2.autodesk.com/NetSWDLD/2021/ACDLT/B1A1D73D-D894-441D-803D-BFFCF11A1340/SFX/AutoCAD*LT*2021*SWL*English*Win*64bit_dlm.sfx.exe
 
 From <http://bbs.pcbeta.com/forum.php?mod=viewthread&tid=1850295> 
 
@@ -50,15 +50,15 @@ Mac版本下载地址：
 	• https://pan.baidu.com/s/1qW4NbatS8o1s-spPDy2c-w
 Win版本下载地址：
 简体中文版(分别是32位和64位)：
-	• http://trial2.autodesk.com/NetSWDLD/2019/ACD/281B1051-D3D3-4FCC-A52C-CF750093307C/SFX/AutoCAD_2019_Simplified_Chinese_Win_32bit_dlm.sfx.exe
-	• http://trial2.autodesk.com/NetSWDLD/2019/ACD/19B8BB53-6D2C-4FFF-A2E9-C8BBABC04DC8/SFX/AutoCAD_2019_Simplified_Chinese_Win_64bit_dlm.sfx.exe
+	• http://trial2.autodesk.com/NetSWDLD/2019/ACD/281B1051-D3D3-4FCC-A52C-CF750093307C/SFX/AutoCAD*2019*Simplified*Chinese*Win*32bit*dlm.sfx.exe
+	• http://trial2.autodesk.com/NetSWDLD/2019/ACD/19B8BB53-6D2C-4FFF-A2E9-C8BBABC04DC8/SFX/AutoCAD*2019*Simplified*Chinese*Win*64bit*dlm.sfx.exe
 繁体中文版(分别是32位和64位)：
-	• http://trial2.autodesk.com/NetSWDLD/2019/ACD/467DAF6A-FA5A-438E-A903-E5B992EE683E/SFX/AutoCAD_2019_Traditional_Chinese_Win_32bit_dlm.sfx.exe
-	• http://trial2.autodesk.com/NetSWDLD/2019/ACD/1E9C3FDF-E9E9-40F1-A502-60B2E31B33A1/SFX/AutoCAD_2019_Traditional_Chinese_Win_64bit_dlm.sfx.exe
+	• http://trial2.autodesk.com/NetSWDLD/2019/ACD/467DAF6A-FA5A-438E-A903-E5B992EE683E/SFX/AutoCAD*2019*Traditional*Chinese*Win*32bit*dlm.sfx.exe
+	• http://trial2.autodesk.com/NetSWDLD/2019/ACD/1E9C3FDF-E9E9-40F1-A502-60B2E31B33A1/SFX/AutoCAD*2019*Traditional*Chinese*Win*64bit*dlm.sfx.exe
 英文版(分别是32位和64位)：
-	• http://trial2.autodesk.com/NetSWDLD/2019/ACD/B4202181-E422-4A7D-941E-D0F2FB753703/SFX/AutoCAD_2019_English_Win_32bit_dlm.sfx.exe
-	• http://trial2.autodesk.com/NetSWDLD/2019/ACD/A17F42E7-F296-422C-9096-B4CA509BF2AA/SFX/AutoCAD_2019_English_Win_32bit_Trial.sfx.exe
-	• http://trial2.autodesk.com/NetSWDLD/2019/ACD/C9344344-1AE9-4207-930B-462FCD804733/SFX/AutoCAD_2019_English_Win_64bit_Trial.sfx.exe
+	• http://trial2.autodesk.com/NetSWDLD/2019/ACD/B4202181-E422-4A7D-941E-D0F2FB753703/SFX/AutoCAD*2019*English*Win*32bit_dlm.sfx.exe
+	• http://trial2.autodesk.com/NetSWDLD/2019/ACD/A17F42E7-F296-422C-9096-B4CA509BF2AA/SFX/AutoCAD*2019*English*Win*32bit_Trial.sfx.exe
+	• http://trial2.autodesk.com/NetSWDLD/2019/ACD/C9344344-1AE9-4207-930B-462FCD804733/SFX/AutoCAD*2019*English*Win*64bit_Trial.sfx.exe
 
 
 

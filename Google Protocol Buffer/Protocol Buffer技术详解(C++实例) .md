@@ -3,20 +3,20 @@
       
 **一、生成目标语言代码。**  
 下面的命令帮助我们将MyMessage.proto文件中定义的一组Protocol Buffer格式的消息编译成目标语言（C++）的代码。至于消息的内容，我们会在后面以分段的形式逐一列出，同时也会在附件中给出所有源代码。  
-_**protoc** -I=./message --cpp_out=./src ./MyMessage.proto 
+***protoc** -I=./message --cpp*out=./src ./MyMessage.proto 
 从上面的命令行参数中可以看出，待编译的文件为MyMessage.proto，他存放在当前目录的message子目录下。--cpp_out参数则指示编译工具我们需要生成目标语言是C++，输出目录是当前目录的src子目录。在本例中，生成的目标代码文件名是MyMessage.pb.h和MyMessage.pb.cc。  
       
 **二、简单message生成的C++代码。**  
 
 先定义一个最简单的message，其中只是包含原始类型的字段。  
 ```protobuf
-option optimize_for = LITE_RUNTIME; 
+option optimize*for = LITE*RUNTIME; 
 message LogonReqMessage { 
     required int64 acctID = 1; 
     required string passwd = 2; 
 } 
 ```
-由于我们在MyMessage文件中定义选项optimize_for的值为LITE_RUNTIME，因此由该.proto文件生成的所有C++类的父类均为::google::protobuf::MessageLite，而非::google::protobuf::Message。在上一篇博客中已经给出了一些简要的说明，MessageLite类是Message的父类，在MessageLite中将缺少Protocol Buffer对反射的支持，而此类功能均在Message类中提供了具体的实现。对于我们的项目而言，整个系统相对比较封闭，不会和更多的外部程序进行交互，与此同时，我们的客户端部分又是运行在Android平台，有鉴于此，我们考虑使用LITE版本的Protocol Buffer。这样不仅可以得到更高编码效率，而且生成代码编译后所占用的资源也会更少，至于反射所能带来的灵活性和极易扩展性，对于该项目而言完全可以忽略。下面我们来看一下由message LogonReqMessage生成的C++类的部分声明，以及常用方法的说明性注释。
+由于我们在MyMessage文件中定义选项optimize*for的值为LITE*RUNTIME，因此由该.proto文件生成的所有C++类的父类均为::google::protobuf::MessageLite，而非::google::protobuf::Message。在上一篇博客中已经给出了一些简要的说明，MessageLite类是Message的父类，在MessageLite中将缺少Protocol Buffer对反射的支持，而此类功能均在Message类中提供了具体的实现。对于我们的项目而言，整个系统相对比较封闭，不会和更多的外部程序进行交互，与此同时，我们的客户端部分又是运行在Android平台，有鉴于此，我们考虑使用LITE版本的Protocol Buffer。这样不仅可以得到更高编码效率，而且生成代码编译后所占用的资源也会更少，至于反射所能带来的灵活性和极易扩展性，对于该项目而言完全可以忽略。下面我们来看一下由message LogonReqMessage生成的C++类的部分声明，以及常用方法的说明性注释。
 
 ```cpp
 class LogonReqMessage : public ::google::protobuf::MessageLite {
@@ -62,7 +62,7 @@ public:
     inline void set_passwd(const ::std::string& value);
     //对于字符串类型字段设置const char*类型的变量值。
     inline void set_passwd(const char* value);
-    inline void set_passwd(const char* value, size_t size);
+    inline void set*passwd(const char* value, size*t size);
     //可以通过返回值直接给passwd对象赋值。在调用该函数之后has_passwd将返回true。
     inline ::std::string* mutable_passwd();
     //释放当前对象对passwd字段的所有权，同时返回passwd字段对象指针。调用此函数之后，passwd字段对象
@@ -104,11 +104,11 @@ enum UserStatus {
     ONLINE = 1; 
 } 
 enum LoginResult { 
-    LOGON_RESULT_SUCCESS = 0; 
-    LOGON_RESULT_NOTEXIST = 1; 
-    LOGON_RESULT_ERROR_PASSWD = 2; 
-    LOGON_RESULT_ALREADY_LOGON = 3; 
-    LOGON_RESULT_SERVER_ERROR = 4; 
+    LOGON*RESULT*SUCCESS = 0; 
+    LOGON*RESULT*NOTEXIST = 1; 
+    LOGON*RESULT*ERROR_PASSWD = 2; 
+    LOGON*RESULT*ALREADY_LOGON = 3; 
+    LOGON*RESULT*SERVER_ERROR = 4; 
 } 
 message UserInfo { 
     required int64 acctID = 1; 
@@ -163,7 +163,7 @@ void testNestedMessage()
 {
     printf("==================This is nested message.================\n");
     LogonRespMessage logonResp;
-    logonResp.set_logonresult(LOGON_RESULT_SUCCESS);
+    logonResp.set*logonresult(LOGON*RESULT_SUCCESS);
     //如上所述，通过mutable_userinfo函数返回userInfo字段的指针，之后再初始化该对象指针。
     UserInfo* userInfo = logonResp.mutable_userinfo();
     userInfo->set_acctid(200);

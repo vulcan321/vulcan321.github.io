@@ -1,6 +1,6 @@
 # 一种解决各种 macos unlocker 无法下载 Darwin.iso 的方法
 
-### 解决思路
+## # 解决思路
 
 将Darwin 文件集成到源程序下载目录，并修改相应文件
 
@@ -8,18 +8,18 @@
 
 [链接](https://pan.baidu.com/s/1RHWQm5MGX7KnA3klxG8www) 提取码: t8ur
 
-## 具体步骤
+# # 具体步骤
 
-1.点击[官方下载](https://softwareupdate.vmware.com/cds/vmw-desktop/fusion/12.1.0/17195230/core/com.vmware.fusion.zip.tar)或[镜像](https://cowtransfer.com/s/9f0ba16df0764d)下载[vmware](https://so.csdn.net/so/search?q=vmware&spm=1001.2101.3001.7020)提供的com.vmware.fusion.zip.tar。并放到unlocker的tools文件下。  
+1.点击[官方下载](https://softwareupdate.vmware.com/cds/vmw-desktop/fusion/12.1.0/17195230/core/com.vmware.fusion.zip.tar)或[镜像](https://cowtransfer.com/s/9f0ba16df0764d)下载vmware提供的com.vmware.fusion.zip.tar。并放到unlocker的tools文件下。  
 2.删除gettools.py的main函数  
 3复制下述代码在原来main.py处
 
-# 注意保存 特别是用[vscode](https://so.csdn.net/so/search?q=vscode&spm=1001.2101.3001.7020)
+# 注意保存 特别是用vscode
 
 ```python
 def main():
 
-	dest = os.path.dirname(os.path.abspath(__file__))
+	dest = os.path.dirname(os.path.abspath(**file**))
 
 	# Re-create the tools folder
 	

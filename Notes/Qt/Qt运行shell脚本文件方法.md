@@ -2,16 +2,16 @@
 
 
 
-## 目录
+# # 目录
 
--   [方法1：system](https://blog.csdn.net/xx970829/article/details/116463167#1system_1)
--   [方法2：QProcess::startDetached](https://blog.csdn.net/xx970829/article/details/116463167#2QProcessstartDetached_35)
--   [方法3：QProcess::start](https://blog.csdn.net/xx970829/article/details/116463167#3QProcessstart_52)
--   -   [完整代码](https://blog.csdn.net/xx970829/article/details/116463167#_70)
-    -   [向sh文件输入参数](https://blog.csdn.net/xx970829/article/details/116463167#sh_186)
-    -   [运行ros指令的sh脚本注意事项](https://blog.csdn.net/xx970829/article/details/116463167#rossh_220)
+-   [方法1：system](https://blog.csdn.net/xx970829/article/details/116463167# 1system_1)
+-   [方法2：QProcess::startDetached](https://blog.csdn.net/xx970829/article/details/116463167# 2QProcessstartDetached_35)
+-   [方法3：QProcess::start](https://blog.csdn.net/xx970829/article/details/116463167# 3QProcessstart_52)
+-   -   [完整代码](https://blog.csdn.net/xx970829/article/details/116463167# _70)
+    -   [向sh文件输入参数](https://blog.csdn.net/xx970829/article/details/116463167# sh_186)
+    -   [运行ros指令的sh脚本注意事项](https://blog.csdn.net/xx970829/article/details/116463167# rossh_220)
 
-## 方法1：system
+# # 方法1：system
 
 ```c++
 system("gnome-terminal -- bash -c '/home/xx/myssh/my.sh'&");//chmod a+x /home/xx/my.sh;
@@ -20,7 +20,7 @@ system("gnome-terminal -- bash -c '/home/xx/myssh/my.sh'&");//chmod a+x /home/xx
 **my.sh**
 
 ```sh
-#!/bin/bash
+# !/bin/bash
 cd /home/xx/myssh
 ./helloworld
 echo "sleep：4秒"
@@ -31,7 +31,7 @@ exit 0
 **helloworld.cpp**
 
 ```c++
-#include<iostream>
+# include<iostream>
 using namespace std;
 
 int main(){
@@ -48,7 +48,7 @@ int main(){
 g++ helloworld.cpp -o helloworld
 ```
 
-## 方法2：QProcess::startDetached
+# # 方法2：QProcess::startDetached
 
 它与start不同，它是以分离进程的方式启动 没有子父进程关系
 
@@ -59,14 +59,14 @@ QProcess::startDetached("/home/xx/myssh/bash.sh");
 **bash.sh**
 
 ```sh
-#!/bin/bash
-gnome-terminal -- bash -c 'source /home/xx/catkin_ws/devel/setup.bash && rosrun cam_laser_calib pcd_points_gps 1 0 111.pcd'&
-#source /home/xx/catkin_ws/devel/setup.bash 
-#rosrun cam_laser_calib pcd_points_gps 1 0 111.pcd
+# !/bin/bash
+gnome-terminal -- bash -c 'source /home/xx/catkin*ws/devel/setup.bash && rosrun cam*laser*calib pcd*points_gps 1 0 111.pcd'&
+# source /home/xx/catkin_ws/devel/setup.bash 
+# rosrun cam*laser*calib pcd*points*gps 1 0 111.pcd
 exit 0
 ```
 
-## 方法3：QProcess::start
+# # 方法3：QProcess::start
 
 ```c++
     process->start("bash");                      //启动终端(Windows下改为cmd)
@@ -81,21 +81,21 @@ exit 0
 ui->textEdit->append(process->readAllStandardOutput().data());   
 ```
 
-### 完整代码
+## # 完整代码
 
 除了上述所用到的my.sh与bash.sh外，剩下的主要是qt代码
 
 **mainwindow.h**
 
 ```c++
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+# ifndef MAINWINDOW_H
+# define MAINWINDOW_H
 
-#include <QMainWindow>
-#include<QProcess>
-QT_BEGIN_NAMESPACE
+# include <QMainWindow>
+# include<QProcess>
+QT*BEGIN*NAMESPACE
 namespace Ui { class MainWindow; }
-QT_END_NAMESPACE
+QT*END*NAMESPACE
 
 class MainWindow : public QMainWindow
 {
@@ -106,11 +106,11 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_pushButton_clicked();
+    void on*pushButton*clicked();
 
-    void on_pushButton_2_clicked();
+    void on*pushButton*2_clicked();
 
-    void on_pushButton_3_clicked();
+    void on*pushButton*3_clicked();
 
     void readoutput();
 
@@ -120,17 +120,17 @@ private:
     Ui::MainWindow *ui;
     QProcess *process;
 };
-#endif // MAINWINDOW_H
+# endif // MAINWINDOW_H
 
 ```
 
 **mainwindow.cpp**
 
 ```c++
-#include "mainwindow.h"
-#include "ui_mainwindow.h"
-#include<QProcess>
-#include<QMessageBox>
+# include "mainwindow.h"
+# include "ui_mainwindow.h"
+# include<QProcess>
+# include<QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -161,17 +161,17 @@ void MainWindow::readerror()
     QMessageBox::information(0, "Error", process->readAllStandardError().data());   //弹出信息框提示错误信息
 }
 
-void MainWindow::on_pushButton_clicked()
+void MainWindow::on*pushButton*clicked()
 {
     system("gnome-terminal -- bash -c '/home/xx/myssh/my.sh'&");//chmod a+x /home/xx/my.sh;
 }
 
-void MainWindow::on_pushButton_2_clicked()
+void MainWindow::on*pushButton*2_clicked()
 {
     QProcess::startDetached("/home/xx/myssh/bash.sh");//以分离进程的方式启动 没有子父进程关系
 }
 
-void MainWindow::on_pushButton_3_clicked()
+void MainWindow::on*pushButton*3_clicked()
 {
     process->start("bash");                      //启动终端(Windows下改为cmd)
     process->waitForStarted();                   //等待启动完成
@@ -184,8 +184,8 @@ void MainWindow::on_pushButton_3_clicked()
 **main.cpp**
 
 ```c++
-#include "mainwindow.h"
-#include <QApplication>
+# include "mainwindow.h"
+# include <QApplication>
 
 int main(int argc, char *argv[])
 {
@@ -196,7 +196,7 @@ int main(int argc, char *argv[])
 }
 
 ```
-## 调用shell脚本并监控返回的方法
+# # 调用shell脚本并监控返回的方法
 
 ```c++
 QProcess process =new QProcess(this);
@@ -224,13 +224,13 @@ void MainWindow::finishedProcess(){
      //do something
 }
 ```
-## 向sh文件输入参数
+# # 向sh文件输入参数
 
 有时需要向sh文件中输入参数，这时可以用‘$1’’$2’等占位  
 如**改my.sh文件**
 
 ```sh
-#!/bin/bash
+# !/bin/bash
 cd /home/xx/myssh
 ./helloworld
 time=$1
@@ -259,18 +259,18 @@ exit 0
     process->write(n);    
 ```
 
-### 运行ros指令的sh脚本注意事项
+## # 运行ros指令的sh脚本注意事项
 
 在运行含ros指令的sh脚本时如：“rosbag play xxx.bag”需要注意两点  
-**1.“xxx.bag”路径要全**:如“/home/xx/catkin\_ws/xxx.bag”，或者先进入该文件夹“cd /home/xx/catkin\_ws”  
+**1.“xxx.bag”路径要全**:如“/home/xx/catkin\*ws/xxx.bag”，或者先进入该文件夹“cd /home/xx/catkin\*ws”  
 **2.与运行roscore一样，要先设置环境变量**:即在运行“rosbag play”指令前先要加“ source /opt/ros/kinetic/setup.bash”。同理，在运行自己写的“rosrun xxx xxx”时也要先source一下如：“source /home/xx/catkin\_ws/devel/setup.bash”
 
 例如：  
 **bagplay.sh**
 
 ```sh
-#!/bin/bash
-#source /opt/ros/melodic/setup.bash
+# !/bin/bash
+# source /opt/ros/melodic/setup.bash
 rosbag play /home/$1/$2
 sleep 20
 exit 0

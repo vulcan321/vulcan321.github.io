@@ -29,23 +29,23 @@ npx.set_np()
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 from d2l import torch as d2l
 import math
 import torch
 from torch import nn
 ```
 
-## Self-Attention
+# # Self-Attention
 
 Given a sequence of input tokens
-$\mathbf{x}_1, \ldots, \mathbf{x}_n$ where any $\mathbf{x}_i \in \mathbb{R}^d$ ($1 \leq i \leq n$),
+$\mathbf{x}*1, \ldots, \mathbf{x}*n$ where any $\mathbf{x}_i \in \mathbb{R}^d$ ($1 \leq i \leq n$),
 its self-attention outputs
 a sequence of the same length
-$\mathbf{y}_1, \ldots, \mathbf{y}_n$,
+$\mathbf{y}*1, \ldots, \mathbf{y}*n$,
 where
 
-$$\mathbf{y}_i = f(\mathbf{x}_i, (\mathbf{x}_1, \mathbf{x}_1), \ldots, (\mathbf{x}_n, \mathbf{x}_n)) \in \mathbb{R}^d$$
+$$\mathbf{y}*i = f(\mathbf{x}*i, (\mathbf{x}*1, \mathbf{x}*1), \ldots, (\mathbf{x}*n, \mathbf{x}*n)) \in \mathbb{R}^d$$
 
 according to the definition of attention pooling $f$ in
 :eqref:`eq_attn-pooling`.
@@ -56,27 +56,27 @@ with shape (batch size, number of time steps or sequence length in tokens, $d$).
 The output tensor has the same shape.
 
 ```{.python .input}
-num_hiddens, num_heads = 100, 5
-attention = d2l.MultiHeadAttention(num_hiddens, num_heads, 0.5)
+num*hiddens, num*heads = 100, 5
+attention = d2l.MultiHeadAttention(num*hiddens, num*heads, 0.5)
 attention.initialize()
 ```
 
 ```{.python .input}
-#@tab pytorch
-num_hiddens, num_heads = 100, 5
-attention = d2l.MultiHeadAttention(num_hiddens, num_hiddens, num_hiddens,
-                                   num_hiddens, num_heads, 0.5)
+# @tab pytorch
+num*hiddens, num*heads = 100, 5
+attention = d2l.MultiHeadAttention(num*hiddens, num*hiddens, num_hiddens,
+                                   num*hiddens, num*heads, 0.5)
 attention.eval()
 ```
 
 ```{.python .input}
-#@tab all
-batch_size, num_queries, valid_lens = 2, 4, d2l.tensor([3, 2])
-X = d2l.ones((batch_size, num_queries, num_hiddens))
+# @tab all
+batch*size, num*queries, valid_lens = 2, 4, d2l.tensor([3, 2])
+X = d2l.ones((batch*size, num*queries, num_hiddens))
 attention(X, X, X, valid_lens).shape
 ```
 
-## Comparing CNNs, RNNs, and Self-Attention
+# # Comparing CNNs, RNNs, and Self-Attention
 :label:`subsec_cnn-rnn-self-attention`
 
 Let us
@@ -112,7 +112,7 @@ As :numref:`fig_cnn-rnn-self-attention` shows,
 CNNs are hierarchical  so 
 there are $\mathcal{O}(1)$ sequential operations
 and the maximum path length is $\mathcal{O}(n/k)$.
-For example, $\mathbf{x}_1$ and $\mathbf{x}_5$
+For example, $\mathbf{x}*1$ and $\mathbf{x}*5$
 are within the receptive field of a two-layer CNN
 with kernel size 3 in :numref:`fig_cnn-rnn-self-attention`.
 
@@ -132,7 +132,7 @@ In self-attention,
 the queries, keys, and values 
 are all $n \times d$ matrices.
 Consider the scaled dot-product attention in
-:eqref:`eq_softmax_QK_V`,
+:eqref:`eq*softmax*QK_V`,
 where a $n \times d$ matrix is multiplied by
 a $d \times n$ matrix,
 then the output $n \times n$ matrix is multiplied
@@ -157,7 +157,7 @@ makes self-attention prohibitively slow for very long sequences.
 
 
 
-## Positional Encoding
+# # Positional Encoding
 :label:`subsec_positional-encoding`
 
 
@@ -187,7 +187,7 @@ whose element on the $i^\mathrm{th}$ row
 and the $(2j)^\mathrm{th}$
 or the $(2j + 1)^\mathrm{th}$ column is
 
-$$\begin{aligned} p_{i, 2j} &= \sin\left(\frac{i}{10000^{2j/d}}\right),\\p_{i, 2j+1} &= \cos\left(\frac{i}{10000^{2j/d}}\right).\end{aligned}$$
+$$\begin{aligned} p*{i, 2j} &= \sin\left(\frac{i}{10000^{2j/d}}\right),\\p*{i, 2j+1} &= \cos\left(\frac{i}{10000^{2j/d}}\right).\end{aligned}$$
 :eqlabel:`eq_positional-encoding-def`
 
 At first glance,
@@ -197,35 +197,35 @@ Before explanations of this design,
 let us first implement it in the following `PositionalEncoding` class.
 
 ```{.python .input}
-#@save
+# @save
 class PositionalEncoding(nn.Block):
-    def __init__(self, num_hiddens, dropout, max_len=1000):
-        super(PositionalEncoding, self).__init__()
+    def **init**(self, num*hiddens, dropout, max*len=1000):
+        super(PositionalEncoding, self).**init**()
         self.dropout = nn.Dropout(dropout)
         # Create a long enough `P`
-        self.P = d2l.zeros((1, max_len, num_hiddens))
+        self.P = d2l.zeros((1, max*len, num*hiddens))
         X = d2l.arange(max_len).reshape(-1, 1) / np.power(
-            10000, np.arange(0, num_hiddens, 2) / num_hiddens)
+            10000, np.arange(0, num*hiddens, 2) / num*hiddens)
         self.P[:, :, 0::2] = np.sin(X)
         self.P[:, :, 1::2] = np.cos(X)
 
     def forward(self, X):
-        X = X + self.P[:, :X.shape[1], :].as_in_ctx(X.ctx)
+        X = X + self.P[:, :X.shape[1], :].as*in*ctx(X.ctx)
         return self.dropout(X)
 ```
 
 ```{.python .input}
-#@tab pytorch
-#@save
+# @tab pytorch
+# @save
 class PositionalEncoding(nn.Module):
-    def __init__(self, num_hiddens, dropout, max_len=1000):
-        super(PositionalEncoding, self).__init__()
+    def **init**(self, num*hiddens, dropout, max*len=1000):
+        super(PositionalEncoding, self).**init**()
         self.dropout = nn.Dropout(dropout)
         # Create a long enough `P`
-        self.P = d2l.zeros((1, max_len, num_hiddens))
+        self.P = d2l.zeros((1, max*len, num*hiddens))
         X = d2l.arange(max_len, dtype=torch.float32).reshape(
             -1, 1) / torch.pow(10000, torch.arange(
-            0, num_hiddens, 2, dtype=torch.float32) / num_hiddens)
+            0, num*hiddens, 2, dtype=torch.float32) / num*hiddens)
         self.P[:, :, 0::2] = torch.sin(X)
         self.P[:, :, 1::2] = torch.cos(X)
 
@@ -249,27 +249,27 @@ the $6^{\mathrm{th}}$ and the $7^{\mathrm{th}}$ (same for the $8^{\mathrm{th}}$ 
 is due to the alternation of sine and cosine functions.
 
 ```{.python .input}
-encoding_dim, num_steps = 32, 60
-pos_encoding = PositionalEncoding(encoding_dim, 0)
+encoding*dim, num*steps = 32, 60
+pos*encoding = PositionalEncoding(encoding*dim, 0)
 pos_encoding.initialize()
-X = pos_encoding(np.zeros((1, num_steps, encoding_dim)))
+X = pos*encoding(np.zeros((1, num*steps, encoding_dim)))
 P = pos_encoding.P[:, :X.shape[1], :]
 d2l.plot(d2l.arange(num_steps), P[0, :, 6:10].T, xlabel='Row (position)',
          figsize=(6, 2.5), legend=["Col %d" % d for d in d2l.arange(6, 10)])
 ```
 
 ```{.python .input}
-#@tab pytorch
-encoding_dim, num_steps = 32, 60
-pos_encoding = PositionalEncoding(encoding_dim, 0)
+# @tab pytorch
+encoding*dim, num*steps = 32, 60
+pos*encoding = PositionalEncoding(encoding*dim, 0)
 pos_encoding.eval()
-X = pos_encoding(d2l.zeros((1, num_steps, encoding_dim)))
+X = pos*encoding(d2l.zeros((1, num*steps, encoding_dim)))
 P = pos_encoding.P[:, :X.shape[1], :]
 d2l.plot(d2l.arange(num_steps), P[0, :, 6:10].T, xlabel='Row (position)',
          figsize=(6, 2.5), legend=["Col %d" % d for d in d2l.arange(6, 10)])
 ```
 
-### Absolute Positional Information
+## # Absolute Positional Information
 
 To see how the monotonically decreased frequency
 along the encoding dimension relates to absolute positional information,
@@ -278,7 +278,7 @@ As we can see,
 the lowest bit, the second-lowest bit, and the third-lowest bit alternate on every number, every two numbers, and every four numbers, respectively.
 
 ```{.python .input}
-#@tab all
+# @tab all
 for i in range(8):
     print(f'{i} in binary is {i:>03b}')
 ```
@@ -296,19 +296,19 @@ are more space-efficient
 than binary representations.
 
 ```{.python .input}
-P = np.expand_dims(np.expand_dims(P[0, :, :], 0), 0)
+P = np.expand*dims(np.expand*dims(P[0, :, :], 0), 0)
 d2l.show_heatmaps(P, xlabel='Column (encoding dimension)',
                   ylabel='Row (position)', figsize=(3.5, 4), cmap='Blues')
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 P = P[0, :, :].unsqueeze(0).unsqueeze(0)
 d2l.show_heatmaps(P, xlabel='Column (encoding dimension)',
                   ylabel='Row (position)', figsize=(3.5, 4), cmap='Blues')
 ```
 
-### Relative Positional Information
+## # Relative Positional Information
 
 Besides capturing absolute positional information,
 the above positional encoding
@@ -325,30 +325,30 @@ This projection can be explained
 mathematically.
 Denoting
 $\omega_j = 1/10000^{2j/d}$,
-any pair of $(p_{i, 2j}, p_{i, 2j+1})$ 
+any pair of $(p*{i, 2j}, p*{i, 2j+1})$ 
 in :eqref:`eq_positional-encoding-def`
 can 
-be linearly projected to $(p_{i+\delta, 2j}, p_{i+\delta, 2j+1})$
+be linearly projected to $(p*{i+\delta, 2j}, p*{i+\delta, 2j+1})$
 for any fixed offset $\delta$:
 
 $$\begin{aligned}
-&\begin{bmatrix} \cos(\delta \omega_j) & \sin(\delta \omega_j) \\  -\sin(\delta \omega_j) & \cos(\delta \omega_j) \\ \end{bmatrix}
-\begin{bmatrix} p_{i, 2j} \\  p_{i, 2j+1} \\ \end{bmatrix}\\
-=&\begin{bmatrix} \cos(\delta \omega_j) \sin(i \omega_j) + \sin(\delta \omega_j) \cos(i \omega_j) \\  -\sin(\delta \omega_j) \sin(i \omega_j) + \cos(\delta \omega_j) \cos(i \omega_j) \\ \end{bmatrix}\\
-=&\begin{bmatrix} \sin\left((i+\delta) \omega_j\right) \\  \cos\left((i+\delta) \omega_j\right) \\ \end{bmatrix}\\
+&\begin{bmatrix} \cos(\delta \omega*j) & \sin(\delta \omega*j) \\  -\sin(\delta \omega*j) & \cos(\delta \omega*j) \\ \end{bmatrix}
+\begin{bmatrix} p*{i, 2j} \\  p*{i, 2j+1} \\ \end{bmatrix}\\
+=&\begin{bmatrix} \cos(\delta \omega*j) \sin(i \omega*j) + \sin(\delta \omega*j) \cos(i \omega*j) \\  -\sin(\delta \omega*j) \sin(i \omega*j) + \cos(\delta \omega*j) \cos(i \omega*j) \\ \end{bmatrix}\\
+=&\begin{bmatrix} \sin\left((i+\delta) \omega*j\right) \\  \cos\left((i+\delta) \omega*j\right) \\ \end{bmatrix}\\
 =& 
-\begin{bmatrix} p_{i+\delta, 2j} \\  p_{i+\delta, 2j+1} \\ \end{bmatrix},
+\begin{bmatrix} p*{i+\delta, 2j} \\  p*{i+\delta, 2j+1} \\ \end{bmatrix},
 \end{aligned}$$
 
 where the $2\times 2$ projection matrix does not depend on any position index $i$.
 
-## Summary
+# # Summary
 
 * In self-attention, the queries, keys, and values all come from the same place.
 * Both CNNs and self-attention enjoy parallel computation and self-attention has the shortest maximum path length. However, the quadratic computational complexity with respect to the sequence length makes self-attention prohibitively slow for very long sequences.
 * To use the sequence order information, we can inject absolute or relative positional information by adding positional encoding to the input representations.
 
-## Exercises
+# # Exercises
 
 1. Suppose that we design a deep architecture to represent a sequence by stacking self-attention layers with positional encoding. What could be issues?
 1. Can you design a learnable positional encoding method?

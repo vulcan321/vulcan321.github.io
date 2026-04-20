@@ -1,5 +1,5 @@
 # 数值稳定性和模型初始化
-:label:`sec_numerical_stability`
+:label:`sec*numerical*stability`
 
 到目前为止，我们实现的每个模型都是根据某个预先指定的分布来初始化模型的参数。
 有人会认为初始化方案是理所当然的，忽略了如何做出这些选择的细节。甚至有人可能会觉得，初始化方案的选择并不是特别重要。
@@ -11,7 +11,7 @@
 本节将更详细地探讨这些主题，并讨论一些有用的启发式方法。
 这些启发式方法在整个深度学习生涯中都很有用。
 
-## 梯度消失和梯度爆炸
+# # 梯度消失和梯度爆炸
 
 考虑一个具有$L$层、输入$\mathbf{x}$和输出$\mathbf{o}$的深层网络。
 每一层$l$由变换$f_l$定义，
@@ -19,12 +19,12 @@
 其隐藏变量是$\mathbf{h}^{(l)}$（令 $\mathbf{h}^{(0)} = \mathbf{x}$）。
 我们的网络可以表示为：
 
-$$\mathbf{h}^{(l)} = f_l (\mathbf{h}^{(l-1)}) \text{ 因此 } \mathbf{o} = f_L \circ \ldots \circ f_1(\mathbf{x}).$$
+$$\mathbf{h}^{(l)} = f*l (\mathbf{h}^{(l-1)}) \text{ 因此 } \mathbf{o} = f*L \circ \ldots \circ f_1(\mathbf{x}).$$
 
 如果所有隐藏变量和输入都是向量，
 我们可以将$\mathbf{o}$关于任何一组参数$\mathbf{W}^{(l)}$的梯度写为下式：
 
-$$\partial_{\mathbf{W}^{(l)}} \mathbf{o} = \underbrace{\partial_{\mathbf{h}^{(L-1)}} \mathbf{h}^{(L)}}_{ \mathbf{M}^{(L)} \stackrel{\mathrm{def}}{=}} \cdot \ldots \cdot \underbrace{\partial_{\mathbf{h}^{(l)}} \mathbf{h}^{(l+1)}}_{ \mathbf{M}^{(l+1)} \stackrel{\mathrm{def}}{=}} \underbrace{\partial_{\mathbf{W}^{(l)}} \mathbf{h}^{(l)}}_{ \mathbf{v}^{(l)} \stackrel{\mathrm{def}}{=}}.$$
+$$\partial*{\mathbf{W}^{(l)}} \mathbf{o} = \underbrace{\partial*{\mathbf{h}^{(L-1)}} \mathbf{h}^{(L)}}*{ \mathbf{M}^{(L)} \stackrel{\mathrm{def}}{=}} \cdot \ldots \cdot \underbrace{\partial*{\mathbf{h}^{(l)}} \mathbf{h}^{(l+1)}}*{ \mathbf{M}^{(l+1)} \stackrel{\mathrm{def}}{=}} \underbrace{\partial*{\mathbf{W}^{(l)}} \mathbf{h}^{(l)}}_{ \mathbf{v}^{(l)} \stackrel{\mathrm{def}}{=}}.$$
 
 换言之，该梯度是$L-l$个矩阵
 $\mathbf{M}^{(L)} \cdot \ldots \cdot \mathbf{M}^{(l+1)}$
@@ -46,7 +46,7 @@ $\mathbf{M}^{(L)} \cdot \ldots \cdot \mathbf{M}^{(l+1)}$
 要么是*梯度消失*（gradient vanishing）问题：
 参数更新过小，在每次更新时几乎不会移动，导致模型无法学习。
 
-### (**梯度消失**)
+## # (**梯度消失**)
 
 曾经sigmoid函数$1/(1 + \exp(-x))$（ :numref:`sec_mlp`提到过）很流行，
 因为它类似于阈值函数。
@@ -71,7 +71,7 @@ d2l.plot(x, [y, x.grad], legend=['sigmoid', 'gradient'], figsize=(4.5, 2.5))
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 %matplotlib inline
 from d2l import torch as d2l
 import torch
@@ -85,7 +85,7 @@ d2l.plot(x.detach().numpy(), [y.detach().numpy(), x.grad.numpy()],
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 %matplotlib inline
 from d2l import tensorflow as d2l
 import tensorflow as tf
@@ -98,7 +98,7 @@ d2l.plot(x.numpy(), [y.numpy(), t.gradient(y, x).numpy()],
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 %matplotlib inline
 from d2l import paddle as d2l
 import warnings
@@ -121,7 +121,7 @@ d2l.plot(x.detach().numpy(), [y.detach().numpy(), x.grad.numpy()],
 事实上，这个问题曾经困扰着深度网络的训练。
 因此，更稳定的ReLU系列函数已经成为从业者的默认选择（虽然在神经科学的角度看起来不太合理）。
 
-### [**梯度爆炸**]
+## # [**梯度爆炸**]
 
 相反，梯度爆炸可能同样令人烦恼。
 为了更好地说明这一点，我们生成100个高斯随机矩阵，并将它们与某个初始矩阵相乘。
@@ -138,7 +138,7 @@ print('乘以100个矩阵后\n', M)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 M = torch.normal(0, 1, size=(4,4))
 print('一个矩阵 \n',M)
 for i in range(100):
@@ -148,7 +148,7 @@ print('乘以100个矩阵后\n', M)
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 M = tf.random.normal((4, 4))
 print('一个矩阵 \n', M)
 for i in range(100):
@@ -158,7 +158,7 @@ print('乘以100个矩阵后\n', M.numpy())
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 M = paddle.normal(0, 1, shape=(4,4))
 print('一个矩阵 \n',M)
 for i in range(100):
@@ -167,7 +167,7 @@ for i in range(100):
 print('乘以100个矩阵后\n', M)
 ```
 
-### 打破对称性
+## # 打破对称性
 
 神经网络设计中的另一个问题是其参数化所固有的对称性。
 假设我们有一个简单的多层感知机，它有一个隐藏层和两个隐藏单元。
@@ -189,24 +189,24 @@ $\mathbf{W}^{(1)}$的所有元素仍然采用相同的值。
 隐藏层的行为就好像只有一个单元。
 请注意，虽然小批量随机梯度下降不会打破这种对称性，但暂退法正则化可以。
 
-## 参数初始化
+# # 参数初始化
 
 解决（或至少减轻）上述问题的一种方法是进行参数初始化，
 优化期间的注意和适当的正则化也可以进一步提高稳定性。
 
-### 默认初始化
+## # 默认初始化
 
-在前面的部分中，例如在 :numref:`sec_linear_concise`中，
+在前面的部分中，例如在 :numref:`sec*linear*concise`中，
 我们使用正态分布来初始化权重值。如果我们不指定初始化方法，
 框架将使用默认的随机初始化方法，对于中等难度的问题，这种方法通常很有效。
 
-### Xavier初始化
+## # Xavier初始化
 :label:`subsec_xavier`
 
 让我们看看某些*没有非线性*的全连接层输出（例如，隐藏变量）$o_{i}$的尺度分布。
-对于该层$n_\mathrm{in}$输入$x_j$及其相关权重$w_{ij}$，输出由下式给出
+对于该层$n*\mathrm{in}$输入$x*j$及其相关权重$w_{ij}$，输出由下式给出
 
-$$o_{i} = \sum_{j=1}^{n_\mathrm{in}} w_{ij} x_j.$$
+$$o*{i} = \sum*{j=1}^{n*\mathrm{in}} w*{ij} x_j.$$
 
 权重$w_{ij}$都是从同一分布中独立抽取的。
 此外，让我们假设该分布具有零均值和方差$\sigma^2$。
@@ -217,10 +217,10 @@ $$o_{i} = \sum_{j=1}^{n_\mathrm{in}} w_{ij} x_j.$$
 
 $$
 \begin{aligned}
-    E[o_i] & = \sum_{j=1}^{n_\mathrm{in}} E[w_{ij} x_j] \\&= \sum_{j=1}^{n_\mathrm{in}} E[w_{ij}] E[x_j] \\&= 0, \\
-    \mathrm{Var}[o_i] & = E[o_i^2] - (E[o_i])^2 \\
-        & = \sum_{j=1}^{n_\mathrm{in}} E[w^2_{ij} x^2_j] - 0 \\
-        & = \sum_{j=1}^{n_\mathrm{in}} E[w^2_{ij}] E[x^2_j] \\
+    E[o*i] & = \sum*{j=1}^{n*\mathrm{in}} E[w*{ij} x*j] \\&= \sum*{j=1}^{n*\mathrm{in}} E[w*{ij}] E[x_j] \\&= 0, \\
+    \mathrm{Var}[o*i] & = E[o*i^2] - (E[o_i])^2 \\
+        & = \sum*{j=1}^{n*\mathrm{in}} E[w^2*{ij} x^2*j] - 0 \\
+        & = \sum*{j=1}^{n*\mathrm{in}} E[w^2*{ij}] E[x^2*j] \\
         & = n_\mathrm{in} \sigma^2 \gamma^2.
 \end{aligned}
 $$
@@ -234,26 +234,26 @@ $$
 
 $$
 \begin{aligned}
-\frac{1}{2} (n_\mathrm{in} + n_\mathrm{out}) \sigma^2 = 1 \text{ 或等价于 }
-\sigma = \sqrt{\frac{2}{n_\mathrm{in} + n_\mathrm{out}}}.
+\frac{1}{2} (n*\mathrm{in} + n*\mathrm{out}) \sigma^2 = 1 \text{ 或等价于 }
+\sigma = \sqrt{\frac{2}{n*\mathrm{in} + n*\mathrm{out}}}.
 \end{aligned}
 $$
 
 这就是现在标准且实用的*Xavier初始化*的基础，
 它以其提出者 :cite:`Glorot.Bengio.2010` 第一作者的名字命名。
 通常，Xavier初始化从均值为零，方差
-$\sigma^2 = \frac{2}{n_\mathrm{in} + n_\mathrm{out}}$
+$\sigma^2 = \frac{2}{n*\mathrm{in} + n*\mathrm{out}}$
 的高斯分布中采样权重。
 我们也可以将其改为选择从均匀分布中抽取权重时的方差。
 注意均匀分布$U(-a, a)$的方差为$\frac{a^2}{3}$。
 将$\frac{a^2}{3}$代入到$\sigma^2$的条件中，将得到初始化值域：
 
-$$U\left(-\sqrt{\frac{6}{n_\mathrm{in} + n_\mathrm{out}}}, \sqrt{\frac{6}{n_\mathrm{in} + n_\mathrm{out}}}\right).$$
+$$U\left(-\sqrt{\frac{6}{n*\mathrm{in} + n*\mathrm{out}}}, \sqrt{\frac{6}{n*\mathrm{in} + n*\mathrm{out}}}\right).$$
 
 尽管在上述数学推理中，“不存在非线性”的假设在神经网络中很容易被违反，
 但Xavier初始化方法在实践中被证明是有效的。
 
-### 额外阅读
+## # 额外阅读
 
 上面的推理仅仅触及了现代参数初始化方法的皮毛。
 深度学习框架通常实现十几种不同的启发式方法。
@@ -267,7 +267,7 @@ $$U\left(-\sqrt{\frac{6}{n_\mathrm{in} + n_\mathrm{out}}}, \sqrt{\frac{6}{n_\mat
 阅读提出并分析每种启发式方法的论文，然后探索有关该主题的最新出版物。
 也许会偶然发现甚至发明一个聪明的想法，并为深度学习框架提供一个实现。
 
-## 小结
+# # 小结
 
 * 梯度消失和梯度爆炸是深度网络中常见的问题。在参数初始化时需要非常小心，以确保梯度和参数可以得到很好的控制。
 * 需要用启发式的初始化方法来确保初始梯度既不太大也不太小。
@@ -275,7 +275,7 @@ $$U\left(-\sqrt{\frac{6}{n_\mathrm{in} + n_\mathrm{out}}}, \sqrt{\frac{6}{n_\mat
 * 随机初始化是保证在进行优化前打破对称性的关键。
 * Xavier初始化表明，对于每一层，输出的方差不受输入数量的影响，任何梯度的方差不受输出数量的影响。
 
-## 练习
+# # 练习
 
 1. 除了多层感知机的排列对称性之外，还能设计出其他神经网络可能会表现出对称性且需要被打破的情况吗？
 2. 我们是否可以将线性回归或softmax回归中的所有权重参数初始化为相同的值？

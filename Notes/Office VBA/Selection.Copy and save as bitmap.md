@@ -4,7 +4,7 @@ I guess that the code from module 1 can be made more efficient for my purpose.
   
 It turned out that the code has to be placed in two seperate modules as in one module it did not work...  
   
-_**Module 1:**_  
+***Module 1:***  
   
 Option Explicit  
 Option Compare Text  
@@ -63,7 +63,7 @@ Function PastePicture(Optional lXlPicType As Long = xlPicture) As IPicture
 Dim h As Long, hPicAvail As Long, hPtr As Long, hPal As Long, lPicType As Long, hCopy As Long  
   
 'Convert the type of picture requested from the xl constant to the API constant  
-lPicType = IIf(lXlPicType = xlBitmap, CF\_BITMAP, CF\_ENHMETAFILE)  
+lPicType = IIf(lXlPicType = xlBitmap, CF\*BITMAP, CF\*ENHMETAFILE)  
   
 'Check if the clipboard contains the required format  
 hPicAvail = IsClipboardFormatAvailable(lPicType)  
@@ -78,7 +78,7 @@ hPtr = GetClipboardData(lPicType)
   
 'Create our own copy of the image on the clipboard, in the appropriate format.  
 If lPicType = CF\_BITMAP Then  
-hCopy = CopyImage(hPtr, IMAGE\_BITMAP, 0, 0, LR\_COPYRETURNORG)  
+hCopy = CopyImage(hPtr, IMAGE\*BITMAP, 0, 0, LR\*COPYRETURNORG)  
 Else  
 hCopy = CopyEnhMetaFile(hPtr, vbNullString)  
 End If  
@@ -120,7 +120,7 @@ End With
 ' Fill uPicInfo with necessary parts.  
 With uPicInfo  
 .Size = Len(uPicInfo) ' Length of structure.  
-.Type = IIf(lPicType = CF\_BITMAP, PICTYPE\_BITMAP, PICTYPE\_ENHMETAFILE) ' Type of Picture  
+.Type = IIf(lPicType = CF\*BITMAP, PICTYPE\*BITMAP, PICTYPE\_ENHMETAFILE) ' Type of Picture  
 .hPic = hPic ' Handle to image.  
 .hPal = IIf(lPicType = CF\_BITMAP, hPal, 0) ' Handle to palette (if bitmap).  
 End With  
@@ -178,7 +178,7 @@ End Select
   
 End Function  
   
-_**And module 2:**_  
+***And module 2:***  
   
 Sub Bitmap\_Exporteren2()  
   

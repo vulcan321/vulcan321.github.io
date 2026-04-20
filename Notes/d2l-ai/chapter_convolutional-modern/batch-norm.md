@@ -1,16 +1,16 @@
 # 批量规范化
-:label:`sec_batch_norm`
+:label:`sec*batch*norm`
 
 训练深层神经网络是十分困难的，特别是在较短的时间内使他们收敛更加棘手。
 本节将介绍*批量规范化*（batch normalization） :cite:`Ioffe.Szegedy.2015`，这是一种流行且有效的技术，可持续加速深层网络的收敛速度。
 再结合在 :numref:`sec_resnet`中将介绍的残差块，批量规范化使得研究人员能够训练100层以上的网络。
 
-## 训练深层网络
+# # 训练深层网络
 
 为什么需要批量规范化层呢？让我们来回顾一下训练神经网络时出现的一些实际挑战。
 
 首先，数据预处理的方式通常会对最终结果产生巨大影响。
-回想一下我们应用多层感知机来预测房价的例子（ :numref:`sec_kaggle_house`）。
+回想一下我们应用多层感知机来预测房价的例子（ :numref:`sec*kaggle*house`）。
 使用真实数据时，我们的第一步是标准化输入特征，使其平均值为0，方差为1。
 直观地说，这种标准化可以很好地与我们的优化器配合使用，因为它可以将参数的量级进行统一。
 
@@ -32,23 +32,23 @@
 
 从形式上来说，用$\mathbf{x} \in \mathcal{B}$表示一个来自小批量$\mathcal{B}$的输入，批量规范化$\mathrm{BN}$根据以下表达式转换$\mathbf{x}$：
 
-$$\mathrm{BN}(\mathbf{x}) = \boldsymbol{\gamma} \odot \frac{\mathbf{x} - \hat{\boldsymbol{\mu}}_\mathcal{B}}{\hat{\boldsymbol{\sigma}}_\mathcal{B}} + \boldsymbol{\beta}.$$
+$$\mathrm{BN}(\mathbf{x}) = \boldsymbol{\gamma} \odot \frac{\mathbf{x} - \hat{\boldsymbol{\mu}}*\mathcal{B}}{\hat{\boldsymbol{\sigma}}*\mathcal{B}} + \boldsymbol{\beta}.$$
 :eqlabel:`eq_batchnorm`
 
-在 :eqref:`eq_batchnorm`中，$\hat{\boldsymbol{\mu}}_\mathcal{B}$是小批量$\mathcal{B}$的样本均值，$\hat{\boldsymbol{\sigma}}_\mathcal{B}$是小批量$\mathcal{B}$的样本标准差。
+在 :eqref:`eq*batchnorm`中，$\hat{\boldsymbol{\mu}}*\mathcal{B}$是小批量$\mathcal{B}$的样本均值，$\hat{\boldsymbol{\sigma}}_\mathcal{B}$是小批量$\mathcal{B}$的样本标准差。
 应用标准化后，生成的小批量的平均值为0和单位方差为1。
 由于单位方差（与其他一些魔法数）是一个主观的选择，因此我们通常包含
 *拉伸参数*（scale）$\boldsymbol{\gamma}$和*偏移参数*（shift）$\boldsymbol{\beta}$，它们的形状与$\mathbf{x}$相同。
 请注意，$\boldsymbol{\gamma}$和$\boldsymbol{\beta}$是需要与其他模型参数一起学习的参数。
 
-由于在训练过程中，中间层的变化幅度不能过于剧烈，而批量规范化将每一层主动居中，并将它们重新调整为给定的平均值和大小（通过$\hat{\boldsymbol{\mu}}_\mathcal{B}$和${\hat{\boldsymbol{\sigma}}_\mathcal{B}}$）。
+由于在训练过程中，中间层的变化幅度不能过于剧烈，而批量规范化将每一层主动居中，并将它们重新调整为给定的平均值和大小（通过$\hat{\boldsymbol{\mu}}*\mathcal{B}$和${\hat{\boldsymbol{\sigma}}*\mathcal{B}}$）。
 
-从形式上来看，我们计算出 :eqref:`eq_batchnorm`中的$\hat{\boldsymbol{\mu}}_\mathcal{B}$和${\hat{\boldsymbol{\sigma}}_\mathcal{B}}$，如下所示：
+从形式上来看，我们计算出 :eqref:`eq*batchnorm`中的$\hat{\boldsymbol{\mu}}*\mathcal{B}$和${\hat{\boldsymbol{\sigma}}_\mathcal{B}}$，如下所示：
 
-$$\begin{aligned} \hat{\boldsymbol{\mu}}_\mathcal{B} &= \frac{1}{|\mathcal{B}|} \sum_{\mathbf{x} \in \mathcal{B}} \mathbf{x},\\
-\hat{\boldsymbol{\sigma}}_\mathcal{B}^2 &= \frac{1}{|\mathcal{B}|} \sum_{\mathbf{x} \in \mathcal{B}} (\mathbf{x} - \hat{\boldsymbol{\mu}}_{\mathcal{B}})^2 + \epsilon.\end{aligned}$$
+$$\begin{aligned} \hat{\boldsymbol{\mu}}*\mathcal{B} &= \frac{1}{|\mathcal{B}|} \sum*{\mathbf{x} \in \mathcal{B}} \mathbf{x},\\
+\hat{\boldsymbol{\sigma}}*\mathcal{B}^2 &= \frac{1}{|\mathcal{B}|} \sum*{\mathbf{x} \in \mathcal{B}} (\mathbf{x} - \hat{\boldsymbol{\mu}}_{\mathcal{B}})^2 + \epsilon.\end{aligned}$$
 
-请注意，我们在方差估计值中添加一个小的常量$\epsilon > 0$，以确保我们永远不会尝试除以零，即使在经验方差估计值可能消失的情况下也是如此。估计值$\hat{\boldsymbol{\mu}}_\mathcal{B}$和${\hat{\boldsymbol{\sigma}}_\mathcal{B}}$通过使用平均值和方差的噪声（noise）估计来抵消缩放问题。
+请注意，我们在方差估计值中添加一个小的常量$\epsilon > 0$，以确保我们永远不会尝试除以零，即使在经验方差估计值可能消失的情况下也是如此。估计值$\hat{\boldsymbol{\mu}}*\mathcal{B}$和${\hat{\boldsymbol{\sigma}}*\mathcal{B}}$通过使用平均值和方差的噪声（noise）估计来抵消缩放问题。
 乍看起来，这种噪声是一个问题，而事实上它是有益的。
 
 事实证明，这是深度学习中一个反复出现的主题。
@@ -62,12 +62,12 @@ $$\begin{aligned} \hat{\boldsymbol{\mu}}_\mathcal{B} &= \frac{1}{|\mathcal{B}|} 
 
 现在，我们了解一下批量规范化在实践中是如何工作的。
 
-## 批量规范化层
+# # 批量规范化层
 
 回想一下，批量规范化和其他层之间的一个关键区别是，由于批量规范化在完整的小批量上运行，因此我们不能像以前在引入其他层时那样忽略批量大小。
 我们在下面讨论这两种情况：全连接层和卷积层，他们的批量规范化实现略有不同。
 
-### 全连接层
+## # 全连接层
 
 通常，我们将批量规范化层置于全连接层中的仿射变换和激活函数之间。
 设全连接层的输入为x，权重参数和偏置参数分别为$\mathbf{W}$和$\mathbf{b}$，激活函数为$\phi$，批量规范化的运算符为$\mathrm{BN}$。
@@ -77,7 +77,7 @@ $$\mathbf{h} = \phi(\mathrm{BN}(\mathbf{W}\mathbf{x} + \mathbf{b}) ).$$
 
 回想一下，均值和方差是在应用变换的"相同"小批量上计算的。
 
-### 卷积层
+## # 卷积层
 
 同样，对于卷积层，我们可以在卷积层之后和非线性激活函数之前应用批量规范化。
 当卷积有多个输出通道时，我们需要对这些通道的“每个”输出执行批量规范化，每个通道都有自己的拉伸（scale）和偏移（shift）参数，这两个参数都是标量。
@@ -85,7 +85,7 @@ $$\mathbf{h} = \phi(\mathrm{BN}(\mathbf{W}\mathbf{x} + \mathbf{b}) ).$$
 那么对于卷积层，我们在每个输出通道的$m \cdot p \cdot q$个元素上同时执行每个批量规范化。
 因此，在计算平均值和方差时，我们会收集所有空间位置的值，然后在给定通道内应用相同的均值和方差，以便在每个空间位置对值进行规范化。
 
-### 预测过程中的批量规范化
+## # 预测过程中的批量规范化
 
 正如我们前面提到的，批量规范化在训练模式和预测模式下的行为通常不同。
 首先，将训练好的模型用于预测时，我们不再需要样本均值中的噪声以及在微批次上估计每个小批次产生的样本方差了。
@@ -93,7 +93,7 @@ $$\mathbf{h} = \phi(\mathrm{BN}(\mathbf{W}\mathbf{x} + \mathbf{b}) ).$$
 一种常用的方法是通过移动平均估算整个训练数据集的样本均值和方差，并在预测时使用它们得到确定的输出。
 可见，和暂退法一样，批量规范化层在训练模式和预测模式下的计算结果也是不一样的。
 
-## (**从零实现**)
+# # (**从零实现**)
 
 下面，我们从头开始实现一个具有张量的批量规范化层。
 
@@ -103,11 +103,11 @@ from mxnet import autograd, np, npx, init
 from mxnet.gluon import nn
 npx.set_np()
 
-def batch_norm(X, gamma, beta, moving_mean, moving_var, eps, momentum):
+def batch*norm(X, gamma, beta, moving*mean, moving_var, eps, momentum):
     # 通过autograd来判断当前模式是训练模式还是预测模式
     if not autograd.is_training():
         # 如果是在预测模式下，直接使用传入的移动平均所得的均值和方差
-        X_hat = (X - moving_mean) / np.sqrt(moving_var + eps)
+        X*hat = (X - moving*mean) / np.sqrt(moving_var + eps)
     else:
         assert len(X.shape) in (2, 4)
         if len(X.shape) == 2:
@@ -122,23 +122,23 @@ def batch_norm(X, gamma, beta, moving_mean, moving_var, eps, momentum):
         # 训练模式下，用当前的均值和方差做标准化
         X_hat = (X - mean) / np.sqrt(var + eps)
         # 更新移动平均的均值和方差
-        moving_mean = momentum * moving_mean + (1.0 - momentum) * mean
-        moving_var = momentum * moving_var + (1.0 - momentum) * var
+        moving*mean = momentum * moving*mean + (1.0 - momentum) * mean
+        moving*var = momentum * moving*var + (1.0 - momentum) * var
     Y = gamma * X_hat + beta  # 缩放和移位
-    return Y, moving_mean, moving_var
+    return Y, moving*mean, moving*var
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 from d2l import torch as d2l
 import torch
 from torch import nn
 
-def batch_norm(X, gamma, beta, moving_mean, moving_var, eps, momentum):
-    # 通过is_grad_enabled来判断当前模式是训练模式还是预测模式
-    if not torch.is_grad_enabled():
+def batch*norm(X, gamma, beta, moving*mean, moving_var, eps, momentum):
+    # 通过is*grad*enabled来判断当前模式是训练模式还是预测模式
+    if not torch.is*grad*enabled():
         # 如果是在预测模式下，直接使用传入的移动平均所得的均值和方差
-        X_hat = (X - moving_mean) / torch.sqrt(moving_var + eps)
+        X*hat = (X - moving*mean) / torch.sqrt(moving_var + eps)
     else:
         assert len(X.shape) in (2, 4)
         if len(X.shape) == 2:
@@ -153,18 +153,18 @@ def batch_norm(X, gamma, beta, moving_mean, moving_var, eps, momentum):
         # 训练模式下，用当前的均值和方差做标准化
         X_hat = (X - mean) / torch.sqrt(var + eps)
         # 更新移动平均的均值和方差
-        moving_mean = momentum * moving_mean + (1.0 - momentum) * mean
-        moving_var = momentum * moving_var + (1.0 - momentum) * var
+        moving*mean = momentum * moving*mean + (1.0 - momentum) * mean
+        moving*var = momentum * moving*var + (1.0 - momentum) * var
     Y = gamma * X_hat + beta  # 缩放和移位
-    return Y, moving_mean.data, moving_var.data
+    return Y, moving*mean.data, moving*var.data
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 from d2l import tensorflow as d2l
 import tensorflow as tf
 
-def batch_norm(X, gamma, beta, moving_mean, moving_var, eps):
+def batch*norm(X, gamma, beta, moving*mean, moving_var, eps):
     # 计算移动方差元平方根的倒数
     inv = tf.cast(tf.math.rsqrt(moving_var + eps), X.dtype)
     # 缩放和移位
@@ -174,18 +174,18 @@ def batch_norm(X, gamma, beta, moving_mean, moving_var, eps):
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 from d2l import paddle as d2l
 import warnings
 warnings.filterwarnings("ignore")
 import paddle
 import paddle.nn as nn
 
-def batch_norm(X, gamma, beta, moving_mean, moving_var, eps, momentum, is_training=True):
+def batch*norm(X, gamma, beta, moving*mean, moving*var, eps, momentum, is*training=True):
     # 训练模式还与预测模式的BN处理不同
     if not is_training:
         # 如果是在预测模式下，直接使用传入的移动平均所得的均值和方差
-        X_hat = (X - moving_mean) / (moving_var + eps) ** 0.5
+        X*hat = (X - moving*mean) / (moving_var + eps) ** 0.5
     else:
         assert len(X.shape) in (2, 4)
         if len(X.shape) == 2:
@@ -200,10 +200,10 @@ def batch_norm(X, gamma, beta, moving_mean, moving_var, eps, momentum, is_traini
         # 训练模式下用当前的均值和方差做标准化
         X_hat = (X - mean) / (var + eps) ** 0.5
         # 更新移动平均的均值和方差
-        moving_mean = momentum * moving_mean + (1.0 - momentum) * mean
-        moving_var = momentum * moving_var + (1.0 - momentum) * var
+        moving*mean = momentum * moving*mean + (1.0 - momentum) * mean
+        moving*var = momentum * moving*var + (1.0 - momentum) * var
     Y = gamma * X_hat + beta  # 缩放和移位
-    return Y, moving_mean, moving_var
+    return Y, moving*mean, moving*var
 ```
 
 我们现在可以[**创建一个正确的`BatchNorm`层**]。
@@ -220,8 +220,8 @@ def batch_norm(X, gamma, beta, moving_mean, moving_var, eps, momentum, is_traini
 class BatchNorm(nn.Block):
     # num_features：完全连接层的输出数量或卷积层的输出通道数。
     # num_dims：2表示完全连接层，4表示卷积层
-    def __init__(self, num_features, num_dims, **kwargs):
-        super().__init__(**kwargs)
+    def **init**(self, num*features, num*dims, **kwargs):
+        super().**init**(**kwargs)
         if num_dims == 2:
             shape = (1, num_features)
         else:
@@ -234,25 +234,25 @@ class BatchNorm(nn.Block):
         self.moving_var = np.ones(shape)
 
     def forward(self, X):
-        # 如果X不在内存上，将moving_mean和moving_var
+        # 如果X不在内存上，将moving*mean和moving*var
         # 复制到X所在显存上
         if self.moving_mean.ctx != X.ctx:
-            self.moving_mean = self.moving_mean.copyto(X.ctx)
-            self.moving_var = self.moving_var.copyto(X.ctx)
-        # 保存更新过的moving_mean和moving_var
-        Y, self.moving_mean, self.moving_var = batch_norm(
+            self.moving*mean = self.moving*mean.copyto(X.ctx)
+            self.moving*var = self.moving*var.copyto(X.ctx)
+        # 保存更新过的moving*mean和moving*var
+        Y, self.moving*mean, self.moving*var = batch_norm(
             X, self.gamma.data(), self.beta.data(), self.moving_mean,
             self.moving_var, eps=1e-12, momentum=0.9)
         return Y
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 class BatchNorm(nn.Module):
     # num_features：完全连接层的输出数量或卷积层的输出通道数。
     # num_dims：2表示完全连接层，4表示卷积层
-    def __init__(self, num_features, num_dims):
-        super().__init__()
+    def **init**(self, num*features, num*dims):
+        super().**init**()
         if num_dims == 2:
             shape = (1, num_features)
         else:
@@ -265,41 +265,41 @@ class BatchNorm(nn.Module):
         self.moving_var = torch.ones(shape)
 
     def forward(self, X):
-        # 如果X不在内存上，将moving_mean和moving_var
+        # 如果X不在内存上，将moving*mean和moving*var
         # 复制到X所在显存上
         if self.moving_mean.device != X.device:
-            self.moving_mean = self.moving_mean.to(X.device)
-            self.moving_var = self.moving_var.to(X.device)
-        # 保存更新过的moving_mean和moving_var
-        Y, self.moving_mean, self.moving_var = batch_norm(
+            self.moving*mean = self.moving*mean.to(X.device)
+            self.moving*var = self.moving*var.to(X.device)
+        # 保存更新过的moving*mean和moving*var
+        Y, self.moving*mean, self.moving*var = batch_norm(
             X, self.gamma, self.beta, self.moving_mean,
             self.moving_var, eps=1e-5, momentum=0.9)
         return Y
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 class BatchNorm(tf.keras.layers.Layer):
-    def __init__(self, **kwargs):
-        super(BatchNorm, self).__init__(**kwargs)
+    def **init**(self, **kwargs):
+        super(BatchNorm, self).**init**(**kwargs)
 
     def build(self, input_shape):
-        weight_shape = [input_shape[-1], ]
+        weight*shape = [input*shape[-1], ]
         # 参与求梯度和迭代的拉伸和偏移参数，分别初始化成1和0
-        self.gamma = self.add_weight(name='gamma', shape=weight_shape,
+        self.gamma = self.add*weight(name='gamma', shape=weight*shape,
             initializer=tf.initializers.ones, trainable=True)
-        self.beta = self.add_weight(name='beta', shape=weight_shape,
+        self.beta = self.add*weight(name='beta', shape=weight*shape,
             initializer=tf.initializers.zeros, trainable=True)
         # 非模型参数的变量初始化为0和1
-        self.moving_mean = self.add_weight(name='moving_mean',
+        self.moving*mean = self.add*weight(name='moving_mean',
             shape=weight_shape, initializer=tf.initializers.zeros,
             trainable=False)
-        self.moving_variance = self.add_weight(name='moving_variance',
+        self.moving*variance = self.add*weight(name='moving_variance',
             shape=weight_shape, initializer=tf.initializers.ones,
             trainable=False)
         super(BatchNorm, self).build(input_shape)
 
-    def assign_moving_average(self, variable, value):
+    def assign*moving*average(self, variable, value):
         momentum = 0.9
         delta = variable * momentum + value * (1 - momentum)
         return variable.assign(delta)
@@ -308,30 +308,30 @@ class BatchNorm(tf.keras.layers.Layer):
     def call(self, inputs, training):
         if training:
             axes = list(range(len(inputs.shape) - 1))
-            batch_mean = tf.reduce_mean(inputs, axes, keepdims=True)
-            batch_variance = tf.reduce_mean(tf.math.squared_difference(
-                inputs, tf.stop_gradient(batch_mean)), axes, keepdims=True)
-            batch_mean = tf.squeeze(batch_mean, axes)
-            batch_variance = tf.squeeze(batch_variance, axes)
-            mean_update = self.assign_moving_average(
-                self.moving_mean, batch_mean)
-            variance_update = self.assign_moving_average(
-                self.moving_variance, batch_variance)
-            self.add_update(mean_update)
-            self.add_update(variance_update)
-            mean, variance = batch_mean, batch_variance
+            batch*mean = tf.reduce*mean(inputs, axes, keepdims=True)
+            batch*variance = tf.reduce*mean(tf.math.squared_difference(
+                inputs, tf.stop*gradient(batch*mean)), axes, keepdims=True)
+            batch*mean = tf.squeeze(batch*mean, axes)
+            batch*variance = tf.squeeze(batch*variance, axes)
+            mean*update = self.assign*moving_average(
+                self.moving*mean, batch*mean)
+            variance*update = self.assign*moving_average(
+                self.moving*variance, batch*variance)
+            self.add*update(mean*update)
+            self.add*update(variance*update)
+            mean, variance = batch*mean, batch*variance
         else:
-            mean, variance = self.moving_mean, self.moving_variance
-        output = batch_norm(inputs, moving_mean=mean, moving_var=variance,
+            mean, variance = self.moving*mean, self.moving*variance
+        output = batch*norm(inputs, moving*mean=mean, moving_var=variance,
             beta=self.beta, gamma=self.gamma, eps=1e-5)
         return output
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 class BatchNorm(nn.Layer):
-    def __init__(self, num_features, num_dims=4):
-        super(BatchNorm, self).__init__()
+    def **init**(self, num*features, num*dims=4):
+        super(BatchNorm, self).**init**()
         if num_dims == 2:
             shape = (1, num_features)
         else:
@@ -353,14 +353,14 @@ class BatchNorm(nn.Layer):
         self.moving_var = paddle.zeros(shape=shape, dtype='float32')
 
     def forward(self, X):
-        # 保存更新过的moving_mean和moving_var
-        Y, self.moving_mean, self.moving_var = batch_norm(
+        # 保存更新过的moving*mean和moving*var
+        Y, self.moving*mean, self.moving*var = batch_norm(
             X, self.gamma, self.beta, self.moving_mean,
-            self.moving_var, eps=1e-5, momentum=0.9, is_training=self.training)
+            self.moving*var, eps=1e-5, momentum=0.9, is*training=self.training)
         return Y
 ```
 
-##  使用批量规范化层的 LeNet
+# #  使用批量规范化层的 LeNet
 
 为了更好理解如何[**应用`BatchNorm`**]，下面我们将其应用(**于LeNet模型**)（ :numref:`sec_lenet`）。
 回想一下，批量规范化是在卷积层或全连接层之后、相应的激活函数之前应用的。
@@ -385,11 +385,11 @@ net.add(nn.Conv2D(6, kernel_size=5),
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 net = nn.Sequential(
-    nn.Conv2d(1, 6, kernel_size=5), BatchNorm(6, num_dims=4), nn.Sigmoid(),
+    nn.Conv2d(1, 6, kernel*size=5), BatchNorm(6, num*dims=4), nn.Sigmoid(),
     nn.AvgPool2d(kernel_size=2, stride=2),
-    nn.Conv2d(6, 16, kernel_size=5), BatchNorm(16, num_dims=4), nn.Sigmoid(),
+    nn.Conv2d(6, 16, kernel*size=5), BatchNorm(16, num*dims=4), nn.Sigmoid(),
     nn.AvgPool2d(kernel_size=2, stride=2), nn.Flatten(),
     nn.Linear(16*4*4, 120), BatchNorm(120, num_dims=2), nn.Sigmoid(),
     nn.Linear(120, 84), BatchNorm(84, num_dims=2), nn.Sigmoid(),
@@ -397,7 +397,7 @@ net = nn.Sequential(
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 # 回想一下，这个函数必须传递给d2l.train_ch6。
 # 或者说为了利用我们现有的CPU/GPU设备，需要在strategy.scope()建立模型
 def net():
@@ -423,11 +423,11 @@ def net():
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 net = nn.Sequential(
-    nn.Conv2D(1, 6, kernel_size=5), BatchNorm(6, num_dims=4), nn.Sigmoid(), 
+    nn.Conv2D(1, 6, kernel*size=5), BatchNorm(6, num*dims=4), nn.Sigmoid(), 
     nn.MaxPool2D(kernel_size=2, stride=2),
-    nn.Conv2D(6, 16, kernel_size=5), BatchNorm(16, num_dims=4), nn.Sigmoid(), 
+    nn.Conv2D(6, 16, kernel*size=5), BatchNorm(16, num*dims=4), nn.Sigmoid(), 
     nn.MaxPool2D(kernel_size=2, stride=2),
     nn.Flatten(), nn.Linear(16 * 4 * 4, 120), BatchNorm(120, num_dims=2), nn.Sigmoid(),
     nn.Linear(120, 84), BatchNorm(84, num_dims=2), nn.Sigmoid(), 
@@ -438,17 +438,17 @@ net = nn.Sequential(
 这个代码与我们第一次训练LeNet（ :numref:`sec_lenet`）时几乎完全相同，主要区别在于学习率大得多。
 
 ```{.python .input}
-#@tab mxnet, pytorch, paddle
-lr, num_epochs, batch_size = 1.0, 10, 256
-train_iter, test_iter = d2l.load_data_fashion_mnist(batch_size)
-d2l.train_ch6(net, train_iter, test_iter, num_epochs, lr, d2l.try_gpu())
+# @tab mxnet, pytorch, paddle
+lr, num*epochs, batch*size = 1.0, 10, 256
+train*iter, test*iter = d2l.load*data*fashion*mnist(batch*size)
+d2l.train*ch6(net, train*iter, test*iter, num*epochs, lr, d2l.try_gpu())
 ```
 
 ```{.python .input}
-#@tab tensorflow
-lr, num_epochs, batch_size = 1.0, 10, 256
-train_iter, test_iter = d2l.load_data_fashion_mnist(batch_size)
-net = d2l.train_ch6(net, train_iter, test_iter, num_epochs, lr, d2l.try_gpu())
+# @tab tensorflow
+lr, num*epochs, batch*size = 1.0, 10, 256
+train*iter, test*iter = d2l.load*data*fashion*mnist(batch*size)
+net = d2l.train*ch6(net, train*iter, test*iter, num*epochs, lr, d2l.try_gpu())
 ```
 
 让我们来看看从第一个批量规范化层中学到的[**拉伸参数`gamma`和偏移参数`beta`**]。
@@ -458,23 +458,23 @@ net[1].gamma.data().reshape(-1,), net[1].beta.data().reshape(-1,)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 net[1].gamma.reshape((-1,)), net[1].beta.reshape((-1,))
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 tf.reshape(net.layers[1].gamma, (-1,)), tf.reshape(net.layers[1].beta, (-1,))
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 param = net.parameters()
 print('gamma:', param[2].numpy().reshape(-1))
 print('beta:', param[3].numpy().reshape(-1))
 ```
 
-## [**简明实现**]
+# # [**简明实现**]
 
 除了使用我们刚刚定义的`BatchNorm`，我们也可以直接使用深度学习框架中定义的`BatchNorm`。
 该代码看起来几乎与我们上面的代码相同。
@@ -499,7 +499,7 @@ net.add(nn.Conv2D(6, kernel_size=5),
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 net = nn.Sequential(
     nn.Conv2d(1, 6, kernel_size=5), nn.BatchNorm2d(6), nn.Sigmoid(),
     nn.AvgPool2d(kernel_size=2, stride=2),
@@ -511,7 +511,7 @@ net = nn.Sequential(
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 def net():
     return tf.keras.models.Sequential([
         tf.keras.layers.Conv2D(filters=6, kernel_size=5,
@@ -535,7 +535,7 @@ def net():
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 net = nn.Sequential(
     nn.Conv2D(1, 6, kernel_size=5), nn.BatchNorm2D(6, momentum=0.1), nn.Sigmoid(), 
     nn.MaxPool2D(kernel_size=2, stride=2),
@@ -551,11 +551,11 @@ net = nn.Sequential(
 请注意，通常高级API变体运行速度快得多，因为它的代码已编译为C++或CUDA，而我们的自定义代码由Python实现。
 
 ```{.python .input}
-#@tab all
-d2l.train_ch6(net, train_iter, test_iter, num_epochs, lr, d2l.try_gpu())
+# @tab all
+d2l.train*ch6(net, train*iter, test*iter, num*epochs, lr, d2l.try_gpu())
 ```
 
-## 争议
+# # 争议
 
 直观地说，批量规范化被认为可以使优化更加平滑。
 然而，我们必须小心区分直觉和对我们观察到的现象的真实解释。
@@ -580,14 +580,14 @@ Ali Rahimi在接受2017年NeurIPS大会的“接受时间考验奖”（Test of 
 很可能，它作为这些辩论的焦点而产生共鸣，要归功于目标受众对它的广泛认可。
 批量规范化已经被证明是一种不可或缺的方法。它适用于几乎所有图像分类器，并在学术界获得了数万引用。
 
-## 小结
+# # 小结
 
 * 在模型训练过程中，批量规范化利用小批量的均值和标准差，不断调整神经网络的中间输出，使整个神经网络各层的中间输出值更加稳定。
 * 批量规范化在全连接层和卷积层的使用略有不同。
 * 批量规范化层和暂退层一样，在训练模式和预测模式下计算不同。
 * 批量规范化有许多有益的副作用，主要是正则化。另一方面，”减少内部协变量偏移“的原始动机似乎不是一个有效的解释。
 
-## 练习
+# # 练习
 
 1. 在使用批量规范化之前，我们是否可以从全连接层或卷积层中删除偏置参数？为什么？
 1. 比较LeNet在使用和不使用批量规范化情况下的学习率。

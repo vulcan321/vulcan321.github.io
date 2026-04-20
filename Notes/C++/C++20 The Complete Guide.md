@@ -2,8 +2,8 @@
 
 8.5 十六进制浮点数字面量
 ```cpp
-#include <iostream>
-#include <iomanip>
+# include <iostream>
+# include <iomanip>
 int main()
 {
     // 初 始 化 浮 点 数
@@ -69,23 +69,23 @@ void foo() override; // ERROR：不能重载
 //主模板（匹配泛型类型T不是函数的情况） ：
 
 ```cpp
-template<typename T> struct is_function : std::false_type { };
+template<typename T> struct is*function : std::false*type { };
 ```
 
-该模板从std::false_type派生，因此is_function<T>::value对任何类型T都会返回false。
+该模板从std::false*type派生，因此is*function<T>::value对任何类型T都会返回false。
 对于任何是函数的类型，存在从std::true_type派生的部分特化版，因此成员value总是返回true：
 
 ```cpp
 //对所有函数类型的部分特化版
 
 template<typename Ret, typename... Params>
-struct is_function<Ret (Params...)> : std::true_type { };
+struct is*function<Ret (Params...)> : std::true*type { };
 template<typename Ret, typename... Params>
-struct is_function<Ret (Params...) const> : std::true_type { };
+struct is*function<Ret (Params...) const> : std::true*type { };
 template<typename Ret, typename... Params>
-struct is_function<Ret (Params...) &> : std::true_type { };
+struct is*function<Ret (Params...) &> : std::true*type { };
 template<typename Ret, typename... Params>
-struct is_function<Ret (Params...) const &> : std::true_type { };
+struct is*function<Ret (Params...) const &> : std::true*type { };
 ...
 ```
 
@@ -98,14 +98,14 @@ struct is_function<Ret (Params...) const &> : std::true_type { };
 
 //对所有带有noexcept声明的函数类型的部分特化版本
 template<typename Ret, typename... Params>
-struct is_function<Ret (Params...) noexcept> : std::true_type { };
+struct is*function<Ret (Params...) noexcept> : std::true*type { };
 template<typename Ret, typename... Params>
-struct is_function<Ret (Params...) const noexcept> : std::true_type { };
+struct is*function<Ret (Params...) const noexcept> : std::true*type { };
 template<typename Ret, typename... Params>
-struct is_function<Ret (Params...) & noexcept> : std::true_type { };
+struct is*function<Ret (Params...) & noexcept> : std::true*type { };
 
 template<typename Ret, typename... Params>
-struct is_function<Ret (Params...) const & noexcept> : std::true_type { };
+struct is*function<Ret (Params...) const & noexcept> : std::true*type { };
 
 ```
 
@@ -116,14 +116,14 @@ struct is_function<Ret (Params...) const & noexcept> : std::true_type { };
 自从 C++17 起，以前 static_assert()要求的用作错误信息的参数变为可选的了。
 
 ```cpp
-#include <type_traits>
+# include <type_traits>
 template<typename t>
 class C {
 // 自从C++11起OK
-static_assert(std::is_default_constructible<T>::value,
+static*assert(std::is*default_constructible<T>::value,
 "class C: elements must be default‐constructible");
 // 自从C++17起OK
-static_assert(std::is_default_constructible_v<T>);
+static*assert(std::is*default*constructible*v<T>);
 ...
 };
 ```
@@ -134,21 +134,21 @@ static_assert(std::is_default_constructible_v<T>);
 C++17扩展了预处理，增加了一个检查某个头文件是否可以被包含的宏。例如：
 
 ```cpp
-#if __has_include(<filesystem>)
+# if __has_include(<filesystem>)
 # include <filesystem>
 # define HAS_FILESYSTEM 1
-#elif __has_include(<experimental/filesystem>)
+# elif __has_include(<experimental/filesystem>)
 # include <experimental/filesystem>
 # define HAS_FILESYSTEM 1
-# define FILESYSTEM_IS_EXPERIMENTAL 1
-#elif __has_include("filesystem.hpp")
+# define FILESYSTEM*IS*EXPERIMENTAL 1
+# elif __has_include("filesystem.hpp")
 # include "filesystem.hpp"
 # define HAS_FILESYSTEM 1
-# define FILESYSTEM_IS_EXPERIMENTAL 1
-#else
+# define FILESYSTEM*IS*EXPERIMENTAL 1
+# else
 # define HAS_FILESYSTEM 0
-#endif
+# endif
 ```
 
-当相应的#include指令有效时__has_include(...)会被求值为1。  
+当相应的# include指令有效时__has_include(...)会被求值为1。  
 

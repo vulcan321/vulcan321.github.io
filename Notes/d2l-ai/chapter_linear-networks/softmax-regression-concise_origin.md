@@ -1,12 +1,12 @@
 # Concise Implementation of Softmax Regression
-:label:`sec_softmax_concise`
+:label:`sec*softmax*concise`
 
 Just as high-level APIs of deep learning frameworks
 made it much easier
-to implement linear regression in :numref:`sec_linear_concise`,
+to implement linear regression in :numref:`sec*linear*concise`,
 we will find it similarly (or possibly more)
 convenient for implementing classification models. Let us stick with the Fashion-MNIST dataset
-and keep the batch size at 256 as in :numref:`sec_softmax_scratch`.
+and keep the batch size at 256 as in :numref:`sec*softmax*scratch`.
 
 ```{.python .input}
 from d2l import mxnet as d2l
@@ -16,25 +16,25 @@ npx.set_np()
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 from d2l import torch as d2l
 import torch
 from torch import nn
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 from d2l import tensorflow as d2l
 import tensorflow as tf
 ```
 
 ```{.python .input}
-#@tab all
+# @tab all
 batch_size = 256
-train_iter, test_iter = d2l.load_data_fashion_mnist(batch_size)
+train*iter, test*iter = d2l.load*data*fashion*mnist(batch*size)
 ```
 
-## Initializing Model Parameters
+# # Initializing Model Parameters
 
 As mentioned in :numref:`sec_softmax`,
 the output layer of softmax regression
@@ -55,7 +55,7 @@ net.initialize(init.Normal(sigma=0.01))
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 # PyTorch does not implicitly reshape the inputs. Thus we define a layer to
 # reshape the inputs in our network
 class Reshape(torch.nn.Module):
@@ -72,17 +72,17 @@ net.apply(init_weights)
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 net = tf.keras.models.Sequential()
 net.add(tf.keras.layers.Flatten(input_shape=(28, 28)))
 weight_initializer = tf.keras.initializers.RandomNormal(mean=0.0, stddev=0.01)
-net.add(tf.keras.layers.Dense(10, kernel_initializer=weight_initializer))
+net.add(tf.keras.layers.Dense(10, kernel*initializer=weight*initializer))
 ```
 
-## Softmax Implementation Revisited
+# # Softmax Implementation Revisited
 :label:`subsec_softmax-implementation-revisited`
 
-In the previous example of :numref:`sec_softmax_scratch`,
+In the previous example of :numref:`sec*softmax*scratch`,
 we calculated our model's output
 and then ran this output through the cross-entropy loss.
 Mathematically, that is a perfectly reasonable thing to do.
@@ -90,7 +90,7 @@ However, from a computational perspective,
 exponentiation can be a source of numerical stability issues.
 
 Recall that the softmax function calculates
-$\hat y_j = \frac{\exp(o_j)}{\sum_k \exp(o_k)}$,
+$\hat y*j = \frac{\exp(o*j)}{\sum*k \exp(o*k)}$,
 where $\hat y_j$ is the $j^\mathrm{th}$ element of
 the predicted probability distribution $\hat{\mathbf{y}}$
 and $o_j$ is the $j^\mathrm{th}$ element of the logits
@@ -112,7 +112,7 @@ After the subtraction and normalization step,
 it might be possible that some $o_j$ have large negative values
 and thus that the corresponding $\exp(o_j)$ will take values close to zero.
 These might be rounded to zero due to finite precision (i.e., *underflow*),
-making $\hat y_j$ zero and giving us `-inf` for $\log(\hat y_j)$.
+making $\hat y*j$ zero and giving us `-inf` for $\log(\hat y*j)$.
 A few steps down the road in backpropagation,
 we might find ourselves faced with a screenful
 of the dreaded `nan` results.
@@ -130,9 +130,9 @@ and can use instead $o_j$ directly due to the canceling in $\log(\exp(\cdot))$.
 
 $$
 \begin{aligned}
-\log{(\hat y_j)} & = \log\left( \frac{\exp(o_j)}{\sum_k \exp(o_k)}\right) \\
-& = \log{(\exp(o_j))}-\log{\left( \sum_k \exp(o_k) \right)} \\
-& = o_j -\log{\left( \sum_k \exp(o_k) \right)}.
+\log{(\hat y*j)} & = \log\left( \frac{\exp(o*j)}{\sum*k \exp(o*k)}\right) \\
+& = \log{(\exp(o*j))}-\log{\left( \sum*k \exp(o_k) \right)} \\
+& = o*j -\log{\left( \sum*k \exp(o_k) \right)}.
 \end{aligned}
 $$
 
@@ -148,16 +148,16 @@ loss = gluon.loss.SoftmaxCrossEntropyLoss()
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 loss = nn.CrossEntropyLoss()
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 loss = tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True)
 ```
 
-## Optimization Algorithm
+# # Optimization Algorithm
 
 Here, we use minibatch stochastic gradient descent
 with a learning rate of 0.1 as the optimization algorithm.
@@ -165,27 +165,27 @@ Note that this is the same as we applied in the linear regression example
 and it illustrates the general applicability of the optimizers.
 
 ```{.python .input}
-trainer = gluon.Trainer(net.collect_params(), 'sgd', {'learning_rate': 0.1})
+trainer = gluon.Trainer(net.collect*params(), 'sgd', {'learning*rate': 0.1})
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 trainer = torch.optim.SGD(net.parameters(), lr=0.1)
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 trainer = tf.keras.optimizers.SGD(learning_rate=.1)
 ```
 
-## Training
+# # Training
 
-Next we call the training function defined in :numref:`sec_softmax_scratch` to train the model.
+Next we call the training function defined in :numref:`sec*softmax*scratch` to train the model.
 
 ```{.python .input}
-#@tab all
+# @tab all
 num_epochs = 10
-d2l.train_ch3(net, train_iter, test_iter, loss, num_epochs, trainer)
+d2l.train*ch3(net, train*iter, test*iter, loss, num*epochs, trainer)
 ```
 
 As before, this algorithm converges to a solution
@@ -193,12 +193,12 @@ that achieves a decent accuracy,
 albeit this time with fewer lines of code than before.
 
 
-## Summary
+# # Summary
 
 * Using high-level APIs, we can implement softmax regression much more concisely.
 * From a computational perspective, implementing softmax regression has intricacies. Note that in many cases, a deep learning framework takes additional precautions beyond these most well-known tricks to ensure numerical stability, saving us from even more pitfalls that we would encounter if we tried to code all of our models from scratch in practice.
 
-## Exercises
+# # Exercises
 
 1. Try adjusting the hyperparameters, such as the batch size, number of epochs, and learning rate, to see what the results are.
 1. Increase the numper of epochs for training. Why might the test accuracy decrease after a while? How could we fix this?

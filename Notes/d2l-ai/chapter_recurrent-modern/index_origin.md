@@ -1,5 +1,5 @@
 # Modern Recurrent Neural Networks
-:label:`chap_modern_rnn`
+:label:`chap*modern*rnn`
 
 We have introduced the basics of RNNs,
 which can better handle sequence data.

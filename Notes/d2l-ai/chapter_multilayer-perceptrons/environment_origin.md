@@ -57,7 +57,7 @@ statistical prediction altogether and
 grapple with difficult philosophical questions
 concerning the ethical application of algorithms.
 
-## Types of Distribution Shift
+# # Types of Distribution Shift
 
 To begin, we stick with the passive prediction setting
 considering the various ways that data distributions might shift
@@ -77,9 +77,9 @@ where we wish to distinguish between dogs and cats.
 If the distribution can shift in arbitrary ways,
 then our setup permits the pathological case
 in which the distribution over inputs remains
-constant: $p_S(\mathbf{x}) = p_T(\mathbf{x})$,
+constant: $p*S(\mathbf{x}) = p*T(\mathbf{x})$,
 but the labels are all flipped:
-$p_S(y | \mathbf{x}) = 1 - p_T(y | \mathbf{x})$.
+$p*S(y | \mathbf{x}) = 1 - p*T(y | \mathbf{x})$.
 In other words, if God can suddenly decide
 that in the future all "cats" are now dogs
 and what we previously called "dogs" are now cats---without
@@ -93,7 +93,7 @@ principled algorithms can detect shift
 and sometimes even adapt on the fly,
 improving on the accuracy of the original classifier.
 
-### Covariate Shift
+## # Covariate Shift
 
 Among categories of distribution shift,
 covariate shift may be the most widely studied.
@@ -128,7 +128,7 @@ characteristics from the test set
 can spell trouble absent a coherent plan
 for how to adapt to the new domain.
 
-### Label Shift
+## # Label Shift
 
 *Label shift* describes the converse problem.
 Here, we assume that the label marginal $P(y)$
@@ -156,7 +156,7 @@ to involve manipulating objects that look like labels (often low-dimensional),
 as opposed to objects that look like inputs,
 which tend to be high-dimensional in deep learning.
 
-### Concept Shift
+## # Concept Shift
 
 We may also encounter the related problem of *concept shift*,
 which arises when the very definitions of labels can change.
@@ -184,14 +184,14 @@ We might hope to exploit knowledge
 that shift only takes place gradually
 either in a temporal or geographic sense.
 
-## Examples of Distribution Shift
+# # Examples of Distribution Shift
 
 Before delving into formalism and algorithms,
 we can discuss some concrete situations
 where covariate or concept shift might not be obvious.
 
 
-### Medical Diagnostics
+## # Medical Diagnostics
 
 Imagine that you want to design an algorithm to detect cancer.
 You collect data from healthy and sick people
@@ -235,7 +235,7 @@ In short, they wasted a significant sum of money.
 
 
 
-### Self-Driving Cars
+## # Self-Driving Cars
 
 Say a company wanted to leverage machine learning
 for developing self-driving cars.
@@ -265,7 +265,7 @@ from trees without shadows---the first set
 of pictures was taken in the early morning,
 the second set at noon.
 
-### Nonstationary Distributions
+## # Nonstationary Distributions
 
 A much more subtle situation arises
 when the distribution changes slowly
@@ -277,7 +277,7 @@ Below are some typical cases.
 * We build a spam filter. It works well at detecting all spam that we have seen so far. But then the spammers wisen up and craft new messages that look unlike anything we have seen before.
 * We build a product recommendation system. It works throughout the winter but then continues to recommend Santa hats long after Christmas.
 
-### More Anecdotes
+## # More Anecdotes
 
 * We build a face detector. It works well on all benchmarks. Unfortunately it fails on test data---the offending examples are close-ups where the face fills the entire image (no such data were in the training set).
 * We build a Web search engine for the US market and want to deploy it in the UK.
@@ -288,7 +288,7 @@ Below are some typical cases.
 
 
 
-## Correction of Distribution Shift
+# # Correction of Distribution Shift
 
 As we have discussed, there are many cases
 where training and test distributions
@@ -301,22 +301,22 @@ The remainder of this section grows considerably more technical.
 The impatient reader could continue on to the next section
 as this material is not prerequisite to subsequent concepts.
 
-### Empirical Risk and True Risk
+## # Empirical Risk and True Risk
 
 Let us first reflect about what exactly
 is happening during model training:
 we iterate over features and associated labels
 of training data
-$\{(\mathbf{x}_1, y_1), \ldots, (\mathbf{x}_n, y_n)\}$
+$\{(\mathbf{x}*1, y*1), \ldots, (\mathbf{x}*n, y*n)\}$
 and update the parameters of a model $f$ after every minibatch.
 For simplicity we do not consider regularization,
 so we largely minimize the loss on the training:
 
-$$\mathop{\mathrm{minimize}}_f \frac{1}{n} \sum_{i=1}^n l(f(\mathbf{x}_i), y_i),$$
+$$\mathop{\mathrm{minimize}}*f \frac{1}{n} \sum*{i=1}^n l(f(\mathbf{x}*i), y*i),$$
 :eqlabel:`eq_empirical-risk-min`
 
 where $l$ is the loss function
-measuring "how bad" the prediction $f(\mathbf{x}_i)$ is given the associated label $y_i$.
+measuring "how bad" the prediction $f(\mathbf{x}*i)$ is given the associated label $y*i$.
 Statisticians call the term in :eqref:`eq_empirical-risk-min` *empirical risk*.
 *Empirical risk* is an average loss over the training data
 to approximate the *true risk*, 
@@ -339,12 +339,12 @@ minimizing true risk.
 
 
 
-### Covariate Shift Correction
+## # Covariate Shift Correction
 :label:`subsec_covariate-shift-correction`
 
 Assume that we want to estimate
 some dependency $P(y \mid \mathbf{x})$
-for which we have labeled data $(\mathbf{x}_i, y_i)$.
+for which we have labeled data $(\mathbf{x}*i, y*i)$.
 Unfortunately, the observations $\mathbf{x}_i$ are drawn
 from some *source distribution* $q(\mathbf{x})$ 
 rather than the *target distribution* $p(\mathbf{x})$.
@@ -366,14 +366,14 @@ by the ratio of the
 probability
 that it would have been drawn from the correct distribution to that from the wrong one:
 
-$$\beta_i \stackrel{\mathrm{def}}{=} \frac{p(\mathbf{x}_i)}{q(\mathbf{x}_i)}.$$
+$$\beta*i \stackrel{\mathrm{def}}{=} \frac{p(\mathbf{x}*i)}{q(\mathbf{x}_i)}.$$
 
 Plugging in the weight $\beta_i$ for
-each data point $(\mathbf{x}_i, y_i)$
+each data point $(\mathbf{x}*i, y*i)$
 we can train our model using
 *weighted empirical risk minimization*:
 
-$$\mathop{\mathrm{minimize}}_f \frac{1}{n} \sum_{i=1}^n \beta_i l(f(\mathbf{x}_i), y_i).$$
+$$\mathop{\mathrm{minimize}}*f \frac{1}{n} \sum*{i=1}^n \beta*i l(f(\mathbf{x}*i), y_i).$$
 :eqlabel:`eq_weighted-empirical-risk-min`
 
 
@@ -423,7 +423,7 @@ where $P(z=1 \mid \mathbf{x})=\frac{1}{1+\exp(-h(\mathbf{x}))}$ ($h$ is a parame
 it follows that
 
 $$
-\beta_i = \frac{1/(1 + \exp(-h(\mathbf{x}_i)))}{\exp(-h(\mathbf{x}_i))/(1 + \exp(-h(\mathbf{x}_i)))} = \exp(h(\mathbf{x}_i)).
+\beta*i = \frac{1/(1 + \exp(-h(\mathbf{x}*i)))}{\exp(-h(\mathbf{x}*i))/(1 + \exp(-h(\mathbf{x}*i)))} = \exp(h(\mathbf{x}_i)).
 $$
 
 As a result, we need to solve two problems:
@@ -434,7 +434,7 @@ in :eqref:`eq_weighted-empirical-risk-min`
 where we weigh terms by $\beta_i$.
 
 Now we are ready to describe a correction algorithm.
-Suppose that we have a training set $\{(\mathbf{x}_1, y_1), \ldots, (\mathbf{x}_n, y_n)\}$ and an unlabeled test set $\{\mathbf{u}_1, \ldots, \mathbf{u}_m\}$.
+Suppose that we have a training set $\{(\mathbf{x}*1, y*1), \ldots, (\mathbf{x}*n, y*n)\}$ and an unlabeled test set $\{\mathbf{u}*1, \ldots, \mathbf{u}*m\}$.
 For covariate shift,
 we assume that $\mathbf{x}_i$ for all $1 \leq i \leq n$ are drawn from some source distribution
 and $\mathbf{u}_i$ for all $1 \leq i \leq m$
@@ -442,10 +442,10 @@ are drawn from the target distribution.
 Here is a prototypical algorithm
 for correcting covariate shift:
 
-1. Generate a binary-classification training set: $\{(\mathbf{x}_1, -1), \ldots, (\mathbf{x}_n, -1), (\mathbf{u}_1, 1), \ldots, (\mathbf{u}_m, 1)\}$.
+1. Generate a binary-classification training set: $\{(\mathbf{x}*1, -1), \ldots, (\mathbf{x}*n, -1), (\mathbf{u}*1, 1), \ldots, (\mathbf{u}*m, 1)\}$.
 1. Train a binary classifier using logistic regression to get function $h$.
-1. Weigh training data using $\beta_i = \exp(h(\mathbf{x}_i))$ or better $\beta_i = \min(\exp(h(\mathbf{x}_i)), c)$ for some constant $c$.
-1. Use weights $\beta_i$ for training on $\{(\mathbf{x}_1, y_1), \ldots, (\mathbf{x}_n, y_n)\}$ in :eqref:`eq_weighted-empirical-risk-min`.
+1. Weigh training data using $\beta*i = \exp(h(\mathbf{x}*i))$ or better $\beta*i = \min(\exp(h(\mathbf{x}*i)), c)$ for some constant $c$.
+1. Use weights $\beta*i$ for training on $\{(\mathbf{x}*1, y*1), \ldots, (\mathbf{x}*n, y*n)\}$ in :eqref:`eq*weighted-empirical-risk-min`.
 
 Note that the above algorithm relies on a crucial assumption.
 For this scheme to work, we need that each data point
@@ -459,7 +459,7 @@ then the corresponding importance weight should be infinity.
 
 
 
-### Label Shift Correction
+## # Label Shift Correction
 
 Assume that we are dealing with a
 classification task with $k$ categories.
@@ -487,7 +487,7 @@ $$
 Here, our importance weights will correspond to the
 label likelihood ratios 
 
-$$\beta_i \stackrel{\mathrm{def}}{=} \frac{p(y_i)}{q(y_i)}.$$
+$$\beta*i \stackrel{\mathrm{def}}{=} \frac{p(y*i)}{q(y_i)}.$$
 
 One nice thing about label shift is that
 if we have a reasonably good model
@@ -531,7 +531,7 @@ by solving a simple linear system
 
 $$\mathbf{C} p(\mathbf{y}) = \mu(\hat{\mathbf{y}}),$$
 
-because as an estimate $\sum_{j=1}^k c_{ij} p(y_j) = \mu(\hat{y}_i)$ holds for all $1 \leq i \leq k$,
+because as an estimate $\sum*{j=1}^k c*{ij} p(y*j) = \mu(\hat{y}*i)$ holds for all $1 \leq i \leq k$,
 where $p(y_j)$ is the $j^\mathrm{th}$ element of the $k$-dimensional label distribution vector $p(\mathbf{y})$.
 If our classifier is sufficiently accurate to begin with,
 then the confusion matrix $\mathbf{C}$ will be invertible,
@@ -540,13 +540,13 @@ and we get a solution $p(\mathbf{y}) = \mathbf{C}^{-1} \mu(\hat{\mathbf{y}})$.
 Because we observe the labels on the source data,
 it is easy to estimate the distribution $q(y)$.
 Then for any training example $i$ with label $y_i$,
-we can take the ratio of our estimated $p(y_i)/q(y_i)$
+we can take the ratio of our estimated $p(y*i)/q(y*i)$
 to calculate the weight $\beta_i$,
 and plug this into weighted empirical risk minimization
 in :eqref:`eq_weighted-empirical-risk-min`.
 
 
-### Concept Shift Correction
+## # Concept Shift Correction
 
 Concept shift is much harder to fix in a principled manner.
 For instance, in a situation where suddenly the problem changes
@@ -567,36 +567,36 @@ old products become less popular. This means that the distribution over ads and 
 In such cases, we can use the same approach that we used for training networks to make them adapt to the change in the data. In other words, we use the existing network weights and simply perform a few update steps with the new data rather than training from scratch.
 
 
-## A Taxonomy of Learning Problems
+# # A Taxonomy of Learning Problems
 
 Armed with knowledge about how to deal with changes in distributions, we can now consider some other aspects of machine learning problem formulation.
 
 
-### Batch Learning
+## # Batch Learning
 
-In *batch learning*, we have access to training features and labels $\{(\mathbf{x}_1, y_1), \ldots, (\mathbf{x}_n, y_n)\}$, which we use to train a model $f(\mathbf{x})$. Later on, we deploy this model to score new data $(\mathbf{x}, y)$ drawn from the same distribution. This is the default assumption for any of the problems that we discuss here. For instance, we might train a cat detector based on lots of pictures of cats and dogs. Once we trained it, we ship it as part of a smart catdoor computer vision system that lets only cats in. This is then installed in a customer's home and is never updated again (barring extreme circumstances).
+In *batch learning*, we have access to training features and labels $\{(\mathbf{x}*1, y*1), \ldots, (\mathbf{x}*n, y*n)\}$, which we use to train a model $f(\mathbf{x})$. Later on, we deploy this model to score new data $(\mathbf{x}, y)$ drawn from the same distribution. This is the default assumption for any of the problems that we discuss here. For instance, we might train a cat detector based on lots of pictures of cats and dogs. Once we trained it, we ship it as part of a smart catdoor computer vision system that lets only cats in. This is then installed in a customer's home and is never updated again (barring extreme circumstances).
 
 
-### Online Learning
+## # Online Learning
 
-Now imagine that the data $(\mathbf{x}_i, y_i)$ arrives one sample at a time. More specifically, assume that we first observe $\mathbf{x}_i$, then we need to come up with an estimate $f(\mathbf{x}_i)$ and only once we have done this, we observe $y_i$ and with it, we receive a reward or incur a loss, given our decision. 
+Now imagine that the data $(\mathbf{x}*i, y*i)$ arrives one sample at a time. More specifically, assume that we first observe $\mathbf{x}*i$, then we need to come up with an estimate $f(\mathbf{x}*i)$ and only once we have done this, we observe $y_i$ and with it, we receive a reward or incur a loss, given our decision. 
 Many real problems fall into this category. For example, we need to predict tomorrow's stock price, this allows us to trade based on that estimate and at the end of the day we find out whether our estimate allowed us to make a profit. In other words, in *online learning*, we have the following cycle where we are continuously improving our model given new observations.
 
 $$
 \mathrm{model} ~ f_t \longrightarrow
 \mathrm{data} ~ \mathbf{x}_t \longrightarrow
-\mathrm{estimate} ~ f_t(\mathbf{x}_t) \longrightarrow
+\mathrm{estimate} ~ f*t(\mathbf{x}*t) \longrightarrow
 \mathrm{observation} ~ y_t \longrightarrow
-\mathrm{loss} ~ l(y_t, f_t(\mathbf{x}_t)) \longrightarrow
+\mathrm{loss} ~ l(y*t, f*t(\mathbf{x}_t)) \longrightarrow
 \mathrm{model} ~ f_{t+1}
 $$
 
-### Bandits
+## # Bandits
 
 *Bandits* are a special case of the problem above. While in most learning problems we have a continuously parametrized function $f$ where we want to learn its parameters (e.g., a deep network), in a *bandit* problem we only have a finite number of arms that we can pull, i.e., a finite number of actions that we can take. It is not very surprising that for this simpler problem stronger theoretical guarantees in terms of optimality can be obtained. We list it mainly since this problem is often (confusingly) treated as if it were a distinct learning setting.
 
 
-### Control
+## # Control
 
 In many cases the environment remembers what we did. Not necessarily in an adversarial manner but it will just remember and the response will depend on what happened before. For instance, a coffee boiler controller will observe different temperatures depending on whether it was heating the boiler previously. PID (proportional-integral-derivative) controller algorithms are a popular choice there. 
 Likewise, a user's behavior on a news site will depend on what we showed her previously (e.g., she will read most news only once). Many such algorithms form a model of the environment in which they act such as to make their decisions appear less random.
@@ -609,18 +609,18 @@ and improve the diversity of generated text and the reconstruction quality of ge
 
 
 
-### Reinforcement Learning 
+## # Reinforcement Learning 
 
 In the more general case of an environment with memory, we may encounter situations where the environment is trying to cooperate with us (cooperative games, in particular for non-zero-sum games), or others where the environment will try to win. Chess, Go, Backgammon, or StarCraft are some of the cases in *reinforcement learning*. Likewise, we might want to build a good controller for autonomous cars. The other cars are likely to respond to the autonomous car's driving style in nontrivial ways, e.g., trying to avoid it, trying to cause an accident, and trying to cooperate with it.
 
-### Considering the Environment
+## # Considering the Environment
 
 One key distinction between the different situations above is that the same strategy that might have worked throughout in the case of a stationary environment, might not work throughout when the environment can adapt. For instance, an arbitrage opportunity discovered by a trader is likely to disappear once he starts exploiting it. The speed and manner at which the environment changes determines to a large extent the type of algorithms that we can bring to bear. For instance, if we know that things may only change slowly, we can force any estimate to change only slowly, too. If we know that the environment might change instantaneously, but only very infrequently, we can make allowances for that. These types of knowledge are crucial for the aspiring data scientist to deal with concept shift, i.e., when the problem that she is trying to solve changes over time.
 
 
 
 
-## Fairness, Accountability, and Transparency in Machine Learning
+# # Fairness, Accountability, and Transparency in Machine Learning
 
 Finally, it is important to remember
 that when you deploy machine learning systems
@@ -678,14 +678,14 @@ that you might encounter in a career in machine learning.
 
 
 
-## Summary
+# # Summary
 
 * In many cases training and test sets do not come from the same distribution. This is called distribution shift.
 * True risk is the expectation of the loss over the entire population of data drawn from their true distribution. However, this entire population is usually unavailable. Empirical risk is an average loss over the training data to approximate the true risk. In practice, we perform empirical risk minimization.
 * Under the corresponding assumptions, covariate and label shift can be detected and corrected for at test time. Failure to account for this bias can become problematic at test time.
 * In some cases, the environment may remember automated actions and respond in surprising ways. We must account for this possibility when building models and continue to monitor live systems, open to the possibility that our models and the environment will become entangled in unanticipated ways.
 
-## Exercises
+# # Exercises
 
 1. What could happen when we change the behavior of a search engine? What might the users do? What about the advertisers?
 1. Implement a covariate shift detector. Hint: build a classifier.

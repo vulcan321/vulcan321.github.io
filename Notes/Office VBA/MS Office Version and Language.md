@@ -1,8 +1,8 @@
-## Mac Excel Version and Mac Office Language settings
+# # Mac Excel Version and Mac Office Language settings
 
 It can be useful to know what the Excel version and the Excel language is of the Excel application that opens your workbook so your code can do different things depending of the version/language.  
 
-### Excel version number
+## # Excel version number
 
 You can use Application.Version to get the version number of Excel as a string. We can use the Val function in Excel to make it numeric so we can test the number. Note that Win Excel give you a whole number 16 and Mac Excel will give you also the update number like 16.65 for example.  
 
@@ -11,35 +11,35 @@ The macro below will display a msgbox with the Excel version, working in Excel f
 ```vbnet
 Sub TestMacOrWindowsOfficeVersion()
 'Test the conditional compiler constants
-    #If MAC_OFFICE_VERSION >= 15 Then
+    # If MAC*OFFICE*VERSION >= 15 Then
         MsgBox "Excel 2016 or higher for the Mac, version: " & _
             Val(Application.Version)
         Exit Sub
-    #End If
+    # End If
 
-    #If Mac Then
+    # If Mac Then
         If Val(Application.Version) < 15 Then
             MsgBox "Excel 2011 or earlier for the Mac, version: " & _
                 Val(Application.Version)
         End If
-    #Else
+    # Else
         MsgBox "Excel for Windows, version: " & _
             Val(Application.Version)
-    #End If
+    # End If
 End Sub
 ```
 
 **More Information**  
 
-In Mac Office 2016 they add a new conditional compiler constant named MAC\_OFFICE\_VERSION. In most cases you can test the Application.Version(>=15) if you want, but in the macro above I use it for testing if it is a Mac and Excel 2016 or higher in one step.  
+In Mac Office 2016 they add a new conditional compiler constant named MAC\*OFFICE\*VERSION. In most cases you can test the Application.Version(>=15) if you want, but in the macro above I use it for testing if it is a Mac and Excel 2016 or higher in one step.  
 
 But if you want to avoid compile errors with for example ribbon macro callbacks in **Excel 2011**(this not compile for example in 2011: control As IRibbonControl) or use VBA functions that are new in 2016 like AppleScriptTask and GrantAccessToMultipleFiles, you can add the ribbon macro callbacks or the new VBA functions in between the two code lines below in your code module.  
 
-#If MAC\_OFFICE\_VERSION >= 15 Then  
+# If MAC\*OFFICE\*VERSION >= 15 Then  
 
 Put your macro callbacks or code here  
 
-#End If  
+# End If  
 
 **Note** : Excel 2019 and Excel 365 on the Mac or Windows also use number 16  
 
@@ -56,7 +56,7 @@ Int(Val(Application.Version))
 Because 2016, 2019 and 365 all give you the answer 16 I build this test macro to get the real version, I not really like it but so far it is the only thing i can get to work. Will update the code when needed.
 
 ```vbnet
-Sub TestExcelVersion_2016_2019_365()
+Sub TestExcelVersion*2016*2019_365()
     'Testcode for Excel 2016, 2019 and 365 in Win and Mac Excel
     'Application.version will display 16 for all versions
     Dim Answ As String
@@ -83,7 +83,7 @@ Sub TestExcelVersion_2016_2019_365()
 End Sub
 ```
 
-### Laguage ID of Excel
+## # Laguage ID of Excel
 
 f you want to know the exact language of the userinterface of Excel you can use this to return the language ID number in Excel for Windows and in Excel 2016 for the Mac version 16 or higher but it is not working on a Mac in the older Excel versions <16 :  
 Application.LanguageSettings.LanguageID(msoLanguageIDUI)  

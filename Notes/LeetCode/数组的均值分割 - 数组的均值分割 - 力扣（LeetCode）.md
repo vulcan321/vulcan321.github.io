@@ -1,4 +1,4 @@
-#### 方法一：折半搜索
+### # 方法一：折半搜索
 
 **思路与算法**
 
@@ -9,9 +9,9 @@ sum(A)×(n−k)\=sum(B)×k⇔ sum(A)×n\=(sum(A)+sum(B))×k⇔ sum(A)×n\=(sum
 即数组 AAA 的平均值与数组 nums\\textit{nums}nums 的平均值相等。此时我们可以将数组 nums\\textit{nums}nums 中的每个元素减去 nums\\textit{nums}nums 的平均值，这样数组 nums\\textit{nums}nums 的平均值则变为 000。此时题目中的问题则可以住准变为：从 nums\\textit{nums}nums 中找出若干个元素组成集合 AAA，使得 AAA 的元素之和为 000，剩下的元素组成集合 BBB，它们的和也同样为 000。
 
 比较容易想到的思路是，从 nnn 个元素中取出若干个元素形成不同的子集，则此时一共有 2n2^n2n 种方法（即每个元素取或不取），我们依次判断每种方法选出的元素之和是否为 000。但题目中的 nnn 可以达到 303030，此时 230\=1,073,741,8242^{30} = 1,073,741,824230\=1,073,741,824，组合的数据非常大。  
-因此我们考虑将数组平均分成两部分 A0A\_0A0 和 B0B\_0B0，它们均含有 n2\\dfrac{n}{2}2n 个元素（不失一般性，这里假设 nnn 为偶数。如果 nnn 为奇数，在 A0A\_0A0 中多放一个元素即可），此时这两个数组分别有 2n22^{\\frac{n}{2}}22n 种不同的子集选择的方法。设 A0A\_0A0 中所有选择的方法得到的不同子集的元素之和的集合为 left\\textit{left}left，B0B\_0B0 中所有选择的方法得到的不同子集的元素之和的集合为 right\\textit{right}right，那么我们只需要在 left\\textit{left}left 中找出一个子集 A0′A\_0^{'}A0′ 的元素之和为 xxx，同时在 right\\textit{right}right 中包含一个子集 B0′B\_0^{'}B0′ 的元素之和为 −x\-x−x，则子集 A0′,B0′A\_0^{'},B\_0^{'}A0′,B0′ 构成的集合的元素之和为 000，此时则找到了一种和为 000 的方法。
+因此我们考虑将数组平均分成两部分 A0A\*0A0 和 B0B\*0B0，它们均含有 n2\\dfrac{n}{2}2n 个元素（不失一般性，这里假设 nnn 为偶数。如果 nnn 为奇数，在 A0A\*0A0 中多放一个元素即可），此时这两个数组分别有 2n22^{\\frac{n}{2}}22n 种不同的子集选择的方法。设 A0A\*0A0 中所有选择的方法得到的不同子集的元素之和的集合为 left\\textit{left}left，B0B\*0B0 中所有选择的方法得到的不同子集的元素之和的集合为 right\\textit{right}right，那么我们只需要在 left\\textit{left}left 中找出一个子集 A0′A\*0^{'}A0′ 的元素之和为 xxx，同时在 right\\textit{right}right 中包含一个子集 B0′B\*0^{'}B0′ 的元素之和为 −x\-x−x，则子集 A0′,B0′A\*0^{'},B\_0^{'}A0′,B0′ 构成的集合的元素之和为 000，此时则找到了一种和为 000 的方法。
 
--   需要注意的是，我们不能同时选择 A0A\_0A0 和 A1A\_1A1 中的所有元素，这样数组 BBB 就为空了。
+-   需要注意的是，我们不能同时选择 A0A\*0A0 和 A1A\*1A1 中的所有元素，这样数组 BBB 就为空了。
 
 此外，将数组 nums\\textit{nums}nums 中每个元素减去它们的平均值，这一步会引入浮点数，可能会导致判断的时候出现误差。一种解决方案是使用分数代替浮点数，但这样代码编写起来较为麻烦。更好的解决方案是先将 nums\\textit{nums}nums 中的每个元素乘以 nums\\textit{nums}nums 的长度，则此时每个元素 nums\[i\]\\textit{nums}\[i\]nums\[i\] 变为 n×nums\[i\]n \\times \\textit{nums}\[i\]n×nums\[i\]，这样数组 nums\\textit{nums}nums 的平均值一定为整数，同时也不影响题目中的平均值相等的要求。
 
@@ -200,12 +200,12 @@ public class Solution {
 ```
 typedef struct {
     int key;
-    UT_hash_handle hh;
+    UT*hash*handle hh;
 } HashItem; 
 
 HashItem *hashFindItem(HashItem **obj, int key) {
     HashItem *pEntry = NULL;
-    HASH_FIND_INT(*obj, &key, pEntry);
+    HASH*FIND*INT(*obj, &key, pEntry);
     return pEntry;
 }
 
@@ -215,7 +215,7 @@ bool hashAddItem(HashItem **obj, int key) {
     }
     HashItem *pEntry = (HashItem *)malloc(sizeof(HashItem));
     pEntry->key = key;
-    HASH_ADD_INT(*obj, key, pEntry);
+    HASH*ADD*INT(*obj, key, pEntry);
     return true;
 }
 
@@ -377,7 +377,7 @@ func splitArraySameAverage(nums []int) bool {
 -   空间复杂度：O(2n2)O(2^{\\frac{n}{2}})O(22n)。一共有 2n22^{\\frac{n}{2}}22n 个子集的元素之和需要保存，因此需要的空间为 O(2n2)O(2^{\\frac{n}{2}})O(22n)。
     
 
-#### [](https://leetcode.cn/problems/split-array-with-same-average/solution/shu-zu-de-jun-zhi-fen-ge-by-leetcode-sol-f630//#方法二：动态规划)方法二：动态规划
+### # [](https://leetcode.cn/problems/split-array-with-same-average/solution/shu-zu-de-jun-zhi-fen-ge-by-leetcode-sol-f630//# 方法二：动态规划)方法二：动态规划
 
 **思路与算法**
 
@@ -551,12 +551,12 @@ public class Solution {
 ```
 typedef struct {
     int key;
-    UT_hash_handle hh;
+    UT*hash*handle hh;
 } HashItem; 
 
 HashItem *hashFindItem(HashItem **obj, int key) {
     HashItem *pEntry = NULL;
-    HASH_FIND_INT(*obj, &key, pEntry);
+    HASH*FIND*INT(*obj, &key, pEntry);
     return pEntry;
 }
 
@@ -566,7 +566,7 @@ bool hashAddItem(HashItem **obj, int key) {
     }
     HashItem *pEntry = (HashItem *)malloc(sizeof(HashItem));
     pEntry->key = key;
-    HASH_ADD_INT(*obj, key, pEntry);
+    HASH*ADD*INT(*obj, key, pEntry);
     return true;
 }
 

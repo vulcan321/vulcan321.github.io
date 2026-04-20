@@ -1,5 +1,5 @@
 # Machine Translation and the Dataset
-:label:`sec_machine_translation`
+:label:`sec*machine*translation`
 
 We have used RNNs to design language models,
 which are key to natural language processing.
@@ -42,7 +42,7 @@ the translation model and the language model.
 Emphasizing end-to-end learning,
 this book will focus on neural machine translation methods.
 Different from our language model problem
-in :numref:`sec_language_model`
+in :numref:`sec*language*model`
 whose corpus is in one single language,
 machine translation datasets
 are composed of pairs of text sequences
@@ -66,20 +66,20 @@ npx.set_np()
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 from d2l import torch as d2l
 import torch
 import os
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 from d2l import tensorflow as d2l
 import tensorflow as tf
 import os
 ```
 
-## Downloading and Preprocessing the Dataset
+# # Downloading and Preprocessing the Dataset
 
 To begin with,
 we download an English-French dataset
@@ -96,19 +96,19 @@ English is the *source language*
 and French is the *target language*.
 
 ```{.python .input}
-#@tab all
-#@save
-d2l.DATA_HUB['fra-eng'] = (d2l.DATA_URL + 'fra-eng.zip',
+# @tab all
+# @save
+d2l.DATA*HUB['fra-eng'] = (d2l.DATA*URL + 'fra-eng.zip',
                            '94646ad1522d915e7b0f9296181140edcf86a4f5')
 
-#@save
-def read_data_nmt():
+# @save
+def read*data*nmt():
     """Load the English-French dataset."""
-    data_dir = d2l.download_extract('fra-eng')
+    data*dir = d2l.download*extract('fra-eng')
     with open(os.path.join(data_dir, 'fra.txt'), 'r') as f:
         return f.read()
 
-raw_text = read_data_nmt()
+raw*text = read*data_nmt()
 print(raw_text[:75])
 ```
 
@@ -121,11 +121,11 @@ convert uppercase letters to lowercase ones,
 and insert space between words and punctuation marks.
 
 ```{.python .input}
-#@tab all
-#@save
+# @tab all
+# @save
 def preprocess_nmt(text):
     """Preprocess the English-French dataset."""
-    def no_space(char, prev_char):
+    def no*space(char, prev*char):
         return char in set(',.!?') and prev_char != ' '
 
     # Replace non-breaking space with space, and convert uppercase letters to
@@ -136,14 +136,14 @@ def preprocess_nmt(text):
            for i, char in enumerate(text)]
     return ''.join(out)
 
-text = preprocess_nmt(raw_text)
+text = preprocess*nmt(raw*text)
 print(text[:80])
 ```
 
-## Tokenization
+# # Tokenization
 
 Different from character-level tokenization
-in :numref:`sec_language_model`,
+in :numref:`sec*language*model`,
 for machine translation
 we prefer word-level tokenization here
 (state-of-the-art models may use more advanced tokenization techniques).
@@ -158,13 +158,13 @@ Specifically,
 $i^\mathrm{th}$ text sequence in the source language (English here) and `target[i]` is that in the target language (French here).
 
 ```{.python .input}
-#@tab all
-#@save
-def tokenize_nmt(text, num_examples=None):
+# @tab all
+# @save
+def tokenize*nmt(text, num*examples=None):
     """Tokenize the English-French dataset."""
     source, target = [], []
     for i, line in enumerate(text.split('\n')):
-        if num_examples and i > num_examples:
+        if num*examples and i > num*examples:
             break
         parts = line.split('\t')
         if len(parts) == 2:
@@ -181,9 +181,9 @@ In this simple English-French dataset,
 most of the text sequences have fewer than 20 tokens.
 
 ```{.python .input}
-#@tab all
+# @tab all
 d2l.set_figsize()
-_, _, patches = d2l.plt.hist(
+*, *, patches = d2l.plt.hist(
     [[len(l) for l in source], [len(l) for l in target]],
     label=['source', 'target'])
 for patch in patches[1].patches:
@@ -191,7 +191,7 @@ for patch in patches[1].patches:
 d2l.plt.legend(loc='upper right');
 ```
 
-## Vocabulary
+# # Vocabulary
 
 Since the machine translation dataset
 consists of pairs of languages,
@@ -213,14 +213,14 @@ Such special tokens are commonly used in
 natural language processing tasks.
 
 ```{.python .input}
-#@tab all
-src_vocab = d2l.Vocab(source, min_freq=2,
+# @tab all
+src*vocab = d2l.Vocab(source, min*freq=2,
                       reserved_tokens=['<pad>', '<bos>', '<eos>'])
 len(src_vocab)
 ```
 
-## Loading the Dataset
-:label:`subsec_mt_data_loading`
+# # Loading the Dataset
+:label:`subsec*mt*data_loading`
 
 Recall that in language modeling
 each sequence example,
@@ -228,7 +228,7 @@ either a segment of one sentence
 or a span over multiple sentences,
 has a fixed length.
 This was specified by the `num_steps`
-(number of time steps or tokens) argument in :numref:`sec_language_model`.
+(number of time steps or tokens) argument in :numref:`sec*language*model`.
 In machine translation, each example is
 a pair of source and target text sequences,
 where each text sequence may have different lengths.
@@ -254,15 +254,15 @@ The following `truncate_pad` function
 truncates or pads text sequences as described before.
 
 ```{.python .input}
-#@tab all
-#@save
-def truncate_pad(line, num_steps, padding_token):
+# @tab all
+# @save
+def truncate*pad(line, num*steps, padding_token):
     """Truncate or pad sequences."""
     if len(line) > num_steps:
         return line[:num_steps]  # Truncate
-    return line + [padding_token] * (num_steps - len(line))  # Pad
+    return line + [padding*token] * (num*steps - len(line))  # Pad
 
-truncate_pad(src_vocab[source[0]], 10, src_vocab['<pad>'])
+truncate*pad(src*vocab[source[0]], 10, src_vocab['<pad>'])
 ```
 
 Now we define a function to transform
@@ -285,66 +285,66 @@ some models that
 we will cover later.
 
 ```{.python .input}
-#@tab all
-#@save
-def build_array_nmt(lines, vocab, num_steps):
+# @tab all
+# @save
+def build*array*nmt(lines, vocab, num_steps):
     """Transform text sequences of machine translation into minibatches."""
     lines = [vocab[l] for l in lines]
     lines = [l + [vocab['<eos>']] for l in lines]
     array = d2l.tensor([truncate_pad(
         l, num_steps, vocab['<pad>']) for l in lines])
-    valid_len = d2l.reduce_sum(
+    valid*len = d2l.reduce*sum(
         d2l.astype(array != vocab['<pad>'], d2l.int32), 1)
     return array, valid_len
 ```
 
-## Putting All Things Together
+# # Putting All Things Together
 
-Finally, we define the `load_data_nmt` function
+Finally, we define the `load*data*nmt` function
 to return the data iterator, together with
 the vocabularies for both the source language and the target language.
 
 ```{.python .input}
-#@tab all
-#@save
-def load_data_nmt(batch_size, num_steps, num_examples=600):
+# @tab all
+# @save
+def load*data*nmt(batch*size, num*steps, num_examples=600):
     """Return the iterator and the vocabularies of the translation dataset."""
-    text = preprocess_nmt(read_data_nmt())
-    source, target = tokenize_nmt(text, num_examples)
-    src_vocab = d2l.Vocab(source, min_freq=2,
+    text = preprocess*nmt(read*data_nmt())
+    source, target = tokenize*nmt(text, num*examples)
+    src*vocab = d2l.Vocab(source, min*freq=2,
                           reserved_tokens=['<pad>', '<bos>', '<eos>'])
-    tgt_vocab = d2l.Vocab(target, min_freq=2,
+    tgt*vocab = d2l.Vocab(target, min*freq=2,
                           reserved_tokens=['<pad>', '<bos>', '<eos>'])
-    src_array, src_valid_len = build_array_nmt(source, src_vocab, num_steps)
-    tgt_array, tgt_valid_len = build_array_nmt(target, tgt_vocab, num_steps)
-    data_arrays = (src_array, src_valid_len, tgt_array, tgt_valid_len)
-    data_iter = d2l.load_array(data_arrays, batch_size)
-    return data_iter, src_vocab, tgt_vocab
+    src*array, src*valid*len = build*array*nmt(source, src*vocab, num_steps)
+    tgt*array, tgt*valid*len = build*array*nmt(target, tgt*vocab, num_steps)
+    data*arrays = (src*array, src*valid*len, tgt*array, tgt*valid_len)
+    data*iter = d2l.load*array(data*arrays, batch*size)
+    return data*iter, src*vocab, tgt_vocab
 ```
 
 Let us read the first minibatch from the English-French dataset.
 
 ```{.python .input}
-#@tab all
-train_iter, src_vocab, tgt_vocab = load_data_nmt(batch_size=2, num_steps=8)
-for X, X_valid_len, Y, Y_valid_len in train_iter:
+# @tab all
+train*iter, src*vocab, tgt*vocab = load*data*nmt(batch*size=2, num_steps=8)
+for X, X*valid*len, Y, Y*valid*len in train_iter:
     print('X:', d2l.astype(X, d2l.int32))
-    print('valid lengths for X:', X_valid_len)
+    print('valid lengths for X:', X*valid*len)
     print('Y:', d2l.astype(Y, d2l.int32))
-    print('valid lengths for Y:', Y_valid_len)
+    print('valid lengths for Y:', Y*valid*len)
     break
 ```
 
-## Summary
+# # Summary
 
 * Machine translation refers to the automatic translation of a sequence from one language to another.
 * Using word-level tokenization, the vocabulary size will be significantly larger than that using character-level tokenization. To alleviate this, we can treat infrequent tokens as the same unknown token.
 * We can truncate and pad text sequences so that all of them will have the same length to be loaded in minibatches.
 
 
-## Exercises
+# # Exercises
 
-1. Try different values of the `num_examples` argument in the `load_data_nmt` function. How does this affect the vocabulary sizes of the source language and the target language?
+1. Try different values of the `num*examples` argument in the `load*data_nmt` function. How does this affect the vocabulary sizes of the source language and the target language?
 1. Text in some languages such as Chinese and Japanese does not have word boundary indicators (e.g., space). Is word-level tokenization still a good idea for such cases? Why or why not?
 
 :begin_tab:`mxnet`

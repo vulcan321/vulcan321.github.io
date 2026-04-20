@@ -56,7 +56,7 @@ that machine learning has embraced for exploiting
 some of the known structure in natural images.
 
 
-## Invariance
+# # Invariance
 
 Imagine that you want to detect an object in an image.
 It seems reasonable that whatever method
@@ -108,7 +108,7 @@ Let us see how this translates into mathematics.
 
 
 
-## Constraining the MLP
+# # Constraining the MLP
 
 To start off, we can consider an MLP
 with two-dimensional images $\mathbf{X}$ as inputs
@@ -118,7 +118,7 @@ Let that sink in.
 We now conceive of not only the inputs but
 also the hidden representations as possessing spatial structure.
 
-Let $[\mathbf{X}]_{i, j}$ and $[\mathbf{H}]_{i, j}$ denote the pixel
+Let $[\mathbf{X}]*{i, j}$ and $[\mathbf{H}]*{i, j}$ denote the pixel
 at location ($i$, $j$)
 in the input image and hidden representation, respectively.
 Consequently, to have each of the hidden units
@@ -130,43 +130,43 @@ as fourth-order weight tensors $\mathsf{W}$.
 Suppose that $\mathbf{U}$ contains biases,
 we could formally express the fully-connected layer as
 
-$$\begin{aligned} \left[\mathbf{H}\right]_{i, j} &= [\mathbf{U}]_{i, j} + \sum_k \sum_l[\mathsf{W}]_{i, j, k, l}  [\mathbf{X}]_{k, l}\\ &=  [\mathbf{U}]_{i, j} +
-\sum_a \sum_b [\mathsf{V}]_{i, j, a, b}  [\mathbf{X}]_{i+a, j+b}.\end{aligned},$$
+$$\begin{aligned} \left[\mathbf{H}\right]*{i, j} &= [\mathbf{U}]*{i, j} + \sum*k \sum*l[\mathsf{W}]*{i, j, k, l}  [\mathbf{X}]*{k, l}\\ &=  [\mathbf{U}]_{i, j} +
+\sum*a \sum*b [\mathsf{V}]*{i, j, a, b}  [\mathbf{X}]*{i+a, j+b}.\end{aligned},$$
 
 where the switch from $\mathsf{W}$ to $\mathsf{V}$ is entirely cosmetic for now
 since there is a one-to-one correspondence
 between coefficients in both fourth-order tensors.
 We simply re-index the subscripts $(k, l)$
 such that $k = i+a$ and $l = j+b$.
-In other words, we set $[\mathsf{V}]_{i, j, a, b} = [\mathsf{W}]_{i, j, i+a, j+b}$.
+In other words, we set $[\mathsf{V}]*{i, j, a, b} = [\mathsf{W}]*{i, j, i+a, j+b}$.
 The indices $a$ and $b$ run over both positive and negative offsets,
 covering the entire image.
 For any given location ($i$, $j$) in the hidden representation $[\mathbf{H}]_{i, j}$,
 we compute its value by summing over pixels in $x$,
 centered around $(i, j)$ and weighted by $[\mathsf{V}]_{i, j, a, b}$.
 
-### Translation Invariance
+## # Translation Invariance
 
 Now let us invoke the first principle
 established above: translation invariance.
 This implies that a shift in the input $\mathbf{X}$
 should simply lead to a shift in the hidden representation $\mathbf{H}$.
 This is only possible if $\mathsf{V}$ and $\mathbf{U}$ do not actually depend on $(i, j)$,
-i.e., we have $[\mathsf{V}]_{i, j, a, b} = [\mathbf{V}]_{a, b}$ and $\mathbf{U}$ is a constant, say $u$.
+i.e., we have $[\mathsf{V}]*{i, j, a, b} = [\mathbf{V}]*{a, b}$ and $\mathbf{U}$ is a constant, say $u$.
 As a result, we can simplify the definition for $\mathbf{H}$:
 
-$$[\mathbf{H}]_{i, j} = u + \sum_a\sum_b [\mathbf{V}]_{a, b}  [\mathbf{X}]_{i+a, j+b}.$$
+$$[\mathbf{H}]*{i, j} = u + \sum*a\sum*b [\mathbf{V}]*{a, b}  [\mathbf{X}]_{i+a, j+b}.$$
 
 
 This is a *convolution*!
 We are effectively weighting pixels at $(i+a, j+b)$
 in the vicinity of location $(i, j)$ with coefficients $[\mathbf{V}]_{a, b}$
 to obtain the value $[\mathbf{H}]_{i, j}$.
-Note that $[\mathbf{V}]_{a, b}$ needs many fewer coefficients than $[\mathsf{V}]_{i, j, a, b}$ since it
+Note that $[\mathbf{V}]*{a, b}$ needs many fewer coefficients than $[\mathsf{V}]*{i, j, a, b}$ since it
 no longer depends on the location within the image.
 We have made significant progress!
 
-###  Locality
+## #  Locality
 
 Now let us invoke the second principle: locality.
 As motivated above, we believe that we should not have
@@ -177,7 +177,7 @@ This means that outside some range $|a|> \Delta$ or $|b| > \Delta$,
 we should set $[\mathbf{V}]_{a, b} = 0$.
 Equivalently, we can rewrite $[\mathbf{H}]_{i, j}$ as
 
-$$[\mathbf{H}]_{i, j} = u + \sum_{a = -\Delta}^{\Delta} \sum_{b = -\Delta}^{\Delta} [\mathbf{V}]_{a, b}  [\mathbf{X}]_{i+a, j+b}.$$
+$$[\mathbf{H}]*{i, j} = u + \sum*{a = -\Delta}^{\Delta} \sum*{b = -\Delta}^{\Delta} [\mathbf{V}]*{a, b}  [\mathbf{X}]_{i+a, j+b}.$$
 :eqlabel:`eq_conv-layer`
 
 Note that :eqref:`eq_conv-layer`, in a nutshell, is a *convolutional layer*.
@@ -205,7 +205,7 @@ But of course, if those biases do not agree with reality,
 e.g., if images turned out not to be translation invariant,
 our models might struggle even to fit our training data.
 
-## Convolutions
+# # Convolutions
 
 
 Before going further, we should briefly review
@@ -227,14 +227,14 @@ $$(f * g)(i) = \sum_a f(a) g(i-a).$$
 For two-dimensional tensors, we have a corresponding sum
 with indices $(a, b)$ for $f$ and $(i-a, j-b)$ for $g$, respectively:
 
-$$(f * g)(i, j) = \sum_a\sum_b f(a, b) g(i-a, j-b).$$
+$$(f * g)(i, j) = \sum*a\sum*b f(a, b) g(i-a, j-b).$$
 :eqlabel:`eq_2d-conv-discrete`
 
 This looks similar to :eqref:`eq_conv-layer`, with one major difference.
 Rather than using $(i+a, j+b)$, we are using the difference instead.
 Note, though, that this distinction is mostly cosmetic
 since we can always match the notation between
-:eqref:`eq_conv-layer` and :eqref:`eq_2d-conv-discrete`.
+:eqref:`eq*conv-layer` and :eqref:`eq*2d-conv-discrete`.
 Our original definition in :eqref:`eq_conv-layer` more properly
 describes a *cross-correlation*.
 We will come back to this in the following section.
@@ -242,21 +242,21 @@ We will come back to this in the following section.
 
 
 
-## "Where's Waldo" Revisited
+# # "Where's Waldo" Revisited
 
 Returning to our Waldo detector, let us see what this looks like.
 The convolutional layer picks windows of a given size
-and weighs intensities according to the filter $\mathsf{V}$, as demonstrated in :numref:`fig_waldo_mask`.
+and weighs intensities according to the filter $\mathsf{V}$, as demonstrated in :numref:`fig*waldo*mask`.
 We might aim to learn a model so that
 wherever the "waldoness" is highest,
 we should find a peak in the hidden layer representations.
 
 ![Detect Waldo.](../img/waldo-mask.jpg)
 :width:`400px`
-:label:`fig_waldo_mask`
+:label:`fig*waldo*mask`
 
 
-### Channels
+## # Channels
 :label:`subsec_why-conv-channels`
 
 There is just one problem with this approach.
@@ -271,7 +271,7 @@ the third can be regarded as assigning
 a multidimensional representation to each pixel location.
 We thus index $\mathsf{X}$ as $[\mathsf{X}]_{i, j, k}$.
 The convolutional filter has to adapt accordingly.
-Instead of $[\mathbf{V}]_{a,b}$, we now have $[\mathsf{V}]_{a,b,c}$.
+Instead of $[\mathbf{V}]*{a,b}$, we now have $[\mathsf{V}]*{a,b,c}$.
 
 Moreover, just as our input consists of a third-order tensor,
 it turns out to be a good idea to similarly formulate
@@ -295,7 +295,7 @@ To support multiple channels in both inputs ($\mathsf{X}$) and hidden representa
 we can add a fourth coordinate to $\mathsf{V}$: $[\mathsf{V}]_{a, b, c, d}$.
 Putting everything together we have:
 
-$$[\mathsf{H}]_{i,j,d} = \sum_{a = -\Delta}^{\Delta} \sum_{b = -\Delta}^{\Delta} \sum_c [\mathsf{V}]_{a, b, c, d} [\mathsf{X}]_{i+a, j+b, c},$$
+$$[\mathsf{H}]*{i,j,d} = \sum*{a = -\Delta}^{\Delta} \sum*{b = -\Delta}^{\Delta} \sum*c [\mathsf{V}]*{a, b, c, d} [\mathsf{X}]*{i+a, j+b, c},$$
 :eqlabel:`eq_conv-layer-channels`
 
 where $d$ indexes the output channels in the hidden representations $\mathsf{H}$. The subsequent convolutional layer will go on to take a third-order tensor, $\mathsf{H}$, as the input.
@@ -314,7 +314,7 @@ to yield networks that are effective in practice.
 We turn to these issues in the remainder of the chapter.
 
 
-## Summary
+# # Summary
 
 * Translation invariance in images implies that all patches of an image will be treated in the same manner.
 * Locality means that only a small neighborhood of pixels will be used to compute the corresponding hidden representations.
@@ -322,7 +322,7 @@ We turn to these issues in the remainder of the chapter.
 * CNNS are a special family of neural networks that contain convolutional layers.
 * Channels on input and output allow our model to capture multiple aspects of an image  at each spatial location.
 
-## Exercises
+# # Exercises
 
 1. Assume that the size of the convolution kernel is $\Delta = 0$.
    Show that in this case the convolution kernel

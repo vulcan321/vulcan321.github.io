@@ -18,7 +18,7 @@ focus on the design of these models.
 
 
 
-## R-CNNs
+# # R-CNNs
 
 
 The *R-CNN* first extracts
@@ -58,7 +58,7 @@ This massive
 computing load makes it infeasible to
 widely use R-CNNs in real-world applications.
 
-## Fast R-CNN
+# # Fast R-CNN
 
 The main performance bottleneck of 
 an R-CNN lies in
@@ -77,13 +77,13 @@ is only performed on
 the entire image :cite:`Girshick.2015`. 
 
 ![The fast R-CNN model.](../img/fast-rcnn.svg)
-:label:`fig_fast_r-cnn`
+:label:`fig*fast*r-cnn`
 
-:numref:`fig_fast_r-cnn` describes the fast R-CNN model. Its major computations are as follows:
+:numref:`fig*fast*r-cnn` describes the fast R-CNN model. Its major computations are as follows:
 
 
-1. Compared with the R-CNN, in the fast R-CNN the input of the CNN for feature extraction is the entire image, rather than individual region proposals. Moreover, this CNN is trainable. Given an input image, let the shape of the CNN output be $1 \times c \times h_1  \times w_1$.
-1. Suppose that selective search generates $n$ region proposals. These region proposals (of different shapes) mark regions of interest (of different shapes) on the CNN output. Then these regions of interest further extract features of the same shape (say height $h_2$ and width $w_2$ are specified) in order to be easily concatenated. To achieve this, the fast R-CNN introduces the *region of interest (RoI) pooling* layer: the CNN output and region proposals are input into this layer, outputting concatenated features of shape $n \times c \times h_2 \times w_2$ that are further extracted for all the region proposals.
+1. Compared with the R-CNN, in the fast R-CNN the input of the CNN for feature extraction is the entire image, rather than individual region proposals. Moreover, this CNN is trainable. Given an input image, let the shape of the CNN output be $1 \times c \times h*1  \times w*1$.
+1. Suppose that selective search generates $n$ region proposals. These region proposals (of different shapes) mark regions of interest (of different shapes) on the CNN output. Then these regions of interest further extract features of the same shape (say height $h*2$ and width $w*2$ are specified) in order to be easily concatenated. To achieve this, the fast R-CNN introduces the *region of interest (RoI) pooling* layer: the CNN output and region proposals are input into this layer, outputting concatenated features of shape $n \times c \times h*2 \times w*2$ that are further extracted for all the region proposals.
 1. Using a fully-connected layer, transform the concatenated features into an output of shape $n \times d$, where $d$ depends on the model design.
 1. Predict the class and bounding box for each of the $n$ region proposals. More concretely, in class and bounding box prediction, transform the fully-connected layer output into an output of shape $n \times q$ ($q$ is the number of classes) and an output of shape $n \times 4$, respectively. The class prediction uses softmax regression.
 
@@ -99,13 +99,13 @@ in the region of interest pooling layer.
 
 For example, let us specify
 the output height and width 
-for each region as $h_2$ and $w_2$, respectively.
+for each region as $h*2$ and $w*2$, respectively.
 For any region of interest window
 of shape $h \times w$,
-this window is divided into a $h_2 \times w_2$ grid
+this window is divided into a $h*2 \times w*2$ grid
 of subwindows,
 where the shape of each subwindow is approximately 
-$(h/h_2) \times (w/w_2)$.
+$(h/h*2) \times (w/w*2)$.
 In practice,
 the height and width of any subwindow shall be rounded up, and the largest element shall be used as the output of the subwindow.
 Therefore, the region of interest pooling layer can extract features of the same shape 
@@ -142,7 +142,7 @@ X
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 import torch
 import torchvision
 
@@ -161,7 +161,7 @@ rois = np.array([[0, 0, 0, 20, 20], [0, 0, 10, 30, 30]])
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 rois = torch.Tensor([[0, 0, 0, 20, 20], [0, 0, 10, 30, 30]])
 ```
 
@@ -175,15 +175,15 @@ into a grid of sub-windows to
 further extract features of the same shape $2\times 2$.
 
 ```{.python .input}
-npx.roi_pooling(X, rois, pooled_size=(2, 2), spatial_scale=0.1)
+npx.roi*pooling(X, rois, pooled*size=(2, 2), spatial_scale=0.1)
 ```
 
 ```{.python .input}
-#@tab pytorch
-torchvision.ops.roi_pool(X, rois, output_size=(2, 2), spatial_scale=0.1)
+# @tab pytorch
+torchvision.ops.roi*pool(X, rois, output*size=(2, 2), spatial_scale=0.1)
 ```
 
-## Faster R-CNN
+# # Faster R-CNN
 
 To be more accurate in object detection,
 the fast R-CNN model
@@ -197,10 +197,10 @@ proposes to replace selective search with a *region proposal network* :cite:`Ren
 
 
 ![The faster R-CNN model.](../img/faster-rcnn.svg)
-:label:`fig_faster_r-cnn`
+:label:`fig*faster*r-cnn`
 
 
-:numref:`fig_faster_r-cnn` shows the faster R-CNN model. Compared with the fast R-CNN,
+:numref:`fig*faster*r-cnn` shows the faster R-CNN model. Compared with the fast R-CNN,
 the faster R-CNN only changes
 the region proposal method
 from selective search to a region proposal network.
@@ -237,7 +237,7 @@ that are learned from data.
 
 
 
-## Mask R-CNN
+# # Mask R-CNN
 
 In the training dataset,
 if pixel-level positions of object 
@@ -248,9 +248,9 @@ to further improve the accuracy of object detection :cite:`He.Gkioxari.Dollar.ea
 
 
 ![The mask R-CNN model.](../img/mask-rcnn.svg)
-:label:`fig_mask_r-cnn`
+:label:`fig*mask*r-cnn`
 
-As shown in :numref:`fig_mask_r-cnn`, 
+As shown in :numref:`fig*mask*r-cnn`, 
 the mask R-CNN
 is modified based on the faster R-CNN. 
 Specifically,
@@ -274,7 +274,7 @@ in subsequent sections of this chapter.
 
 
 
-## Summary
+# # Summary
 
 
 * The R-CNN extracts many region proposals from the input image, uses a CNN to perform forward propagation on each region proposal to extract its features, then uses these features to predict the class and bounding box of this region proposal.
@@ -283,7 +283,7 @@ in subsequent sections of this chapter.
 * Based on the faster R-CNN, the mask R-CNN additionally introduces a fully convolutional network, so as to leverage pixel-level labels to further improve the accuracy of object detection.
 
 
-## Exercises
+# # Exercises
 
 1. Can we frame object detection as a single regression problem, such as predicting bounding boxes and class probabilities? You may refer to the design of the YOLO model :cite:`Redmon.Divvala.Girshick.ea.2016`.
 1. Compare single shot multibox detection with the methods introduced in this section. What are their major differences? You may refer to Figure 2 of :cite:`Zhao.Zheng.Xu.ea.2019`.

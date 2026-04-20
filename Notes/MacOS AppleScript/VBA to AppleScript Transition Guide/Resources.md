@@ -8,36 +8,36 @@ The below links are useful resources for anyone doing AppleScript. There are als
 
 Script Editors
 
-_Script Editor_  
+*Script Editor*  
 <[http://www.apple.com/applescript/scripteditor/](http://www.apple.com/applescript/scripteditor/)\>
 
-_Script Debugger_  
+*Script Debugger*  
 <[http://www.latenightsw.com/sd4/download.html](http://www.latenightsw.com/sd4/download.html)\>
 
 _Smile  
-_<[http://www.satimage.fr/software/en/downloads\_software.html](http://www.satimage.fr/software/en/downloads_software.html)\>
+*<[http://www.satimage.fr/software/en/downloads\*software.html](http://www.satimage.fr/software/en/downloads_software.html)\>
 
 _AppleScript Studio (with Xcode)  
 _<[http://www.apple.com/applescript/studio/](http://www.apple.com/applescript/studio/)\>
 
 Books on AppleScript
 
-_AppleScript: The Definitive Guide, 2<sup>nd</sup> Edition_ by Matt Neuburg (O‘Reilly)  
+*AppleScript: The Definitive Guide, 2<sup>nd</sup> Edition* by Matt Neuburg (O‘Reilly)  
 <[http://www.oreilly.com/catalog/applescpttdg2/](http://www.oreilly.com/catalog/applescpttdg2/)\>
 
-_AppleScript: The Missing Manual_ by Adam Goldstein (O‘Reilly)  
+*AppleScript: The Missing Manual* by Adam Goldstein (O‘Reilly)  
 <[http://www.oreilly.com/catalog/applescripttmm/](http://www.oreilly.com/catalog/applescripttmm/)\>
 
-_AppleScript: The Comprehensive_ _Guide to Scripting and Automation in Mac OS X, 2<sup>nd</sup> Edition_ by Hanaan Rosenthal (Apress)  
+*AppleScript: The Comprehensive* *Guide to Scripting and Automation in Mac OS X, 2<sup>nd</sup> Edition* by Hanaan Rosenthal (Apress)  
 <[http://www.apress.com/book/bookDisplay.html?bID=10107](http://www.apress.com/book/bookDisplay.html?bID=10107)\>
 
-_Beginning AppleScript_ by Stephen G. Kochan (Wrox)  
+*Beginning AppleScript* by Stephen G. Kochan (Wrox)  
 <[http://www.wrox.com/WileyCDA/WroxTitle/productCd-0764574000.html](http://www.wrox.com/WileyCDA/WroxTitle/productCd-0764574000.html)\>
 
-_Danny Goodman‘s AppleScript Handbook, Mac OS X Edition_ by Danny Goodman (SpiderWorks)  
+*Danny Goodman‘s AppleScript Handbook, Mac OS X Edition* by Danny Goodman (SpiderWorks)  
 <[http://www.spiderworks.com/books/ashandbook.php](http://www.spiderworks.com/books/ashandbook.php)\>
 
-_Mac OS X Technology Guide to Automator_ by Ben Waldie (SpiderWorks)  
+*Mac OS X Technology Guide to Automator* by Ben Waldie (SpiderWorks)  
 <[http://www.spiderworks.com/books/automator.php](http://www.spiderworks.com/books/automator.php)\>
 
 MacTech Magazine
@@ -50,21 +50,21 @@ _MacTech.com Site Search, MacTech Community Search:
 
 Microsoft Office AppleScript Reference Guides
 
-_AppleScript Reference Guides for Word, Excel and PowerPoint_  
+*AppleScript Reference Guides for Word, Excel and PowerPoint*  
 <[http://www.microsoft.com/mac/resources/resources.aspx?pid=asforoffice](http://www.microsoft.com/mac/resources/resources.aspx?pid=asforoffice)\>
 
-_Office 2004 for Macintosh: The Missing Manual_ _Chapter 22: AppleScript_ by Paul Berkowitz (O‘Reilly)  
+*Office 2004 for Macintosh: The Missing Manual* *Chapter 22: AppleScript* by Paul Berkowitz (O‘Reilly)  
 <[http://www.oreilly.com/catalog/officemactmm/](http://www.oreilly.com/catalog/officemactmm/)\>
 
 Mailing Lists and Newsgroups
 
-_AppleScript-Users Mailing List_  
+*AppleScript-Users Mailing List*  
 <[http://lists.apple.com/mailman/listinfo/applescript-users](http://lists.apple.com/mailman/listinfo/applescript-users)\>
 
 _Microsoft Mac Office Newsgroups  
 _<[http://www.microsoft.com/mac/community/community.aspx?pid=community](http://www.microsoft.com/mac/community/community.aspx?pid=community)\>
 
-Or in a news reader (e.g. Entourage) at _Microsoft News Server_: msnews.microsoft.com  
+Or in a news reader (e.g. Entourage) at *Microsoft News Server*: msnews.microsoft.com  
 microsoft.public.mac.office  
 microsoft.public.mac.office.entourage  
 microsoft.public.mac.office.excel  
@@ -77,18 +77,18 @@ _AppleScript Studio
 _<[http://developer.apple.com/documentation/AppleScript/Conceptual/StudioBuildingApps/](http://developer.apple.com/documentation/AppleScript/Conceptual/StudioBuildingApps/)\>  
 <[http://developer.apple.com/documentation/AppleScript/Reference/StudioReference/](http://developer.apple.com/documentation/AppleScript/Reference/StudioReference/)\>
 
-_FaceSpan_
+*FaceSpan*
 
 <[http://www.latenightsw.com/fs4/index.html](http://www.latenightsw.com/fs4/index.html)\>
 
 _Smile  
-_<[http://www.satimage.fr/software/en/downloads\_software.html](http://www.satimage.fr/software/en/downloads_software.html)\>
+*<[http://www.satimage.fr/software/en/downloads\*software.html](http://www.satimage.fr/software/en/downloads_software.html)\>
 
 _24U Appearance OSAX  
 _<[http://www.24usoftware.com/AppearanceOSAX](http://www.24usoftware.com/AppearanceOSAX)\>
 
 _Pashua  
-_<[http://www.bluem.net/downloads/pashua\_en/](http://www.bluem.net/downloads/pashua_en/)\>
+*<[http://www.bluem.net/downloads/pashua\*en/](http://www.bluem.net/downloads/pashua_en/)\>
 
 _REALbasic  
 _<[http://www.realsoftware.com/](http://www.realsoftware.com)\>
@@ -111,29 +111,29 @@ _<[http://www.apple.com/automator/](http://www.apple.com/automator/)\>
 <[http://www.automatoractions.com](http://www.apple.com/automator/)\>
 
 _DragThing  
-_<[http://www.dragthing.com/](http://www.dragthing.com/)_\>_
+*<[http://www.dragthing.com/](http://www.dragthing.com/)*\>_
 
 _iKey  
-_<[http://www.scriptsoftware.com/ikey/](http://www.scriptsoftware.com/ikey/)_\>_
+*<[http://www.scriptsoftware.com/ikey/](http://www.scriptsoftware.com/ikey/)*\>_
 
 _PreFab UI Browser  
-_<[http://prefabsoftware.com/](http://prefabsoftware.com/)_\>_
+*<[http://prefabsoftware.com/](http://prefabsoftware.com/)*\>_
 
 _QuicKeys  
-_<[http://www.quickeys.com/](http://www.quickeys.com/)_\>_
+*<[http://www.quickeys.com/](http://www.quickeys.com/)*\>_
 
 _Version Tracker  
-_<[http://www.versiontracker.com](http://www.versiontracker.com)_\>_
+*<[http://www.versiontracker.com](http://www.versiontracker.com)*\>_
 
 Other Resources for Microsoft Office
 
-_Mac Word MVP WebSite_  
+*Mac Word MVP WebSite*  
 <[http://word.mvps.org/Mac/WordMacHome.html](http://word.mvps.org/Mac/WordMacHome.html)\>
 
 _Word MVP WebSite  
 _<[http://word.mvps.org/index.html](http://word.mvps.org/index.html)\>
 
-_Entourage MVP WebSite_  
+*Entourage MVP WebSite*  
 <[http://www.entourage.mvps.org/index.html](http://www.entourage.mvps.org/index.html)\>
 
 _Microsoft MacTopia Website  
@@ -142,7 +142,7 @@ _<[http://www.microsoft.com/mac/](http://www.microsoft.com/mac/)\>
 Acknowledgements
 
 This document was written by Paul Berkowitz. You can find many of Paul‘s scripts at:  
-       <[http://scriptbuilders.net/search.php?search\_str=Paul%20Berkowitz](http://scriptbuilders.net/search.php?search_str=Paul%20Berkowitz)\>
+       <[http://scriptbuilders.net/search.php?search\*str=Paul%20Berkowitz](http://scriptbuilders.net/search.php?search*str=Paul%20Berkowitz)\>
 
 The "punch list" team, who provided all the VBA macros, and some descriptive text as well. This project could not have been created without them:
 
@@ -180,7 +180,7 @@ The Reviewers:
 
         Barry Wainwright <http://www.barryw.net>
 
-        Allen Watson, AppleScripts for You http://homepage.mac.com/allen_a_watson/
+        Allen Watson, AppleScripts for You http://homepage.mac.com/allen*a*watson/
 
         Benjamin Waldie, <http://www.automatedworkflows.com>
 

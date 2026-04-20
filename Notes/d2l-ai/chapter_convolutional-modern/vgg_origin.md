@@ -24,7 +24,7 @@ It is easy to implement these repeated structures in code
 with any modern deep learning framework by using loops and subroutines.
 
 
-## VGG Blocks
+# # VGG Blocks
 
 The basic building block of classic CNNs
 is a sequence of the following:
@@ -52,47 +52,47 @@ from mxnet import np, npx
 from mxnet.gluon import nn
 npx.set_np()
 
-def vgg_block(num_convs, num_channels):
+def vgg*block(num*convs, num_channels):
     blk = nn.Sequential()
-    for _ in range(num_convs):
-        blk.add(nn.Conv2D(num_channels, kernel_size=3,
+    for * in range(num*convs):
+        blk.add(nn.Conv2D(num*channels, kernel*size=3,
                           padding=1, activation='relu'))
     blk.add(nn.MaxPool2D(pool_size=2, strides=2))
     return blk
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 from d2l import torch as d2l
 import torch
 from torch import nn
 
-def vgg_block(num_convs, in_channels, out_channels):
+def vgg*block(num*convs, in*channels, out*channels):
     layers=[]
-    for _ in range(num_convs):
-        layers.append(nn.Conv2d(in_channels, out_channels,
+    for * in range(num*convs):
+        layers.append(nn.Conv2d(in*channels, out*channels,
                                 kernel_size=3, padding=1))
         layers.append(nn.ReLU())
-        in_channels = out_channels
+        in*channels = out*channels
     layers.append(nn.MaxPool2d(kernel_size=2,stride=2))
     return nn.Sequential(*layers)
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 from d2l import tensorflow as d2l
 import tensorflow as tf
 
-def vgg_block(num_convs, num_channels):
+def vgg*block(num*convs, num_channels):
     blk = tf.keras.models.Sequential()
-    for _ in range(num_convs):
-        blk.add(tf.keras.layers.Conv2D(num_channels,kernel_size=3,
+    for * in range(num*convs):
+        blk.add(tf.keras.layers.Conv2D(num*channels,kernel*size=3,
                                     padding='same',activation='relu'))
     blk.add(tf.keras.layers.MaxPool2D(pool_size=2, strides=2))
     return blk
 ```
 
-## VGG Network
+# # VGG Network
 
 Like AlexNet and LeNet,
 the VGG Network can be partitioned into two parts:
@@ -105,7 +105,7 @@ This is depicted in :numref:`fig_vgg`.
 :label:`fig_vgg`
 
 
-The convolutional part of the network connects several VGG blocks from :numref:`fig_vgg` (also defined in the `vgg_block` function)
+The convolutional part of the network connects several VGG blocks from :numref:`fig*vgg` (also defined in the `vgg*block` function)
 in succession.
 The following variable `conv_arch` consists of a list of tuples (one per block),
 where each contains two values: the number of convolutional layers
@@ -124,7 +124,7 @@ Since this network uses 8 convolutional layers
 and 3 fully-connected layers, it is often called VGG-11.
 
 ```{.python .input}
-#@tab all
+# @tab all
 conv_arch = ((1, 64), (1, 128), (2, 256), (2, 512), (2, 512))
 ```
 
@@ -134,8 +134,8 @@ The following code implements VGG-11. This is a simple matter of executing a for
 def vgg(conv_arch):
     net = nn.Sequential()
     # The convolutional part
-    for (num_convs, num_channels) in conv_arch:
-        net.add(vgg_block(num_convs, num_channels))
+    for (num*convs, num*channels) in conv_arch:
+        net.add(vgg*block(num*convs, num_channels))
     # The fully-connected part
     net.add(nn.Dense(4096, activation='relu'), nn.Dropout(0.5),
             nn.Dense(4096, activation='relu'), nn.Dropout(0.5),
@@ -146,14 +146,14 @@ net = vgg(conv_arch)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 def vgg(conv_arch):
     # The convolutional part
     conv_blks=[]
     in_channels=1
-    for (num_convs, out_channels) in conv_arch:
-        conv_blks.append(vgg_block(num_convs, in_channels, out_channels))
-        in_channels = out_channels
+    for (num*convs, out*channels) in conv_arch:
+        conv*blks.append(vgg*block(num*convs, in*channels, out_channels))
+        in*channels = out*channels
 
     return nn.Sequential(
         *conv_blks, nn.Flatten(),
@@ -166,12 +166,12 @@ net = vgg(conv_arch)
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 def vgg(conv_arch):
     net = tf.keras.models.Sequential()
     # The convulational part
-    for (num_convs, num_channels) in conv_arch:
-        net.add(vgg_block(num_convs, num_channels))
+    for (num*convs, num*channels) in conv_arch:
+        net.add(vgg*block(num*convs, num_channels))
     # The fully-connected part
     net.add(tf.keras.models.Sequential([
         tf.keras.layers.Flatten(),
@@ -197,19 +197,19 @@ for blk in net:
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 X = torch.randn(size=(1, 1, 224, 224))
 for blk in net:
     X = blk(X)
-    print(blk.__class__.__name__,'output shape:\t',X.shape)
+    print(blk.**class**.**name**,'output shape:\t',X.shape)
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 X = tf.random.uniform((1, 224, 224, 1))
 for blk in net.layers:
     X = blk(X)
-    print(blk.__class__.__name__,'output shape:\t', X.shape)
+    print(blk.**class**.**name**,'output shape:\t', X.shape)
 ```
 
 As you can see, we halve height and width at each block,
@@ -217,46 +217,46 @@ finally reaching a height and width of 7
 before flattening the representations
 for processing by the fully-connected part of the network.
 
-## Training
+# # Training
 
 Since VGG-11 is more computationally-heavy than AlexNet
 we construct a network with a smaller number of channels.
 This is more than sufficient for training on Fashion-MNIST.
 
 ```{.python .input}
-#@tab mxnet, pytorch
+# @tab mxnet, pytorch
 ratio = 4
-small_conv_arch = [(pair[0], pair[1] // ratio) for pair in conv_arch]
-net = vgg(small_conv_arch)
+small*conv*arch = [(pair[0], pair[1] // ratio) for pair in conv_arch]
+net = vgg(small*conv*arch)
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 ratio = 4
-small_conv_arch = [(pair[0], pair[1] // ratio) for pair in conv_arch]
+small*conv*arch = [(pair[0], pair[1] // ratio) for pair in conv_arch]
 # Recall that this has to be a function that will be passed to
 # `d2l.train_ch6()` so that model building/compiling need to be within
 # `strategy.scope()` in order to utilize the CPU/GPU devices that we have
-net = lambda: vgg(small_conv_arch)
+net = lambda: vgg(small*conv*arch)
 ```
 
 Apart from using a slightly larger learning rate,
 the model training process is similar to that of AlexNet in :numref:`sec_alexnet`.
 
 ```{.python .input}
-#@tab all
-lr, num_epochs, batch_size = 0.05, 10, 128
-train_iter, test_iter = d2l.load_data_fashion_mnist(batch_size, resize=224)
-d2l.train_ch6(net, train_iter, test_iter, num_epochs, lr)
+# @tab all
+lr, num*epochs, batch*size = 0.05, 10, 128
+train*iter, test*iter = d2l.load*data*fashion*mnist(batch*size, resize=224)
+d2l.train*ch6(net, train*iter, test*iter, num*epochs, lr)
 ```
 
-## Summary
+# # Summary
 
 * VGG-11 constructs a network using reusable convolutional blocks. Different VGG models can be defined by the differences in the number of convolutional layers and output channels in each block.
 * The use of blocks leads to very compact representations of the network definition. It allows for efficient design of complex networks.
 * In their VGG paper, Simonyan and Ziserman experimented with various architectures. In particular, they found that several layers of deep and narrow convolutions (i.e., $3 \times 3$) were more effective than fewer layers of wider convolutions.
 
-## Exercises
+# # Exercises
 
 1. When printing out the dimensions of the layers we only saw 8 results rather than 11. Where did the remaining 3 layer information go?
 1. Compared with AlexNet, VGG is much slower in terms of computation, and it also needs more GPU memory. Analyze the reasons for this.

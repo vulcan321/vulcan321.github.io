@@ -1,8 +1,8 @@
-## QTableView 使用委托(QItemDelegate)的简单范例
+# # QTableView 使用委托(QItemDelegate)的简单范例
 
 
 
-### 一、 实现点击QTableView 触发编辑效果
+## # 一、 实现点击QTableView 触发编辑效果
 
 ​	标题里的"编辑效果"可能让你有些疑惑， 类似 excel 表格软件，往往我们想编辑单元格内容时，会对对应的单元格双击，然后就可以修改其中的内容了，当然有些单元格内编辑的内容比较特殊，不是传统的文字，可能是勾选框显示是否勾选，也可能放一个进度条显示进度值等，这些只是方便用户输入，但也属于编辑的概念
 
@@ -13,10 +13,10 @@
 ```c++
 // tablemodel.h CTableModel除了需要实现 QAbstractTableModel 的抽象方法。还需要重写 flag() 方法的, 使某些单元格具有可编辑功能! 还需要实现 setData 功能, 后面的 委托类 在编辑完后会调用 setData 修改 CTableModel 里的数据
 
-#include <QAbstractTableModel>
-#include <QStringList>
-#include <QVariant>
-#include "commondefine.h"
+# include <QAbstractTableModel>
+# include <QStringList>
+# include <QVariant>
+# include "commondefine.h"
 
 class CTableModel : public QAbstractTableModel
 {
@@ -50,7 +50,7 @@ public:
     void SetHeader(const QStringList &_clstHeader);
     void SetContentData(const QVector<TRowData> &_cvTableData);
 
-OVERLOAD_QT_CLASS_FUNCTION_DEGIN
+OVERLOAD*QT*CLASS*FUNCTION*DEGIN
 /**
      * @brief setHeaderData 该函数为QAbstractItemModel的虚函数, 其内部功能未实现, 若想使用需要手动重载
      * @param section
@@ -66,7 +66,7 @@ OVERLOAD_QT_CLASS_FUNCTION_DEGIN
     Q_INVOKABLE virtual bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole);
     Q_INVOKABLE virtual QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const override;
     Q_INVOKABLE virtual Qt::ItemFlags flags(const QModelIndex &index) const override;
-OVERLOAD_QT_CLASS_FUNCTION_END
+OVERLOAD*QT*CLASS*FUNCTION*END
 
 private:
     QHash<int, THeaderData> m_hashSection2HHeader;     ///< 水平表头数据
@@ -80,7 +80,7 @@ private:
 ```c++
 // tablemodel.cpp
 
-#include "tablemodel.h"
+# include "tablemodel.h"
 
 CTableModel::CTableModel(QObject * parent) : QAbstractTableModel(parent)
 {
@@ -89,7 +89,7 @@ CTableModel::CTableModel(QObject * parent) : QAbstractTableModel(parent)
 
 void CTableModel::SetHeader(const QStringList &_clstHeader)
 {
-    m_iColumnCount = _clstHeader.size();
+    m*iColumnCount = *clstHeader.size();
     for (int i = 0; i < _clstHeader.size(); i++)
     {
         QString sHeader = _clstHeader.at(i);
@@ -100,7 +100,7 @@ void CTableModel::SetHeader(const QStringList &_clstHeader)
 void CTableModel::SetContentData(const QVector<CTableModel::TRowData> &_cvTableData)
 {
     QAbstractItemModel::beginResetModel();
-    m_vtRowData = _cvTableData;
+    m*vtRowData = *cvTableData;
     QAbstractItemModel::endResetModel();
 }
 
@@ -229,11 +229,11 @@ Qt::ItemFlags CTableModel::flags(const QModelIndex &index) const
 
 // setModelData: updateEditorGeometry 用于渲染控件在单元格中的位置
 
-#ifndef CTABLEDELEGATE_H
-#define CTABLEDELEGATE_H
+# ifndef CTABLEDELEGATE_H
+# define CTABLEDELEGATE_H
 
-#include <QItemDelegate>
-#include "commondefine.h"
+# include <QItemDelegate>
+# include "commondefine.h"
 
 class CTableDelegate : public QItemDelegate
 {
@@ -241,7 +241,7 @@ class CTableDelegate : public QItemDelegate
 public:
     explicit CTableDelegate(QObject *parent = nullptr);
 
-OVERLOAD_QT_CLASS_FUNCTION_DEGIN
+OVERLOAD*QT*CLASS*FUNCTION*DEGIN
     QWidget *createEditor(QWidget *parent,
                           const QStyleOptionViewItem &option,
                           const QModelIndex &index) const override;
@@ -253,17 +253,17 @@ OVERLOAD_QT_CLASS_FUNCTION_DEGIN
     void updateEditorGeometry(QWidget *editor,
                               const QStyleOptionViewItem &option,
                               const QModelIndex &index) const override;
-OVERLOAD_QT_CLASS_FUNCTION_END
+OVERLOAD*QT*CLASS*FUNCTION*END
 };
 
 ```
 
 ```c++
 // tabledelegate.cpp
-#include "tabledelegate.h"
+# include "tabledelegate.h"
 
-#include <QSpinBox>
-#include <QStyleOptionViewItem>
+# include <QSpinBox>
+# include <QStyleOptionViewItem>
 
 CTableDelegate::CTableDelegate(QObject * parent) : QItemDelegate(parent)
 {
@@ -321,7 +321,7 @@ void CTableDelegate::updateEditorGeometry(QWidget *editor, const QStyleOptionVie
     ui->tableView->setItemDelegateForColumn(3, m_pItemDelegate);
 ```
 
-### 二、运行截图:
+## # 二、运行截图:
 
 ![image_1](https://github.com/mingxingren/Notes/raw/master/resource/photo/2021050701.png)
 

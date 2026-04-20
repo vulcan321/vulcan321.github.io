@@ -1,10 +1,10 @@
 # 循环神经网络的从零开始实现
-:label:`sec_rnn_scratch`
+:label:`sec*rnn*scratch`
 
 本节将根据 :numref:`sec_rnn`中的描述，
 从头开始基于循环神经网络实现字符级语言模型。
 这样的模型将在H.G.Wells的时光机器数据集上训练。
-和前面 :numref:`sec_language_model`中介绍过的一样，
+和前面 :numref:`sec*language*model`中介绍过的一样，
 我们先读取数据集。
 
 ```{.python .input}
@@ -16,7 +16,7 @@ npx.set_np()
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 %matplotlib inline
 from d2l import torch as d2l
 import math
@@ -26,7 +26,7 @@ from torch.nn import functional as F
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 %matplotlib inline
 from d2l import tensorflow as d2l
 import math
@@ -34,7 +34,7 @@ import tensorflow as tf
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 %matplotlib inline
 from d2l import paddle as d2l
 import warnings
@@ -46,18 +46,18 @@ from paddle.nn import functional as F
 ```
 
 ```{.python .input}
-#@tab all
-batch_size, num_steps = 32, 35
-train_iter, vocab = d2l.load_data_time_machine(batch_size, num_steps)
+# @tab all
+batch*size, num*steps = 32, 35
+train*iter, vocab = d2l.load*data*time*machine(batch*size, num*steps)
 ```
 
 ```{.python .input}
-#@tab tensorflow
-train_random_iter, vocab_random_iter = d2l.load_data_time_machine(
-    batch_size, num_steps, use_random_iter=True)
+# @tab tensorflow
+train*random*iter, vocab*random*iter = d2l.load*data*time_machine(
+    batch*size, num*steps, use*random*iter=True)
 ```
 
-## [**独热编码**]
+# # [**独热编码**]
 
 回想一下，在`train_iter`中，每个词元都表示为一个数字索引，
 将这些索引直接输入神经网络可能会使学习变得困难。
@@ -79,18 +79,18 @@ npx.one_hot(np.array([0, 2]), len(vocab))
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 F.one_hot(torch.tensor([0, 2]), len(vocab))
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 tf.one_hot(tf.constant([0, 2]), len(vocab))
 ```
 
 ```{.python .input}
-#@tab paddle
-F.one_hot(paddle.to_tensor([0, 2]), len(vocab))
+# @tab paddle
+F.one*hot(paddle.to*tensor([0, 2]), len(vocab))
 ```
 
 我们每次采样的(**小批量数据形状是二维张量：
@@ -108,24 +108,24 @@ npx.one_hot(X.T, 28).shape
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 X = d2l.reshape(d2l.arange(10), (2, 5))
 F.one_hot(X.T, 28).shape
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 X = d2l.reshape(d2l.arange(10), (2, 5))
 tf.one_hot(tf.transpose(X), 28).shape
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 X = paddle.arange(10).reshape((2, 5))
 F.one_hot(X.T, 28).shape
 ```
 
-## 初始化模型参数
+# # 初始化模型参数
 
 接下来，我们[**初始化循环神经网络模型的模型参数**]。
 隐藏单元数`num_hiddens`是一个可调的超参数。
@@ -133,119 +133,119 @@ F.one_hot(X.T, 28).shape
 因此，它们具有相同的维度，即词表的大小。
 
 ```{.python .input}
-def get_params(vocab_size, num_hiddens, device):
-    num_inputs = num_outputs = vocab_size
+def get*params(vocab*size, num_hiddens, device):
+    num*inputs = num*outputs = vocab_size
 
     def normal(shape):
         return np.random.normal(scale=0.01, size=shape, ctx=device)
 
     # 隐藏层参数
-    W_xh = normal((num_inputs, num_hiddens))
-    W_hh = normal((num_hiddens, num_hiddens))
-    b_h = d2l.zeros(num_hiddens, ctx=device)
+    W*xh = normal((num*inputs, num_hiddens))
+    W*hh = normal((num*hiddens, num_hiddens))
+    b*h = d2l.zeros(num*hiddens, ctx=device)
     # 输出层参数
-    W_hq = normal((num_hiddens, num_outputs))
-    b_q = d2l.zeros(num_outputs, ctx=device)
+    W*hq = normal((num*hiddens, num_outputs))
+    b*q = d2l.zeros(num*outputs, ctx=device)
     # 附加梯度
-    params = [W_xh, W_hh, b_h, W_hq, b_q]
+    params = [W*xh, W*hh, b*h, W*hq, b_q]
     for param in params:
         param.attach_grad()
     return params
 ```
 
 ```{.python .input}
-#@tab pytorch
-def get_params(vocab_size, num_hiddens, device):
-    num_inputs = num_outputs = vocab_size
+# @tab pytorch
+def get*params(vocab*size, num_hiddens, device):
+    num*inputs = num*outputs = vocab_size
 
     def normal(shape):
         return torch.randn(size=shape, device=device) * 0.01
 
     # 隐藏层参数
-    W_xh = normal((num_inputs, num_hiddens))
-    W_hh = normal((num_hiddens, num_hiddens))
-    b_h = d2l.zeros(num_hiddens, device=device)
+    W*xh = normal((num*inputs, num_hiddens))
+    W*hh = normal((num*hiddens, num_hiddens))
+    b*h = d2l.zeros(num*hiddens, device=device)
     # 输出层参数
-    W_hq = normal((num_hiddens, num_outputs))
-    b_q = d2l.zeros(num_outputs, device=device)
+    W*hq = normal((num*hiddens, num_outputs))
+    b*q = d2l.zeros(num*outputs, device=device)
     # 附加梯度
-    params = [W_xh, W_hh, b_h, W_hq, b_q]
+    params = [W*xh, W*hh, b*h, W*hq, b_q]
     for param in params:
-        param.requires_grad_(True)
+        param.requires*grad*(True)
     return params
 ```
 
 ```{.python .input}
-#@tab tensorflow
-def get_params(vocab_size, num_hiddens):
-    num_inputs = num_outputs = vocab_size
+# @tab tensorflow
+def get*params(vocab*size, num_hiddens):
+    num*inputs = num*outputs = vocab_size
     
     def normal(shape):
         return d2l.normal(shape=shape,stddev=0.01,mean=0,dtype=tf.float32)
 
     # 隐藏层参数
-    W_xh = tf.Variable(normal((num_inputs, num_hiddens)), dtype=tf.float32)
-    W_hh = tf.Variable(normal((num_hiddens, num_hiddens)), dtype=tf.float32)
-    b_h = tf.Variable(d2l.zeros(num_hiddens), dtype=tf.float32)
+    W*xh = tf.Variable(normal((num*inputs, num_hiddens)), dtype=tf.float32)
+    W*hh = tf.Variable(normal((num*hiddens, num_hiddens)), dtype=tf.float32)
+    b*h = tf.Variable(d2l.zeros(num*hiddens), dtype=tf.float32)
     # 输出层参数
-    W_hq = tf.Variable(normal((num_hiddens, num_outputs)), dtype=tf.float32)
-    b_q = tf.Variable(d2l.zeros(num_outputs), dtype=tf.float32)
-    params = [W_xh, W_hh, b_h, W_hq, b_q]
+    W*hq = tf.Variable(normal((num*hiddens, num_outputs)), dtype=tf.float32)
+    b*q = tf.Variable(d2l.zeros(num*outputs), dtype=tf.float32)
+    params = [W*xh, W*hh, b*h, W*hq, b_q]
     return params
 ```
 
 ```{.python .input}
-#@tab paddle
-def get_params(vocab_size, num_hiddens):
-    num_inputs = num_outputs = vocab_size
+# @tab paddle
+def get*params(vocab*size, num_hiddens):
+    num*inputs = num*outputs = vocab_size
 
     def normal(shape):
         return paddle.randn(shape=shape)* 0.01
 
     # 隐藏层参数
-    W_xh = normal([num_inputs, num_hiddens])
-    W_hh = normal([num_hiddens, num_hiddens])
-    b_h = d2l.zeros(shape=[num_hiddens])
+    W*xh = normal([num*inputs, num_hiddens])
+    W*hh = normal([num*hiddens, num_hiddens])
+    b*h = d2l.zeros(shape=[num*hiddens])
     # 输出层参数
-    W_hq = normal([num_hiddens, num_outputs])
-    b_q = d2l.zeros(shape=[num_outputs])
+    W*hq = normal([num*hiddens, num_outputs])
+    b*q = d2l.zeros(shape=[num*outputs])
     # 附加梯度
-    params = [W_xh, W_hh, b_h, W_hq, b_q]
+    params = [W*xh, W*hh, b*h, W*hq, b_q]
     for param in params:
         param.stop_gradient=False
     return params
 ```
 
-## 循环神经网络模型
+# # 循环神经网络模型
 
 为了定义循环神经网络模型，
-我们首先需要[**一个`init_rnn_state`函数在初始化时返回隐状态**]。
+我们首先需要[**一个`init*rnn*state`函数在初始化时返回隐状态**]。
 这个函数的返回是一个张量，张量全用0填充，
 形状为（批量大小，隐藏单元数）。
 在后面的章节中我们将会遇到隐状态包含多个变量的情况，
 而使用元组可以更容易地处理些。
 
 ```{.python .input}
-def init_rnn_state(batch_size, num_hiddens, device):
-    return (d2l.zeros((batch_size, num_hiddens), ctx=device), )
+def init*rnn*state(batch*size, num*hiddens, device):
+    return (d2l.zeros((batch*size, num*hiddens), ctx=device), )
 ```
 
 ```{.python .input}
-#@tab pytorch
-def init_rnn_state(batch_size, num_hiddens, device):
-    return (d2l.zeros((batch_size, num_hiddens), device=device), )
+# @tab pytorch
+def init*rnn*state(batch*size, num*hiddens, device):
+    return (d2l.zeros((batch*size, num*hiddens), device=device), )
 ```
 
 ```{.python .input}
-#@tab tensorflow
-def init_rnn_state(batch_size, num_hiddens):
-    return (d2l.zeros((batch_size, num_hiddens)), )
+# @tab tensorflow
+def init*rnn*state(batch*size, num*hiddens):
+    return (d2l.zeros((batch*size, num*hiddens)), )
 ```
 
 ```{.python .input}
-#@tab paddle
-def init_rnn_state(batch_size, num_hiddens):
-    return (paddle.zeros(shape=[batch_size, num_hiddens]), )
+# @tab paddle
+def init*rnn*state(batch*size, num*hiddens):
+    return (paddle.zeros(shape=[batch*size, num*hiddens]), )
 ```
 
 [**下面的`rnn`函数定义了如何在一个时间步内计算隐状态和输出。**]
@@ -258,59 +258,59 @@ def init_rnn_state(batch_size, num_hiddens):
 ```{.python .input}
 def rnn(inputs, state, params):
     # inputs的形状：(时间步数量，批量大小，词表大小)
-    W_xh, W_hh, b_h, W_hq, b_q = params
+    W*xh, W*hh, b*h, W*hq, b_q = params
     H, = state
     outputs = []
     # X的形状：(批量大小，词表大小)
     for X in inputs:
-        H = np.tanh(np.dot(X, W_xh) + np.dot(H, W_hh) + b_h)
-        Y = np.dot(H, W_hq) + b_q
+        H = np.tanh(np.dot(X, W*xh) + np.dot(H, W*hh) + b_h)
+        Y = np.dot(H, W*hq) + b*q
         outputs.append(Y)
     return np.concatenate(outputs, axis=0), (H,)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 def rnn(inputs, state, params):
     # inputs的形状：(时间步数量，批量大小，词表大小)
-    W_xh, W_hh, b_h, W_hq, b_q = params
+    W*xh, W*hh, b*h, W*hq, b_q = params
     H, = state
     outputs = []
     # X的形状：(批量大小，词表大小)
     for X in inputs:
-        H = torch.tanh(torch.mm(X, W_xh) + torch.mm(H, W_hh) + b_h)
-        Y = torch.mm(H, W_hq) + b_q
+        H = torch.tanh(torch.mm(X, W*xh) + torch.mm(H, W*hh) + b_h)
+        Y = torch.mm(H, W*hq) + b*q
         outputs.append(Y)
     return torch.cat(outputs, dim=0), (H,)
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 def rnn(inputs, state, params):
     # inputs的形状：(时间步数量，批量大小，词表大小)
-    W_xh, W_hh, b_h, W_hq, b_q = params
+    W*xh, W*hh, b*h, W*hq, b_q = params
     H, = state
     outputs = []
     # X的形状：(批量大小，词表大小)
     for X in inputs:
         X = tf.reshape(X,[-1,W_xh.shape[0]])
-        H = tf.tanh(tf.matmul(X, W_xh) + tf.matmul(H, W_hh) + b_h)
-        Y = tf.matmul(H, W_hq) + b_q
+        H = tf.tanh(tf.matmul(X, W*xh) + tf.matmul(H, W*hh) + b_h)
+        Y = tf.matmul(H, W*hq) + b*q
         outputs.append(Y)
     return d2l.concat(outputs, axis=0), (H,)
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 def rnn(inputs, state, params):
     # inputs的形状：(时间步数量，批量大小，词表大小)
-    W_xh, W_hh, b_h, W_hq, b_q = params
+    W*xh, W*hh, b*h, W*hq, b_q = params
     H, = state
     outputs = []
     # X的形状：(批量大小，词表大小)
     for X in inputs:
-        H = paddle.tanh(paddle.mm(X, W_xh) + paddle.mm(H, W_hh) + b_h)
-        Y = paddle.mm(H, W_hq) + b_q
+        H = paddle.tanh(paddle.mm(X, W*xh) + paddle.mm(H, W*hh) + b_h)
+        Y = paddle.mm(H, W*hq) + b*q
         outputs.append(Y)
     return paddle.concat(x=outputs, axis=0), (H,)
 ```
@@ -319,129 +319,129 @@ def rnn(inputs, state, params):
 并存储从零开始实现的循环神经网络模型的参数。
 
 ```{.python .input}
-class RNNModelScratch:  #@save
+class RNNModelScratch:  # @save
     """从零开始实现的循环神经网络模型"""
-    def __init__(self, vocab_size, num_hiddens, device, get_params,
-                 init_state, forward_fn):
-        self.vocab_size, self.num_hiddens = vocab_size, num_hiddens
-        self.params = get_params(vocab_size, num_hiddens, device)
-        self.init_state, self.forward_fn = init_state, forward_fn
+    def **init**(self, vocab*size, num*hiddens, device, get_params,
+                 init*state, forward*fn):
+        self.vocab*size, self.num*hiddens = vocab*size, num*hiddens
+        self.params = get*params(vocab*size, num_hiddens, device)
+        self.init*state, self.forward*fn = init*state, forward*fn
 
-    def __call__(self, X, state):
-        X = npx.one_hot(X.T, self.vocab_size)
+    def **call**(self, X, state):
+        X = npx.one*hot(X.T, self.vocab*size)
         return self.forward_fn(X, state, self.params)
 
-    def begin_state(self, batch_size, ctx):
-        return self.init_state(batch_size, self.num_hiddens, ctx)
+    def begin*state(self, batch*size, ctx):
+        return self.init*state(batch*size, self.num_hiddens, ctx)
 ```
 
 ```{.python .input}
-#@tab pytorch
-class RNNModelScratch: #@save
+# @tab pytorch
+class RNNModelScratch: # @save
     """从零开始实现的循环神经网络模型"""
-    def __init__(self, vocab_size, num_hiddens, device,
-                 get_params, init_state, forward_fn):
-        self.vocab_size, self.num_hiddens = vocab_size, num_hiddens
-        self.params = get_params(vocab_size, num_hiddens, device)
-        self.init_state, self.forward_fn = init_state, forward_fn
+    def **init**(self, vocab*size, num*hiddens, device,
+                 get*params, init*state, forward_fn):
+        self.vocab*size, self.num*hiddens = vocab*size, num*hiddens
+        self.params = get*params(vocab*size, num_hiddens, device)
+        self.init*state, self.forward*fn = init*state, forward*fn
 
-    def __call__(self, X, state):
-        X = F.one_hot(X.T, self.vocab_size).type(torch.float32)
+    def **call**(self, X, state):
+        X = F.one*hot(X.T, self.vocab*size).type(torch.float32)
         return self.forward_fn(X, state, self.params)
 
-    def begin_state(self, batch_size, device):
-        return self.init_state(batch_size, self.num_hiddens, device)
+    def begin*state(self, batch*size, device):
+        return self.init*state(batch*size, self.num_hiddens, device)
 ```
 
 ```{.python .input}
-#@tab tensorflow
-class RNNModelScratch: #@save
+# @tab tensorflow
+class RNNModelScratch: # @save
     """从零开始实现的循环神经网络模型"""
-    def __init__(self, vocab_size, num_hiddens,
-                 init_state, forward_fn, get_params):
-        self.vocab_size, self.num_hiddens = vocab_size, num_hiddens
-        self.init_state, self.forward_fn = init_state, forward_fn
-        self.trainable_variables = get_params(vocab_size, num_hiddens)
+    def **init**(self, vocab*size, num*hiddens,
+                 init*state, forward*fn, get_params):
+        self.vocab*size, self.num*hiddens = vocab*size, num*hiddens
+        self.init*state, self.forward*fn = init*state, forward*fn
+        self.trainable*variables = get*params(vocab*size, num*hiddens)
 
-    def __call__(self, X, state):
-        X = tf.one_hot(tf.transpose(X), self.vocab_size)
+    def **call**(self, X, state):
+        X = tf.one*hot(tf.transpose(X), self.vocab*size)
         X = tf.cast(X, tf.float32)
-        return self.forward_fn(X, state, self.trainable_variables)
+        return self.forward*fn(X, state, self.trainable*variables)
 
-    def begin_state(self, batch_size, *args, **kwargs):
-        return self.init_state(batch_size, self.num_hiddens)
+    def begin*state(self, batch*size, *args, **kwargs):
+        return self.init*state(batch*size, self.num_hiddens)
 ```
 
 ```{.python .input}
-#@tab paddle
-class RNNModelScratch: #@save
+# @tab paddle
+class RNNModelScratch: # @save
     """从零开始实现的循环神经网络模型"""
-    def __init__(self, vocab_size, num_hiddens,
-                 get_params, init_state, forward_fn):
-        self.vocab_size, self.num_hiddens = vocab_size, num_hiddens
-        self.params = get_params(vocab_size, num_hiddens)
-        self.init_state, self.forward_fn = init_state, forward_fn
+    def **init**(self, vocab*size, num*hiddens,
+                 get*params, init*state, forward_fn):
+        self.vocab*size, self.num*hiddens = vocab*size, num*hiddens
+        self.params = get*params(vocab*size, num_hiddens)
+        self.init*state, self.forward*fn = init*state, forward*fn
 
-    def __call__(self, X, state):
-        X = F.one_hot(X.T, self.vocab_size)
+    def **call**(self, X, state):
+        X = F.one*hot(X.T, self.vocab*size)
         return self.forward_fn(X, state, self.params)
 
-    def begin_state(self, batch_size):
-        return self.init_state(batch_size, self.num_hiddens)
+    def begin*state(self, batch*size):
+        return self.init*state(batch*size, self.num_hiddens)
 ```
 
 让我们[**检查输出是否具有正确的形状**]。
 例如，隐状态的维数是否保持不变。
 
 ```{.python .input}
-#@tab mxnet
+# @tab mxnet
 num_hiddens = 512
-net = RNNModelScratch(len(vocab), num_hiddens, d2l.try_gpu(), get_params,
-                      init_rnn_state, rnn)
-state = net.begin_state(X.shape[0], d2l.try_gpu())
-Y, new_state = net(X.as_in_context(d2l.try_gpu()), state)
-Y.shape, len(new_state), new_state[0].shape
+net = RNNModelScratch(len(vocab), num*hiddens, d2l.try*gpu(), get_params,
+                      init*rnn*state, rnn)
+state = net.begin*state(X.shape[0], d2l.try*gpu())
+Y, new*state = net(X.as*in*context(d2l.try*gpu()), state)
+Y.shape, len(new*state), new*state[0].shape
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 num_hiddens = 512
-net = RNNModelScratch(len(vocab), num_hiddens, d2l.try_gpu(), get_params,
-                      init_rnn_state, rnn)
-state = net.begin_state(X.shape[0], d2l.try_gpu())
-Y, new_state = net(X.to(d2l.try_gpu()), state)
-Y.shape, len(new_state), new_state[0].shape
+net = RNNModelScratch(len(vocab), num*hiddens, d2l.try*gpu(), get_params,
+                      init*rnn*state, rnn)
+state = net.begin*state(X.shape[0], d2l.try*gpu())
+Y, new*state = net(X.to(d2l.try*gpu()), state)
+Y.shape, len(new*state), new*state[0].shape
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 # 定义tensorflow训练策略
-device_name = d2l.try_gpu()._device_name
+device*name = d2l.try*gpu().*device*name
 strategy = tf.distribute.OneDeviceStrategy(device_name)
 
 num_hiddens = 512
 with strategy.scope():
-    net = RNNModelScratch(len(vocab), num_hiddens, init_rnn_state, rnn,
+    net = RNNModelScratch(len(vocab), num*hiddens, init*rnn_state, rnn,
                           get_params)
 state = net.begin_state(X.shape[0])
 Y, new_state = net(X, state)
-Y.shape, len(new_state), new_state[0].shape
+Y.shape, len(new*state), new*state[0].shape
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 num_hiddens = 512
-net = RNNModelScratch(len(vocab), num_hiddens, get_params,
-                      init_rnn_state, rnn)
+net = RNNModelScratch(len(vocab), num*hiddens, get*params,
+                      init*rnn*state, rnn)
 state = net.begin_state(X.shape[0])
 Y, new_state = net(X, state)
-Y.shape, len(new_state), new_state[0].shape
+Y.shape, len(new*state), new*state[0].shape
 ```
 
 我们可以看到输出形状是（时间步数$\times$批量大小，词表大小），
 而隐状态形状保持不变，即（批量大小，隐藏单元数）。
 
-## 预测
+# # 预测
 
 让我们[**首先定义预测函数来生成`prefix`之后的新字符**]，
 其中的`prefix`是一个用户提供的包含多个字符的字符串。
@@ -454,69 +454,69 @@ Y.shape, len(new_state), new_state[0].shape
 从而预测字符并输出它们。
 
 ```{.python .input}
-def predict_ch8(prefix, num_preds, net, vocab, device):  #@save
+def predict*ch8(prefix, num*preds, net, vocab, device):  # @save
     """在prefix后面生成新字符"""
-    state = net.begin_state(batch_size=1, ctx=device)
+    state = net.begin*state(batch*size=1, ctx=device)
     outputs = [vocab[prefix[0]]]
     get_input = lambda: d2l.reshape(
         d2l.tensor([outputs[-1]], ctx=device), (1, 1))
     for y in prefix[1:]:  # 预热期
-        _, state = net(get_input(), state)
+        *, state = net(get*input(), state)
         outputs.append(vocab[y])
-    for _ in range(num_preds):  # 预测num_preds步
+    for * in range(num*preds):  # 预测num_preds步
         y, state = net(get_input(), state)
         outputs.append(int(y.argmax(axis=1).reshape(1)))
-    return ''.join([vocab.idx_to_token[i] for i in outputs])
+    return ''.join([vocab.idx*to*token[i] for i in outputs])
 ```
 
 ```{.python .input}
-#@tab pytorch
-def predict_ch8(prefix, num_preds, net, vocab, device):  #@save
+# @tab pytorch
+def predict*ch8(prefix, num*preds, net, vocab, device):  # @save
     """在prefix后面生成新字符"""
-    state = net.begin_state(batch_size=1, device=device)
+    state = net.begin*state(batch*size=1, device=device)
     outputs = [vocab[prefix[0]]]
     get_input = lambda: d2l.reshape(d2l.tensor(
         [outputs[-1]], device=device), (1, 1))
     for y in prefix[1:]:  # 预热期
-        _, state = net(get_input(), state)
+        *, state = net(get*input(), state)
         outputs.append(vocab[y])
-    for _ in range(num_preds):  # 预测num_preds步
+    for * in range(num*preds):  # 预测num_preds步
         y, state = net(get_input(), state)
         outputs.append(int(y.argmax(dim=1).reshape(1)))
-    return ''.join([vocab.idx_to_token[i] for i in outputs])
+    return ''.join([vocab.idx*to*token[i] for i in outputs])
 ```
 
 ```{.python .input}
-#@tab tensorflow
-def predict_ch8(prefix, num_preds, net, vocab):  #@save
+# @tab tensorflow
+def predict*ch8(prefix, num*preds, net, vocab):  # @save
     """在prefix后面生成新字符"""
-    state = net.begin_state(batch_size=1, dtype=tf.float32)
+    state = net.begin*state(batch*size=1, dtype=tf.float32)
     outputs = [vocab[prefix[0]]]
     get_input = lambda: d2l.reshape(d2l.tensor([outputs[-1]]), 
                                     (1, 1)).numpy()
     for y in prefix[1:]:  # 预热期
-        _, state = net(get_input(), state)
+        *, state = net(get*input(), state)
         outputs.append(vocab[y])
-    for _ in range(num_preds):  # 预测num_preds步
+    for * in range(num*preds):  # 预测num_preds步
         y, state = net(get_input(), state)
         outputs.append(int(y.numpy().argmax(axis=1).reshape(1)))
-    return ''.join([vocab.idx_to_token[i] for i in outputs])
+    return ''.join([vocab.idx*to*token[i] for i in outputs])
 ```
 
 ```{.python .input}
-#@tab paddle
-def predict_ch8(prefix, num_preds, net, vocab, device):  #@save
+# @tab paddle
+def predict*ch8(prefix, num*preds, net, vocab, device):  # @save
     """在prefix后面生成新字符"""
-    state = net.begin_state(batch_size=1)
+    state = net.begin*state(batch*size=1)
     outputs = [vocab[prefix[0]]]
     get_input = lambda: d2l.reshape(d2l.tensor(outputs[-1], place=device), (1, 1))
     for y in prefix[1:]:  # 预热期
-        _, state = net(get_input(), state)
+        *, state = net(get*input(), state)
         outputs.append(vocab[y])
-    for _ in range(num_preds):  # 预测num_preds步
+    for * in range(num*preds):  # 预测num_preds步
         y, state = net(get_input(), state)
         outputs.append(int(paddle.reshape(paddle.argmax(y,axis=1),shape=[1])))
-    return ''.join([vocab.idx_to_token[i] for i in outputs])
+    return ''.join([vocab.idx*to*token[i] for i in outputs])
 ```
 
 现在我们可以测试`predict_ch8`函数。
@@ -525,20 +525,20 @@ def predict_ch8(prefix, num_preds, net, vocab, device):  #@save
 鉴于我们还没有训练网络，它会生成荒谬的预测结果。
 
 ```{.python .input}
-#@tab mxnet,pytorch, paddle
-predict_ch8('time traveller ', 10, net, vocab, d2l.try_gpu())
+# @tab mxnet,pytorch, paddle
+predict*ch8('time traveller ', 10, net, vocab, d2l.try*gpu())
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 predict_ch8('time traveller ', 10, net, vocab)
 ```
 
-## [**梯度裁剪**]
+# # [**梯度裁剪**]
 
 对于长度为$T$的序列，我们在迭代中计算这$T$个时间步上的梯度，
 将会在反向传播过程中产生长度为$\mathcal{O}(T)$的矩阵乘法链。
-如 :numref:`sec_numerical_stability`所述，
+如 :numref:`sec*numerical*stability`所述，
 当$T$较大时，它可能导致数值不稳定，
 例如可能导致梯度爆炸或梯度消失。
 因此，循环神经网络模型往往需要额外的方式来支持稳定训练。
@@ -587,7 +587,7 @@ $$|f(\mathbf{x}) - f(\mathbf{x} - \eta\mathbf{g})| \leq L \eta\|\mathbf{g}\|,$$
 我们在此计算了所有模型参数的梯度的范数。
 
 ```{.python .input}
-def grad_clipping(net, theta):  #@save
+def grad_clipping(net, theta):  # @save
     """裁剪梯度"""
     if isinstance(net, gluon.Block):
         params = [p.data() for p in net.collect_params().values()]
@@ -600,8 +600,8 @@ def grad_clipping(net, theta):  #@save
 ```
 
 ```{.python .input}
-#@tab pytorch
-def grad_clipping(net, theta):  #@save
+# @tab pytorch
+def grad_clipping(net, theta):  # @save
     """裁剪梯度"""
     if isinstance(net, nn.Module):
         params = [p for p in net.parameters() if p.requires_grad]
@@ -614,14 +614,14 @@ def grad_clipping(net, theta):  #@save
 ```
 
 ```{.python .input}
-#@tab tensorflow
-def grad_clipping(grads, theta):  #@save
+# @tab tensorflow
+def grad_clipping(grads, theta):  # @save
     """裁剪梯度"""
     theta = tf.constant(theta, dtype=tf.float32)
     new_grad = []
     for grad in grads:
         if isinstance(grad, tf.IndexedSlices):
-            new_grad.append(tf.convert_to_tensor(grad))
+            new*grad.append(tf.convert*to_tensor(grad))
         else:
             new_grad.append(grad)
     norm = tf.math.sqrt(sum((tf.reduce_sum(grad ** 2)).numpy()
@@ -631,13 +631,13 @@ def grad_clipping(grads, theta):  #@save
         for i, grad in enumerate(new_grad):
             new_grad[i] = grad * theta / norm
     else:
-        new_grad = new_grad
+        new*grad = new*grad
     return new_grad
 ```
 
 ```{.python .input}
-#@tab paddle
-def grad_clipping(net, theta):  #@save
+# @tab paddle
+def grad_clipping(net, theta):  # @save
     """裁剪梯度"""
     if isinstance(net, nn.Layer):
         params = [p for p in net.parameters() if not p.stop_gradient]
@@ -650,10 +650,10 @@ def grad_clipping(net, theta):  #@save
                 param.grad.set_value(param.grad * theta / norm)
 ```
 
-## 训练
+# # 训练
 
 在训练模型之前，让我们[**定义一个函数在一个迭代周期内训练模型**]。
-它与我们训练 :numref:`sec_softmax_scratch`模型的方式有三个不同之处。
+它与我们训练 :numref:`sec*softmax*scratch`模型的方式有三个不同之处。
 
 1. 序列数据的不同采样方法（随机采样和顺序分区）将导致隐状态初始化的差异。
 1. 我们在更新模型参数之前裁剪梯度。
@@ -677,27 +677,27 @@ def grad_clipping(net, theta):  #@save
 
 当使用随机抽样时，因为每个样本都是在一个随机位置抽样的，
 因此需要为每个迭代周期重新初始化隐状态。
-与 :numref:`sec_softmax_scratch`中的
-`train_epoch_ch3`函数相同，
+与 :numref:`sec*softmax*scratch`中的
+`train*epoch*ch3`函数相同，
 `updater`是更新模型参数的常用函数。
 它既可以是从头开始实现的`d2l.sgd`函数，
 也可以是深度学习框架中内置的优化函数。
 
 ```{.python .input}
-#@save
-def train_epoch_ch8(net, train_iter, loss, updater, device, use_random_iter):
+# @save
+def train*epoch*ch8(net, train*iter, loss, updater, device, use*random_iter):
     """训练模型一个迭代周期（定义见第8章）"""
     state, timer = None, d2l.Timer()
     metric = d2l.Accumulator(2)  # 训练损失之和,词元数量
     for X, Y in train_iter:
-        if state is None or use_random_iter:
+        if state is None or use*random*iter:
             # 在第一次迭代或使用随机抽样时初始化state
-            state = net.begin_state(batch_size=X.shape[0], ctx=device)
+            state = net.begin*state(batch*size=X.shape[0], ctx=device)
         else:
             for s in state:
                 s.detach()
         y = Y.T.reshape(-1)
-        X, y = X.as_in_ctx(device), y.as_in_ctx(device)
+        X, y = X.as*in*ctx(device), y.as*in*ctx(device)
         with autograd.record():
             y_hat, state = net(X, state)
             l = loss(y_hat, y).mean()
@@ -709,16 +709,16 @@ def train_epoch_ch8(net, train_iter, loss, updater, device, use_random_iter):
 ```
 
 ```{.python .input}
-#@tab pytorch
-#@save
-def train_epoch_ch8(net, train_iter, loss, updater, device, use_random_iter):
+# @tab pytorch
+# @save
+def train*epoch*ch8(net, train*iter, loss, updater, device, use*random_iter):
     """训练网络一个迭代周期（定义见第8章）"""
     state, timer = None, d2l.Timer()
     metric = d2l.Accumulator(2)  # 训练损失之和,词元数量
     for X, Y in train_iter:
-        if state is None or use_random_iter:
+        if state is None or use*random*iter:
             # 在第一次迭代或使用随机抽样时初始化state
-            state = net.begin_state(batch_size=X.shape[0], device=device)
+            state = net.begin*state(batch*size=X.shape[0], device=device)
         else:
             if isinstance(net, nn.Module) and not isinstance(state, tuple):
                 # state对于nn.GRU是个张量
@@ -746,16 +746,16 @@ def train_epoch_ch8(net, train_iter, loss, updater, device, use_random_iter):
 ```
 
 ```{.python .input}
-#@tab tensorflow
-#@save
-def train_epoch_ch8(net, train_iter, loss, updater, use_random_iter):
+# @tab tensorflow
+# @save
+def train*epoch*ch8(net, train*iter, loss, updater, use*random_iter):
     """训练模型一个迭代周期（定义见第8章）"""
     state, timer = None, d2l.Timer()
     metric = d2l.Accumulator(2)  # 训练损失之和,词元数量
     for X, Y in train_iter:
-        if state is None or use_random_iter:
+        if state is None or use*random*iter:
             # 在第一次迭代或使用随机抽样时初始化state
-            state = net.begin_state(batch_size=X.shape[0], dtype=tf.float32)
+            state = net.begin*state(batch*size=X.shape[0], dtype=tf.float32)
         with tf.GradientTape(persistent=True) as g:
             y_hat, state = net(X, state)
             y = d2l.reshape(tf.transpose(Y), (-1))
@@ -770,16 +770,16 @@ def train_epoch_ch8(net, train_iter, loss, updater, use_random_iter):
 ```
 
 ```{.python .input}
-#@tab paddle
-#@save
-def train_epoch_ch8(net, train_iter, loss, updater, device, use_random_iter):
+# @tab paddle
+# @save
+def train*epoch*ch8(net, train*iter, loss, updater, device, use*random_iter):
     """训练网络一个迭代周期（定义见第8章)"""
     state, timer = None, d2l.Timer()
     metric = d2l.Accumulator(2)  # 训练损失之和,词元数量
     for X, Y in train_iter:
-        if state is None or use_random_iter:
+        if state is None or use*random*iter:
             # 在第一次迭代或使用随机抽样时初始化state
-            state = net.begin_state(batch_size=X.shape[0])
+            state = net.begin*state(batch*size=X.shape[0])
         else:
             if isinstance(net, nn.Layer) and not isinstance(state, tuple):
                 # state对于nn.GRU是个张量
@@ -812,8 +812,8 @@ def train_epoch_ch8(net, train_iter, loss, updater, device, use_random_iter):
 也可以使用高级API来实现。**]
 
 ```{.python .input}
-def train_ch8(net, train_iter, vocab, lr, num_epochs, device,  #@save
-              use_random_iter=False):
+def train*ch8(net, train*iter, vocab, lr, num_epochs, device,  # @save
+              use*random*iter=False):
     """训练模型（定义见第8章）"""
     loss = gluon.loss.SoftmaxCrossEntropyLoss()
     animator = d2l.Animator(xlabel='epoch', ylabel='perplexity',
@@ -824,14 +824,14 @@ def train_ch8(net, train_iter, vocab, lr, num_epochs, device,  #@save
                          init=init.Normal(0.01))
         trainer = gluon.Trainer(net.collect_params(),
                                 'sgd', {'learning_rate': lr})
-        updater = lambda batch_size: trainer.step(batch_size)
+        updater = lambda batch*size: trainer.step(batch*size)
     else:
-        updater = lambda batch_size: d2l.sgd(net.params, lr, batch_size)
+        updater = lambda batch*size: d2l.sgd(net.params, lr, batch*size)
     predict = lambda prefix: predict_ch8(prefix, 50, net, vocab, device)
     # 训练和预测
     for epoch in range(num_epochs):
-        ppl, speed = train_epoch_ch8(
-            net, train_iter, loss, updater, device, use_random_iter)
+        ppl, speed = train*epoch*ch8(
+            net, train*iter, loss, updater, device, use*random_iter)
         if (epoch + 1) % 10 == 0:
             animator.add(epoch + 1, [ppl])
     print(f'困惑度 {ppl:.1f}, {speed:.1f} 词元/秒 {str(device)}')
@@ -840,10 +840,10 @@ def train_ch8(net, train_iter, vocab, lr, num_epochs, device,  #@save
 ```
 
 ```{.python .input}
-#@tab pytorch
-#@save
-def train_ch8(net, train_iter, vocab, lr, num_epochs, device,
-              use_random_iter=False):
+# @tab pytorch
+# @save
+def train*ch8(net, train*iter, vocab, lr, num_epochs, device,
+              use*random*iter=False):
     """训练模型（定义见第8章）"""
     loss = nn.CrossEntropyLoss()
     animator = d2l.Animator(xlabel='epoch', ylabel='perplexity',
@@ -852,12 +852,12 @@ def train_ch8(net, train_iter, vocab, lr, num_epochs, device,
     if isinstance(net, nn.Module):
         updater = torch.optim.SGD(net.parameters(), lr)
     else:
-        updater = lambda batch_size: d2l.sgd(net.params, lr, batch_size)
+        updater = lambda batch*size: d2l.sgd(net.params, lr, batch*size)
     predict = lambda prefix: predict_ch8(prefix, 50, net, vocab, device)
     # 训练和预测
     for epoch in range(num_epochs):
-        ppl, speed = train_epoch_ch8(
-            net, train_iter, loss, updater, device, use_random_iter)
+        ppl, speed = train*epoch*ch8(
+            net, train*iter, loss, updater, device, use*random_iter)
         if (epoch + 1) % 10 == 0:
             print(predict('time traveller'))
             animator.add(epoch + 1, [ppl])
@@ -867,10 +867,10 @@ def train_ch8(net, train_iter, vocab, lr, num_epochs, device,
 ```
 
 ```{.python .input}
-#@tab tensorflow
-#@save
-def train_ch8(net, train_iter, vocab, lr, num_epochs, strategy,
-              use_random_iter=False):
+# @tab tensorflow
+# @save
+def train*ch8(net, train*iter, vocab, lr, num_epochs, strategy,
+              use*random*iter=False):
     """训练模型（定义见第8章）"""
     with strategy.scope():
         loss = tf.keras.losses.SparseCategoricalCrossentropy(
@@ -881,21 +881,21 @@ def train_ch8(net, train_iter, vocab, lr, num_epochs, strategy,
     predict = lambda prefix: predict_ch8(prefix, 50, net, vocab)
     # 训练和预测
     for epoch in range(num_epochs):
-        ppl, speed = train_epoch_ch8(net, train_iter, loss, updater,
-                                     use_random_iter)
+        ppl, speed = train*epoch*ch8(net, train_iter, loss, updater,
+                                     use*random*iter)
         if (epoch + 1) % 10 == 0:
             print(predict('time traveller'))
             animator.add(epoch + 1, [ppl])
-    device = d2l.try_gpu()._device_name
+    device = d2l.try*gpu().*device_name
     print(f'困惑度 {ppl:.1f}, {speed:.1f} 词元/秒 {str(device)}')
     print(predict('time traveller'))
     print(predict('traveller'))
 ```
 
 ```{.python .input}
-#@tab paddle
-#@save
-def train_ch8(net, train_iter, vocab, lr, num_epochs, device, use_random_iter=False):
+# @tab paddle
+# @save
+def train*ch8(net, train*iter, vocab, lr, num*epochs, device, use*random_iter=False):
     """训练模型（定义见第8章）"""
     loss = nn.CrossEntropyLoss()
     animator = d2l.Animator(xlabel='epoch', ylabel='perplexity',
@@ -905,12 +905,12 @@ def train_ch8(net, train_iter, vocab, lr, num_epochs, device, use_random_iter=Fa
         updater = paddle.optimizer.SGD(
                 learning_rate=lr, parameters=net.parameters())
     else:
-        updater = lambda batch_size: d2l.sgd(net.params, lr, batch_size)
+        updater = lambda batch*size: d2l.sgd(net.params, lr, batch*size)
     predict = lambda prefix: predict_ch8(prefix, 50, net, vocab, device)
     # 训练和预测
     for epoch in range(num_epochs):
-        ppl, speed = train_epoch_ch8(
-            net, train_iter, loss, updater, device, use_random_iter)
+        ppl, speed = train*epoch*ch8(
+            net, train*iter, loss, updater, device, use*random_iter)
         if (epoch + 1) % 10 == 0:
             print(predict('time traveller'))
             animator.add(epoch + 1, [ppl])
@@ -924,42 +924,42 @@ def train_ch8(net, train_iter, vocab, lr, num_epochs, device, use_random_iter=Fa
 所以模型需要更多的迭代周期来更好地收敛。
 
 ```{.python .input}
-#@tab mxnet,pytorch, paddle
+# @tab mxnet,pytorch, paddle
 num_epochs, lr = 500, 1
-train_ch8(net, train_iter, vocab, lr, num_epochs, d2l.try_gpu())
+train*ch8(net, train*iter, vocab, lr, num*epochs, d2l.try*gpu())
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 num_epochs, lr = 500, 1
-train_ch8(net, train_iter, vocab, lr, num_epochs, strategy)
+train*ch8(net, train*iter, vocab, lr, num_epochs, strategy)
 ```
 
 [**最后，让我们检查一下使用随机抽样方法的结果。**]
 
 ```{.python .input}
-#@tab mxnet,pytorch
-net = RNNModelScratch(len(vocab), num_hiddens, d2l.try_gpu(), get_params,
-                      init_rnn_state, rnn)
-train_ch8(net, train_iter, vocab, lr, num_epochs, d2l.try_gpu(),
-          use_random_iter=True)
+# @tab mxnet,pytorch
+net = RNNModelScratch(len(vocab), num*hiddens, d2l.try*gpu(), get_params,
+                      init*rnn*state, rnn)
+train*ch8(net, train*iter, vocab, lr, num*epochs, d2l.try*gpu(),
+          use*random*iter=True)
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 with strategy.scope():
-    net = RNNModelScratch(len(vocab), num_hiddens, init_rnn_state, rnn,
+    net = RNNModelScratch(len(vocab), num*hiddens, init*rnn_state, rnn,
                           get_params)
-train_ch8(net, train_iter, vocab_random_iter, lr, num_epochs, strategy,
-          use_random_iter=True)
+train*ch8(net, train*iter, vocab*random*iter, lr, num_epochs, strategy,
+          use*random*iter=True)
 ```
 
 ```{.python .input}
-#@tab paddle
-net = RNNModelScratch(len(vocab), num_hiddens, get_params,
-                      init_rnn_state, rnn)
-train_ch8(net, train_iter, vocab, lr, num_epochs, d2l.try_gpu(),
-          use_random_iter=True)
+# @tab paddle
+net = RNNModelScratch(len(vocab), num*hiddens, get*params,
+                      init*rnn*state, rnn)
+train*ch8(net, train*iter, vocab, lr, num*epochs, d2l.try*gpu(),
+          use*random*iter=True)
 ```
 
 从零开始实现上述循环神经网络模型，
@@ -967,7 +967,7 @@ train_ch8(net, train_iter, vocab, lr, num_epochs, d2l.try_gpu(),
 在下一节中，我们将学习如何改进循环神经网络模型。
 例如，如何使其实现地更容易，且运行速度更快。
 
-## 小结
+# # 小结
 
 * 我们可以训练一个基于循环神经网络的字符级语言模型，根据用户提供的文本的前缀生成后续文本。
 * 一个简单的循环神经网络语言模型包括输入编码、循环神经网络模型和输出生成。
@@ -976,7 +976,7 @@ train_ch8(net, train_iter, vocab, lr, num_epochs, d2l.try_gpu(),
 * 在进行任何预测之前，模型通过预热期进行自我更新（例如，获得比初始值更好的隐状态）。
 * 梯度裁剪可以防止梯度爆炸，但不能应对梯度消失。
 
-## 练习
+# # 练习
 
 1. 尝试说明独热编码等价于为每个对象选择不同的嵌入表示。
 1. 通过调整超参数（如迭代周期数、隐藏单元数、小批量数据的时间步数、学习率等）来改善困惑度。
@@ -986,7 +986,7 @@ train_ch8(net, train_iter, vocab, lr, num_epochs, d2l.try_gpu(),
       例如[*世界大战*](http://www.gutenberg.org/ebooks/36)？
 1. 修改预测函数，例如使用采样，而不是选择最有可能的下一个字符。
     * 会发生什么？
-    * 调整模型使之偏向更可能的输出，例如，当$\alpha > 1$，从$q(x_t \mid x_{t-1}, \ldots, x_1) \propto P(x_t \mid x_{t-1}, \ldots, x_1)^\alpha$中采样。
+    * 调整模型使之偏向更可能的输出，例如，当$\alpha > 1$，从$q(x*t \mid x*{t-1}, \ldots, x*1) \propto P(x*t \mid x*{t-1}, \ldots, x*1)^\alpha$中采样。
 1. 在不裁剪梯度的情况下运行本节中的代码会发生什么？
 1. 更改顺序划分，使其不会从计算图中分离隐状态。运行时间会有变化吗？困惑度呢？
 1. 用ReLU替换本节中使用的激活函数，并重复本节中的实验。我们还需要梯度裁剪吗？为什么？

@@ -1,14 +1,14 @@
-# Class: XMLFileRead in Category [XML Files : XML Files](https://www.fmsinc.com/microsoftaccess/modules/code/XMLFiles/XMLFiles/XMLFileRead_class.htm../../index.html#XML_Files_XML_Files) from Total Visual SourceBook
+# Class: XMLFileRead in Category [XML Files : XML Files](https://www.fmsinc.com/microsoftaccess/modules/code/XMLFiles/XMLFiles/XMLFileRead*class.htm../../index.html# XML*Files*XML*Files) from Total Visual SourceBook
 
-### Read an XML file or text string using the DOMDocument MSXML.DLL object from VBA and VB6.
+## # Read an XML file or text string using the DOMDocument MSXML.DLL object from VBA and VB6.
 
 Easily read the root, elements (nodes) for children and sibling nodes. Examples show how to read the entire file and search for specific nodes.
 
-## [Procedure List](https://www.fmsinc.com/microsoftaccess/modules/code/XMLFiles/XMLFiles/XMLFileRead_class.htm#ProcedureListID)
+# # [Procedure List](https://www.fmsinc.com/microsoftaccess/modules/code/XMLFiles/XMLFiles/XMLFileRead_class.htm# ProcedureListID)
 
 <table class="table-bordered table-condensed table-hover table-striped" align="center"><tbody><tr class="PricingSectionTitle"><td class="PricingTitle">Procedure Name</td><td class="PricingTitle">Type</td><td class="PricingTitle">Description</td></tr><tr><td class="TableBodyBold">(Declarations)</td><td class="text-center">Declarations</td><td class="text-left">Declarations and private variables for the CXMLFileRead class.</td></tr><tr><td class="TableBodyBold">FirstChild</td><td class="text-center">Property</td><td class="text-left">Get the FirstChild of the XML file which should show the version info.</td></tr><tr><td class="TableBodyBold">Root</td><td class="text-center">Property</td><td class="text-left">Get the root of the XML file.</td></tr><tr><td class="TableBodyBold">LoadXMLFile</td><td class="text-center">Method</td><td class="text-left">Load the XML file from a physical file on disk.</td></tr><tr><td class="TableBodyBold">LoadXMLString</td><td class="text-center">Method</td><td class="text-left">Load the XML file as a string rather than loading it from a physical file on disk.</td></tr><tr><td class="TableBodyBold">ReadTextFile</td><td class="text-center">Private</td><td class="text-left">Open the named text file and return its contents as a string.</td></tr><tr><td class="TableBodyBold">RootNodeCount</td><td class="text-center">Method</td><td class="text-left">Get the number of nodes on the root.</td></tr><tr><td class="TableBodyBold">ChildNodeCount</td><td class="text-center">Method</td><td class="text-left">Get the number of nodes in the current node.</td></tr><tr><td class="TableBodyBold">GetNextNode</td><td class="text-center">Method</td><td class="text-left">Get the name of the next node. Get all the child nodes, then the sibling nodes, and then back to the parent level.</td></tr><tr><td class="TableBodyBold">GetChildNode</td><td class="text-center">Method</td><td class="text-left">Get the name and value of the specified child node by index. Optionally reset the current node to the new node if it was found. Use the GetChildNodeCount procedure to get the number of child nodes for the current node.</td></tr><tr><td class="TableBodyBold">GetNextChildNode</td><td class="text-center">Method</td><td class="text-left">Get the name and value of the next child node. Optionally reset the current node to the new node if it was found.</td></tr><tr><td class="TableBodyBold">GetNextSiblingNode</td><td class="text-center">Method</td><td class="text-left">Get the name and value of the next sibling node. Optionally resets the current node to the new node if it was found.</td></tr><tr><td class="TableBodyBold">GetChildNodeCount</td><td class="text-center">Method</td><td class="text-left">Get the number of child items in the current node.</td></tr><tr><td class="TableBodyBold">GetSiblingCount</td><td class="text-center">Method</td><td class="text-left">Get the number of siblings for the current node.</td></tr><tr><td class="TableBodyBold">GetNodeValue</td><td class="text-center">Method</td><td class="text-left">Get the node value by calling it explicitly or searching for it. Optionally make it the current node.</td></tr></tbody></table>
 
-## [Example Code for Using Class: XMLFileRead](https://www.fmsinc.com/microsoftaccess/modules/code/XMLFiles/XMLFiles/XMLFileRead_class.htm#XMLFileReadID)
+# # [Example Code for Using Class: XMLFileRead](https://www.fmsinc.com/microsoftaccess/modules/code/XMLFiles/XMLFiles/XMLFileRead_class.htm# XMLFileReadID)
 
 ```vb
 ' Example of using the CXMLFileRead class to read XML files in VBA and VB6.
@@ -121,7 +121,7 @@ Private Sub ReadXMLFilePortions()
     ' Search for a particular node
     Debug.Print
     Debug.Print "Node Search : "
-    strValue = clsXMLRead.GetNodeValue("//GeocodeResponse/result/address_component/long_name[. ='District of Columbia']", True, fFound)
+    strValue = clsXMLRead.GetNodeValue("//GeocodeResponse/result/address*component/long*name[. ='District of Columbia']", True, fFound)
     If fFound Then
       strNodeName = "long_name"
       Debug.Print "Node       : <" & strNodeName & "> " & strValue

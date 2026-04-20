@@ -1,6 +1,6 @@
 # Microsoft Script Control
 
-## Adding VBA reference
+# # Adding VBA reference
 
 In order to programmatically add the VBA reference for `C:\Windows\SysWOW64\msscript.ocx`, the following snippet might help:
 
@@ -9,11 +9,11 @@ call application.VBE.activeVBProject.references.addFromGuid("{0E59F1D2-1FBE-11D0
 
 ```
 
-## language
+# # language
 
 `language` can be set to either `"[VBScript](https://renenyffenegger.ch/notes/development/languages/VBScript/index)"` or [`"JScript"`](https://renenyffenegger.ch/notes/development/languages/JavaScript/index).
 
-## Parsing JSON
+# # Parsing JSON
 
 The following simple example tries to show how [JSON](https://renenyffenegger.ch/notes/development/languages/JavaScript/JSON/index) might be parsed with [Visual Basic for Applications](https://renenyffenegger.ch/notes/development/languages/VBA/index).
 
@@ -63,7 +63,7 @@ end sub ' }
 
 Github respository [about-VBA](https://github.com/ReneNyffenegger/about-VBA), path: [/object-libraries/Microsoft-Script-Control/parseJSON.bas](https://github.com/ReneNyffenegger/about-VBA/blob/master/object-libraries/Microsoft-Script-Control/parseJSON.bas)
 
-## Calling a JavaScript function
+# # Calling a JavaScript function
 
 This example tries to demonstrate how a trival [JavaScript](https://renenyffenegger.ch/notes/development/languages/JavaScript/index) function might be called in VBA.
 

@@ -1,16 +1,16 @@
 # Language Models and the Dataset
-:label:`sec_language_model`
+:label:`sec*language*model`
 
 
-In :numref:`sec_text_preprocessing`, we see how to map text data into tokens, where these tokens can be viewed as a sequence of discrete observations, such as words or characters.
-Assume that the tokens in a text sequence of length $T$ are in turn $x_1, x_2, \ldots, x_T$. 
+In :numref:`sec*text*preprocessing`, we see how to map text data into tokens, where these tokens can be viewed as a sequence of discrete observations, such as words or characters.
+Assume that the tokens in a text sequence of length $T$ are in turn $x*1, x*2, \ldots, x_T$. 
 Then, in the text sequence,
 $x_t$($1 \leq t \leq T$) can be considered as the observation or label at time step $t$. Given such a text sequence,
 the goal of a *language model* is to estimate the joint probability of the sequence
 
-$$P(x_1, x_2, \ldots, x_T).$$
+$$P(x*1, x*2, \ldots, x_T).$$
 
-Language models are incredibly useful. For instance, an ideal language model would be able to generate natural text just on its own, simply by drawing one token at a time $x_t \sim P(x_t \mid x_{t-1}, \ldots, x_1)$.
+Language models are incredibly useful. For instance, an ideal language model would be able to generate natural text just on its own, simply by drawing one token at a time $x*t \sim P(x*t \mid x*{t-1}, \ldots, x*1)$.
 Quite unlike the monkey using a typewriter, all text emerging from such a model would pass as natural language, e.g., English text. Furthermore, it would be sufficient for generating a meaningful dialog, simply by conditioning the text on previous dialog fragments.
 Clearly we are still very far from designing such a system, since it would need to *understand* the text rather than just generate grammatically sensible content.
 
@@ -22,14 +22,14 @@ Likewise, in a document summarization algorithm
 it is worthwhile knowing that "dog bites man" is much more frequent than "man bites dog", or that "I want to eat grandma" is a rather disturbing statement, whereas "I want to eat, grandma" is much more benign.
 
 
-## Learning a Language Model
+# # Learning a Language Model
 
 The obvious question is how we should model a document, or even a sequence of tokens. 
 Suppose that we tokenize text data at the word level.
 We can take recourse to the analysis we applied to sequence models in :numref:`sec_sequence`.
 Let us start by applying basic probability rules:
 
-$$P(x_1, x_2, \ldots, x_T) = \prod_{t=1}^T P(x_t  \mid  x_1, \ldots, x_{t-1}).$$
+$$P(x*1, x*2, \ldots, x*T) = \prod*{t=1}^T P(x*t  \mid  x*1, \ldots, x_{t-1}).$$
 
 For example, 
 the probability of a text sequence containing four words would be given as:
@@ -79,12 +79,12 @@ and $m$ the number of unique words.
 This solution helps with singletons, e.g., via
 
 $$\begin{aligned}
-	\hat{P}(x) & = \frac{n(x) + \epsilon_1/m}{n + \epsilon_1}, \\
-	\hat{P}(x' \mid x) & = \frac{n(x, x') + \epsilon_2 \hat{P}(x')}{n(x) + \epsilon_2}, \\
-	\hat{P}(x'' \mid x,x') & = \frac{n(x, x',x'') + \epsilon_3 \hat{P}(x'')}{n(x, x') + \epsilon_3}.
+	\hat{P}(x) & = \frac{n(x) + \epsilon*1/m}{n + \epsilon*1}, \\
+	\hat{P}(x' \mid x) & = \frac{n(x, x') + \epsilon*2 \hat{P}(x')}{n(x) + \epsilon*2}, \\
+	\hat{P}(x'' \mid x,x') & = \frac{n(x, x',x'') + \epsilon*3 \hat{P}(x'')}{n(x, x') + \epsilon*3}.
 \end{aligned}$$
 
-Here $\epsilon_1,\epsilon_2$, and $\epsilon_3$ are hyperparameters.
+Here $\epsilon*1,\epsilon*2$, and $\epsilon_3$ are hyperparameters.
 Take $\epsilon_1$ as an example:
 when $\epsilon_1 = 0$, no smoothing is applied;
 when $\epsilon_1$ approaches positive infinity,
@@ -104,25 +104,25 @@ Last, long word
 sequences are almost certain to be novel, hence a model that simply
 counts the frequency of previously seen word sequences is bound to perform poorly there.
 
-## Markov Models and $n$-grams
+# # Markov Models and $n$-grams
 
 Before we discuss solutions involving deep learning, we need some more terminology and concepts. Recall our discussion of Markov Models in :numref:`sec_sequence`.
-Let us apply this to language modeling. A distribution over sequences satisfies the Markov property of first order if $P(x_{t+1} \mid x_t, \ldots, x_1) = P(x_{t+1} \mid x_t)$. Higher orders correspond to longer dependencies. This leads to a number of approximations that we could apply to model a sequence:
+Let us apply this to language modeling. A distribution over sequences satisfies the Markov property of first order if $P(x*{t+1} \mid x*t, \ldots, x*1) = P(x*{t+1} \mid x_t)$. Higher orders correspond to longer dependencies. This leads to a number of approximations that we could apply to model a sequence:
 
 $$
 \begin{aligned}
-P(x_1, x_2, x_3, x_4) &=  P(x_1) P(x_2) P(x_3) P(x_4),\\
-P(x_1, x_2, x_3, x_4) &=  P(x_1) P(x_2  \mid  x_1) P(x_3  \mid  x_2) P(x_4  \mid  x_3),\\
-P(x_1, x_2, x_3, x_4) &=  P(x_1) P(x_2  \mid  x_1) P(x_3  \mid  x_1, x_2) P(x_4  \mid  x_2, x_3).
+P(x*1, x*2, x*3, x*4) &=  P(x*1) P(x*2) P(x*3) P(x*4),\\
+P(x*1, x*2, x*3, x*4) &=  P(x*1) P(x*2  \mid  x*1) P(x*3  \mid  x*2) P(x*4  \mid  x_3),\\
+P(x*1, x*2, x*3, x*4) &=  P(x*1) P(x*2  \mid  x*1) P(x*3  \mid  x*1, x*2) P(x*4  \mid  x*2, x_3).
 \end{aligned}
 $$
 
 The probability formulae that involve one, two, and three variables are typically referred to as *unigram*, *bigram*, and *trigram* models, respectively. In the following, we will learn how to design better models.
 
-## Natural Language Statistics
+# # Natural Language Statistics
 
 Let us see how this works on real data.
-We construct a vocabulary based on the time machine dataset as introduced in :numref:`sec_text_preprocessing` 
+We construct a vocabulary based on the time machine dataset as introduced in :numref:`sec*text*preprocessing` 
 and print the top 10 most frequent words.
 
 ```{.python .input}
@@ -133,22 +133,22 @@ npx.set_np()
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 from d2l import torch as d2l
 import torch
 import random
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 from d2l import tensorflow as d2l
 import tensorflow as tf
 import random
 ```
 
 ```{.python .input}
-#@tab all
-tokens = d2l.tokenize(d2l.read_time_machine())
+# @tab all
+tokens = d2l.tokenize(d2l.read*time*machine())
 # Since each text line is not necessisarily a sentence or a paragraph, we
 # concatenate all text lines 
 corpus = [token for line in tokens for token in line]
@@ -162,7 +162,7 @@ Nonetheless, they still carry meaning and we will still use them.
 Besides, it is quite clear that the word frequency decays rather rapidly. The $10^{\mathrm{th}}$ most frequent word is less than $1/5$ as common as the most popular one. To get a better idea, we plot the figure of the word frequency.
 
 ```{.python .input}
-#@tab all
+# @tab all
 freqs = [freq for token, freq in vocab.token_freqs]
 d2l.plot(freqs, xlabel='token: x', ylabel='frequency: n(x)',
          xscale='log', yscale='log')
@@ -174,7 +174,7 @@ which states that the frequency $n_i$ of the $i^\mathrm{th}$ most frequent word
 is:
 
 $$n_i \propto \frac{1}{i^\alpha},$$
-:eqlabel:`eq_zipf_law`
+:eqlabel:`eq*zipf*law`
 
 which is equivalent to
 
@@ -186,39 +186,39 @@ After all, we will significantly overestimate the frequency of the tail, also kn
 Let us see whether the bigram frequency behaves in the same manner as the unigram frequency.
 
 ```{.python .input}
-#@tab all
+# @tab all
 bigram_tokens = [pair for pair in zip(corpus[:-1], corpus[1:])]
-bigram_vocab = d2l.Vocab(bigram_tokens)
-bigram_vocab.token_freqs[:10]
+bigram*vocab = d2l.Vocab(bigram*tokens)
+bigram*vocab.token*freqs[:10]
 ```
 
 One thing is notable here. Out of the ten most frequent word pairs, nine are composed of both stop words and only one is relevant to the actual book---"the time". Furthermore, let us see whether the trigram frequency behaves in the same manner.
 
 ```{.python .input}
-#@tab all
+# @tab all
 trigram_tokens = [triple for triple in zip(
     corpus[:-2], corpus[1:-1], corpus[2:])]
-trigram_vocab = d2l.Vocab(trigram_tokens)
-trigram_vocab.token_freqs[:10]
+trigram*vocab = d2l.Vocab(trigram*tokens)
+trigram*vocab.token*freqs[:10]
 ```
 
 Last, let us visualize the token frequency among these three models: unigrams, bigrams, and trigrams.
 
 ```{.python .input}
-#@tab all
-bigram_freqs = [freq for token, freq in bigram_vocab.token_freqs]
-trigram_freqs = [freq for token, freq in trigram_vocab.token_freqs]
-d2l.plot([freqs, bigram_freqs, trigram_freqs], xlabel='token: x',
+# @tab all
+bigram*freqs = [freq for token, freq in bigram*vocab.token_freqs]
+trigram*freqs = [freq for token, freq in trigram*vocab.token_freqs]
+d2l.plot([freqs, bigram*freqs, trigram*freqs], xlabel='token: x',
          ylabel='frequency: n(x)', xscale='log', yscale='log',
          legend=['unigram', 'bigram', 'trigram'])
 ```
 
-This figure is quite exciting for a number of reasons. First, beyond unigram words, sequences of words also appear to be following Zipf's law, albeit with a smaller exponent $\alpha$ in :eqref:`eq_zipf_law`, depending on the sequence length.
+This figure is quite exciting for a number of reasons. First, beyond unigram words, sequences of words also appear to be following Zipf's law, albeit with a smaller exponent $\alpha$ in :eqref:`eq*zipf*law`, depending on the sequence length.
 Second, the number of distinct $n$-grams is not that large. This gives us hope that there is quite a lot of structure in language.
 Third, many $n$-grams occur very rarely, which makes Laplace smoothing rather unsuitable for language modeling. Instead, we will use deep learning based models.
 
 
-## Reading Long Sequence Data
+# # Reading Long Sequence Data
 
 Since sequence data are by their very nature sequential, we need to address
 the issue of processing it.
@@ -243,15 +243,15 @@ will be fed into the model.
 Suppose that the network processes a subsequence
 of $n$ time steps
 at a time.
-:numref:`fig_timemachine_5gram`
+:numref:`fig*timemachine*5gram`
 shows all the different ways to obtain subsequences
 from an original text sequence, where $n=5$ and a token at each time step corresponds to a character.
 Note that we have quite some freedom since we could pick an arbitrary offset that indicates the initial position.
 
 ![Different offsets lead to different subsequences when splitting up text.](../img/timemachine-5gram.svg)
-:label:`fig_timemachine_5gram`
+:label:`fig*timemachine*5gram`
 
-Hence, which one should we pick from :numref:`fig_timemachine_5gram`?
+Hence, which one should we pick from :numref:`fig*timemachine*5gram`?
 In fact, all of them are equally good.
 However, if we pick just one offset,
 there is limited coverage of all the possible subsequences
@@ -264,7 +264,7 @@ we describe how to accomplish this for both
 *random sampling* and *sequential partitioning* strategies.
 
 
-### Random Sampling
+## # Random Sampling
 
 In random sampling, each example is a subsequence arbitrarily captured on the original long sequence.
 The subsequences from two adjacent random minibatches
@@ -279,15 +279,15 @@ and `num_steps` is the predefined number of time steps
 in each subsequence.
 
 ```{.python .input}
-#@tab all
-def seq_data_iter_random(corpus, batch_size, num_steps):  #@save
+# @tab all
+def seq*data*iter*random(corpus, batch*size, num_steps):  # @save
     """Generate a minibatch of subsequences using random sampling."""
     # Start with a random offset to partition a sequence
     corpus = corpus[random.randint(0, num_steps):]
     # Subtract 1 since we need to account for labels
-    num_subseqs = (len(corpus) - 1) // num_steps
+    num*subseqs = (len(corpus) - 1) // num*steps
     # The starting indices for subsequences of length `num_steps`
-    initial_indices = list(range(0, num_subseqs * num_steps, num_steps))
+    initial*indices = list(range(0, num*subseqs * num*steps, num*steps))
     # In random sampling, the subsequences from two adjacent random
     # minibatches during iteration are not necessarily adjacent on the
     # original sequence
@@ -297,13 +297,13 @@ def seq_data_iter_random(corpus, batch_size, num_steps):  #@save
         # Return a sequence of length `num_steps` starting from `pos`
         return corpus[pos: pos + num_steps]
 
-    num_subseqs_per_example = num_subseqs // batch_size
-    for i in range(0, batch_size * num_subseqs_per_example, batch_size):
+    num*subseqs*per*example = num*subseqs // batch_size
+    for i in range(0, batch*size * num*subseqs*per*example, batch_size):
         # Here, `initial_indices` contains randomized starting indices for
         # subsequences
-        initial_indices_per_batch = initial_indices[i: i + batch_size]
-        X = [data(j) for j in initial_indices_per_batch]
-        Y = [data(j + 1) for j in initial_indices_per_batch]
+        initial*indices*per*batch = initial*indices[i: i + batch_size]
+        X = [data(j) for j in initial*indices*per_batch]
+        Y = [data(j + 1) for j in initial*indices*per_batch]
         yield d2l.tensor(X), d2l.tensor(Y)
 ```
 
@@ -314,13 +314,13 @@ respectively.
 This means that we can generate $\lfloor (35 - 1) / 5 \rfloor= 6$ feature-label subsequence pairs. With a minibatch size of 2, we only get 3 minibatches.
 
 ```{.python .input}
-#@tab all
+# @tab all
 my_seq = list(range(35))
-for X, Y in seq_data_iter_random(my_seq, batch_size=2, num_steps=5):
+for X, Y in seq*data*iter*random(my*seq, batch*size=2, num*steps=5):
     print('X: ', X, '\nY:', Y)
 ```
 
-### Sequential Partitioning
+## # Sequential Partitioning
 
 In addition to random sampling of the original sequence, we can also ensure that 
 the subsequences from two adjacent minibatches
@@ -329,35 +329,35 @@ are adjacent on the original sequence.
 This strategy preserves the order of split subsequences when iterating over minibatches, hence is called sequential partitioning.
 
 ```{.python .input}
-#@tab mxnet, pytorch
-def seq_data_iter_sequential(corpus, batch_size, num_steps):  #@save
+# @tab mxnet, pytorch
+def seq*data*iter*sequential(corpus, batch*size, num_steps):  # @save
     """Generate a minibatch of subsequences using sequential partitioning."""
     # Start with a random offset to partition a sequence
     offset = random.randint(0, num_steps)
-    num_tokens = ((len(corpus) - offset - 1) // batch_size) * batch_size
+    num*tokens = ((len(corpus) - offset - 1) // batch*size) * batch_size
     Xs = d2l.tensor(corpus[offset: offset + num_tokens])
     Ys = d2l.tensor(corpus[offset + 1: offset + 1 + num_tokens])
-    Xs, Ys = Xs.reshape(batch_size, -1), Ys.reshape(batch_size, -1)
-    num_batches = Xs.shape[1] // num_steps
-    for i in range(0, num_batches * num_steps, num_steps):
+    Xs, Ys = Xs.reshape(batch*size, -1), Ys.reshape(batch*size, -1)
+    num*batches = Xs.shape[1] // num*steps
+    for i in range(0, num*batches * num*steps, num_steps):
         X = Xs[:, i: i + num_steps]
         Y = Ys[:, i: i + num_steps]
         yield X, Y
 ```
 
 ```{.python .input}
-#@tab tensorflow
-def seq_data_iter_sequential(corpus, batch_size, num_steps):  #@save
+# @tab tensorflow
+def seq*data*iter*sequential(corpus, batch*size, num_steps):  # @save
     """Generate a minibatch of subsequences using sequential partitioning."""
     # Start with a random offset to partition a sequence
     offset = random.randint(0, num_steps)
-    num_tokens = ((len(corpus) - offset - 1) // batch_size) * batch_size
+    num*tokens = ((len(corpus) - offset - 1) // batch*size) * batch_size
     Xs = d2l.tensor(corpus[offset: offset + num_tokens])
     Ys = d2l.tensor(corpus[offset + 1: offset + 1 + num_tokens])
     Xs = d2l.reshape(Xs, (batch_size, -1))
     Ys = d2l.reshape(Ys, (batch_size, -1))
-    num_batches = Xs.shape[1] // num_steps
-    for i in range(0, num_batches * num_steps, num_steps):
+    num*batches = Xs.shape[1] // num*steps
+    for i in range(0, num*batches * num*steps, num_steps):
         X = Xs[:, i: i + num_steps]
         Y = Ys[:, i: i + num_steps]
         yield X, Y
@@ -371,42 +371,42 @@ during iteration
 are indeed adjacent on the original sequence.
 
 ```{.python .input}
-#@tab all
-for X, Y in seq_data_iter_sequential(my_seq, batch_size=2, num_steps=5):
+# @tab all
+for X, Y in seq*data*iter*sequential(my*seq, batch*size=2, num*steps=5):
     print('X: ', X, '\nY:', Y)
 ```
 
 Now we wrap the above two sampling functions to a class so that we can use it as a data iterator later.
 
 ```{.python .input}
-#@tab all
-class SeqDataLoader:  #@save
+# @tab all
+class SeqDataLoader:  # @save
     """An iterator to load sequence data."""
-    def __init__(self, batch_size, num_steps, use_random_iter, max_tokens):
-        if use_random_iter:
-            self.data_iter_fn = d2l.seq_data_iter_random
+    def **init**(self, batch*size, num*steps, use*random*iter, max_tokens):
+        if use*random*iter:
+            self.data*iter*fn = d2l.seq*data*iter_random
         else:
-            self.data_iter_fn = d2l.seq_data_iter_sequential
-        self.corpus, self.vocab = d2l.load_corpus_time_machine(max_tokens)
-        self.batch_size, self.num_steps = batch_size, num_steps
+            self.data*iter*fn = d2l.seq*data*iter_sequential
+        self.corpus, self.vocab = d2l.load*corpus*time*machine(max*tokens)
+        self.batch*size, self.num*steps = batch*size, num*steps
 
-    def __iter__(self):
-        return self.data_iter_fn(self.corpus, self.batch_size, self.num_steps)
+    def **iter**(self):
+        return self.data*iter*fn(self.corpus, self.batch*size, self.num*steps)
 ```
 
-Last, we define a function `load_data_time_machine` that returns both the data iterator and the vocabulary, so we can use it similarly as other other functions with the `load_data` prefix, such as `d2l.load_data_fashion_mnist` defined in :numref:`sec_fashion_mnist`.
+Last, we define a function `load*data*time*machine` that returns both the data iterator and the vocabulary, so we can use it similarly as other other functions with the `load*data` prefix, such as `d2l.load*data*fashion*mnist` defined in :numref:`sec*fashion_mnist`.
 
 ```{.python .input}
-#@tab all
-def load_data_time_machine(batch_size, num_steps,  #@save
-                           use_random_iter=False, max_tokens=10000):
+# @tab all
+def load*data*time*machine(batch*size, num_steps,  # @save
+                           use*random*iter=False, max_tokens=10000):
     """Return the iterator and the vocabulary of the time machine dataset."""
     data_iter = SeqDataLoader(
-        batch_size, num_steps, use_random_iter, max_tokens)
-    return data_iter, data_iter.vocab
+        batch*size, num*steps, use*random*iter, max_tokens)
+    return data*iter, data*iter.vocab
 ```
 
-## Summary
+# # Summary
 
 * Language models are key to natural language processing.
 * $n$-grams provide a convenient model for dealing with long sequences by truncating the dependence.
@@ -416,7 +416,7 @@ def load_data_time_machine(batch_size, num_steps,  #@save
 * The main choices for reading long sequences are random sampling and sequential partitioning. The latter can ensure that the subsequences from two adjacent minibatches during iteration are adjacent on the original sequence.
 
 
-## Exercises
+# # Exercises
 
 1. Suppose there are $100,000$ words in the training dataset. How much word frequency and multi-word adjacent frequency does a four-gram need to store?
 1. How would you model a dialogue?

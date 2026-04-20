@@ -92,10 +92,10 @@ File.WriteAllText("kb.json", json);
 - 每条记录作为一个 chunk（一个类或一个方法），便于后续向量检索。
 - 可额外生成 Markdown 格式（便于 LLM 阅读）：
 	```text
-	## Namespace.ClassName (Interface)
+	# # Namespace.ClassName (Interface)
 	**签名**：public interface IUserService { ... }
 	**文档**：xxx
-	### 方法
+	## # 方法
 	- \`Task<User> GetUserAsync(int id)\`：xxx
 	```
 这样提取出的 KB 就是你项目的“公共 API 知识库”，干净且只包含 Public 部分。其他可选方案（不推荐作为主力）：

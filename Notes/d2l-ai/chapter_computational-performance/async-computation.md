@@ -14,7 +14,7 @@ npx.set_np()
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 from d2l import torch as d2l
 import numpy, os, subprocess
 import torch
@@ -22,7 +22,7 @@ from torch import nn
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 from d2l import paddle as d2l
 import numpy, os, subprocess
 import warnings
@@ -32,7 +32,7 @@ from paddle import nn
 d2l.try_gpu()
 ```
 
-## 通过后端异步处理
+# # 通过后端异步处理
 
 :begin_tab:`mxnet`
 作为热身，考虑一个简单问题：生成一个随机矩阵并将其相乘。让我们在NumPy和`mxnet.np`中都这样做，看看有什么不同。
@@ -59,7 +59,7 @@ with d2l.Benchmark('mxnet.np'):
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 # GPU计算热身
 device = d2l.try_gpu()
 a = torch.randn(size=(1000, 1000), device=device)
@@ -77,7 +77,7 @@ with d2l.Benchmark('torch'):
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 # GPU计算热身
 a = paddle.randn(shape=(1000, 1000))
 b = paddle.mm(a, a)
@@ -114,7 +114,7 @@ with d2l.Benchmark():
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 with d2l.Benchmark():
     for _ in range(10):
         a = torch.randn(size=(1000, 1000), device=device)
@@ -123,7 +123,7 @@ with d2l.Benchmark():
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 with d2l.Benchmark():
     for _ in range(10):
         a = paddle.randn(shape=(1000, 1000))
@@ -157,7 +157,7 @@ z
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 x = torch.ones((1, 2), device=device)
 y = torch.ones((1, 2), device=device)
 z = x * y + 2
@@ -165,7 +165,7 @@ z
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 x = paddle.ones((1, 2))
 y = paddle.ones((1, 2))
 z = x * y + 2
@@ -175,18 +175,18 @@ z
 ![后端跟踪计算图中各个步骤之间的依赖关系](../img/asyncgraph.svg)
 :label:`fig_asyncgraph`
 
-上面的代码片段在 :numref:`fig_asyncgraph`中进行了说明。每当Python前端线程执行前三条语句中的一条语句时，它只是将任务返回到后端队列。当最后一个语句的结果需要被打印出来时，Python前端线程将等待C++后端线程完成变量`z`的结果计算。这种设计的一个好处是Python前端线程不需要执行实际的计算。因此，不管Python的性能如何，对程序的整体性能几乎没有影响。 :numref:`fig_threading`演示了前端和后端如何交互。
+上面的代码片段在 :numref:`fig*asyncgraph`中进行了说明。每当Python前端线程执行前三条语句中的一条语句时，它只是将任务返回到后端队列。当最后一个语句的结果需要被打印出来时，Python前端线程将等待C++后端线程完成变量`z`的结果计算。这种设计的一个好处是Python前端线程不需要执行实际的计算。因此，不管Python的性能如何，对程序的整体性能几乎没有影响。 :numref:`fig*threading`演示了前端和后端如何交互。
 
 ![前端和后端的交互](../img/threading.svg)
 :label:`fig_threading`
 
-## 障碍器与阻塞器
+# # 障碍器与阻塞器
 
 :begin_tab:`mxnet`
 有许多操作用于强制Python等待完成：
 
 * 最明显的是，`npx.waitall()`不考虑计算指令的发出时间，等待直到所有计算完成。除非绝对必要，否则在实践中使用此运算符不是个好主意，因为它可能会导致较差的性能；
-* 如果只想等待一个特定的变量可用，我们可以调用`z.wait_to_read()`。在这种情况下，MXNet阻止程序返回Python，直到计算出变量`z`为止。`z`之后的其他计算才可能很好地继续。
+* 如果只想等待一个特定的变量可用，我们可以调用`z.wait*to*read()`。在这种情况下，MXNet阻止程序返回Python，直到计算出变量`z`为止。`z`之后的其他计算才可能很好地继续。
 
 接下来看看这在实践中是如何运作的。
 :end_tab:
@@ -196,9 +196,9 @@ with d2l.Benchmark('waitall'):
     b = np.dot(a, a)
     npx.waitall()
 
-with d2l.Benchmark('wait_to_read'):
+with d2l.Benchmark('wait*to*read'):
     b = np.dot(a, a)
-    b.wait_to_read()
+    b.wait*to*read()
 ```
 
 :begin_tab:`mxnet`
@@ -217,17 +217,17 @@ with d2l.Benchmark('scalar conversion'):
     b.sum().item()
 ```
 
-## 改进计算
+# # 改进计算
 
 :begin_tab:`mxnet`
-在重度多线程的系统中（即使普通笔记本电脑也有4个或更多线程，然而在多插槽服务器上这个数字可能超过256），调度操作的开销可能会变得非常大。这也是极度希望计算和调度是异步和并行的原因。为了说明这样做的好处，让我们看看按顺序（同步执行）或异步执行多次将变量递增$1$会发生什么情况。这里通过在每个加法之间插入`wait_to_read`障碍器来模拟同步执行。
+在重度多线程的系统中（即使普通笔记本电脑也有4个或更多线程，然而在多插槽服务器上这个数字可能超过256），调度操作的开销可能会变得非常大。这也是极度希望计算和调度是异步和并行的原因。为了说明这样做的好处，让我们看看按顺序（同步执行）或异步执行多次将变量递增$1$会发生什么情况。这里通过在每个加法之间插入`wait*to*read`障碍器来模拟同步执行。
 :end_tab:
 
 ```{.python .input}
 with d2l.Benchmark('synchronous'):
     for _ in range(10000):
         y = x + 1
-        y.wait_to_read()
+        y.wait*to*read()
 
 with d2l.Benchmark('asynchronous'):
     for _ in range(10000):
@@ -241,10 +241,10 @@ Python前端线程和C++后端线程之间的简化交互可以概括如下：
 1. 然后后端从队列接收计算任务并执行；
 1. 然后后端将计算结果返回到前端。
 
-假设这三个阶段的持续时间分别为$t_1, t_2, t_3$。如果不使用异步编程，执行10000次计算所需的总时间约为$10000 (t_1+ t_2 + t_3)$。如果使用异步编程，因为前端不必等待后端为每个循环返回计算结果，执行$10000$次计算所花费的总时间可以减少到$t_1 + 10000 t_2 + t_3$（假设$10000 t_2 > 9999t_1$）。
+假设这三个阶段的持续时间分别为$t*1, t*2, t*3$。如果不使用异步编程，执行10000次计算所需的总时间约为$10000 (t*1+ t*2 + t*3)$。如果使用异步编程，因为前端不必等待后端为每个循环返回计算结果，执行$10000$次计算所花费的总时间可以减少到$t*1 + 10000 t*2 + t*3$（假设$10000 t*2 > 9999t_1$）。
 
 
-## 小结
+# # 小结
 
 * 深度学习框架可以将Python前端的控制与后端的执行解耦，使得命令可以快速地异步插入后端、并行执行。
 * 异步产生了一个相当灵活的前端，但请注意：过度填充任务队列可能会导致内存消耗过多。建议对每个小批量进行同步，以保持前端和后端大致同步。
@@ -254,11 +254,11 @@ Python前端线程和C++后端线程之间的简化交互可以概括如下：
 * 将MXNet管理的内存转换到Python将迫使后端等待特定变量就绪，`print`、`asnumpy`和`item`等函数也具有这个效果。请注意，错误地使用同步会破坏程序性能。
 :end_tab:
 
-## 练习
+# # 练习
 
 :begin_tab:`mxnet`
-1. 上面提到使用异步计算可以将执行$10000$次计算所需的总时间减少到$t_1 + 10000 t_2 + t_3$。为什么要假设这里是$10000 t_2 > 9999 t_1$？
-1. 测量`waitall`和`wait_to_read`之间的差值。提示：执行多条指令并同步以获得中间结果。
+1. 上面提到使用异步计算可以将执行$10000$次计算所需的总时间减少到$t*1 + 10000 t*2 + t*3$。为什么要假设这里是$10000 t*2 > 9999 t_1$？
+1. 测量`waitall`和`wait*to*read`之间的差值。提示：执行多条指令并同步以获得中间结果。
 :end_tab:
 
 :begin_tab:`pytorch`

@@ -7,7 +7,7 @@ For instance, the optimization problem might diverge due to an overly large lear
 Let us start with a simple special case.
 
 
-## One-Dimensional Gradient Descent
+# # One-Dimensional Gradient Descent
 
 Gradient descent in one dimension is an excellent example to explain why the gradient descent algorithm may reduce the value of the objective function. Consider some continuously differentiable real-valued function $f: \mathbb{R} \rightarrow \mathbb{R}$. Using a Taylor expansion we obtain
 
@@ -39,7 +39,7 @@ npx.set_np()
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 %matplotlib inline
 from d2l import torch as d2l
 import numpy as np
@@ -47,7 +47,7 @@ import torch
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 %matplotlib inline
 from d2l import tensorflow as d2l
 import numpy as np
@@ -55,7 +55,7 @@ import tensorflow as tf
 ```
 
 ```{.python .input}
-#@tab all
+# @tab all
 def f(x):  # Objective function
     return x ** 2
 
@@ -66,7 +66,7 @@ def f_grad(x):  # Gradient (derivative) of the objective function
 Next, we use $x=10$ as the initial value and assume $\eta=0.2$. Using gradient descent to iterate $x$ for 10 times we can see that, eventually, the value of $x$ approaches the optimal solution.
 
 ```{.python .input}
-#@tab all
+# @tab all
 def gd(eta, f_grad):
     x = 10.0
     results = [x]
@@ -82,40 +82,40 @@ results = gd(0.2, f_grad)
 The progress of optimizing over $x$ can be plotted as follows.
 
 ```{.python .input}
-#@tab all
+# @tab all
 def show_trace(results, f):
     n = max(abs(min(results)), abs(max(results)))
     f_line = d2l.arange(-n, n, 0.01)
     d2l.set_figsize()
-    d2l.plot([f_line, results], [[f(x) for x in f_line], [
+    d2l.plot([f*line, results], [[f(x) for x in f*line], [
         f(x) for x in results]], 'x', 'f(x)', fmts=['-', '-o'])
 
 show_trace(results, f)
 ```
 
-### Learning Rate
+## # Learning Rate
 :label:`subsec_gd-learningrate`
 
 The learning rate $\eta$ can be set by the algorithm designer. If we use a learning rate that is too small, it will cause $x$ to update very slowly, requiring more iterations to get a better solution. To show what happens in such a case, consider the progress in the same optimization problem for $\eta = 0.05$. As we can see, even after 10 steps we are still very far from the optimal solution.
 
 ```{.python .input}
-#@tab all
-show_trace(gd(0.05, f_grad), f)
+# @tab all
+show*trace(gd(0.05, f*grad), f)
 ```
 
 Conversely, if we use an excessively high learning rate, $\left|\eta f'(x)\right|$ might be too large for the first-order Taylor expansion formula. That is, the term $\mathcal{O}(\eta^2 f'^2(x))$ in :eqref:`gd-taylor-2` might become significant. In this case, we cannot guarantee that the iteration of $x$ will be able to lower the value of $f(x)$. For example, when we set the learning rate to $\eta=1.1$, $x$ overshoots the optimal solution $x=0$ and gradually diverges.
 
 ```{.python .input}
-#@tab all
-show_trace(gd(1.1, f_grad), f)
+# @tab all
+show*trace(gd(1.1, f*grad), f)
 ```
 
-### Local Minima
+## # Local Minima
 
 To illustrate what happens for nonconvex functions consider the case of $f(x) = x \cdot \cos(cx)$ for some constant $c$. This function has infinitely many local minima. Depending on our choice of the learning rate and depending on how well conditioned the problem is, we may end up with one of many solutions. The example below illustrates how an (unrealistically) high learning rate will lead to a poor local minimum.
 
 ```{.python .input}
-#@tab all
+# @tab all
 c = d2l.tensor(0.15 * np.pi)
 
 def f(x):  # Objective function
@@ -124,16 +124,16 @@ def f(x):  # Objective function
 def f_grad(x):  # Gradient of the objective function
     return d2l.cos(c * x) - c * x * d2l.sin(c * x)
 
-show_trace(gd(2, f_grad), f)
+show*trace(gd(2, f*grad), f)
 ```
 
-## Multivariate Gradient Descent
+# # Multivariate Gradient Descent
 
-Now that we have a better intuition of the univariate case, let us consider the situation where $\mathbf{x} = [x_1, x_2, \ldots, x_d]^\top$. That is, the objective function $f: \mathbb{R}^d \to \mathbb{R}$ maps vectors into scalars. Correspondingly its gradient is multivariate, too. It is a vector consisting of $d$ partial derivatives:
+Now that we have a better intuition of the univariate case, let us consider the situation where $\mathbf{x} = [x*1, x*2, \ldots, x_d]^\top$. That is, the objective function $f: \mathbb{R}^d \to \mathbb{R}$ maps vectors into scalars. Correspondingly its gradient is multivariate, too. It is a vector consisting of $d$ partial derivatives:
 
-$$\nabla f(\mathbf{x}) = \bigg[\frac{\partial f(\mathbf{x})}{\partial x_1}, \frac{\partial f(\mathbf{x})}{\partial x_2}, \ldots, \frac{\partial f(\mathbf{x})}{\partial x_d}\bigg]^\top.$$
+$$\nabla f(\mathbf{x}) = \bigg[\frac{\partial f(\mathbf{x})}{\partial x*1}, \frac{\partial f(\mathbf{x})}{\partial x*2}, \ldots, \frac{\partial f(\mathbf{x})}{\partial x_d}\bigg]^\top.$$
 
-Each partial derivative element $\partial f(\mathbf{x})/\partial x_i$ in the gradient indicates the rate of change of $f$ at $\mathbf{x}$ with respect to the input $x_i$. As before in the univariate case we can use the corresponding Taylor approximation for multivariate functions to get some idea of what we should do. In particular, we have that
+Each partial derivative element $\partial f(\mathbf{x})/\partial x*i$ in the gradient indicates the rate of change of $f$ at $\mathbf{x}$ with respect to the input $x*i$. As before in the univariate case we can use the corresponding Taylor approximation for multivariate functions to get some idea of what we should do. In particular, we have that
 
 $$f(\mathbf{x} + \boldsymbol{\epsilon}) = f(\mathbf{x}) + \mathbf{\boldsymbol{\epsilon}}^\top \nabla f(\mathbf{x}) + \mathcal{O}(\|\boldsymbol{\epsilon}\|^2).$$
 :eqlabel:`gd-multi-taylor`
@@ -142,13 +142,13 @@ In other words, up to second-order terms in $\boldsymbol{\epsilon}$ the directio
 
 $$\mathbf{x} \leftarrow \mathbf{x} - \eta \nabla f(\mathbf{x}).$$
 
-To see how the algorithm behaves in practice let us construct an objective function $f(\mathbf{x})=x_1^2+2x_2^2$ with a two-dimensional vector $\mathbf{x} = [x_1, x_2]^\top$ as input and a scalar as output. The gradient is given by $\nabla f(\mathbf{x}) = [2x_1, 4x_2]^\top$. We will observe the trajectory of $\mathbf{x}$ by gradient descent from the initial position $[-5, -2]$. 
+To see how the algorithm behaves in practice let us construct an objective function $f(\mathbf{x})=x*1^2+2x*2^2$ with a two-dimensional vector $\mathbf{x} = [x*1, x*2]^\top$ as input and a scalar as output. The gradient is given by $\nabla f(\mathbf{x}) = [2x*1, 4x*2]^\top$. We will observe the trajectory of $\mathbf{x}$ by gradient descent from the initial position $[-5, -2]$. 
 
 To begin with, we need two more helper functions. The first uses an update function and applies it 20 times to the initial value. The second helper visualizes the trajectory of $\mathbf{x}$.
 
 ```{.python .input}
-#@tab all
-def train_2d(trainer, steps=20, f_grad=None):  #@save
+# @tab all
+def train*2d(trainer, steps=20, f*grad=None):  # @save
     """Optimize a 2D objective function with a customized trainer."""
     # `s1` and `s2` are internal state variables that will be used later
     x1, x2, s1, s2 = -5, -2, 0, 0
@@ -162,13 +162,13 @@ def train_2d(trainer, steps=20, f_grad=None):  #@save
     print(f'epoch {i + 1}, x1: {float(x1):f}, x2: {float(x2):f}')
     return results
 
-def show_trace_2d(f, results):  #@save
+def show*trace*2d(f, results):  # @save
     """Show the trace of 2D variables during optimization."""
     d2l.set_figsize()
-    d2l.plt.plot(*zip(*results), '-o', color='#ff7f0e')
+    d2l.plt.plot(*zip(*results), '-o', color='# ff7f0e')
     x1, x2 = d2l.meshgrid(d2l.arange(-5.5, 1.0, 0.1),
                           d2l.arange(-3.0, 1.0, 0.1))
-    d2l.plt.contour(x1, x2, f(x1, x2), colors='#1f77b4')
+    d2l.plt.contour(x1, x2, f(x1, x2), colors='# 1f77b4')
     d2l.plt.xlabel('x1')
     d2l.plt.ylabel('x2')
 ```
@@ -176,29 +176,29 @@ def show_trace_2d(f, results):  #@save
 Next, we observe the trajectory of the optimization variable $\mathbf{x}$ for learning rate $\eta = 0.1$. We can see that after 20 steps the value of $\mathbf{x}$ approaches its minimum at $[0, 0]$. Progress is fairly well-behaved albeit rather slow.
 
 ```{.python .input}
-#@tab all
+# @tab all
 def f_2d(x1, x2):  # Objective function
     return x1 ** 2 + 2 * x2 ** 2
 
-def f_2d_grad(x1, x2):  # Gradient of the objective function
+def f*2d*grad(x1, x2):  # Gradient of the objective function
     return (2 * x1, 4 * x2)
 
-def gd_2d(x1, x2, s1, s2, f_grad):
+def gd*2d(x1, x2, s1, s2, f*grad):
     g1, g2 = f_grad(x1, x2)
     return (x1 - eta * g1, x2 - eta * g2, 0, 0)
 
 eta = 0.1
-show_trace_2d(f_2d, train_2d(gd_2d, f_grad=f_2d_grad))
+show*trace*2d(f*2d, train*2d(gd*2d, f*grad=f*2d*grad))
 ```
 
-## Adaptive Methods
+# # Adaptive Methods
 
 As we could see in :numref:`subsec_gd-learningrate`, getting the learning rate $\eta$ "just right" is tricky. If we pick it too small, we make little progress. If we pick it too large, the solution oscillates and in the worst case it might even diverge. What if we could determine $\eta$ automatically or get rid of having to select a learning rate at all? 
 Second-order methods that look not only at the value and gradient of the objective function
 but also at its *curvature* can help in this case. While these methods cannot be applied to deep learning directly due to the computational cost, they provide useful intuition into how to design advanced optimization algorithms that mimic many of the desirable properties of the algorithms outlined below.
 
 
-### Newton's Method
+## # Newton's Method
 
 Reviewing the Taylor expansion of some function $f: \mathbb{R}^d \rightarrow \mathbb{R}$ there is no need to stop after the first term. In fact, we can write it as
 
@@ -224,7 +224,7 @@ the global minimum at $x=0$ is reached
 after a few iterations.
 
 ```{.python .input}
-#@tab all
+# @tab all
 c = d2l.tensor(0.5)
 
 def f(x):  # Objective function
@@ -240,7 +240,7 @@ def newton(eta=1):
     x = 10.0
     results = [x]
     for i in range(10):
-        x -= eta * f_grad(x) / f_hess(x)
+        x -= eta * f*grad(x) / f*hess(x)
         results.append(float(x))
     print('epoch 10, x:', x)
     return results
@@ -253,7 +253,7 @@ That is a fatal flaw of the algorithm.
 Let us see what happens in practice.
 
 ```{.python .input}
-#@tab all
+# @tab all
 c = d2l.tensor(0.15 * np.pi)
 
 def f(x):  # Objective function
@@ -272,11 +272,11 @@ This went spectacularly wrong. How can we fix it? One way would be to "fix" the 
 Let us see how this works with a slightly smaller learning rate, say $\eta = 0.5$. As we can see, we have quite an efficient algorithm.
 
 ```{.python .input}
-#@tab all
+# @tab all
 show_trace(newton(0.5), f)
 ```
 
-### Convergence Analysis
+## # Convergence Analysis
 
 We only analyze the convergence rate of Newton's method for some convex and three times differentiable objective function $f$, where the second derivative is nonzero, i.e., $f'' > 0$. The multivariate proof is a straightforward extension of the one-dimensional argument below and omitted since it does not help us much in terms of intuition.
 
@@ -304,7 +304,7 @@ First, we do not really have much of a guarantee when we will reach the region o
 
 
 
-### Preconditioning
+## # Preconditioning
 
 Quite unsurprisingly computing and storing the full Hessian is very expensive. It is thus desirable to find alternatives. One way to improve matters is *preconditioning*. It avoids computing the Hessian in its entirety but only computes the *diagonal* entries. This leads to update algorithms of the form
 
@@ -316,13 +316,13 @@ To see why this might be a good idea consider a situation where one variable den
 As we will see later, preconditioning drives some of the innovation in stochastic gradient descent optimization algorithms. 
 
 
-### Gradient Descent with Line Search
+## # Gradient Descent with Line Search
 
 One of the key problems in gradient descent is that we might overshoot the goal or make insufficient progress. A simple fix for the problem is to use line search in conjunction with gradient descent. That is, we use the direction given by $\nabla f(\mathbf{x})$ and then perform binary search as to which learning rate $\eta$ minimizes $f(\mathbf{x} - \eta \nabla f(\mathbf{x}))$.
 
 This algorithm converges rapidly (for an analysis and proof see e.g., :cite:`Boyd.Vandenberghe.2004`). However, for the purpose of deep learning this is not quite so feasible, since each step of the line search would require us to evaluate the objective function on the entire dataset. This is way too costly to accomplish.
 
-## Summary
+# # Summary
 
 * Learning rates matter. Too large and we diverge, too small and we do not make progress.
 * Gradient descent can get stuck in local minima.
@@ -331,7 +331,7 @@ This algorithm converges rapidly (for an analysis and proof see e.g., :cite:`Boy
 * Newton's method is a lot faster once it has started working properly in convex problems.
 * Beware of using Newton's method without any adjustments for nonconvex problems.
 
-## Exercises
+# # Exercises
 
 1. Experiment with different learning rates and objective functions for gradient descent.
 1. Implement line search to minimize a convex function in the interval $[a, b]$.

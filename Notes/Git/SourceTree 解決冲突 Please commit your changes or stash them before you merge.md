@@ -1,4 +1,4 @@
-## 用**git pull**来更新代码的时候，遇到了下面的问题：
+# # 用**git pull**来更新代码的时候，遇到了下面的问题：
 
 ```shell
 error:
@@ -15,7 +15,7 @@ git pull
 git stash pop
 ```
 
-### 参考文献：
+## # 参考文献：
 
 1.https://juejin.cn/post/6844904105404547086
 
@@ -23,7 +23,7 @@ git stash pop
 
 3.https://blog.csdn.net/qq_32452623/article/details/75645578
 
-## SourceTree 强制覆盖 Pull
+# # SourceTree 强制覆盖 Pull
 
 ```shell
 git fetch --all

@@ -62,9 +62,9 @@ Hre are some supporting reference links:
 
 [EverdayAppleScriptObjC by Shane Stanely](http://macosautomation.com/applescript/apps/index.html)
 
-[Mac Automation Scripting Guide](https://developer.apple.com/library/archive/documentation/LanguagesUtilities/Conceptual/MacAutomationScriptingGuide/index.html#//apple_ref/doc/uid/TP40016239-CH56-SW1)
+[Mac Automation Scripting Guide](https://developer.apple.com/library/archive/documentation/LanguagesUtilities/Conceptual/MacAutomationScriptingGuide/index.html# //apple_ref/doc/uid/TP40016239-CH56-SW1)
 
-[AppleScript release notes](https://developer.apple.com/library/archive/releasenotes/AppleScript/RN-AppleScript/RN-10_10/RN-10_10.html)
+[AppleScript release notes](https://developer.apple.com/library/archive/releasenotes/AppleScript/RN-AppleScript/RN-10*10/RN-10*10.html)
 
 Strings
 
@@ -537,7 +537,7 @@ on storeRecord:theRecord inPath:thePath
 		current application's NSString's stringWithString:thePath
 	set thePath to ¬
 		thePath's stringByExpandingTildeInPath()
-	set savingFormat to current application's NSPropertyListBinaryFormat_v1_0
+	set savingFormat to current application's NSPropertyListBinaryFormat*v1*0
 	set theData to ¬
 		current application's NSPropertyListSerialization's dataWithPropertyList:theRecord format:savingFormat options:0 |error|:(missing value)
 	theData's writeToFile:thePath atomically:true
@@ -585,7 +585,7 @@ on writeAsPropertyList(theRecord, thePath)
 	set thePath to current application's NSString's stringWithString:thePath
 	set thePath to thePath's stringByExpandingTildeInPath()
 	set savingFormat to ¬
-		current application's NSPropertyListBinaryFormat_v1_0
+		current application's NSPropertyListBinaryFormat*v1*0
 	set theData to ¬
 		current application's NSPropertyListSerialization's dataWithPropertyList:theRecord format:savingFormat options:0 |error|:(missing value)
 	theData's writeToFile:thePath atomically:true

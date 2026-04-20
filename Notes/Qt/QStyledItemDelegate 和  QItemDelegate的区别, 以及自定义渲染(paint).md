@@ -1,6 +1,6 @@
-## QStyledItemDelegate 和  QItemDelegate的区别, 以及自定义渲染(paint)
+# # QStyledItemDelegate 和  QItemDelegate的区别, 以及自定义渲染(paint)
 
-### 1. QStyledItemDelegate 和  QItemDelegate的区别
+## # 1. QStyledItemDelegate 和  QItemDelegate的区别
 
 **QStyledItemDelegate** 和 **QItemDelegate** 都是继承 **QAbstractItemDelegate**，官方文档上说这两个类基本一样， 唯一不同是 **QStyledItemDelegate**  可以被 **Qss** 影响。
 
@@ -51,7 +51,7 @@ void QItemDelegate::paint(QPainter *painter,
     QRect decorationRect;
     value = index.data(Qt::DecorationRole);
     if (value.isValid()) {
-        // ### we need the pixmap to call the virtual function
+        // ## # we need the pixmap to call the virtual function
         pixmap = decoration(opt, value);
         if (value.userType() == QMetaType::QIcon) {
             d->tmp.icon = qvariant_cast<QIcon>(value);
@@ -133,7 +133,7 @@ void QItemDelegate::drawBackground(QPainter *painter,
 ```c++
     // 代码尝试对两个 TableView 的 item 进行 Qss样式渲染
     QString sQss = "QTableView::item{ border-bottom:1px solid red; }"
-        "QTableView::item::selected{ color:red; background:#EFF4FF;}";
+        "QTableView::item::selected{ color:red; background:# EFF4FF;}";
     m_pModel = new CTableModel(this);
     QStringList lstHeader = {"测试列"};
     m_pModel->SetHeader(lstHeader);
@@ -164,7 +164,7 @@ void QItemDelegate::drawBackground(QPainter *painter,
 
 
 
-### 2. 自定义渲染(paint)
+## # 2. 自定义渲染(paint)
 
 当你想在单元格显示一些特殊图形时, 只是使用 **QStyledItemDelegate** 提供API可能并不能满足需求, 此时需要重写 **paint** 函数, 当重写**paint**函数时, 我认为 **QStyledItemDelegate**  和 **QItemDelegate** 并没有区别。你可以像 **QItemDelegate** 的 **paint** 函数那样, 使用**QPainter** 原生绘制; 也可以像 **QStyledItemDelegate**  那样使用 **QStyle** 绘制，并且可以用 **Qss** 辅助渲染，十分方便炫酷!
 
@@ -192,9 +192,9 @@ void CStyledTableDelegate::paint(QPainter *painter, const QStyleOptionViewItem &
     oStyleButton.rect = oRect.marginsRemoved(oMargins);
     oStyleButton.state |= QStyle::State_Enabled;
 
-    QApplication::style()->drawControl(QStyle::CE_PushButton, &oStyleButton, painter, m_pbtnStyle);
-    //    m_pwgtStyle->style()->drawControl(QStyle::CE_PushButton, &oStyleButton, painter, m_pbtnStyle);
-    //    m_pbtnStyle->style()->drawControl(QStyle::CE_PushButton, &oStyleButton, painter, m_pbtnStyle);
+    QApplication::style()->drawControl(QStyle::CE*PushButton, &oStyleButton, painter, m*pbtnStyle);
+    //    m*pwgtStyle->style()->drawControl(QStyle::CE*PushButton, &oStyleButton, painter, m_pbtnStyle);
+    //    m*pbtnStyle->style()->drawControl(QStyle::CE*PushButton, &oStyleButton, painter, m_pbtnStyle);
 }
 
 ```
@@ -216,10 +216,10 @@ void CStyledTableDelegate::paint(QPainter *painter, const QStyleOptionViewItem &
     oStyleButton.rect = oRect.marginsRemoved(oMargins);
     oStyleButton.state |= QStyle::State_Enabled;
 
-//    QApplication::style()->drawControl(QStyle::CE_PushButton, &oStyleButton, painter, m_pbtnStyle);
+//    QApplication::style()->drawControl(QStyle::CE*PushButton, &oStyleButton, painter, m*pbtnStyle);
     // m_pwgtStyle 是QWidget类型
-    m_pwgtStyle->style()->drawControl(QStyle::CE_PushButton, &oStyleButton, painter, m_pbtnStyle);
-//    m_pbtnStyle->style()->drawControl(QStyle::CE_PushButton, &oStyleButton, painter, m_pbtnStyle);
+    m*pwgtStyle->style()->drawControl(QStyle::CE*PushButton, &oStyleButton, painter, m_pbtnStyle);
+//    m*pbtnStyle->style()->drawControl(QStyle::CE*PushButton, &oStyleButton, painter, m_pbtnStyle);
 }
 ```
 
@@ -240,10 +240,10 @@ void CStyledTableDelegate::paint(QPainter *painter, const QStyleOptionViewItem &
     oStyleButton.rect = oRect.marginsRemoved(oMargins);
     oStyleButton.state |= QStyle::State_Enabled;
 
-//    QApplication::style()->drawControl(QStyle::CE_PushButton, &oStyleButton, painter, m_pbtnStyle);
-//    m_pwgtStyle->style()->drawControl(QStyle::CE_PushButton, &oStyleButton, painter, m_pbtnStyle);
+//    QApplication::style()->drawControl(QStyle::CE*PushButton, &oStyleButton, painter, m*pbtnStyle);
+//    m*pwgtStyle->style()->drawControl(QStyle::CE*PushButton, &oStyleButton, painter, m_pbtnStyle);
     // m_pbtnStyle 是 QPushButton
-    m_pbtnStyle->style()->drawControl(QStyle::CE_PushButton, &oStyleButton, painter, m_pbtnStyle);
+    m*pbtnStyle->style()->drawControl(QStyle::CE*PushButton, &oStyleButton, painter, m_pbtnStyle);
 }
 ```
 
@@ -251,5 +251,5 @@ void CStyledTableDelegate::paint(QPainter *painter, const QStyleOptionViewItem &
 
 ![image-03](https://github.com/mingxingren/Notes/raw/master/resource/photo/image-2021051003.png)
 
-可以看到只有 **QPushButton** 的 **QStyle** 对象在渲染控件的时候有 **drawControl** 的第四个参数的 **Qss** 效果。 这是为什么呢? 答案是在初始化的时候，代码只是对 **m_pbtnStyle** 这个对象设置了 **Qss**, 导致 **m_pbtnStyle->style()** 对象类型为 **QStyleSheetStyle**(这个类型在 Qt 库里不公开), 而其他对象的 **style()** 类型是 **QWindowsVistaStyle**(这个类型也不公开)。 由此可以推测只有类型是 **QStyleSheetStyle** 类型才能渲染出 **Qss** 效果，只要 **m_pwgtStyle** 也设置 **Qss** 就可以渲染出带有**Qss**效果的**UI**
+可以看到只有 **QPushButton** 的 **QStyle** 对象在渲染控件的时候有 **drawControl** 的第四个参数的 **Qss** 效果。 这是为什么呢? 答案是在初始化的时候，代码只是对 **m*pbtnStyle** 这个对象设置了 **Qss**, 导致 **m*pbtnStyle->style()** 对象类型为 **QStyleSheetStyle**(这个类型在 Qt 库里不公开), 而其他对象的 **style()** 类型是 **QWindowsVistaStyle**(这个类型也不公开)。 由此可以推测只有类型是 **QStyleSheetStyle** 类型才能渲染出 **Qss** 效果，只要 **m_pwgtStyle** 也设置 **Qss** 就可以渲染出带有**Qss**效果的**UI**
 

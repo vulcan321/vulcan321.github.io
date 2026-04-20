@@ -1,5 +1,5 @@
 # 层和块
-:label:`sec_model_construction`
+:label:`sec*model*construction`
 
 之前首次介绍神经网络时，我们关注的是具有单一输出的线性模型。
 在这里，整个模型只有一个输出。
@@ -51,7 +51,7 @@
 提供了一些后端实现，我们只需要考虑前向传播函数和必需的参数。
 
 在构造自定义块之前，(**我们先回顾一下多层感知机**)
-（ :numref:`sec_mlp_concise` ）的代码。
+（ :numref:`sec*mlp*concise` ）的代码。
 下面的代码生成一个网络，其中包含一个具有256个单元和ReLU激活函数的全连接隐藏层，
 然后是一个具有10个隐藏单元且不带激活函数的全连接输出层。
 
@@ -70,7 +70,7 @@ net(X)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 import torch
 from torch import nn
 from torch.nn import functional as F
@@ -82,7 +82,7 @@ net(X)
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 import tensorflow as tf
 
 net = tf.keras.models.Sequential([
@@ -95,7 +95,7 @@ net(X)
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 import warnings
 warnings.filterwarnings(action='ignore')
 import paddle
@@ -118,7 +118,7 @@ net(X)
 请注意，每层都是`Dense`类的一个实例，`Dense`类本身就是`Block`的子类。
 到目前为止，我们一直在通过`net(X)`调用我们的模型来获得模型的输出。
 这实际上是`net.forward(X)`的简写，
-这是通过`Block`类的`__call__`函数实现的一个Python技巧。
+这是通过`Block`类的`**call**`函数实现的一个Python技巧。
 前向传播（`forward`）函数非常简单：它将列表中的每个`Block`连接在一起，
 将每个`Block`的输出作为输入传递给下一层。
 
@@ -133,7 +133,7 @@ net(X)
 注意，两个全连接层都是`Linear`类的实例，
 `Linear`类本身就是`Module`的子类。
 另外，到目前为止，我们一直在通过`net(X)`调用我们的模型来获得模型的输出。
-这实际上是`net.__call__(X)`的简写。
+这实际上是`net.**call**(X)`的简写。
 这个前向传播函数非常简单：
 它将列表中的每个块连接在一起，将每个块的输出作为下一个块的输入。
 
@@ -151,7 +151,7 @@ net(X)
 它将列表中的每个块连接在一起，将每个块的输出作为下一个块的输入。
 注意，到目前为止，我们一直在通过`net(X)`调用我们的模型来获得模型的输出。
 这实际上是`net.call(X)`的简写，
-这是通过Block类的`__call__`函数实现的一个Python技巧。
+这是通过Block类的`**call**`函数实现的一个Python技巧。
 :end_tab:
 
 :begin_tab:`paddle`
@@ -163,12 +163,12 @@ net(X)
 注意，两个全连接层都是`Linear`类的实例，
 `Linear`类本身就是`Layer`的子类。
 另外，到目前为止，我们一直在通过`net(X)`调用我们的模型来获得模型的输出。
-这实际上是`net.__call__(X)`的简写。
+这实际上是`net.**call**(X)`的简写。
 这个前向传播函数非常简单：
 它将列表中的每个块连接在一起，将每个块的输出作为下一个块的输入。
 :end_tab:
 
-## [**自定义块**]
+# # [**自定义块**]
 
 要想直观地了解块是如何工作的，最简单的方法就是自己实现一个。
 在实现我们自定义块之前，我们简要总结一下每个块必须提供的基本功能。
@@ -193,15 +193,15 @@ net(X)
 在下面的代码片段中，我们从零开始编写一个块。
 它包含一个多层感知机，其具有256个隐藏单元的隐藏层和一个10维输出层。
 注意，下面的`MLP`类继承了表示块的类。
-我们的实现只需要提供我们自己的构造函数（Python中的`__init__`函数）和前向传播函数。
+我们的实现只需要提供我们自己的构造函数（Python中的`**init**`函数）和前向传播函数。
 
 ```{.python .input}
 class MLP(nn.Block):
     # 用模型参数声明层。这里，我们声明两个全连接的层
-    def __init__(self, **kwargs):
+    def **init**(self, **kwargs):
         # 调用MLP的父类Block的构造函数来执行必要的初始化。
         # 这样，在类实例化时也可以指定其他函数参数，例如模型参数params（稍后将介绍）
-        super().__init__(**kwargs)
+        super().**init**(**kwargs)
         self.hidden = nn.Dense(256, activation='relu')  # 隐藏层
         self.out = nn.Dense(10)  # 输出层
 
@@ -211,13 +211,13 @@ class MLP(nn.Block):
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 class MLP(nn.Module):
     # 用模型参数声明层。这里，我们声明两个全连接的层
-    def __init__(self):
+    def **init**(self):
         # 调用MLP的父类Module的构造函数来执行必要的初始化。
         # 这样，在类实例化时也可以指定其他函数参数，例如模型参数params（稍后将介绍）
-        super().__init__()
+        super().**init**()
         self.hidden = nn.Linear(20, 256)  # 隐藏层
         self.out = nn.Linear(256, 10)  # 输出层
 
@@ -228,13 +228,13 @@ class MLP(nn.Module):
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 class MLP(tf.keras.Model):
     # 用模型参数声明层。这里，我们声明两个全连接的层
-    def __init__(self):
+    def **init**(self):
         # 调用MLP的父类Model的构造函数来执行必要的初始化。
         # 这样，在类实例化时也可以指定其他函数参数，例如模型参数params（稍后将介绍）
-        super().__init__()
+        super().**init**()
         # Hiddenlayer
         self.hidden = tf.keras.layers.Dense(units=256, activation=tf.nn.relu)
         self.out = tf.keras.layers.Dense(units=10)  # Outputlayer
@@ -245,13 +245,13 @@ class MLP(tf.keras.Model):
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 class MLP(nn.Layer):
     # 用模型参数声明层。这里，我们声明两个全连接的层
-    def __init__(self):
+    def **init**(self):
         # 调用`MLP`的父类Layer的构造函数来执行必要的初始化。
         # 这样，在类实例化时也可以指定其他函数参数，例如模型参数`params`（稍后将介绍）
-        super().__init__()
+        super().**init**()
         self.hidden = nn.Linear(20, 256)  # 隐藏层
         self.out = nn.Linear(256, 10)  # 输出层
 
@@ -270,8 +270,8 @@ class MLP(nn.Layer):
 
 接着我们[**实例化多层感知机的层，然后在每次调用前向传播函数时调用这些层**]。
 注意一些关键细节：
-首先，我们定制的`__init__`函数通过`super().__init__()`
-调用父类的`__init__`函数，
+首先，我们定制的`**init**`函数通过`super().**init**()`
+调用父类的`**init**`函数，
 省去了重复编写模版代码的痛苦。
 然后，我们实例化两个全连接层，
 分别为`self.hidden`和`self.out`。
@@ -288,13 +288,13 @@ net(X)
 ```
 
 ```{.python .input}
-#@tab pytorch, paddle
+# @tab pytorch, paddle
 net = MLP()
 net(X)
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 net = MLP()
 net(X)
 ```
@@ -305,7 +305,7 @@ net(X)
 我们在接下来的章节中充分利用了这种多功能性，
 比如在处理卷积神经网络时。
 
-## [**顺序块**]
+# # [**顺序块**]
 
 现在我们可以更仔细地看看`Sequential`类是如何工作的，
 回想一下`Sequential`的设计是为了把其他模块串起来。
@@ -334,13 +334,13 @@ class MySequential(nn.Block):
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 class MySequential(nn.Module):
-    def __init__(self, *args):
-        super().__init__()
+    def **init**(self, *args):
+        super().**init**()
         for idx, module in enumerate(args):
             # 这里，module是Module子类的一个实例。我们把它保存在'Module'类的成员
-            # 变量_modules中。_module的类型是OrderedDict
+            # 变量*modules中。*module的类型是OrderedDict
             self._modules[str(idx)] = module
 
     def forward(self, X):
@@ -351,10 +351,10 @@ class MySequential(nn.Module):
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 class MySequential(tf.keras.Model):
-    def __init__(self, *args):
-        super().__init__()
+    def **init**(self, *args):
+        super().**init**()
         self.modules = []
         for block in args:
             # 这里，block是tf.keras.layers.Layer子类的一个实例
@@ -367,14 +367,14 @@ class MySequential(tf.keras.Model):
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 class MySequential(nn.Layer):
-    def __init__(self, *layers):
-        super(MySequential, self).__init__()
+    def **init**(self, *layers):
+        super(MySequential, self).**init**()
         # 如果传入的是一个tuple
         if len(layers) > 0 and isinstance(layers[0], tuple): 
             for name, layer in layers:
-                # add_sublayer方法会将layer添加到self._sub_layers(一个tuple)
+                # add*sublayer方法会将layer添加到self.*sub_layers(一个tuple)
                 self.add_sublayer(name, layer)  
         else:
             for idx, layer in enumerate(layers):
@@ -382,7 +382,7 @@ class MySequential(nn.Layer):
 
     def forward(self, X):
         # OrderedDict保证了按照成员添加的顺序遍历它们
-        for layer in self._sub_layers.values():
+        for layer in self.*sub*layers.values():
             X = layer(X)
         return X
 ```
@@ -397,7 +397,7 @@ Gluon知道在`_children`字典中查找需要初始化参数的子块。
 :end_tab:
 
 :begin_tab:`pytorch`
-`__init__`函数将每个模块逐个添加到有序字典`_modules`中。
+`**init**`函数将每个模块逐个添加到有序字典`_modules`中。
 读者可能会好奇为什么每个`Module`都有一个`_modules`属性？
 以及为什么我们使用它而不是自己定义一个Python列表？
 简而言之，`_modules`的主要优点是：
@@ -406,12 +406,12 @@ Gluon知道在`_children`字典中查找需要初始化参数的子块。
 :end_tab:
 
 :begin_tab:`paddle`
-`__init__`函数将每个模块逐个添加到有序字典`_sub_layers`中。
-你可能会好奇为什么每个`Layer`都有一个`_sub_layers`属性？
+`**init**`函数将每个模块逐个添加到有序字典`*sub*layers`中。
+你可能会好奇为什么每个`Layer`都有一个`*sub*layers`属性？
 以及为什么我们使用它而不是自己定义一个Python列表？
-简而言之，`_sub_layers`的主要优点是：
+简而言之，`*sub*layers`的主要优点是：
 在模块的参数初始化过程中，
-系统知道在`_sub_layers`字典中查找需要初始化参数的子块。
+系统知道在`*sub*layers`字典中查找需要初始化参数的子块。
 :end_tab:
 
 当`MySequential`的前向传播函数被调用时，
@@ -427,13 +427,13 @@ net(X)
 ```
 
 ```{.python .input}
-#@tab pytorch, paddle
+# @tab pytorch, paddle
 net = MySequential(nn.Linear(20, 256), nn.ReLU(), nn.Linear(256, 10))
 net(X)
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 net = MySequential(
     tf.keras.layers.Dense(units=256, activation=tf.nn.relu),
     tf.keras.layers.Dense(10))
@@ -441,9 +441,9 @@ net(X)
 ```
 
 请注意，`MySequential`的用法与之前为`Sequential`类编写的代码相同
-（如 :numref:`sec_mlp_concise` 中所述）。
+（如 :numref:`sec*mlp*concise` 中所述）。
 
-## [**在前向传播函数中执行代码**]
+# # [**在前向传播函数中执行代码**]
 
 `Sequential`类使模型构造变得简单，
 允许我们组合新的架构，而不必定义自己的类。
@@ -466,10 +466,10 @@ $c$是某个在优化过程中没有更新的指定常量。
 
 ```{.python .input}
 class FixedHiddenMLP(nn.Block):
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+    def **init**(self, **kwargs):
+        super().**init**(**kwargs)
         # 使用get_constant函数创建的随机权重参数在训练期间不会更新（即为常量参数）
-        self.rand_weight = self.params.get_constant(
+        self.rand*weight = self.params.get*constant(
             'rand_weight', np.random.uniform(size=(20, 20)))
         self.dense = nn.Dense(20, activation='relu')
 
@@ -486,12 +486,12 @@ class FixedHiddenMLP(nn.Block):
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 class FixedHiddenMLP(nn.Module):
-    def __init__(self):
-        super().__init__()
+    def **init**(self):
+        super().**init**()
         # 不计算梯度的随机权重参数。因此其在训练期间保持不变
-        self.rand_weight = torch.rand((20, 20), requires_grad=False)
+        self.rand*weight = torch.rand((20, 20), requires*grad=False)
         self.linear = nn.Linear(20, 20)
 
     def forward(self, X):
@@ -507,10 +507,10 @@ class FixedHiddenMLP(nn.Module):
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 class FixedHiddenMLP(tf.keras.Model):
-    def __init__(self):
-        super().__init__()
+    def **init**(self):
+        super().**init**()
         self.flatten = tf.keras.layers.Flatten()
         # 使用tf.constant函数创建的随机权重参数在训练期间不会更新（即为常量参数）
         self.rand_weight = tf.constant(tf.random.uniform((20, 20)))
@@ -529,10 +529,10 @@ class FixedHiddenMLP(tf.keras.Model):
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 class FixedHiddenMLP(nn.Layer):
-    def __init__(self):
-        super().__init__()
+    def **init**(self):
+        super().**init**()
         # 不计算梯度的随机权重参数。因此其在训练期间保持不变。
         self.rand_weight = paddle.rand([20, 20])
         self.linear = nn.Linear(20, 20)
@@ -568,7 +568,7 @@ net(X)
 ```
 
 ```{.python .input}
-#@tab pytorch, tensorflow, paddle
+# @tab pytorch, tensorflow, paddle
 net = FixedHiddenMLP()
 net(X)
 ```
@@ -578,8 +578,8 @@ net(X)
 
 ```{.python .input}
 class NestMLP(nn.Block):
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+    def **init**(self, **kwargs):
+        super().**init**(**kwargs)
         self.net = nn.Sequential()
         self.net.add(nn.Dense(64, activation='relu'),
                      nn.Dense(32, activation='relu'))
@@ -595,10 +595,10 @@ chimera(X)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 class NestMLP(nn.Module):
-    def __init__(self):
-        super().__init__()
+    def **init**(self):
+        super().**init**()
         self.net = nn.Sequential(nn.Linear(20, 64), nn.ReLU(),
                                  nn.Linear(64, 32), nn.ReLU())
         self.linear = nn.Linear(32, 16)
@@ -611,10 +611,10 @@ chimera(X)
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 class NestMLP(tf.keras.Model):
-    def __init__(self):
-        super().__init__()
+    def **init**(self):
+        super().**init**()
         self.net = tf.keras.Sequential()
         self.net.add(tf.keras.layers.Dense(64, activation=tf.nn.relu))
         self.net.add(tf.keras.layers.Dense(32, activation=tf.nn.relu))
@@ -631,10 +631,10 @@ chimera(X)
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 class NestMLP(nn.Layer):
-    def __init__(self):
-        super().__init__()
+    def **init**(self):
+        super().**init**()
         self.net = nn.Sequential(nn.Linear(20, 64), nn.ReLU(),
                                  nn.Linear(64, 32), nn.ReLU())
         self.linear = nn.Linear(32, 16)
@@ -646,7 +646,7 @@ chimera = nn.Sequential(NestMLP(), nn.Linear(16, 20), FixedHiddenMLP())
 chimera(X)
 ```
 
-## 效率
+# # 效率
 
 :begin_tab:`mxnet`
 读者可能会开始担心操作效率的问题。
@@ -693,14 +693,14 @@ Python的问题[全局解释器锁](https://wiki.python.org/moin/GlobalInterpret
 :end_tab:
 
 
-## 小结
+# # 小结
 
 * 一个块可以由许多层组成；一个块可以由许多块组成。
 * 块可以包含代码。
 * 块负责大量的内部处理，包括参数初始化和反向传播。
 * 层和块的顺序连接由`Sequential`块处理。
 
-## 练习
+# # 练习
 
 1. 如果将`MySequential`中存储块的方式更改为Python列表，会出现什么样的问题？
 1. 实现一个块，它以两个块为参数，例如`net1`和`net2`，并返回前向传播中两个网络的串联输出。这也被称为平行块。

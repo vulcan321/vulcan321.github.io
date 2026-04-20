@@ -1,5 +1,5 @@
 # Approximate Training
-:label:`sec_approx_train`
+:label:`sec*approx*train`
 
 Recall our discussions in :numref:`sec_word2vec`.
 The main idea of the skip-gram model is
@@ -44,7 +44,7 @@ the continuous bag of words model,
 we will just take the skip-gram model as an example
 to describe these two approximate training methods.
 
-## Negative Sampling
+# # Negative Sampling
 :label:`subsec_negative-sampling`
 
 
@@ -56,7 +56,7 @@ is considered as an event with the probability
 modeled by
 
 
-$$P(D=1\mid w_c, w_o) = \sigma(\mathbf{u}_o^\top \mathbf{v}_c),$$
+$$P(D=1\mid w*c, w*o) = \sigma(\mathbf{u}*o^\top \mathbf{v}*c),$$
 
 where $\sigma$ uses the definition of the sigmoid activation function:
 
@@ -74,7 +74,7 @@ and let the context window size be $m$,
 consider maximizing the joint probability
 
 
-$$ \prod_{t=1}^{T} \prod_{-m \leq j \leq m,\ j \neq 0} P(D=1\mid w^{(t)}, w^{(t+j)}).$$
+$$ \prod*{t=1}^{T} \prod*{-m \leq j \leq m,\ j \neq 0} P(D=1\mid w^{(t)}, w^{(t+j)}).$$
 :eqlabel:`eq-negative-sample-pos`
 
 
@@ -111,22 +111,22 @@ the context window of $w_c$.
 Assume that
 these events involving
 both the positive example and negative examples
-$S, N_1, \ldots, N_K$ are mutually independent.
+$S, N*1, \ldots, N*K$ are mutually independent.
 Negative sampling
 rewrites the joint probability (involving only positive examples)
 in :eqref:`eq-negative-sample-pos`
 as
 
-$$ \prod_{t=1}^{T} \prod_{-m \leq j \leq m,\ j \neq 0} P(w^{(t+j)} \mid w^{(t)}),$$
+$$ \prod*{t=1}^{T} \prod*{-m \leq j \leq m,\ j \neq 0} P(w^{(t+j)} \mid w^{(t)}),$$
 
 where the conditional probability is approximated through
-events $S, N_1, \ldots, N_K$:
+events $S, N*1, \ldots, N*K$:
 
-$$ P(w^{(t+j)} \mid w^{(t)}) =P(D=1\mid w^{(t)}, w^{(t+j)})\prod_{k=1,\ w_k \sim P(w)}^K P(D=0\mid w^{(t)}, w_k).$$
+$$ P(w^{(t+j)} \mid w^{(t)}) =P(D=1\mid w^{(t)}, w^{(t+j)})\prod*{k=1,\ w*k \sim P(w)}^K P(D=0\mid w^{(t)}, w_k).$$
 :eqlabel:`eq-negative-sample-conditional-prob`
 
 Denote by
-$i_t$ and $h_k$
+$i*t$ and $h*k$
 the indices of
 a word $w^{(t)}$ at time step $t$
 of a text sequence
@@ -137,9 +137,9 @@ The logarithmic loss with respect to the conditional probabilities in :eqref:`eq
 $$
 \begin{aligned}
 -\log P(w^{(t+j)} \mid w^{(t)})
-=& -\log P(D=1\mid w^{(t)}, w^{(t+j)}) - \sum_{k=1,\ w_k \sim P(w)}^K \log P(D=0\mid w^{(t)}, w_k)\\
-=&-  \log\, \sigma\left(\mathbf{u}_{i_{t+j}}^\top \mathbf{v}_{i_t}\right) - \sum_{k=1,\ w_k \sim P(w)}^K \log\left(1-\sigma\left(\mathbf{u}_{h_k}^\top \mathbf{v}_{i_t}\right)\right)\\
-=&-  \log\, \sigma\left(\mathbf{u}_{i_{t+j}}^\top \mathbf{v}_{i_t}\right) - \sum_{k=1,\ w_k \sim P(w)}^K \log\sigma\left(-\mathbf{u}_{h_k}^\top \mathbf{v}_{i_t}\right).
+=& -\log P(D=1\mid w^{(t)}, w^{(t+j)}) - \sum*{k=1,\ w*k \sim P(w)}^K \log P(D=0\mid w^{(t)}, w_k)\\
+=&-  \log\, \sigma\left(\mathbf{u}*{i*{t+j}}^\top \mathbf{v}*{i*t}\right) - \sum*{k=1,\ w*k \sim P(w)}^K \log\left(1-\sigma\left(\mathbf{u}*{h*k}^\top \mathbf{v}*{i*t}\right)\right)\\
+=&-  \log\, \sigma\left(\mathbf{u}*{i*{t+j}}^\top \mathbf{v}*{i*t}\right) - \sum*{k=1,\ w*k \sim P(w)}^K \log\sigma\left(-\mathbf{u}*{h*k}^\top \mathbf{v}*{i*t}\right).
 \end{aligned}
 $$
 
@@ -158,19 +158,19 @@ is smaller.
 
 
 
-## Hierarchical Softmax
+# # Hierarchical Softmax
 
 As an alternative approximate training method,
 *hierarchical softmax*
 uses the binary tree,
 a data structure
-illustrated in :numref:`fig_hi_softmax`,
+illustrated in :numref:`fig*hi*softmax`,
 where each leaf node
 of the tree represents
 a word in dictionary $\mathcal{V}$.
 
 ![Hierarchical softmax for approximate training, where each leaf node of the tree represents a word in the dictionary.](../img/hi-softmax.svg)
-:label:`fig_hi_softmax`
+:label:`fig*hi*softmax`
 
 Denote by $L(w)$
 the number of nodes (including both ends)
@@ -181,11 +181,11 @@ Let $n(w,j)$ be the $j^\mathrm{th}$ node on this path,
 with its context word vector being
 $\mathbf{u}_{n(w, j)}$.
 For example,
-$L(w_3) = 4$ in  :numref:`fig_hi_softmax`.
+$L(w*3) = 4$ in  :numref:`fig*hi_softmax`.
 Hierarchical softmax approximates the conditional probability in :eqref:`eq_skip-gram-softmax` as
 
 
-$$P(w_o \mid w_c) = \prod_{j=1}^{L(w_o)-1} \sigma\left( [\![  n(w_o, j+1) = \text{leftChild}(n(w_o, j)) ]\!] \cdot \mathbf{u}_{n(w_o, j)}^\top \mathbf{v}_c\right),$$
+$$P(w*o \mid w*c) = \prod*{j=1}^{L(w*o)-1} \sigma\left( [\![  n(w*o, j+1) = \text{leftChild}(n(w*o, j)) ]\!] \cdot \mathbf{u}*{n(w*o, j)}^\top \mathbf{v}_c\right),$$
 
 where function $\sigma$
 is defined in :eqref:`eq_sigma-f`,
@@ -195,17 +195,17 @@ To illustrate,
 let us calculate
 the conditional probability
 of generating word $w_3$
-given word $w_c$ in :numref:`fig_hi_softmax`.
+given word $w*c$ in :numref:`fig*hi_softmax`.
 This requires dot products
 between the word vector
-$\mathbf{v}_c$ of $w_c$
+$\mathbf{v}*c$ of $w*c$
 and
 non-leaf node vectors
-on the path (the path in bold in :numref:`fig_hi_softmax`) from the root to $w_3$,
+on the path (the path in bold in :numref:`fig*hi*softmax`) from the root to $w_3$,
 which is traversed left, right, then left:
 
 
-$$P(w_3 \mid w_c) = \sigma(\mathbf{u}_{n(w_3, 1)}^\top \mathbf{v}_c) \cdot \sigma(-\mathbf{u}_{n(w_3, 2)}^\top \mathbf{v}_c) \cdot \sigma(\mathbf{u}_{n(w_3, 3)}^\top \mathbf{v}_c).$$
+$$P(w*3 \mid w*c) = \sigma(\mathbf{u}*{n(w*3, 1)}^\top \mathbf{v}*c) \cdot \sigma(-\mathbf{u}*{n(w*3, 2)}^\top \mathbf{v}*c) \cdot \sigma(\mathbf{u}*{n(w*3, 3)}^\top \mathbf{v}_c).$$
 
 Since $\sigma(x)+\sigma(-x) = 1$,
 it holds that
@@ -215,21 +215,21 @@ dictionary $\mathcal{V}$
 based on any word $w_c$
 sum up to one:
 
-$$\sum_{w \in \mathcal{V}} P(w \mid w_c) = 1.$$
+$$\sum*{w \in \mathcal{V}} P(w \mid w*c) = 1.$$
 :eqlabel:`eq_hi-softmax-sum-one`
 
-Fortunately, since $L(w_o)-1$ is on the order of $\mathcal{O}(\text{log}_2|\mathcal{V}|)$ due to the binary tree structure,
+Fortunately, since $L(w*o)-1$ is on the order of $\mathcal{O}(\text{log}*2|\mathcal{V}|)$ due to the binary tree structure,
 when the dictionary size $\mathcal{V}$ is huge,
 the computational cost for  each training step using hierarchical softmax
 is significantly reduced compared with that
 without approximate training.
 
-## Summary
+# # Summary
 
 * Negative sampling constructs the loss function by considering mutually independent events that involve both positive and negative examples. The computational cost for training is linearly dependent on the number of noise words at each step.
 * Hierarchical softmax constructs the loss function using  the path from the root node to the leaf node in the binary tree. The computational cost for training is dependent on the logarithm of the dictionary size at each step.
 
-## Exercises
+# # Exercises
 
 1. How can we sample noise words in negative sampling?
 1. Verify that :eqref:`eq_hi-softmax-sum-one` holds.

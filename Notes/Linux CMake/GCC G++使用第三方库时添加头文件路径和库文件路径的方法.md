@@ -6,13 +6,13 @@
 
 1）添加头文件路径：
 
--I   #指明头文件的路径
+-I   # 指明头文件的路径
 
 2）添加库文件路径：
 
--L   #指定目录。link的时候，去找的目录。gcc会先从-L指定的目录去找，然后才查找默认路径。（告诉gcc,-l库名最可能在这个目录下）。
+-L   # 指定目录。link的时候，去找的目录。gcc会先从-L指定的目录去找，然后才查找默认路径。（告诉gcc,-l库名最可能在这个目录下）。
 
--l   #指定文件（库名），linking options
+-l   # 指定文件（库名），linking options
 
 注：-l紧接着就是库名，这里的库名不是真正的库文件名。比如说数学库，它的库名是m，他的库文件名是libm.so。再比如说matlab eigen库，它的库名是eng，它的库文件名是libeng.so。很容易总结得：把库文件名的头lib和尾.so去掉就是库名了。在使用时，“-leng”就告诉gcc在链接阶段引用共享函数库libeng.so。
 
@@ -25,9 +25,9 @@
 在/etc/profile中添加（根据语言不同，任选其一）：
 
 ```
-export C_INCLUDE_PATH=C_INCLUDE_PATH:头文件路径               	#c
-export CPLUS_INCLUDE_PATH=CPLUS_INCLUDE_PATH:头文件路径     		#c++
-export OBJC_INCLUDE_PATH=OBJC_INCLUDE_PATH:头文件路径        	#java
+export C*INCLUDE*PATH=C*INCLUDE*PATH:头文件路径               	# c
+export CPLUS*INCLUDE*PATH=CPLUS*INCLUDE*PATH:头文件路径     		# c++
+export OBJC*INCLUDE*PATH=OBJC*INCLUDE*PATH:头文件路径        	# java
 ```
 
 终端重启后需执行一次source。
@@ -38,10 +38,10 @@ export OBJC_INCLUDE_PATH=OBJC_INCLUDE_PATH:头文件路径        	#java
 
 ```
 LIBRARY_PATH   
-#used by gcc before compilation to search for directories containing libraries that need to be linked to your program.
+# used by gcc before compilation to search for directories containing libraries that need to be linked to your program.
 
-LD_LIBRARY_PATH
-#used by your program to search for directories containing the libraries after it has been successfully compiled and linked.
+LD*LIBRARY*PATH
+# used by your program to search for directories containing the libraries after it has been successfully compiled and linked.
 ```
 
 例如：
@@ -49,16 +49,16 @@ LD_LIBRARY_PATH
 ```
 MATLAB=/opt/MATLAB/R2012a
 
-export LIBRARY_PATH=$LIBRARY_PATH:$MATLAB/bin/glnxa64
+export LIBRARY*PATH=$LIBRARY*PATH:$MATLAB/bin/glnxa64
 
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$MATLAB/bin/glnxa64
+export LD*LIBRARY*PATH=$LD*LIBRARY*PATH:$MATLAB/bin/glnxa64
 ```
 
-题外话，顺便提一下LIBRARY_PATH和LD_LIBRARY_PATH的区别：
+题外话，顺便提一下LIBRARY*PATH和LD*LIBRARY_PATH的区别：
 
-我们知道Linux下有2种库：static libraries和shared libraries。如（这里）阐述的，静态库是在编译期间会被链接并拷贝到你的程序中，因此运行时不再需要该静态库。动态库在编译时并不会被拷贝到你的程序中，而是在程序运行时才被载入，因此在程序运行时还需要动态库存在，这时就会用到LD_LIBRARY_PATH指定的路径去查找这个动态库。
+我们知道Linux下有2种库：static libraries和shared libraries。如（这里）阐述的，静态库是在编译期间会被链接并拷贝到你的程序中，因此运行时不再需要该静态库。动态库在编译时并不会被拷贝到你的程序中，而是在程序运行时才被载入，因此在程序运行时还需要动态库存在，这时就会用到LD*LIBRARY*PATH指定的路径去查找这个动态库。
 
-The libraries can be static or shared. If it is static then the code is copied over into your program and you don't need to search for the library after your program is compiled and linked. If your library is shared then it needs to be dynamically linked to your program and that's when LD_LIBRARY_PATH comes into play.
+The libraries can be static or shared. If it is static then the code is copied over into your program and you don't need to search for the library after your program is compiled and linked. If your library is shared then it needs to be dynamically linked to your program and that's when LD*LIBRARY*PATH comes into play.
 
  
 
@@ -73,12 +73,12 @@ The libraries can be static or shared. If it is static then the code is copied o
  * matlab_eigen.cpp 
  * 
  * This is an example of how to create a surface contour plot in MATLAB 
- * http://cn.mathworks.com/matlabcentral/fileexchange/35311-matlab-plot-gallery-surface-contour-plot/content/html/Surface_Contour_Plot.html 
+ * http://cn.mathworks.com/matlabcentral/fileexchange/35311-matlab-plot-gallery-surface-contour-plot/content/html/Surface*Contour*Plot.html 
 */  
   
-#include <iostream>  
-#include <math.h>  
-#include "engine.h"  
+# include <iostream>  
+# include <math.h>  
+# include "engine.h"  
   
 int main() {  
   
@@ -113,7 +113,7 @@ int main() {
 用方法一编译：
 
 ```
-$ g++ matlab_eigen.cpp -o matlab_eigen -I/opt/MATLAB/R2012a/extern/include -L/opt/MATLAB/R2012a/bin/glnxa64 -leng -lmx
+$ g++ matlab*eigen.cpp -o matlab*eigen -I/opt/MATLAB/R2012a/extern/include -L/opt/MATLAB/R2012a/bin/glnxa64 -leng -lmx
 ```
 
  
@@ -124,15 +124,15 @@ $ g++ matlab_eigen.cpp -o matlab_eigen -I/opt/MATLAB/R2012a/extern/include -L/op
 
 ```
 MATLAB=/opt/MATLAB/R2012a
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$MATLAB/bin/glnxa64
-export LIBRARY_PATH=$LIBRARY_PATH:$MATLAB/bin/glnxa64
-export CPLUS_INCLUDE_PATH=CPLUS_INCLUDE_PATH:$MATLAB/extern/include
+export LD*LIBRARY*PATH=$LD*LIBRARY*PATH:$MATLAB/bin/glnxa64
+export LIBRARY*PATH=$LIBRARY*PATH:$MATLAB/bin/glnxa64
+export CPLUS*INCLUDE*PATH=CPLUS*INCLUDE*PATH:$MATLAB/extern/include
 ```
 
 编译：
 
 ```
-$ g++ matlab_eigen.cpp -o matlab_eigen -leng -lmx
+$ g++ matlab*eigen.cpp -o matlab*eigen -leng -lmx
 ```
 
  

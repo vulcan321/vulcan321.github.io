@@ -1,5 +1,5 @@
 # Numerical Stability and Initialization
-:label:`sec_numerical_stability`
+:label:`sec*numerical*stability`
 
 
 Thus far, every model that we have implemented
@@ -24,7 +24,7 @@ that you will find useful
 throughout your career in deep learning.
 
 
-## Vanishing and Exploding Gradients
+# # Vanishing and Exploding Gradients
 
 Consider a deep network with $L$ layers,
 input $\mathbf{x}$ and output $\mathbf{o}$.
@@ -33,13 +33,13 @@ parameterized by weights $\mathbf{W}^{(l)}$,
 whose hidden variable is $\mathbf{h}^{(l)}$ (let $\mathbf{h}^{(0)} = \mathbf{x}$),
 our network can be expressed as:
 
-$$\mathbf{h}^{(l)} = f_l (\mathbf{h}^{(l-1)}) \text{ and thus } \mathbf{o} = f_L \circ \ldots \circ f_1(\mathbf{x}).$$
+$$\mathbf{h}^{(l)} = f*l (\mathbf{h}^{(l-1)}) \text{ and thus } \mathbf{o} = f*L \circ \ldots \circ f_1(\mathbf{x}).$$
 
 If all the hidden variables and the input are vectors,
 we can write the gradient of $\mathbf{o}$ with respect to
 any set of parameters $\mathbf{W}^{(l)}$ as follows:
 
-$$\partial_{\mathbf{W}^{(l)}} \mathbf{o} = \underbrace{\partial_{\mathbf{h}^{(L-1)}} \mathbf{h}^{(L)}}_{ \mathbf{M}^{(L)} \stackrel{\mathrm{def}}{=}} \cdot \ldots \cdot \underbrace{\partial_{\mathbf{h}^{(l)}} \mathbf{h}^{(l+1)}}_{ \mathbf{M}^{(l+1)} \stackrel{\mathrm{def}}{=}} \underbrace{\partial_{\mathbf{W}^{(l)}} \mathbf{h}^{(l)}}_{ \mathbf{v}^{(l)} \stackrel{\mathrm{def}}{=}}.$$
+$$\partial*{\mathbf{W}^{(l)}} \mathbf{o} = \underbrace{\partial*{\mathbf{h}^{(L-1)}} \mathbf{h}^{(L)}}*{ \mathbf{M}^{(L)} \stackrel{\mathrm{def}}{=}} \cdot \ldots \cdot \underbrace{\partial*{\mathbf{h}^{(l)}} \mathbf{h}^{(l+1)}}*{ \mathbf{M}^{(l+1)} \stackrel{\mathrm{def}}{=}} \underbrace{\partial*{\mathbf{W}^{(l)}} \mathbf{h}^{(l)}}_{ \mathbf{v}^{(l)} \stackrel{\mathrm{def}}{=}}.$$
 
 In other words, this gradient is
 the product of $L-l$ matrices
@@ -70,7 +70,7 @@ rendering learning impossible as parameters
 hardly move on each update.
 
 
-### Vanishing Gradients
+## # Vanishing Gradients
 
 One frequent culprit causing the vanishing gradient problem
 is the choice of the activation function $\sigma$
@@ -101,7 +101,7 @@ d2l.plot(x, [y, x.grad], legend=['sigmoid', 'gradient'], figsize=(4.5, 2.5))
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 %matplotlib inline
 from d2l import torch as d2l
 import torch
@@ -115,7 +115,7 @@ d2l.plot(x.detach().numpy(), [y.detach().numpy(), x.grad.numpy()],
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 %matplotlib inline
 from d2l import tensorflow as d2l
 import tensorflow as tf
@@ -142,7 +142,7 @@ Consequently, ReLUs, which are more stable
 have emerged as the default choice for practitioners.
 
 
-### Exploding Gradients
+## # Exploding Gradients
 
 The opposite problem, when gradients explode,
 can be similarly vexing.
@@ -166,7 +166,7 @@ print('after multiplying 100 matrices', M)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 M = torch.normal(0, 1, size=(4,4))
 print('a single matrix \n',M)
 for i in range(100):
@@ -176,7 +176,7 @@ print('after multiplying 100 matrices\n', M)
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 M = tf.random.normal((4, 4))
 print('a single matrix \n', M)
 for i in range(100):
@@ -185,7 +185,7 @@ for i in range(100):
 print('after multiplying 100 matrices\n', M.numpy())
 ```
 
-### Breaking the Symmetry
+## # Breaking the Symmetry
 
 Another problem in neural network design
 is the symmetry inherent in their parametrization.
@@ -226,7 +226,7 @@ Note that while minibatch stochastic gradient descent would not break this symme
 dropout regularization would!
 
 
-## Parameter Initialization
+# # Parameter Initialization
 
 One way of addressing---or at least mitigating---the
 issues raised above is through careful initialization.
@@ -234,9 +234,9 @@ Additional care during optimization
 and suitable regularization can further enhance stability.
 
 
-### Default Initialization
+## # Default Initialization
 
-In the previous sections, e.g., in :numref:`sec_linear_concise`,
+In the previous sections, e.g., in :numref:`sec*linear*concise`,
 we used a normal distribution 
 to initialize the values of our weights.
 If we do not specify the initialization method, the framework will
@@ -248,16 +248,16 @@ for moderate problem sizes.
 
 
 
-### Xavier Initialization
+## # Xavier Initialization
 
 Let us look at the scale distribution of
 an output (e.g., a hidden variable) $o_{i}$ for some fully-connected layer
 *without nonlinearities*.
-With $n_\mathrm{in}$ inputs $x_j$
+With $n*\mathrm{in}$ inputs $x*j$
 and their associated weights $w_{ij}$ for this layer,
 an output is given by
 
-$$o_{i} = \sum_{j=1}^{n_\mathrm{in}} w_{ij} x_j.$$
+$$o*{i} = \sum*{j=1}^{n*\mathrm{in}} w*{ij} x_j.$$
 
 The weights $w_{ij}$ are all drawn
 independently from the same distribution.
@@ -272,10 +272,10 @@ In this case, we can compute the mean and variance of $o_i$ as follows:
 
 $$
 \begin{aligned}
-    E[o_i] & = \sum_{j=1}^{n_\mathrm{in}} E[w_{ij} x_j] \\&= \sum_{j=1}^{n_\mathrm{in}} E[w_{ij}] E[x_j] \\&= 0, \\
-    \mathrm{Var}[o_i] & = E[o_i^2] - (E[o_i])^2 \\
-        & = \sum_{j=1}^{n_\mathrm{in}} E[w^2_{ij} x^2_j] - 0 \\
-        & = \sum_{j=1}^{n_\mathrm{in}} E[w^2_{ij}] E[x^2_j] \\
+    E[o*i] & = \sum*{j=1}^{n*\mathrm{in}} E[w*{ij} x*j] \\&= \sum*{j=1}^{n*\mathrm{in}} E[w*{ij}] E[x_j] \\&= 0, \\
+    \mathrm{Var}[o*i] & = E[o*i^2] - (E[o_i])^2 \\
+        & = \sum*{j=1}^{n*\mathrm{in}} E[w^2*{ij} x^2*j] - 0 \\
+        & = \sum*{j=1}^{n*\mathrm{in}} E[w^2*{ij}] E[x^2*j] \\
         & = n_\mathrm{in} \sigma^2 \gamma^2.
 \end{aligned}
 $$
@@ -295,8 +295,8 @@ Instead, we simply try to satisfy:
 
 $$
 \begin{aligned}
-\frac{1}{2} (n_\mathrm{in} + n_\mathrm{out}) \sigma^2 = 1 \text{ or equivalently }
-\sigma = \sqrt{\frac{2}{n_\mathrm{in} + n_\mathrm{out}}}.
+\frac{1}{2} (n*\mathrm{in} + n*\mathrm{out}) \sigma^2 = 1 \text{ or equivalently }
+\sigma = \sqrt{\frac{2}{n*\mathrm{in} + n*\mathrm{out}}}.
 \end{aligned}
 $$
 
@@ -306,7 +306,7 @@ named after the first author of its creators :cite:`Glorot.Bengio.2010`.
 Typically, the Xavier initialization
 samples weights from a Gaussian distribution
 with zero mean and variance
-$\sigma^2 = \frac{2}{n_\mathrm{in} + n_\mathrm{out}}$.
+$\sigma^2 = \frac{2}{n*\mathrm{in} + n*\mathrm{out}}$.
 We can also adapt Xavier's intuition to
 choose the variance when sampling weights
 from a uniform distribution.
@@ -314,7 +314,7 @@ Note that the uniform distribution $U(-a, a)$ has variance $\frac{a^2}{3}$.
 Plugging $\frac{a^2}{3}$ into our condition on $\sigma^2$
 yields the suggestion to initialize according to
 
-$$U\left(-\sqrt{\frac{6}{n_\mathrm{in} + n_\mathrm{out}}}, \sqrt{\frac{6}{n_\mathrm{in} + n_\mathrm{out}}}\right).$$
+$$U\left(-\sqrt{\frac{6}{n*\mathrm{in} + n*\mathrm{out}}}, \sqrt{\frac{6}{n*\mathrm{in} + n*\mathrm{out}}}\right).$$
 
 Though the assumption for nonexistence of nonlinearities
 in the above mathematical reasoning 
@@ -323,7 +323,7 @@ the Xavier initialization method
 turns out to work well in practice.
 
 
-### Beyond
+## # Beyond
 
 The reasoning above barely scratches the surface
 of modern approaches to parameter initialization.
@@ -346,7 +346,7 @@ Perhaps you will stumble across or even invent
 a clever idea and contribute an implementation to deep learning frameworks.
 
 
-## Summary
+# # Summary
 
 * Vanishing and exploding gradients are common issues in deep networks. Great care in parameter initialization is required to ensure that gradients and parameters remain well controlled.
 * Initialization heuristics are needed to ensure that the initial gradients are neither too large nor too small.
@@ -354,7 +354,7 @@ a clever idea and contribute an implementation to deep learning frameworks.
 * Random initialization is key to ensure that symmetry is broken before optimization.
 * Xavier initialization suggests that, for each layer, variance of any output is not affected by the number of inputs, and variance of any gradient is not affected by the number of outputs.
 
-## Exercises
+# # Exercises
 
 1. Can you design other cases where a neural network might exhibit symmetry requiring breaking besides the permutation symmetry in an MLP's layers?
 1. Can we initialize all weight parameters in linear regression or in softmax regression to the same value?

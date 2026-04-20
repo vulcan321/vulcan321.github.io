@@ -39,7 +39,7 @@
   事实上，地震是时空相关的，即余震通常发生在很短的时间跨度和很近的距离内。
 * 人类之间的互动也是连续的，这可以从微博上的争吵和辩论中看出。
 
-## 统计工具
+# # 统计工具
 
 处理序列数据需要统计工具和新的深度神经网络架构。
 为了简单起见，我们以 :numref:`fig_ftse100`所示的股票价格（富时100指数）为例。
@@ -53,24 +53,24 @@ $t \in \mathbb{Z}^+$时，观察到的价格$x_t$。
 请注意，$t$对于本文中的序列通常是离散的，并在整数或其子集上变化。
 假设一个交易员想在$t$日的股市中表现良好，于是通过以下途径预测$x_t$：
 
-$$x_t \sim P(x_t \mid x_{t-1}, \ldots, x_1).$$
+$$x*t \sim P(x*t \mid x*{t-1}, \ldots, x*1).$$
 
-### 自回归模型
+## # 自回归模型
 
 为了实现这个预测，交易员可以使用回归模型，
-例如在 :numref:`sec_linear_concise`中训练的模型。
+例如在 :numref:`sec*linear*concise`中训练的模型。
 仅有一个主要问题：输入数据的数量，
-输入$x_{t-1}, \ldots, x_1$本身因$t$而异。
+输入$x*{t-1}, \ldots, x*1$本身因$t$而异。
 也就是说，输入数据的数量这个数字将会随着我们遇到的数据量的增加而增加，
 因此需要一个近似方法来使这个计算变得容易处理。
 本章后面的大部分内容将围绕着如何有效估计
-$P(x_t \mid x_{t-1}, \ldots, x_1)$展开。
+$P(x*t \mid x*{t-1}, \ldots, x_1)$展开。
 简单地说，它归结为以下两种策略。
 
 第一种策略，假设在现实情况下相当长的序列
-$x_{t-1}, \ldots, x_1$可能是不必要的，
+$x*{t-1}, \ldots, x*1$可能是不必要的，
 因此我们只需要满足某个长度为$\tau$的时间跨度，
-即使用观测序列$x_{t-1}, \ldots, x_{t-\tau}$。
+即使用观测序列$x*{t-1}, \ldots, x*{t-\tau}$。
 当下获得的最直接的好处就是参数的数量总是不变的，
 至少在$t > \tau$时如此，这就使我们能够训练一个上面提及的深度网络。
 这种模型被称为*自回归模型*（autoregressive models），
@@ -78,9 +78,9 @@ $x_{t-1}, \ldots, x_1$可能是不必要的，
 
 第二种策略，如 :numref:`fig_sequence-model`所示，
 是保留一些对过去观测的总结$h_t$，
-并且同时更新预测$\hat{x}_t$和总结$h_t$。
-这就产生了基于$\hat{x}_t = P(x_t \mid h_{t})$估计$x_t$，
-以及公式$h_t = g(h_{t-1}, x_{t-1})$更新的模型。
+并且同时更新预测$\hat{x}*t$和总结$h*t$。
+这就产生了基于$\hat{x}*t = P(x*t \mid h*{t})$估计$x*t$，
+以及公式$h*t = g(h*{t-1}, x_{t-1})$更新的模型。
 由于$h_t$从未被观测到，这类模型也被称为
 *隐变量自回归模型*（latent autoregressive models）。
 
@@ -97,66 +97,66 @@ $x_{t-1}, \ldots, x_1$可能是不必要的，
 统计学家称不变的动力学为*静止的*（stationary）。
 因此，整个序列的估计值都将通过以下的方式获得：
 
-$$P(x_1, \ldots, x_T) = \prod_{t=1}^T P(x_t \mid x_{t-1}, \ldots, x_1).$$
+$$P(x*1, \ldots, x*T) = \prod*{t=1}^T P(x*t \mid x*{t-1}, \ldots, x*1).$$
 
 注意，如果我们处理的是离散的对象（如单词），
 而不是连续的数字，则上述的考虑仍然有效。
 唯一的差别是，对于离散的对象，
-我们需要使用分类器而不是回归模型来估计$P(x_t \mid  x_{t-1}, \ldots, x_1)$。
+我们需要使用分类器而不是回归模型来估计$P(x*t \mid  x*{t-1}, \ldots, x_1)$。
 
-### 马尔可夫模型
+## # 马尔可夫模型
 
 回想一下，在自回归模型的近似法中，
-我们使用$x_{t-1}, \ldots, x_{t-\tau}$
-而不是$x_{t-1}, \ldots, x_1$来估计$x_t$。
+我们使用$x*{t-1}, \ldots, x*{t-\tau}$
+而不是$x*{t-1}, \ldots, x*1$来估计$x_t$。
 只要这种是近似精确的，我们就说序列满足*马尔可夫条件*（Markov condition）。
 特别是，如果$\tau = 1$，得到一个
 *一阶马尔可夫模型*（first-order Markov model），
 $P(x)$由下式给出：
 
-$$P(x_1, \ldots, x_T) = \prod_{t=1}^T P(x_t \mid x_{t-1}) \text{ 当 } P(x_1 \mid x_0) = P(x_1).$$
+$$P(x*1, \ldots, x*T) = \prod*{t=1}^T P(x*t \mid x*{t-1}) \text{ 当 } P(x*1 \mid x*0) = P(x*1).$$
 
 当假设$x_t$仅是离散值时，这样的模型特别棒，
 因为在这种情况下，使用动态规划可以沿着马尔可夫链精确地计算结果。
-例如，我们可以高效地计算$P(x_{t+1} \mid x_{t-1})$：
+例如，我们可以高效地计算$P(x*{t+1} \mid x*{t-1})$：
 
 $$
 \begin{aligned}
-P(x_{t+1} \mid x_{t-1})
-&= \frac{\sum_{x_t} P(x_{t+1}, x_t, x_{t-1})}{P(x_{t-1})}\\
-&= \frac{\sum_{x_t} P(x_{t+1} \mid x_t, x_{t-1}) P(x_t, x_{t-1})}{P(x_{t-1})}\\
-&= \sum_{x_t} P(x_{t+1} \mid x_t) P(x_t \mid x_{t-1})
+P(x*{t+1} \mid x*{t-1})
+&= \frac{\sum*{x*t} P(x*{t+1}, x*t, x*{t-1})}{P(x*{t-1})}\\
+&= \frac{\sum*{x*t} P(x*{t+1} \mid x*t, x*{t-1}) P(x*t, x*{t-1})}{P(x*{t-1})}\\
+&= \sum*{x*t} P(x*{t+1} \mid x*t) P(x*t \mid x*{t-1})
 \end{aligned}
 $$
 
 利用这一事实，我们只需要考虑过去观察中的一个非常短的历史：
-$P(x_{t+1} \mid x_t, x_{t-1}) = P(x_{t+1} \mid x_t)$。
+$P(x*{t+1} \mid x*t, x*{t-1}) = P(x*{t+1} \mid x_t)$。
 隐马尔可夫模型中的动态规划超出了本节的范围
-（我们将在 :numref:`sec_bi_rnn`再次遇到），
+（我们将在 :numref:`sec*bi*rnn`再次遇到），
 而动态规划这些计算工具已经在控制算法和强化学习算法广泛使用。
 
-### 因果关系
+## # 因果关系
 
-原则上，将$P(x_1, \ldots, x_T)$倒序展开也没什么问题。
+原则上，将$P(x*1, \ldots, x*T)$倒序展开也没什么问题。
 毕竟，基于条件概率公式，我们总是可以写出：
 
-$$P(x_1, \ldots, x_T) = \prod_{t=T}^1 P(x_t \mid x_{t+1}, \ldots, x_T).$$
+$$P(x*1, \ldots, x*T) = \prod*{t=T}^1 P(x*t \mid x*{t+1}, \ldots, x*T).$$
 
 事实上，如果基于一个马尔可夫模型，
 我们还可以得到一个反向的条件概率分布。
 然而，在许多情况下，数据存在一个自然的方向，即在时间上是前进的。
 很明显，未来的事件不能影响过去。
-因此，如果我们改变$x_t$，可能会影响未来发生的事情$x_{t+1}$，但不能反过来。
+因此，如果我们改变$x*t$，可能会影响未来发生的事情$x*{t+1}$，但不能反过来。
 也就是说，如果我们改变$x_t$，基于过去事件得到的分布不会改变。
-因此，解释$P(x_{t+1} \mid x_t)$应该比解释$P(x_t \mid x_{t+1})$更容易。
+因此，解释$P(x*{t+1} \mid x*t)$应该比解释$P(x*t \mid x*{t+1})$更容易。
 例如，在某些情况下，对于某些可加性噪声$\epsilon$，
-显然我们可以找到$x_{t+1} = f(x_t) + \epsilon$，
+显然我们可以找到$x*{t+1} = f(x*t) + \epsilon$，
 而反之则不行 :cite:`Hoyer.Janzing.Mooij.ea.2009`。
 而这个向前推进的方向恰好也是我们通常感兴趣的方向。
 彼得斯等人 :cite:`Peters.Janzing.Scholkopf.2017`
 对该主题的更多内容做了详尽的解释，而我们的上述讨论只是其中的冰山一角。
 
-## 训练
+# # 训练
 
 在了解了上述统计工具后，让我们在实践中尝试一下！
 首先，我们生成一些数据：(**使用正弦函数和一些可加性噪声来生成序列数据，
@@ -171,7 +171,7 @@ npx.set_np()
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 %matplotlib inline
 from d2l import torch as d2l
 import torch
@@ -179,14 +179,14 @@ from torch import nn
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 %matplotlib inline
 from d2l import tensorflow as d2l
 import tensorflow as tf
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 %matplotlib inline
 from d2l import paddle as d2l
 import warnings
@@ -196,7 +196,7 @@ from paddle import nn
 ```
 
 ```{.python .input}
-#@tab mxnet, pytorch, paddle
+# @tab mxnet, pytorch, paddle
 T = 1000  # 总共产生1000个点
 time = d2l.arange(1, T + 1, dtype=d2l.float32)
 x = d2l.sin(0.01 * time) + d2l.normal(0, 0.2, (T,))
@@ -204,7 +204,7 @@ d2l.plot(time, [x], 'time', 'x', xlim=[1, 1000], figsize=(6, 3))
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 T = 1000  # 总共产生1000个点
 time = d2l.arange(1, T + 1, dtype=d2l.float32)
 x = d2l.sin(0.01 * time) + d2l.normal([T], 0, 0.2)
@@ -212,8 +212,8 @@ d2l.plot(time, [x], 'time', 'x', xlim=[1, 1000], figsize=(6, 3))
 ```
 
 接下来，我们将这个序列转换为模型的*特征－标签*（feature-label）对。
-基于嵌入维度$\tau$，我们[**将数据映射为数据对$y_t = x_t$
-和$\mathbf{x}_t = [x_{t-\tau}, \ldots, x_{t-1}]$。**]
+基于嵌入维度$\tau$，我们[**将数据映射为数据对$y*t = x*t$
+和$\mathbf{x}*t = [x*{t-\tau}, \ldots, x_{t-1}]$。**]
 这比我们提供的数据样本少了$\tau$个，
 因为我们没有足够的历史记录来描述前$\tau$个数据样本。
 一个简单的解决办法是：如果拥有足够长的序列就丢弃这几项；
@@ -221,7 +221,7 @@ d2l.plot(time, [x], 'time', 'x', xlim=[1, 1000], figsize=(6, 3))
 在这里，我们仅使用前600个“特征－标签”对进行训练。
 
 ```{.python .input}
-#@tab mxnet, pytorch, paddle
+# @tab mxnet, pytorch, paddle
 tau = 4
 features = d2l.zeros((T - tau, tau))
 for i in range(tau):
@@ -230,7 +230,7 @@ labels = d2l.reshape(x[tau:], (-1, 1))
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 tau = 4
 features = tf.Variable(d2l.zeros((T - tau, tau)))
 for i in range(tau):
@@ -239,11 +239,11 @@ labels = d2l.reshape(x[tau:], (-1, 1))
 ```
 
 ```{.python .input}
-#@tab all
-batch_size, n_train = 16, 600
+# @tab all
+batch*size, n*train = 16, 600
 # 只有前n_train个样本用于训练
-train_iter = d2l.load_array((features[:n_train], labels[:n_train]),
-                            batch_size, is_train=True)
+train*iter = d2l.load*array((features[:n*train], labels[:n*train]),
+                            batch*size, is*train=True)
 ```
 
 在这里，我们[**使用一个相当简单的架构训练模型：
@@ -263,11 +263,11 @@ loss = gluon.loss.L2Loss()
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 # 初始化网络权重的函数
 def init_weights(m):
     if type(m) == nn.Linear:
-        nn.init.xavier_uniform_(m.weight)
+        nn.init.xavier*uniform*(m.weight)
 
 # 一个简单的多层感知机
 def get_net():
@@ -282,7 +282,7 @@ loss = nn.MSELoss(reduction='none')
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 # 一个简单的多层感知机
 def get_net():
     net = tf.keras.Sequential([tf.keras.layers.Dense(10, activation='relu'),
@@ -294,12 +294,12 @@ loss = tf.keras.losses.MeanSquaredError()
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 def init_weights(m):
     if type(m) == nn.Linear:
         nn.initializer.XavierUniform(m.weight)
 
-#一个简单的多层感知机
+# 一个简单的多层感知机
 def get_net():
     net = nn.Sequential(nn.Linear(4, 10),
                         nn.ReLU(),
@@ -307,11 +307,11 @@ def get_net():
     net.apply(init_weights)
     return net
 
-#平方损失。注意:MSELoss计算平方误差时不带系数1/2
+# 平方损失。注意:MSELoss计算平方误差时不带系数1/2
 loss = nn.MSELoss(reduction='none')
 ```
 
-现在，准备[**训练模型**]了。实现下面的训练代码的方式与前面几节（如 :numref:`sec_linear_concise`）中的循环训练基本相同。因此，我们不会深入探讨太多细节。
+现在，准备[**训练模型**]了。实现下面的训练代码的方式与前面几节（如 :numref:`sec*linear*concise`）中的循环训练基本相同。因此，我们不会深入探讨太多细节。
 
 ```{.python .input}
 def train(net, train_iter, loss, epochs, lr):
@@ -324,14 +324,14 @@ def train(net, train_iter, loss, epochs, lr):
             l.backward()
             trainer.step(batch_size)
         print(f'epoch {epoch + 1}, '
-              f'loss: {d2l.evaluate_loss(net, train_iter, loss):f}')
+              f'loss: {d2l.evaluate*loss(net, train*iter, loss):f}')
 
 net = get_net()
 train(net, train_iter, loss, 5, 0.01)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 def train(net, train_iter, loss, epochs, lr):
     trainer = torch.optim.Adam(net.parameters(), lr)
     for epoch in range(epochs):
@@ -341,14 +341,14 @@ def train(net, train_iter, loss, epochs, lr):
             l.sum().backward()
             trainer.step()
         print(f'epoch {epoch + 1}, '
-              f'loss: {d2l.evaluate_loss(net, train_iter, loss):f}')
+              f'loss: {d2l.evaluate*loss(net, train*iter, loss):f}')
 
 net = get_net()
 train(net, train_iter, loss, 5, 0.01)
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 def train(net, train_iter, loss, epochs, lr):
     trainer = tf.keras.optimizers.Adam()
     for epoch in range(epochs):
@@ -360,14 +360,14 @@ def train(net, train_iter, loss, epochs, lr):
                 grads = g.gradient(l, params)
             trainer.apply_gradients(zip(grads, params))
         print(f'epoch {epoch + 1}, '
-              f'loss: {d2l.evaluate_loss(net, train_iter, loss):f}')
+              f'loss: {d2l.evaluate*loss(net, train*iter, loss):f}')
 
 net = get_net()
 train(net, train_iter, loss, 5, 0.01)
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 def train(net, train_iter, loss, epochs, lr):
     trainer = paddle.optimizer.Adam(learning_rate=lr, parameters=net.parameters())
     for epoch in range(epochs):
@@ -377,13 +377,13 @@ def train(net, train_iter, loss, epochs, lr):
             l.sum().backward()
             trainer.step()
         print(f'epoch {epoch + 1}, '
-              f'loss: {d2l.evaluate_loss(net, train_iter, loss):f}')
+              f'loss: {d2l.evaluate*loss(net, train*iter, loss):f}')
 
 net = get_net()
 train(net, train_iter, loss, 5, 0.01)
 ```
 
-## 预测
+# # 预测
 
 由于训练损失很小，因此我们期望模型能有很好的工作效果。
 让我们看看这在实践中意味着什么。
@@ -391,7 +391,7 @@ train(net, train_iter, loss, 5, 0.01)
 也就是*单步预测*（one-step-ahead prediction）。
 
 ```{.python .input}
-#@tab all
+# @tab all
 onestep_preds = net(features)
 d2l.plot([time, time[tau:]], 
          [d2l.numpy(x), d2l.numpy(onestep_preds)], 'time',
@@ -405,52 +405,52 @@ d2l.plot([time, time[tau:]],
 然而有一个小问题：如果数据观察序列的时间步只到$604$，
 我们需要一步一步地向前迈进：
 $$
-\hat{x}_{605} = f(x_{601}, x_{602}, x_{603}, x_{604}), \\
-\hat{x}_{606} = f(x_{602}, x_{603}, x_{604}, \hat{x}_{605}), \\
-\hat{x}_{607} = f(x_{603}, x_{604}, \hat{x}_{605}, \hat{x}_{606}),\\
-\hat{x}_{608} = f(x_{604}, \hat{x}_{605}, \hat{x}_{606}, \hat{x}_{607}),\\
-\hat{x}_{609} = f(\hat{x}_{605}, \hat{x}_{606}, \hat{x}_{607}, \hat{x}_{608}),\\
+\hat{x}*{605} = f(x*{601}, x*{602}, x*{603}, x_{604}), \\
+\hat{x}*{606} = f(x*{602}, x*{603}, x*{604}, \hat{x}_{605}), \\
+\hat{x}*{607} = f(x*{603}, x*{604}, \hat{x}*{605}, \hat{x}_{606}),\\
+\hat{x}*{608} = f(x*{604}, \hat{x}*{605}, \hat{x}*{606}, \hat{x}_{607}),\\
+\hat{x}*{609} = f(\hat{x}*{605}, \hat{x}*{606}, \hat{x}*{607}, \hat{x}_{608}),\\
 \ldots
 $$
 
-通常，对于直到$x_t$的观测序列，其在时间步$t+k$处的预测输出$\hat{x}_{t+k}$
+通常，对于直到$x*t$的观测序列，其在时间步$t+k$处的预测输出$\hat{x}*{t+k}$
 称为$k$*步预测*（$k$-step-ahead-prediction）。
-由于我们的观察已经到了$x_{604}$，它的$k$步预测是$\hat{x}_{604+k}$。
+由于我们的观察已经到了$x*{604}$，它的$k$步预测是$\hat{x}*{604+k}$。
 换句话说，我们必须使用我们自己的预测（而不是原始数据）来[**进行多步预测**]。
 让我们看看效果如何。
 
 ```{.python .input}
-#@tab mxnet, pytorch
+# @tab mxnet, pytorch
 multistep_preds = d2l.zeros(T)
-multistep_preds[: n_train + tau] = x[: n_train + tau]
+multistep*preds[: n*train + tau] = x[: n_train + tau]
 for i in range(n_train + tau, T):
     multistep_preds[i] = net(
         d2l.reshape(multistep_preds[i - tau: i], (1, -1)))
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 multistep_preds = tf.Variable(d2l.zeros(T))
-multistep_preds[:n_train + tau].assign(x[:n_train + tau])
+multistep*preds[:n*train + tau].assign(x[:n_train + tau])
 for i in range(n_train + tau, T):
     multistep_preds[i].assign(d2l.reshape(net(
         d2l.reshape(multistep_preds[i - tau: i], (1, -1))), ()))
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 multistep_preds = d2l.zeros([T])
-multistep_preds[: n_train + tau] = x[: n_train + tau]
+multistep*preds[: n*train + tau] = x[: n_train + tau]
 for i in range(n_train + tau, T):
     multistep_preds[i] = net(
         d2l.reshape(multistep_preds[i - tau: i], (1, -1)))
 ```
 
 ```{.python .input}
-#@tab all
+# @tab all
 d2l.plot([time, time[tau:], time[n_train + tau:]],
          [d2l.numpy(x), d2l.numpy(onestep_preds),
-          d2l.numpy(multistep_preds[n_train + tau:])], 'time',
+          d2l.numpy(multistep*preds[n*train + tau:])], 'time',
          'x', legend=['data', '1-step preds', 'multistep preds'],
          xlim=[1, 1000], figsize=(6, 3))
 ```
@@ -460,7 +460,7 @@ d2l.plot([time, time[tau:], time[n_train + tau:]],
 为什么这个算法效果这么差呢？事实是由于错误的累积：
 假设在步骤$1$之后，我们积累了一些错误$\epsilon_1 = \bar\epsilon$。
 于是，步骤$2$的输入被扰动了$\epsilon_1$，
-结果积累的误差是依照次序的$\epsilon_2 = \bar\epsilon + c \epsilon_1$，
+结果积累的误差是依照次序的$\epsilon*2 = \bar\epsilon + c \epsilon*1$，
 其中$c$为某个常数，后面的预测误差依此类推。
 因此误差可能会相当快地偏离真实的观测结果。
 例如，未来$24$小时的天气预报往往相当准确，
@@ -471,13 +471,13 @@ d2l.plot([time, time[tau:], time[n_train + tau:]],
 让我们[**更仔细地看一下$k$步预测**]的困难。
 
 ```{.python .input}
-#@tab all
+# @tab all
 max_steps = 64
 ```
 
 ```{.python .input}
-#@tab mxnet, pytorch
-features = d2l.zeros((T - tau - max_steps + 1, tau + max_steps))
+# @tab mxnet, pytorch
+features = d2l.zeros((T - tau - max*steps + 1, tau + max*steps))
 # 列i（i<tau）是来自x的观测，其时间步从（i）到（i+T-tau-max_steps+1）
 for i in range(tau):
     features[:, i] = x[i: i + T - tau - max_steps + 1]
@@ -488,8 +488,8 @@ for i in range(tau, tau + max_steps):
 ```
 
 ```{.python .input}
-#@tab tensorflow
-features = tf.Variable(d2l.zeros((T - tau - max_steps + 1, tau + max_steps)))
+# @tab tensorflow
+features = tf.Variable(d2l.zeros((T - tau - max*steps + 1, tau + max*steps)))
 # 列i（i<tau）是来自x的观测，其时间步从（i）到（i+T-tau-max_steps+1）
 for i in range(tau):
     features[:, i].assign(x[i: i + T - tau - max_steps + 1].numpy())
@@ -500,8 +500,8 @@ for i in range(tau, tau + max_steps):
 ```
 
 ```{.python .input}
-#@tab paddle
-features = d2l.zeros((T - tau - max_steps + 1, tau + max_steps))
+# @tab paddle
+features = d2l.zeros((T - tau - max*steps + 1, tau + max*steps))
 # 列i（i<tau）是来自x的观测，其时间步从（i+1）到（i+T-tau-max_steps+1）
 for i in range(tau):
     features[:, i] = x[i: i + T - tau - max_steps + 1]
@@ -512,7 +512,7 @@ for i in range(tau, tau + max_steps):
 ```
 
 ```{.python .input}
-#@tab all
+# @tab all
 steps = (1, 4, 16, 64)
 d2l.plot([time[tau + i - 1: T - max_steps + i] for i in steps],
          [d2l.numpy(features[:, tau + i - 1]) for i in steps], 'time', 'x',
@@ -523,14 +523,14 @@ d2l.plot([time[tau + i - 1: T - max_steps + i] for i in steps],
 以上例子清楚地说明了当我们试图预测更远的未来时，预测的质量是如何变化的。
 虽然“$4$步预测”看起来仍然不错，但超过这个跨度的任何预测几乎都是无用的。
 
-## 小结
+# # 小结
 
 * 内插法（在现有观测值之间进行估计）和外推法（对超出已知观测范围进行预测）在实践的难度上差别很大。因此，对于所拥有的序列数据，在训练时始终要尊重其时间顺序，即最好不要基于未来的数据进行训练。
 * 序列模型的估计需要专门的统计工具，两种较流行的选择是自回归模型和隐变量自回归模型。
 * 对于时间是向前推进的因果模型，正向估计通常比反向估计更容易。
 * 对于直到时间步$t$的观测序列，其在时间步$t+k$的预测输出是“$k$步预测”。随着我们对预测时间$k$值的增加，会造成误差的快速累积和预测质量的极速下降。
 
-## 练习
+# # 练习
 
 1. 改进本节实验中的模型。
     1. 是否包含了过去$4$个以上的观测结果？真实值需要是多少个？

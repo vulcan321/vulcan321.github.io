@@ -1,8 +1,8 @@
 
-## The Basics of Custom Draw
+# # The Basics of Custom Draw
 
 
-### Hooking Up a Custom Draw Message Map Entry
+## # Hooking Up a Custom Draw Message Map Entry
 
 Custom draw is a process similar to using callbacks. Windows notifies your program, via a notification message, at certain points in the process of drawing the list control. You can choose to ignore the notifications altogether (in which case you'll see the standard list control), process some part of the drawing yourself (for simple effects) or even draw the control yourself (just as when owner-drawing a control). The real selling point is that you can choose to respond to only some of the notifications if you so wish. That way, you only have to paint the parts you need to and Windows will do the rest.
 
@@ -11,7 +11,7 @@ Let's say that you want to add custom draw to the existing list control to give 
 C++
 
 ```cpp
-ON_NOTIFY ( NM_CUSTOMDRAW, IDC_MY_LIST, OnCustomdrawMyList )
+ON*NOTIFY ( NM*CUSTOMDRAW, IDC*MY*LIST, OnCustomdrawMyList )
 ```
 
 ...and the prototype looks like this:
@@ -22,17 +22,17 @@ C++
 afx_msg void OnCustomdrawMyList ( NMHDR* pNMHDR, LRESULT* pResult );
 ```
 
-This tells MFC that you want to handle a `WM_NOTIFY` message sent from your list control (whose ID is `IDC_MY_LIST`) when the notification code is `NM_CUSTOMDRAW`. The handler is a function called `OnCustomdrawMyList`. If you have a CListCtrl-derived class that you want to add custom draw to, you can use `ON_NOTIFY_REFLECT` instead:
+This tells MFC that you want to handle a `WM*NOTIFY` message sent from your list control (whose ID is `IDC*MY*LIST`) when the notification code is `NM*CUSTOMDRAW`. The handler is a function called `OnCustomdrawMyList`. If you have a CListCtrl-derived class that you want to add custom draw to, you can use `ON*NOTIFY*REFLECT` instead:
 
 C++
 
 ```cpp
-ON_NOTIFY_REFLECT ( NM_CUSTOMDRAW, OnCustomdraw )
+ON*NOTIFY*REFLECT ( NM_CUSTOMDRAW, OnCustomdraw )
 ```
 
 The message handler has the same prototype as above, but goes in your derived class instead.
 
-### Custom Draw Stages
+## # Custom Draw Stages
 
 Custom draw breaks the drawing process into two parts: erasing and painting. Windows may send `NM_CUSTOMDRAW` messages at the beginning and end of each part. So in total that's four messages. However, your application may actually receive as few as one or many more than four messages, depending on what you tell Windows you want. The times when a notification may be sent are called "draw stages." You need to have a good grasp of this concept, since it's used throughout custom draw. So, to summarize that rather dry paragraph, you may be notified at the following times (or stages):
 
@@ -43,7 +43,7 @@ Custom draw breaks the drawing process into two parts: erasing and painting. Win
 
 Not all of those are equally useful and, in practice, I have not yet needed to handle more than one stage. In fact, while doing some experimenting in the process of writing this article, I was unable to get Windows to send either the pre-erase or post-erase messages! So don't let this section intimidate you.
 
-### Responding to NM\_CUSTOMDRAW Messages
+## # Responding to NM\_CUSTOMDRAW Messages
 
 The value you return from your custom draw handler is a vitally important piece of information, as it tells Windows how much of the drawing process you have done and, indirectly, how much you want Windows itself to do. There are five responses you can send from your custom draw handler:
 
@@ -53,11 +53,11 @@ The value you return from your custom draw handler is a vitally important piece 
 4.  I want to receive additional `NM_CUSTOMDRAW` messages during the draw stages of each item in the list.
 5.  I want to receive additional `NM_CUSTOMDRAW` messages during the draw stages of each sub-item in the row currently being drawn.
 
-Notice that the phrase "control or item" appears often. Remember that I said you may receive more than four `NM_CUSTOMDRAW` messages? This is where that happens. The first `NM_CUSTOMDRAW` you receive applies to the entire control. If you return response 4 above (requesting notifications on a per-item basis), then you will receive messages as each item (row) goes through its drawing stages. And if you then return response 5, you'll get even more messages as each sub-item (column) goes through its drawing stages.
+Notice that the phrase "control or item" appears often. Remember that I said you may receive more than four `NM*CUSTOMDRAW` messages? This is where that happens. The first `NM*CUSTOMDRAW` you receive applies to the entire control. If you return response 4 above (requesting notifications on a per-item basis), then you will receive messages as each item (row) goes through its drawing stages. And if you then return response 5, you'll get even more messages as each sub-item (column) goes through its drawing stages.
 
 In report-mode list controls, you can use any of those responses, depending on what kind of effect you want to achieve. I'll present some examples of how to respond to `NM_CUSTOMDRAW` messages a little later.
 
-### Information Provided by NM\_CUSTOMDRAW Messages
+## # Information Provided by NM\_CUSTOMDRAW Messages
 
 The `NM_CUSTOMDRAW` message passes your handler a pointer to an `NMLVCUSTOMDRAW` struct, which contains the following information:
 
@@ -73,7 +73,7 @@ The `NM_CUSTOMDRAW` message passes your handler a pointer to an `NMLVCUSTOMDRAW`
 
 Any of those items may be important depending on the effect you're going for, but you'll always use the draw stage and usually the device context. The item indexes and `LPARAM` are often very useful as well.
 
-## A Simple Example
+# # A Simple Example
 
 OK, time to actually see some code after all the boring details. The first example will be pretty simple, and will just change the color of the text in the control, rotating between red, green, and blue. This involves four steps:
 
@@ -133,7 +133,7 @@ The result of this code is shown below. See how each row has the color we told W
 
 One thing to keep in mind is you must always check the draw stage before doing anything else, because your handler will receive many messages, and the draw stage determines what actions your code takes.
 
-## A Little Less Simple Example
+# # A Little Less Simple Example
 
 The next sample shows how to handle custom draw for sub-items (that is, the columns). Our handler will set the text and cell background colors, but it won't be much more complex than the previous one; there's just one additional if block. The steps involved when dealing with sub-items are:
 
@@ -169,7 +169,7 @@ NMLVCUSTOMDRAW* pLVCD = reinterpret_cast<NMLVCUSTOMDRAW*>( pNMHDR );
 
         *pResult = CDRF_NOTIFYSUBITEMDRAW;
         }
-    else if ( (CDDS_ITEMPREPAINT | CDDS_SUBITEM) == pLVCD->nmcd.dwDrawStage )
+    else if ( (CDDS*ITEMPREPAINT | CDDS*SUBITEM) == pLVCD->nmcd.dwDrawStage )
         {
         // This is the prepaint stage for a subitem. Here's where we set the
         // item's text and background colors. Our return value will tell 
@@ -214,9 +214,9 @@ The resulting list is shown below:
 A couple of things to note here:
 
 -   The `clrTextBk` color is painted in just the column. The area to the right of the last column and below the last row still gets the control's background color.
--   While I was reviewing the docs, I read the page titled "`NM_CUSTOMDRAW` (list view)" and it says that you can return `CDRF_NOTIFYSUBITEMDRAW` from the very first custom draw message, without having to handle the `CDDS_ITEMPREPAINT` draw stage. I tested this, however, and it did not work. You do in fact need to handle the `CDDS_ITEMPREPAINT` stage.
+-   While I was reviewing the docs, I read the page titled "`NM*CUSTOMDRAW` (list view)" and it says that you can return `CDRF*NOTIFYSUBITEMDRAW` from the very first custom draw message, without having to handle the `CDDS*ITEMPREPAINT` draw stage. I tested this, however, and it did not work. You do in fact need to handle the `CDDS*ITEMPREPAINT` stage.
 
-## Handling the Post-paint Draw Stage
+# # Handling the Post-paint Draw Stage
 
 So far, the examples have handled the pre-print stage, to change the appearance of the list items when Windows draws them. However, during the pre-paint stage, your options are limited to just changing the color or appearance of the text. If you want to change how the icon is drawn, you can either draw the entire item during the pre-paint stage (overkill), or do custom drawing during the post-paint stage. When you do custom drawing during the post-paint stage, your custom draw handler is called after Windows has drawn the entire item or sub-item, and you can do any additional drawing you want to.
 
@@ -259,13 +259,13 @@ NMLVCUSTOMDRAW* pLVCD = reinterpret_cast<NMLVCUSTOMDRAW*>( pNMHDR );
         int    nItem = static_cast<int>( pLVCD->nmcd.dwItemSpec );
 
         // Get the image index and state of this item.  Note that we need to
-        // check the selected state manually.  The docs _say_ that the
+        // check the selected state manually.  The docs *say* that the
         // item's state is in pLVCD->nmcd.uItemState, but during my testing
         // it was always equal to 0x0201, which doesn't make sense, since
         // the max CDIS_* constant in commctrl.h is 0x0100.
 
         ZeroMemory ( &rItem, sizeof(LVITEM) );
-        rItem.mask  = LVIF_IMAGE | LVIF_STATE;
+        rItem.mask  = LVIF*IMAGE | LVIF*STATE;
         rItem.iItem = nItem;
         rItem.stateMask = LVIS_SELECTED;
         m_list.GetItem ( &rItem );
@@ -277,7 +277,7 @@ NMLVCUSTOMDRAW* pLVCD = reinterpret_cast<NMLVCUSTOMDRAW*>( pNMHDR );
             CRect rcIcon;
 
             // Get the rect that holds the item's icon.
-            m_list.GetItemRect ( nItem, &rcIcon, LVIR_ICON );
+            m*list.GetItemRect ( nItem, &rcIcon, LVIR*ICON );
 
             // Draw the icon.
             m_imglist.Draw ( pDC, rItem.iImage, rcIcon.TopLeft(),
@@ -295,17 +295,17 @@ Again, custom draw lets us get away with doing as little work as possible. What 
 
 The only drawback to drawing in this way is that sometimes you can see a bit of flicker, since the icons are drawn twice in quick succession.
 
-## Using Custom Draw as a Replacement for Owner Draw
+# # Using Custom Draw as a Replacement for Owner Draw
 
 Another neat thing you can do with custom draw is use it to do the same thing you would do with owner draw. The other advantage is that if you only need to owner-draw certain rows, you can do that and have Windows draw the others. When doing a real owner-drawn control, you have to do everything, even if you don't need any "special effects" for some rows.
 
-When you owner-draw using custom draw, you handle the `NM_CUSTOMDRAW` message sent during an item's pre-paint stage, do all the drawing, and return `CDRF_SKIPDEFAULT` from your handler. This is different than what we've done so far. `CDRF_SKIPDEFAULT` tells Windows to not do any painting in the row because you've already done it all.
+When you owner-draw using custom draw, you handle the `NM*CUSTOMDRAW` message sent during an item's pre-paint stage, do all the drawing, and return `CDRF*SKIPDEFAULT` from your handler. This is different than what we've done so far. `CDRF_SKIPDEFAULT` tells Windows to not do any painting in the row because you've already done it all.
 
 I won't include the code for this example here in the article, since it's a bit long, but you can step through the code in the debugger and see what's happening. If you arrange your windows so you can see both the demo app's dialog and the code at the same time, you'll see the painting happening step-by-step. The list control is pretty simple, with just one column and no header control. The list looks like this:
 
 ![ [sample list view 4 - 6K] ](https://www.codeproject.com/KB/list/lvcustomdraw/lvcustomdraw4.gif)
 
-## Other Things You Can (Supposedly) Do
+# # Other Things You Can (Supposedly) Do
 
 In a recent project I did at work, I wrote a list control that looks like this:
 

@@ -26,11 +26,11 @@ list：双向链表，允许高效地在任何位置插入和删除元素。
 deque：双端队列，两端都可以高效地进行插入和删除操作。
 set / multiset：有序集合，不允许重复元素（multiset允许重复）。
 map / multimap：键值对映射，键值有序且不重复（multimap允许键值对应多个值）。
-unordered_set / unordered_map：哈希集和哈希映射，基于哈希表实现，无序但查找速度快。
+unordered*set / unordered*map：哈希集和哈希映射，基于哈希表实现，无序但查找速度快。
 
 
 算法（Algorithms）：
-提供了一系列通用的算法，如排序（sort()）、查找（find()、binary_search()）、遍历（for_each()）、变换（transform()）、合并（merge()）、复制（copy()）、填充（fill()）等，这些算法通常以迭代器为参数，可以在不同的容器或其他序列容器上进行操作。
+提供了一系列通用的算法，如排序（sort()）、查找（find()、binary*search()）、遍历（for*each()）、变换（transform()）、合并（merge()）、复制（copy()）、填充（fill()）等，这些算法通常以迭代器为参数，可以在不同的容器或其他序列容器上进行操作。
 
 迭代器（Iterators）：
 迭代器 访问容器内元素的一种统一方式，它是STL中不同组件之间交互的核心工具。根据功能的不同，迭代器有多种类型，例如输入迭代器、输出迭代器、前向迭代器、双向迭代器和随机访问迭代器。
@@ -63,7 +63,7 @@ if constexpr (condition) {
 }
 模板参数推导改进 对模板实参的类型推导进行了扩展，特别是对于类模板参数。
 
-新类型 traits 包括 std::is_swappable 和 std::is_invocable 等新 trait 类型，用来检查类型是否可以安全地交换或调用。
+新类型 traits 包括 std::is*swappable 和 std::is*invocable 等新 trait 类型，用来检查类型是否可以安全地交换或调用。
 
 std::optional 引入了官方的空值对象（nullable object）包装器，用于表示可能存在的值。
 

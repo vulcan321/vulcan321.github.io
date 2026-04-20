@@ -10,12 +10,12 @@ C++ 中的基本数据类型有哪些？
 内存泄漏的定义和解决方法？
 
 STL 中常用的容器有哪些？
-vector array list map set unordered_map unordered_set
+vector array list map set unordered*map unordered*set
 queue stack priority_queue 
 deque 
 
 智能指针的种类和用法？
-shared_ptr weak_ptr unique_ptr
+shared*ptr weak*ptr unique_ptr
 
 类的成员函数、构造函数、析构函数的作用？
 

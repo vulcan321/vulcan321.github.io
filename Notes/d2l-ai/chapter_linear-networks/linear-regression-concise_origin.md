@@ -1,12 +1,12 @@
 # Concise Implementation of Linear Regression
-:label:`sec_linear_concise`
+:label:`sec*linear*concise`
 
 Broad and intense interest in deep learning for the past several years
 has inspired companies, academics, and hobbyists
 to develop a variety of mature open source frameworks
 for automating the repetitive work of implementing
 gradient-based learning algorithms.
-In :numref:`sec_linear_scratch`, we relied only on
+In :numref:`sec*linear*scratch`, we relied only on
 (i) tensors for data storage and linear algebra;
 and (ii) auto differentiation for calculating gradients.
 In practice, because data iterators, loss functions, optimizers,
@@ -14,13 +14,13 @@ and neural network layers
 are so common, modern libraries implement these components for us as well.
 
 In this section, we will show you how to implement
-the linear regression model from :numref:`sec_linear_scratch`
+the linear regression model from :numref:`sec*linear*scratch`
 concisely by using high-level APIs of deep learning frameworks.
 
 
-## Generating the Dataset
+# # Generating the Dataset
 
-To start, we will generate the same dataset as in :numref:`sec_linear_scratch`.
+To start, we will generate the same dataset as in :numref:`sec*linear*scratch`.
 
 ```{.python .input}
 from d2l import mxnet as d2l
@@ -29,7 +29,7 @@ npx.set_np()
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 from d2l import torch as d2l
 import numpy as np
 import torch
@@ -37,20 +37,20 @@ from torch.utils import data
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 from d2l import tensorflow as d2l
 import numpy as np
 import tensorflow as tf
 ```
 
 ```{.python .input}
-#@tab all
+# @tab all
 true_w = d2l.tensor([2, -3.4])
 true_b = 4.2
-features, labels = d2l.synthetic_data(true_w, true_b, 1000)
+features, labels = d2l.synthetic*data(true*w, true_b, 1000)
 ```
 
-## Reading the Dataset
+# # Reading the Dataset
 
 Rather than rolling our own iterator,
 we can call upon the existing API in a framework to read data.
@@ -62,25 +62,25 @@ we want the data iterator object to shuffle the data
 on each epoch (pass through the dataset).
 
 ```{.python .input}
-def load_array(data_arrays, batch_size, is_train=True):  #@save
+def load*array(data*arrays, batch*size, is*train=True):  # @save
     """Construct a Gluon data iterator."""
     dataset = gluon.data.ArrayDataset(*data_arrays)
-    return gluon.data.DataLoader(dataset, batch_size, shuffle=is_train)
+    return gluon.data.DataLoader(dataset, batch*size, shuffle=is*train)
 ```
 
 ```{.python .input}
-#@tab pytorch
-def load_array(data_arrays, batch_size, is_train=True):  #@save
+# @tab pytorch
+def load*array(data*arrays, batch*size, is*train=True):  # @save
     """Construct a PyTorch data iterator."""
     dataset = data.TensorDataset(*data_arrays)
-    return data.DataLoader(dataset, batch_size, shuffle=is_train)
+    return data.DataLoader(dataset, batch*size, shuffle=is*train)
 ```
 
 ```{.python .input}
-#@tab tensorflow
-def load_array(data_arrays, batch_size, is_train=True):  #@save
+# @tab tensorflow
+def load*array(data*arrays, batch*size, is*train=True):  # @save
     """Construct a TensorFlow data iterator."""
-    dataset = tf.data.Dataset.from_tensor_slices(data_arrays)
+    dataset = tf.data.Dataset.from*tensor*slices(data_arrays)
     if is_train:
         dataset = dataset.shuffle(buffer_size=1000)
     dataset = dataset.batch(batch_size)
@@ -88,27 +88,27 @@ def load_array(data_arrays, batch_size, is_train=True):  #@save
 ```
 
 ```{.python .input}
-#@tab all
+# @tab all
 batch_size = 10
-data_iter = load_array((features, labels), batch_size)
+data*iter = load*array((features, labels), batch_size)
 ```
 
 Now we can use `data_iter` in much the same way as we called
-the `data_iter` function in :numref:`sec_linear_scratch`.
+the `data*iter` function in :numref:`sec*linear_scratch`.
 To verify that it is working, we can read and print
 the first minibatch of examples.
-Comparing with :numref:`sec_linear_scratch`,
+Comparing with :numref:`sec*linear*scratch`,
 here we use `iter` to construct a Python iterator and use `next` to obtain the first item from the iterator.
 
 ```{.python .input}
-#@tab all
+# @tab all
 next(iter(data_iter))
 ```
 
-## Defining the Model
+# # Defining the Model
 
 When we implemented linear regression from scratch
-in :numref:`sec_linear_scratch`,
+in :numref:`sec*linear*scratch`,
 we defined our model parameters explicitly
 and coded up the calculations to produce output
 using basic linear algebra operations.
@@ -140,7 +140,7 @@ will involve multiple layers,
 we will use it anyway just to familiarize you
 with the most standard workflow.
 
-Recall the architecture of a single-layer network as shown in :numref:`fig_single_neuron`.
+Recall the architecture of a single-layer network as shown in :numref:`fig*single*neuron`.
 The layer is said to be *fully-connected*
 because each of its inputs is connected to each of its outputs
 by means of a matrix-vector multiplication.
@@ -187,20 +187,20 @@ net.add(nn.Dense(1))
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 # `nn` is an abbreviation for neural networks
 from torch import nn
 net = nn.Sequential(nn.Linear(2, 1))
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 # `keras` is the high-level API for TensorFlow
 net = tf.keras.Sequential()
 net.add(tf.keras.layers.Dense(1))
 ```
 
-## Initializing Model Parameters
+# # Initializing Model Parameters
 
 Before using `net`, we need to initialize the model parameters,
 such as the weights and bias in the linear regression model.
@@ -220,7 +220,7 @@ Bias parameters are initialized to zero by default.
 :end_tab:
 
 :begin_tab:`pytorch`
-As we have specified the input and output dimensions when constructing `nn.Linear`. Now we access the parameters directly to specify there initial values. We first locate the layer by `net[0]`, which is the first layer in the network, and then use the `weight.data` and `bias.data` methods to access the parameters. Next we use the replace methods `normal_` and `fill_` to overwrite parameter values.
+As we have specified the input and output dimensions when constructing `nn.Linear`. Now we access the parameters directly to specify there initial values. We first locate the layer by `net[0]`, which is the first layer in the network, and then use the `weight.data` and `bias.data` methods to access the parameters. Next we use the replace methods `normal*` and `fill*` to overwrite parameter values.
 :end_tab:
 
 :begin_tab:`tensorflow`
@@ -233,13 +233,13 @@ net.initialize(init.Normal(sigma=0.01))
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 net[0].weight.data.normal_(0, 0.01)
 net[0].bias.data.fill_(0)
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 initializer = tf.initializers.RandomNormal(stddev=0.01)
 net = tf.keras.Sequential()
 net.add(tf.keras.layers.Dense(1, kernel_initializer=initializer))
@@ -281,7 +281,7 @@ have not been initialized yet,
 we cannot access or manipulate them.
 :end_tab:
 
-## Defining the Loss Function
+# # Defining the Loss Function
 
 :begin_tab:`mxnet`
 In Gluon, the `loss` module defines various loss functions.
@@ -304,16 +304,16 @@ loss = gluon.loss.L2Loss()
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 loss = nn.MSELoss()
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 loss = tf.keras.losses.MeanSquaredError()
 ```
 
-## Defining the Optimization Algorithm
+# # Defining the Optimization Algorithm
 
 :begin_tab:`mxnet`
 Minibatch stochastic gradient descent is a standard tool
@@ -354,20 +354,20 @@ we set the value `learning_rate`, which is set to 0.03 here.
 
 ```{.python .input}
 from mxnet import gluon
-trainer = gluon.Trainer(net.collect_params(), 'sgd', {'learning_rate': 0.03})
+trainer = gluon.Trainer(net.collect*params(), 'sgd', {'learning*rate': 0.03})
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 trainer = torch.optim.SGD(net.parameters(), lr=0.03)
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 trainer = tf.keras.optimizers.SGD(learning_rate=0.03)
 ```
 
-## Training
+# # Training
 
 You might have noticed that expressing our model through
 high-level APIs of a deep learning framework
@@ -405,7 +405,7 @@ for epoch in range(num_epochs):
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 num_epochs = 3
 for epoch in range(num_epochs):
     for X, y in data_iter:
@@ -418,14 +418,14 @@ for epoch in range(num_epochs):
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 num_epochs = 3
 for epoch in range(num_epochs):
     for X, y in data_iter:
         with tf.GradientTape() as tape:
             l = loss(net(X, training=True), y)
         grads = tape.gradient(l, net.trainable_variables)
-        trainer.apply_gradients(zip(grads, net.trainable_variables))
+        trainer.apply*gradients(zip(grads, net.trainable*variables))
     l = loss(net(features), labels)
     print(f'epoch {epoch + 1}, loss {l:f}')
 ```
@@ -441,28 +441,28 @@ close to their ground-truth counterparts.
 
 ```{.python .input}
 w = net[0].weight.data()
-print(f'error in estimating w: {true_w - d2l.reshape(w, true_w.shape)}')
+print(f'error in estimating w: {true*w - d2l.reshape(w, true*w.shape)}')
 b = net[0].bias.data()
 print(f'error in estimating b: {true_b - b}')
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 w = net[0].weight.data
-print('error in estimating w:', true_w - d2l.reshape(w, true_w.shape))
+print('error in estimating w:', true*w - d2l.reshape(w, true*w.shape))
 b = net[0].bias.data
 print('error in estimating b:', true_b - b)
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 w = net.get_weights()[0]
-print('error in estimating w', true_w - d2l.reshape(w, true_w.shape))
+print('error in estimating w', true*w - d2l.reshape(w, true*w.shape))
 b = net.get_weights()[1]
 print('error in estimating b', true_b - b)
 ```
 
-## Summary
+# # Summary
 
 :begin_tab:`mxnet`
 * Using Gluon, we can implement models much more concisely.
@@ -484,7 +484,7 @@ print('error in estimating b', true_b - b)
 * Dimensionality and storage are automatically inferred (but be careful not to attempt to access parameters before they have been initialized).
 :end_tab:
 
-## Exercises
+# # Exercises
 
 :begin_tab:`mxnet`
 1. If we replace `l = loss(output, y)` with `l = loss(output, y).mean()`, we need to change `trainer.step(batch_size)` to `trainer.step(1)` for the code to behave identically. Why?

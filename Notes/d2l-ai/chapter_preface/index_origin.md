@@ -37,12 +37,12 @@ and playing a growing role in basic sciences---from astrophysics to biology.
 
 
 
-## About This Book
+# # About This Book
 
 This book represents our attempt to make deep learning approachable,
 teaching you the *concepts*, the *context*, and the *code*.
 
-### One Medium Combining Code, Math, and HTML
+## # One Medium Combining Code, Math, and HTML
 
 For any computing technology to reach its full impact,
 it must be well-understood, well-documented, and supported by
@@ -124,7 +124,7 @@ accessible both as executable code, as a physical book,
 as a downloadable PDF, and on the Internet as a website.
 At present there exist no tools and no workflow
 perfectly suited to these demands, so we had to assemble our own.
-We describe our approach in detail in :numref:`sec_how_to_contribute`.
+We describe our approach in detail in :numref:`sec*how*to_contribute`.
 We settled on GitHub to share the source and to allow for edits,
 Jupyter notebooks for mixing code, equations and text,
 Sphinx as a rendering engine to generate multiple outputs,
@@ -135,7 +135,7 @@ We believe that this might be the first book published
 using such an integrated workflow.
 
 
-### Learning by Doing
+## # Learning by Doing
 
 Many textbooks teach a series of topics, each in exhaustive detail.
 For example, Chris Bishop's excellent textbook :cite:`Bishop.2006`,
@@ -192,13 +192,13 @@ Once we have taught you how some component works,
 we can just use the Gluon version in subsequent tutorials.
 
 
-### Content and Structure
+## # Content and Structure
 
 The book can be roughly divided into three parts,
-which are presented by different colors in :numref:`fig_book_org`:
+which are presented by different colors in :numref:`fig*book*org`:
 
 ![Book structure](../img/book-org.svg)
-:label:`fig_book_org`
+:label:`fig*book*org`
 
 
 * The first part covers basics and preliminaries.
@@ -208,7 +208,7 @@ we quickly bring you up to speed on the prerequisites required
 for hands-on deep learning, such as how to store and manipulate data,
 and how to apply various numerical operations based on basic concepts
 from linear algebra, calculus, and probability.
-:numref:`chap_linear` and :numref:`chap_perceptrons`
+:numref:`chap*linear` and :numref:`chap*perceptrons`
 cover the most basic concepts and techniques of deep learning,
 such as linear regression, multilayer perceptrons and regularization.
 
@@ -216,10 +216,10 @@ such as linear regression, multilayer perceptrons and regularization.
 :numref:`chap_computation` describes the various key components of deep
 learning calculations and lays the groundwork
 for us to subsequently implement more complex models.
-Next, in :numref:`chap_cnn` and :numref:`chap_modern_cnn`,
+Next, in :numref:`chap*cnn` and :numref:`chap*modern_cnn`,
 we introduce convolutional neural networks (CNNs), powerful tools
 that form the backbone of most modern computer vision systems.
-Subsequently, in :numref:`chap_rnn` and :numref:`chap_modern_rnn`, we introduce
+Subsequently, in :numref:`chap*rnn` and :numref:`chap*modern_rnn`, we introduce
 recurrent neural networks (RNNs), models that exploit
 temporal or sequential structure in data, and are commonly used
 for natural language processing and time series prediction.
@@ -238,12 +238,12 @@ that influence the computational performance of your deep learning code.
 In :numref:`chap_cv`,
 we illustrate
 major applications of deep learning in computer vision.
-In :numref:`chap_nlp_pretrain` and :numref:`chap_nlp_app`,
+In :numref:`chap*nlp*pretrain` and :numref:`chap*nlp*app`,
 we show how to pretrain language representation models and apply
 them to natural language processing tasks.
 
 
-### Code
+## # Code
 :label:`sec_code`
 
 Most sections of this book feature executable code because of our belief
@@ -266,13 +266,13 @@ the frequently-imported and referred-to functions, classes, etc.
 in this book in the `d2l` package.
 For any block such as a function, a class, or multiple imports
 to be saved in the package, we will mark it with
-`#@save`. We offer a detailed overview of these functions and classes in :numref:`sec_d2l`.
+`# @save`. We offer a detailed overview of these functions and classes in :numref:`sec_d2l`.
 The `d2l` package is light-weight and only requires
 the following packages and modules as dependencies:
 
 ```{.python .input  n=1}
-#@tab all
-#@save
+# @tab all
+# @save
 import collections
 from collections import defaultdict
 from IPython import display
@@ -289,7 +289,7 @@ import time
 import requests
 import zipfile
 import hashlib
-d2l = sys.modules[__name__]
+d2l = sys.modules[**name**]
 ```
 
 :begin_tab:`mxnet`
@@ -342,14 +342,14 @@ Here is how we import modules from TensorFlow.
 :end_tab:
 
 ```{.python .input  n=1}
-#@save
+# @save
 from mxnet import autograd, context, gluon, image, init, np, npx
 from mxnet.gluon import nn, rnn
 ```
 
 ```{.python .input  n=1}
-#@tab pytorch
-#@save
+# @tab pytorch
+# @save
 import numpy as np
 import torch
 import torchvision
@@ -360,13 +360,13 @@ from torchvision import transforms
 ```
 
 ```{.python .input  n=1}
-#@tab tensorflow
-#@save
+# @tab tensorflow
+# @save
 import numpy as np
 import tensorflow as tf
 ```
 
-### Target Audience
+## # Target Audience
 
 This book is for students (undergraduate or graduate),
 engineers, and researchers, who seek a solid grasp
@@ -390,7 +390,7 @@ And if you have not used Python before,
 you may want to peruse this [Python tutorial](http://learnpython.org/).
 
 
-### Forum
+## # Forum
 
 Associated with this book, we have launched a discussion forum,
 located at [discuss.d2l.ai](https://discuss.d2l.ai/).
@@ -398,7 +398,7 @@ When you have questions on any section of the book,
 you can find the associated discussion page link at the end of each chapter.
 
 
-## Acknowledgments
+# # Acknowledgments
 
 We are indebted to the hundreds of contributors for both
 the English and the Chinese drafts.
@@ -434,7 +434,7 @@ We thank Amazon Web Services, especially Swami Sivasubramanian,
 Raju Gulabani, Charlie Bell, and Andrew Jassy for their generous support in writing this book. Without the available time, resources, discussions with colleagues, and continuous encouragement this book would not have happened.
 
 
-## Summary
+# # Summary
 
 * Deep learning has revolutionized pattern recognition, introducing technology that now powers a wide range of  technologies, including computer vision, natural language processing, automatic speech recognition.
 * To successfully apply deep learning, you must understand how to cast a problem, the mathematics of modeling, the algorithms for fitting your models to data, and the engineering techniques to implement it all.
@@ -443,7 +443,7 @@ Raju Gulabani, Charlie Bell, and Andrew Jassy for their generous support in writ
 * All notebooks are available for download on GitHub.
 
 
-## Exercises
+# # Exercises
 
 1. Register an account on the discussion forum of this book [discuss.d2l.ai](https://discuss.d2l.ai/).
 1. Install Python on your computer.

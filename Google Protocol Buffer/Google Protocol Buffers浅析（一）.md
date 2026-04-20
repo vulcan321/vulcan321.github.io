@@ -62,9 +62,9 @@ message AddressBook {
 
 当你下载完了对应的编译器二进制文件后，就可以使用下列命令来完成编译过程：
 ```
-protoc.exe -proto_path=SRC --cpp_out=DST SRC/addressbook.proto 
+protoc.exe -proto*path=SRC --cpp*out=DST SRC/addressbook.proto 
 ```
-其中--proto\_path指出proto文件所在的目录，--cpp\_out则是生成的代码文件要放的目录，最后的一个参数指出proto文件的路径。如上述命令中可以看出，将SRC目录下的addressbook.proto编译后放在DST目录下，应该会生成addressbook.pb.h和addressbook.pb.cc文件。
+其中--proto\*path指出proto文件所在的目录，--cpp\*out则是生成的代码文件要放的目录，最后的一个参数指出proto文件的路径。如上述命令中可以看出，将SRC目录下的addressbook.proto编译后放在DST目录下，应该会生成addressbook.pb.h和addressbook.pb.cc文件。
 
 通过查看头文件，可以发现针对每个字段都会大致生成如下几种函数，以number为例：
 
@@ -80,7 +80,7 @@ protoc.exe -proto_path=SRC --cpp_out=DST SRC/addressbook.proto 
 
 ```
 
-可以看出，对于每个字段会生成一个has函数(has\_number)、clear清除函数(clear\_number)、set函数(set\_number)、get函数(number和mutable\_number)。这儿解释下get函数中的两个函数的区别，对于原型为const std::string &number() const的get函数而言，返回的是常量字段，不能对其值进行修改。但是在有一些情况下，对字段进行修改是必要的，所以提供了一个mutable版的get函数，通过获取字段变量的指针，从而达到改变其值的目的。
+可以看出，对于每个字段会生成一个has函数(has\*number)、clear清除函数(clear\*number)、set函数(set\*number)、get函数(number和mutable\*number)。这儿解释下get函数中的两个函数的区别，对于原型为const std::string &number() const的get函数而言，返回的是常量字段，不能对其值进行修改。但是在有一些情况下，对字段进行修改是必要的，所以提供了一个mutable版的get函数，通过获取字段变量的指针，从而达到改变其值的目的。
 
  而对于字段修饰符为repeated的字段生成的函数，则稍微有一些不同，如phone字段，则编译器会为其产生如下的代码： 
 
@@ -89,10 +89,10 @@ protoc.exe -proto_path=SRC --cpp_out=DST SRC/addressbook.proto 
   inline int phone_size() const;
   inline void clear_phone();
   inline const ::google::protobuf::RepeatedPtrField< ::Person_PhoneNumber >& phone() const;
-  inline ::google::protobuf::RepeatedPtrField< ::Person_PhoneNumber >* mutable_phone();
+  inline ::google::protobuf::RepeatedPtrField< ::Person*PhoneNumber >* mutable*phone();
   inline const ::Person_PhoneNumber& phone(int index) const;
-  inline ::Person_PhoneNumber* mutable_phone(int index);
-  inline ::Person_PhoneNumber* add_phone();
+  inline ::Person*PhoneNumber* mutable*phone(int index);
+  inline ::Person*PhoneNumber* add*phone();
 ```
 
 

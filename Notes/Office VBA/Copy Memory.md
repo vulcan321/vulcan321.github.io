@@ -2,26 +2,26 @@ The following is a fully fledged example which uses conditional compilation* to 
 
 It also demonstrates the two different ways to declare and call the function (by Pointer and by Variable).
 ```vbnet
-#If Mac Then
-  #If Win64 Then
+# If Mac Then
+  # If Win64 Then
     Private Declare PtrSafe Function CopyMemory_byPtr Lib "libc.dylib" Alias "memmove" (ByVal dest As LongPtr, ByVal src As LongPtr, ByVal size As Long) As LongPtr
     Private Declare PtrSafe Function CopyMemory_byVar Lib "libc.dylib" Alias "memmove" (ByRef dest As Any, ByRef src As Any, ByVal size As Long) As LongPtr
-  #Else
+  # Else
     Private Declare Function CopyMemory_byPtr Lib "libc.dylib" Alias "memmove" (ByVal dest As Long, ByVal src As Long, ByVal size As Long) As Long
     Private Declare Function CopyMemory_byVar Lib "libc.dylib" Alias "memmove" (ByRef dest As Any, ByRef src As Any, ByVal size As Long) As Long
-  #End If
-#ElseIf VBA7 Then
-  #If Win64 Then
+  # End If
+# ElseIf VBA7 Then
+  # If Win64 Then
     Private Declare PtrSafe Sub CopyMemory_byPtr Lib "kernel32" Alias "RtlMoveMemory" (ByVal dest As LongPtr, ByVal src As LongPtr, ByVal size As LongLong)
     Private Declare PtrSafe Sub CopyMemory_byVar Lib "kernel32" Alias "RtlMoveMemory" (ByRef dest As Any, ByRef src As Any, ByVal size As LongLong)
-  #Else
+  # Else
     Private Declare PtrSafe Sub CopyMemory_byPtr Lib "kernel32" Alias "RtlMoveMemory" (ByVal dest As LongPtr, ByVal src As LongPtr, ByVal size As Long)
     Private Declare PtrSafe Sub CopyMemory_byVar Lib "kernel32" Alias "RtlMoveMemory" (ByRef dest As Any, ByRef src As Any, ByVal size As Long)
-  #End If
-#Else
+  # End If
+# Else
   Private Declare Sub CopyMemory_byPtr Lib "kernel32" Alias "RtlMoveMemory" (ByVal dest As Long, ByVal src As Long, ByVal size As Long)
   Private Declare Sub CopyMemory_byVar Lib "kernel32" Alias "RtlMoveMemory" (ByRef dest As Any, ByRef src As Any, ByVal size As Long)
-#End If
+# End If
 
 
 Public Sub CopyMemoryTest()
@@ -34,13 +34,13 @@ Public Sub CopyMemoryTest()
     abytSrc(¡) = AscB("A") + ¡
   Next ¡
 
-  MsgBox "Dest before copy = #" & ToString(abytDest) & "#"
+  MsgBox "Dest before copy = # " & ToString(abytDest) & "# "
   CopyMemory_byVar abytDest(0), abytSrc(0), 4
-  MsgBox "Dest during copy = #" & ToString(abytDest) & "#"
+  MsgBox "Dest during copy = # " & ToString(abytDest) & "# "
   CopyMemory_byPtr VarPtr(abytDest(0)) + 4, VarPtr(abytSrc(0)) + 4, 4
-  MsgBox "Dest during copy = #" & ToString(abytDest) & "#"
+  MsgBox "Dest during copy = # " & ToString(abytDest) & "# "
   CopyMemory_byPtr VarPtr(abytDest(8)), VarPtr(abytSrc(8)), 4
-  MsgBox "Dest after copy = #" & ToString(abytDest) & "#"
+  MsgBox "Dest after copy = # " & ToString(abytDest) & "# "
 
 End Sub
 

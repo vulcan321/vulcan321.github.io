@@ -2,7 +2,7 @@
 :label:`sec_lenet`
 
 通过之前几节，我们学习了构建一个完整卷积神经网络的所需组件。
-回想一下，之前我们将softmax回归模型（ :numref:`sec_softmax_scratch`）和多层感知机模型（ :numref:`sec_mlp_scratch`）应用于Fashion-MNIST数据集中的服装图片。
+回想一下，之前我们将softmax回归模型（ :numref:`sec*softmax*scratch`）和多层感知机模型（ :numref:`sec*mlp*scratch`）应用于Fashion-MNIST数据集中的服装图片。
 为了能够应用softmax回归和多层感知机，我们首先将每个大小为$28\times28$的图像展平为一个784维的固定长度的一维向量，然后用全连接层对其进行处理。
 而现在，我们已经掌握了卷积层的处理方法，我们可以在图像中保留空间结构。
 同时，用卷积层代替全连接层的另一个好处是：模型更简洁、所需的参数更少。
@@ -15,7 +15,7 @@
 LeNet被广泛用于自动取款机（ATM）机中，帮助识别处理支票的数字。
 时至今日，一些自动取款机仍在运行Yann LeCun和他的同事Leon Bottou在上世纪90年代写的代码呢！
 
-## LeNet
+# # LeNet
 
 总体来看，(**LeNet（LeNet-5）由两个部分组成：**)(~~卷积编码器和全连接层密集块~~)
 
@@ -52,7 +52,7 @@ net.add(nn.Conv2D(channels=6, kernel_size=5, padding=2, activation='sigmoid'),
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 from d2l import torch as d2l
 import torch
 from torch import nn
@@ -69,7 +69,7 @@ net = nn.Sequential(
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 from d2l import tensorflow as d2l
 import tensorflow as tf
 
@@ -88,7 +88,7 @@ def net():
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 from d2l import paddle as d2l
 import warnings
 warnings.filterwarnings("ignore")
@@ -108,10 +108,10 @@ net = nn.Sequential(
 
 我们对原始模型做了一点小改动，去掉了最后一层的高斯激活。除此之外，这个网络与最初的LeNet-5一致。
 
-下面，我们将一个大小为$28 \times 28$的单通道（黑白）图像通过LeNet。通过在每一层打印输出的形状，我们可以[**检查模型**]，以确保其操作与我们期望的 :numref:`img_lenet_vert`一致。
+下面，我们将一个大小为$28 \times 28$的单通道（黑白）图像通过LeNet。通过在每一层打印输出的形状，我们可以[**检查模型**]，以确保其操作与我们期望的 :numref:`img*lenet*vert`一致。
 
 ![LeNet 的简化版。](../img/lenet-vert.svg)
-:label:`img_lenet_vert`
+:label:`img*lenet*vert`
 
 ```{.python .input}
 X = np.random.uniform(size=(1, 1, 28, 28))
@@ -122,27 +122,27 @@ for layer in net:
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 X = torch.rand(size=(1, 1, 28, 28), dtype=torch.float32)
 for layer in net:
     X = layer(X)
-    print(layer.__class__.__name__,'output shape: \t',X.shape)
+    print(layer.**class**.**name**,'output shape: \t',X.shape)
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 X = tf.random.uniform((1, 28, 28, 1))
 for layer in net().layers:
     X = layer(X)
-    print(layer.__class__.__name__, 'output shape: \t', X.shape)
+    print(layer.**class**.**name**, 'output shape: \t', X.shape)
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 X = paddle.rand((1, 1, 28, 28), 'float32')
 for layer in net:
     X = layer(X)
-    print(layer.__class__.__name__, 'output shape: \t', X.shape)
+    print(layer.**class**.**name**, 'output shape: \t', X.shape)
 ```
 
 请注意，在整个卷积块中，与上一层相比，每一层特征的高度和宽度都减小了。
@@ -151,39 +151,39 @@ for layer in net:
 随着层叠的上升，通道的数量从输入时的1个，增加到第一个卷积层之后的6个，再到第二个卷积层之后的16个。
 同时，每个汇聚层的高度和宽度都减半。最后，每个全连接层减少维数，最终输出一个维数与结果分类数相匹配的输出。
 
-## 模型训练
+# # 模型训练
 
 现在我们已经实现了LeNet，让我们看看[**LeNet在Fashion-MNIST数据集上的表现**]。
 
 ```{.python .input}
-#@tab all
+# @tab all
 batch_size = 256
-train_iter, test_iter = d2l.load_data_fashion_mnist(batch_size=batch_size)
+train*iter, test*iter = d2l.load*data*fashion*mnist(batch*size=batch_size)
 ```
 
 虽然卷积神经网络的参数较少，但与深度的多层感知机相比，它们的计算成本仍然很高，因为每个参数都参与更多的乘法。
 通过使用GPU，可以用它加快训练。
 
 :begin_tab:`mxnet, pytorch`
-为了进行评估，我们需要[**对**] :numref:`sec_softmax_scratch`中描述的(**`evaluate_accuracy`函数进行轻微的修改**)。
+为了进行评估，我们需要[**对**] :numref:`sec*softmax*scratch`中描述的(**`evaluate_accuracy`函数进行轻微的修改**)。
 由于完整的数据集位于内存中，因此在模型使用GPU计算数据集之前，我们需要将其复制到显存中。
 :end_tab:
 
 ```{.python .input}
-def evaluate_accuracy_gpu(net, data_iter, device=None):  #@save
+def evaluate*accuracy*gpu(net, data_iter, device=None):  # @save
     """使用GPU计算模型在数据集上的精度"""
     if not device:  # 查询第一个参数所在的第一个设备
-        device = list(net.collect_params().values())[0].list_ctx()[0]
+        device = list(net.collect*params().values())[0].list*ctx()[0]
     metric = d2l.Accumulator(2)  # 正确预测的数量，总预测的数量
     for X, y in data_iter:
-        X, y = X.as_in_ctx(device), y.as_in_ctx(device)
+        X, y = X.as*in*ctx(device), y.as*in*ctx(device)
         metric.add(d2l.accuracy(net(X), y), d2l.size(y))
     return metric[0] / metric[1]
 ```
 
 ```{.python .input}
-#@tab pytorch
-def evaluate_accuracy_gpu(net, data_iter, device=None): #@save
+# @tab pytorch
+def evaluate*accuracy*gpu(net, data_iter, device=None): # @save
     """使用GPU计算模型在数据集上的精度"""
     if isinstance(net, nn.Module):
         net.eval()  # 设置为评估模式
@@ -204,8 +204,8 @@ def evaluate_accuracy_gpu(net, data_iter, device=None): #@save
 ```
 
 ```{.python .input}
-#@tab paddle
-def evaluate_accuracy_gpu(net, data_iter, device=None):     #@save
+# @tab paddle
+def evaluate*accuracy*gpu(net, data_iter, device=None):     # @save
     """使用GPU计算模型在数据集上的精度"""
     if isinstance(net, nn.Layer):
         net.eval()  # 设置为评估模式
@@ -227,17 +227,17 @@ def evaluate_accuracy_gpu(net, data_iter, device=None):     #@save
 ```
 
 [**为了使用GPU，我们还需要一点小改动**]。
-与 :numref:`sec_softmax_scratch`中定义的`train_epoch_ch3`不同，在进行正向和反向传播之前，我们需要将每一小批量数据移动到我们指定的设备（例如GPU）上。
+与 :numref:`sec*softmax*scratch`中定义的`train*epoch*ch3`不同，在进行正向和反向传播之前，我们需要将每一小批量数据移动到我们指定的设备（例如GPU）上。
 
-如下所示，训练函数`train_ch6`也类似于 :numref:`sec_softmax_scratch`中定义的`train_ch3`。
+如下所示，训练函数`train*ch6`也类似于 :numref:`sec*softmax*scratch`中定义的`train*ch3`。
 由于我们将实现多层神经网络，因此我们将主要使用高级API。
 以下训练函数假定从高级API创建的模型作为输入，并进行相应的优化。
 我们使用在 :numref:`subsec_xavier`中介绍的Xavier随机初始化模型参数。
 与全连接层一样，我们使用交叉熵损失函数和小批量随机梯度下降。
 
 ```{.python .input}
-#@save
-def train_ch6(net, train_iter, test_iter, num_epochs, lr, device):
+# @save
+def train*ch6(net, train*iter, test*iter, num*epochs, lr, device):
     """用GPU训练模型(在第六章定义)"""
     net.initialize(force_reinit=True, ctx=device, init=init.Xavier())
     loss = gluon.loss.SoftmaxCrossEntropyLoss()
@@ -245,13 +245,13 @@ def train_ch6(net, train_iter, test_iter, num_epochs, lr, device):
                             'sgd', {'learning_rate': lr})
     animator = d2l.Animator(xlabel='epoch', xlim=[1, num_epochs],
                             legend=['train loss', 'train acc', 'test acc'])
-    timer, num_batches = d2l.Timer(), len(train_iter)
+    timer, num*batches = d2l.Timer(), len(train*iter)
     for epoch in range(num_epochs):
         metric = d2l.Accumulator(3)  # 训练损失之和，训练准确率之和，样本数
         for i, (X, y) in enumerate(train_iter):
             timer.start()
-            # 下面是与“d2l.train_epoch_ch3”的主要不同
-            X, y = X.as_in_ctx(device), y.as_in_ctx(device)
+            # 下面是与“d2l.train*epoch*ch3”的主要不同
+            X, y = X.as*in*ctx(device), y.as*in*ctx(device)
             with autograd.record():
                 y_hat = net(X)
                 l = loss(y_hat, y)
@@ -261,25 +261,25 @@ def train_ch6(net, train_iter, test_iter, num_epochs, lr, device):
             timer.stop()
             train_l = metric[0] / metric[2]
             train_acc = metric[1] / metric[2]
-            if (i + 1) % (num_batches // 5) == 0 or i == num_batches - 1:
+            if (i + 1) % (num*batches // 5) == 0 or i == num*batches - 1:
                 animator.add(epoch + (i + 1) / num_batches,
-                             (train_l, train_acc, None))
-        test_acc = evaluate_accuracy_gpu(net, test_iter)
+                             (train*l, train*acc, None))
+        test*acc = evaluate*accuracy*gpu(net, test*iter)
         animator.add(epoch + 1, (None, None, test_acc))
-    print(f'loss {train_l:.3f}, train acc {train_acc:.3f}, '
+    print(f'loss {train*l:.3f}, train acc {train*acc:.3f}, '
           f'test acc {test_acc:.3f}')
     print(f'{metric[2] * num_epochs / timer.sum():.1f} examples/sec '
           f'on {str(device)}')
 ```
 
 ```{.python .input}
-#@tab pytorch
-#@save
-def train_ch6(net, train_iter, test_iter, num_epochs, lr, device):
+# @tab pytorch
+# @save
+def train*ch6(net, train*iter, test*iter, num*epochs, lr, device):
     """用GPU训练模型(在第六章定义)"""
     def init_weights(m):
         if type(m) == nn.Linear or type(m) == nn.Conv2d:
-            nn.init.xavier_uniform_(m.weight)
+            nn.init.xavier*uniform*(m.weight)
     net.apply(init_weights)
     print('training on', device)
     net.to(device)
@@ -287,7 +287,7 @@ def train_ch6(net, train_iter, test_iter, num_epochs, lr, device):
     loss = nn.CrossEntropyLoss()
     animator = d2l.Animator(xlabel='epoch', xlim=[1, num_epochs],
                             legend=['train loss', 'train acc', 'test acc'])
-    timer, num_batches = d2l.Timer(), len(train_iter)
+    timer, num*batches = d2l.Timer(), len(train*iter)
     for epoch in range(num_epochs):
         # 训练损失之和，训练准确率之和，样本数
         metric = d2l.Accumulator(3)  
@@ -305,70 +305,70 @@ def train_ch6(net, train_iter, test_iter, num_epochs, lr, device):
             timer.stop()
             train_l = metric[0] / metric[2]
             train_acc = metric[1] / metric[2]
-            if (i + 1) % (num_batches // 5) == 0 or i == num_batches - 1:
+            if (i + 1) % (num*batches // 5) == 0 or i == num*batches - 1:
                 animator.add(epoch + (i + 1) / num_batches,
-                             (train_l, train_acc, None))
-        test_acc = evaluate_accuracy_gpu(net, test_iter)
+                             (train*l, train*acc, None))
+        test*acc = evaluate*accuracy*gpu(net, test*iter)
         animator.add(epoch + 1, (None, None, test_acc))
-    print(f'loss {train_l:.3f}, train acc {train_acc:.3f}, '
+    print(f'loss {train*l:.3f}, train acc {train*acc:.3f}, '
           f'test acc {test_acc:.3f}')
     print(f'{metric[2] * num_epochs / timer.sum():.1f} examples/sec '
           f'on {str(device)}')
 ```
 
 ```{.python .input}
-#@tab tensorflow
-class TrainCallback(tf.keras.callbacks.Callback):  #@save
+# @tab tensorflow
+class TrainCallback(tf.keras.callbacks.Callback):  # @save
     """一个以可视化的训练进展的回调"""
-    def __init__(self, net, train_iter, test_iter, num_epochs, device_name):
+    def **init**(self, net, train*iter, test*iter, num*epochs, device*name):
         self.timer = d2l.Timer()
         self.animator = d2l.Animator(
             xlabel='epoch', xlim=[1, num_epochs], legend=[
                 'train loss', 'train acc', 'test acc'])
         self.net = net
-        self.train_iter = train_iter
-        self.test_iter = test_iter
-        self.num_epochs = num_epochs
-        self.device_name = device_name
+        self.train*iter = train*iter
+        self.test*iter = test*iter
+        self.num*epochs = num*epochs
+        self.device*name = device*name
 
-    def on_epoch_begin(self, epoch, logs=None):
+    def on*epoch*begin(self, epoch, logs=None):
         self.timer.start()
 
-    def on_epoch_end(self, epoch, logs):
+    def on*epoch*end(self, epoch, logs):
         self.timer.stop()
         test_acc = self.net.evaluate(
-            self.test_iter, verbose=0, return_dict=True)['accuracy']
+            self.test*iter, verbose=0, return*dict=True)['accuracy']
         metrics = (logs['loss'], logs['accuracy'], test_acc)
         self.animator.add(epoch + 1, metrics)
         if epoch == self.num_epochs - 1:
-            batch_size = next(iter(self.train_iter))[0].shape[0]
-            num_examples = batch_size * tf.data.experimental.cardinality(
+            batch*size = next(iter(self.train*iter))[0].shape[0]
+            num*examples = batch*size * tf.data.experimental.cardinality(
                 self.train_iter).numpy()
             print(f'loss {metrics[0]:.3f}, train acc {metrics[1]:.3f}, '
                   f'test acc {metrics[2]:.3f}')
             print(f'{num_examples / self.timer.avg():.1f} examples/sec on '
                   f'{str(self.device_name)}')
 
-#@save
-def train_ch6(net_fn, train_iter, test_iter, num_epochs, lr, device):
+# @save
+def train*ch6(net*fn, train*iter, test*iter, num_epochs, lr, device):
     """用GPU训练模型(在第六章定义)"""
-    device_name = device._device_name
+    device*name = device.*device_name
     strategy = tf.distribute.OneDeviceStrategy(device_name)
     with strategy.scope():
         optimizer = tf.keras.optimizers.SGD(learning_rate=lr)
         loss = tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True)
         net = net_fn()
         net.compile(optimizer=optimizer, loss=loss, metrics=['accuracy'])
-    callback = TrainCallback(net, train_iter, test_iter, num_epochs,
+    callback = TrainCallback(net, train*iter, test*iter, num_epochs,
                              device_name)
-    net.fit(train_iter, epochs=num_epochs, verbose=0, callbacks=[callback])
+    net.fit(train*iter, epochs=num*epochs, verbose=0, callbacks=[callback])
     return net
 ```
 
 ```{.python .input}
-#@tab paddle
-#@save
-def train_ch6(net, train_iter, test_iter, num_epochs, lr, device):
+# @tab paddle
+# @save
+def train*ch6(net, train*iter, test*iter, num*epochs, lr, device):
     """用GPU训练模型(在第六章定义)"""
     def init_weights(m):
         if type(m) == nn.Linear or type(m) == nn.Conv2D:
@@ -380,7 +380,7 @@ def train_ch6(net, train_iter, test_iter, num_epochs, lr, device):
     loss = nn.CrossEntropyLoss()
     animator = d2l.Animator(xlabel='epoch', xlim=[1, num_epochs],
                             legend=['train loss', 'train acc', 'test acc'])
-    timer, num_batches = d2l.Timer(), len(train_iter)
+    timer, num*batches = d2l.Timer(), len(train*iter)
     for epoch in range(num_epochs):
         # 训练损失之和，训练准确率之和，样本数
         metric = d2l.Accumulator(3)
@@ -388,7 +388,7 @@ def train_ch6(net, train_iter, test_iter, num_epochs, lr, device):
         for i, (X, y) in enumerate(train_iter):
             timer.start()
             optimizer.clear_grad()
-            X, y = paddle.to_tensor(X, place=device), paddle.to_tensor(y, place=device)
+            X, y = paddle.to*tensor(X, place=device), paddle.to*tensor(y, place=device)
             y_hat = net(X)
             l = loss(y_hat, y)
             l.backward()
@@ -398,12 +398,12 @@ def train_ch6(net, train_iter, test_iter, num_epochs, lr, device):
             timer.stop()
             train_l = metric[0] / metric[2]
             train_acc = metric[1] / metric[2]
-            if (i + 1) % (num_batches // 5) == 0 or i == num_batches - 1:
+            if (i + 1) % (num*batches // 5) == 0 or i == num*batches - 1:
                 animator.add(epoch + (i + 1) / num_batches,
-                             (train_l, train_acc, None))
-        test_acc = evaluate_accuracy_gpu(net, test_iter)
+                             (train*l, train*acc, None))
+        test*acc = evaluate*accuracy*gpu(net, test*iter)
         animator.add(epoch + 1, (None, None, test_acc))
-    print(f'loss {train_l:.3f}, train acc {train_acc:.3f}, '
+    print(f'loss {train*l:.3f}, train acc {train*acc:.3f}, '
           f'test acc {test_acc:.3f}')
     print(f'{metric[2] * num_epochs / timer.sum():.1f} examples/sec '
           f'on {str(device)}')
@@ -412,12 +412,12 @@ def train_ch6(net, train_iter, test_iter, num_epochs, lr, device):
 现在，我们[**训练和评估LeNet-5模型**]。
 
 ```{.python .input}
-#@tab all
+# @tab all
 lr, num_epochs = 0.9, 10
-train_ch6(net, train_iter, test_iter, num_epochs, lr, d2l.try_gpu())
+train*ch6(net, train*iter, test*iter, num*epochs, lr, d2l.try_gpu())
 ```
 
-## 小结
+# # 小结
 
 * 卷积神经网络（CNN）是一类使用卷积层的网络。
 * 在卷积神经网络中，我们组合使用卷积层、非线性激活函数和汇聚层。
@@ -425,7 +425,7 @@ train_ch6(net, train_iter, test_iter, num_epochs, lr, d2l.try_gpu())
 * 在传统的卷积神经网络中，卷积块编码得到的表征在输出之前需由一个或多个全连接层进行处理。
 * LeNet是最早发布的卷积神经网络之一。
 
-## 练习
+# # 练习
 
 1. 将平均汇聚层替换为最大汇聚层，会发生什么？
 1. 尝试构建一个基于LeNet的更复杂的网络，以提高其准确性。

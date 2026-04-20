@@ -5,7 +5,7 @@
 这些内容有助于读者了解和实现本书中介绍的大多数模型。
 本节将介绍线性代数中的基本数学对象、算术和运算，并用数学符号和相应的代码实现来表示它们。
 
-## 标量
+# # 标量
 
 
 如果你曾经在餐厅支付餐费，那么应该已经知道一些基本的线性代数，比如在数字间相加或相乘。
@@ -36,7 +36,7 @@ x + y, x * y, x / y, x ** y
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 import torch
 
 x = torch.tensor(3.0)
@@ -46,7 +46,7 @@ x + y, x * y, x / y, x**y
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 import tensorflow as tf
 
 x = tf.constant(3.0)
@@ -56,7 +56,7 @@ x + y, x * y, x / y, x**y
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 import warnings
 warnings.filterwarnings(action='ignore')
 import paddle
@@ -67,7 +67,7 @@ y = paddle.to_tensor([2.0])
 x + y, x * y, x / y, x**y
 ```
 
-## 向量
+# # 向量
 
 [**向量可以被视为标量值组成的列表**]。
 这些标量值被称为向量的*元素*（element）或*分量*（component）。
@@ -87,19 +87,19 @@ x
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 x = torch.arange(4)
 x
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 x = tf.range(4)
 x
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 x = paddle.arange(4)
 x
 ```
@@ -109,31 +109,31 @@ x
 大量文献认为列向量是向量的默认方向，在本书中也是如此。
 在数学中，向量$\mathbf{x}$可以写为：
 
-$$\mathbf{x} =\begin{bmatrix}x_{1}  \\x_{2}  \\ \vdots  \\x_{n}\end{bmatrix},$$
-:eqlabel:`eq_vec_def`
+$$\mathbf{x} =\begin{bmatrix}x*{1}  \\x*{2}  \\ \vdots  \\x_{n}\end{bmatrix},$$
+:eqlabel:`eq*vec*def`
 
-其中$x_1,\ldots,x_n$是向量的元素。在代码中，我们(**通过张量的索引来访问任一元素**)。
+其中$x*1,\ldots,x*n$是向量的元素。在代码中，我们(**通过张量的索引来访问任一元素**)。
 
 ```{.python .input}
 x[3]
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 x[3]
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 x[3]
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 x[3]
 ```
 
-### 长度、维度和形状
+## # 长度、维度和形状
 
 向量只是一个数字数组，就像每个数组都有一个长度一样，每个向量也是如此。
 在数学表示法中，如果我们想说一个向量$\mathbf{x}$由$n$个实值标量组成，
@@ -147,17 +147,17 @@ len(x)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 len(x)
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 len(x)
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 len(x)
 ```
 
@@ -170,17 +170,17 @@ x.shape
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 x.shape
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 x.shape
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 x.shape
 ```
 
@@ -190,7 +190,7 @@ x.shape
 然而，张量的维度用来表示张量具有的轴数。
 在这个意义上，张量的某个轴的维数就是这个轴的长度。
 
-## 矩阵
+# # 矩阵
 
 正如向量将标量从零阶推广到一阶，矩阵将向量从一阶推广到二阶。
 矩阵，我们通常用粗体、大写字母来表示
@@ -202,8 +202,8 @@ x.shape
 我们可以将任意矩阵$\mathbf{A} \in \mathbb{R}^{m \times n}$视为一个表格，
 其中每个元素$a_{ij}$属于第$i$行第$j$列：
 
-$$\mathbf{A}=\begin{bmatrix} a_{11} & a_{12} & \cdots & a_{1n} \\ a_{21} & a_{22} & \cdots & a_{2n} \\ \vdots & \vdots & \ddots & \vdots \\ a_{m1} & a_{m2} & \cdots & a_{mn} \\ \end{bmatrix}.$$
-:eqlabel:`eq_matrix_def`
+$$\mathbf{A}=\begin{bmatrix} a*{11} & a*{12} & \cdots & a*{1n} \\ a*{21} & a*{22} & \cdots & a*{2n} \\ \vdots & \vdots & \ddots & \vdots \\ a*{m1} & a*{m2} & \cdots & a_{mn} \\ \end{bmatrix}.$$
+:eqlabel:`eq*matrix*def`
 
 对于任意$\mathbf{A} \in \mathbb{R}^{m \times n}$，
 $\mathbf{A}$的形状是（$m$,$n$）或$m \times n$。
@@ -219,43 +219,43 @@ A
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 A = torch.arange(20).reshape(5, 4)
 A
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 A = tf.reshape(tf.range(20), (5, 4))
 A
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 A = paddle.reshape(paddle.arange(20), (5, 4))
 A
 ```
 
 我们可以通过行索引（$i$）和列索引（$j$）来访问矩阵中的标量元素$a_{ij}$，
 例如$[\mathbf{A}]_{ij}$。
-如果没有给出矩阵$\mathbf{A}$的标量元素，如在 :eqref:`eq_matrix_def`那样，
+如果没有给出矩阵$\mathbf{A}$的标量元素，如在 :eqref:`eq*matrix*def`那样，
 我们可以简单地使用矩阵$\mathbf{A}$的小写字母索引下标$a_{ij}$
 来引用$[\mathbf{A}]_{ij}$。
 为了表示起来简单，只有在必要时才会将逗号插入到单独的索引中，
-例如$a_{2,3j}$和$[\mathbf{A}]_{2i-1,3}$。
+例如$a*{2,3j}$和$[\mathbf{A}]*{2i-1,3}$。
 
 当我们交换矩阵的行和列时，结果称为矩阵的*转置*（transpose）。
 通常用$\mathbf{a}^\top$来表示矩阵的转置，如果$\mathbf{B}=\mathbf{A}^\top$，
-则对于任意$i$和$j$，都有$b_{ij}=a_{ji}$。
-因此，在 :eqref:`eq_matrix_def`中的转置是一个形状为$n \times m$的矩阵：
+则对于任意$i$和$j$，都有$b*{ij}=a*{ji}$。
+因此，在 :eqref:`eq*matrix*def`中的转置是一个形状为$n \times m$的矩阵：
 
 $$
 \mathbf{A}^\top =
 \begin{bmatrix}
-    a_{11} & a_{21} & \dots  & a_{m1} \\
-    a_{12} & a_{22} & \dots  & a_{m2} \\
+    a*{11} & a*{21} & \dots  & a_{m1} \\
+    a*{12} & a*{22} & \dots  & a_{m2} \\
     \vdots & \vdots & \ddots  & \vdots \\
-    a_{1n} & a_{2n} & \dots  & a_{mn}
+    a*{1n} & a*{2n} & \dots  & a_{mn}
 \end{bmatrix}.
 $$
 
@@ -266,17 +266,17 @@ A.T
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 A.T
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 tf.transpose(A)
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 paddle.transpose(A, perm=[1, 0])
 ```
 
@@ -289,19 +289,19 @@ B
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 B = torch.tensor([[1, 2, 3], [2, 0, 4], [3, 4, 5]])
 B
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 B = tf.constant([[1, 2, 3], [2, 0, 4], [3, 4, 5]])
 B
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 B = paddle.to_tensor([[1, 2, 3], [2, 0, 4], [3, 4, 5]])
 B
 ```
@@ -313,17 +313,17 @@ B == B.T
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 B == B.T
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 B == tf.transpose(B)
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 B == paddle.transpose(B, perm=[1, 0])
 ```
 
@@ -336,13 +336,13 @@ B == paddle.transpose(B, perm=[1, 0])
 例如，沿着张量的最外轴，我们可以访问或遍历小批量的数据样本。
 
 
-## 张量
+# # 张量
 
 [**就像向量是标量的推广，矩阵是向量的推广一样，我们可以构建具有更多轴的数据结构**]。
 张量（本小节中的“张量”指代数对象）是描述具有任意数量轴的$n$维数组的通用方法。
 例如，向量是一阶张量，矩阵是二阶张量。
 张量用特殊字体的大写字母表示（例如，$\mathsf{X}$、$\mathsf{Y}$和$\mathsf{Z}$），
-它们的索引机制（例如$x_{ijk}$和$[\mathsf{X}]_{1,2i-1,3}$）与矩阵类似。
+它们的索引机制（例如$x*{ijk}$和$[\mathsf{X}]*{1,2i-1,3}$）与矩阵类似。
 
 当我们开始处理图像时，张量将变得更加重要，图像以$n$维数组形式出现，
 其中3个轴对应于高度、宽度，以及一个*通道*（channel）轴，
@@ -355,24 +355,24 @@ X
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 X = torch.arange(24).reshape(2, 3, 4)
 X
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 X = tf.reshape(tf.range(24), (2, 3, 4))
 X
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 X = paddle.reshape(paddle.arange(24), (2, 3, 4))
 X
 ```
 
-## 张量算法的基本性质
+# # 张量算法的基本性质
 
 标量、向量、矩阵和任意数量轴的张量（本小节中的“张量”指代数对象）有一些实用的属性。
 例如，从按元素操作的定义中可以注意到，任何按元素的一元运算都不会改变其操作数的形状。
@@ -386,21 +386,21 @@ A, A + B
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 A = torch.arange(20, dtype=torch.float32).reshape(5, 4)
 B = A.clone()  # 通过分配新内存，将A的一个副本分配给B
 A, A + B
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 A = tf.reshape(tf.range(20, dtype=tf.float32), (5, 4))
 B = A  # 不能通过分配新内存将A克隆到B
 A, A + B
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 A = paddle.reshape(paddle.arange(20, dtype=paddle.float32), (5, 4))
 B = A.clone()  # 通过分配新内存，将A的一个副本分配给B
 A, A + B
@@ -409,14 +409,14 @@ A, A + B
 具体而言，[**两个矩阵的按元素乘法称为*Hadamard积*（Hadamard product）（数学符号$\odot$）**]。
 对于矩阵$\mathbf{B} \in \mathbb{R}^{m \times n}$，
 其中第$i$行和第$j$列的元素是$b_{ij}$。
-矩阵$\mathbf{A}$（在 :eqref:`eq_matrix_def`中定义）和$\mathbf{B}$的Hadamard积为：
+矩阵$\mathbf{A}$（在 :eqref:`eq*matrix*def`中定义）和$\mathbf{B}$的Hadamard积为：
 $$
 \mathbf{A} \odot \mathbf{B} =
 \begin{bmatrix}
-    a_{11}  b_{11} & a_{12}  b_{12} & \dots  & a_{1n}  b_{1n} \\
-    a_{21}  b_{21} & a_{22}  b_{22} & \dots  & a_{2n}  b_{2n} \\
+    a*{11}  b*{11} & a*{12}  b*{12} & \dots  & a*{1n}  b*{1n} \\
+    a*{21}  b*{21} & a*{22}  b*{22} & \dots  & a*{2n}  b*{2n} \\
     \vdots & \vdots & \ddots & \vdots \\
-    a_{m1}  b_{m1} & a_{m2}  b_{m2} & \dots  & a_{mn}  b_{mn}
+    a*{m1}  b*{m1} & a*{m2}  b*{m2} & \dots  & a*{mn}  b*{mn}
 \end{bmatrix}.
 $$
 
@@ -425,17 +425,17 @@ A * B
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 A * B
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 A * B
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 A * B
 ```
 
@@ -448,33 +448,33 @@ a + X, (a * X).shape
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 a = 2
 X = torch.arange(24).reshape(2, 3, 4)
 a + X, (a * X).shape
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 a = 2
 X = tf.reshape(tf.range(24), (2, 3, 4))
 a + X, (a * X).shape
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 a = 2
 X = paddle.reshape(paddle.arange(24), (2, 3, 4))
 a + X, (a * X).shape
 ```
 
-## 降维
+# # 降维
 
 :label:`subseq_lin-alg-reduction`
 
 我们可以对任意张量进行的一个有用的操作是[**计算其元素的和**]。
 数学表示法使用$\sum$符号表示求和。
-为了表示长度为$d$的向量中元素的总和，可以记为$\sum_{i=1}^dx_i$。
+为了表示长度为$d$的向量中元素的总和，可以记为$\sum*{i=1}^dx*i$。
 在代码中可以调用计算求和的函数：
 
 ```{.python .input}
@@ -483,42 +483,42 @@ x, x.sum()
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 x = torch.arange(4, dtype=torch.float32)
 x, x.sum()
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 x = tf.range(4, dtype=tf.float32)
 x, tf.reduce_sum(x)
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 x = paddle.arange(4, dtype=paddle.float32)
 x, x.sum()
 ```
 
 我们可以(**表示任意形状张量的元素和**)。
-例如，矩阵$\mathbf{A}$中元素的和可以记为$\sum_{i=1}^{m} \sum_{j=1}^{n} a_{ij}$。
+例如，矩阵$\mathbf{A}$中元素的和可以记为$\sum*{i=1}^{m} \sum*{j=1}^{n} a_{ij}$。
 
 ```{.python .input}
 A.shape, A.sum()
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 A.shape, A.sum()
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 A.shape, tf.reduce_sum(A)
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 A.shape, A.sum()
 ```
 
@@ -528,51 +528,51 @@ A.shape, A.sum()
 由于输入矩阵沿0轴降维以生成输出向量，因此输入轴0的维数在输出形状中消失。
 
 ```{.python .input}
-A_sum_axis0 = A.sum(axis=0)
-A_sum_axis0, A_sum_axis0.shape
+A*sum*axis0 = A.sum(axis=0)
+A*sum*axis0, A*sum*axis0.shape
 ```
 
 ```{.python .input}
-#@tab pytorch
-A_sum_axis0 = A.sum(axis=0)
-A_sum_axis0, A_sum_axis0.shape
+# @tab pytorch
+A*sum*axis0 = A.sum(axis=0)
+A*sum*axis0, A*sum*axis0.shape
 ```
 
 ```{.python .input}
-#@tab tensorflow
-A_sum_axis0 = tf.reduce_sum(A, axis=0)
-A_sum_axis0, A_sum_axis0.shape
+# @tab tensorflow
+A*sum*axis0 = tf.reduce_sum(A, axis=0)
+A*sum*axis0, A*sum*axis0.shape
 ```
 
 ```{.python .input}
-#@tab paddle
-A_sum_axis0 = A.sum(axis=0)
-A_sum_axis0, A_sum_axis0.shape
+# @tab paddle
+A*sum*axis0 = A.sum(axis=0)
+A*sum*axis0, A*sum*axis0.shape
 ```
 
 指定`axis=1`将通过汇总所有列的元素降维（轴1）。因此，输入轴1的维数在输出形状中消失。
 
 ```{.python .input}
-A_sum_axis1 = A.sum(axis=1)
-A_sum_axis1, A_sum_axis1.shape
+A*sum*axis1 = A.sum(axis=1)
+A*sum*axis1, A*sum*axis1.shape
 ```
 
 ```{.python .input}
-#@tab pytorch
-A_sum_axis1 = A.sum(axis=1)
-A_sum_axis1, A_sum_axis1.shape
+# @tab pytorch
+A*sum*axis1 = A.sum(axis=1)
+A*sum*axis1, A*sum*axis1.shape
 ```
 
 ```{.python .input}
-#@tab tensorflow
-A_sum_axis1 = tf.reduce_sum(A, axis=1)
-A_sum_axis1, A_sum_axis1.shape
+# @tab tensorflow
+A*sum*axis1 = tf.reduce_sum(A, axis=1)
+A*sum*axis1, A*sum*axis1.shape
 ```
 
 ```{.python .input}
-#@tab paddle
-A_sum_axis1 = A.sum(axis=1)
-A_sum_axis1, A_sum_axis1.shape
+# @tab paddle
+A*sum*axis1 = A.sum(axis=1)
+A*sum*axis1, A*sum*axis1.shape
 ```
 
 沿着行和列对矩阵求和，等价于对矩阵的所有元素进行求和。
@@ -582,17 +582,17 @@ A.sum(axis=[0, 1])  # 结果和A.sum()相同
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 A.sum(axis=[0, 1])  # 结果和A.sum()相同
 ```
 
 ```{.python .input}
-#@tab tensorflow
-tf.reduce_sum(A, axis=[0, 1])  # 结果和tf.reduce_sum(A)相同
+# @tab tensorflow
+tf.reduce*sum(A, axis=[0, 1])  # 结果和tf.reduce*sum(A)相同
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 A.sum(axis=[0, 1])
 ```
 
@@ -605,17 +605,17 @@ A.mean(), A.sum() / A.size
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 A.mean(), A.sum() / A.numel()
 ```
 
 ```{.python .input}
-#@tab tensorflow
-tf.reduce_mean(A), tf.reduce_sum(A) / tf.size(A).numpy()
+# @tab tensorflow
+tf.reduce*mean(A), tf.reduce*sum(A) / tf.size(A).numpy()
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 A.mean(), A.sum() / A.numel()
 ```
 
@@ -626,21 +626,21 @@ A.mean(axis=0), A.sum(axis=0) / A.shape[0]
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 A.mean(axis=0), A.sum(axis=0) / A.shape[0]
 ```
 
 ```{.python .input}
-#@tab tensorflow
-tf.reduce_mean(A, axis=0), tf.reduce_sum(A, axis=0) / A.shape[0]
+# @tab tensorflow
+tf.reduce*mean(A, axis=0), tf.reduce*sum(A, axis=0) / A.shape[0]
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 A.mean(axis=0), A.sum(axis=0) / A.shape[0]
 ```
 
-### 非降维求和
+## # 非降维求和
 
 :label:`subseq_lin-alg-non-reduction`
 
@@ -652,41 +652,41 @@ sum_A
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 sum_A = A.sum(axis=1, keepdims=True)
 sum_A
 ```
 
 ```{.python .input}
-#@tab tensorflow
-sum_A = tf.reduce_sum(A, axis=1, keepdims=True)
+# @tab tensorflow
+sum*A = tf.reduce*sum(A, axis=1, keepdims=True)
 sum_A
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 sum_A = paddle.sum(A, axis=1, keepdim=True)
 sum_A
 ```
 
-例如，由于`sum_A`在对每行进行求和后仍保持两个轴，我们可以(**通过广播将`A`除以`sum_A`**)。
+例如，由于`sum*A`在对每行进行求和后仍保持两个轴，我们可以(**通过广播将`A`除以`sum*A`**)。
 
 ```{.python .input}
 A / sum_A
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 A / sum_A
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 A / sum_A
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 A / sum_A
 ```
 
@@ -699,28 +699,28 @@ A.cumsum(axis=0)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 A.cumsum(axis=0)
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 tf.cumsum(A, axis=0)
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 A.cumsum(axis=0)
 ```
 
-## 点积（Dot Product）
+# # 点积（Dot Product）
 
 我们已经学习了按元素操作、求和及平均值。
 另一个最基本的操作之一是点积。
 给定两个向量$\mathbf{x},\mathbf{y}\in\mathbb{R}^d$，
 它们的*点积*（dot product）$\mathbf{x}^\top\mathbf{y}$
 （或$\langle\mathbf{x},\mathbf{y}\rangle$）
-是相同位置的按元素乘积的和：$\mathbf{x}^\top \mathbf{y} = \sum_{i=1}^{d} x_i y_i$。
+是相同位置的按元素乘积的和：$\mathbf{x}^\top \mathbf{y} = \sum*{i=1}^{d} x*i y_i$。
 
 [~~点积是相同位置的按元素乘积的和~~]
 
@@ -730,19 +730,19 @@ x, y, np.dot(x, y)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 y = torch.ones(4, dtype = torch.float32)
 x, y, torch.dot(x, y)
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 y = tf.ones(4, dtype=tf.float32)
 x, y, tf.tensordot(x, y, axes=1)
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 y = paddle.ones(shape=[4], dtype='float32')
 x, y, paddle.dot(x, y)
 ```
@@ -754,17 +754,17 @@ np.sum(x * y)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 torch.sum(x * y)
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 tf.reduce_sum(x * y)
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 paddle.sum(x * y)
 ```
 
@@ -773,15 +773,15 @@ paddle.sum(x * y)
 和一组由$\mathbf{w} \in \mathbb{R}^d$表示的权重。
 $\mathbf{x}$中的值根据权重$\mathbf{w}$的加权和，
 可以表示为点积$\mathbf{x}^\top \mathbf{w}$。
-当权重为非负数且和为1（即$\left(\sum_{i=1}^{d}{w_i}=1\right)$）时，
+当权重为非负数且和为1（即$\left(\sum*{i=1}^{d}{w*i}=1\right)$）时，
 点积表示*加权平均*（weighted average）。
 将两个向量规范化得到单位长度后，点积表示它们夹角的余弦。
 本节后面的内容将正式介绍*长度*（length）的概念。
 
-## 矩阵-向量积
+# # 矩阵-向量积
 
 现在我们知道如何计算点积，可以开始理解*矩阵-向量积*（matrix-vector product）。
-回顾分别在 :eqref:`eq_matrix_def`和 :eqref:`eq_vec_def`中定义的矩阵$\mathbf{A} \in \mathbb{R}^{m \times n}$和向量$\mathbf{x} \in \mathbb{R}^n$。
+回顾分别在 :eqref:`eq*matrix*def`和 :eqref:`eq*vec*def`中定义的矩阵$\mathbf{A} \in \mathbb{R}^{m \times n}$和向量$\mathbf{x} \in \mathbb{R}^n$。
 让我们将矩阵$\mathbf{A}$用它的行向量表示：
 
 $$\mathbf{A}=
@@ -840,21 +840,21 @@ A.shape, x.shape, np.dot(A, x)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 A.shape, x.shape, torch.mv(A, x)
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 A.shape, x.shape, tf.linalg.matvec(A, x)
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 A.shape, x.shape, paddle.mv(A, x)
 ```
 
-## 矩阵-矩阵乘法
+# # 矩阵-矩阵乘法
 
 在掌握点积和矩阵-向量积的知识后，
 那么**矩阵-矩阵乘法**（matrix-matrix multiplication）应该很简单。
@@ -862,19 +862,19 @@ A.shape, x.shape, paddle.mv(A, x)
 假设有两个矩阵$\mathbf{A} \in \mathbb{R}^{n \times k}$和$\mathbf{B} \in \mathbb{R}^{k \times m}$：
 
 $$\mathbf{A}=\begin{bmatrix}
- a_{11} & a_{12} & \cdots & a_{1k} \\
- a_{21} & a_{22} & \cdots & a_{2k} \\
+ a*{11} & a*{12} & \cdots & a_{1k} \\
+ a*{21} & a*{22} & \cdots & a_{2k} \\
 \vdots & \vdots & \ddots & \vdots \\
- a_{n1} & a_{n2} & \cdots & a_{nk} \\
+ a*{n1} & a*{n2} & \cdots & a_{nk} \\
 \end{bmatrix},\quad
 \mathbf{B}=\begin{bmatrix}
- b_{11} & b_{12} & \cdots & b_{1m} \\
- b_{21} & b_{22} & \cdots & b_{2m} \\
+ b*{11} & b*{12} & \cdots & b_{1m} \\
+ b*{21} & b*{22} & \cdots & b_{2m} \\
 \vdots & \vdots & \ddots & \vdots \\
- b_{k1} & b_{k2} & \cdots & b_{km} \\
+ b*{k1} & b*{k2} & \cdots & b_{km} \\
 \end{bmatrix}.$$
 
-用行向量$\mathbf{a}^\top_{i} \in \mathbb{R}^k$表示矩阵$\mathbf{A}$的第$i$行，并让列向量$\mathbf{b}_{j} \in \mathbb{R}^k$作为矩阵$\mathbf{B}$的第$j$列。要生成矩阵积$\mathbf{C} = \mathbf{A}\mathbf{B}$，最简单的方法是考虑$\mathbf{A}$的行向量和$\mathbf{B}$的列向量:
+用行向量$\mathbf{a}^\top*{i} \in \mathbb{R}^k$表示矩阵$\mathbf{A}$的第$i$行，并让列向量$\mathbf{b}*{j} \in \mathbb{R}^k$作为矩阵$\mathbf{B}$的第$j$列。要生成矩阵积$\mathbf{C} = \mathbf{A}\mathbf{B}$，最简单的方法是考虑$\mathbf{A}$的行向量和$\mathbf{B}$的列向量:
 
 $$\mathbf{A}=
 \begin{bmatrix}
@@ -884,10 +884,10 @@ $$\mathbf{A}=
 \mathbf{a}^\top_n \\
 \end{bmatrix},
 \quad \mathbf{B}=\begin{bmatrix}
- \mathbf{b}_{1} & \mathbf{b}_{2} & \cdots & \mathbf{b}_{m} \\
+ \mathbf{b}*{1} & \mathbf{b}*{2} & \cdots & \mathbf{b}_{m} \\
 \end{bmatrix}.
 $$
-当我们简单地将每个元素$c_{ij}$计算为点积$\mathbf{a}^\top_i \mathbf{b}_j$:
+当我们简单地将每个元素$c*{ij}$计算为点积$\mathbf{a}^\top*i \mathbf{b}_j$:
 
 $$\mathbf{C} = \mathbf{AB} = \begin{bmatrix}
 \mathbf{a}^\top_{1} \\
@@ -896,13 +896,13 @@ $$\mathbf{C} = \mathbf{AB} = \begin{bmatrix}
 \mathbf{a}^\top_n \\
 \end{bmatrix}
 \begin{bmatrix}
- \mathbf{b}_{1} & \mathbf{b}_{2} & \cdots & \mathbf{b}_{m} \\
+ \mathbf{b}*{1} & \mathbf{b}*{2} & \cdots & \mathbf{b}_{m} \\
 \end{bmatrix}
 = \begin{bmatrix}
-\mathbf{a}^\top_{1} \mathbf{b}_1 & \mathbf{a}^\top_{1}\mathbf{b}_2& \cdots & \mathbf{a}^\top_{1} \mathbf{b}_m \\
- \mathbf{a}^\top_{2}\mathbf{b}_1 & \mathbf{a}^\top_{2} \mathbf{b}_2 & \cdots & \mathbf{a}^\top_{2} \mathbf{b}_m \\
+\mathbf{a}^\top*{1} \mathbf{b}*1 & \mathbf{a}^\top*{1}\mathbf{b}*2& \cdots & \mathbf{a}^\top*{1} \mathbf{b}*m \\
+ \mathbf{a}^\top*{2}\mathbf{b}*1 & \mathbf{a}^\top*{2} \mathbf{b}*2 & \cdots & \mathbf{a}^\top*{2} \mathbf{b}*m \\
  \vdots & \vdots & \ddots &\vdots\\
-\mathbf{a}^\top_{n} \mathbf{b}_1 & \mathbf{a}^\top_{n}\mathbf{b}_2& \cdots& \mathbf{a}^\top_{n} \mathbf{b}_m
+\mathbf{a}^\top*{n} \mathbf{b}*1 & \mathbf{a}^\top*{n}\mathbf{b}*2& \cdots& \mathbf{a}^\top*{n} \mathbf{b}*m
 \end{bmatrix}.
 $$
 
@@ -917,26 +917,26 @@ np.dot(A, B)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 B = torch.ones(4, 3)
 torch.mm(A, B)
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 B = tf.ones((4, 3), tf.float32)
 tf.matmul(A, B)
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 B = paddle.ones(shape=[4, 3], dtype='float32')
 paddle.mm(A, B)
 ```
 
 矩阵-矩阵乘法可以简单地称为**矩阵乘法**，不应与"Hadamard积"混淆。
 
-## 范数
+# # 范数
 :label:`subsec_lin-algebra-norms`
 
 线性代数中最有用的一些运算符是*范数*（norm）。
@@ -966,11 +966,11 @@ $$\forall i, [\mathbf{x}]_i = 0 \Leftrightarrow f(\mathbf{x})=0.$$
 范数听起来很像距离的度量。
 欧几里得距离和毕达哥拉斯定理中的非负性概念和三角不等式可能会给出一些启发。
 事实上，欧几里得距离是一个$L_2$范数：
-假设$n$维向量$\mathbf{x}$中的元素是$x_1,\ldots,x_n$，其[**$L_2$*范数*是向量元素平方和的平方根：**]
+假设$n$维向量$\mathbf{x}$中的元素是$x*1,\ldots,x*n$，其[**$L_2$*范数*是向量元素平方和的平方根：**]
 
-(**$$\|\mathbf{x}\|_2 = \sqrt{\sum_{i=1}^n x_i^2},$$**)
+(**$$\|\mathbf{x}\|*2 = \sqrt{\sum*{i=1}^n x_i^2},$$**)
 
-其中，在$L_2$范数中常常省略下标$2$，也就是说$\|\mathbf{x}\|$等同于$\|\mathbf{x}\|_2$。
+其中，在$L*2$范数中常常省略下标$2$，也就是说$\|\mathbf{x}\|$等同于$\|\mathbf{x}\|*2$。
 在代码中，我们可以按如下方式计算向量的$L_2$范数。
 
 ```{.python .input}
@@ -979,28 +979,28 @@ np.linalg.norm(u)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 u = torch.tensor([3.0, -4.0])
 torch.norm(u)
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 u = tf.constant([3.0, -4.0])
 tf.norm(u)
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 u = paddle.to_tensor([3.0, -4.0])
 paddle.norm(u)
 ```
 
-深度学习中更经常地使用$L_2$范数的平方，也会经常遇到[**$L_1$范数，它表示为向量元素的绝对值之和：**]
+深度学习中更经常地使用$L*2$范数的平方，也会经常遇到[**$L*1$范数，它表示为向量元素的绝对值之和：**]
 
-(**$$\|\mathbf{x}\|_1 = \sum_{i=1}^n \left|x_i \right|.$$**)
+(**$$\|\mathbf{x}\|*1 = \sum*{i=1}^n \left|x_i \right|.$$**)
 
-与$L_2$范数相比，$L_1$范数受异常值的影响较小。
+与$L*2$范数相比，$L*1$范数受异常值的影响较小。
 为了计算$L_1$范数，我们将绝对值函数和按元素求和组合起来。
 
 ```{.python .input}
@@ -1008,27 +1008,27 @@ np.abs(u).sum()
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 torch.abs(u).sum()
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 tf.reduce_sum(tf.abs(u))
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 paddle.abs(u).sum()
 ```
 
-$L_2$范数和$L_1$范数都是更一般的$L_p$范数的特例：
+$L*2$范数和$L*1$范数都是更一般的$L_p$范数的特例：
 
-$$\|\mathbf{x}\|_p = \left(\sum_{i=1}^n \left|x_i \right|^p \right)^{1/p}.$$
+$$\|\mathbf{x}\|*p = \left(\sum*{i=1}^n \left|x_i \right|^p \right)^{1/p}.$$
 
 类似于向量的$L_2$范数，[**矩阵**]$\mathbf{X} \in \mathbb{R}^{m \times n}$(**的*Frobenius范数*（Frobenius norm）是矩阵元素平方和的平方根：**)
 
-(**$$\|\mathbf{X}\|_F = \sqrt{\sum_{i=1}^m \sum_{j=1}^n x_{ij}^2}.$$**)
+(**$$\|\mathbf{X}\|*F = \sqrt{\sum*{i=1}^m \sum*{j=1}^n x*{ij}^2}.$$**)
 
 Frobenius范数满足向量范数的所有性质，它就像是矩阵形向量的$L_2$范数。
 调用以下函数将计算矩阵的Frobenius范数。
@@ -1038,23 +1038,23 @@ np.linalg.norm(np.ones((4, 9)))
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 torch.norm(torch.ones((4, 9)))
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 tf.norm(tf.ones((4, 9)))
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 paddle.norm(paddle.ones(shape=[4, 9], dtype='float32'))
 ```
 
-### 范数和目标
+## # 范数和目标
 
-:label:`subsec_norms_and_objectives`
+:label:`subsec*norms*and_objectives`
 
 在深度学习中，我们经常试图解决优化问题：
 *最大化*分配给观测数据的概率;
@@ -1062,7 +1062,7 @@ paddle.norm(paddle.ones(shape=[4, 9], dtype='float32'))
 用向量表示物品（如单词、产品或新闻文章），以便最小化相似项目之间的距离，最大化不同项目之间的距离。
 目标，或许是深度学习算法最重要的组成部分（除了数据），通常被表达为范数。
 
-## 关于线性代数的更多信息
+# # 关于线性代数的更多信息
 
 仅用一节，我们就教会了阅读本书所需的、用以理解现代深度学习的线性代数。
 线性代数还有很多，其中很多数学对于机器学习非常有用。
@@ -1073,17 +1073,17 @@ paddle.norm(paddle.ones(shape=[4, 9], dtype='float32'))
 
 如果渴望了解有关线性代数的更多信息，可以参考[线性代数运算的在线附录](https://d2l.ai/chapter_appendix-mathematics-for-deep-learning/geometry-linear-algebraic-ops.html)或其他优秀资源 :cite:`Strang.1993,Kolter.2008,Petersen.Pedersen.ea.2008`。
 
-## 小结
+# # 小结
 
 * 标量、向量、矩阵和张量是线性代数中的基本数学对象。
 * 向量泛化自标量，矩阵泛化自向量。
 * 标量、向量、矩阵和张量分别具有零、一、二和任意数量的轴。
 * 一个张量可以通过`sum`和`mean`沿指定的轴降低维度。
 * 两个矩阵的按元素乘法被称为他们的Hadamard积。它与矩阵乘法不同。
-* 在深度学习中，我们经常使用范数，如$L_1$范数、$L_2$范数和Frobenius范数。
+* 在深度学习中，我们经常使用范数，如$L*1$范数、$L*2$范数和Frobenius范数。
 * 我们可以对标量、向量、矩阵和张量执行各种操作。
 
-## 练习
+# # 练习
 
 1. 证明一个矩阵$\mathbf{A}$的转置的转置是$\mathbf{A}$，即$(\mathbf{A}^\top)^\top = \mathbf{A}$。
 1. 给出两个矩阵$\mathbf{A}$和$\mathbf{B}$，证明“它们转置的和”等于“它们和的转置”，即$\mathbf{A}^\top + \mathbf{B}^\top = (\mathbf{A} + \mathbf{B})^\top$。

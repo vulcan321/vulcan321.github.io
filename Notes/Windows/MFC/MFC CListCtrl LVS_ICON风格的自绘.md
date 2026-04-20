@@ -15,7 +15,7 @@ public:
     virtual ~CListCtrlEx();
 
 protected:
-    DECLARE_MESSAGE_MAP()
+    DECLARE*MESSAGE*MAP()
 public:
     afx_msg void OnNMCustomdraw(NMHDR *pNMHDR, LRESULT *pResult);
     afx_msg void OnEnable(BOOL bEnable);
@@ -43,10 +43,10 @@ CListCtrlEx::~CListCtrlEx()
 }
 
 
-BEGIN_MESSAGE_MAP(CListCtrlEx, CListCtrl)
-    ON_NOTIFY_REFLECT(NM_CUSTOMDRAW, &CListCtrlEx::OnNMCustomdraw)
-    ON_WM_ENABLE()
-END_MESSAGE_MAP()
+BEGIN*MESSAGE*MAP(CListCtrlEx, CListCtrl)
+    ON*NOTIFY*REFLECT(NM_CUSTOMDRAW, &CListCtrlEx::OnNMCustomdraw)
+    ON*WM*ENABLE()
+END*MESSAGE*MAP()
 
 
 
@@ -83,9 +83,9 @@ void CListCtrlEx::OnNMCustomdraw(NMHDR *pNMHDR, LRESULT *pResult)
         // Get the image index and selected/focused state of the
         // item being drawn.
         ZeroMemory(&rItem, sizeof(LVITEM));
-        rItem.mask = LVIF_IMAGE | LVIF_STATE;
+        rItem.mask = LVIF*IMAGE | LVIF*STATE;
         rItem.iItem = nItem;
-        rItem.stateMask = LVIS_SELECTED | LVIS_FOCUSED;
+        rItem.stateMask = LVIS*SELECTED | LVIS*FOCUSED;
         GetItem(&rItem);
 
         // Get the rect that holds the item's icon.

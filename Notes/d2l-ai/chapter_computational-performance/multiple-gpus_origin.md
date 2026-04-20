@@ -1,13 +1,13 @@
 # Training on Multiple GPUs
-:label:`sec_multi_gpu`
+:label:`sec*multi*gpu`
 
-So far we discussed how to train models efficiently on CPUs and GPUs. We even showed how deep learning frameworks allow one to parallelize computation and communication automatically between them in :numref:`sec_auto_para`. We also showed in :numref:`sec_use_gpu` how to list all the available GPUs on a computer using the `nvidia-smi` command.
+So far we discussed how to train models efficiently on CPUs and GPUs. We even showed how deep learning frameworks allow one to parallelize computation and communication automatically between them in :numref:`sec*auto*para`. We also showed in :numref:`sec*use*gpu` how to list all the available GPUs on a computer using the `nvidia-smi` command.
 What we did *not* discuss is how to actually parallelize deep learning training. 
-Instead, we implied in passing that one would somehow split the data across multiple devices and make it work. The present section fills in the details and shows how to train a network in parallel when starting from scratch. Details on how to take advantage of functionality in high-level APIs is relegated to :numref:`sec_multi_gpu_concise`.
-We assume that you are familiar with minibatch stochastic gradient descent algorithms such as the ones described in :numref:`sec_minibatch_sgd`.
+Instead, we implied in passing that one would somehow split the data across multiple devices and make it work. The present section fills in the details and shows how to train a network in parallel when starting from scratch. Details on how to take advantage of functionality in high-level APIs is relegated to :numref:`sec*multi*gpu_concise`.
+We assume that you are familiar with minibatch stochastic gradient descent algorithms such as the ones described in :numref:`sec*minibatch*sgd`.
 
 
-## Splitting the Problem
+# # Splitting the Problem
 
 Let us start with a simple computer vision problem and a slightly archaic network, e.g., with multiple layers of convolutions, pooling, and possibly a few fully-connected layers in the end. 
 That is, let us start with a network that looks quite similar to LeNet :cite:`LeCun.Bottou.Bengio.ea.1998` or AlexNet :cite:`Krizhevsky.Sutskever.Hinton.2012`. 
@@ -28,14 +28,14 @@ Moreover, compute-intensive, yet sequential operations are nontrivial to partiti
 
 Second, we could split the work layer-wise. For instance, rather than computing 64 channels on a single GPU we could split up the problem across 4 GPUs, each of which generates data for 16 channels.
 Likewise, for a fully-connected layer we could split the number of output units.
-:numref:`fig_alexnet_original` (taken from :cite:`Krizhevsky.Sutskever.Hinton.2012`)
+:numref:`fig*alexnet*original` (taken from :cite:`Krizhevsky.Sutskever.Hinton.2012`)
 illustrates this design, where this strategy was used to deal with GPUs that had a very small memory footprint (2 GB at the time).
 This allows for good scaling in terms of computation, provided that the number of channels (or units) is not too small.
 Besides,
 multiple GPUs can process increasingly larger networks since the available memory scales linearly.
 
 ![Model parallelism in the original AlexNet design due to limited GPU memory.](../img/alexnet-original.svg)
-:label:`fig_alexnet_original`
+:label:`fig*alexnet*original`
 
 However,
 we need a *very large* number of synchronization or barrier operations since each layer depends on the results from all the other layers.
@@ -55,17 +55,17 @@ However, adding more GPUs does not allow us to train larger models.
 A comparison of different ways of parallelization on multiple GPUs is depicted in :numref:`fig_splitting`.
 By and large, data parallelism is the most convenient way to proceed, provided that we have access to GPUs with sufficiently large memory. See also :cite:`Li.Andersen.Park.ea.2014` for a detailed description of partitioning for distributed training. GPU memory used to be a problem in the early days of deep learning. By now this issue has been resolved for all but the most unusual cases. We focus on data parallelism in what follows.
 
-## Data Parallelism
+# # Data Parallelism
 
 Assume that there are $k$ GPUs on a machine. Given the model to be trained, each GPU will maintain a complete set of model parameters independently though parameter values across the GPUs are identical and synchronized. 
 As an example,
-:numref:`fig_data_parallel` illustrates 
+:numref:`fig*data*parallel` illustrates 
 training with
 data parallelism when $k=2$.
 
 
 ![Calculation of minibatch stochastic gradient descent using data parallelism on two GPUs.](../img/data-parallel.svg)
-:label:`fig_data_parallel`
+:label:`fig*data*parallel`
 
 In general, the training proceeds as follows:
 
@@ -79,7 +79,7 @@ In general, the training proceeds as follows:
 
 
 Note that in practice we *increase* the minibatch size $k$-fold when training on $k$ GPUs such that each GPU has the same amount of work to do as if we were training on a single GPU only. On a 16-GPU server this can increase the minibatch size considerably and we may have to increase the learning rate accordingly.
-Also note that batch normalization in :numref:`sec_batch_norm` needs to be adjusted, e.g., by keeping a separate batch normalization coefficient per GPU.
+Also note that batch normalization in :numref:`sec*batch*norm` needs to be adjusted, e.g., by keeping a separate batch normalization coefficient per GPU.
 In what follows we will use a toy network to illustrate multi-GPU training.
 
 ```{.python .input}
@@ -90,7 +90,7 @@ npx.set_np()
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 %matplotlib inline
 from d2l import torch as d2l
 import torch
@@ -98,7 +98,7 @@ from torch import nn
 from torch.nn import functional as F
 ```
 
-## A Toy Network
+# # A Toy Network
 
 We use LeNet as introduced in :numref:`sec_lenet` (with slight modifications). We define it from scratch to illustrate parameter exchange and synchronization in detail.
 
@@ -119,13 +119,13 @@ params = [W1, b1, W2, b2, W3, b3, W4, b4]
 def lenet(X, params):
     h1_conv = npx.convolution(data=X, weight=params[0], bias=params[1],
                               kernel=(3, 3), num_filter=20)
-    h1_activation = npx.relu(h1_conv)
-    h1 = npx.pooling(data=h1_activation, pool_type='avg', kernel=(2, 2),
+    h1*activation = npx.relu(h1*conv)
+    h1 = npx.pooling(data=h1*activation, pool*type='avg', kernel=(2, 2),
                      stride=(2, 2))
     h2_conv = npx.convolution(data=h1, weight=params[2], bias=params[3],
                               kernel=(5, 5), num_filter=50)
-    h2_activation = npx.relu(h2_conv)
-    h2 = npx.pooling(data=h2_activation, pool_type='avg', kernel=(2, 2),
+    h2*activation = npx.relu(h2*conv)
+    h2 = npx.pooling(data=h2*activation, pool*type='avg', kernel=(2, 2),
                      stride=(2, 2))
     h2 = h2.reshape(h2.shape[0], -1)
     h3_linear = np.dot(h2, params[4]) + params[5]
@@ -138,7 +138,7 @@ loss = gluon.loss.SoftmaxCrossEntropyLoss()
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 # Initialize model parameters
 scale = 0.01
 W1 = torch.randn(size=(20, 1, 3, 3)) * scale
@@ -154,11 +154,11 @@ params = [W1, b1, W2, b2, W3, b3, W4, b4]
 # Define the model
 def lenet(X, params):
     h1_conv = F.conv2d(input=X, weight=params[0], bias=params[1])
-    h1_activation = F.relu(h1_conv)
-    h1 = F.avg_pool2d(input=h1_activation, kernel_size=(2, 2), stride=(2, 2))
+    h1*activation = F.relu(h1*conv)
+    h1 = F.avg*pool2d(input=h1*activation, kernel_size=(2, 2), stride=(2, 2))
     h2_conv = F.conv2d(input=h1, weight=params[2], bias=params[3])
-    h2_activation = F.relu(h2_conv)
-    h2 = F.avg_pool2d(input=h2_activation, kernel_size=(2, 2), stride=(2, 2))
+    h2*activation = F.relu(h2*conv)
+    h2 = F.avg*pool2d(input=h2*activation, kernel_size=(2, 2), stride=(2, 2))
     h2 = h2.reshape(h2.shape[0], -1)
     h3_linear = torch.mm(h2, params[4]) + params[5]
     h3 = F.relu(h3_linear)
@@ -169,7 +169,7 @@ def lenet(X, params):
 loss = nn.CrossEntropyLoss(reduction='none')
 ```
 
-## Data Synchronization
+# # Data Synchronization
 
 For efficient multi-GPU training we need two basic operations. 
 First we need to have the ability to distribute a list of parameters to multiple devices and to attach gradients (`get_params`). Without parameters it is impossible to evaluate the network on a GPU.
@@ -184,19 +184,19 @@ def get_params(params, device):
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 def get_params(params, device):
     new_params = [p.clone().to(device) for p in params]
     for p in new_params:
-        p.requires_grad_()
+        p.requires*grad*()
     return new_params
 ```
 
 Let us try it out by copying the model parameters to one GPU.
 
 ```{.python .input}
-#@tab all
-new_params = get_params(params, d2l.try_gpu(0))
+# @tab all
+new*params = get*params(params, d2l.try_gpu(0))
 print('b1 weight:', new_params[1])
 print('b1 grad:', new_params[1].grad)
 ```
@@ -213,7 +213,7 @@ def allreduce(data):
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 def allreduce(data):
     for i in range(1, len(data)):
         data[0][:] += data[i].to(data[0].device)
@@ -231,14 +231,14 @@ print('after allreduce:\n', data[0], '\n', data[1])
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 data = [torch.ones((1, 2), device=d2l.try_gpu(i)) * (i + 1) for i in range(2)]
 print('before allreduce:\n', data[0], '\n', data[1])
 allreduce(data)
 print('after allreduce:\n', data[0], '\n', data[1])
 ```
 
-## Distributing Data
+# # Distributing Data
 
 We need a simple utility function to distribute a minibatch evenly across multiple GPUs. For instance, on two GPUs we would like to have half of the data to be copied to either of the GPUs.
 Since it is more convenient and more concise, we use the built-in function from the deep learning framework to try it out on a $4 \times 5$ matrix.
@@ -246,14 +246,14 @@ Since it is more convenient and more concise, we use the built-in function from 
 ```{.python .input}
 data = np.arange(20).reshape(4, 5)
 devices = [npx.gpu(0), npx.gpu(1)]
-split = gluon.utils.split_and_load(data, devices)
+split = gluon.utils.split*and*load(data, devices)
 print('input :', data)
 print('load into', devices)
 print('output:', split)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 data = torch.arange(20).reshape(4, 5)
 devices = [torch.device('cuda:0'), torch.device('cuda:1')]
 split = nn.parallel.scatter(data, devices)
@@ -265,17 +265,17 @@ print('output:', split)
 For later reuse we define a `split_batch` function that splits both data and labels.
 
 ```{.python .input}
-#@save
+# @save
 def split_batch(X, y, devices):
     """Split `X` and `y` into multiple devices."""
     assert X.shape[0] == y.shape[0]
-    return (gluon.utils.split_and_load(X, devices),
-            gluon.utils.split_and_load(y, devices))
+    return (gluon.utils.split*and*load(X, devices),
+            gluon.utils.split*and*load(y, devices))
 ```
 
 ```{.python .input}
-#@tab pytorch
-#@save
+# @tab pytorch
+# @save
 def split_batch(X, y, devices):
     """Split `X` and `y` into multiple devices."""
     assert X.shape[0] == y.shape[0]
@@ -283,17 +283,17 @@ def split_batch(X, y, devices):
             nn.parallel.scatter(y, devices))
 ```
 
-## Training
+# # Training
 
-Now we can implement multi-GPU training on a single minibatch. Its implementation is primarily based on the data parallelism approach described in this section. We will use the auxiliary functions we just discussed, `allreduce` and `split_and_load`, to synchronize the data among multiple GPUs. Note that we do not need to write any specific code to achieve parallelism. Since the computational graph does not have any dependencies across devices within a minibatch, it is executed in parallel *automatically*.
+Now we can implement multi-GPU training on a single minibatch. Its implementation is primarily based on the data parallelism approach described in this section. We will use the auxiliary functions we just discussed, `allreduce` and `split*and*load`, to synchronize the data among multiple GPUs. Note that we do not need to write any specific code to achieve parallelism. Since the computational graph does not have any dependencies across devices within a minibatch, it is executed in parallel *automatically*.
 
 ```{.python .input}
-def train_batch(X, y, device_params, devices, lr):
-    X_shards, y_shards = split_batch(X, y, devices)
+def train*batch(X, y, device*params, devices, lr):
+    X*shards, y*shards = split_batch(X, y, devices)
     with autograd.record():  # Loss is calculated separately on each GPU
-        ls = [loss(lenet(X_shard, device_W), y_shard)
-              for X_shard, y_shard, device_W in zip(
-                  X_shards, y_shards, device_params)]
+        ls = [loss(lenet(X*shard, device*W), y_shard)
+              for X*shard, y*shard, device_W in zip(
+                  X*shards, y*shards, device_params)]
     for l in ls:  # Backpropagation is performed separately on each GPU
         l.backward()
     # Sum all gradients from each GPU and broadcast them to all GPUs
@@ -305,13 +305,13 @@ def train_batch(X, y, device_params, devices, lr):
 ```
 
 ```{.python .input}
-#@tab pytorch
-def train_batch(X, y, device_params, devices, lr):
-    X_shards, y_shards = split_batch(X, y, devices)
+# @tab pytorch
+def train*batch(X, y, device*params, devices, lr):
+    X*shards, y*shards = split_batch(X, y, devices)
     # Loss is calculated separately on each GPU
-    ls = [loss(lenet(X_shard, device_W), y_shard).sum()
-          for X_shard, y_shard, device_W in zip(
-              X_shards, y_shards, device_params)]
+    ls = [loss(lenet(X*shard, device*W), y_shard).sum()
+          for X*shard, y*shard, device_W in zip(
+              X*shards, y*shards, device_params)]
     for l in ls:  # Backpropagation is performed separately on each GPU
         l.backward()
     # Sum all gradients from each GPU and broadcast them to all GPUs
@@ -327,11 +327,11 @@ Now, we can define the training function. It is slightly different from the ones
 Obviously each batch is processed using the `train_batch` function to deal with multiple GPUs. For convenience (and conciseness of code) we compute the accuracy on a single GPU, though this is *inefficient* since the other GPUs are idle.
 
 ```{.python .input}
-def train(num_gpus, batch_size, lr):
-    train_iter, test_iter = d2l.load_data_fashion_mnist(batch_size)
-    devices = [d2l.try_gpu(i) for i in range(num_gpus)]
+def train(num*gpus, batch*size, lr):
+    train*iter, test*iter = d2l.load*data*fashion*mnist(batch*size)
+    devices = [d2l.try*gpu(i) for i in range(num*gpus)]
     # Copy model parameters to `num_gpus` GPUs
-    device_params = [get_params(params, d) for d in devices]
+    device*params = [get*params(params, d) for d in devices]
     num_epochs = 10
     animator = d2l.Animator('epoch', 'test acc', xlim=[1, num_epochs])
     timer = d2l.Timer()
@@ -339,23 +339,23 @@ def train(num_gpus, batch_size, lr):
         timer.start()
         for X, y in train_iter:
             # Perform multi-GPU training for a single minibatch
-            train_batch(X, y, device_params, devices, lr)
+            train*batch(X, y, device*params, devices, lr)
             npx.waitall()
         timer.stop()
         # Evaluate the model on GPU 0
-        animator.add(epoch + 1, (d2l.evaluate_accuracy_gpu(
-            lambda x: lenet(x, device_params[0]), test_iter, devices[0]),))
+        animator.add(epoch + 1, (d2l.evaluate*accuracy*gpu(
+            lambda x: lenet(x, device*params[0]), test*iter, devices[0]),))
     print(f'test acc: {animator.Y[0][-1]:.2f}, {timer.avg():.1f} sec/epoch '
           f'on {str(devices)}')
 ```
 
 ```{.python .input}
-#@tab pytorch
-def train(num_gpus, batch_size, lr):
-    train_iter, test_iter = d2l.load_data_fashion_mnist(batch_size)
-    devices = [d2l.try_gpu(i) for i in range(num_gpus)]
+# @tab pytorch
+def train(num*gpus, batch*size, lr):
+    train*iter, test*iter = d2l.load*data*fashion*mnist(batch*size)
+    devices = [d2l.try*gpu(i) for i in range(num*gpus)]
     # Copy model parameters to `num_gpus` GPUs
-    device_params = [get_params(params, d) for d in devices]
+    device*params = [get*params(params, d) for d in devices]
     num_epochs = 10
     animator = d2l.Animator('epoch', 'test acc', xlim=[1, num_epochs])
     timer = d2l.Timer()
@@ -363,12 +363,12 @@ def train(num_gpus, batch_size, lr):
         timer.start()
         for X, y in train_iter:
             # Perform multi-GPU training for a single minibatch
-            train_batch(X, y, device_params, devices, lr)
+            train*batch(X, y, device*params, devices, lr)
             torch.cuda.synchronize()
         timer.stop()
         # Evaluate the model on GPU 0
-        animator.add(epoch + 1, (d2l.evaluate_accuracy_gpu(
-            lambda x: lenet(x, device_params[0]), test_iter, devices[0]),))
+        animator.add(epoch + 1, (d2l.evaluate*accuracy*gpu(
+            lambda x: lenet(x, device*params[0]), test*iter, devices[0]),))
     print(f'test acc: {animator.Y[0][-1]:.2f}, {timer.avg():.1f} sec/epoch '
           f'on {str(devices)}')
 ```
@@ -377,8 +377,8 @@ Let us see how well this works on a single GPU.
 We first use a batch size of 256 and a learning rate of 0.2.
 
 ```{.python .input}
-#@tab all
-train(num_gpus=1, batch_size=256, lr=0.2)
+# @tab all
+train(num*gpus=1, batch*size=256, lr=0.2)
 ```
 
 By keeping the batch size and learning rate unchanged and increasing the number of GPUs to 2, we can see that the test accuracy roughly stays the same compared with
@@ -387,18 +387,18 @@ In terms of the optimization algorithms, they are identical. Unfortunately there
 Let us see what happens nonetheless for Fashion-MNIST.
 
 ```{.python .input}
-#@tab all
-train(num_gpus=2, batch_size=256, lr=0.2)
+# @tab all
+train(num*gpus=2, batch*size=256, lr=0.2)
 ```
 
-## Summary
+# # Summary
 
 * There are multiple ways to split deep network training over multiple GPUs. We could split them between layers, across layers, or across data. The former two require tightly choreographed data transfers. Data parallelism is the simplest strategy.
 * Data parallel training is straightforward. However, it increases the effective minibatch size to be efficient.
 * In data parallelism, data are split across multiple GPUs, where each GPU executes its own forward and backward operation and subsequently gradients are aggregated and results are broadcast back to the GPUs.
 * We may use slightly increased learning rates for larger minibatches.
 
-## Exercises
+# # Exercises
 
 1. When training on $k$ GPUs, change the minibatch size from $b$ to $k \cdot b$, i.e., scale it up by the number of GPUs.
 1. Compare accuracy for different learning rates. How does it scale with the number of GPUs?

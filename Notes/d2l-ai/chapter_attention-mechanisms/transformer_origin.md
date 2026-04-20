@@ -23,7 +23,7 @@ pervasive in a wide range of
 modern deep learning applications,
 such as in areas of language, vision, speech, and reinforcement learning.
 
-## Model
+# # Model
 
 
 As an instance of the encoder-decoder
@@ -36,7 +36,7 @@ the Transformer is composed of an encoder and a decoder.
 Different from
 Bahdanau attention
 for sequence to sequence learning
-in :numref:`fig_s2s_attention_details`,
+in :numref:`fig*s2s*attention_details`,
 the input (source) and output (target)
 sequence embeddings
 are added with positional encoding
@@ -114,7 +114,7 @@ npx.set_np()
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 from d2l import torch as d2l
 import math
 import pandas as pd
@@ -122,7 +122,7 @@ import torch
 from torch import nn
 ```
 
-## Positionwise Feed-Forward Networks
+# # Positionwise Feed-Forward Networks
 
 The positionwise feed-forward network
 transforms
@@ -134,31 +134,31 @@ the input `X` with shape
 (batch size, number of time steps or sequence length in tokens, number of hidden units or feature dimension)
 will be transformed by a two-layer MLP into
 an output tensor of shape
-(batch size, number of time steps, `ffn_num_outputs`).
+(batch size, number of time steps, `ffn*num*outputs`).
 
 ```{.python .input}
-#@save
+# @save
 class PositionWiseFFN(nn.Block):
-    def __init__(self, ffn_num_hiddens, ffn_num_outputs, **kwargs):
-        super(PositionWiseFFN, self).__init__(**kwargs)
-        self.dense1 = nn.Dense(ffn_num_hiddens, flatten=False,
+    def **init**(self, ffn*num*hiddens, ffn*num*outputs, **kwargs):
+        super(PositionWiseFFN, self).**init**(**kwargs)
+        self.dense1 = nn.Dense(ffn*num*hiddens, flatten=False,
                                activation='relu')
-        self.dense2 = nn.Dense(ffn_num_outputs, flatten=False)
+        self.dense2 = nn.Dense(ffn*num*outputs, flatten=False)
 
     def forward(self, X):
         return self.dense2(self.dense1(X))
 ```
 
 ```{.python .input}
-#@tab pytorch
-#@save
+# @tab pytorch
+# @save
 class PositionWiseFFN(nn.Module):
-    def __init__(self, ffn_num_input, ffn_num_hiddens, ffn_num_outputs,
+    def **init**(self, ffn*num*input, ffn*num*hiddens, ffn*num*outputs,
                  **kwargs):
-        super(PositionWiseFFN, self).__init__(**kwargs)
-        self.dense1 = nn.Linear(ffn_num_input, ffn_num_hiddens)
+        super(PositionWiseFFN, self).**init**(**kwargs)
+        self.dense1 = nn.Linear(ffn*num*input, ffn*num*hiddens)
         self.relu = nn.ReLU()
-        self.dense2 = nn.Linear(ffn_num_hiddens, ffn_num_outputs)
+        self.dense2 = nn.Linear(ffn*num*hiddens, ffn*num*outputs)
 
     def forward(self, X):
         return self.dense2(self.relu(self.dense1(X)))
@@ -181,13 +181,13 @@ ffn(np.ones((2, 3, 4)))[0]
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 ffn = PositionWiseFFN(4, 4, 8)
 ffn.eval()
 ffn(d2l.ones((2, 3, 4)))[0]
 ```
 
-## Residual Connection and Layer Normalization
+# # Residual Connection and Layer Normalization
 
 Now let us focus on
 the "add & norm" component in :numref:`fig_transformer`.
@@ -197,7 +197,7 @@ this is a residual connection immediately
 followed by layer normalization.
 Both are key to effective deep architectures.
 
-In :numref:`sec_batch_norm`,
+In :numref:`sec*batch*norm`,
 we explained how batch normalization
 recenters and rescales across the examples within
 a minibatch.
@@ -229,7 +229,7 @@ with autograd.record():
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 ln = nn.LayerNorm(2)
 bn = nn.BatchNorm1d(2)
 X = d2l.tensor([[1, 2], [2, 3]], dtype=torch.float32)
@@ -242,10 +242,10 @@ using a residual connection followed by layer normalization.
 Dropout is also applied for regularization.
 
 ```{.python .input}
-#@save
+# @save
 class AddNorm(nn.Block):
-    def __init__(self, dropout, **kwargs):
-        super(AddNorm, self).__init__(**kwargs)
+    def **init**(self, dropout, **kwargs):
+        super(AddNorm, self).**init**(**kwargs)
         self.dropout = nn.Dropout(dropout)
         self.ln = nn.LayerNorm()
 
@@ -254,11 +254,11 @@ class AddNorm(nn.Block):
 ```
 
 ```{.python .input}
-#@tab pytorch
-#@save
+# @tab pytorch
+# @save
 class AddNorm(nn.Module):
-    def __init__(self, normalized_shape, dropout, **kwargs):
-        super(AddNorm, self).__init__(**kwargs)
+    def **init**(self, normalized_shape, dropout, **kwargs):
+        super(AddNorm, self).**init**(**kwargs)
         self.dropout = nn.Dropout(dropout)
         self.ln = nn.LayerNorm(normalized_shape)
 
@@ -277,13 +277,13 @@ add_norm(d2l.ones((2, 3, 4)), d2l.ones((2, 3, 4))).shape
 ```
 
 ```{.python .input}
-#@tab pytorch
-add_norm = AddNorm([3, 4], 0.5) # Normalized_shape is input.size()[1:]
+# @tab pytorch
+add*norm = AddNorm([3, 4], 0.5) # Normalized*shape is input.size()[1:]
 add_norm.eval()
 add_norm(d2l.ones((2, 3, 4)), d2l.ones((2, 3, 4))).shape
 ```
 
-## Encoder
+# # Encoder
 
 With all the essential components to assemble
 the Transformer encoder,
@@ -295,15 +295,15 @@ where a residual connection followed by layer normalization is employed
 around both sublayers.
 
 ```{.python .input}
-#@save
+# @save
 class EncoderBlock(nn.Block):
-    def __init__(self, num_hiddens, ffn_num_hiddens, num_heads, dropout,
+    def **init**(self, num*hiddens, ffn*num*hiddens, num*heads, dropout,
                  use_bias=False, **kwargs):
-        super(EncoderBlock, self).__init__(**kwargs)
+        super(EncoderBlock, self).**init**(**kwargs)
         self.attention = d2l.MultiHeadAttention(
-            num_hiddens, num_heads, dropout, use_bias)
+            num*hiddens, num*heads, dropout, use_bias)
         self.addnorm1 = AddNorm(dropout)
-        self.ffn = PositionWiseFFN(ffn_num_hiddens, num_hiddens)
+        self.ffn = PositionWiseFFN(ffn*num*hiddens, num_hiddens)
         self.addnorm2 = AddNorm(dropout)
 
     def forward(self, X, valid_lens):
@@ -312,19 +312,19 @@ class EncoderBlock(nn.Block):
 ```
 
 ```{.python .input}
-#@tab pytorch
-#@save
+# @tab pytorch
+# @save
 class EncoderBlock(nn.Module):
-    def __init__(self, key_size, query_size, value_size, num_hiddens,
-                 norm_shape, ffn_num_input, ffn_num_hiddens, num_heads,
+    def **init**(self, key*size, query*size, value*size, num*hiddens,
+                 norm*shape, ffn*num*input, ffn*num*hiddens, num*heads,
                  dropout, use_bias=False, **kwargs):
-        super(EncoderBlock, self).__init__(**kwargs)
+        super(EncoderBlock, self).**init**(**kwargs)
         self.attention = d2l.MultiHeadAttention(
-            key_size, query_size, value_size, num_hiddens, num_heads, dropout,
+            key*size, query*size, value*size, num*hiddens, num_heads, dropout,
             use_bias)
         self.addnorm1 = AddNorm(norm_shape, dropout)
         self.ffn = PositionWiseFFN(
-            ffn_num_input, ffn_num_hiddens, num_hiddens)
+            ffn*num*input, ffn*num*hiddens, num_hiddens)
         self.addnorm2 = AddNorm(norm_shape, dropout)
 
     def forward(self, X, valid_lens):
@@ -341,16 +341,16 @@ X = d2l.ones((2, 100, 24))
 valid_lens = d2l.tensor([3, 2])
 encoder_blk = EncoderBlock(24, 48, 8, 0.5)
 encoder_blk.initialize()
-encoder_blk(X, valid_lens).shape
+encoder*blk(X, valid*lens).shape
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 X = d2l.ones((2, 100, 24))
 valid_lens = d2l.tensor([3, 2])
 encoder_blk = EncoderBlock(24, 24, 24, 24, [100, 24], 24, 48, 8, 0.5)
 encoder_blk.eval()
-encoder_blk(X, valid_lens).shape
+encoder*blk(X, valid*lens).shape
 ```
 
 In the following Transformer encoder implementation,
@@ -362,25 +362,25 @@ by the square root of the embedding dimension
 to rescale before summing up the input embedding and the positional encoding.
 
 ```{.python .input}
-#@save
+# @save
 class TransformerEncoder(d2l.Encoder):
-    def __init__(self, vocab_size, num_hiddens, ffn_num_hiddens,
-                 num_heads, num_layers, dropout, use_bias=False, **kwargs):
-        super(TransformerEncoder, self).__init__(**kwargs)
-        self.num_hiddens = num_hiddens
-        self.embedding = nn.Embedding(vocab_size, num_hiddens)
-        self.pos_encoding = d2l.PositionalEncoding(num_hiddens, dropout)
+    def **init**(self, vocab*size, num*hiddens, ffn*num*hiddens,
+                 num*heads, num*layers, dropout, use_bias=False, **kwargs):
+        super(TransformerEncoder, self).**init**(**kwargs)
+        self.num*hiddens = num*hiddens
+        self.embedding = nn.Embedding(vocab*size, num*hiddens)
+        self.pos*encoding = d2l.PositionalEncoding(num*hiddens, dropout)
         self.blks = nn.Sequential()
-        for _ in range(num_layers):
+        for * in range(num*layers):
             self.blks.add(
-                EncoderBlock(num_hiddens, ffn_num_hiddens, num_heads, dropout,
+                EncoderBlock(num*hiddens, ffn*num*hiddens, num*heads, dropout,
                              use_bias))
 
     def forward(self, X, valid_lens, *args):
         # Since positional encoding values are between -1 and 1, the embedding
         # values are multiplied by the square root of the embedding dimension
         # to rescale before they are summed up
-        X = self.pos_encoding(self.embedding(X) * math.sqrt(self.num_hiddens))
+        X = self.pos*encoding(self.embedding(X) * math.sqrt(self.num*hiddens))
         self.attention_weights = [None] * len(self.blks)
         for i, blk in enumerate(self.blks):
             X = blk(X, valid_lens)
@@ -390,28 +390,28 @@ class TransformerEncoder(d2l.Encoder):
 ```
 
 ```{.python .input}
-#@tab pytorch
-#@save
+# @tab pytorch
+# @save
 class TransformerEncoder(d2l.Encoder):
-    def __init__(self, vocab_size, key_size, query_size, value_size,
-                 num_hiddens, norm_shape, ffn_num_input, ffn_num_hiddens,
-                 num_heads, num_layers, dropout, use_bias=False, **kwargs):
-        super(TransformerEncoder, self).__init__(**kwargs)
-        self.num_hiddens = num_hiddens
-        self.embedding = nn.Embedding(vocab_size, num_hiddens)
-        self.pos_encoding = d2l.PositionalEncoding(num_hiddens, dropout)
+    def **init**(self, vocab*size, key*size, query*size, value*size,
+                 num*hiddens, norm*shape, ffn*num*input, ffn*num*hiddens,
+                 num*heads, num*layers, dropout, use_bias=False, **kwargs):
+        super(TransformerEncoder, self).**init**(**kwargs)
+        self.num*hiddens = num*hiddens
+        self.embedding = nn.Embedding(vocab*size, num*hiddens)
+        self.pos*encoding = d2l.PositionalEncoding(num*hiddens, dropout)
         self.blks = nn.Sequential()
         for i in range(num_layers):
             self.blks.add_module("block"+str(i),
-                EncoderBlock(key_size, query_size, value_size, num_hiddens,
-                             norm_shape, ffn_num_input, ffn_num_hiddens,
-                             num_heads, dropout, use_bias))
+                EncoderBlock(key*size, query*size, value*size, num*hiddens,
+                             norm*shape, ffn*num*input, ffn*num_hiddens,
+                             num*heads, dropout, use*bias))
 
     def forward(self, X, valid_lens, *args):
         # Since positional encoding values are between -1 and 1, the embedding
         # values are multiplied by the square root of the embedding dimension
         # to rescale before they are summed up
-        X = self.pos_encoding(self.embedding(X) * math.sqrt(self.num_hiddens))
+        X = self.pos*encoding(self.embedding(X) * math.sqrt(self.num*hiddens))
         self.attention_weights = [None] * len(self.blks)
         for i, blk in enumerate(self.blks):
             X = blk(X, valid_lens)
@@ -431,14 +431,14 @@ encoder(np.ones((2, 100)), valid_lens).shape
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 encoder = TransformerEncoder(
     200, 24, 24, 24, 24, [100, 24], 24, 48, 8, 2, 0.5)
 encoder.eval()
 encoder(d2l.ones((2, 100), dtype=torch.long), valid_lens).shape
 ```
 
-## Decoder
+# # Decoder
 
 As shown in :numref:`fig_transformer`,
 the Transformer decoder
@@ -472,7 +472,7 @@ only the generated tokens
 can be used in the decoder self-attention.
 To preserve auto-regression in the decoder,
 its masked self-attention
-specifies  `dec_valid_lens` so that
+specifies  `dec*valid*lens` so that
 any query
 only attends to
 all positions in the decoder
@@ -481,21 +481,21 @@ up to the query position.
 ```{.python .input}
 class DecoderBlock(nn.Block):
     # The `i`-th block in the decoder
-    def __init__(self, num_hiddens, ffn_num_hiddens, num_heads,
+    def **init**(self, num*hiddens, ffn*num*hiddens, num*heads,
                  dropout, i, **kwargs):
-        super(DecoderBlock, self).__init__(**kwargs)
+        super(DecoderBlock, self).**init**(**kwargs)
         self.i = i
-        self.attention1 = d2l.MultiHeadAttention(num_hiddens, num_heads,
+        self.attention1 = d2l.MultiHeadAttention(num*hiddens, num*heads,
                                                  dropout)
         self.addnorm1 = AddNorm(dropout)
-        self.attention2 = d2l.MultiHeadAttention(num_hiddens, num_heads,
+        self.attention2 = d2l.MultiHeadAttention(num*hiddens, num*heads,
                                                  dropout)
         self.addnorm2 = AddNorm(dropout)
-        self.ffn = PositionWiseFFN(ffn_num_hiddens, num_hiddens)
+        self.ffn = PositionWiseFFN(ffn*num*hiddens, num_hiddens)
         self.addnorm3 = AddNorm(dropout)
 
     def forward(self, X, state):
-        enc_outputs, enc_valid_lens = state[0], state[1]
+        enc*outputs, enc*valid_lens = state[0], state[1]
         # During training, all the tokens of any output sequence are processed
         # at the same time, so `state[2][self.i]` is `None` as initialized.
         # When decoding any output sequence token by token during prediction,
@@ -508,45 +508,45 @@ class DecoderBlock(nn.Block):
         state[2][self.i] = key_values
 
         if autograd.is_training():
-            batch_size, num_steps, _ = X.shape
-            # Shape of `dec_valid_lens`: (`batch_size`, `num_steps`), where
+            batch*size, num*steps, _ = X.shape
+            # Shape of `dec*valid*lens`: (`batch*size`, `num*steps`), where
             # every row is [1, 2, ..., `num_steps`]
-            dec_valid_lens = np.tile(np.arange(1, num_steps + 1, ctx=X.ctx),
+            dec*valid*lens = np.tile(np.arange(1, num_steps + 1, ctx=X.ctx),
                                      (batch_size, 1))
         else:
-            dec_valid_lens = None
+            dec*valid*lens = None
 
         # Self-attention
-        X2 = self.attention1(X, key_values, key_values, dec_valid_lens)
+        X2 = self.attention1(X, key*values, key*values, dec*valid*lens)
         Y = self.addnorm1(X, X2)
         # Encoder-decoder attention. Shape of `enc_outputs`:
-        # (`batch_size`, `num_steps`, `num_hiddens`)
-        Y2 = self.attention2(Y, enc_outputs, enc_outputs, enc_valid_lens)
+        # (`batch*size`, `num*steps`, `num_hiddens`)
+        Y2 = self.attention2(Y, enc*outputs, enc*outputs, enc*valid*lens)
         Z = self.addnorm2(Y, Y2)
         return self.addnorm3(Z, self.ffn(Z)), state
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 class DecoderBlock(nn.Module):
     # The `i`-th block in the decoder
-    def __init__(self, key_size, query_size, value_size, num_hiddens,
-                 norm_shape, ffn_num_input, ffn_num_hiddens, num_heads,
+    def **init**(self, key*size, query*size, value*size, num*hiddens,
+                 norm*shape, ffn*num*input, ffn*num*hiddens, num*heads,
                  dropout, i, **kwargs):
-        super(DecoderBlock, self).__init__(**kwargs)
+        super(DecoderBlock, self).**init**(**kwargs)
         self.i = i
         self.attention1 = d2l.MultiHeadAttention(
-            key_size, query_size, value_size, num_hiddens, num_heads, dropout)
+            key*size, query*size, value*size, num*hiddens, num_heads, dropout)
         self.addnorm1 = AddNorm(norm_shape, dropout)
         self.attention2 = d2l.MultiHeadAttention(
-            key_size, query_size, value_size, num_hiddens, num_heads, dropout)
+            key*size, query*size, value*size, num*hiddens, num_heads, dropout)
         self.addnorm2 = AddNorm(norm_shape, dropout)
-        self.ffn = PositionWiseFFN(ffn_num_input, ffn_num_hiddens,
+        self.ffn = PositionWiseFFN(ffn*num*input, ffn*num*hiddens,
                                    num_hiddens)
         self.addnorm3 = AddNorm(norm_shape, dropout)
 
     def forward(self, X, state):
-        enc_outputs, enc_valid_lens = state[0], state[1]
+        enc*outputs, enc*valid_lens = state[0], state[1]
         # During training, all the tokens of any output sequence are processed
         # at the same time, so `state[2][self.i]` is `None` as initialized.
         # When decoding any output sequence token by token during prediction,
@@ -558,20 +558,20 @@ class DecoderBlock(nn.Module):
             key_values = torch.cat((state[2][self.i], X), axis=1)
         state[2][self.i] = key_values
         if self.training:
-            batch_size, num_steps, _ = X.shape
-            # Shape of `dec_valid_lens`: (`batch_size`, `num_steps`), where
+            batch*size, num*steps, _ = X.shape
+            # Shape of `dec*valid*lens`: (`batch*size`, `num*steps`), where
             # every row is [1, 2, ..., `num_steps`]
-            dec_valid_lens = torch.arange(
-                1, num_steps + 1, device=X.device).repeat(batch_size, 1)
+            dec*valid*lens = torch.arange(
+                1, num*steps + 1, device=X.device).repeat(batch*size, 1)
         else:
-            dec_valid_lens = None
+            dec*valid*lens = None
 
         # Self-attention
-        X2 = self.attention1(X, key_values, key_values, dec_valid_lens)
+        X2 = self.attention1(X, key*values, key*values, dec*valid*lens)
         Y = self.addnorm1(X, X2)
         # Encoder-decoder attention. Shape of `enc_outputs`:
-        # (`batch_size`, `num_steps`, `num_hiddens`)
-        Y2 = self.attention2(Y, enc_outputs, enc_outputs, enc_valid_lens)
+        # (`batch*size`, `num*steps`, `num_hiddens`)
+        Y2 = self.attention2(Y, enc*outputs, enc*outputs, enc*valid*lens)
         Z = self.addnorm2(Y, Y2)
         return self.addnorm3(Z, self.ffn(Z)), state
 ```
@@ -586,16 +586,16 @@ the same as that of the encoder.
 decoder_blk = DecoderBlock(24, 48, 8, 0.5, 0)
 decoder_blk.initialize()
 X = np.ones((2, 100, 24))
-state = [encoder_blk(X, valid_lens), valid_lens, [None]]
+state = [encoder*blk(X, valid*lens), valid_lens, [None]]
 decoder_blk(X, state)[0].shape
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 decoder_blk = DecoderBlock(24, 24, 24, 24, [100, 24], 24, 48, 8, 0.5, 0)
 decoder_blk.eval()
 X = d2l.ones((2, 100, 24))
-state = [encoder_blk(X, valid_lens), valid_lens, [None]]
+state = [encoder*blk(X, valid*lens), valid_lens, [None]]
 decoder_blk(X, state)[0].shape
 ```
 
@@ -610,129 +610,129 @@ are stored for later visualization.
 
 ```{.python .input}
 class TransformerDecoder(d2l.AttentionDecoder):
-    def __init__(self, vocab_size, num_hiddens, ffn_num_hiddens,
-                 num_heads, num_layers, dropout, **kwargs):
-        super(TransformerDecoder, self).__init__(**kwargs)
-        self.num_hiddens = num_hiddens
-        self.num_layers = num_layers
-        self.embedding = nn.Embedding(vocab_size, num_hiddens)
-        self.pos_encoding = d2l.PositionalEncoding(num_hiddens, dropout)
+    def **init**(self, vocab*size, num*hiddens, ffn*num*hiddens,
+                 num*heads, num*layers, dropout, **kwargs):
+        super(TransformerDecoder, self).**init**(**kwargs)
+        self.num*hiddens = num*hiddens
+        self.num*layers = num*layers
+        self.embedding = nn.Embedding(vocab*size, num*hiddens)
+        self.pos*encoding = d2l.PositionalEncoding(num*hiddens, dropout)
         self.blks = nn.Sequential()
         for i in range(num_layers):
             self.blks.add(
-                DecoderBlock(num_hiddens, ffn_num_hiddens, num_heads,
+                DecoderBlock(num*hiddens, ffn*num*hiddens, num*heads,
                              dropout, i))
         self.dense = nn.Dense(vocab_size, flatten=False)
 
-    def init_state(self, enc_outputs, enc_valid_lens, *args):
-        return [enc_outputs, enc_valid_lens, [None] * self.num_layers]
+    def init*state(self, enc*outputs, enc*valid*lens, *args):
+        return [enc*outputs, enc*valid*lens, [None] * self.num*layers]
 
     def forward(self, X, state):
-        X = self.pos_encoding(self.embedding(X) * math.sqrt(self.num_hiddens))
-        self._attention_weights = [[None] * len(self.blks) for _ in range (2)]
+        X = self.pos*encoding(self.embedding(X) * math.sqrt(self.num*hiddens))
+        self.*attention*weights = [[None] * len(self.blks) for _ in range (2)]
         for i, blk in enumerate(self.blks):
             X, state = blk(X, state)
             # Decoder self-attention weights
-            self._attention_weights[0][
+            self.*attention*weights[0][
                 i] = blk.attention1.attention.attention_weights
             # Encoder-decoder attention weights
-            self._attention_weights[1][
+            self.*attention*weights[1][
                 i] = blk.attention2.attention.attention_weights
         return self.dense(X), state
 
     @property
     def attention_weights(self):
-        return self._attention_weights
+        return self.*attention*weights
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 class TransformerDecoder(d2l.AttentionDecoder):
-    def __init__(self, vocab_size, key_size, query_size, value_size,
-                 num_hiddens, norm_shape, ffn_num_input, ffn_num_hiddens,
-                 num_heads, num_layers, dropout, **kwargs):
-        super(TransformerDecoder, self).__init__(**kwargs)
-        self.num_hiddens = num_hiddens
-        self.num_layers = num_layers
-        self.embedding = nn.Embedding(vocab_size, num_hiddens)
-        self.pos_encoding = d2l.PositionalEncoding(num_hiddens, dropout)
+    def **init**(self, vocab*size, key*size, query*size, value*size,
+                 num*hiddens, norm*shape, ffn*num*input, ffn*num*hiddens,
+                 num*heads, num*layers, dropout, **kwargs):
+        super(TransformerDecoder, self).**init**(**kwargs)
+        self.num*hiddens = num*hiddens
+        self.num*layers = num*layers
+        self.embedding = nn.Embedding(vocab*size, num*hiddens)
+        self.pos*encoding = d2l.PositionalEncoding(num*hiddens, dropout)
         self.blks = nn.Sequential()
         for i in range(num_layers):
             self.blks.add_module("block"+str(i),
-                DecoderBlock(key_size, query_size, value_size, num_hiddens,
-                             norm_shape, ffn_num_input, ffn_num_hiddens,
+                DecoderBlock(key*size, query*size, value*size, num*hiddens,
+                             norm*shape, ffn*num*input, ffn*num_hiddens,
                              num_heads, dropout, i))
-        self.dense = nn.Linear(num_hiddens, vocab_size)
+        self.dense = nn.Linear(num*hiddens, vocab*size)
 
-    def init_state(self, enc_outputs, enc_valid_lens, *args):
-        return [enc_outputs, enc_valid_lens, [None] * self.num_layers]
+    def init*state(self, enc*outputs, enc*valid*lens, *args):
+        return [enc*outputs, enc*valid*lens, [None] * self.num*layers]
 
     def forward(self, X, state):
-        X = self.pos_encoding(self.embedding(X) * math.sqrt(self.num_hiddens))
-        self._attention_weights = [[None] * len(self.blks) for _ in range (2)]
+        X = self.pos*encoding(self.embedding(X) * math.sqrt(self.num*hiddens))
+        self.*attention*weights = [[None] * len(self.blks) for _ in range (2)]
         for i, blk in enumerate(self.blks):
             X, state = blk(X, state)
             # Decoder self-attention weights
-            self._attention_weights[0][
+            self.*attention*weights[0][
                 i] = blk.attention1.attention.attention_weights
             # Encoder-decoder attention weights
-            self._attention_weights[1][
+            self.*attention*weights[1][
                 i] = blk.attention2.attention.attention_weights
         return self.dense(X), state
 
     @property
     def attention_weights(self):
-        return self._attention_weights
+        return self.*attention*weights
 ```
 
-## Training
+# # Training
 
 Let us instantiate an encoder-decoder model
 by following the Transformer architecture.
 Here we specify that
 both the Transformer encoder and the Transformer decoder
 have 2 layers using 4-head attention.
-Similar to :numref:`sec_seq2seq_training`,
+Similar to :numref:`sec*seq2seq*training`,
 we train the Transformer model
 for sequence to sequence learning on the English-French machine translation dataset.
 
 ```{.python .input}
-num_hiddens, num_layers, dropout, batch_size, num_steps = 32, 2, 0.1, 64, 10
-lr, num_epochs, device = 0.005, 200, d2l.try_gpu()
-ffn_num_hiddens, num_heads = 64, 4
+num*hiddens, num*layers, dropout, batch*size, num*steps = 32, 2, 0.1, 64, 10
+lr, num*epochs, device = 0.005, 200, d2l.try*gpu()
+ffn*num*hiddens, num_heads = 64, 4
 
-train_iter, src_vocab, tgt_vocab = d2l.load_data_nmt(batch_size, num_steps)
+train*iter, src*vocab, tgt*vocab = d2l.load*data*nmt(batch*size, num_steps)
 
 encoder = TransformerEncoder(
-    len(src_vocab), num_hiddens, ffn_num_hiddens, num_heads, num_layers,
+    len(src*vocab), num*hiddens, ffn*num*hiddens, num*heads, num*layers,
     dropout)
 decoder = TransformerDecoder(
-    len(tgt_vocab), num_hiddens, ffn_num_hiddens, num_heads, num_layers,
+    len(tgt*vocab), num*hiddens, ffn*num*hiddens, num*heads, num*layers,
     dropout)
 net = d2l.EncoderDecoder(encoder, decoder)
-d2l.train_seq2seq(net, train_iter, lr, num_epochs, tgt_vocab, device)
+d2l.train*seq2seq(net, train*iter, lr, num*epochs, tgt*vocab, device)
 ```
 
 ```{.python .input}
-#@tab pytorch
-num_hiddens, num_layers, dropout, batch_size, num_steps = 32, 2, 0.1, 64, 10
-lr, num_epochs, device = 0.005, 200, d2l.try_gpu()
-ffn_num_input, ffn_num_hiddens, num_heads = 32, 64, 4
-key_size, query_size, value_size = 32, 32, 32
+# @tab pytorch
+num*hiddens, num*layers, dropout, batch*size, num*steps = 32, 2, 0.1, 64, 10
+lr, num*epochs, device = 0.005, 200, d2l.try*gpu()
+ffn*num*input, ffn*num*hiddens, num_heads = 32, 64, 4
+key*size, query*size, value_size = 32, 32, 32
 norm_shape = [32]
 
-train_iter, src_vocab, tgt_vocab = d2l.load_data_nmt(batch_size, num_steps)
+train*iter, src*vocab, tgt*vocab = d2l.load*data*nmt(batch*size, num_steps)
 
 encoder = TransformerEncoder(
-    len(src_vocab), key_size, query_size, value_size, num_hiddens,
-    norm_shape, ffn_num_input, ffn_num_hiddens, num_heads,
+    len(src*vocab), key*size, query*size, value*size, num_hiddens,
+    norm*shape, ffn*num*input, ffn*num*hiddens, num*heads,
     num_layers, dropout)
 decoder = TransformerDecoder(
-    len(tgt_vocab), key_size, query_size, value_size, num_hiddens,
-    norm_shape, ffn_num_input, ffn_num_hiddens, num_heads,
+    len(tgt*vocab), key*size, query*size, value*size, num_hiddens,
+    norm*shape, ffn*num*input, ffn*num*hiddens, num*heads,
     num_layers, dropout)
 net = d2l.EncoderDecoder(encoder, decoder)
-d2l.train_seq2seq(net, train_iter, lr, num_epochs, tgt_vocab, device)
+d2l.train*seq2seq(net, train*iter, lr, num*epochs, tgt*vocab, device)
 ```
 
 After training,
@@ -740,26 +740,26 @@ we use the Transformer model
 to translate a few English sentences into French and compute their BLEU scores.
 
 ```{.python .input}
-#@tab all
+# @tab all
 engs = ['go .', "i lost .", 'he\'s calm .', 'i\'m home .']
 fras = ['va !', 'j\'ai perdu .', 'il est calme .', 'je suis chez moi .']
 for eng, fra in zip(engs, fras):
-    translation, dec_attention_weight_seq = d2l.predict_seq2seq(
-        net, eng, src_vocab, tgt_vocab, num_steps, device, True)
+    translation, dec*attention*weight*seq = d2l.predict*seq2seq(
+        net, eng, src*vocab, tgt*vocab, num_steps, device, True)
     print(f'{eng} => {translation}, ',
           f'bleu {d2l.bleu(translation, fra, k=2):.3f}')
 ```
 
 Let us visualize the Transformer attention weights when translating the last English sentence into French.
 The shape of the encoder self-attention weights
-is (number of encoder layers, number of attention heads, `num_steps` or number of queries, `num_steps` or number of key-value pairs).
+is (number of encoder layers, number of attention heads, `num*steps` or number of queries, `num*steps` or number of key-value pairs).
 
 ```{.python .input}
-#@tab all
-enc_attention_weights = d2l.reshape(
+# @tab all
+enc*attention*weights = d2l.reshape(
     d2l.concat(net.encoder.attention_weights, 0),
-    (num_layers, num_heads, -1, num_steps))
-enc_attention_weights.shape
+    (num*layers, num*heads, -1, num_steps))
+enc*attention*weights.shape
 ```
 
 In the encoder self-attention,
@@ -775,14 +775,14 @@ based on a separate representation subspaces of queries, keys, and values.
 
 ```{.python .input}
 d2l.show_heatmaps(
-    enc_attention_weights, xlabel='Key positions', ylabel='Query positions',
+    enc*attention*weights, xlabel='Key positions', ylabel='Query positions',
     titles=['Head %d' % i for i in range(1, 5)], figsize=(7, 3.5))
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 d2l.show_heatmaps(
-    enc_attention_weights.cpu(), xlabel='Key positions',
+    enc*attention*weights.cpu(), xlabel='Key positions',
     ylabel='Query positions', titles=['Head %d' % i for i in range(1, 5)],
     figsize=(7, 3.5))
 ```
@@ -799,40 +799,40 @@ the beginning-of-sequence token followed by
 the output tokens.
 
 ```{.python .input}
-dec_attention_weights_2d = [d2l.tensor(head[0]).tolist()
-                            for step in dec_attention_weight_seq
+dec*attention*weights_2d = [d2l.tensor(head[0]).tolist()
+                            for step in dec*attention*weight_seq
                             for attn in step for blk in attn for head in blk]
-dec_attention_weights_filled = d2l.tensor(
-    pd.DataFrame(dec_attention_weights_2d).fillna(0.0).values)
-dec_attention_weights = d2l.reshape(dec_attention_weights_filled,
-                                    (-1, 2, num_layers, num_heads, num_steps))
-dec_self_attention_weights, dec_inter_attention_weights = \
-    dec_attention_weights.transpose(1, 2, 3, 0, 4)
-dec_self_attention_weights.shape, dec_inter_attention_weights.shape
+dec*attention*weights_filled = d2l.tensor(
+    pd.DataFrame(dec*attention*weights_2d).fillna(0.0).values)
+dec*attention*weights = d2l.reshape(dec*attention*weights_filled,
+                                    (-1, 2, num*layers, num*heads, num_steps))
+dec*self*attention*weights, dec*inter*attention*weights = \
+    dec*attention*weights.transpose(1, 2, 3, 0, 4)
+dec*self*attention*weights.shape, dec*inter*attention*weights.shape
 ```
 
 ```{.python .input}
-#@tab pytorch
-dec_attention_weights_2d = [head[0].tolist()
-                            for step in dec_attention_weight_seq
+# @tab pytorch
+dec*attention*weights_2d = [head[0].tolist()
+                            for step in dec*attention*weight_seq
                             for attn in step for blk in attn for head in blk]
-dec_attention_weights_filled = d2l.tensor(
-    pd.DataFrame(dec_attention_weights_2d).fillna(0.0).values)
-dec_attention_weights = d2l.reshape(dec_attention_weights_filled,
-                                    (-1, 2, num_layers, num_heads, num_steps))
-dec_self_attention_weights, dec_inter_attention_weights = \
-    dec_attention_weights.permute(1, 2, 3, 0, 4)
-dec_self_attention_weights.shape, dec_inter_attention_weights.shape
+dec*attention*weights_filled = d2l.tensor(
+    pd.DataFrame(dec*attention*weights_2d).fillna(0.0).values)
+dec*attention*weights = d2l.reshape(dec*attention*weights_filled,
+                                    (-1, 2, num*layers, num*heads, num_steps))
+dec*self*attention*weights, dec*inter*attention*weights = \
+    dec*attention*weights.permute(1, 2, 3, 0, 4)
+dec*self*attention*weights.shape, dec*inter*attention*weights.shape
 ```
 
 Due to the auto-regressive property of the decoder self-attention,
 no query attends to key-value pairs after the query position.
 
 ```{.python .input}
-#@tab all
+# @tab all
 # Plus one to include the beginning-of-sequence token
 d2l.show_heatmaps(
-    dec_self_attention_weights[:, :, :, :len(translation.split()) + 1],
+    dec*self*attention_weights[:, :, :, :len(translation.split()) + 1],
     xlabel='Key positions', ylabel='Query positions',
     titles=['Head %d' % i for i in range(1, 5)], figsize=(7, 3.5))
 ```
@@ -843,9 +843,9 @@ no query from the output sequence
 attends to those padding tokens from the input sequence.
 
 ```{.python .input}
-#@tab all
+# @tab all
 d2l.show_heatmaps(
-    dec_inter_attention_weights, xlabel='Key positions',
+    dec*inter*attention_weights, xlabel='Key positions',
     ylabel='Query positions', titles=['Head %d' % i for i in range(1, 5)],
     figsize=(7, 3.5))
 ```
@@ -859,7 +859,7 @@ is often individually used
 for different deep learning tasks.
 
 
-## Summary
+# # Summary
 
 * The Transformer is an instance of the encoder-decoder architecture, though either the encoder or the decoder can be used individually in practice.
 * In the Transformer, multi-head self-attention is used for representing the input sequence and the output sequence, though the decoder has to preserve the auto-regressive property via a masked version.
@@ -867,7 +867,7 @@ for different deep learning tasks.
 * The positionwise feed-forward network in the Transformer model transforms the representation at all the sequence positions using the same MLP.
 
 
-## Exercises
+# # Exercises
 
 1. Train a deeper Transformer in the experiments. How does it affect the training speed and the translation performance?
 1. Is it a good idea to replace scaled dot-product attention with additive attention in the Transformer? Why?

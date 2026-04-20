@@ -1,4 +1,4 @@
-## **Syntax highlighting in markdown**
+# # **Syntax highlighting in markdown**
 
 Last updated by Dan Quinney on August 08, 2016 16:33
 

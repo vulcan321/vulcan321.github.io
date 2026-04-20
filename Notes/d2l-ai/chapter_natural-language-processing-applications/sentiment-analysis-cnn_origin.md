@@ -1,5 +1,5 @@
 # Sentiment Analysis: Using Convolutional Neural Networks 
-:label:`sec_sentiment_cnn`
+:label:`sec*sentiment*cnn`
 
 
 In :numref:`chap_cnn`,
@@ -45,20 +45,20 @@ from mxnet.gluon import nn
 npx.set_np()
 
 batch_size = 64
-train_iter, test_iter, vocab = d2l.load_data_imdb(batch_size)
+train*iter, test*iter, vocab = d2l.load*data*imdb(batch_size)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 from d2l import torch as d2l
 import torch
 from torch import nn
 
 batch_size = 64
-train_iter, test_iter, vocab = d2l.load_data_imdb(batch_size)
+train*iter, test*iter, vocab = d2l.load*data*imdb(batch_size)
 ```
 
-## One-Dimensional Convolutions
+# # One-Dimensional Convolutions
 
 Before introducing the model, 
 let's see how a one-dimensional convolution works.
@@ -88,7 +88,7 @@ and a kernel tensor `K`,
 it returns the output tensor `Y`.
 
 ```{.python .input}
-#@tab all
+# @tab all
 def corr1d(X, K):
     w = K.shape[0]
     Y = d2l.zeros((X.shape[0] - w + 1))
@@ -100,7 +100,7 @@ def corr1d(X, K):
 We can construct the input tensor `X` and the kernel tensor `K` from :numref:`fig_conv1d` to validate the output of the above one-dimensional cross-correlation implementation.
 
 ```{.python .input}
-#@tab all
+# @tab all
 X, K = d2l.tensor([0, 1, 2, 3, 4, 5, 6]), d2l.tensor([1, 2])
 corr1d(X, K)
 ```
@@ -113,18 +113,18 @@ Then for each channel,
 perform a cross-correlation operation on the one-dimensional tensor of the input and the one-dimensional tensor of the convolution kernel, 
 summing the results over all the channels
 to produce the one-dimensional output tensor.
-:numref:`fig_conv1d_channel` shows a one-dimensional cross-correlation operation with 3 input channels.
+:numref:`fig*conv1d*channel` shows a one-dimensional cross-correlation operation with 3 input channels.
 
 ![One-dimensional cross-correlation operation with 3 input channels. The shaded portions are the first output element as well as the input and kernel tensor elements used for the output computation: $0\times1+1\times2+1\times3+2\times4+2\times(-1)+3\times(-3)=2$.](../img/conv1d-channel.svg)
-:label:`fig_conv1d_channel`
+:label:`fig*conv1d*channel`
 
 
 We can implement the one-dimensional cross-correlation operation for multiple input channels
-and validate the results in :numref:`fig_conv1d_channel`.
+and validate the results in :numref:`fig*conv1d*channel`.
 
 ```{.python .input}
-#@tab all
-def corr1d_multi_in(X, K):
+# @tab all
+def corr1d*multi*in(X, K):
     # First, iterate through the 0th dimension (channel dimension) of `X` and
     # `K`. Then, add them together
     return sum(corr1d(x, k) for x, k in zip(X, K))
@@ -133,7 +133,7 @@ X = d2l.tensor([[0, 1, 2, 3, 4, 5, 6],
               [1, 2, 3, 4, 5, 6, 7],
               [2, 3, 4, 5, 6, 7, 8]])
 K = d2l.tensor([[1, 2], [3, 4], [-1, -3]])
-corr1d_multi_in(X, K)
+corr1d*multi*in(X, K)
 ```
 
 Note that
@@ -145,25 +145,25 @@ two-dimensional cross-correlations.
 To illustrate,
 an equivalent form of
 the multi-input-channel one-dimensional cross-correlation
-in :numref:`fig_conv1d_channel`
+in :numref:`fig*conv1d*channel`
 is 
 the 
 single-input-channel 
 two-dimensional cross-correlation
-in :numref:`fig_conv1d_2d`,
+in :numref:`fig*conv1d*2d`,
 where the height of the convolution kernel
 has to be the same as that of the input tensor.
 
 
 ![Two-dimensional cross-correlation operation with a single input channel. The shaded portions are the first output element as well as the input and kernel tensor elements used for the output computation: $2\times(-1)+3\times(-3)+1\times3+2\times4+0\times1+1\times2=2$.](../img/conv1d-2d.svg)
-:label:`fig_conv1d_2d`
+:label:`fig*conv1d*2d`
 
-Both the outputs in :numref:`fig_conv1d` and :numref:`fig_conv1d_channel` have only one channel.
+Both the outputs in :numref:`fig*conv1d` and :numref:`fig*conv1d_channel` have only one channel.
 Same as two-dimensional convolutions with multiple output channels described in :numref:`subsec_multi-output-channels`,
 we can also specify multiple output channels
 for one-dimensional convolutions.
 
-## Max-Over-Time Pooling
+# # Max-Over-Time Pooling
 
 Similarly, we can use pooling
 to extract the highest value
@@ -185,7 +185,7 @@ the max-over-time pooling
 allows different numbers of time steps
 at different channels.
 
-## The textCNN Model
+# # The textCNN Model
 
 Using the one-dimensional convolution
 and max-over-time pooling,
@@ -209,9 +209,9 @@ into the output as follows:
 1. Transform the concatenated vector into the output categories using the fully connected layer. Dropout can be used for reducing overfitting.
 
 ![The model architecture of textCNN.](../img/textcnn.svg)
-:label:`fig_conv1d_textcnn`
+:label:`fig*conv1d*textcnn`
 
-:numref:`fig_conv1d_textcnn` 
+:numref:`fig*conv1d*textcnn` 
 illustrates the model architecture of textCNN
 with a concrete example.
 The input is a sentence with 11 tokens,
@@ -234,11 +234,11 @@ for binary sentiment predictions.
 
 
 
-### Defining the Model
+## # Defining the Model
 
 We implement the textCNN model in the following class.
 Compared with the bidirectional RNN model in
-:numref:`sec_sentiment_rnn`,
+:numref:`sec*sentiment*rnn`,
 besides
 replacing recurrent layers with convolutional layers,
 we also use two embedding layers:
@@ -247,12 +247,12 @@ with fixed weights.
 
 ```{.python .input}
 class TextCNN(nn.Block):
-    def __init__(self, vocab_size, embed_size, kernel_sizes, num_channels,
+    def **init**(self, vocab*size, embed*size, kernel*sizes, num*channels,
                  **kwargs):
-        super(TextCNN, self).__init__(**kwargs)
-        self.embedding = nn.Embedding(vocab_size, embed_size)
+        super(TextCNN, self).**init**(**kwargs)
+        self.embedding = nn.Embedding(vocab*size, embed*size)
         # The embedding layer not to be trained
-        self.constant_embedding = nn.Embedding(vocab_size, embed_size)
+        self.constant*embedding = nn.Embedding(vocab*size, embed_size)
         self.dropout = nn.Dropout(0.5)
         self.decoder = nn.Dense(2)
         # The max-over-time pooling layer has no parameters, so this instance
@@ -260,7 +260,7 @@ class TextCNN(nn.Block):
         self.pool = nn.GlobalMaxPool1D()
         # Create multiple one-dimensional convolutional layers
         self.convs = nn.Sequential()
-        for c, k in zip(num_channels, kernel_sizes):
+        for c, k in zip(num*channels, kernel*sizes):
             self.convs.add(nn.Conv1D(c, k, activation='relu'))
 
     def forward(self, inputs):
@@ -282,14 +282,14 @@ class TextCNN(nn.Block):
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 class TextCNN(nn.Module):
-    def __init__(self, vocab_size, embed_size, kernel_sizes, num_channels,
+    def **init**(self, vocab*size, embed*size, kernel*sizes, num*channels,
                  **kwargs):
-        super(TextCNN, self).__init__(**kwargs)
-        self.embedding = nn.Embedding(vocab_size, embed_size)
+        super(TextCNN, self).**init**(**kwargs)
+        self.embedding = nn.Embedding(vocab*size, embed*size)
         # The embedding layer not to be trained
-        self.constant_embedding = nn.Embedding(vocab_size, embed_size)
+        self.constant*embedding = nn.Embedding(vocab*size, embed_size)
         self.dropout = nn.Dropout(0.5)
         self.decoder = nn.Linear(sum(num_channels), 2)
         # The max-over-time pooling layer has no parameters, so this instance
@@ -298,7 +298,7 @@ class TextCNN(nn.Module):
         self.relu = nn.ReLU()
         # Create multiple one-dimensional convolutional layers
         self.convs = nn.ModuleList()
-        for c, k in zip(num_channels, kernel_sizes):
+        for c, k in zip(num*channels, kernel*sizes):
             self.convs.append(nn.Conv1d(2 * embed_size, c, k))
 
     def forward(self, inputs):
@@ -323,28 +323,28 @@ Let's create a textCNN instance.
 It has 3 convolutional layers with kernel widths of 3, 4, and 5, all with 100 output channels.
 
 ```{.python .input}
-embed_size, kernel_sizes, nums_channels = 100, [3, 4, 5], [100, 100, 100]
-devices = d2l.try_all_gpus()
-net = TextCNN(len(vocab), embed_size, kernel_sizes, nums_channels)
+embed*size, kernel*sizes, nums_channels = 100, [3, 4, 5], [100, 100, 100]
+devices = d2l.try*all*gpus()
+net = TextCNN(len(vocab), embed*size, kernel*sizes, nums_channels)
 net.initialize(init.Xavier(), ctx=devices)
 ```
 
 ```{.python .input}
-#@tab pytorch
-embed_size, kernel_sizes, nums_channels = 100, [3, 4, 5], [100, 100, 100]
-devices = d2l.try_all_gpus()
-net = TextCNN(len(vocab), embed_size, kernel_sizes, nums_channels)
+# @tab pytorch
+embed*size, kernel*sizes, nums_channels = 100, [3, 4, 5], [100, 100, 100]
+devices = d2l.try*all*gpus()
+net = TextCNN(len(vocab), embed*size, kernel*sizes, nums_channels)
 
 def init_weights(m):
     if type(m) in (nn.Linear, nn.Conv1d):
-        nn.init.xavier_uniform_(m.weight)
+        nn.init.xavier*uniform*(m.weight)
 
 net.apply(init_weights);
 ```
 
-### Loading Pretrained Word Vectors
+## # Loading Pretrained Word Vectors
 
-Same as :numref:`sec_sentiment_rnn`,
+Same as :numref:`sec*sentiment*rnn`,
 we load pretrained 100-dimensional GloVe embeddings
 as the initialized token representations.
 These token representations (embedding weights)
@@ -354,53 +354,53 @@ and fixed in `constant_embedding`.
 
 ```{.python .input}
 glove_embedding = d2l.TokenEmbedding('glove.6b.100d')
-embeds = glove_embedding[vocab.idx_to_token]
+embeds = glove*embedding[vocab.idx*to_token]
 net.embedding.weight.set_data(embeds)
-net.constant_embedding.weight.set_data(embeds)
-net.constant_embedding.collect_params().setattr('grad_req', 'null')
+net.constant*embedding.weight.set*data(embeds)
+net.constant*embedding.collect*params().setattr('grad_req', 'null')
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 glove_embedding = d2l.TokenEmbedding('glove.6b.100d')
-embeds = glove_embedding[vocab.idx_to_token]
+embeds = glove*embedding[vocab.idx*to_token]
 net.embedding.weight.data.copy_(embeds)
-net.constant_embedding.weight.data.copy_(embeds)
-net.constant_embedding.weight.requires_grad = False
+net.constant*embedding.weight.data.copy*(embeds)
+net.constant*embedding.weight.requires*grad = False
 ```
 
-### Training and Evaluating the Model
+## # Training and Evaluating the Model
 
 Now we can train the textCNN model for sentiment analysis.
 
 ```{.python .input}
 lr, num_epochs = 0.001, 5
-trainer = gluon.Trainer(net.collect_params(), 'adam', {'learning_rate': lr})
+trainer = gluon.Trainer(net.collect*params(), 'adam', {'learning*rate': lr})
 loss = gluon.loss.SoftmaxCrossEntropyLoss()
-d2l.train_ch13(net, train_iter, test_iter, loss, trainer, num_epochs, devices)
+d2l.train*ch13(net, train*iter, test*iter, loss, trainer, num*epochs, devices)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 lr, num_epochs = 0.001, 5
 trainer = torch.optim.Adam(net.parameters(), lr=lr)
 loss = nn.CrossEntropyLoss(reduction="none")
-d2l.train_ch13(net, train_iter, test_iter, loss, trainer, num_epochs, devices)
+d2l.train*ch13(net, train*iter, test*iter, loss, trainer, num*epochs, devices)
 ```
 
 Below we use the trained model to predict the sentiment for two simple sentences.
 
 ```{.python .input}
-#@tab all
+# @tab all
 d2l.predict_sentiment(net, vocab, 'this movie is so great')
 ```
 
 ```{.python .input}
-#@tab all
+# @tab all
 d2l.predict_sentiment(net, vocab, 'this movie is so bad')
 ```
 
-## Summary
+# # Summary
 
 * One-dimensional CNNs can process local features such as $n$-grams in text.
 * Multi-input-channel one-dimensional cross-correlations are equivalent to single-input-channel two-dimensional cross-correlations.
@@ -408,10 +408,10 @@ d2l.predict_sentiment(net, vocab, 'this movie is so bad')
 * The textCNN model transforms individual token representations into downstream application outputs using one-dimensional convolutional layers and max-over-time pooling layers.
 
 
-## Exercises
+# # Exercises
 
-1. Tune hyperparameters and compare the two architectures for sentiment analysis in :numref:`sec_sentiment_rnn` and in this section, such as in classification accuracy and computational efficiency.
-1. Can you further improve the classification accuracy of the model by using the methods introduced in the exercises of :numref:`sec_sentiment_rnn`?
+1. Tune hyperparameters and compare the two architectures for sentiment analysis in :numref:`sec*sentiment*rnn` and in this section, such as in classification accuracy and computational efficiency.
+1. Can you further improve the classification accuracy of the model by using the methods introduced in the exercises of :numref:`sec*sentiment*rnn`?
 1. Add positional encoding in the input representations. Does it improve the classification accuracy?
 
 :begin_tab:`mxnet`

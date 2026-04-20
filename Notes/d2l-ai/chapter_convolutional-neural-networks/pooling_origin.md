@@ -18,7 +18,7 @@ we accomplish this goal of ultimately learning a global representation,
 while keeping all of the advantages of convolutional layers at the intermediate layers of processing.
 
 Moreover, when detecting lower-level features, such as edges
-(as discussed in :numref:`sec_conv_layer`),
+(as discussed in :numref:`sec*conv*layer`),
 we often want our representations to be somewhat invariant to translation.
 For instance, if we take the image `X`
 with a sharp delineation between black and white
@@ -37,7 +37,7 @@ which serve the dual purposes of
 mitigating the sensitivity of convolutional layers to location
 and of spatially downsampling representations.
 
-## Maximum Pooling and Average Pooling
+# # Maximum Pooling and Average Pooling
 
 Like convolutional layers, *pooling* operators
 consist of a fixed-shape window that is slid over
@@ -95,7 +95,7 @@ moves no more than one element in height or width.
 In the code below, we implement the forward propagation
 of the pooling layer in the `pool2d` function.
 This function is similar to the `corr2d` function
-in :numref:`sec_conv_layer`.
+in :numref:`sec*conv*layer`.
 However, here we have no kernel, computing the output
 as either the maximum or the average of each region in the input.
 
@@ -107,46 +107,46 @@ npx.set_np()
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 from d2l import torch as d2l
 import torch
 from torch import nn
 ```
 
 ```{.python .input}
-#@tab mxnet, pytorch
+# @tab mxnet, pytorch
 def pool2d(X, pool_size, mode='max'):
-    p_h, p_w = pool_size
-    Y = d2l.zeros((X.shape[0] - p_h + 1, X.shape[1] - p_w + 1))
+    p*h, p*w = pool_size
+    Y = d2l.zeros((X.shape[0] - p*h + 1, X.shape[1] - p*w + 1))
     for i in range(Y.shape[0]):
         for j in range(Y.shape[1]):
             if mode == 'max':
-                Y[i, j] = X[i: i + p_h, j: j + p_w].max()
+                Y[i, j] = X[i: i + p*h, j: j + p*w].max()
             elif mode == 'avg':
-                Y[i, j] = X[i: i + p_h, j: j + p_w].mean()
+                Y[i, j] = X[i: i + p*h, j: j + p*w].mean()
     return Y
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 import tensorflow as tf
 
 def pool2d(X, pool_size, mode='max'):
-    p_h, p_w = pool_size
-    Y = tf.Variable(tf.zeros((X.shape[0] - p_h + 1, X.shape[1] - p_w +1)))
+    p*h, p*w = pool_size
+    Y = tf.Variable(tf.zeros((X.shape[0] - p*h + 1, X.shape[1] - p*w +1)))
     for i in range(Y.shape[0]):
         for j in range(Y.shape[1]):
             if mode == 'max':
-                Y[i, j].assign(tf.reduce_max(X[i: i + p_h, j: j + p_w]))
+                Y[i, j].assign(tf.reduce*max(X[i: i + p*h, j: j + p_w]))
             elif mode =='avg':
-                Y[i, j].assign(tf.reduce_mean(X[i: i + p_h, j: j + p_w]))
+                Y[i, j].assign(tf.reduce*mean(X[i: i + p*h, j: j + p_w]))
     return Y
 ```
 
 We can construct the input tensor `X` in :numref:`fig_pooling` to validate the output of the two-dimensional maximum pooling layer.
 
 ```{.python .input}
-#@tab all
+# @tab all
 X = d2l.tensor([[0.0, 1.0, 2.0], [3.0, 4.0, 5.0], [6.0, 7.0, 8.0]])
 pool2d(X, (2, 2))
 ```
@@ -154,11 +154,11 @@ pool2d(X, (2, 2))
 Also, we experiment with the average pooling layer.
 
 ```{.python .input}
-#@tab all
+# @tab all
 pool2d(X, (2, 2), 'avg')
 ```
 
-## Padding and Stride
+# # Padding and Stride
 
 As with convolutional layers, pooling layers
 can also change the output shape.
@@ -170,13 +170,13 @@ We first construct an input tensor `X` whose shape has four dimensions,
 where the number of examples and number of channels are both 1.
 
 ```{.python .input}
-#@tab mxnet, pytorch
+# @tab mxnet, pytorch
 X = d2l.reshape(d2l.arange(16, dtype=d2l.float32), (1, 1, 4, 4))
 X
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 X = d2l.reshape(d2l.arange(16, dtype=d2l.float32), (1, 4, 4, 1))
 X
 ```
@@ -194,13 +194,13 @@ pool2d(X)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 pool2d = nn.MaxPool2d(3)
 pool2d(X)
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 pool2d = tf.keras.layers.MaxPool2D(pool_size=[3, 3])
 pool2d(X)
 ```
@@ -213,13 +213,13 @@ pool2d(X)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 pool2d = nn.MaxPool2d(3, padding=1, stride=2)
 pool2d(X)
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 pool2d = tf.keras.layers.MaxPool2D(pool_size=[3, 3], padding='same',
                                    strides=2)
 pool2d(X)
@@ -234,19 +234,19 @@ pool2d(X)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 pool2d = nn.MaxPool2d((2, 3), padding=(1, 1), stride=(2, 3))
 pool2d(X)
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 pool2d = tf.keras.layers.MaxPool2D(pool_size=[2, 3], padding='same',
                                    strides=(2, 3))
 pool2d(X)
 ```
 
-## Multiple Channels
+# # Multiple Channels
 
 When processing multi-channel input data,
 the pooling layer pools each input channel separately,
@@ -258,13 +258,13 @@ Below, we will concatenate tensors `X` and `X + 1`
 on the channel dimension to construct an input with 2 channels.
 
 ```{.python .input}
-#@tab mxnet, pytorch
+# @tab mxnet, pytorch
 X = d2l.concat((X, X + 1), 1)
 X
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 X = tf.reshape(tf.stack([X, X+1], 0), (1, 2, 4, 4))
 ```
 
@@ -276,18 +276,18 @@ pool2d(X)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 pool2d = nn.MaxPool2d(3, padding=1, stride=2)
 pool2d(X)
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 pool2d = tf.keras.layers.MaxPool2D(3, padding='same', strides=2)
 pool2d(X)
 ```
 
-## Summary
+# # Summary
 
 * Taking the input elements in the pooling window, the maximum pooling operation assigns the maximum value as the output and the average pooling operation assigns the average value as the output.
 * One of the major benefits of a pooling layer is to alleviate the excessive sensitivity of the convolutional layer to location.
@@ -296,11 +296,11 @@ pool2d(X)
 * The pooling layer's number of output channels is the same as the number of input channels.
 
 
-## Exercises
+# # Exercises
 
 1. Can you implement average pooling as a special case of a convolution layer? If so, do it.
 1. Can you implement max pooling as a special case of a convolution layer? If so, do it.
-1. What is the computational cost of the pooling layer? Assume that the input to the pooling layer is of size $c\times h\times w$, the pooling window has a shape of $p_h\times p_w$ with a padding of $(p_h, p_w)$ and a stride of $(s_h, s_w)$.
+1. What is the computational cost of the pooling layer? Assume that the input to the pooling layer is of size $c\times h\times w$, the pooling window has a shape of $p*h\times p*w$ with a padding of $(p*h, p*w)$ and a stride of $(s*h, s*w)$.
 1. Why do you expect maximum pooling and average pooling to work differently?
 1. Do we need a separate minimum pooling layer? Can you replace it with another operation?
 1. Is there another operation between average and maximum pooling that you could consider (hint: recall the softmax)? Why might it not be so popular?

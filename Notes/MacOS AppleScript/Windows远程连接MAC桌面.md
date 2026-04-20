@@ -1,11 +1,11 @@
 # Windows远程连接MAC桌面
 
-## 一、准备软件
+# # 一、准备软件
 
 VNC Server (MAC OS X已支持)  
 RealVNC/TightVNC
 
-## 二、MAC OS X设置
+# # 二、MAC OS X设置
 
 注：Mac OS X 10.5 已经支持了VNC Viewer访问的功能，设置如下:
 

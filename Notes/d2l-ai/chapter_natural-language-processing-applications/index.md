@@ -1,14 +1,14 @@
 # 自然语言处理：应用
-:label:`chap_nlp_app`
+:label:`chap*nlp*app`
 
 前面我们学习了如何在文本序列中表示词元，
-并在 :numref:`chap_nlp_pretrain`中训练了词元的表示。
+并在 :numref:`chap*nlp*pretrain`中训练了词元的表示。
 这样的预训练文本表示可以通过不同模型架构，放入不同的下游自然语言处理任务。
 
 前一章我们提及到一些自然语言处理应用，这些应用没有预训练，只是为了解释深度学习架构。
 例如，在 :numref:`chap_rnn`中，
 我们依赖循环神经网络设计语言模型来生成类似中篇小说的文本。
-在 :numref:`chap_modern_rnn`和 :numref:`chap_attention`中，
+在 :numref:`chap*modern*rnn`和 :numref:`chap_attention`中，
 我们还设计了基于循环神经网络和注意力机制的机器翻译模型。
 
 然而，本书并不打算全面涵盖所有此类应用。

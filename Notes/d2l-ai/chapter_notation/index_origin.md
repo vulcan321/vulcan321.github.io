@@ -4,20 +4,20 @@
 The notation used throughout this book is summarized below.
 
 
-## Numbers
+# # Numbers
 
 * $x$: A scalar
 * $\mathbf{x}$: A vector
 * $\mathbf{X}$: A matrix
 * $\mathsf{X}$: A tensor
 * $\mathbf{I}$: An identity matrix
-* $x_i$, $[\mathbf{x}]_i$: The $i^\mathrm{th}$ element of vector $\mathbf{x}$
-* $x_{ij}$, $[\mathbf{X}]_{ij}$: The element of matrix $\mathbf{X}$ at row $i$ and column $j$
+* $x*i$, $[\mathbf{x}]*i$: The $i^\mathrm{th}$ element of vector $\mathbf{x}$
+* $x*{ij}$, $[\mathbf{X}]*{ij}$: The element of matrix $\mathbf{X}$ at row $i$ and column $j$
 
 
 
 
-## Set Theory
+# # Set Theory
 
 
 * $\mathcal{X}$: A set
@@ -30,7 +30,7 @@ The notation used throughout this book is summarized below.
 * $\mathcal{A}\setminus\mathcal{B}$: Subtraction of set $\mathcal{B}$ from set $\mathcal{A}$
 
 
-## Functions and Operators
+# # Functions and Operators
 
 
 * $f(\cdot)$: A function
@@ -42,7 +42,7 @@ The notation used throughout this book is summarized below.
 * $\odot$: Hadamard (elementwise) product
 * $[\cdot, \cdot]$: Concatenation
 * $\lvert \mathcal{X} \rvert$: Cardinality of set $\mathcal{X}$
-* $\|\cdot\|_p$: $L_p$ norm
+* $\|\cdot\|*p$: $L*p$ norm
 * $\|\cdot\|$: $L_2$ norm
 * $\langle \mathbf{x}, \mathbf{y} \rangle$: Dot product of vectors $\mathbf{x}$ and $\mathbf{y}$
 * $\sum$: Series addition
@@ -50,7 +50,7 @@ The notation used throughout this book is summarized below.
 * $\stackrel{\mathrm{def}}{=}$: Definition
 
 
-## Calculus
+# # Calculus
 
 * $\frac{dy}{dx}$: Derivative of $y$ with respect to $x$
 * $\frac{\partial y}{\partial x}$: Partial derivative of $y$ with respect to $x$
@@ -58,7 +58,7 @@ The notation used throughout this book is summarized below.
 * $\int_a^b f(x) \;dx$: Definite integral of $f$ from $a$ to $b$ with respect to $x$
 * $\int f(x) \;dx$: Indefinite integral of $f$ with respect to $x$
 
-## Probability and Information Theory
+# # Probability and Information Theory
 
 * $P(\cdot)$: Probability distribution
 * $z \sim P$: Random variable $z$ has probability distribution $P$
@@ -76,7 +76,7 @@ The notation used throughout this book is summarized below.
 
 
 
-## Complexity
+# # Complexity
 
 * $\mathcal{O}$: Big O notation
 

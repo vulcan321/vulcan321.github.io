@@ -33,7 +33,7 @@ To start, we focus our exposition on
 a one-hidden-layer MLP
 with weight decay ($L_2$ regularization).
 
-## Forward Propagation
+# # Forward Propagation
 
 *Forward propagation* (or *forward pass*) refers to the calculation and storage
 of intermediate variables (including outputs)
@@ -83,7 +83,7 @@ According to the definition of $L_2$ regularization,
 given the hyperparameter $\lambda$,
 the regularization term is
 
-$$s = \frac{\lambda}{2} \left(\|\mathbf{W}^{(1)}\|_F^2 + \|\mathbf{W}^{(2)}\|_F^2\right),$$
+$$s = \frac{\lambda}{2} \left(\|\mathbf{W}^{(1)}\|*F^2 + \|\mathbf{W}^{(2)}\|*F^2\right),$$
 :eqlabel:`eq_forward-s`
 
 where the Frobenius norm of the matrix
@@ -98,7 +98,7 @@ We refer to $J$ as the *objective function*
 in the following discussion.
 
 
-## Computational Graph of Forward Propagation
+# # Computational Graph of Forward Propagation
 
 Plotting *computational graphs* helps us visualize
 the dependencies of operators
@@ -115,7 +115,7 @@ are primarily rightward and upward.
 ![Computational graph of forward propagation.](../img/forward.svg)
 :label:`fig_forward`
 
-## Backpropagation
+# # Backpropagation
 
 *Backpropagation* refers to the method of calculating
 the gradient of neural network parameters.
@@ -235,7 +235,7 @@ $$
 
 
 
-## Training Neural Networks
+# # Training Neural Networks
 
 When training neural networks,
 forward and backward propagation depend on each other.
@@ -273,7 +273,7 @@ training deeper networks using larger batch sizes
 more easily leads to *out of memory* errors.
 
 
-## Summary
+# # Summary
 
 * Forward propagation sequentially calculates and stores intermediate variables within the computational graph defined by the neural network. It proceeds from the input to the output layer.
 * Backpropagation sequentially calculates and stores the gradients of intermediate variables and parameters within the neural network in the reversed order.
@@ -281,7 +281,7 @@ more easily leads to *out of memory* errors.
 * Training requires significantly more memory than prediction.
 
 
-## Exercises
+# # Exercises
 
 1. Assume that the inputs $\mathbf{X}$ to some scalar function $f$ are $n \times m$ matrices. What is the dimensionality of the gradient of $f$ with respect to $\mathbf{X}$?
 1. Add a bias to the hidden layer of the model described in this section.

@@ -2,11 +2,11 @@
 
 By [Craig Hockenberry](https://twitter.com/chockenberry/)
 
-## Introduction
+# # Introduction
 
 This tutorial will show you the current best practices for controlling another app using AppleScript. I'll also show you some tricks that will help you and your customers get AppleScripts set up with a minimum amount of effort.
 
-## First Steps
+# # First Steps
 
 The first thing you need to learn is how to run an AppleScript from your own app. Typically, the hardest part of this is writing AppleScript code. Behold:
 
@@ -46,12 +46,12 @@ end chockify
 
 In my opinion, AppleScript's greatest strength is not its syntax. Nor is its ability to process strings, even when it's making them AWESOME DUH
 
-When developing scripts like this, I constantly refer to the [AppleScript Language Guide](https://developer.apple.com/library/mac/documentation/applescript/conceptual/applescriptlangguide/introduction/ASLR_intro.html#//apple_ref/doc/uid/TP40000983-CH208-SW1). The good news is that scripts that communicate with other apps are typically short and sweet. AppleScript can be thought of as a transport mechanism rather than a processing environment. The script shown above is atypical.
+When developing scripts like this, I constantly refer to the [AppleScript Language Guide](https://developer.apple.com/library/mac/documentation/applescript/conceptual/applescriptlangguide/introduction/ASLR*intro.html# //apple*ref/doc/uid/TP40000983-CH208-SW1). The good news is that scripts that communicate with other apps are typically short and sweet. AppleScript can be thought of as a transport mechanism rather than a processing environment. The script shown above is atypical.
 
 Once you have your script written and tested, you can move back to the comfortable environs of Objective-C. And the first line of code you'll write is a trip back in time to the Carbon era:
 
 ```objc
-#import <Carbon/Carbon.h> // for AppleScript definitions
+# import <Carbon/Carbon.h> // for AppleScript definitions
 
 ```
 
@@ -85,7 +85,7 @@ Once you have the definitions, you can create an event descriptor. This is a chu
 
 ```
 
-_Note:_ This code is available on [GitHub](https://github.com/objcio/issue-14-sandbox-scripting). The `Automation.scpt` file contains the chockify function and all the other scripts used in this tutorial. The Objective-C code is all in `AppDelegate.m`.
+*Note:* This code is available on [GitHub](https://github.com/objcio/issue-14-sandbox-scripting). The `Automation.scpt` file contains the chockify function and all the other scripts used in this tutorial. The Objective-C code is all in `AppDelegate.m`.
 
 Now that you have an event descriptor that tells AppleScript what you want to do, you need to give it somewhere to do it. That means loading an AppleScript from your application bundle:
 
@@ -109,7 +109,7 @@ if (URL) {
 
 ```
 
-An instance of `NSAppleScript` is created using a URL from the application bundle. That script, in turn, is used with the chockify event descriptor created above. If everything goes according to plan, you end up with another event descriptor. If not, you get a dictionary back that contains information describing what went wrong. Although the pattern is similar to many other Foundation classes, the error _is not_ an instance of `NSError`.
+An instance of `NSAppleScript` is created using a URL from the application bundle. That script, in turn, is used with the chockify event descriptor created above. If everything goes according to plan, you end up with another event descriptor. If not, you get a dictionary back that contains information describing what went wrong. Although the pattern is similar to many other Foundation classes, the error *is not* an instance of `NSError`.
 
 All that's left to do now is extract the information you want from the descriptor:
 
@@ -134,7 +134,7 @@ All that's left to do now is extract the information you want from the descripto
 
 Your InputString just got a facelift, and you've seen everything you need to run AppleScripts from your app. Sort of.
 
-## The Way It Used To Be
+# # The Way It Used To Be
 
 There was a time when you could send AppleEvents to any application, not just to the currently running application, as we did with chockify above.
 
@@ -164,7 +164,7 @@ AppleScript run error = {
 
 Even though Safari is running. What. The.
 
-## Sandbox Restrictions
+# # Sandbox Restrictions
 
 You're trying to run this script from an application sandbox. As far as that sandbox is concerned, Safari is, in fact, not running.
 
@@ -176,7 +176,7 @@ Luckily, things have gotten much better in recent releases of OS X. In 10.8 Moun
 
 Apple's mantra for the application sandbox is to drive security policy through user intent. In practice, this means a user has to decide to want to run your script. It might have come from the Internet or it might be a part of your application; the only thing that matters is that your customer says "Yes, I want to run this script." Once that permission is granted, the scripts are run in a way where the interaction with the rest of the system is limited. The `NSUserScriptTask` class makes all this possible.
 
-## Installing Scripts
+# # Installing Scripts
 
 So how does a user grant access for an application that wants to run scripts?
 
@@ -247,9 +247,9 @@ That `Automation.scpt` file that we used to run from inside the application bund
 
 It's important throughout this entire process to let your customer know exactly what's going on. You have to remember that the customer is the one in control of the script, not you. If the customer decides to clear out all his or her scripts from the folder, you need to cope with that. You may need to disable an app feature that requires the script, or explain why the script needs to be installed again.
 
-_Note:_ The [Scriptinator](https://github.com/objcio/issue-14-sandbox-scripting) sample code includes both of the approaches shown above. For a real world example, take a look at the [Overlay](http://xscopeapp.com/guide#overlay) tool in the free trial version of [xScope](http://xscopeapp.com/). It has a user-friendly setup procedure and sophisticated scripting that lets the app communicate with the customer's web browser. As a bonus, you may find that xScope is a great tool for doing your own development!
+*Note:* The [Scriptinator](https://github.com/objcio/issue-14-sandbox-scripting) sample code includes both of the approaches shown above. For a real world example, take a look at the [Overlay](http://xscopeapp.com/guide# overlay) tool in the free trial version of [xScope](http://xscopeapp.com/). It has a user-friendly setup procedure and sophisticated scripting that lets the app communicate with the customer's web browser. As a bonus, you may find that xScope is a great tool for doing your own development!
 
-## Scripting Tasks
+# # Scripting Tasks
 
 Now that you have the automation scripts in the right place, you can start to use them.
 
@@ -310,7 +310,7 @@ For scripts that a user has written, the user may expect your app to simply 'run
 
 One of the nice things about `NSUserAppleScriptTask` is the completion handler. Scripts are run asynchronously, so your user interface doesn't need to block while a (potentially lengthy) script is run. Be careful about what you do when that completion handler is invoked; it's not running on the main thread, so you can't make any updates to your user interface there.
 
-## Behind the Scenes
+# # Behind the Scenes
 
 What's going on behind the scenes?
 
@@ -318,11 +318,11 @@ As you may have guessed by the fact that scripts can only run once asynchronousl
 
 If you look at the `keySenderPIDAttr` attribute in an incoming event descriptor, you'll see that the process ID belongs to `/usr/libexec/lsboxd`, not your own application. This mysterious process is presumably the Launch Services sandbox daemon. In any case, your requests to another process are most certainly being marshaled.
 
-To understand more about the security goals of the application sandbox at a high level, I'd recommend Ivan Krstić's talk _"The OS X App Sandbox"_ at [WWDC 2012](https://developer.apple.com/videos/wwdc/2012/). It's a surprisingly entertaining talk, and at 36 minutes into the presentation, the automation changes shown above are introduced. At that same conference, a talk entitled _"Secure Automation Techniques in OS X"_ by Sal Soghoian and Chris Nebel goes into the details of the automation changes. Skip ahead to the 35-minute mark if you just want to learn about Application-Run User Scripts.
+To understand more about the security goals of the application sandbox at a high level, I'd recommend Ivan Krstić's talk *"The OS X App Sandbox"* at [WWDC 2012](https://developer.apple.com/videos/wwdc/2012/). It's a surprisingly entertaining talk, and at 36 minutes into the presentation, the automation changes shown above are introduced. At that same conference, a talk entitled *"Secure Automation Techniques in OS X"* by Sal Soghoian and Chris Nebel goes into the details of the automation changes. Skip ahead to the 35-minute mark if you just want to learn about Application-Run User Scripts.
 
 Another important security announcement discussed in these talks — but not covered in this tutorial — are access groups. If you're going to be scripting system applications like Mail or iTunes, you'll definitely want to pay attention to this topic in the videos above.
 
-## Synchronicity
+# # Synchronicity
 
 As I mentioned above, there is a subtle difference between `NSAppleScript` and `NSUserAppleScriptTask`: the new mechanism runs asynchronously. For the most part, using a completion handler is a much better way to deal with things, because there's nothing to block your application while a script runs.
 
@@ -331,14 +331,14 @@ However, there are cases where it can get tricky if you're executing tasks with 
 A simple way to get behavior that mimics the old way of doing things is to use a semaphore that makes sure only one task is running at a time. In your class or application initialization, create the semaphore using `libdispatch`:
 
 ```applescript
-self.appleScriptTaskSemaphore = dispatch_semaphore_create(1);
+self.appleScriptTaskSemaphore = dispatch*semaphore*create(1);
 ```
 
 Then simply wait on that semaphore before initiating the script task. When the task completes, signal on that same semaphore:
 
 ```objc
 // wait for any previous tasks to complete before starting a new one — remember that you're blocking the main thread here!
-dispatch_semaphore_wait(self.appleScriptTaskSemaphore, DISPATCH_TIME_FOREVER);
+dispatch*semaphore*wait(self.appleScriptTaskSemaphore, DISPATCH*TIME*FOREVER);
 
 // run the script task
 NSAppleEventDescriptor *event = [self openNetworkPreferencesEventDescriptor];
@@ -351,7 +351,7 @@ NSAppleEventDescriptor *event = [self openNetworkPreferencesEventDescriptor];
     }
     
     // the task has completed, so let any pending tasks proceed
-    dispatch_semaphore_signal(self.appleScriptTaskSemaphore);
+    dispatch*semaphore*signal(self.appleScriptTaskSemaphore);
 }];
 
 
@@ -359,7 +359,7 @@ NSAppleEventDescriptor *event = [self openNetworkPreferencesEventDescriptor];
 
 Again, don't do this unless you have a really good reason.
 
-## What Can You Script?
+# # What Can You Script?
 
 In the last example, the Network pane of System Preferences was opened with the following AppleScript code:
 
@@ -448,6 +448,6 @@ end tell
 
 Done! Now imagine how helpful that could be to a user who needs to add accessibility permissions for your app. Rather than tell the user how to navigate to that preference panel, you just open it for him or her. Nice.
 
-## Wrapping Up
+# # Wrapping Up
 
 There you have it: everything you need to know about controlling another app from your own app. Whether you're giving users the ability to automate their workflows or simply enabling internal functionality in your app, AppleScript is a powerful component of every Mac application, even if it's running in a sandbox. Hopefully this tutorial has given you new tools and insight on how to take advantage of these capabilities in your own projects!

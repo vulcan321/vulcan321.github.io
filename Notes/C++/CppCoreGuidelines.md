@@ -1,6 +1,6 @@
-### P.4: Ideally, a program should be statically type safe[](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#S-philosophy#p4-ideally-a-program-should-be-statically-type-safe)
+## # P.4: Ideally, a program should be statically type safe[](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines# S-philosophy# p4-ideally-a-program-should-be-statically-type-safe)
 
-##### Reason
+#### # Reason
 
 Ideally, a program would be completely statically (compile-time) type safe. Unfortunately, that is not possible. Problem areas:
 
@@ -10,11 +10,11 @@ Ideally, a program would be completely statically (compile-time) type safe. Unfo
 -   range errors
 -   narrowing conversions
 
-##### Note
+#### # Note
 
 These areas are sources of serious problems (e.g., crashes and security violations). We try to provide alternative techniques.
 
-##### Enforcement
+#### # Enforcement
 
 We can ban, restrain, or detect the individual problem categories separately, as required and feasible for individual programs. Always suggest an alternative. For example:
 
@@ -24,13 +24,13 @@ We can ban, restrain, or detect the individual problem categories separately, as
 -   range errors – use `span`
 -   narrowing conversions – minimize their use and use `narrow` or `narrow_cast` (from the GSL) where they are necessary
 
-### P.5: Prefer compile-time checking to run-time checking[](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#S-philosophy#p5-prefer-compile-time-checking-to-run-time-checking)
+## # P.5: Prefer compile-time checking to run-time checking[](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines# S-philosophy# p5-prefer-compile-time-checking-to-run-time-checking)
 
-##### Reason
+#### # Reason
 
 Code clarity and performance. You don’t need to write error handlers for errors caught at compile time.
 
-##### Example
+#### # Example
 
 ```
 // Int is an alias used for integers
@@ -50,7 +50,7 @@ static_assert(sizeof(Int) >= 4);    // do: compile-time check
 
 Or better still just use the type system and replace `Int` with `int32_t`.
 
-##### Example
+#### # Example
 
 ```
 void read(int* p, int n);   // read max n integers into *p
@@ -70,19 +70,19 @@ read(a);        // better: let the compiler figure out the number of elements
 
 **Alternative formulation**: Don’t postpone to run time what can be done well at compile time.
 
-##### Enforcement
+#### # Enforcement
 
 -   Look for pointer arguments.
 -   Look for run-time checks for range violations.
 
 
-### P.7: Catch run-time errors early[](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#S-philosophy#p7-catch-run-time-errors-early)
+## # P.7: Catch run-time errors early[](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines# S-philosophy# p7-catch-run-time-errors-early)
 
-##### Reason
+#### # Reason
 
 Avoid “mysterious” crashes. Avoid errors leading to (possibly unrecognized) wrong results.
 
-##### Example
+#### # Example
 
 ```
 void increment1(int* p, int n)    // bad: error-prone
@@ -132,11 +132,11 @@ void use3(int m)
 }
 ```
 
-##### Example
+#### # Example
 
 Excess checking can be costly. There are cases where checking early is inefficient because you might never need the value, or might only need part of the value that is more easily checked than the whole. Similarly, don’t add validity checks that change the asymptotic behavior of your interface (e.g., don’t add a `O(n)` check to an interface with an average complexity of `O(1)`).
 
-##### Enforcement
+#### # Enforcement
 
 -   Look at pointers and arrays: Do range-checking early and not repeatedly
 -   Look at conversions: Eliminate or mark narrowing conversions
@@ -144,13 +144,13 @@ Excess checking can be costly. There are cases where checking early is inefficie
 -   Look for structured data (objects of classes with invariants) being converted into strings
 
 
-### P.8: Don’t leak any resources[](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#S-philosophy#p8-dont-leak-any-resources)
+## # P.8: Don’t leak any resources[](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines# S-philosophy# p8-dont-leak-any-resources)
 
-##### Reason
+#### # Reason
 
 Even a slow growth in resources will, over time, exhaust the availability of those resources. This is particularly important for long-running programs, but is an essential piece of responsible programming behavior.
 
-##### Example, bad
+#### # Example, bad
 
 ```
 void f(char* name)
@@ -163,7 +163,7 @@ void f(char* name)
 }
 ```
 
-Prefer [RAII](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#S-philosophy#Rr-raii):
+Prefer [RAII](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines# S-philosophy# Rr-raii):
 
 ```
 void f(char* name)

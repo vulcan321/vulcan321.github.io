@@ -1,10 +1,10 @@
 # Softmax Regression
 :label:`sec_softmax`
 
-In :numref:`sec_linear_regression`, we introduced linear regression,
-working through implementations from scratch in :numref:`sec_linear_scratch`
+In :numref:`sec*linear*regression`, we introduced linear regression,
+working through implementations from scratch in :numref:`sec*linear*scratch`
 and again using high-level APIs of a deep learning framework
-in :numref:`sec_linear_concise` to do the heavy lifting.
+in :numref:`sec*linear*concise` to do the heavy lifting.
 
 Regression is the hammer we reach for when
 we want to answer *how much?* or *how many?* questions.
@@ -34,14 +34,14 @@ because often, even when we only care about hard assignments,
 we still use models that make soft assignments.
 
 
-## Classification Problem
+# # Classification Problem
 :label:`subsec_classification-problem`
 
 To get our feet wet, let us start off with
 a simple image classification problem.
 Here, each input consists of a $2\times2$ grayscale image.
 We can represent each pixel value with a single scalar,
-giving us four features $x_1, x_2, x_3, x_4$.
+giving us four features $x*1, x*2, x*3, x*4$.
 Further, let us assume that each image belongs to one
 among the categories "cat", "chicken", and "dog".
 
@@ -68,7 +68,7 @@ and $(0, 0, 1)$ to "dog":
 $$y \in \{(1, 0, 0), (0, 1, 0), (0, 0, 1)\}.$$
 
 
-## Network Architecture
+# # Network Architecture
 
 In order to estimate the conditional probabilities associated with all the possible classes,
 we need a model with multiple outputs, one per class.
@@ -78,20 +78,20 @@ Each output will correspond to its own affine function.
 In our case, since we have 4 features and 3 possible output categories,
 we will need 12 scalars to represent the weights ($w$ with subscripts),
 and 3 scalars to represent the biases ($b$ with subscripts).
-We compute these three *logits*, $o_1, o_2$, and $o_3$, for each input:
+We compute these three *logits*, $o*1, o*2$, and $o_3$, for each input:
 
 $$
 \begin{aligned}
-o_1 &= x_1 w_{11} + x_2 w_{12} + x_3 w_{13} + x_4 w_{14} + b_1,\\
-o_2 &= x_1 w_{21} + x_2 w_{22} + x_3 w_{23} + x_4 w_{24} + b_2,\\
-o_3 &= x_1 w_{31} + x_2 w_{32} + x_3 w_{33} + x_4 w_{34} + b_3.
+o*1 &= x*1 w*{11} + x*2 w*{12} + x*3 w*{13} + x*4 w*{14} + b*1,\\
+o*2 &= x*1 w*{21} + x*2 w*{22} + x*3 w*{23} + x*4 w*{24} + b*2,\\
+o*3 &= x*1 w*{31} + x*2 w*{32} + x*3 w*{33} + x*4 w*{34} + b*3.
 \end{aligned}
 $$
 
 We can depict this calculation with the neural network diagram shown in :numref:`fig_softmaxreg`.
 Just as in linear regression, softmax regression is also a single-layer neural network.
-And since the calculation of each output, $o_1, o_2$, and $o_3$,
-depends on all inputs, $x_1$, $x_2$, $x_3$, and $x_4$,
+And since the calculation of each output, $o*1, o*2$, and $o_3$,
+depends on all inputs, $x*1$, $x*2$, $x*3$, and $x*4$,
 the output layer of softmax regression can also be described as fully-connected layer.
 
 ![Softmax regression is a single-layer neural network.](../img/softmaxreg.svg)
@@ -107,7 +107,7 @@ our outputs are given by a matrix-vector product of our weights by our input fea
 plus our biases $\mathbf{b}$.
 
 
-## Softmax Operation
+# # Softmax Operation
 
 The main approach that we are going to take here
 is to interpret the outputs of our model as probabilities.
@@ -120,8 +120,8 @@ Put formally, we would like any output $\hat{y}_j$
 to be interpreted as the probability
 that a given item belongs to class $j$.
 Then we can choose the class with the largest output value
-as our prediction $\operatorname*{argmax}_j y_j$.
-For example, if $\hat{y}_1$, $\hat{y}_2$, and $\hat{y}_3$
+as our prediction $\operatorname*{argmax}*j y*j$.
+For example, if $\hat{y}*1$, $\hat{y}*2$, and $\hat{y}_3$
 are 0.1, 0.8, and 0.1, respectively,
 then we predict category 2, which (in our example) represents "chicken".
 
@@ -152,10 +152,10 @@ while requiring that the model remains differentiable,
 we first exponentiate each logit (ensuring non-negativity)
 and then divide by their sum (ensuring that they sum to 1):
 
-$$\hat{\mathbf{y}} = \mathrm{softmax}(\mathbf{o})\quad \text{where}\quad \hat{y}_j = \frac{\exp(o_j)}{\sum_k \exp(o_k)}. $$
-:eqlabel:`eq_softmax_y_and_o`
+$$\hat{\mathbf{y}} = \mathrm{softmax}(\mathbf{o})\quad \text{where}\quad \hat{y}*j = \frac{\exp(o*j)}{\sum*k \exp(o*k)}. $$
+:eqlabel:`eq*softmax*y*and*o`
 
-It is easy to see $\hat{y}_1 + \hat{y}_2 + \hat{y}_3 = 1$
+It is easy to see $\hat{y}*1 + \hat{y}*2 + \hat{y}_3 = 1$
 with $0 \leq \hat{y}_j \leq 1$ for all $j$.
 Thus, $\hat{\mathbf{y}}$ is a proper probability distribution
 whose element values can be interpreted accordingly.
@@ -165,7 +165,7 @@ that determine the probabilities assigned to each class.
 Therefore, during prediction we can still pick out the most likely class by
 
 $$
-\operatorname*{argmax}_j \hat y_j = \operatorname*{argmax}_j o_j.
+\operatorname*{argmax}*j \hat y*j = \operatorname*{argmax}*j o*j.
 $$
 
 Although softmax is a nonlinear function,
@@ -175,8 +175,8 @@ thus, softmax regression is a linear model.
 
 
 
-## Vectorization for Minibatches
-:label:`subsec_softmax_vectorization`
+# # Vectorization for Minibatches
+:label:`subsec*softmax*vectorization`
 
 To improve computational efficiency and take advantage of GPUs,
 we typically carry out vector calculations for minibatches of data.
@@ -188,7 +188,7 @@ weights $\mathbf{W} \in \mathbb{R}^{d \times q}$,
 and the bias satisfies $\mathbf{b} \in \mathbb{R}^{1\times q}$.
 
 $$ \begin{aligned} \mathbf{O} &= \mathbf{X} \mathbf{W} + \mathbf{b}, \\ \hat{\mathbf{Y}} & = \mathrm{softmax}(\mathbf{O}). \end{aligned} $$
-:eqlabel:`eq_minibatch_softmax_reg`
+:eqlabel:`eq*minibatch*softmax_reg`
 
 This accelerates the dominant operation into
 a matrix-matrix product $\mathbf{X} \mathbf{W}$
@@ -197,11 +197,11 @@ if we processed one example at a time.
 Since each row in $\mathbf{X}$ represents a data point,
 the softmax operation itself can be computed *rowwise*:
 for each row of $\mathbf{O}$, exponentiate all entries and then normalize them by the sum.
-Triggering broadcasting during the summation $\mathbf{X} \mathbf{W} + \mathbf{b}$ in :eqref:`eq_minibatch_softmax_reg`,
+Triggering broadcasting during the summation $\mathbf{X} \mathbf{W} + \mathbf{b}$ in :eqref:`eq*minibatch*softmax_reg`,
 both the minibatch logits $\mathbf{O}$ and output probabilities $\hat{\mathbf{Y}}$
 are $n \times q$ matrices.
 
-## Loss Function
+# # Loss Function
 
 Next, we need a loss function to measure
 the quality of our predicted probabilities.
@@ -209,10 +209,10 @@ We will rely on maximum likelihood estimation,
 the very same concept that we encountered
 when providing a probabilistic justification
 for the mean squared error objective in linear regression
-(:numref:`subsec_normal_distribution_and_squared_loss`).
+(:numref:`subsec*normal*distribution*and*squared_loss`).
 
 
-### Log-Likelihood
+## # Log-Likelihood
 
 The softmax function gives us a vector $\hat{\mathbf{y}}$,
 which we can interpret as estimated conditional probabilities
@@ -242,10 +242,10 @@ $$
 where for any pair of label $\mathbf{y}$ and model prediction $\hat{\mathbf{y}}$ over $q$ classes,
 the loss function $l$ is
 
-$$ l(\mathbf{y}, \hat{\mathbf{y}}) = - \sum_{j=1}^q y_j \log \hat{y}_j. $$
-:eqlabel:`eq_l_cross_entropy`
+$$ l(\mathbf{y}, \hat{\mathbf{y}}) = - \sum*{j=1}^q y*j \log \hat{y}_j. $$
+:eqlabel:`eq*l*cross_entropy`
 
-For reasons explained later on, the loss function in :eqref:`eq_l_cross_entropy`
+For reasons explained later on, the loss function in :eqref:`eq*l*cross_entropy`
 is commonly called the *cross-entropy loss*.
 Since $\mathbf{y}$ is a one-hot vector of length $q$,
 the sum over all its coordinates $j$ vanishes for all but one term.
@@ -261,20 +261,20 @@ It may also not be possible when the input features
 are not sufficiently informative
 to classify every example perfectly.
 
-### Softmax and Derivatives
-:label:`subsec_softmax_and_derivatives`
+## # Softmax and Derivatives
+:label:`subsec*softmax*and_derivatives`
 
 Since the softmax and the corresponding loss are so common,
 it is worth understanding a bit better how it is computed.
-Plugging :eqref:`eq_softmax_y_and_o` into the definition of the loss
-in :eqref:`eq_l_cross_entropy`
+Plugging :eqref:`eq*softmax*y*and*o` into the definition of the loss
+in :eqref:`eq*l*cross_entropy`
 and using the definition of the softmax we obtain:
 
 $$
 \begin{aligned}
-l(\mathbf{y}, \hat{\mathbf{y}}) &=  - \sum_{j=1}^q y_j \log \frac{\exp(o_j)}{\sum_{k=1}^q \exp(o_k)} \\
-&= \sum_{j=1}^q y_j \log \sum_{k=1}^q \exp(o_k) - \sum_{j=1}^q y_j o_j\\
-&= \log \sum_{k=1}^q \exp(o_k) - \sum_{j=1}^q y_j o_j.
+l(\mathbf{y}, \hat{\mathbf{y}}) &=  - \sum*{j=1}^q y*j \log \frac{\exp(o*j)}{\sum*{k=1}^q \exp(o_k)} \\
+&= \sum*{j=1}^q y*j \log \sum*{k=1}^q \exp(o*k) - \sum*{j=1}^q y*j o_j\\
+&= \log \sum*{k=1}^q \exp(o*k) - \sum*{j=1}^q y*j o_j.
 \end{aligned}
 $$
 
@@ -282,7 +282,7 @@ To understand a bit better what is going on,
 consider the derivative with respect to any logit $o_j$. We get
 
 $$
-\partial_{o_j} l(\mathbf{y}, \hat{\mathbf{y}}) = \frac{\exp(o_j)}{\sum_{k=1}^q \exp(o_k)} - y_j = \mathrm{softmax}(\mathbf{o})_j - y_j.
+\partial*{o*j} l(\mathbf{y}, \hat{\mathbf{y}}) = \frac{\exp(o*j)}{\sum*{k=1}^q \exp(o*k)} - y*j = \mathrm{softmax}(\mathbf{o})*j - y*j.
 $$
 
 In other words, the derivative is the difference
@@ -298,7 +298,7 @@ In any exponential family (see the
 the gradients of the log-likelihood are given by precisely this term.
 This fact makes computing gradients easy in practice.
 
-### Cross-Entropy Loss
+## # Cross-Entropy Loss
 
 Now consider the case where we observe not just a single outcome
 but an entire distribution over outcomes.
@@ -306,7 +306,7 @@ We can use the same representation as before for the label $\mathbf{y}$.
 The only difference is that rather than a vector containing only binary entries,
 say $(0, 0, 1)$, we now have a generic probability vector, say $(0.1, 0.2, 0.7)$.
 The math that we used previously to define the loss $l$
-in :eqref:`eq_l_cross_entropy`
+in :eqref:`eq*l*cross_entropy`
 still works out fine,
 just that the interpretation is slightly more general.
 It is the expected value of the loss for a distribution over labels.
@@ -316,13 +316,13 @@ We can demystify the name by introducing just the basics of information theory.
 If you wish to understand more details of information theory,
 you may further refer to the [online appendix on information theory](https://d2l.ai/chapter_appendix-mathematics-for-deep-learning/information-theory.html).
 
-## Information Theory Basics
+# # Information Theory Basics
 
 *Information theory* deals with the problem of encoding, decoding, transmitting,
 and manipulating information (also known as data) in as concise form as possible.
 
 
-### Entropy
+## # Entropy
 
 The central idea in information theory is to quantify the information content in data.
 This quantity places a hard limit on our ability to compress the data.
@@ -330,7 +330,7 @@ In information theory, this quantity is called the *entropy* of a distribution $
 and it is captured by the following equation:
 
 $$H[p] = \sum_j - p(j) \log p(j).$$
-:eqlabel:`eq_softmax_reg_entropy`
+:eqlabel:`eq*softmax*reg_entropy`
 
 One of the fundamental theorems of information theory states
 that in order to encode data drawn randomly from the distribution $p$,
@@ -340,7 +340,7 @@ but when using a code with base $e$ rather than one with base 2.
 Thus, one nat is $\frac{1}{\log(2)} \approx 1.44$ bit.
 
 
-### Surprisal
+## # Surprisal
 
 You might be wondering what compression has to do with prediction.
 Imagine that we have a stream of data that we want to compress.
@@ -359,12 +359,12 @@ Our surprise is greater when we assigned an event lower probability.
 Claude Shannon settled on $\log \frac{1}{P(j)} = -\log P(j)$
 to quantify one's *surprisal* at observing an event $j$
 having assigned it a (subjective) probability $P(j)$.
-The entropy defined in :eqref:`eq_softmax_reg_entropy` is then the *expected surprisal*
+The entropy defined in :eqref:`eq*softmax*reg_entropy` is then the *expected surprisal*
 when one assigned the correct probabilities
 that truly match the data-generating process.
 
 
-### Cross-Entropy Revisited
+## # Cross-Entropy Revisited
 
 So if entropy is level of surprise experienced
 by someone who knows the true probability,
@@ -381,7 +381,7 @@ and (ii) as minimizing our surprisal (and thus the number of bits)
 required to communicate the labels.
 
 
-## Model Prediction and Evaluation
+# # Model Prediction and Evaluation
 
 After training the softmax regression model, given any example features,
 we can predict the probability of each output class.
@@ -392,13 +392,13 @@ we will use *accuracy* to evaluate the model's performance.
 This is equal to the ratio between the number of correct predictions and the total number of predictions.
 
 
-## Summary
+# # Summary
 
 * The softmax operation takes a vector and maps it into probabilities.
 * Softmax regression applies to classification problems. It uses the probability distribution of the output class in the softmax operation.
 * Cross-entropy is a good measure of the difference between two probability distributions. It measures the number of bits needed to encode the data given our model.
 
-## Exercises
+# # Exercises
 
 1. We can explore the connection between exponential families and the softmax in some more depth.
     * Compute the second derivative of the cross-entropy loss $l(\mathbf{y},\hat{\mathbf{y}})$ for the softmax.

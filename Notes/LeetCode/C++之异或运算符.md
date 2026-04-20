@@ -1,6 +1,6 @@
 # C++之异或运算符
 
-## 一、"异或"运算符（“∧”）
+# # 一、"异或"运算符（“∧”）
 
 也称XOR运算符。规则：相同为0，相异为1,0∧0=0,0∧1=1,1∧0=1,1∧1=0
 
@@ -23,7 +23,7 @@ a^0=a;
 a^b^c=a^c^b;
 ```
 
-## 二、LeetCode No268\. Missing Number
+# # 二、LeetCode No268\. Missing Number
 
 Question：
 
@@ -36,7 +36,7 @@ Algorithm：Bit Manipulation
 
 把0-n的数异或后再与nums里的数异或，即得到Missing Number（除了Missing Number都自己与自己异或了一次）
 
-#### Submitted Code：
+### # Submitted Code：
 
 ```cpp
 class Solution {
@@ -55,7 +55,7 @@ public:
 };
 ```
 
-## 三、LeetCode No136\. Single Number
+# # 三、LeetCode No136\. Single Number
 
 Question：
 
@@ -65,7 +65,7 @@ Algorithm：Bit Manipulation
 
 所有元素异或
 
-#### Submitted Code：
+### # Submitted Code：
 
 ```cpp
 class Solution {
@@ -79,7 +79,7 @@ public:
 };
 ```
 
-## 四、LeetCode No260\. Single Number III
+# # 四、LeetCode No260\. Single Number III
 
 Question：
 
@@ -93,9 +93,9 @@ Algorithm：Bit Manipulation
 
 1、按照Single Number的方法，对所有元素异或，那么得到的是这两个元素异或值xor\_two
 
-2、如何将两个元素分开，由于值不同的位异或为1，所以我们不妨可以找出xor\_two的最后一个1（-xor\_two为其补码），把两个元素区别，然后再分别对两个数组异或
+2、如何将两个元素分开，由于值不同的位异或为1，所以我们不妨可以找出xor\*two的最后一个1（-xor\*two为其补码），把两个元素区别，然后再分别对两个数组异或
 
-#### Submitted Code：
+### # Submitted Code：
 
 ```cpp
 class Solution {
@@ -105,8 +105,8 @@ public:
         int last_bit = 0;
         vector<int> result = {0,0};
         for(int i=1;i<nums.size();i++)
-            xor_two = xor_two ^ nums[i];
-        last_bit = xor_two & (~(xor_two-1)); 
+            xor*two = xor*two ^ nums[i];
+        last*bit = xor*two & (~(xor_two-1)); 
         //相异为1，取异或的最后一个1，把两个元素区分，然后分别对两个数组异或
         for(int i=0;i<nums.size();i++)
         {

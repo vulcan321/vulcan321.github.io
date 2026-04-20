@@ -1,5 +1,5 @@
 # 延后初始化
-:label:`sec_deferred_init`
+:label:`sec*deferred*init`
 
 到目前为止，我们忽略了建立网络时需要做的以下这些事情：
 
@@ -19,7 +19,7 @@
 这种能力可以大大简化定义和修改模型的任务。
 接下来，我们将更深入地研究初始化机制。
 
-## 实例化网络
+# # 实例化网络
 
 首先，让我们实例化一个多层感知机。
 
@@ -38,7 +38,7 @@ net = get_net()
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 import tensorflow as tf
 
 net = tf.keras.models.Sequential([
@@ -56,7 +56,7 @@ print(net.collect_params())
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 [net.layers[i].get_weights() for i in range(len(net.layers))]
 ```
 
@@ -94,7 +94,7 @@ net.collect_params()
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 X = tf.random.uniform((2, 20))
 net(X)
 [w.shape for w in net.get_weights()]
@@ -105,12 +105,12 @@ net(X)
 注意，在这种情况下，只有第一层需要延迟初始化，但是框架仍是按顺序初始化的。
 等到知道了所有的参数形状，框架就可以初始化参数。
 
-## 小结
+# # 小结
 
 * 延后初始化使框架能够自动推断参数形状，使修改模型架构变得容易，避免了一些常见的错误。
 * 我们可以通过模型传递数据，使框架最终初始化参数。
 
-## 练习
+# # 练习
 
 1. 如果指定了第一层的输入尺寸，但没有指定后续层的尺寸，会发生什么？是否立即进行初始化？
 1. 如果指定了不匹配的维度会发生什么？

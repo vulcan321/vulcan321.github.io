@@ -8,7 +8,7 @@ GoogLeNet吸收了NiN中串联网络的思想，并在此基础上做了改进�
 本文的一个观点是，有时使用不同大小的卷积核组合是有利的。
 本节将介绍一个稍微简化的GoogLeNet版本：我们省略了一些为稳定训练而添加的特殊特性，现在有了更好的训练方法，这些特性不是必要的。
 
-## (**Inception块**)
+# # (**Inception块**)
 
 在GoogLeNet中，基本的卷积块被称为*Inception块*（Inception block）。这很可能得名于电影《盗梦空间》（Inception），因为电影中的一句话“我们需要走得更深”（“We need to go deeper”）。
 
@@ -29,33 +29,33 @@ npx.set_np()
 
 class Inception(nn.Block):
     # c1--c4是每条路径的输出通道数
-    def __init__(self, c1, c2, c3, c4, **kwargs):
-        super(Inception, self).__init__(**kwargs)
+    def **init**(self, c1, c2, c3, c4, **kwargs):
+        super(Inception, self).**init**(**kwargs)
         # 线路1，单1x1卷积层
-        self.p1_1 = nn.Conv2D(c1, kernel_size=1, activation='relu')
+        self.p1*1 = nn.Conv2D(c1, kernel*size=1, activation='relu')
         # 线路2，1x1卷积层后接3x3卷积层
-        self.p2_1 = nn.Conv2D(c2[0], kernel_size=1, activation='relu')
-        self.p2_2 = nn.Conv2D(c2[1], kernel_size=3, padding=1,
+        self.p2*1 = nn.Conv2D(c2[0], kernel*size=1, activation='relu')
+        self.p2*2 = nn.Conv2D(c2[1], kernel*size=3, padding=1,
                               activation='relu')
         # 线路3，1x1卷积层后接5x5卷积层
-        self.p3_1 = nn.Conv2D(c3[0], kernel_size=1, activation='relu')
-        self.p3_2 = nn.Conv2D(c3[1], kernel_size=5, padding=2,
+        self.p3*1 = nn.Conv2D(c3[0], kernel*size=1, activation='relu')
+        self.p3*2 = nn.Conv2D(c3[1], kernel*size=5, padding=2,
                               activation='relu')
         # 线路4，3x3最大汇聚层后接1x1卷积层
-        self.p4_1 = nn.MaxPool2D(pool_size=3, strides=1, padding=1)
-        self.p4_2 = nn.Conv2D(c4, kernel_size=1, activation='relu')
+        self.p4*1 = nn.MaxPool2D(pool*size=3, strides=1, padding=1)
+        self.p4*2 = nn.Conv2D(c4, kernel*size=1, activation='relu')
 
     def forward(self, x):
         p1 = self.p1_1(x)
-        p2 = self.p2_2(self.p2_1(x))
-        p3 = self.p3_2(self.p3_1(x))
-        p4 = self.p4_2(self.p4_1(x))
+        p2 = self.p2*2(self.p2*1(x))
+        p3 = self.p3*2(self.p3*1(x))
+        p4 = self.p4*2(self.p4*1(x))
         # 在通道维度上连结输出
         return np.concatenate((p1, p2, p3, p4), axis=1)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 from d2l import torch as d2l
 import torch
 from torch import nn
@@ -63,38 +63,38 @@ from torch.nn import functional as F
 
 class Inception(nn.Module):
     # c1--c4是每条路径的输出通道数
-    def __init__(self, in_channels, c1, c2, c3, c4, **kwargs):
-        super(Inception, self).__init__(**kwargs)
+    def **init**(self, in_channels, c1, c2, c3, c4, **kwargs):
+        super(Inception, self).**init**(**kwargs)
         # 线路1，单1x1卷积层
-        self.p1_1 = nn.Conv2d(in_channels, c1, kernel_size=1)
+        self.p1*1 = nn.Conv2d(in*channels, c1, kernel_size=1)
         # 线路2，1x1卷积层后接3x3卷积层
-        self.p2_1 = nn.Conv2d(in_channels, c2[0], kernel_size=1)
-        self.p2_2 = nn.Conv2d(c2[0], c2[1], kernel_size=3, padding=1)
+        self.p2*1 = nn.Conv2d(in*channels, c2[0], kernel_size=1)
+        self.p2*2 = nn.Conv2d(c2[0], c2[1], kernel*size=3, padding=1)
         # 线路3，1x1卷积层后接5x5卷积层
-        self.p3_1 = nn.Conv2d(in_channels, c3[0], kernel_size=1)
-        self.p3_2 = nn.Conv2d(c3[0], c3[1], kernel_size=5, padding=2)
+        self.p3*1 = nn.Conv2d(in*channels, c3[0], kernel_size=1)
+        self.p3*2 = nn.Conv2d(c3[0], c3[1], kernel*size=5, padding=2)
         # 线路4，3x3最大汇聚层后接1x1卷积层
-        self.p4_1 = nn.MaxPool2d(kernel_size=3, stride=1, padding=1)
-        self.p4_2 = nn.Conv2d(in_channels, c4, kernel_size=1)
+        self.p4*1 = nn.MaxPool2d(kernel*size=3, stride=1, padding=1)
+        self.p4*2 = nn.Conv2d(in*channels, c4, kernel_size=1)
 
     def forward(self, x):
         p1 = F.relu(self.p1_1(x))
-        p2 = F.relu(self.p2_2(F.relu(self.p2_1(x))))
-        p3 = F.relu(self.p3_2(F.relu(self.p3_1(x))))
-        p4 = F.relu(self.p4_2(self.p4_1(x)))
+        p2 = F.relu(self.p2*2(F.relu(self.p2*1(x))))
+        p3 = F.relu(self.p3*2(F.relu(self.p3*1(x))))
+        p4 = F.relu(self.p4*2(self.p4*1(x)))
         # 在通道维度上连结输出
         return torch.cat((p1, p2, p3, p4), dim=1)
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 from d2l import tensorflow as d2l
 import tensorflow as tf
 
 class Inception(tf.keras.Model):
     # c1--c4是每条路径的输出通道数
-    def __init__(self, c1, c2, c3, c4):
-        super().__init__()
+    def **init**(self, c1, c2, c3, c4):
+        super().**init**()
         # 线路1，单1x1卷积层
         self.p1_1 = tf.keras.layers.Conv2D(c1, 1, activation='relu')
         # 线路2，1x1卷积层后接3x3卷积层
@@ -112,15 +112,15 @@ class Inception(tf.keras.Model):
 
     def call(self, x):
         p1 = self.p1_1(x)
-        p2 = self.p2_2(self.p2_1(x))
-        p3 = self.p3_2(self.p3_1(x))
-        p4 = self.p4_2(self.p4_1(x))
+        p2 = self.p2*2(self.p2*1(x))
+        p3 = self.p3*2(self.p3*1(x))
+        p4 = self.p4*2(self.p4*1(x))
         # 在通道维度上连结输出
         return tf.keras.layers.Concatenate()([p1, p2, p3, p4])
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 from d2l import paddle as d2l
 import warnings
 warnings.filterwarnings("ignore")
@@ -130,25 +130,25 @@ import paddle.nn.functional as F
 
 class Inception(nn.Layer):
     # c1--c4是每条路径的输出通道数
-    def __init__(self, in_channels, c1, c2, c3, c4, **kwargs):
-        super(Inception, self).__init__(**kwargs)
+    def **init**(self, in_channels, c1, c2, c3, c4, **kwargs):
+        super(Inception, self).**init**(**kwargs)
         # 线路1，单1x1卷积层
-        self.p1_1 = nn.Conv2D(in_channels, c1, kernel_size=1)
+        self.p1*1 = nn.Conv2D(in*channels, c1, kernel_size=1)
         # 线路2，1x1卷积层后接3x3卷积层
-        self.p2_1 = nn.Conv2D(in_channels, c2[0], kernel_size=1)
-        self.p2_2 = nn.Conv2D(c2[0], c2[1], kernel_size=3, padding=1)
+        self.p2*1 = nn.Conv2D(in*channels, c2[0], kernel_size=1)
+        self.p2*2 = nn.Conv2D(c2[0], c2[1], kernel*size=3, padding=1)
         # 线路3，1x1卷积层后接5x5卷积层
-        self.p3_1 = nn.Conv2D(in_channels, c3[0], kernel_size=1)
-        self.p3_2 = nn.Conv2D(c3[0], c3[1], kernel_size=5, padding=2)
+        self.p3*1 = nn.Conv2D(in*channels, c3[0], kernel_size=1)
+        self.p3*2 = nn.Conv2D(c3[0], c3[1], kernel*size=5, padding=2)
         # 线路4，3x3最大池化层后接1x1卷积层
-        self.p4_1 = nn.MaxPool2D(kernel_size=3, stride=1, padding=1)
-        self.p4_2 = nn.Conv2D(in_channels, c4, kernel_size=1)
+        self.p4*1 = nn.MaxPool2D(kernel*size=3, stride=1, padding=1)
+        self.p4*2 = nn.Conv2D(in*channels, c4, kernel_size=1)
 
     def forward(self, x):
         p1 = F.relu(self.p1_1(x))
-        p2 = F.relu(self.p2_2(F.relu(self.p2_1(x))))
-        p3 = F.relu(self.p3_2(F.relu(self.p3_1(x))))
-        p4 = F.relu(self.p4_2(self.p4_1(x)))
+        p2 = F.relu(self.p2*2(F.relu(self.p2*1(x))))
+        p3 = F.relu(self.p3*2(F.relu(self.p3*1(x))))
+        p4 = F.relu(self.p4*2(self.p4*1(x)))
         # 在通道维度上连结输出
         return paddle.concat(x=[p1, p2, p3, p4], axis=1)
 ```
@@ -157,13 +157,13 @@ class Inception(nn.Layer):
 首先我们考虑一下滤波器（filter）的组合，它们可以用各种滤波器尺寸探索图像，这意味着不同大小的滤波器可以有效地识别不同范围的图像细节。
 同时，我们可以为不同的滤波器分配不同数量的参数。
 
-## [**GoogLeNet模型**]
+# # [**GoogLeNet模型**]
 
-如 :numref:`fig_inception_full`所示，GoogLeNet一共使用9个Inception块和全局平均汇聚层的堆叠来生成其估计值。Inception块之间的最大汇聚层可降低维度。
+如 :numref:`fig*inception*full`所示，GoogLeNet一共使用9个Inception块和全局平均汇聚层的堆叠来生成其估计值。Inception块之间的最大汇聚层可降低维度。
 第一个模块类似于AlexNet和LeNet，Inception块的组合从VGG继承，全局平均汇聚层避免了在最后使用全连接层。
 
 ![GoogLeNet架构。](../img/inception-full.svg)
-:label:`fig_inception_full`
+:label:`fig*inception*full`
 
 现在，我们逐一实现GoogLeNet的每个模块。第一个模块使用64个通道、$7\times 7$卷积层。
 
@@ -174,14 +174,14 @@ b1.add(nn.Conv2D(64, kernel_size=7, strides=2, padding=3, activation='relu'),
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 b1 = nn.Sequential(nn.Conv2d(1, 64, kernel_size=7, stride=2, padding=3),
                    nn.ReLU(),
                    nn.MaxPool2d(kernel_size=3, stride=2, padding=1))
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 def b1():
     return tf.keras.models.Sequential([
         tf.keras.layers.Conv2D(64, 7, strides=2, padding='same',
@@ -190,7 +190,7 @@ def b1():
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 b1 = nn.Sequential(nn.Conv2D(1, 64, kernel_size=7, stride=2, padding=3),
                    nn.ReLU(), 
                    nn.MaxPool2D(kernel_size=3, stride=2,padding=1))
@@ -207,7 +207,7 @@ b2.add(nn.Conv2D(64, kernel_size=1, activation='relu'),
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 b2 = nn.Sequential(nn.Conv2d(64, 64, kernel_size=1),
                    nn.ReLU(),
                    nn.Conv2d(64, 192, kernel_size=3, padding=1),
@@ -216,7 +216,7 @@ b2 = nn.Sequential(nn.Conv2d(64, 64, kernel_size=1),
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 def b2():
     return tf.keras.Sequential([
         tf.keras.layers.Conv2D(64, 1, activation='relu'),
@@ -225,7 +225,7 @@ def b2():
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 b2 = nn.Sequential(nn.Conv2D(64, 64, kernel_size=1), 
                    nn.ReLU(),
                    nn.Conv2D(64, 192, kernel_size=3, padding=1),
@@ -246,14 +246,14 @@ b3.add(Inception(64, (96, 128), (16, 32), 32),
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 b3 = nn.Sequential(Inception(192, 64, (96, 128), (16, 32), 32),
                    Inception(256, 128, (128, 192), (32, 96), 64),
                    nn.MaxPool2d(kernel_size=3, stride=2, padding=1))
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 def b3():
     return tf.keras.models.Sequential([
         Inception(64, (96, 128), (16, 32), 32),
@@ -262,7 +262,7 @@ def b3():
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 b3 = nn.Sequential(Inception(192, 64, (96, 128), (16, 32), 32),
                    Inception(256, 128, (128, 192), (32, 96), 64),
                    nn.MaxPool2D(kernel_size=3, stride=2, padding=1))
@@ -285,7 +285,7 @@ b4.add(Inception(192, (96, 208), (16, 48), 64),
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 b4 = nn.Sequential(Inception(480, 192, (96, 208), (16, 48), 64),
                    Inception(512, 160, (112, 224), (24, 64), 64),
                    Inception(512, 128, (128, 256), (24, 64), 64),
@@ -295,7 +295,7 @@ b4 = nn.Sequential(Inception(480, 192, (96, 208), (16, 48), 64),
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 def b4():
     return tf.keras.Sequential([
         Inception(192, (96, 208), (16, 48), 64),
@@ -307,7 +307,7 @@ def b4():
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 b4 = nn.Sequential(Inception(480, 192, (96, 208), (16, 48), 64),
                    Inception(512, 160, (112, 224), (24, 64), 64),
                    Inception(512, 128, (128, 256), (24, 64), 64),
@@ -332,7 +332,7 @@ net.add(b1, b2, b3, b4, b5, nn.Dense(10))
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 b5 = nn.Sequential(Inception(832, 256, (160, 320), (32, 128), 128),
                    Inception(832, 384, (192, 384), (48, 128), 128),
                    nn.AdaptiveAvgPool2d((1,1)),
@@ -342,7 +342,7 @@ net = nn.Sequential(b1, b2, b3, b4, b5, nn.Linear(1024, 10))
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 def b5():
     return tf.keras.Sequential([
         Inception(256, (160, 320), (32, 128), 128),
@@ -359,7 +359,7 @@ def net():
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 b5 = nn.Sequential(Inception(832, 256, (160, 320), (32, 128), 128),
                    Inception(832, 384, (192, 384), (48, 128), 128),
                    nn.AdaptiveAvgPool2D((1, 1)), 
@@ -380,50 +380,50 @@ for layer in net:
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 X = torch.rand(size=(1, 1, 96, 96))
 for layer in net:
     X = layer(X)
-    print(layer.__class__.__name__,'output shape:\t', X.shape)
+    print(layer.**class**.**name**,'output shape:\t', X.shape)
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 X = tf.random.uniform(shape=(1, 96, 96, 1))
 for layer in net().layers:
     X = layer(X)
-    print(layer.__class__.__name__, 'output shape:\t', X.shape)
+    print(layer.**class**.**name**, 'output shape:\t', X.shape)
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 X = paddle.rand(shape=(1, 1, 96, 96))
 for layer in net:
     X = layer(X)
-    print(layer.__class__.__name__,'output shape:\t', X.shape)
+    print(layer.**class**.**name**,'output shape:\t', X.shape)
 ```
 
-## [**训练模型**]
+# # [**训练模型**]
 
 和以前一样，我们使用Fashion-MNIST数据集来训练我们的模型。在训练之前，我们将图片转换为$96 \times 96$分辨率。
 
 ```{.python .input}
-#@tab all
-lr, num_epochs, batch_size = 0.1, 10, 128
-train_iter, test_iter = d2l.load_data_fashion_mnist(batch_size, resize=96)
-d2l.train_ch6(net, train_iter, test_iter, num_epochs, lr, d2l.try_gpu())
+# @tab all
+lr, num*epochs, batch*size = 0.1, 10, 128
+train*iter, test*iter = d2l.load*data*fashion*mnist(batch*size, resize=96)
+d2l.train*ch6(net, train*iter, test*iter, num*epochs, lr, d2l.try_gpu())
 ```
 
-## 小结
+# # 小结
 
 * Inception块相当于一个有4条路径的子网络。它通过不同窗口形状的卷积层和最大汇聚层来并行抽取信息，并使用$1×1$卷积层减少每像素级别上的通道维数从而降低模型复杂度。
 *  GoogLeNet将多个设计精细的Inception块与其他层（卷积层、全连接层）串联起来。其中Inception块的通道数分配之比是在ImageNet数据集上通过大量的实验得来的。
 * GoogLeNet和它的后继者们一度是ImageNet上最有效的模型之一：它以较低的计算复杂度提供了类似的测试精度。
 
-## 练习
+# # 练习
 
 1. GoogLeNet有一些后续版本。尝试实现并运行它们，然后观察实验结果。这些后续版本包括：
-    * 添加批量规范化层 :cite:`Ioffe.Szegedy.2015`（batch normalization），在 :numref:`sec_batch_norm`中将介绍；
+    * 添加批量规范化层 :cite:`Ioffe.Szegedy.2015`（batch normalization），在 :numref:`sec*batch*norm`中将介绍；
     * 对Inception模块进行调整 :cite:`Szegedy.Vanhoucke.Ioffe.ea.2016`；
     * 使用标签平滑（label smoothing）进行模型正则化 :cite:`Szegedy.Vanhoucke.Ioffe.ea.2016`；
     * 加入残差连接 :cite:`Szegedy.Ioffe.Vanhoucke.ea.2017`。（ :numref:`sec_resnet`将介绍）。

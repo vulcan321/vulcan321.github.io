@@ -1,17 +1,17 @@
 # 语言模型和数据集
-:label:`sec_language_model`
+:label:`sec*language*model`
 
-在 :numref:`sec_text_preprocessing`中，
+在 :numref:`sec*text*preprocessing`中，
 我们了解了如何将文本数据映射为词元，
 以及将这些词元可以视为一系列离散的观测，例如单词或字符。
-假设长度为$T$的文本序列中的词元依次为$x_1, x_2, \ldots, x_T$。
+假设长度为$T$的文本序列中的词元依次为$x*1, x*2, \ldots, x_T$。
 于是，$x_t$（$1 \leq t \leq T$）
 可以被认为是文本序列在时间步$t$处的观测或标签。
 在给定这样的文本序列时，*语言模型*（language model）的目标是估计序列的联合概率
 
-$$P(x_1, x_2, \ldots, x_T).$$
+$$P(x*1, x*2, \ldots, x_T).$$
 
-例如，只需要一次抽取一个词元$x_t \sim P(x_t \mid x_{t-1}, \ldots, x_1)$，
+例如，只需要一次抽取一个词元$x*t \sim P(x*t \mid x*{t-1}, \ldots, x*1)$，
 一个理想的语言模型就能够基于模型本身生成自然文本。
 与猴子使用打字机完全不同的是，从这样的模型中提取的文本
 都将作为自然语言（例如，英语文本）来传递。
@@ -29,7 +29,7 @@ $$P(x_1, x_2, \ldots, x_T).$$
 或者“我想吃奶奶”是一个相当匪夷所思的语句，
 而“我想吃，奶奶”则要正常得多。
 
-## 学习语言模型
+# # 学习语言模型
 
 显而易见，我们面对的问题是如何对一个文档，
 甚至是一个词元序列进行建模。
@@ -37,7 +37,7 @@ $$P(x_1, x_2, \ldots, x_T).$$
 我们可以依靠在 :numref:`sec_sequence`中对序列模型的分析。
 让我们从基本概率规则开始：
 
-$$P(x_1, x_2, \ldots, x_T) = \prod_{t=1}^T P(x_t  \mid  x_1, \ldots, x_{t-1}).$$
+$$P(x*1, x*2, \ldots, x*T) = \prod*{t=1}^T P(x*t  \mid  x*1, \ldots, x_{t-1}).$$
 
 例如，包含了四个单词的一个文本序列的概率是：
 
@@ -78,14 +78,14 @@ $$\hat{P}(\text{learning} \mid \text{deep}) = \frac{n(\text{deep, learning})}{n(
 
 $$
 \begin{aligned}
-    \hat{P}(x) & = \frac{n(x) + \epsilon_1/m}{n + \epsilon_1}, \\
-    \hat{P}(x' \mid x) & = \frac{n(x, x') + \epsilon_2 \hat{P}(x')}{n(x) + \epsilon_2}, \\
-    \hat{P}(x'' \mid x,x') & = \frac{n(x, x',x'') + \epsilon_3 \hat{P}(x'')}{n(x, x') + \epsilon_3}.
+    \hat{P}(x) & = \frac{n(x) + \epsilon*1/m}{n + \epsilon*1}, \\
+    \hat{P}(x' \mid x) & = \frac{n(x, x') + \epsilon*2 \hat{P}(x')}{n(x) + \epsilon*2}, \\
+    \hat{P}(x'' \mid x,x') & = \frac{n(x, x',x'') + \epsilon*3 \hat{P}(x'')}{n(x, x') + \epsilon*3}.
 \end{aligned}
 $$
 
-其中，$\epsilon_1,\epsilon_2$和$\epsilon_3$是超参数。
-以$\epsilon_1$为例：当$\epsilon_1 = 0$时，不应用平滑；
+其中，$\epsilon*1,\epsilon*2$和$\epsilon_3$是超参数。
+以$\epsilon*1$为例：当$\epsilon*1 = 0$时，不应用平滑；
 当$\epsilon_1$接近正无穷大时，$\hat{P}(x)$接近均匀概率分布$1/m$。
 上面的公式是 :cite:`Wood.Gasthaus.Archambeau.ea.2011`
 的一个相当原始的变形。
@@ -99,21 +99,21 @@ $$
 因此一个模型如果只是简单地统计先前“看到”的单词序列频率，
 那么模型面对这种问题肯定是表现不佳的。
 
-## 马尔可夫模型与$n$元语法
+# # 马尔可夫模型与$n$元语法
 
 在讨论包含深度学习的解决方案之前，我们需要了解更多的概念和术语。
 回想一下我们在 :numref:`sec_sequence`中对马尔可夫模型的讨论，
 并且将其应用于语言建模。
-如果$P(x_{t+1} \mid x_t, \ldots, x_1) = P(x_{t+1} \mid x_t)$，
+如果$P(x*{t+1} \mid x*t, \ldots, x*1) = P(x*{t+1} \mid x_t)$，
 则序列上的分布满足一阶马尔可夫性质。
 阶数越高，对应的依赖关系就越长。
 这种性质推导出了许多可以应用于序列建模的近似公式：
 
 $$
 \begin{aligned}
-P(x_1, x_2, x_3, x_4) &=  P(x_1) P(x_2) P(x_3) P(x_4),\\
-P(x_1, x_2, x_3, x_4) &=  P(x_1) P(x_2  \mid  x_1) P(x_3  \mid  x_2) P(x_4  \mid  x_3),\\
-P(x_1, x_2, x_3, x_4) &=  P(x_1) P(x_2  \mid  x_1) P(x_3  \mid  x_1, x_2) P(x_4  \mid  x_2, x_3).
+P(x*1, x*2, x*3, x*4) &=  P(x*1) P(x*2) P(x*3) P(x*4),\\
+P(x*1, x*2, x*3, x*4) &=  P(x*1) P(x*2  \mid  x*1) P(x*3  \mid  x*2) P(x*4  \mid  x_3),\\
+P(x*1, x*2, x*3, x*4) &=  P(x*1) P(x*2  \mid  x*1) P(x*3  \mid  x*1, x*2) P(x*4  \mid  x*2, x_3).
 \end{aligned}
 $$
 
@@ -121,10 +121,10 @@ $$
 *一元语法*（unigram）、*二元语法*（bigram）和*三元语法*（trigram）模型。
 下面，我们将学习如何去设计更好的模型。
 
-## 自然语言统计
+# # 自然语言统计
 
 我们看看在真实数据上如果进行自然语言统计。
-根据 :numref:`sec_text_preprocessing`中介绍的时光机器数据集构建词表，
+根据 :numref:`sec*text*preprocessing`中介绍的时光机器数据集构建词表，
 并打印前$10$个最常用的（频率最高的）单词。
 
 ```{.python .input}
@@ -135,21 +135,21 @@ npx.set_np()
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 from d2l import torch as d2l
 import torch
 import random
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 from d2l import tensorflow as d2l
 import tensorflow as tf
 import random
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 from d2l import paddle as d2l
 import warnings
 warnings.filterwarnings("ignore")
@@ -158,8 +158,8 @@ import random
 ```
 
 ```{.python .input}
-#@tab all
-tokens = d2l.tokenize(d2l.read_time_machine())
+# @tab all
+tokens = d2l.tokenize(d2l.read*time*machine())
 # 因为每个文本行不一定是一个句子或一个段落，因此我们把所有文本行拼接到一起
 corpus = [token for line in tokens for token in line]
 vocab = d2l.Vocab(corpus)
@@ -174,7 +174,7 @@ vocab.token_freqs[:10]
 为了更好地理解，我们可以[**画出的词频图**]：
 
 ```{.python .input}
-#@tab all
+# @tab all
 freqs = [freq for token, freq in vocab.token_freqs]
 d2l.plot(freqs, xlabel='token: x', ylabel='frequency: n(x)',
          xscale='log', yscale='log')
@@ -186,7 +186,7 @@ d2l.plot(freqs, xlabel='token: x', ylabel='frequency: n(x)',
 即第$i$个最常用单词的频率$n_i$为：
 
 $$n_i \propto \frac{1}{i^\alpha},$$
-:eqlabel:`eq_zipf_law`
+:eqlabel:`eq*zipf*law`
 
 等价于
 
@@ -199,10 +199,10 @@ $$\log n_i = -\alpha \log i + c,$$
 我们来看看二元语法的频率是否与一元语法的频率表现出相同的行为方式。
 
 ```{.python .input}
-#@tab all
+# @tab all
 bigram_tokens = [pair for pair in zip(corpus[:-1], corpus[1:])]
-bigram_vocab = d2l.Vocab(bigram_tokens)
-bigram_vocab.token_freqs[:10]
+bigram*vocab = d2l.Vocab(bigram*tokens)
+bigram*vocab.token*freqs[:10]
 ```
 
 这里值得注意：在十个最频繁的词对中，有九个是由两个停用词组成的，
@@ -210,20 +210,20 @@ bigram_vocab.token_freqs[:10]
 我们再进一步看看三元语法的频率是否表现出相同的行为方式。
 
 ```{.python .input}
-#@tab all
+# @tab all
 trigram_tokens = [triple for triple in zip(
     corpus[:-2], corpus[1:-1], corpus[2:])]
-trigram_vocab = d2l.Vocab(trigram_tokens)
-trigram_vocab.token_freqs[:10]
+trigram*vocab = d2l.Vocab(trigram*tokens)
+trigram*vocab.token*freqs[:10]
 ```
 
 最后，我们[**直观地对比三种模型中的词元频率**]：一元语法、二元语法和三元语法。
 
 ```{.python .input}
-#@tab all
-bigram_freqs = [freq for token, freq in bigram_vocab.token_freqs]
-trigram_freqs = [freq for token, freq in trigram_vocab.token_freqs]
-d2l.plot([freqs, bigram_freqs, trigram_freqs], xlabel='token: x',
+# @tab all
+bigram*freqs = [freq for token, freq in bigram*vocab.token_freqs]
+trigram*freqs = [freq for token, freq in trigram*vocab.token_freqs]
+d2l.plot([freqs, bigram*freqs, trigram*freqs], xlabel='token: x',
          ylabel='frequency: n(x)', xscale='log', yscale='log',
          legend=['unigram', 'bigram', 'trigram'])
 ```
@@ -231,14 +231,14 @@ d2l.plot([freqs, bigram_freqs, trigram_freqs], xlabel='token: x',
 这张图非常令人振奋！原因有很多：
 
 1. 除了一元语法词，单词序列似乎也遵循齐普夫定律，
-尽管公式 :eqref:`eq_zipf_law`中的指数$\alpha$更小
+尽管公式 :eqref:`eq*zipf*law`中的指数$\alpha$更小
 （指数的大小受序列长度的影响）；
 2. 词表中$n$元组的数量并没有那么大，这说明语言中存在相当多的结构，
 这些结构给了我们应用模型的希望；
 3. 很多$n$元组很少出现，这使得拉普拉斯平滑非常不适合语言建模。
 作为代替，我们将使用基于深度学习的模型。
 
-## 读取长序列数据
+# # 读取长序列数据
 
 由于序列数据本质上是连续的，因此我们在处理数据时需要解决这个问题。
 在 :numref:`sec_sequence`中我们以一种相当特别的方式做到了这一点：
@@ -256,15 +256,15 @@ d2l.plot([freqs, bigram_freqs, trigram_freqs], xlabel='token: x',
 于是任意长的序列可以被我们划分为具有相同时间步数的子序列。
 当训练我们的神经网络时，这样的小批量子序列将被输入到模型中。
 假设网络一次只处理具有$n$个时间步的子序列。
- :numref:`fig_timemachine_5gram`画出了
+ :numref:`fig*timemachine*5gram`画出了
 从原始文本序列获得子序列的所有不同的方式，
 其中$n=5$，并且每个时间步的词元对应于一个字符。
 请注意，因为我们可以选择任意偏移量来指示初始位置，所以我们有相当大的自由度。
 
 ![分割文本时，不同的偏移量会导致不同的子序列](../img/timemachine-5gram.svg)
-:label:`fig_timemachine_5gram`
+:label:`fig*timemachine*5gram`
 
-因此，我们应该从 :numref:`fig_timemachine_5gram`中选择哪一个呢？
+因此，我们应该从 :numref:`fig*timemachine*5gram`中选择哪一个呢？
 事实上，他们都一样的好。
 然而，如果我们只选择一个偏移量，
 那么用于训练网络的、所有可能的子序列的覆盖范围将是有限的。
@@ -273,7 +273,7 @@ d2l.plot([freqs, bigram_freqs, trigram_freqs], xlabel='token: x',
 下面，我们将描述如何实现*随机采样*（random sampling）和
 *顺序分区*（sequential partitioning）策略。
 
-### 随机采样
+## # 随机采样
 
 (**在随机采样中，每个样本都是在原始的长序列上任意捕获的子序列。**)
 在迭代过程中，来自两个相邻的、随机的、小批量中的子序列不一定在原始序列上相邻。
@@ -285,15 +285,15 @@ d2l.plot([freqs, bigram_freqs, trigram_freqs], xlabel='token: x',
 参数`num_steps`是每个子序列中预定义的时间步数。
 
 ```{.python .input}
-#@tab all
-def seq_data_iter_random(corpus, batch_size, num_steps):  #@save
+# @tab all
+def seq*data*iter*random(corpus, batch*size, num_steps):  # @save
     """使用随机抽样生成一个小批量子序列"""
     # 从随机偏移量开始对序列进行分区，随机范围包括num_steps-1
     corpus = corpus[random.randint(0, num_steps - 1):]
     # 减去1，是因为我们需要考虑标签
-    num_subseqs = (len(corpus) - 1) // num_steps
+    num*subseqs = (len(corpus) - 1) // num*steps
     # 长度为num_steps的子序列的起始索引
-    initial_indices = list(range(0, num_subseqs * num_steps, num_steps))
+    initial*indices = list(range(0, num*subseqs * num*steps, num*steps))
     # 在随机抽样的迭代过程中，
     # 来自两个相邻的、随机的、小批量中的子序列不一定在原始序列上相邻
     random.shuffle(initial_indices)
@@ -302,12 +302,12 @@ def seq_data_iter_random(corpus, batch_size, num_steps):  #@save
         # 返回从pos位置开始的长度为num_steps的序列
         return corpus[pos: pos + num_steps]
 
-    num_batches = num_subseqs // batch_size
-    for i in range(0, batch_size * num_batches, batch_size):
+    num*batches = num*subseqs // batch_size
+    for i in range(0, batch*size * num*batches, batch_size):
         # 在这里，initial_indices包含子序列的随机起始索引
-        initial_indices_per_batch = initial_indices[i: i + batch_size]
-        X = [data(j) for j in initial_indices_per_batch]
-        Y = [data(j + 1) for j in initial_indices_per_batch]
+        initial*indices*per*batch = initial*indices[i: i + batch_size]
+        X = [data(j) for j in initial*indices*per_batch]
+        Y = [data(j + 1) for j in initial*indices*per_batch]
         yield d2l.tensor(X), d2l.tensor(Y)
 ```
 
@@ -317,65 +317,65 @@ $\lfloor (35 - 1) / 5 \rfloor= 6$个“特征－标签”子序列对。
 如果设置小批量大小为$2$，我们只能得到$3$个小批量。
 
 ```{.python .input}
-#@tab all
+# @tab all
 my_seq = list(range(35))
-for X, Y in seq_data_iter_random(my_seq, batch_size=2, num_steps=5):
+for X, Y in seq*data*iter*random(my*seq, batch*size=2, num*steps=5):
     print('X: ', X, '\nY:', Y)
 ```
 
-### 顺序分区
+## # 顺序分区
 
 在迭代过程中，除了对原始序列可以随机抽样外，
 我们还可以[**保证两个相邻的小批量中的子序列在原始序列上也是相邻的**]。
 这种策略在基于小批量的迭代过程中保留了拆分的子序列的顺序，因此称为顺序分区。
 
 ```{.python .input}
-#@tab mxnet, pytorch
-def seq_data_iter_sequential(corpus, batch_size, num_steps):  #@save
+# @tab mxnet, pytorch
+def seq*data*iter*sequential(corpus, batch*size, num_steps):  # @save
     """使用顺序分区生成一个小批量子序列"""
     # 从随机偏移量开始划分序列
     offset = random.randint(0, num_steps)
-    num_tokens = ((len(corpus) - offset - 1) // batch_size) * batch_size
+    num*tokens = ((len(corpus) - offset - 1) // batch*size) * batch_size
     Xs = d2l.tensor(corpus[offset: offset + num_tokens])
     Ys = d2l.tensor(corpus[offset + 1: offset + 1 + num_tokens])
-    Xs, Ys = Xs.reshape(batch_size, -1), Ys.reshape(batch_size, -1)
-    num_batches = Xs.shape[1] // num_steps
-    for i in range(0, num_steps * num_batches, num_steps):
+    Xs, Ys = Xs.reshape(batch*size, -1), Ys.reshape(batch*size, -1)
+    num*batches = Xs.shape[1] // num*steps
+    for i in range(0, num*steps * num*batches, num_steps):
         X = Xs[:, i: i + num_steps]
         Y = Ys[:, i: i + num_steps]
         yield X, Y
 ```
 
 ```{.python .input}
-#@tab tensorflow
-def seq_data_iter_sequential(corpus, batch_size, num_steps):  #@save
+# @tab tensorflow
+def seq*data*iter*sequential(corpus, batch*size, num_steps):  # @save
     """使用顺序分区生成一个小批量子序列"""
     # 从随机偏移量开始划分序列
     offset = random.randint(0, num_steps)
-    num_tokens = ((len(corpus) - offset - 1) // batch_size) * batch_size
+    num*tokens = ((len(corpus) - offset - 1) // batch*size) * batch_size
     Xs = d2l.tensor(corpus[offset: offset + num_tokens])
     Ys = d2l.tensor(corpus[offset + 1: offset + 1 + num_tokens])
     Xs = d2l.reshape(Xs, (batch_size, -1))
     Ys = d2l.reshape(Ys, (batch_size, -1))
-    num_batches = Xs.shape[1] // num_steps
-    for i in range(0, num_batches * num_steps, num_steps):
+    num*batches = Xs.shape[1] // num*steps
+    for i in range(0, num*batches * num*steps, num_steps):
         X = Xs[:, i: i + num_steps]
         Y = Ys[:, i: i + num_steps]
         yield X, Y
 ```
 
 ```{.python .input}
-#@tab paddle
-def seq_data_iter_sequential(corpus, batch_size, num_steps):  #@save
+# @tab paddle
+def seq*data*iter*sequential(corpus, batch*size, num_steps):  # @save
     """使用顺序分区生成一个小批量子序列"""
     # 从随机偏移量开始划分序列
     offset = random.randint(0, num_steps)
-    num_tokens = ((len(corpus) - offset - 1) // batch_size) * batch_size
+    num*tokens = ((len(corpus) - offset - 1) // batch*size) * batch_size
     Xs = d2l.tensor(corpus[offset: offset + num_tokens])
     Ys = d2l.tensor(corpus[offset + 1: offset + 1 + num_tokens])
-    Xs, Ys = Xs.reshape((batch_size, -1)), Ys.reshape((batch_size, -1))
-    num_batches = Xs.shape[1] // num_steps
-    for i in range(0, num_steps * num_batches, num_steps):
+    Xs, Ys = Xs.reshape((batch*size, -1)), Ys.reshape((batch*size, -1))
+    num*batches = Xs.shape[1] // num*steps
+    for i in range(0, num*steps * num*batches, num_steps):
         X = Xs[:, i: i + num_steps]
         Y = Ys[:, i: i + num_steps]
         yield X, Y
@@ -386,8 +386,8 @@ def seq_data_iter_sequential(corpus, batch_size, num_steps):  #@save
 迭代期间来自两个相邻的小批量中的子序列在原始序列中确实是相邻的。
 
 ```{.python .input}
-#@tab all
-for X, Y in seq_data_iter_sequential(my_seq, batch_size=2, num_steps=5):
+# @tab all
+for X, Y in seq*data*iter*sequential(my*seq, batch*size=2, num*steps=5):
     print('X: ', X, '\nY:', Y)
 ```
 
@@ -395,38 +395,38 @@ for X, Y in seq_data_iter_sequential(my_seq, batch_size=2, num_steps=5):
 以便稍后可以将其用作数据迭代器。
 
 ```{.python .input}
-#@tab all
-class SeqDataLoader:  #@save
+# @tab all
+class SeqDataLoader:  # @save
     """加载序列数据的迭代器"""
-    def __init__(self, batch_size, num_steps, use_random_iter, max_tokens):
-        if use_random_iter:
-            self.data_iter_fn = d2l.seq_data_iter_random
+    def **init**(self, batch*size, num*steps, use*random*iter, max_tokens):
+        if use*random*iter:
+            self.data*iter*fn = d2l.seq*data*iter_random
         else:
-            self.data_iter_fn = d2l.seq_data_iter_sequential
-        self.corpus, self.vocab = d2l.load_corpus_time_machine(max_tokens)
-        self.batch_size, self.num_steps = batch_size, num_steps
+            self.data*iter*fn = d2l.seq*data*iter_sequential
+        self.corpus, self.vocab = d2l.load*corpus*time*machine(max*tokens)
+        self.batch*size, self.num*steps = batch*size, num*steps
 
-    def __iter__(self):
-        return self.data_iter_fn(self.corpus, self.batch_size, self.num_steps)
+    def **iter**(self):
+        return self.data*iter*fn(self.corpus, self.batch*size, self.num*steps)
 ```
 
-[**最后，我们定义了一个函数`load_data_time_machine`，
+[**最后，我们定义了一个函数`load*data*time_machine`，
 它同时返回数据迭代器和词表**]，
 因此可以与其他带有`load_data`前缀的函数
-（如 :numref:`sec_fashion_mnist`中定义的
-`d2l.load_data_fashion_mnist`）类似地使用。
+（如 :numref:`sec*fashion*mnist`中定义的
+`d2l.load*data*fashion_mnist`）类似地使用。
 
 ```{.python .input}
-#@tab all
-def load_data_time_machine(batch_size, num_steps,  #@save
-                           use_random_iter=False, max_tokens=10000):
+# @tab all
+def load*data*time*machine(batch*size, num_steps,  # @save
+                           use*random*iter=False, max_tokens=10000):
     """返回时光机器数据集的迭代器和词表"""
     data_iter = SeqDataLoader(
-        batch_size, num_steps, use_random_iter, max_tokens)
-    return data_iter, data_iter.vocab
+        batch*size, num*steps, use*random*iter, max_tokens)
+    return data*iter, data*iter.vocab
 ```
 
-## 小结
+# # 小结
 
 * 语言模型是自然语言处理的关键。
 * $n$元语法通过截断相关性，为处理长序列提供了一种实用的模型。
@@ -435,7 +435,7 @@ def load_data_time_machine(batch_size, num_steps,  #@save
 * 通过拉普拉斯平滑法可以有效地处理结构丰富而频率不足的低频词词组。
 * 读取长序列的主要方式是随机采样和顺序分区。在迭代过程中，后者可以保证来自两个相邻的小批量中的子序列在原始序列上也是相邻的。
 
-## 练习
+# # 练习
 
 1. 假设训练数据集中有$100,000$个单词。一个四元语法需要存储多少个词频和相邻多词频率？
 1. 我们如何对一系列对话建模？

@@ -1,23 +1,23 @@
 # Grocery 
 Shopping List
 
-## Meat & Poultry
+# # Meat & Poultry
 
-### Chicken
+## # Chicken
 
-### Beef
+## # Beef
 
-## Grains & Bread
+# # Grains & Bread
 
-### Oatmeal
+## # Oatmeal
 
-## Snacks & Beverages
+# # Snacks & Beverages
 
-### Chips
+## # Chips
 
 额鹅鹅
 
-### Soda
+## # Soda
 
 - Subtopic 1
 - Subtopic 2
@@ -25,14 +25,14 @@ Shopping List
 - Subtopic 4
 - Subtopic 5
 
-## Others
+# # Others
 
-### Fruits
+## # Fruits
 
 - Banana
 - Apple
 
-### Vegetables
+## # Vegetables
 
 - Onion
 

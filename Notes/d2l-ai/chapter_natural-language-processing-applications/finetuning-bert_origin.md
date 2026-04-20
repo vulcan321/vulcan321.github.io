@@ -42,7 +42,7 @@ parameters of the extra layers are learned from scratch while
 all the parameters in the pretrained BERT model are fine-tuned.
 
 
-## Single Text Classification
+# # Single Text Classification
 
 *Single text classification* takes a single text sequence as the input and outputs its classification result.
 Besides sentiment analysis that we have studied in this chapter,
@@ -69,7 +69,7 @@ it will be fed into a small MLP consisting of fully connected (dense) layers
 to output the distribution of all the discrete label values.
 
 
-## Text Pair Classification or Regression
+# # Text Pair Classification or Regression
 
 We have also examined natural language inference in this chapter.
 It belongs to *text pair classification*,
@@ -100,7 +100,7 @@ trivial changes can be applied such as outputting a continuous label value
 and using the mean squared loss: they are common for regression.
 
 
-## Text Tagging
+# # Text Tagging
 
 Now let's consider token-level tasks, such as *text tagging*,
 where each token is assigned a label.
@@ -126,7 +126,7 @@ such as a part-of-speech tag.
 
 
 
-## Question Answering
+# # Question Answering
 
 As another token-level application,
 *question answering* reflects capabilities of reading comprehension.
@@ -173,19 +173,19 @@ For question answering,
 the supervised learning's training objective is as straightforward as
 maximizing the log-likelihoods of the ground-truth start and end positions.
 When predicting the span,
-we can compute the score $s_i + e_j$ for a valid span
+we can compute the score $s*i + e*j$ for a valid span
 from position $i$ to position $j$ ($i \leq j$),
 and output the span with the highest score.
 
 
-## Summary
+# # Summary
 
 * BERT requires minimal architecture changes (extra fully connected layers) for sequence-level and token-level natural language processing applications, such as single text classification (e.g., sentiment analysis and testing linguistic acceptability), text pair classification or regression (e.g., natural language inference and semantic textual similarity), text tagging (e.g., part-of-speech tagging), and question answering.
 * During supervised learning of a downstream application, parameters of the extra layers are learned from scratch while all the parameters in the pretrained BERT model are fine-tuned.
 
 
 
-## Exercises
+# # Exercises
 
 1. Let's design a search engine algorithm for news articles. When the system receives an query (e.g., "oil industry during the coronavirus outbreak"), it should return a ranked list of news articles that are most relevant to the query. Suppose that we have a huge pool of news articles and a large number of queries. To simplify the problem, suppose that the most relevant article has been labeled for each query. How can we apply negative sampling (see :numref:`subsec_negative-sampling`) and BERT in the algorithm design?
 1. How can we leverage BERT in training language models?

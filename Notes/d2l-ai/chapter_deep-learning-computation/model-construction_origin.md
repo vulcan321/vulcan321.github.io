@@ -1,5 +1,5 @@
 # Layers and Blocks
-:label:`sec_model_construction`
+:label:`sec*model*construction`
 
 When we first introduced neural networks,
 we focused on linear models with a single output.
@@ -91,7 +91,7 @@ and the forward propagation function.
 
 To begin, we revisit the code
 that we used to implement MLPs
-(:numref:`sec_mlp_concise`).
+(:numref:`sec*mlp*concise`).
 The following code generates a network
 with one fully-connected hidden layer
 with 256 units and ReLU activation,
@@ -113,7 +113,7 @@ net(X)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 import torch
 from torch import nn
 from torch.nn import functional as F
@@ -125,7 +125,7 @@ net(X)
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 import tensorflow as tf
 
 net = tf.keras.models.Sequential([
@@ -158,7 +158,7 @@ Note that until now, we have been invoking our models
 via the construction `net(X)` to obtain their outputs.
 This is actually just shorthand for `net.forward(X)`,
 a slick Python trick achieved via
-the `Block` class's `__call__` function.
+the `Block` class's `**call**` function.
 :end_tab:
 
 :begin_tab:`pytorch`
@@ -177,7 +177,7 @@ Note that until now, we have been invoking our models
 via the construction `net(X)` to obtain their outputs.
 This is actually just shorthand for `net.forward(X)`,
 a slick Python trick achieved via
-the Block class's `__call__` function.
+the Block class's `**call**` function.
 :end_tab:
 
 :begin_tab:`tensorflow`
@@ -196,10 +196,10 @@ Note that until now, we have been invoking our models
 via the construction `net(X)` to obtain their outputs.
 This is actually just shorthand for `net.call(X)`,
 a slick Python trick achieved via
-the Block class's `__call__` function.
+the Block class's `**call**` function.
 :end_tab:
 
-## A Custom Block
+# # A Custom Block
 
 Perhaps the easiest way to develop intuition
 about how a block works
@@ -222,18 +222,18 @@ with one hidden layer with 256 hidden units,
 and a 10-dimensional output layer.
 Note that the `MLP` class below inherits the class that represents a block.
 We will heavily rely on the parent class's functions,
-supplying only our own constructor (the `__init__` function in Python) and the forward propagation function.
+supplying only our own constructor (the `**init**` function in Python) and the forward propagation function.
 
 ```{.python .input}
 class MLP(nn.Block):
     # Declare a layer with model parameters. Here, we declare two
     # fully-connected layers
-    def __init__(self, **kwargs):
+    def **init**(self, **kwargs):
         # Call the constructor of the `MLP` parent class `Block` to perform
         # the necessary initialization. In this way, other function arguments
         # can also be specified during class instantiation, such as the model
         # parameters, `params` (to be described later)
-        super().__init__(**kwargs)
+        super().**init**(**kwargs)
         self.hidden = nn.Dense(256, activation='relu')  # Hidden layer
         self.out = nn.Dense(10)  # Output layer
 
@@ -244,16 +244,16 @@ class MLP(nn.Block):
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 class MLP(nn.Module):
     # Declare a layer with model parameters. Here, we declare two fully
     # connected layers
-    def __init__(self):
+    def **init**(self):
         # Call the constructor of the `MLP` parent class `Block` to perform
         # the necessary initialization. In this way, other function arguments
         # can also be specified during class instantiation, such as the model
         # parameters, `params` (to be described later)
-        super().__init__()
+        super().**init**()
         self.hidden = nn.Linear(20, 256)  # Hidden layer
         self.out = nn.Linear(256, 10)  # Output layer
 
@@ -266,16 +266,16 @@ class MLP(nn.Module):
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 class MLP(tf.keras.Model):
     # Declare a layer with model parameters. Here, we declare two fully
     # connected layers
-    def __init__(self):
+    def **init**(self):
         # Call the constructor of the `MLP` parent class `Block` to perform
         # the necessary initialization. In this way, other function arguments
         # can also be specified during class instantiation, such as the model
         # parameters, `params` (to be described later)
-        super().__init__()
+        super().**init**()
         # Hidden layer
         self.hidden = tf.keras.layers.Dense(units=256, activation=tf.nn.relu)
         self.out = tf.keras.layers.Dense(units=10)  # Output layer
@@ -304,9 +304,9 @@ in the constructor
 and subsequently invoke these layers
 on each call to the forward propagation function.
 Note a few key details.
-First, our customized `__init__` function
-invokes the parent class's `__init__` function
-via `super().__init__()`
+First, our customized `**init**` function
+invokes the parent class's `**init**` function
+via `super().**init**()`
 sparing us the pain of restating
 boilerplate code applicable to most blocks.
 We then instantiate our two fully-connected layers,
@@ -324,13 +324,13 @@ net(X)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 net = MLP()
 net(X)
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 net = MLP()
 net(X)
 ```
@@ -346,7 +346,7 @@ such as when addressing
 convolutional neural networks.
 
 
-## The Sequential Block
+# # The Sequential Block
 
 We can now take a closer look
 at how the `Sequential` class works.
@@ -379,10 +379,10 @@ class MySequential(nn.Block):
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 class MySequential(nn.Module):
-    def __init__(self, *args):
-        super().__init__()
+    def **init**(self, *args):
+        super().**init**()
         for block in args:
             # Here, `block` is an instance of a `Module` subclass. We save it
             # in the member variable `_modules` of the `Module` class, and its
@@ -398,10 +398,10 @@ class MySequential(nn.Module):
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 class MySequential(tf.keras.Model):
-    def __init__(self, *args):
-        super().__init__()
+    def **init**(self, *args):
+        super().**init**()
         self.modules = []
         for block in args:
             # Here, `block` is an instance of a `tf.keras.layers.Layer`
@@ -429,7 +429,7 @@ parameters also need to be initialized.
 :end_tab:
 
 :begin_tab:`pytorch`
-In the `__init__` method, we add every block
+In the `**init**` method, we add every block
 to the ordered dictionary `_modules` one by one.
 You might wonder why every `Module`
 possesses a `_modules` attribute
@@ -457,13 +457,13 @@ net(X)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 net = MySequential(nn.Linear(20, 256), nn.ReLU(), nn.Linear(256, 10))
 net(X)
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 net = MySequential(
     tf.keras.layers.Dense(units=256, activation=tf.nn.relu),
     tf.keras.layers.Dense(10))
@@ -473,10 +473,10 @@ net(X)
 Note that this use of `MySequential`
 is identical to the code we previously wrote
 for the `Sequential` class
-(as described in :numref:`sec_mlp_concise`).
+(as described in :numref:`sec*mlp*concise`).
 
 
-## Executing Code in the Forward Propagation Function
+# # Executing Code in the Forward Propagation Function
 
 The `Sequential` class makes model construction easy,
 allowing us to assemble new architectures
@@ -509,11 +509,11 @@ So we implement a `FixedHiddenMLP` class as follows.
 
 ```{.python .input}
 class FixedHiddenMLP(nn.Block):
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+    def **init**(self, **kwargs):
+        super().**init**(**kwargs)
         # Random weight parameters created with the `get_constant` function
         # are not updated during training (i.e., constant parameters)
-        self.rand_weight = self.params.get_constant(
+        self.rand*weight = self.params.get*constant(
             'rand_weight', np.random.uniform(size=(20, 20)))
         self.dense = nn.Dense(20, activation='relu')
 
@@ -532,13 +532,13 @@ class FixedHiddenMLP(nn.Block):
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 class FixedHiddenMLP(nn.Module):
-    def __init__(self):
-        super().__init__()
+    def **init**(self):
+        super().**init**()
         # Random weight parameters that will not compute gradients and
         # therefore keep constant during training
-        self.rand_weight = torch.rand((20, 20), requires_grad=False)
+        self.rand*weight = torch.rand((20, 20), requires*grad=False)
         self.linear = nn.Linear(20, 20)
 
     def forward(self, X):
@@ -556,10 +556,10 @@ class FixedHiddenMLP(nn.Module):
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 class FixedHiddenMLP(tf.keras.Model):
-    def __init__(self):
-        super().__init__()
+    def **init**(self):
+        super().**init**()
         self.flatten = tf.keras.layers.Flatten()
         # Random weight parameters created with `tf.constant` are not updated
         # during training (i.e., constant parameters)
@@ -611,7 +611,7 @@ net(X)
 ```
 
 ```{.python .input}
-#@tab pytorch, tensorflow
+# @tab pytorch, tensorflow
 net = FixedHiddenMLP()
 net(X)
 ```
@@ -623,8 +623,8 @@ in some creative ways.
 
 ```{.python .input}
 class NestMLP(nn.Block):
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+    def **init**(self, **kwargs):
+        super().**init**(**kwargs)
         self.net = nn.Sequential()
         self.net.add(nn.Dense(64, activation='relu'),
                      nn.Dense(32, activation='relu'))
@@ -640,10 +640,10 @@ chimera(X)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 class NestMLP(nn.Module):
-    def __init__(self):
-        super().__init__()
+    def **init**(self):
+        super().**init**()
         self.net = nn.Sequential(nn.Linear(20, 64), nn.ReLU(),
                                  nn.Linear(64, 32), nn.ReLU())
         self.linear = nn.Linear(32, 16)
@@ -656,10 +656,10 @@ chimera(X)
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 class NestMLP(tf.keras.Model):
-    def __init__(self):
-        super().__init__()
+    def **init**(self):
+        super().**init**()
         self.net = tf.keras.Sequential()
         self.net.add(tf.keras.layers.Dense(64, activation=tf.nn.relu))
         self.net.add(tf.keras.layers.Dense(32, activation=tf.nn.relu))
@@ -675,7 +675,7 @@ chimera.add(FixedHiddenMLP())
 chimera(X)
 ```
 
-## Compilation
+# # Compilation
 
 :begin_tab:`mxnet, tensorflow`
 The avid reader might start to worry
@@ -706,7 +706,7 @@ the hybridization section (:numref:`sec_hybridize`)
 to learn about compilation after finishing the current chapter.
 :end_tab:
 
-## Summary
+# # Summary
 
 * Layers are blocks.
 * Many layers can comprise a block.
@@ -716,7 +716,7 @@ to learn about compilation after finishing the current chapter.
 * Sequential concatenations of layers and blocks are handled by the `Sequential` block.
 
 
-## Exercises
+# # Exercises
 
 1. What kinds of problems will occur if you change `MySequential` to store blocks in a Python list?
 1. Implement a block that takes two blocks as an argument, say `net1` and `net2` and returns the concatenated output of both networks in the forward propagation. This is also called a parallel block.

@@ -1,7 +1,7 @@
 # Natural Language Processing: Applications
-:label:`chap_nlp_app`
+:label:`chap*nlp*app`
 
-We have seen how to represent tokens in text sequences and train their representations in :numref:`chap_nlp_pretrain`.
+We have seen how to represent tokens in text sequences and train their representations in :numref:`chap*nlp*pretrain`.
 Such pretrained text representations can be fed to various models for different downstream natural language processing tasks.
 
 In fact,
@@ -10,7 +10,7 @@ earlier chapters have already discussed some natural language processing applica
 just for explaining deep learning architectures.
 For instance, in :numref:`chap_rnn`,
 we have relied on RNNs to design language models to generate novella-like text.
-In :numref:`chap_modern_rnn` and :numref:`chap_attention`,
+In :numref:`chap*modern*rnn` and :numref:`chap_attention`,
 we have also designed models based on RNNs and attention mechanisms for machine translation.
 
 However, this book does not intend to cover all such applications in a comprehensive manner.

@@ -6,7 +6,7 @@
 
   原理性描述摘自：https://www.cnblogs.com/xq1314/p/7909521.html
 
-## **1、Base64编码概述**
+# # **1、Base64编码概述**
 
   Base64是一种编码方式，这个术语最初是在“MIME内容传输编码规范”中提出的。Base64不是一种加密算法，它实际上是一种“二进制转换到文本”的编码方式，它能够将任意二进制数据转换为ASCII字符串的形式，以便在只支持文本的环境中也能够顺利地传输二进制数据。
 
@@ -14,13 +14,13 @@
 
 （2）base64解码：把字符转为二进制数据；
 
-## **2、Base64编码由来**
+# # **2、Base64编码由来**
 
   因为有些网络传输渠道并不支持所有字节，例如传统的邮件只支持可见字符的传输，像ASCII码的控制字符（ASCII码包含了 128 个字符。其中前 32 个， 0-31 ，即 0x00-0x1F ，都是不可见字符。这些字符，就叫做控制字符。）就不能通过邮件传输。另外，例如图片二进制流的每个字节不可能全部都是可见字符，所以就传送不了。
 
   最好的方法就是在不改变传统协议的情况下，做一种扩展方案来支持二进制文件的传送，把不可能打印的字符用可打印的字符标识，问题就解决了。Base64编码就应运而生，Base64就是一种基于64个可打印字符来表示二进制数据的表示方法。
 
-## **3、Base64编码原理**
+# # **3、Base64编码原理**
 
   如下图Base64编码索引表，字符选用了“A-Z 、 a-z 、 0-9、+、 / ”64个可打印字符。数字代表字符索引，这个是标准Base64标准协议规定的，不能更改。64个字节用6个bit位就可以全部表示（32+16+8+4+2+1）就可以全部表示。这里注意一个Base64字符是8个bit，但有效部分只有右边6个bit，左边两个永远是0。
 
@@ -34,16 +34,16 @@
 
 ![](..\..\images\9deaca1c-fda5-4dba-9945-3ab7a057ad25.png)
 
-## **4、Base64编码 c语言代码实现**
+# # **4、Base64编码 c语言代码实现**
 
 ```javascript
 /******* Base64 Encoding ******************/
 
-static const size_t BASE64_ENCODE_INPUT = 3;
-static const size_t BASE64_ENCODE_OUTPUT = 4;
-static const char* const BASE64_ENCODE_TABLE = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+static const size*t BASE64*ENCODE_INPUT = 3;
+static const size*t BASE64*ENCODE_OUTPUT = 4;
+static const char* const BASE64*ENCODE*TABLE = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
 
-size_t base64EncodeGetLength( size_t size )
+size*t base64EncodeGetLength( size*t size )
 {
     /*
      * output 4 bytes for every 3 input:
@@ -54,10 +54,10 @@ size_t base64EncodeGetLength( size_t size )
      * 4 = --111111 =                   --111111
      */
 
-    return (((size + BASE64_ENCODE_INPUT - 1) / BASE64_ENCODE_INPUT) * BASE64_ENCODE_OUTPUT) + 1; /*plus terminator*/
+    return (((size + BASE64*ENCODE*INPUT - 1) / BASE64*ENCODE*INPUT) * BASE64*ENCODE*OUTPUT) + 1; /*plus terminator*/
 }
 
-size_t base64Encode( char* dest, const void* src, size_t size )
+size*t base64Encode( char* dest, const void* src, size*t size )
 {
     if (dest && src)
     {
@@ -70,7 +70,7 @@ size_t base64Encode( char* dest, const void* src, size_t size )
         while (dwSrcSize >= 1)
         {
             /* Encode inputs */
-            dwBlockSize = (dwSrcSize < BASE64_ENCODE_INPUT ? dwSrcSize : BASE64_ENCODE_INPUT);
+            dwBlockSize = (dwSrcSize < BASE64*ENCODE*INPUT ? dwSrcSize : BASE64*ENCODE*INPUT);
             n1 = n2 = n3 = n4 = 0;
             switch (dwBlockSize)
             {
@@ -110,11 +110,11 @@ size_t base64Encode( char* dest, const void* src, size_t size )
             }
 
             /* 4 outputs */
-            *dest++ = BASE64_ENCODE_TABLE[ n1 ];
-            *dest++ = BASE64_ENCODE_TABLE[ n2 ];
-            *dest++ = BASE64_ENCODE_TABLE[ n3 ];
-            *dest++ = BASE64_ENCODE_TABLE[ n4 ];
-            dwDestSize += BASE64_ENCODE_OUTPUT;
+            *dest++ = BASE64*ENCODE*TABLE[ n1 ];
+            *dest++ = BASE64*ENCODE*TABLE[ n2 ];
+            *dest++ = BASE64*ENCODE*TABLE[ n3 ];
+            *dest++ = BASE64*ENCODE*TABLE[ n4 ];
+            dwDestSize += BASE64*ENCODE*OUTPUT;
         }
         *dest++ = '\x0'; /*append terminator*/
 
@@ -128,16 +128,16 @@ size_t base64Encode( char* dest, const void* src, size_t size )
 
 复制
 
-## **5、Base64解码 c语言代码实现**
+# # **5、Base64解码 c语言代码实现**
 
 ```javascript
 /****************************** Base64 Decoding ******************************/
 
-static const size_t BASE64_DECODE_INPUT = 4;
-static const size_t BASE64_DECODE_OUTPUT = 3;
-static const size_t BASE64_DECODE_MAX_PADDING = 2;
-static const unsigned char BASE64_DECODE_MAX = 63;
-static const unsigned char BASE64_DECODE_TABLE[ 0x80 ] = {
+static const size*t BASE64*DECODE_INPUT = 4;
+static const size*t BASE64*DECODE_OUTPUT = 3;
+static const size*t BASE64*DECODE*MAX*PADDING = 2;
+static const unsigned char BASE64*DECODE*MAX = 63;
+static const unsigned char BASE64*DECODE*TABLE[ 0x80 ] = {
     /*00-07*/ 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
     /*08-0f*/ 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
     /*10-17*/ 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
@@ -161,19 +161,19 @@ int base64Validate( const char* src, size_t size )
      * returns 0 if the source is a valid base64 encoding
      */
 
-    if (size % BASE64_DECODE_INPUT != 0)
+    if (size % BASE64*DECODE*INPUT != 0)
         return -1; /*ERROR - size isn't a multiple of 4*/
 
     for (; size >= 1; --size, ++src)
     {
         unsigned char ch = *src;
-        if ((ch >= 0x80) || (BASE64_DECODE_TABLE[ ch ] > BASE64_DECODE_MAX))
+        if ((ch >= 0x80) || (BASE64*DECODE*TABLE[ ch ] > BASE64*DECODE*MAX))
             break;
     }
-    for (; 1 <= size && size <= BASE64_DECODE_MAX_PADDING; --size, ++src)
+    for (; 1 <= size && size <= BASE64*DECODE*MAX_PADDING; --size, ++src)
     {
         unsigned char ch = *src;
-        if ((ch >= 0x80) || (BASE64_DECODE_TABLE[ ch ] != BASE64_DECODE_MAX + 1))
+        if ((ch >= 0x80) || (BASE64*DECODE*TABLE[ ch ] != BASE64*DECODE*MAX + 1))
             break;
     }
     if (size != 0)
@@ -181,7 +181,7 @@ int base64Validate( const char* src, size_t size )
 
     return 0; /*OK*/
 }
-size_t base64DecodeGetLength( size_t size )
+size*t base64DecodeGetLength( size*t size )
 {
     /*
      * output 3 bytes for every 4 input:
@@ -192,14 +192,14 @@ size_t base64DecodeGetLength( size_t size )
      * 4 = --111111 =                   --111111
      */
 
-    if (size % BASE64_DECODE_INPUT == 0)
-        return (((size + BASE64_DECODE_INPUT - 1) / BASE64_DECODE_INPUT) * BASE64_DECODE_OUTPUT) + 1; /*plus terminator*/
+    if (size % BASE64*DECODE*INPUT == 0)
+        return (((size + BASE64*DECODE*INPUT - 1) / BASE64*DECODE*INPUT) * BASE64*DECODE*OUTPUT) + 1; /*plus terminator*/
     else
         return 0; /*ERROR - size isn't a multiple of 4*/
 }
-size_t base64Decode( void* dest, const char* src, size_t size )
+size*t base64Decode( void* dest, const char* src, size*t size )
 {
-    if (dest && src && (size % BASE64_DECODE_INPUT == 0))
+    if (dest && src && (size % BASE64*DECODE*INPUT == 0))
     {
         unsigned char* pDest = (unsigned char*)dest;
         size_t dwSrcSize = size;
@@ -213,36 +213,36 @@ size_t base64Decode( void* dest, const char* src, size_t size )
             in2 = *src++;
             in3 = *src++;
             in4 = *src++;
-            dwSrcSize -= BASE64_DECODE_INPUT;
+            dwSrcSize -= BASE64*DECODE*INPUT;
 
             /* Validate ascii */
             if (in1 >= 0x80 || in2 >= 0x80 || in3 >= 0x80 || in4 >= 0x80)
                 return 0; /*ERROR - invalid base64 character*/
 
             /* Convert ascii to base64 */
-            in1 = BASE64_DECODE_TABLE[ in1 ];
-            in2 = BASE64_DECODE_TABLE[ in2 ];
-            in3 = BASE64_DECODE_TABLE[ in3 ];
-            in4 = BASE64_DECODE_TABLE[ in4 ];
+            in1 = BASE64*DECODE*TABLE[ in1 ];
+            in2 = BASE64*DECODE*TABLE[ in2 ];
+            in3 = BASE64*DECODE*TABLE[ in3 ];
+            in4 = BASE64*DECODE*TABLE[ in4 ];
 
             /* Validate base64 */
-            if (in1 > BASE64_DECODE_MAX || in2 > BASE64_DECODE_MAX)
+            if (in1 > BASE64*DECODE*MAX || in2 > BASE64*DECODE*MAX)
                 return 0; /*ERROR - invalid base64 character*/
             /*the following can be padding*/
-            if ((int)in3 > (int)BASE64_DECODE_MAX + 1 || (int)in4 > (int)BASE64_DECODE_MAX + 1)
+            if ((int)in3 > (int)BASE64*DECODE*MAX + 1 || (int)in4 > (int)BASE64*DECODE*MAX + 1)
                 return 0; /*ERROR - invalid base64 character*/
 
             /* 3 outputs */
             *pDest++ = ((unsigned char)(in1 & 0x3f) << 2) | ((unsigned char)(in2 & 0x30) >> 4);
             *pDest++ = ((unsigned char)(in2 & 0x0f) << 4) | ((unsigned char)(in3 & 0x3c) >> 2);
             *pDest++ = ((unsigned char)(in3 & 0x03) << 6) | (in4 & 0x3f);
-            dwDestSize += BASE64_DECODE_OUTPUT;
+            dwDestSize += BASE64*DECODE*OUTPUT;
 
             /* Padding */
-            if (in4 == BASE64_DECODE_MAX + 1)
+            if (in4 == BASE64*DECODE*MAX + 1)
             {
                 --dwDestSize;
-                if (in3 == BASE64_DECODE_MAX + 1)
+                if (in3 == BASE64*DECODE*MAX + 1)
                 {
                     --dwDestSize;
                 }
@@ -260,7 +260,7 @@ size_t base64Decode( void* dest, const char* src, size_t size )
 
 复制
 
-## **6、Base64 编解码测试代码**
+# # **6、Base64 编解码测试代码**
 
 ```javascript
 int  main()
@@ -293,7 +293,7 @@ int  main()
 
 复制
 
-## **7、Base64 编解码运行测试结果**
+# # **7、Base64 编解码运行测试结果**
 
 ![](..\..\images\b280e780-0b2a-4f44-aced-e0bd04a71d75.png)
 

@@ -48,7 +48,7 @@ Win破解方法3：
 Mac破解方法：
 
 1.  安装Autodesk软件
-2.  安装nlm11.18.0.0\_ipv4\_ipv6\_mac64.pkg
+2.  安装nlm11.18.0.0\*ipv4\*ipv6\_mac64.pkg
 3.  拷贝libadlmint.dylib到/资源库/Application Support/Autodesk/AdskLicensing/Current/AdskLicensingAgent/AdskLicensingAgent.app/右键 显示包内容/Contents/PlugIns/
 4.  关闭电脑的SIP(非必需操作，如要关闭可以百度搜索MAC如何关闭SIP)
 5.  在应用程序/实用工具/终端，打开终端，输入cd /usr/local/flexnetserver/ 回车
@@ -74,177 +74,177 @@ Autodesk 2024 系列软件官方下载地址：
 **3DS MAX 2024(中英多语言版)**
 
 -   ```
-    https://efulfillment.autodesk.com/NetSWDLD/2024/3DSMAX/A54AED8B-2D32-3795-8962-12E42ED4A767/SFX/Autodesk_3ds_Max_2024_EFGJKPS_Win_64bit_001_003.sfx.exe
+    https://efulfillment.autodesk.com/NetSWDLD/2024/3DSMAX/A54AED8B-2D32-3795-8962-12E42ED4A767/SFX/Autodesk*3ds*Max*2024*EFGJKPS*Win*64bit*001*003.sfx.exe
     ```
     
 -   ```
-    https://efulfillment.autodesk.com/NetSWDLD/2024/3DSMAX/A54AED8B-2D32-3795-8962-12E42ED4A767/SFX/Autodesk_3ds_Max_2024_EFGJKPS_Win_64bit_002_003.sfx.exe
+    https://efulfillment.autodesk.com/NetSWDLD/2024/3DSMAX/A54AED8B-2D32-3795-8962-12E42ED4A767/SFX/Autodesk*3ds*Max*2024*EFGJKPS*Win*64bit*002*003.sfx.exe
     ```
     
 -   ```
-    https://efulfillment.autodesk.com/NetSWDLD/2024/3DSMAX/A54AED8B-2D32-3795-8962-12E42ED4A767/SFX/Autodesk_3ds_Max_2024_EFGJKPS_Win_64bit_003_003.sfx.exe
+    https://efulfillment.autodesk.com/NetSWDLD/2024/3DSMAX/A54AED8B-2D32-3795-8962-12E42ED4A767/SFX/Autodesk*3ds*Max*2024*EFGJKPS*Win*64bit*003*003.sfx.exe
     ```
     
 
 **Maya 2024 Win(中英多语言版)**
 
 -   ```
-    https://efulfillment.autodesk.com/NetSWDLD/2024/MAYA/2FA13C35-AE58-3F58-AD53-C16C22486F9B/SFX/Autodesk_Maya_2024_Windows_64bit_dlm_001_002.sfx.exe
+    https://efulfillment.autodesk.com/NetSWDLD/2024/MAYA/2FA13C35-AE58-3F58-AD53-C16C22486F9B/SFX/Autodesk*Maya*2024*Windows*64bit*dlm*001_002.sfx.exe
     ```
     
 -   ```
-    https://efulfillment.autodesk.com/NetSWDLD/2024/MAYA/2FA13C35-AE58-3F58-AD53-C16C22486F9B/SFX/Autodesk_Maya_2024_Windows_64bit_dlm_002_002.sfx.exe
+    https://efulfillment.autodesk.com/NetSWDLD/2024/MAYA/2FA13C35-AE58-3F58-AD53-C16C22486F9B/SFX/Autodesk*Maya*2024*Windows*64bit*dlm*002_002.sfx.exe
     ```
     
 
 **Maya 2024 Mac(中英多语言版)**
 
 -   ```
-    https://dds.autodesk.com/NetSWDLD/2024/MAYA/5DF5A9B6-E255-39CA-AEEC-9D0B8A40BED6/SFX/Autodesk_Maya_2024_0_1_Update_macOS.dmg
+    https://dds.autodesk.com/NetSWDLD/2024/MAYA/5DF5A9B6-E255-39CA-AEEC-9D0B8A40BED6/SFX/Autodesk*Maya*2024*0*1*Update*macOS.dmg
     ```
     
 
 **Autodesk CAD 2024(简体中文版)**
 
 -   ```
-    https://efulfillment.autodesk.com/NetSWDLD/2024/ACD/C0D3A90A-5925-3283-B826-68A4EAF3698A/SFX/AutoCAD_2024_Simplified_Chinese_Win_64bit_dlm_001_002.sfx.exe
+    https://efulfillment.autodesk.com/NetSWDLD/2024/ACD/C0D3A90A-5925-3283-B826-68A4EAF3698A/SFX/AutoCAD*2024*Simplified*Chinese*Win*64bit*dlm*001*002.sfx.exe
     ```
     
 -   ```
-    https://efulfillment.autodesk.com/NetSWDLD/2024/ACD/C0D3A90A-5925-3283-B826-68A4EAF3698A/SFX/AutoCAD_2024_Simplified_Chinese_Win_64bit_dlm_002_002.sfx.exe
+    https://efulfillment.autodesk.com/NetSWDLD/2024/ACD/C0D3A90A-5925-3283-B826-68A4EAF3698A/SFX/AutoCAD*2024*Simplified*Chinese*Win*64bit*dlm*002*002.sfx.exe
     ```
     
 
 **Autodesk CAD 2024(繁体中文版)**
 
 -   ```
-    https://efulfillment.autodesk.com/NetSWDLD/2024/ACD/DDF43270-FC4E-3B3D-8E58-6AA772EFC4DD/SFX/AutoCAD_2024_Traditional_Chinese_Win_64bit_dlm_001_002.sfx.exe
+    https://efulfillment.autodesk.com/NetSWDLD/2024/ACD/DDF43270-FC4E-3B3D-8E58-6AA772EFC4DD/SFX/AutoCAD*2024*Traditional*Chinese*Win*64bit*dlm*001*002.sfx.exe
     ```
     
 -   ```
-    https://efulfillment.autodesk.com/NetSWDLD/2024/ACD/DDF43270-FC4E-3B3D-8E58-6AA772EFC4DD/SFX/AutoCAD_2024_Traditional_Chinese_Win_64bit_dlm_002_002.sfx.exe
+    https://efulfillment.autodesk.com/NetSWDLD/2024/ACD/DDF43270-FC4E-3B3D-8E58-6AA772EFC4DD/SFX/AutoCAD*2024*Traditional*Chinese*Win*64bit*dlm*002*002.sfx.exe
     ```
     
 
 **Autodesk CAD 2024 Win(英文版)**
 
 -   ```
-    https://efulfillment.autodesk.com/NetSWDLD/2024/ACD/CC46AD7F-5075-3702-B2BF-CFCC5AB8468B/SFX/AutoCAD_2024_English_Win_64bit_dlm_001_002.sfx.exe
+    https://efulfillment.autodesk.com/NetSWDLD/2024/ACD/CC46AD7F-5075-3702-B2BF-CFCC5AB8468B/SFX/AutoCAD*2024*English*Win*64bit*dlm*001_002.sfx.exe
     ```
     
 -   ```
-    https://efulfillment.autodesk.com/NetSWDLD/2024/ACD/CC46AD7F-5075-3702-B2BF-CFCC5AB8468B/SFX/AutoCAD_2024_English_Win_64bit_dlm_002_002.sfx.exe
+    https://efulfillment.autodesk.com/NetSWDLD/2024/ACD/CC46AD7F-5075-3702-B2BF-CFCC5AB8468B/SFX/AutoCAD*2024*English*Win*64bit*dlm*002_002.sfx.exe
     ```
     
 
 **Autodesk CAD 2024 Mac**
 
 -   ```
-    https://efulfillment.autodesk.com/NetSWDLD/2024/ACDMAC/4EB37CFC-1C2B-33FC-AE6B-83EEE5EA4C79/ESD/Autodesk_AutoCAD_2024_macOS.dmg
+    https://efulfillment.autodesk.com/NetSWDLD/2024/ACDMAC/4EB37CFC-1C2B-33FC-AE6B-83EEE5EA4C79/ESD/Autodesk*AutoCAD*2024_macOS.dmg
     ```
     
 
 **MotionBuilder 2024**
 
 -   ```
-    https://efulfillment.autodesk.com/NetSWDLD/2024/MOBPRO/03A3363B-79B3-3095-84AF-B252188A0631/SFX/Autodesk_MotionBuilder_2024_Windows_64bit_dlm.sfx.exe
+    https://efulfillment.autodesk.com/NetSWDLD/2024/MOBPRO/03A3363B-79B3-3095-84AF-B252188A0631/SFX/Autodesk*MotionBuilder*2024*Windows*64bit_dlm.sfx.exe
     ```
     
 
 **MudBox 2024**
 
 -   ```
-    https://efulfillment.autodesk.com/NetSWDLD/2024/MBXPRO/A82CD984-57D0-38C3-BA61-F1FF058DF928/SFX/Autodesk_Mudbox_2024_Windows_64bit_dlm.sfx.exe
+    https://efulfillment.autodesk.com/NetSWDLD/2024/MBXPRO/A82CD984-57D0-38C3-BA61-F1FF058DF928/SFX/Autodesk*Mudbox*2024*Windows*64bit_dlm.sfx.exe
     ```
     
 
 **Inventor Pro 2024(中文版)**
 
 -   ```
-    https://efulfillment.autodesk.com/NetSWDLD/2024/INVPROSA/6A358503-3AE7-35FF-BDC5-5B39F75B2E88/SFX/Inventor_Pro_2024_Simplified_Chinese_Win_64bit_Dlm_001_003.sfx.exe
+    https://efulfillment.autodesk.com/NetSWDLD/2024/INVPROSA/6A358503-3AE7-35FF-BDC5-5B39F75B2E88/SFX/Inventor*Pro*2024*Simplified*Chinese*Win*64bit*Dlm*001_003.sfx.exe
     ```
     
 -   ```
-    https://efulfillment.autodesk.com/NetSWDLD/2024/INVPROSA/6A358503-3AE7-35FF-BDC5-5B39F75B2E88/SFX/Inventor_Pro_2024_Simplified_Chinese_Win_64bit_Dlm_002_003.sfx.exe
+    https://efulfillment.autodesk.com/NetSWDLD/2024/INVPROSA/6A358503-3AE7-35FF-BDC5-5B39F75B2E88/SFX/Inventor*Pro*2024*Simplified*Chinese*Win*64bit*Dlm*002_003.sfx.exe
     ```
     
 -   ```
-    https://efulfillment.autodesk.com/NetSWDLD/2024/INVPROSA/6A358503-3AE7-35FF-BDC5-5B39F75B2E88/SFX/Inventor_Pro_2024_Simplified_Chinese_Win_64bit_Dlm_003_003.sfx.exe
+    https://efulfillment.autodesk.com/NetSWDLD/2024/INVPROSA/6A358503-3AE7-35FF-BDC5-5B39F75B2E88/SFX/Inventor*Pro*2024*Simplified*Chinese*Win*64bit*Dlm*003_003.sfx.exe
     ```
     
 
 **Inventor Pro 2024(英文版)**
 
 -   ```
-    https://efulfillment.autodesk.com/NetSWDLD/2024/INVPROSA/0B739F57-E75B-3A3D-B2A3-BFB7B2346754/SFX/Inventor_Pro_2024_English_Win_64bit_Dlm_001_003.sfx.exe
+    https://efulfillment.autodesk.com/NetSWDLD/2024/INVPROSA/0B739F57-E75B-3A3D-B2A3-BFB7B2346754/SFX/Inventor*Pro*2024*English*Win*64bit*Dlm*001*003.sfx.exe
     ```
     
 -   ```
-    https://efulfillment.autodesk.com/NetSWDLD/2024/INVPROSA/0B739F57-E75B-3A3D-B2A3-BFB7B2346754/SFX/Inventor_Pro_2024_English_Win_64bit_Dlm_002_003.sfx.exe
+    https://efulfillment.autodesk.com/NetSWDLD/2024/INVPROSA/0B739F57-E75B-3A3D-B2A3-BFB7B2346754/SFX/Inventor*Pro*2024*English*Win*64bit*Dlm*002*003.sfx.exe
     ```
     
 -   ```
-    https://efulfillment.autodesk.com/NetSWDLD/2024/INVPROSA/0B739F57-E75B-3A3D-B2A3-BFB7B2346754/SFX/Inventor_Pro_2024_English_Win_64bit_Dlm_003_003.sfx.exe
+    https://efulfillment.autodesk.com/NetSWDLD/2024/INVPROSA/0B739F57-E75B-3A3D-B2A3-BFB7B2346754/SFX/Inventor*Pro*2024*English*Win*64bit*Dlm*003*003.sfx.exe
     ```
     
 
 **Navisworks Manage 2024**
 
 -   ```
-    https://efulfillment.autodesk.com/NetSWDLD/2024/NAVMAN/1BB907BC-4F14-3ED2-950C-39A3D99D2EFE/SFX/Autodesk_Navisworks_Manage_2024_Win_64bit_dlm_001_002.sfx.exe
+    https://efulfillment.autodesk.com/NetSWDLD/2024/NAVMAN/1BB907BC-4F14-3ED2-950C-39A3D99D2EFE/SFX/Autodesk*Navisworks*Manage*2024*Win*64bit*dlm*001*002.sfx.exe
     ```
     
 -   ```
-    https://efulfillment.autodesk.com/NetSWDLD/2024/NAVMAN/1BB907BC-4F14-3ED2-950C-39A3D99D2EFE/SFX/Autodesk_Navisworks_Manage_2024_Win_64bit_dlm_002_002.sfx.exe
+    https://efulfillment.autodesk.com/NetSWDLD/2024/NAVMAN/1BB907BC-4F14-3ED2-950C-39A3D99D2EFE/SFX/Autodesk*Navisworks*Manage*2024*Win*64bit*dlm*002*002.sfx.exe
     ```
     
 
 **Revit 2024**
 
 -   ```
-    http://dds.autodesk.com/NetSWDLD/2024/RVT/E7F68AA6-4954-3ACE-8543-D2FCC9B0A356/SFX/Revit_2024_G1_Win_64bit_dlm_001_005.sfx.exe
+    http://dds.autodesk.com/NetSWDLD/2024/RVT/E7F68AA6-4954-3ACE-8543-D2FCC9B0A356/SFX/Revit*2024*G1*Win*64bit*dlm*001_005.sfx.exe
     ```
     
 -   ```
-    http://dds.autodesk.com/NetSWDLD/2024/RVT/E7F68AA6-4954-3ACE-8543-D2FCC9B0A356/SFX/Revit_2024_G1_Win_64bit_dlm_002_005.sfx.exe
+    http://dds.autodesk.com/NetSWDLD/2024/RVT/E7F68AA6-4954-3ACE-8543-D2FCC9B0A356/SFX/Revit*2024*G1*Win*64bit*dlm*002_005.sfx.exe
     ```
     
 -   ```
-    http://dds.autodesk.com/NetSWDLD/2024/RVT/E7F68AA6-4954-3ACE-8543-D2FCC9B0A356/SFX/Revit_2024_G1_Win_64bit_dlm_003_005.sfx.exe
+    http://dds.autodesk.com/NetSWDLD/2024/RVT/E7F68AA6-4954-3ACE-8543-D2FCC9B0A356/SFX/Revit*2024*G1*Win*64bit*dlm*003_005.sfx.exe
     ```
     
 -   ```
-    http://dds.autodesk.com/NetSWDLD/2024/RVT/E7F68AA6-4954-3ACE-8543-D2FCC9B0A356/SFX/Revit_2024_G1_Win_64bit_dlm_004_005.sfx.exe
+    http://dds.autodesk.com/NetSWDLD/2024/RVT/E7F68AA6-4954-3ACE-8543-D2FCC9B0A356/SFX/Revit*2024*G1*Win*64bit*dlm*004_005.sfx.exe
     ```
     
 -   ```
-    http://dds.autodesk.com/NetSWDLD/2024/RVT/E7F68AA6-4954-3ACE-8543-D2FCC9B0A356/SFX/Revit_2024_G1_Win_64bit_dlm_005_005.sfx.exe
+    http://dds.autodesk.com/NetSWDLD/2024/RVT/E7F68AA6-4954-3ACE-8543-D2FCC9B0A356/SFX/Revit*2024*G1*Win*64bit*dlm*005_005.sfx.exe
     ```
     
 
 **Civil 3D 2024(中文版)**
 
 -   ```
-    http://dds.autodesk.com/NetSWDLD/2024/CIV3D/7F836E27-9361-3B37-8668-761FAA962B4E/SFX/Autodesk_Civil_3D_2024_Chinese_Simplified_Win_64bit_dlm_001_003.sfx.exe
+    http://dds.autodesk.com/NetSWDLD/2024/CIV3D/7F836E27-9361-3B37-8668-761FAA962B4E/SFX/Autodesk*Civil*3D*2024*Chinese*Simplified*Win*64bit*dlm*001*003.sfx.exe
     ```
     
 -   ```
-    http://dds.autodesk.com/NetSWDLD/2024/CIV3D/7F836E27-9361-3B37-8668-761FAA962B4E/SFX/Autodesk_Civil_3D_2024_Chinese_Simplified_Win_64bit_dlm_002_003.sfx.exe
+    http://dds.autodesk.com/NetSWDLD/2024/CIV3D/7F836E27-9361-3B37-8668-761FAA962B4E/SFX/Autodesk*Civil*3D*2024*Chinese*Simplified*Win*64bit*dlm*002*003.sfx.exe
     ```
     
 -   ```
-    http://dds.autodesk.com/NetSWDLD/2024/CIV3D/7F836E27-9361-3B37-8668-761FAA962B4E/SFX/Autodesk_Civil_3D_2024_Chinese_Simplified_Win_64bit_dlm_003_003.sfx.exe
+    http://dds.autodesk.com/NetSWDLD/2024/CIV3D/7F836E27-9361-3B37-8668-761FAA962B4E/SFX/Autodesk*Civil*3D*2024*Chinese*Simplified*Win*64bit*dlm*003*003.sfx.exe
     ```
 
 
-## 系统要求
+# # 系统要求
 
 AutoCAD2023/AutoCAD2022：Windows 10 及更高版64位  
 AutoCAD2021/AutoCAD2020：仅64位版，开始不再提供32位  
 2019-2021：Windows 7(KB4019990) , Windows 10 1803 及更高版64位  
 2015-2019：Windows 7 及更高版；2004-2014：Windows XP 及更高版
 
-## 下载地址
+# # 下载地址
 
 AutoCAD 2024.1.2 中文破解版 (最新CAD2024中文破解版)
 
@@ -252,22 +252,22 @@ https://www.123pan.com/s/A6cA-Wl9Jh
 
 https://pan.baidu.com/s/1\_nrPgNnUBdz6qKNvDLutCw?pwd=2023
 
-___
+---
 
 Autodesk AutoCAD 2024.1.2 Update 23年11月更新补丁  
-https://up1.autodesk.com/2024/ACD/C60FCE98-51FF-3F06-82DE-4F3E660B3292/AutoCAD\_2024.1.2\_Update.exe
+https://up1.autodesk.com/2024/ACD/C60FCE98-51FF-3F06-82DE-4F3E660B3292/AutoCAD\*2024.1.2\*Update.exe
 
 Autodesk AutoCAD 2024 官方简体中文版完整离线安装包  
-https://efulfillment.autodesk.com/NetSWDLD/2024/ACD/C0D3A90A-5925-3283-B826-68A4EAF3698A/SFX/AutoCAD\_2024\_Simplified\_Chinese\_Win\_64bit\_dlm\_001\_002.sfx.exe
-https://efulfillment.autodesk.com/NetSWDLD/2024/ACD/C0D3A90A-5925-3283-B826-68A4EAF3698A/SFX/AutoCAD\_2024\_Simplified\_Chinese\_Win\_64bit\_dlm\_002\_002.sfx.exe
+https://efulfillment.autodesk.com/NetSWDLD/2024/ACD/C0D3A90A-5925-3283-B826-68A4EAF3698A/SFX/AutoCAD\*2024\*Simplified\*Chinese\*Win\*64bit\*dlm\*001\*002.sfx.exe
+https://efulfillment.autodesk.com/NetSWDLD/2024/ACD/C0D3A90A-5925-3283-B826-68A4EAF3698A/SFX/AutoCAD\*2024\*Simplified\*Chinese\*Win\*64bit\*dlm\*002\*002.sfx.exe
 
 Autodesk AutoCAD LT 2024.1.2 Update 23年11月更新补丁  
-https://up1.autodesk.com/2024/ACDLT/9FE27715-D515-3200-99DD-6A2DE87700BE/AutoCAD\_LT\_2024.1.2\_Update.exe
+https://up1.autodesk.com/2024/ACDLT/9FE27715-D515-3200-99DD-6A2DE87700BE/AutoCAD\*LT\*2024.1.2\_Update.exe
 
 Autodesk AutoCAD LT 2024 官方简体中文版完整离线安装包  
-https://trial2.autodesk.com/NetSWDLD/2024/ACDLT/73E6C25F-EEFD-3C10-8F94-27C090847201/SFX/AutoCAD\_LT\_2024\_Simplified\_Chinese\_Win\_64bit\_dlm.sfx.exe
+https://trial2.autodesk.com/NetSWDLD/2024/ACDLT/73E6C25F-EEFD-3C10-8F94-27C090847201/SFX/AutoCAD\*LT\*2024\*Simplified\*Chinese\*Win\*64bit\_dlm.sfx.exe
 
-___
+---
 
 AutoCAD2024-2021 Patch - KarMa 最新CAD2024破解补丁通用版  
 https://pan.lanzouu.com/iqQW307vlqbc
@@ -280,10 +280,10 @@ https://pan.lanzouu.com/iLLB907vlqab
 ﹂Autodesk NLM Cracked (MAGNiTUDE method) (2023/10/14)  
 https://pan.lanzouu.com/iL4NR1ehz0jc
 
-___
+---
 
 适用AutoCAD 2024 VBA模块64位安装包官方下载地址  
-https://damassets.autodesk.net/content/dam/autodesk/external-assets/support-articles/download-the-microsoft-vba-module-for-autocad/Autodesk\_AutoCAD\_2024\_VBA\_Enabler.exe
+https://damassets.autodesk.net/content/dam/autodesk/external-assets/support-articles/download-the-microsoft-vba-module-for-autocad/Autodesk\*AutoCAD\*2024\*VBA\*Enabler.exe
 
 AutoCAD 的 Microsoft VBA模块所有支持版本下载页面  
 https://www.autodesk.com.cn/support/technical/article/caas/tsarticles/tsarticles/CHS/ts/3kxk0RyvfWTfSfAIrcmsLQ.html

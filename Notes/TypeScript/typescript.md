@@ -1,6 +1,6 @@
-## Typescript Tutorial
+# # Typescript Tutorial
 
-### Get Started
+## # Get Started
 
 Within your npm project,  run the following command to install the compiler:
 

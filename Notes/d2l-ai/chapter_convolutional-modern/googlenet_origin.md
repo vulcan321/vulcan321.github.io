@@ -17,7 +17,7 @@ omit a few ad-hoc features that were added to stabilize training
 but are unnecessary now with better training algorithms available.
 
 
-## Inception Blocks
+# # Inception Blocks
 
 The basic convolutional block in GoogLeNet is called an *Inception block*,
 likely named due to a quote from the movie *Inception* ("We need to go deeper"),
@@ -50,36 +50,36 @@ npx.set_np()
 
 class Inception(nn.Block):
     # `c1`--`c4` are the number of output channels for each path
-    def __init__(self, c1, c2, c3, c4, **kwargs):
-        super(Inception, self).__init__(**kwargs)
+    def **init**(self, c1, c2, c3, c4, **kwargs):
+        super(Inception, self).**init**(**kwargs)
         # Path 1 is a single 1 x 1 convolutional layer
-        self.p1_1 = nn.Conv2D(c1, kernel_size=1, activation='relu')
+        self.p1*1 = nn.Conv2D(c1, kernel*size=1, activation='relu')
         # Path 2 is a 1 x 1 convolutional layer followed by a 3 x 3
         # convolutional layer
-        self.p2_1 = nn.Conv2D(c2[0], kernel_size=1, activation='relu')
-        self.p2_2 = nn.Conv2D(c2[1], kernel_size=3, padding=1,
+        self.p2*1 = nn.Conv2D(c2[0], kernel*size=1, activation='relu')
+        self.p2*2 = nn.Conv2D(c2[1], kernel*size=3, padding=1,
                               activation='relu')
         # Path 3 is a 1 x 1 convolutional layer followed by a 5 x 5
         # convolutional layer
-        self.p3_1 = nn.Conv2D(c3[0], kernel_size=1, activation='relu')
-        self.p3_2 = nn.Conv2D(c3[1], kernel_size=5, padding=2,
+        self.p3*1 = nn.Conv2D(c3[0], kernel*size=1, activation='relu')
+        self.p3*2 = nn.Conv2D(c3[1], kernel*size=5, padding=2,
                               activation='relu')
         # Path 4 is a 3 x 3 maximum pooling layer followed by a 1 x 1
         # convolutional layer
-        self.p4_1 = nn.MaxPool2D(pool_size=3, strides=1, padding=1)
-        self.p4_2 = nn.Conv2D(c4, kernel_size=1, activation='relu')
+        self.p4*1 = nn.MaxPool2D(pool*size=3, strides=1, padding=1)
+        self.p4*2 = nn.Conv2D(c4, kernel*size=1, activation='relu')
 
     def forward(self, x):
         p1 = self.p1_1(x)
-        p2 = self.p2_2(self.p2_1(x))
-        p3 = self.p3_2(self.p3_1(x))
-        p4 = self.p4_2(self.p4_1(x))
+        p2 = self.p2*2(self.p2*1(x))
+        p3 = self.p3*2(self.p3*1(x))
+        p4 = self.p4*2(self.p4*1(x))
         # Concatenate the outputs on the channel dimension
         return np.concatenate((p1, p2, p3, p4), axis=1)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 from d2l import torch as d2l
 import torch
 from torch import nn
@@ -87,41 +87,41 @@ from torch.nn import functional as F
 
 class Inception(nn.Module):
     # `c1`--`c4` are the number of output channels for each path
-    def __init__(self, in_channels, c1, c2, c3, c4, **kwargs):
-        super(Inception, self).__init__(**kwargs)
+    def **init**(self, in_channels, c1, c2, c3, c4, **kwargs):
+        super(Inception, self).**init**(**kwargs)
         # Path 1 is a single 1 x 1 convolutional layer
-        self.p1_1 = nn.Conv2d(in_channels, c1, kernel_size=1)
+        self.p1*1 = nn.Conv2d(in*channels, c1, kernel_size=1)
         # Path 2 is a 1 x 1 convolutional layer followed by a 3 x 3
         # convolutional layer
-        self.p2_1 = nn.Conv2d(in_channels, c2[0], kernel_size=1)
-        self.p2_2 = nn.Conv2d(c2[0], c2[1], kernel_size=3, padding=1)
+        self.p2*1 = nn.Conv2d(in*channels, c2[0], kernel_size=1)
+        self.p2*2 = nn.Conv2d(c2[0], c2[1], kernel*size=3, padding=1)
         # Path 3 is a 1 x 1 convolutional layer followed by a 5 x 5
         # convolutional layer
-        self.p3_1 = nn.Conv2d(in_channels, c3[0], kernel_size=1)
-        self.p3_2 = nn.Conv2d(c3[0], c3[1], kernel_size=5, padding=2)
+        self.p3*1 = nn.Conv2d(in*channels, c3[0], kernel_size=1)
+        self.p3*2 = nn.Conv2d(c3[0], c3[1], kernel*size=5, padding=2)
         # Path 4 is a 3 x 3 maximum pooling layer followed by a 1 x 1
         # convolutional layer
-        self.p4_1 = nn.MaxPool2d(kernel_size=3, stride=1, padding=1)
-        self.p4_2 = nn.Conv2d(in_channels, c4, kernel_size=1)
+        self.p4*1 = nn.MaxPool2d(kernel*size=3, stride=1, padding=1)
+        self.p4*2 = nn.Conv2d(in*channels, c4, kernel_size=1)
 
     def forward(self, x):
         p1 = F.relu(self.p1_1(x))
-        p2 = F.relu(self.p2_2(F.relu(self.p2_1(x))))
-        p3 = F.relu(self.p3_2(F.relu(self.p3_1(x))))
-        p4 = F.relu(self.p4_2(self.p4_1(x)))
+        p2 = F.relu(self.p2*2(F.relu(self.p2*1(x))))
+        p3 = F.relu(self.p3*2(F.relu(self.p3*1(x))))
+        p4 = F.relu(self.p4*2(self.p4*1(x)))
         # Concatenate the outputs on the channel dimension
         return torch.cat((p1, p2, p3, p4), dim=1)
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 from d2l import tensorflow as d2l
 import tensorflow as tf
 
 class Inception(tf.keras.Model):
     # `c1`--`c4` are the number of output channels for each path
-    def __init__(self, c1, c2, c3, c4):
-        super().__init__()
+    def **init**(self, c1, c2, c3, c4):
+        super().**init**()
         # Path 1 is a single 1 x 1 convolutional layer
         self.p1_1 = tf.keras.layers.Conv2D(c1, 1, activation='relu')
         # Path 2 is a 1 x 1 convolutional layer followed by a 3 x 3
@@ -142,9 +142,9 @@ class Inception(tf.keras.Model):
 
     def call(self, x):
         p1 = self.p1_1(x)
-        p2 = self.p2_2(self.p2_1(x))
-        p3 = self.p3_2(self.p3_1(x))
-        p4 = self.p4_2(self.p4_1(x))
+        p2 = self.p2*2(self.p2*1(x))
+        p3 = self.p3*2(self.p3*1(x))
+        p4 = self.p4*2(self.p4*1(x))
         # Concatenate the outputs on the channel dimension
         return tf.keras.layers.Concatenate()([p1, p2, p3, p4])
 ```
@@ -158,9 +158,9 @@ At the same time, we can allocate different amounts of parameters
 for different filters.
 
 
-## GoogLeNet Model
+# # GoogLeNet Model
 
-As shown in :numref:`fig_inception_full`, GoogLeNet uses a stack of a total of 9 inception blocks
+As shown in :numref:`fig*inception*full`, GoogLeNet uses a stack of a total of 9 inception blocks
 and global average pooling to generate its estimates.
 Maximum pooling between inception blocks reduces the dimensionality.
 The first module is similar to AlexNet and LeNet.
@@ -169,7 +169,7 @@ and the global average pooling avoids
 a stack of fully-connected layers at the end.
 
 ![The GoogLeNet architecture.](../img/inception-full.svg)
-:label:`fig_inception_full`
+:label:`fig*inception*full`
 
 We can now implement GoogLeNet piece by piece.
 The first module uses a 64-channel $7\times 7$ convolutional layer.
@@ -181,14 +181,14 @@ b1.add(nn.Conv2D(64, kernel_size=7, strides=2, padding=3, activation='relu'),
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 b1 = nn.Sequential(nn.Conv2d(1, 64, kernel_size=7, stride=2, padding=3),
                    nn.ReLU(),
                    nn.MaxPool2d(kernel_size=3, stride=2, padding=1))
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 def b1():
     return tf.keras.models.Sequential([
         tf.keras.layers.Conv2D(64, 7, strides=2, padding='same',
@@ -208,7 +208,7 @@ b2.add(nn.Conv2D(64, kernel_size=1, activation='relu'),
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 b2 = nn.Sequential(nn.Conv2d(64, 64, kernel_size=1),
                    nn.ReLU(),
                    nn.Conv2d(64, 192, kernel_size=3, padding=1),
@@ -216,7 +216,7 @@ b2 = nn.Sequential(nn.Conv2d(64, 64, kernel_size=1),
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 def b2():
     return tf.keras.Sequential([
         tf.keras.layers.Conv2D(64, 1, activation='relu'),
@@ -246,14 +246,14 @@ b3.add(Inception(64, (96, 128), (16, 32), 32),
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 b3 = nn.Sequential(Inception(192, 64, (96, 128), (16, 32), 32),
                    Inception(256, 128, (128, 192), (32, 96), 64),
                    nn.MaxPool2d(kernel_size=3, stride=2, padding=1))
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 def b3():
     return tf.keras.models.Sequential([
         Inception(64, (96, 128), (16, 32), 32),
@@ -288,7 +288,7 @@ b4.add(Inception(192, (96, 208), (16, 48), 64),
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 b4 = nn.Sequential(Inception(480, 192, (96, 208), (16, 48), 64),
                    Inception(512, 160, (112, 224), (24, 64), 64),
                    Inception(512, 128, (128, 256), (24, 64), 64),
@@ -298,7 +298,7 @@ b4 = nn.Sequential(Inception(480, 192, (96, 208), (16, 48), 64),
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 def b4():
     return tf.keras.Sequential([
         Inception(192, (96, 208), (16, 48), 64),
@@ -332,7 +332,7 @@ net.add(b1, b2, b3, b4, b5, nn.Dense(10))
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 b5 = nn.Sequential(Inception(832, 256, (160, 320), (32, 128), 128),
                    Inception(832, 384, (192, 384), (48, 128), 128),
                    nn.AdaptiveMaxPool2d((1,1)),
@@ -342,7 +342,7 @@ net = nn.Sequential(b1, b2, b3, b4, b5, nn.Linear(1024, 10))
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 def b5():
     return tf.keras.Sequential([
         Inception(256, (160, 320), (32, 128), 128),
@@ -375,45 +375,45 @@ for layer in net:
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 X = torch.rand(size=(1, 1, 96, 96))
 for layer in net:
     X = layer(X)
-    print(layer.__class__.__name__,'output shape:\t', X.shape)
+    print(layer.**class**.**name**,'output shape:\t', X.shape)
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 X = tf.random.uniform(shape=(1, 96, 96, 1))
 for layer in net().layers:
     X = layer(X)
-    print(layer.__class__.__name__, 'output shape:\t', X.shape)
+    print(layer.**class**.**name**, 'output shape:\t', X.shape)
 ```
 
-## Training
+# # Training
 
 As before, we train our model using the Fashion-MNIST dataset.
  We transform it to $96 \times 96$ pixel resolution
  before invoking the training procedure.
 
 ```{.python .input}
-#@tab all
-lr, num_epochs, batch_size = 0.1, 10, 128
-train_iter, test_iter = d2l.load_data_fashion_mnist(batch_size, resize=96)
-d2l.train_ch6(net, train_iter, test_iter, num_epochs, lr)
+# @tab all
+lr, num*epochs, batch*size = 0.1, 10, 128
+train*iter, test*iter = d2l.load*data*fashion*mnist(batch*size, resize=96)
+d2l.train*ch6(net, train*iter, test*iter, num*epochs, lr)
 ```
 
-## Summary
+# # Summary
 
 * The Inception block is equivalent to a subnetwork with four paths. It extracts information in parallel through convolutional layers of different window shapes and maximum pooling layers. $1 \times 1$ convolutions reduce channel dimensionality on a per-pixel level. Maximum pooling reduces the resolution.
 * GoogLeNet connects multiple well-designed Inception blocks with other layers in series. The ratio of the number of channels assigned in the Inception block is obtained through a large number of experiments on the ImageNet dataset.
 * GoogLeNet, as well as its succeeding versions, was one of the most efficient models on ImageNet, providing similar test accuracy with lower computational complexity.
 
-## Exercises
+# # Exercises
 
 1. There are several iterations of GoogLeNet. Try to implement and run them. Some of them include the following:
     * Add a batch normalization layer :cite:`Ioffe.Szegedy.2015`, as described
-      later in :numref:`sec_batch_norm`.
+      later in :numref:`sec*batch*norm`.
     * Make adjustments to the Inception block
       :cite:`Szegedy.Vanhoucke.Ioffe.ea.2016`.
     * Use label smoothing for model regularization

@@ -1,5 +1,5 @@
 # 模型选择、欠拟合和过拟合
-:label:`sec_model_selection`
+:label:`sec*model*selection`
 
 作为机器学习科学家，我们的目标是发现*模式*（pattern）。
 但是，我们如何才能确定模型是真正发现了一种泛化的模式，
@@ -33,7 +33,7 @@
 如果有足够多的神经元、层数和训练迭代周期，
 模型最终可以在训练集上达到完美的精度，此时测试集的准确性却下降了。
 
-## 训练误差和泛化误差
+# # 训练误差和泛化误差
 
 为了进一步讨论这一现象，我们需要了解训练误差和泛化误差。
 *训练误差*（training error）是指，
@@ -77,7 +77,7 @@
 当我们逐渐增加数据量，正面比例明显偏离$\frac{1}{2}$的可能性将会降低，
 我们的训练误差将与泛化误差相匹配。
 
-### 统计学习理论
+## # 统计学习理论
 
 由于泛化是机器学习中的基本问题，
 许多数学家和理论家毕生致力于研究描述这一现象的形式理论。
@@ -123,7 +123,7 @@
 这种情况正是我们想要避免或控制的。
 深度学习中有许多启发式的技术旨在防止过拟合。
 
-### 模型复杂性
+## # 模型复杂性
 
 当我们有简单的模型和大量的数据时，我们期望泛化误差与训练误差相近。
 当我们有更复杂的模型和更少的样本时，我们预计训练误差会下降，但泛化误差会增大。
@@ -150,7 +150,7 @@
 1. 参数采用的值。当权重的取值范围较大时，模型可能更容易过拟合。
 1. 训练样本的数量。即使模型很简单，也很容易过拟合只包含一两个样本的数据集。而过拟合一个有数百万个样本的数据集则需要一个极其灵活的模型。
 
-## 模型选择
+# # 模型选择
 
 在机器学习中，我们通常在评估几个候选模型后选择最终的模型。
 这个过程叫做*模型选择*。
@@ -161,7 +161,7 @@
 不同数量的隐藏层、不同数量的隐藏单元以及不同的激活函数组合的模型。
 为了确定候选模型中的最佳模型，我们通常会使用验证集。
 
-### 验证集
+## # 验证集
 
 原则上，在我们确定所有的超参数之前，我们不希望用到测试集。
 如果我们在模型选择过程中使用测试数据，可能会有过拟合测试数据的风险，那就麻烦大了。
@@ -185,7 +185,7 @@
 并没有真正的测试数据集。
 因此，书中每次实验报告的准确度都是验证集准确度，而不是测试集准确度。
 
-### $K$折交叉验证
+## # $K$折交叉验证
 
 当训练数据稀缺时，我们甚至可能无法提供足够的数据来构成一个合适的验证集。
 这个问题的一个流行的解决方案是采用$K$*折交叉验证*。
@@ -194,7 +194,7 @@
 并在剩余的一个子集（在该轮中没有用于训练的子集）上进行验证。
 最后，通过对$K$次实验的结果取平均来估计训练和验证误差。
 
-## 欠拟合还是过拟合？
+# # 欠拟合还是过拟合？
 
 当我们比较训练和验证误差时，我们要注意两种常见的情况。
 首先，我们要注意这样的情况：训练误差和验证误差都很严重，
@@ -215,17 +215,17 @@
 是否过拟合或欠拟合可能取决于模型复杂性和可用训练数据集的大小，
 这两个点将在下面进行讨论。
 
-### 模型复杂性
+## # 模型复杂性
 
 为了说明一些关于过拟合和模型复杂性的经典直觉，
 我们给出一个多项式的例子。
 给定由单个特征$x$和对应实数标签$y$组成的训练数据，
 我们试图找到下面的$d$阶多项式来估计标签$y$。
 
-$$\hat{y}= \sum_{i=0}^d x^i w_i$$
+$$\hat{y}= \sum*{i=0}^d x^i w*i$$
 
 这只是一个线性回归问题，我们的特征是$x$的幂给出的，
-模型的权重是$w_i$给出的，偏置是$w_0$给出的
+模型的权重是$w*i$给出的，偏置是$w*0$给出的
 （因为对于所有的$x$都有$x^0 = 1$）。
 由于这只是一个线性回归问题，我们可以使用平方误差作为我们的损失函数。
 
@@ -235,14 +235,14 @@ $$\hat{y}= \sum_{i=0}^d x^i w_i$$
 高阶多项式函数相对于低阶多项式的训练误差应该始终更低（最坏也是相等）。
 事实上，当数据样本包含了$x$的不同值时，
 函数阶数等于数据样本数量的多项式函数可以完美拟合训练集。
-在 :numref:`fig_capacity_vs_error`中，
+在 :numref:`fig*capacity*vs_error`中，
 我们直观地描述了多项式的阶数和欠拟合与过拟合之间的关系。
 
 
 ![模型复杂度对欠拟合和过拟合的影响](../img/capacity-vs-error.svg)
-:label:`fig_capacity_vs_error`
+:label:`fig*capacity*vs_error`
 
-### 数据集大小
+## # 数据集大小
 
 另一个重要因素是数据集的大小。
 训练数据集中的样本越少，我们就越有可能（且更严重地）过拟合。
@@ -256,7 +256,7 @@ $$\hat{y}= \sum_{i=0}^d x^i w_i$$
 从一定程度上来说，深度学习目前的生机要归功于
 廉价存储、互联设备以及数字化经济带来的海量数据集。
 
-## 多项式回归
+# # 多项式回归
 
 我们现在可以(**通过多项式拟合来探索这些概念**)。
 
@@ -269,7 +269,7 @@ npx.set_np()
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 from d2l import torch as d2l
 import torch
 from torch import nn
@@ -278,7 +278,7 @@ import math
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 from d2l import tensorflow as d2l
 import tensorflow as tf
 import numpy as np
@@ -286,7 +286,7 @@ import math
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 from d2l import paddle as d2l
 import warnings
 warnings.filterwarnings("ignore")
@@ -296,7 +296,7 @@ import numpy as np
 import math
 ```
 
-### 生成数据集
+## # 生成数据集
 
 给定$x$，我们将[**使用以下三阶多项式来生成训练和测试数据的标签：**]
 
@@ -310,19 +310,19 @@ import math
 我们将为训练集和测试集各生成100个样本。
 
 ```{.python .input}
-#@tab all
+# @tab all
 max_degree = 20  # 多项式的最大阶数
-n_train, n_test = 100, 100  # 训练和测试数据集大小
-true_w = np.zeros(max_degree)  # 分配大量的空间
+n*train, n*test = 100, 100  # 训练和测试数据集大小
+true*w = np.zeros(max*degree)  # 分配大量的空间
 true_w[0:4] = np.array([5, 1.2, -3.4, 5.6])
 
-features = np.random.normal(size=(n_train + n_test, 1))
+features = np.random.normal(size=(n*train + n*test, 1))
 np.random.shuffle(features)
-poly_features = np.power(features, np.arange(max_degree).reshape(1, -1))
+poly*features = np.power(features, np.arange(max*degree).reshape(1, -1))
 for i in range(max_degree):
     poly_features[:, i] /= math.gamma(i + 1)  # gamma(n)=(n-1)!
-# labels的维度:(n_train+n_test,)
-labels = np.dot(poly_features, true_w)
+# labels的维度:(n*train+n*test,)
+labels = np.dot(poly*features, true*w)
 labels += np.random.normal(scale=0.1, size=labels.shape)
 ```
 
@@ -332,24 +332,24 @@ labels += np.random.normal(scale=0.1, size=labels.shape)
 第一个值是与偏置相对应的常量特征。
 
 ```{.python .input}
-#@tab pytorch, tensorflow, paddle
+# @tab pytorch, tensorflow, paddle
 # NumPy ndarray转换为tensor
-true_w, features, poly_features, labels = [d2l.tensor(x, dtype=
-    d2l.float32) for x in [true_w, features, poly_features, labels]]
+true*w, features, poly*features, labels = [d2l.tensor(x, dtype=
+    d2l.float32) for x in [true*w, features, poly*features, labels]]
 ```
 
 ```{.python .input}
-#@tab all
+# @tab all
 features[:2], poly_features[:2, :], labels[:2]
 ```
 
-### 对模型进行训练和测试
+## # 对模型进行训练和测试
 
 首先让我们[**实现一个函数来评估模型在给定数据集上的损失**]。
 
 ```{.python .input}
-#@tab mxnet, tensorflow
-def evaluate_loss(net, data_iter, loss):  #@save
+# @tab mxnet, tensorflow
+def evaluate*loss(net, data*iter, loss):  # @save
     """评估给定数据集上模型的损失"""
     metric = d2l.Accumulator(2)  # 损失的总和,样本数量
     for X, y in data_iter:
@@ -359,8 +359,8 @@ def evaluate_loss(net, data_iter, loss):  #@save
 ```
 
 ```{.python .input}
-#@tab pytorch
-def evaluate_loss(net, data_iter, loss):  #@save
+# @tab pytorch
+def evaluate*loss(net, data*iter, loss):  # @save
     """评估给定数据集上模型的损失"""
     metric = d2l.Accumulator(2)  # 损失的总和,样本数量
     for X, y in data_iter:
@@ -372,8 +372,8 @@ def evaluate_loss(net, data_iter, loss):  #@save
 ```
 
 ```{.python .input}
-#@tab paddle
-def evaluate_loss(net, data_iter, loss):  #@save
+# @tab paddle
+def evaluate*loss(net, data*iter, loss):  # @save
     """评估给定数据集上模型的损失。"""
     metric = d2l.Accumulator(2)  # 损失的总和, 样本数量
     for X, y in data_iter:
@@ -387,16 +387,16 @@ def evaluate_loss(net, data_iter, loss):  #@save
 现在[**定义训练函数**]。
 
 ```{.python .input}
-def train(train_features, test_features, train_labels, test_labels,
+def train(train*features, test*features, train*labels, test*labels,
           num_epochs=400):
     loss = gluon.loss.L2Loss()
     net = nn.Sequential()
     # 不设置偏置，因为我们已经在多项式中实现了它
     net.add(nn.Dense(1, use_bias=False))
     net.initialize()
-    batch_size = min(10, train_labels.shape[0])
-    train_iter = d2l.load_array((train_features, train_labels), batch_size)
-    test_iter = d2l.load_array((test_features, test_labels), batch_size,
+    batch*size = min(10, train*labels.shape[0])
+    train*iter = d2l.load*array((train*features, train*labels), batch_size)
+    test*iter = d2l.load*array((test*features, test*labels), batch_size,
                                is_train=False)
     trainer = gluon.Trainer(net.collect_params(), 'sgd',
                             {'learning_rate': 0.01})
@@ -404,116 +404,116 @@ def train(train_features, test_features, train_labels, test_labels,
                             xlim=[1, num_epochs], ylim=[1e-3, 1e2],
                             legend=['train', 'test'])
     for epoch in range(num_epochs):
-        d2l.train_epoch_ch3(net, train_iter, loss, trainer)
+        d2l.train*epoch*ch3(net, train_iter, loss, trainer)
         if epoch == 0 or (epoch + 1) % 20 == 0:
-            animator.add(epoch + 1, (evaluate_loss(net, train_iter, loss),
-                                     evaluate_loss(net, test_iter, loss)))
+            animator.add(epoch + 1, (evaluate*loss(net, train*iter, loss),
+                                     evaluate*loss(net, test*iter, loss)))
     print('weight:', net[0].weight.data().asnumpy())
 ```
 
 ```{.python .input}
-#@tab pytorch
-def train(train_features, test_features, train_labels, test_labels,
+# @tab pytorch
+def train(train*features, test*features, train*labels, test*labels,
           num_epochs=400):
     loss = nn.MSELoss(reduction='none')
-    input_shape = train_features.shape[-1]
+    input*shape = train*features.shape[-1]
     # 不设置偏置，因为我们已经在多项式中实现了它
     net = nn.Sequential(nn.Linear(input_shape, 1, bias=False))
-    batch_size = min(10, train_labels.shape[0])
-    train_iter = d2l.load_array((train_features, train_labels.reshape(-1,1)),
+    batch*size = min(10, train*labels.shape[0])
+    train*iter = d2l.load*array((train*features, train*labels.reshape(-1,1)),
                                 batch_size)
-    test_iter = d2l.load_array((test_features, test_labels.reshape(-1,1)),
-                               batch_size, is_train=False)
+    test*iter = d2l.load*array((test*features, test*labels.reshape(-1,1)),
+                               batch*size, is*train=False)
     trainer = torch.optim.SGD(net.parameters(), lr=0.01)
     animator = d2l.Animator(xlabel='epoch', ylabel='loss', yscale='log',
                             xlim=[1, num_epochs], ylim=[1e-3, 1e2],
                             legend=['train', 'test'])
     for epoch in range(num_epochs):
-        d2l.train_epoch_ch3(net, train_iter, loss, trainer)
+        d2l.train*epoch*ch3(net, train_iter, loss, trainer)
         if epoch == 0 or (epoch + 1) % 20 == 0:
-            animator.add(epoch + 1, (evaluate_loss(net, train_iter, loss),
-                                     evaluate_loss(net, test_iter, loss)))
+            animator.add(epoch + 1, (evaluate*loss(net, train*iter, loss),
+                                     evaluate*loss(net, test*iter, loss)))
     print('weight:', net[0].weight.data.numpy())
 ```
 
 ```{.python .input}
-#@tab tensorflow
-def train(train_features, test_features, train_labels, test_labels,
+# @tab tensorflow
+def train(train*features, test*features, train*labels, test*labels,
           num_epochs=400):
     loss = tf.losses.MeanSquaredError()
-    input_shape = train_features.shape[-1]
+    input*shape = train*features.shape[-1]
     # 不设置偏置，因为我们已经在多项式中实现了它
     net = tf.keras.Sequential()
     net.add(tf.keras.layers.Dense(1, use_bias=False))
-    batch_size = min(10, train_labels.shape[0])
-    train_iter = d2l.load_array((train_features, train_labels), batch_size)
-    test_iter = d2l.load_array((test_features, test_labels), batch_size,
+    batch*size = min(10, train*labels.shape[0])
+    train*iter = d2l.load*array((train*features, train*labels), batch_size)
+    test*iter = d2l.load*array((test*features, test*labels), batch_size,
                                is_train=False)
     trainer = tf.keras.optimizers.SGD(learning_rate=.01)
     animator = d2l.Animator(xlabel='epoch', ylabel='loss', yscale='log',
                             xlim=[1, num_epochs], ylim=[1e-3, 1e2],
                             legend=['train', 'test'])
     for epoch in range(num_epochs):
-        d2l.train_epoch_ch3(net, train_iter, loss, trainer)
+        d2l.train*epoch*ch3(net, train_iter, loss, trainer)
         if epoch == 0 or (epoch + 1) % 20 == 0:
-            animator.add(epoch + 1, (evaluate_loss(net, train_iter, loss),
-                                     evaluate_loss(net, test_iter, loss)))
+            animator.add(epoch + 1, (evaluate*loss(net, train*iter, loss),
+                                     evaluate*loss(net, test*iter, loss)))
     print('weight:', net.get_weights()[0].T)
 ```
 
 ```{.python .input}
-#@tab paddle
-def train(train_features, test_features, train_labels, test_labels,
+# @tab paddle
+def train(train*features, test*features, train*labels, test*labels,
           num_epochs=400):
     loss = nn.MSELoss()
-    input_shape = train_features.shape[-1]
+    input*shape = train*features.shape[-1]
     # 不设置偏置，因为我们已经在多项式特征中实现了它
-    net = nn.Sequential(nn.Linear(input_shape, 1, bias_attr=False))
-    batch_size = min(10, train_labels.shape[0])
+    net = nn.Sequential(nn.Linear(input*shape, 1, bias*attr=False))
+    batch*size = min(10, train*labels.shape[0])
     print(batch_size)
-    train_iter = d2l.load_array(((train_features, train_labels.reshape([-1,1]))),
+    train*iter = d2l.load*array(((train*features, train*labels.reshape([-1,1]))),
                                 batch_size)
-    test_iter = d2l.load_array((test_features, test_labels.reshape([-1,1])),
-                               batch_size, is_train=False)
+    test*iter = d2l.load*array((test*features, test*labels.reshape([-1,1])),
+                               batch*size, is*train=False)
     trainer = paddle.optimizer.SGD(parameters=net.parameters(), learning_rate=0.01)
     animator = d2l.Animator(xlabel='epoch', ylabel='loss', yscale='log',
                             xlim=[1, num_epochs], ylim=[1e-3, 1e2],
                             legend=['train', 'test'])
     for epoch in range(num_epochs):
-        d2l.train_epoch_ch3(net, train_iter, loss, trainer)
+        d2l.train*epoch*ch3(net, train_iter, loss, trainer)
         if epoch == 0 or (epoch + 1) % 20 == 0:
-            animator.add(epoch + 1, (evaluate_loss(net, train_iter, loss),
-                                     evaluate_loss(net, test_iter, loss)))
+            animator.add(epoch + 1, (evaluate*loss(net, train*iter, loss),
+                                     evaluate*loss(net, test*iter, loss)))
     print('weight:', net[0].weight.numpy())
 ```
 
-### [**三阶多项式函数拟合(正常)**]
+## # [**三阶多项式函数拟合(正常)**]
 
 我们将首先使用三阶多项式函数，它与数据生成函数的阶数相同。
 结果表明，该模型能有效降低训练损失和测试损失。
 学习到的模型参数也接近真实值$w = [5, 1.2, -3.4, 5.6]$。
 
 ```{.python .input}
-#@tab all
+# @tab all
 # 从多项式特征中选择前4个维度，即1,x,x^2/2!,x^3/3!
-train(poly_features[:n_train, :4], poly_features[n_train:, :4],
-      labels[:n_train], labels[n_train:])
+train(poly*features[:n*train, :4], poly*features[n*train:, :4],
+      labels[:n*train], labels[n*train:])
 ```
 
-### [**线性函数拟合(欠拟合)**]
+## # [**线性函数拟合(欠拟合)**]
 
 让我们再看看线性函数拟合，减少该模型的训练损失相对困难。
 在最后一个迭代周期完成后，训练损失仍然很高。
 当用来拟合非线性模式（如这里的三阶多项式函数）时，线性模型容易欠拟合。
 
 ```{.python .input}
-#@tab all
+# @tab all
 # 从多项式特征中选择前2个维度，即1和x
-train(poly_features[:n_train, :2], poly_features[n_train:, :2],
-      labels[:n_train], labels[n_train:])
+train(poly*features[:n*train, :2], poly*features[n*train:, :2],
+      labels[:n*train], labels[n*train:])
 ```
 
-### [**高阶多项式函数拟合(过拟合)**]
+## # [**高阶多项式函数拟合(过拟合)**]
 
 现在，让我们尝试使用一个阶数过高的多项式来训练模型。
 在这种情况下，没有足够的数据用于学到高阶系数应该具有接近于零的值。
@@ -522,22 +522,22 @@ train(poly_features[:n_train, :2], poly_features[n_train:, :2],
 结果表明，复杂模型对数据造成了过拟合。
 
 ```{.python .input}
-#@tab all
+# @tab all
 # 从多项式特征中选取所有维度
-train(poly_features[:n_train, :], poly_features[n_train:, :],
-      labels[:n_train], labels[n_train:], num_epochs=1500)
+train(poly*features[:n*train, :], poly*features[n*train:, :],
+      labels[:n*train], labels[n*train:], num_epochs=1500)
 ```
 
 在接下来的章节中，我们将继续讨论过拟合问题和处理这些问题的方法，例如权重衰减和dropout。
 
-## 小结
+# # 小结
 
 * 欠拟合是指模型无法继续减少训练误差。过拟合是指训练误差远小于验证误差。
 * 由于不能基于训练误差来估计泛化误差，因此简单地最小化训练误差并不一定意味着泛化误差的减小。机器学习模型需要注意防止过拟合，即防止泛化误差过大。
 * 验证集可以用于模型选择，但不能过于随意地使用它。
 * 我们应该选择一个复杂度适当的模型，避免使用数量不足的训练样本。
 
-## 练习
+# # 练习
 
 1. 这个多项式回归问题可以准确地解出吗？提示：使用线性代数。
 1. 考虑多项式的模型选择。

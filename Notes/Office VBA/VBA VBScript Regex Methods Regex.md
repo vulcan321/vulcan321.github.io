@@ -1,4 +1,4 @@
-# [VBA VBScript Regex Methods Regex](https://www.tutorialandexample.com/vba-vbscript-regex-methods-regex#)
+# [VBA VBScript Regex Methods Regex](https://www.tutorialandexample.com/vba-vbscript-regex-methods-regex# )
 
 **VBA VBScript Regex Methods Regex**
 
@@ -23,7 +23,7 @@ Execute (String value)
 **Program:**
 
 ```vb
-Function VBA_Regex_ExecuteMethod(regexVar As String, stringVar As String)
+Function VBA*Regex*ExecuteMethod(regexVar As String, stringVar As String)
 '***************************************************************
 ' Example for Execute Method of Regular Expression
 '***************************************************************

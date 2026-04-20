@@ -1,6 +1,6 @@
 # [C++ stl nth\_element 原理解析](https://www.cnblogs.com/zzzlight/p/14298223.html)
 
-　　nth\_element是stl中的一个库函数，该函数可以从某个序列中找到第 n 小的元素 K，并将 K 移动到序列中第 n 的位置处。不仅如此，整个序列经过 nth\_element() 函数处理后，所有位于 K 之前的元素都比 K 小，所有位于 K 之后的元素都比 K 大。
+　　nth\*element是stl中的一个库函数，该函数可以从某个序列中找到第 n 小的元素 K，并将 K 移动到序列中第 n 的位置处。不仅如此，整个序列经过 nth\*element() 函数处理后，所有位于 K 之前的元素都比 K 小，所有位于 K 之后的元素都比 K 大。
 
 但这个函数与完整排序的区别在于：
 
@@ -8,9 +8,9 @@
 
 　　2.它的时间复杂度在O(N),而许多排序所用的复杂度为O(NlogN)。对于特定的找到第k大数的问题，所花时间是好于排序的。
 
-[gcc\/libstdc++-v3\/include/bits\/stl_algo.h](https://github.com/gcc-mirror/gcc/blob/d9375e490072d1aae73a93949aa158fcd2a27018/libstdc++-v3/include/bits/stl_algo.h#L1966)
+[gcc\/libstdc++-v3\/include/bits\/stl*algo.h](https://github.com/gcc-mirror/gcc/blob/d9375e490072d1aae73a93949aa158fcd2a27018/libstdc++-v3/include/bits/stl*algo.h# L1966)
 
-[llvm\/llvm-project/libcxx/include/__algorithm/nth_element.h](https://github.com/llvm/llvm-project/blob/ed2d3644abee9535eb07333beb1562a651001281/libcxx/include/__algorithm/nth_element.h#L46)
+[llvm\/llvm-project/libcxx/include/__algorithm/nth_element.h](https://github.com/llvm/llvm-project/blob/ed2d3644abee9535eb07333beb1562a651001281/libcxx/include/__algorithm/nth_element.h# L46)
 
 
 它的原理思想如图
@@ -32,74 +32,74 @@
 下面是nth\_element stl的源码
 
 ```cpp
-template<typename _RandomAccessIterator, typename _Compare>
+template<typename *RandomAccessIterator, typename *Compare>
     inline void
-    nth_element(_RandomAccessIterator __first, _RandomAccessIterator __nth,
+    nth*element(*RandomAccessIterator __first, _RandomAccessIterator __nth,
         _RandomAccessIterator __last, _Compare __comp)
     {
       // concept requirements
-      __glibcxx_function_requires(_Mutable_RandomAccessIteratorConcept<
+      __glibcxx*function*requires(*Mutable*RandomAccessIteratorConcept<
                   _RandomAccessIterator>)
-      __glibcxx_function_requires(_BinaryPredicateConcept<_Compare,
-        typename iterator_traits<_RandomAccessIterator>::value_type,
-        typename iterator_traits<_RandomAccessIterator>::value_type>)
-      __glibcxx_requires_valid_range(__first, __nth);
-      __glibcxx_requires_valid_range(__nth, __last);
+      __glibcxx*function*requires(*BinaryPredicateConcept<*Compare,
+        typename iterator*traits<*RandomAccessIterator>::value_type,
+        typename iterator*traits<*RandomAccessIterator>::value_type>)
+      __glibcxx*requires*valid_range(**first, **nth);
+      __glibcxx*requires*valid_range(**nth, **last);
 
-      if (__first == __last || __nth == __last)
+      if (**first == **last || **nth == **last)
     return;
 
-      std::__introselect(__first, __nth, __last,
-             std::__lg(__last - __first) * 2,
-             __gnu_cxx::__ops::__iter_comp_iter(__comp));
+      std::**introselect(**first, **nth, **last,
+             std::**lg(**last - __first) * 2,
+             __gnu*cxx::**ops::**iter*comp_iter(__comp));
     }
 
 ```
 
-其中直接讲其核心的\_\_introselect函数部分
+其中直接讲其核心的\*\*introselect函数部分
 
 ```cpp
-template<typename _RandomAccessIterator, typename _Size, typename _Compare>
+template<typename *RandomAccessIterator, typename *Size, typename _Compare>
     void
     __introselect(_RandomAccessIterator __first, _RandomAccessIterator __nth,
           _RandomAccessIterator __last, _Size __depth_limit,
           _Compare __comp)
     {
-      while (__last - __first > 3)
+      while (**last - **first > 3)
     {
       if (__depth_limit == 0)
         {
-          std::__heap_select(__first, __nth + 1, __last, __comp);
+          std::__heap_select(**first, **nth + 1, **last, **comp);
           // Place the nth largest element in its final position.
-          std::iter_swap(__first, __nth);
+          std::iter_swap(**first, **nth);
           return;
         }
       --__depth_limit;                                               
       _RandomAccessIterator __cut =      
-        std::__unguarded_partition_pivot(__first, __last, __comp); //这里函数返回的是分割后右段的第一个元素。后面会详细讲解一下这个的功能
-      if (__cut <= __nth)  //如果右段起点小于等于nth 
-        __first = __cut;   //进入右段，对右段进行下次的分割
+        std::__unguarded*partition*pivot(**first, **last, __comp); //这里函数返回的是分割后右段的第一个元素。后面会详细讲解一下这个的功能
+      if (**cut <= **nth)  //如果右段起点小于等于nth 
+        **first = **cut;   //进入右段，对右段进行下次的分割
       else
-        __last = __cut;
+        **last = **cut;
     }
-      std::__insertion_sort(__first, __last, __comp);
+      std::__insertion_sort(**first, **last, __comp);
     }
 ```
 
 
 这个算法的思路很像快排中partation函数的思路。但对于段长度在3时候，就选择使用插入排序。
 
-这里的关键是\_\_unguarded\_partition\_pivot函数部分
+这里的关键是\*\*unguarded\*partition\*pivot函数部分
 
 ```cpp
-template<typename _RandomAccessIterator, typename _Compare>
+template<typename *RandomAccessIterator, typename *Compare>
     inline _RandomAccessIterator
-    __unguarded_partition_pivot(_RandomAccessIterator __first,
+    __unguarded*partition*pivot(_RandomAccessIterator __first,
                 _RandomAccessIterator __last, _Compare __comp)
     {
-      _RandomAccessIterator __mid = __first + (__last - __first) / 2;  
-      std::__move_median_to_first(__first, __first + 1, __mid, __last - 1,    //对first last mid排序找到中位值
+      _RandomAccessIterator **mid = **first + (**last - **first) / 2;  
+      std::__move*median*to_first(**first, **first + 1, **mid, **last - 1,    //对first last mid排序找到中位值
                   __comp);                                                    //这里的中位值即下面的pivot点
-      return std::__unguarded_partition(__first + 1, __last, __first, __comp);  //这里即实现了对于类似快排若左边大于pivot则与右边小于pivot的交换
+      return std::__unguarded_partition(**first + 1, **last, **first, **comp);  //这里即实现了对于类似快排若左边大于pivot则与右边小于pivot的交换
     }                                                                           //并返回的是右端第一个
 ```

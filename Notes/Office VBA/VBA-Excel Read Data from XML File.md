@@ -114,7 +114,7 @@ End Function
 ```
 [view raw](https://gist.github.com/thmain/2be0139d4c38f7985b4565c88c767aa9/raw/aa0f4bb9bfcf8615cd326c8c302c58510029e4d4/ReadXml.vb)  
 
-[ReadXml.vb](https://gist.github.com/thmain/2be0139d4c38f7985b4565c88c767aa9#file-readxml-vb)  
+[ReadXml.vb](https://gist.github.com/thmain/2be0139d4c38f7985b4565c88c767aa9# file-readxml-vb)  
 hosted with ❤ by [GitHub](https://github.com)
 
 Read XML

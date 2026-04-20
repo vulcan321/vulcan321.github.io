@@ -4,8 +4,8 @@
 
 本节包括以下章节：
 
-*   [*第 4 章*](04.html#_idTextAnchor066)，*将源文件转换为抽象语法树*
-*   [*第 5 章*](05.html#_idTextAnchor079)，*IR 生成基础*
-*   [*第 6 章*](06.html#_idTextAnchor102)，*高级语言构造的 IR 生成*
-*   [*第 7 章*](07.html#_idTextAnchor111)，*高级 IR 生成*
-*   [*第 8 章*](08.html#_idTextAnchor126)，*优化 IR*
+*   [*第 4 章*](04.html# _idTextAnchor066)，*将源文件转换为抽象语法树*
+*   [*第 5 章*](05.html# _idTextAnchor079)，*IR 生成基础*
+*   [*第 6 章*](06.html# _idTextAnchor102)，*高级语言构造的 IR 生成*
+*   [*第 7 章*](07.html# _idTextAnchor111)，*高级 IR 生成*
+*   [*第 8 章*](08.html# _idTextAnchor126)，*优化 IR*

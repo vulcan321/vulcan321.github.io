@@ -5,9 +5,9 @@ This tutorial explains how you can copy content from one word document and paste
 
 In the automated world we aim to automate our repetitive tasks as much as possible. As a request it looks easy but it's a bit complex as you need to handle MS word from Excel and need to give instructions to system via VBA about the changes and interactivity you want to implement.
 
-___
+---
 
-## Copy all headings to another document
+# # Copy all headings to another document
 
 The program below copies each text which is formatted in `Heading 1` style and paste to a **new word document**. You need to make changes in the lines of code highlighted in **red**.
 
@@ -256,13 +256,13 @@ Replace this line of code `Set newwrdDoc = wrdApp.Documents.Add` with the code b
 
 ```
 
-_If you wish to save the file with the new name you can change in this line of code._
+*If you wish to save the file with the new name you can change in this line of code.*
 
 ```
 myPath1 = myPath & "\newdoc1_updated.docx"
 ```
 
-## Find specific text and then copy the next 3 words or characters
+# # Find specific text and then copy the next 3 words or characters
 
 Specify the word(s) you want to find in `FindWord = "Text you wish to search"` and make style blank in  
 `mystyle = ""`  
@@ -291,7 +291,7 @@ Next 3 Characters
 
 > If there are some **spaces** you may find the code extracts only 2 characters (or words) rather than 3 so you can increase the number from 3 to 4 in the code above
 
-## Copy text between two words
+# # Copy text between two words
 
 Suppose you wish to pull all the text between two words (or headings). In the code below you can specify the words in `FindWord1` and `FindWord2` variables.
 
@@ -417,7 +417,7 @@ End Sub
 
 ```
 
-## Find multiple different texts and copy in loop
+# # Find multiple different texts and copy in loop
 
 If you wish to extract content between a couple of texts in iterative manner and then copy them one by one in another word document.  
 Here we assume texts are stored in column B starting from cell B3. See the image below.
@@ -563,9 +563,9 @@ End Sub
 
 ```
 
-## Find Text and Replace All
+# # Find Text and Replace All
 
-Suppose you want to find a specific text and replace it with some text. If a text has more than 1 occurence, it should be dealt with. In other words, _Replace All_ functionality should be enabled. Here we are replacing it in the output document after copying from input word document. **Add the code below after line** `Next i` . Specify text in **.Text =** and **.Replacement.Text =**
+Suppose you want to find a specific text and replace it with some text. If a text has more than 1 occurence, it should be dealt with. In other words, *Replace All* functionality should be enabled. Here we are replacing it in the output document after copying from input word document. **Add the code below after line** `Next i` . Specify text in **.Text =** and **.Replacement.Text =**
 
 ```
    'Replace All Name

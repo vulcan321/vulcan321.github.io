@@ -4,7 +4,7 @@
 So far, this book has focused on imperative programming, which makes use of statements such as `print`, `+`, and `if` to change a program's state. Consider the following example of a simple imperative program.
 
 ```{.python .input}
-#@tab all
+# @tab all
 def add(a, b):
     return a + b
 
@@ -17,14 +17,14 @@ def fancy_func(a, b, c, d):
 print(fancy_func(1, 2, 3, 4))
 ```
 
-Python is an *interpreted language*. When evaluating the above `fancy_func` function it performs the operations making up the function's body *in sequence*. That is, it will evaluate `e = add(a, b)` and store the results as variable `e`, thereby changing the program's state. The next two statements `f = add(c, d)` and `g = add(e, f)` will be executed similarly, performing additions and storing the results as variables. :numref:`fig_compute_graph` illustrates the flow of data.
+Python is an *interpreted language*. When evaluating the above `fancy*func` function it performs the operations making up the function's body *in sequence*. That is, it will evaluate `e = add(a, b)` and store the results as variable `e`, thereby changing the program's state. The next two statements `f = add(c, d)` and `g = add(e, f)` will be executed similarly, performing additions and storing the results as variables. :numref:`fig*compute_graph` illustrates the flow of data.
 
 ![Data flow in an imperative program.](../img/computegraph.svg)
-:label:`fig_compute_graph`
+:label:`fig*compute*graph`
 
-Although imperative programming is convenient, it may be inefficient. On one hand, even if the `add` function is repeatedly called throughout `fancy_func`, Python will execute the three function calls individually. If these are executed, say, on a GPU (or even on multiple GPUs), the overhead arising from the Python interpreter can become overwhelming. Moreover, it will need to save the variable values of `e` and `f` until all the statements in `fancy_func` have been executed. This is because we do not know whether the variables `e` and `f` will be used by other parts of the program after the statements `e = add(a, b)` and `f = add(c, d)` are executed.
+Although imperative programming is convenient, it may be inefficient. On one hand, even if the `add` function is repeatedly called throughout `fancy*func`, Python will execute the three function calls individually. If these are executed, say, on a GPU (or even on multiple GPUs), the overhead arising from the Python interpreter can become overwhelming. Moreover, it will need to save the variable values of `e` and `f` until all the statements in `fancy*func` have been executed. This is because we do not know whether the variables `e` and `f` will be used by other parts of the program after the statements `e = add(a, b)` and `f = add(c, d)` are executed.
 
-## Symbolic Programming
+# # Symbolic Programming
 
 Consider the alternative, *symbolic programming*, where computation is usually performed only once the process has been fully defined. This strategy is used by multiple deep learning frameworks, including Theano and TensorFlow (the latter has acquired imperative extensions). It usually involves the following steps:
 
@@ -37,14 +37,14 @@ Second, a compiler might optimize and rewrite the above code into `print((1 + 2)
 To get a better idea, consider the following simulation of imperative programming (it is Python after all) below.
 
 ```{.python .input}
-#@tab all
+# @tab all
 def add_():
     return '''
 def add(a, b):
     return a + b
 '''
 
-def fancy_func_():
+def fancy*func*():
     return '''
 def fancy_func(a, b, c, d):
     e = add(a, b)
@@ -54,7 +54,7 @@ def fancy_func(a, b, c, d):
 '''
 
 def evoke_():
-    return add_() + fancy_func_() + 'print(fancy_func(1, 2, 3, 4))'
+    return add*() + fancy*func*() + 'print(fancy*func(1, 2, 3, 4))'
 
 prog = evoke_()
 print(prog)
@@ -68,7 +68,7 @@ The differences between imperative (interpreted) programming and symbolic progra
 * Symbolic programming is more efficient and easier to port. Symbolic programming makes it easier to optimize the code during compilation, while also having the ability to port the program into a format independent of Python. This allows the program to be run in a non-Python environment, thus avoiding any potential performance issues related to the Python interpreter.
 
 
-## Hybrid Programming
+# # Hybrid Programming
 
 Historically most deep learning frameworks choose between an imperative or a symbolic approach. For example, Theano, TensorFlow (inspired by the former), Keras, and CNTK formulate models symbolically. Conversely, Chainer and PyTorch take an imperative approach. An imperative mode was added to TensorFlow 2.0 and Keras in later revisions.
 
@@ -87,7 +87,7 @@ As mentioned above, PyTorch is based on imperative programming and uses dynamic 
 The imperative programming paradigm is now the default in Tensorflow 2, a welcoming change for those new to the language. However, the same symbolic programming techniques and subsequent computational graphs still exist in TensorFlow, and can be accessed by the easy-to-use `tf.function` decorator. This brought the imperative programming paradigm to TensorFlow, allowed users to define more intuitive functions, then wrap them and compile them into computational graphs automatically using a feature the TensorFlow team refers to as [autograph](https://www.tensorflow.org/api_docs/python/tf/autograph).
 :end_tab:
 
-## Hybridizing the `Sequential` Class
+# # Hybridizing the `Sequential` Class
 
 The easiest way to get a feel for how hybridization works is to consider deep networks with multiple layers. Conventionally the Python interpreter will need to execute the code for all layers to generate an instruction that can then be forwarded to a CPU or a GPU. For a single (fast) computing device this does not cause any major issues. On the other hand, if we use an advanced 8-GPU server such as an AWS P3dn.24xlarge instance Python will struggle to keep all GPUs busy. The single-threaded Python interpreter becomes the bottleneck here. Let us see how we can address this for significant parts of the code by replacing `Sequential` with `HybridSequential`. We begin by defining a simple MLP.
 
@@ -112,7 +112,7 @@ net(x)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 from d2l import torch as d2l
 import torch
 from torch import nn
@@ -132,7 +132,7 @@ net(x)
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 from d2l import tensorflow as d2l
 import tensorflow as tf
 from tensorflow.keras.layers import Dense
@@ -169,13 +169,13 @@ net(x)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 net = torch.jit.script(net)
 net(x)
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 net = tf.function(net)
 net(x)
 ```
@@ -193,22 +193,22 @@ Converting the model using `tf.function` gives us incredible power in TensorFlow
 Explicitly adding the `jit_compile = True` flag to the `tf.function()` call enables XLA (Accelerated Linear Algebra) functionality in TensorFlow. XLA can further optimize JIT compiled code in certain instances. Graph-mode execution is enabled without this explicit definition, however XLA can make certain large linear algebra operations (in the vein of those we see in deep learning applications) much faster, particularly in a GPU environment.
 :end_tab:
 
-### Acceleration by Hybridization
+## # Acceleration by Hybridization
 
 To demonstrate the performance improvement gained by compilation we compare the time needed to evaluate `net(x)` before and after hybridization. Let us define a function to measure this time first. It will come handy throughout the chapter as we set out to measure (and improve) performance.
 
 ```{.python .input}
-#@tab all
-#@save
+# @tab all
+# @save
 class Benchmark:
-    def __init__(self, description='Done'):
+    def **init**(self, description='Done'):
         self.description = description
 
-    def __enter__(self):
+    def **enter**(self):
         self.timer = d2l.Timer()
         return self
 
-    def __exit__(self, *args):
+    def **exit**(self, *args):
         print(f'{self.description}: {self.timer.stop():.4f} sec')
 ```
 
@@ -237,7 +237,7 @@ with Benchmark('With hybridization'):
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 net = get_net()
 with Benchmark('Without torchscript'):
     for i in range(1000): net(x)
@@ -248,7 +248,7 @@ with Benchmark('With torchscript'):
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 net = get_net()
 with Benchmark('Eager Mode'):
     for i in range(1000): net(x)
@@ -270,7 +270,7 @@ As is observed in the above results, after an `nn.Sequential` instance is script
 As is observed in the above results, after a tf.keras Sequential instance is scripted using the `tf.function` function, computing performance is improved through the use of symbolic programming via graph-mode execution in tensorflow. 
 :end_tab:
 
-### Serialization
+## # Serialization
 
 :begin_tab:`mxnet`
 One of the benefits of compiling the models is that we can serialize (save) the model and its parameters to disk. This allows us to store a model in a manner that is independent of the front-end language of choice. This allows us to deploy trained models to other devices and easily use other front-end programming languages. At the same time the code is often faster than what can be achieved in imperative programming. Let us see the `export` function in action.
@@ -292,15 +292,15 @@ net.export('my_mlp')
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 net.save('my_mlp')
 !ls -lh my_mlp*
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 net = get_net()
-tf.saved_model.save(net, 'my_mlp')
+tf.saved*model.save(net, 'my*mlp')
 !ls -lh my_mlp*
 ```
 
@@ -320,8 +320,8 @@ Besides, contrary to the `Block` instance, which needs to use the `forward` func
 
 ```{.python .input}
 class HybridNet(nn.HybridBlock):
-    def __init__(self, **kwargs):
-        super(HybridNet, self).__init__(**kwargs)
+    def **init**(self, **kwargs):
+        super(HybridNet, self).**init**(**kwargs)
         self.hidden = nn.Dense(4)
         self.output = nn.Dense(2)
 
@@ -365,7 +365,7 @@ net(x)
 This is quite different from what we saw previously. All print statements, as defined in `hybrid_forward`, are omitted. Indeed, after hybridization the execution of `net(x)` does not involve the Python interpreter any longer. This means that any spurious Python code is omitted (such as print statements) in favor of a much more streamlined execution and better performance. Instead, MXNet directly calls the C++ backend. Also note that some functions are not supported in the `symbol` module (e.g.,  `asnumpy`) and operations in-place such as `a += b` and `a[:] = a + b` must be rewritten as `a = a + b`. Nonetheless, compilation of models is worth the effort whenever speed matters. The benefit can range from small percentage points to more than twice the speed, depending on the complexity of the model, the speed of the CPU, and the speed and number of GPUs.
 :end_tab:
 
-## Summary
+# # Summary
 
 
 * Imperative programming makes it easy to design new models since it is possible to write code with control flow and the ability to use a large amount of the Python software ecosystem.
@@ -377,7 +377,7 @@ This is quite different from what we saw previously. All print statements, as de
 :end_tab:
 
 
-## Exercises
+# # Exercises
 
 
 :begin_tab:`mxnet` 

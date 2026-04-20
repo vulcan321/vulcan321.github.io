@@ -8,7 +8,7 @@ It can be said that the most advanced computer vision applications are almost in
 In view of this, this chapter will focus on the field of computer vision, and investigate methods and applications that have recently been influential in academia and industry.
 
 
-In :numref:`chap_cnn` and :numref:`chap_modern_cnn`, we studied various convolutional neural networks that are
+In :numref:`chap*cnn` and :numref:`chap*modern_cnn`, we studied various convolutional neural networks that are
 commonly used in computer vision, and applied them
 to simple image classification tasks. 
 At the beginning of this chapter, we will describe

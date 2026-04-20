@@ -4,7 +4,7 @@
 
 在Objective-C里其实也可以运行AppleScript
 
-第一种方式是Source 将脚本写到变量[字符串](https://so.csdn.net/so/search?q=%E5%AD%97%E7%AC%A6%E4%B8%B2&spm=1001.2101.3001.7020)里
+第一种方式是Source 将脚本写到变量字符串里
 
 ```objc
     NSAppleEventDescriptor *eventDescriptor = nil;

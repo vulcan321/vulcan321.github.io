@@ -1,7 +1,7 @@
 # GPUs
-:label:`sec_use_gpu`
+:label:`sec*use*gpu`
 
-In :numref:`tab_intro_decade`, we discussed the rapid growth
+In :numref:`tab*intro*decade`, we discussed the rapid growth
 of computation over the past two decades.
 In a nutshell, GPU performance has increased
 by a factor of 1000 every decade since 2000.
@@ -24,7 +24,7 @@ the `nvidia-smi` command can be used
 to view the graphics card information.
 
 ```{.python .input}
-#@tab all
+# @tab all
 !nvidia-smi
 ```
 
@@ -95,7 +95,7 @@ Almost all other sections do *not* require multiple GPUs.
 Instead, this is simply to illustrate
 how data flow between different devices.
 
-## Computing Devices
+# # Computing Devices
 
 We can specify devices, such as CPUs and GPUs,
 for storage and calculation.
@@ -138,7 +138,7 @@ npx.cpu(), npx.gpu(), npx.gpu(1)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 import torch
 from torch import nn
 
@@ -146,7 +146,7 @@ torch.device('cpu'), torch.cuda.device('cuda'), torch.cuda.device('cuda:1')
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 import tensorflow as tf
 
 tf.device('/CPU:0'), tf.device('/GPU:0'), tf.device('/GPU:1')
@@ -159,66 +159,66 @@ npx.num_gpus()
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 torch.cuda.device_count()
 ```
 
 ```{.python .input}
-#@tab tensorflow
-len(tf.config.experimental.list_physical_devices('GPU'))
+# @tab tensorflow
+len(tf.config.experimental.list*physical*devices('GPU'))
 ```
 
 Now we define two convenient functions that allow us
 to run code even if the requested GPUs do not exist.
 
 ```{.python .input}
-def try_gpu(i=0):  #@save
+def try_gpu(i=0):  # @save
     """Return gpu(i) if exists, otherwise return cpu()."""
     return npx.gpu(i) if npx.num_gpus() >= i + 1 else npx.cpu()
 
-def try_all_gpus():  #@save
+def try*all*gpus():  # @save
     """Return all available GPUs, or [cpu()] if no GPU exists."""
     devices = [npx.gpu(i) for i in range(npx.num_gpus())]
     return devices if devices else [npx.cpu()]
 
-try_gpu(), try_gpu(10), try_all_gpus()
+try*gpu(), try*gpu(10), try*all*gpus()
 ```
 
 ```{.python .input}
-#@tab pytorch
-def try_gpu(i=0):  #@save
+# @tab pytorch
+def try_gpu(i=0):  # @save
     """Return gpu(i) if exists, otherwise return cpu()."""
     if torch.cuda.device_count() >= i + 1:
         return torch.device(f'cuda:{i}')
     return torch.device('cpu')
 
-def try_all_gpus():  #@save
+def try*all*gpus():  # @save
     """Return all available GPUs, or [cpu(),] if no GPU exists."""
     devices = [torch.device(f'cuda:{i}')
              for i in range(torch.cuda.device_count())]
     return devices if devices else [torch.device('cpu')]
 
-try_gpu(), try_gpu(10), try_all_gpus()
+try*gpu(), try*gpu(10), try*all*gpus()
 ```
 
 ```{.python .input}
-#@tab tensorflow
-def try_gpu(i=0):  #@save
+# @tab tensorflow
+def try_gpu(i=0):  # @save
     """Return gpu(i) if exists, otherwise return cpu()."""
-    if len(tf.config.experimental.list_physical_devices('GPU')) >= i + 1:
+    if len(tf.config.experimental.list*physical*devices('GPU')) >= i + 1:
         return tf.device(f'/GPU:{i}')
     return tf.device('/CPU:0')
 
-def try_all_gpus():  #@save
+def try*all*gpus():  # @save
     """Return all available GPUs, or [cpu(),] if no GPU exists."""
-    num_gpus = len(tf.config.experimental.list_physical_devices('GPU'))
+    num*gpus = len(tf.config.experimental.list*physical_devices('GPU'))
     devices = [tf.device(f'/GPU:{i}') for i in range(num_gpus)]
     return devices if devices else [tf.device('/CPU:0')]
 
-try_gpu(), try_gpu(10), try_all_gpus()
+try*gpu(), try*gpu(10), try*all*gpus()
 ```
 
-## Tensors and GPUs
+# # Tensors and GPUs
 
 By default, tensors are created on the CPU.
 We can query the device where the tensor is located.
@@ -229,13 +229,13 @@ x.ctx
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 x = torch.tensor([1, 2, 3])
 x.device
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 x = tf.constant([1, 2, 3])
 x.device
 ```
@@ -249,7 +249,7 @@ live on the same device---otherwise the framework
 would not know where to store the result
 or even how to decide where to perform the computation.
 
-### Storage on the GPU
+## # Storage on the GPU
 
 There are several ways to store a tensor on the GPU.
 For example, we can specify a storage device when creating a tensor.
@@ -264,13 +264,13 @@ X
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 X = torch.ones(2, 3, device=try_gpu())
 X
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 with try_gpu():
     X = tf.ones((2, 3))
 X
@@ -284,19 +284,19 @@ Y
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 Y = torch.randn(2, 3, device=try_gpu(1))
 Y
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 with try_gpu(1):
     Y = tf.random.uniform((2, 3))
 Y
 ```
 
-### Copying
+## # Copying
 
 If we want to compute `X + Y`,
 we need to decide where to perform this operation.
@@ -322,14 +322,14 @@ print(Z)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 Z = X.cuda(1)
 print(X)
 print(Z)
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 with try_gpu(1):
     Z = X
 print(X)
@@ -341,7 +341,7 @@ Now that the data are on the same GPU
 we can add them up.
 
 ```{.python .input}
-#@tab all
+# @tab all
 Y + Z
 ```
 
@@ -354,11 +354,11 @@ There are times where, depending on the environment our code is running in,
 two variables may already live on the same device.
 So we want to make a copy only if the variables
 currently live in different devices.
-In these cases, we can call `as_in_ctx`.
+In these cases, we can call `as*in*ctx`.
 If the variable already live in the specified device
 then this is a no-op.
 Unless you specifically want to make a copy,
-`as_in_ctx` is the method of choice.
+`as*in*ctx` is the method of choice.
 :end_tab:
 
 :begin_tab:`pytorch`
@@ -374,22 +374,22 @@ It will return `Z` instead of making a copy and allocating new memory.
 :end_tab:
 
 ```{.python .input}
-Z.as_in_ctx(try_gpu(1)) is Z
+Z.as*in*ctx(try_gpu(1)) is Z
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 Z.cuda(1) is Z
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 with try_gpu(1):
     Z2 = Z
 Z2 is Z
 ```
 
-### Side Notes
+## # Side Notes
 
 People use GPUs to do machine learning
 because they expect them to be fast.
@@ -425,7 +425,7 @@ Even worse, it is now subject to the dreaded global interpreter lock
 that makes everything wait for Python to complete.
 
 
-## Neural Networks and GPUs
+# # Neural Networks and GPUs
 
 Similarly, a neural network model can specify devices.
 The following code puts the model parameters on the GPU.
@@ -437,13 +437,13 @@ net.initialize(ctx=try_gpu())
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 net = nn.Sequential(nn.Linear(3, 1))
 net = net.to(device=try_gpu())
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 strategy = tf.distribute.MirroredStrategy()
 with strategy.scope():
     net = tf.keras.models.Sequential([
@@ -457,7 +457,7 @@ simply since they will become somewhat more computationally intensive.
 When the input is a tensor on the GPU, the model will calculate the result on the same GPU.
 
 ```{.python .input}
-#@tab all
+# @tab all
 net(X)
 ```
 
@@ -468,18 +468,18 @@ net[0].weight.data().ctx
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 net[0].weight.data.device
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 net.layers[0].weights[0].device, net.layers[0].weights[1].device
 ```
 
 In short, as long as all data and parameters are on the same device, we can learn models efficiently. In the following chapters we will see several such examples.
 
-## Summary
+# # Summary
 
 * We can specify devices for storage and calculation, such as the CPU or GPU.
   By default, data are created in the main memory
@@ -495,7 +495,7 @@ In short, as long as all data and parameters are on the same device, we can lear
   It is much better to allocate memory
   for logging inside the GPU and only move larger logs.
 
-## Exercises
+# # Exercises
 
 1. Try a larger computation task, such as the multiplication of large matrices,
    and see the difference in speed between the CPU and GPU.

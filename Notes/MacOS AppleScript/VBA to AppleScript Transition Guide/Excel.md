@@ -2,13 +2,13 @@
 
 Excel VBA Macros to AppleScript
 
-Make sure you have read Chapter 2: _AppleScript in Microsoft Office (General)_ first. It deals with many important features of VBA, including Excel VBA, that need to be treated very differently in AppleScript, as well as some equivalent control and operator statements in AppleScript you need to know.
+Make sure you have read Chapter 2: *AppleScript in Microsoft Office (General)* first. It deals with many important features of VBA, including Excel VBA, that need to be treated very differently in AppleScript, as well as some equivalent control and operator statements in AppleScript you need to know.
 
 This chapter consists of typical, and popular, subroutines (macros) in VBA, and their equivalent in AppleScript, with comments as necessary to explain differences in the AppleScript approach. All the many examples have been written, and provided, by John McGimpsey, Macintosh MVP specialist in Excel. Some of his explanatory comments have been incorporated as well.
 
 Note: when testing out scripts in Script Editor, you may wish to begin every one with an activate command on its own line just inside the tell application "Microsoft Excel" block, as its first line. That will bring Excel to the front so you can see what is happening. It is not necessary to include activate when running saved scripts from the script menu while Excel is in the front (and there may be other occasions when you are running a script from elsewhere and don't want Excel to come to the front). I have not included activate in the sample scripts here, but you may wish to do so.
 
-Before launching into scripting Excel, it is a good idea to read the introductory section _Using the Excel Dictionary_ and especially the section _How to reference cells and ranges_ on p. 15, of the _Excel AppleScript Reference_ available in PDF format free from Microsoft at <[http://www.microsoft.com/mac/resources/resources.aspx?pid=asforoffice](http://www.microsoft.com/mac/resources/resources.aspx?pid=asforoffice)\>. Although it is largely aimed at AppleScripters unfamiliar with Excel's Object Model rather than vice versa, it is full of useful knowledge for all scripters of Excel.
+Before launching into scripting Excel, it is a good idea to read the introductory section *Using the Excel Dictionary* and especially the section *How to reference cells and ranges* on p. 15, of the *Excel AppleScript Reference* available in PDF format free from Microsoft at <[http://www.microsoft.com/mac/resources/resources.aspx?pid=asforoffice](http://www.microsoft.com/mac/resources/resources.aspx?pid=asforoffice)\>. Although it is largely aimed at AppleScripters unfamiliar with Excel's Object Model rather than vice versa, it is full of useful knowledge for all scripters of Excel.
 
 Remember that this article was written while Office 2004 is current: some problems with Excel 2004's AppleScript discussed here may be fixed in Excel 2008 and workarounds provided here may no longer be needed there.
 
@@ -16,7 +16,7 @@ Excel is one of the most complex and detailed applications there is, with a huge
 
 Most of the enormous repertoire of Excel features as programmed through VBA has a straightforward equivalent in AppleScript. But here and there are Methods or Properties that have not made it over, or not in the same format. When we come upon those, solutions and workarounds will be offered.
 
-In particular, although the AppleScript implementation of Excel has been very thoroughly carried out, such that almost all of the VBA Model can be found mirrored in the AppleScript Model, there are some serious bugs connected with columns and rows. Make sure to read the relevant section of this chapter (_Working with Columns and Rows_) or you will run into trouble.
+In particular, although the AppleScript implementation of Excel has been very thoroughly carried out, such that almost all of the VBA Model can be found mirrored in the AppleScript Model, there are some serious bugs connected with columns and rows. Make sure to read the relevant section of this chapter (*Working with Columns and Rows*) or you will run into trouble.
 
 The one significant gap in the AppleScript model is that Worksheet Functions did not make it over from VBA. Apparently there are conflicts between how Excel performs these and how they would have to be done piped through AppleScript, which does not have the same precision with floating point numbers. But you can enter any Function (via AppleScript) into a cell on a worksheet, let Excel do its calculations, pass the result (cell value) back to the script, and clear the cell.
 
@@ -1724,13 +1724,13 @@ set number format of range "A1" of active sheet to "+0;-0;0;@"
 
    ActiveSheet.Range("A1:A100").NumberFormat = _
 
-   "[Red][<-100](0);[Green][<=100]0_);[Red]0_);@_)"
+   "[Red][<-100](0);[Green][<=100]0*);[Red]0*);@_)"
 
 becomes in AppleScript:
 
 set number format of range "A1:A100" of active sheet to ¬
 
-     "[Red][<-100](0);[Green][<=100]0_);[Red]0_);@_)"
+     "[Red][<-100](0);[Green][<=100]0*);[Red]0*);@_)"
 
 Alignment, Wrap Text
 
@@ -2571,7 +2571,7 @@ tell application "Microsoft Excel"
 
                             (column 1 of rData), name:(value of cell i of rHeaders)}
 
-                   --  need to specify _value_ (no default property)                                  
+                   --  need to specify *value* (no default property)                                  
 
               end repeat
 

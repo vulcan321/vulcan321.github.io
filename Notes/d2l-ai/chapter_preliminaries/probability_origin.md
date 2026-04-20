@@ -9,9 +9,9 @@ We have already invoked probabilities in previous sections without articulating 
 
 ![Images of varying resolutions ($10 \times 10$, $20 \times 20$, $40 \times 40$, $80 \times 80$, and $160 \times 160$ pixels).](../img/cat-dog-pixels.png)
 :width:`300px`
-:label:`fig_cat_dog`
+:label:`fig*cat*dog`
 
-As shown in :numref:`fig_cat_dog`,
+As shown in :numref:`fig*cat*dog`,
 while it is easy for humans to recognize cats and dogs at the resolution of $160 \times 160$ pixels,
 it becomes challenging at $40 \times 40$ pixels and next to impossible at $10 \times 10$ pixels. In
 other words, our ability to tell cats and dogs apart at a large distance (and thus low resolution) might approach uninformed guessing. Probability gives us a
@@ -28,7 +28,7 @@ Now consider the second case: given some weather monitoring data, we want to pre
 In both cases, we have some value of interest. And in both cases we are uncertain about the outcome.
 But there is a key difference between the two cases. In this first case, the image is in fact either a dog or a cat, and we just do not know which. In the second case, the outcome may actually be a random event, if you believe in such things (and most physicists do). So probability is a flexible language for reasoning about our level of certainty, and it can be applied effectively in a broad set of contexts.
 
-## Basic Probability Theory
+# # Basic Probability Theory
 
 Say that we cast a die and want to know what the chance is of seeing a 1 rather than another digit. If the die is fair, all the six outcomes $\{1, \ldots, 6\}$ are equally likely to occur, and thus we would see a $1$ in one out of six cases. Formally we state that $1$ occurs with probability $\frac{1}{6}$.
 
@@ -50,7 +50,7 @@ npx.set_np()
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 %matplotlib inline
 from d2l import torch as d2l
 import torch
@@ -58,7 +58,7 @@ from torch.distributions import multinomial
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 %matplotlib inline
 from d2l import tensorflow as d2l
 import tensorflow as tf
@@ -84,13 +84,13 @@ np.random.multinomial(1, fair_probs)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 fair_probs = torch.ones([6]) / 6
 multinomial.Multinomial(1, fair_probs).sample()
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 fair_probs = tf.ones(6) / 6
 tfp.distributions.Multinomial(1, fair_probs).sample()
 ```
@@ -107,12 +107,12 @@ np.random.multinomial(10, fair_probs)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 multinomial.Multinomial(10, fair_probs).sample()
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 tfp.distributions.Multinomial(10, fair_probs).sample()
 ```
 
@@ -127,14 +127,14 @@ counts / 1000
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 # Store the results as 32-bit floats for division
 counts = multinomial.Multinomial(1000, fair_probs).sample()
 counts / 1000  # Relative frequency as the estimate
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 counts = tfp.distributions.Multinomial(1000, fair_probs).sample()
 counts / 1000
 ```
@@ -147,7 +147,7 @@ Let us conduct 500 groups of experiments where each group draws 10 samples.
 ```{.python .input}
 counts = np.random.multinomial(10, fair_probs, size=500)
 cum_counts = counts.astype(np.float32).cumsum(axis=0)
-estimates = cum_counts / cum_counts.sum(axis=1, keepdims=True)
+estimates = cum*counts / cum*counts.sum(axis=1, keepdims=True)
 
 d2l.set_figsize((6, 4.5))
 for i in range(6):
@@ -160,10 +160,10 @@ d2l.plt.legend();
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 counts = multinomial.Multinomial(10, fair_probs).sample((500,))
 cum_counts = counts.cumsum(dim=0)
-estimates = cum_counts / cum_counts.sum(dim=1, keepdims=True)
+estimates = cum*counts / cum*counts.sum(dim=1, keepdims=True)
 
 d2l.set_figsize((6, 4.5))
 for i in range(6):
@@ -176,10 +176,10 @@ d2l.plt.legend();
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 counts = tfp.distributions.Multinomial(10, fair_probs).sample(500)
 cum_counts = tf.cumsum(counts, axis=0)
-estimates = cum_counts / tf.reduce_sum(cum_counts, axis=1, keepdims=True)
+estimates = cum*counts / tf.reduce*sum(cum_counts, axis=1, keepdims=True)
 
 d2l.set_figsize((6, 4.5))
 for i in range(6):
@@ -196,7 +196,7 @@ The dashed black line gives the true underlying probability.
 As we get more data by conducting more experiments,
 the $6$ solid curves converge towards the true probability.
 
-### Axioms of Probability Theory
+## # Axioms of Probability Theory
 
 When dealing with the rolls of a die,
 we call the set $\mathcal{S} = \{1, 2, 3, 4, 5, 6\}$ the *sample space* or *outcome space*, where each element is an *outcome*.
@@ -213,15 +213,15 @@ denoted as $P(\mathcal{A})$, satisfies the following properties:
 
 * For any event $\mathcal{A}$, its probability is never negative, i.e., $P(\mathcal{A}) \geq 0$;
 * Probability of the entire sample space is $1$, i.e., $P(\mathcal{S}) = 1$;
-* For any countable sequence of events $\mathcal{A}_1, \mathcal{A}_2, \ldots$ that are *mutually exclusive* ($\mathcal{A}_i \cap \mathcal{A}_j = \emptyset$ for all $i \neq j$), the probability that any happens is equal to the sum of their individual probabilities, i.e., $P(\bigcup_{i=1}^{\infty} \mathcal{A}_i) = \sum_{i=1}^{\infty} P(\mathcal{A}_i)$.
+* For any countable sequence of events $\mathcal{A}*1, \mathcal{A}*2, \ldots$ that are *mutually exclusive* ($\mathcal{A}*i \cap \mathcal{A}*j = \emptyset$ for all $i \neq j$), the probability that any happens is equal to the sum of their individual probabilities, i.e., $P(\bigcup*{i=1}^{\infty} \mathcal{A}*i) = \sum*{i=1}^{\infty} P(\mathcal{A}*i)$.
 
 These are also the axioms of probability theory, proposed by Kolmogorov in 1933.
 Thanks to this axiom system, we can avoid any philosophical dispute on randomness;
 instead, we can reason rigorously with a mathematical language.
-For instance, by letting event $\mathcal{A}_1$ be the entire sample space and $\mathcal{A}_i = \emptyset$ for all $i > 1$, we can prove that $P(\emptyset) = 0$, i.e., the probability of an impossible event is $0$.
+For instance, by letting event $\mathcal{A}*1$ be the entire sample space and $\mathcal{A}*i = \emptyset$ for all $i > 1$, we can prove that $P(\emptyset) = 0$, i.e., the probability of an impossible event is $0$.
 
 
-### Random Variables
+## # Random Variables
 
 In our random experiment of casting a die, we introduced the notion of a *random variable*. A random variable can be pretty much any quantity and is not deterministic. It could take one value among a set of possibilities in a random experiment.
 Consider a random variable $X$ whose value is in the sample space $\mathcal{S} = \{1, 2, 3, 4, 5, 6\}$ of rolling a die. We can denote the event "seeing a $5$" as $\{X = 5\}$ or $X = 5$, and its probability as $P(\{X = 5\})$ or $P(X = 5)$.
@@ -240,9 +240,9 @@ which means $\{X = 1, 2, \text{or}, 3\}$. Equivalently, $P(1 \leq X \leq 3)$ rep
 Note that there is a subtle difference between *discrete* random variables, like the sides of a die, and *continuous* ones, like the weight and the height of a person. There is little point in asking whether two people have exactly the same height. If we take precise enough measurements you will find that no two people on the planet have the exact same height. In fact, if we take a fine enough measurement, you will not have the same height when you wake up and when you go to sleep. So there is no purpose in asking about the probability
 that someone is 1.80139278291028719210196740527486202 meters tall. Given the world population of humans the probability is virtually 0. It makes more sense in this case to ask whether someone's height falls into a given interval, say between 1.79 and 1.81 meters. In these cases we quantify the likelihood that we see a value as a *density*. The height of exactly 1.80 meters has no probability, but nonzero density. In the interval between any two different heights we have nonzero probability.
 In the rest of this section, we consider probability in discrete space.
-For probability over continuous random variables, you may refer to :numref:`sec_random_variables`.
+For probability over continuous random variables, you may refer to :numref:`sec*random*variables`.
 
-## Dealing with Multiple Random Variables
+# # Dealing with Multiple Random Variables
 
 Very often, we will want to consider more than one random variable at a time.
 For instance, we may want to model the relationship between diseases and symptoms. Given a disease and a symptom, say "flu" and "cough", either may or may not occur in a patient with some probability. While we hope that the probability of both would be close to zero, we may want to estimate these probabilities and their relationships to each other so that we may apply our inferences to effect better medical care.
@@ -253,20 +253,20 @@ random variable. We can even think of all the metadata as random variables
 such as location, time, aperture, focal length, ISO, focus distance, and camera type.
 All of these are random variables that occur jointly. When we deal with multiple random variables, there are several quantities of interest.
 
-### Joint Probability
+## # Joint Probability
 
 The first is called the *joint probability* $P(A = a, B=b)$. Given any values $a$ and $b$, the joint probability lets us answer, what is the probability that $A=a$ and $B=b$ simultaneously?
 Note that for any values $a$ and $b$, $P(A=a, B=b) \leq P(A=a)$.
 This has to be the case, since for $A=a$ and $B=b$ to happen, $A=a$ has to happen *and* $B=b$ also has to happen (and vice versa). Thus, $A=a$ and $B=b$ cannot be more likely than $A=a$ or $B=b$ individually.
 
 
-### Conditional Probability
+## # Conditional Probability
 
 This brings us to an interesting ratio: $0 \leq \frac{P(A=a, B=b)}{P(A=a)} \leq 1$. We call this ratio a *conditional probability*
 and denote it by $P(B=b \mid A=a)$: it is the probability of $B=b$, provided that
 $A=a$ has occurred.
 
-### Bayes' theorem
+## # Bayes' theorem
 
 Using the definition of conditional probabilities, we can derive one of the most useful and celebrated equations in statistics: *Bayes' theorem*.
 It goes as follows.
@@ -276,7 +276,7 @@ $$P(A \mid B) = \frac{P(B \mid A) P(A)}{P(B)}.$$
 
 Note that here we use the more compact notation where $P(A, B)$ is a *joint distribution* and $P(A \mid B)$ is a *conditional distribution*. Such distributions can be evaluated for particular values $A = a, B=b$.
 
-### Marginalization
+## # Marginalization
 
 Bayes' theorem is very useful if we want to infer one thing from the other, say cause and effect, but we only know the properties in the reverse direction, as we will see later in this section. One important operation that we need, to make this work, is *marginalization*.
 It is the operation of determining $P(B)$ from $P(A, B)$. We can see that the probability of $B$ amounts to accounting for all possible choices of $A$ and aggregating the joint probabilities over all of them:
@@ -286,7 +286,7 @@ $$P(B) = \sum_{A} P(A, B),$$
 which is also known as the *sum rule*. The probability or distribution as a result of marginalization is called a *marginal probability* or a *marginal distribution*.
 
 
-### Independence
+## # Independence
 
 Another useful property to check for is *dependence* vs. *independence*.
 Two random variables $A$ and $B$ being independent
@@ -299,12 +299,12 @@ Since $P(A \mid B) = \frac{P(A, B)}{P(B)} = P(A)$ is equivalent to $P(A, B) = P(
 Likewise, two random variables $A$ and $B$ are *conditionally independent* given another random variable $C$
 if and only if $P(A, B \mid C) = P(A \mid C)P(B \mid C)$. This is expressed as $A \perp B \mid C$.
 
-### Application
-:label:`subsec_probability_hiv_app`
+## # Application
+:label:`subsec*probability*hiv_app`
 
 Let us put our skills to the test. Assume that a doctor administers an HIV test to a patient. This test is fairly accurate and it fails only with 1% probability if the patient is healthy but reporting him as diseased. Moreover,
 it never fails to detect HIV if the patient actually has it. We use $D_1$ to indicate the diagnosis ($1$ if positive and $0$ if negative) and $H$ to denote the HIV status ($1$ if positive and $0$ if negative).
-:numref:`conditional_prob_D1` lists such conditional probabilities.
+:numref:`conditional*prob*D1` lists such conditional probabilities.
 
 :Conditional probability of $P(D_1 \mid H)$.
 
@@ -312,14 +312,14 @@ it never fails to detect HIV if the patient actually has it. We use $D_1$ to ind
 |---|---|---|
 |$P(D_1 = 1 \mid H)$|            1 |         0.01 |
 |$P(D_1 = 0 \mid H)$|            0 |         0.99 |
-:label:`conditional_prob_D1`
+:label:`conditional*prob*D1`
 
 Note that the column sums are all 1 (but the row sums are not), since the conditional probability needs to sum up to 1, just like the probability. Let us work out the probability of the patient having HIV if the test comes back positive, i.e., $P(H = 1 \mid D_1 = 1)$. Obviously this is going to depend on how common the disease is, since it affects the number of false alarms. Assume that the population is quite healthy, e.g., $P(H=1) = 0.0015$. To apply Bayes' theorem, we need to apply marginalization and the multiplication rule to determine
 
 $$\begin{aligned}
 &P(D_1 = 1) \\
-=& P(D_1=1, H=0) + P(D_1=1, H=1)  \\
-=& P(D_1=1 \mid H=0) P(H=0) + P(D_1=1 \mid H=1) P(H=1) \\
+=& P(D*1=1, H=0) + P(D*1=1, H=1)  \\
+=& P(D*1=1 \mid H=0) P(H=0) + P(D*1=1 \mid H=1) P(H=1) \\
 =& 0.011485.
 \end{aligned}
 $$
@@ -327,7 +327,7 @@ $$
 Thus, we get
 
 $$\begin{aligned}
-&P(H = 1 \mid D_1 = 1)\\ =& \frac{P(D_1=1 \mid H=1) P(H=1)}{P(D_1=1)} \\ =& 0.1306 \end{aligned}.$$
+&P(H = 1 \mid D*1 = 1)\\ =& \frac{P(D*1=1 \mid H=1) P(H=1)}{P(D_1=1)} \\ =& 0.1306 \end{aligned}.$$
 
 In other words, there is only a 13.06% chance that the patient
 actually has HIV, despite using a very accurate test.
@@ -335,7 +335,7 @@ As we can see, probability can be counterintuitive.
 
 What should a patient do upon receiving such terrifying news? Likely, the patient
 would ask the physician to administer another test to get clarity. The second
-test has different characteristics and it is not as good as the first one, as shown in :numref:`conditional_prob_D2`.
+test has different characteristics and it is not as good as the first one, as shown in :numref:`conditional*prob*D2`.
 
 
 :Conditional probability of $P(D_2 \mid H)$.
@@ -344,22 +344,22 @@ test has different characteristics and it is not as good as the first one, as sh
 |---|---|---|
 |$P(D_2 = 1 \mid H)$|            0.98 |         0.03 |
 |$P(D_2 = 0 \mid H)$|            0.02 |         0.97 |
-:label:`conditional_prob_D2`
+:label:`conditional*prob*D2`
 
 Unfortunately, the second test comes back positive, too.
 Let us work out the requisite probabilities to invoke Bayes' theorem
 by assuming the conditional independence:
 
 $$\begin{aligned}
-&P(D_1 = 1, D_2 = 1 \mid H = 0) \\
-=& P(D_1 = 1 \mid H = 0) P(D_2 = 1 \mid H = 0)  \\
+&P(D*1 = 1, D*2 = 1 \mid H = 0) \\
+=& P(D*1 = 1 \mid H = 0) P(D*2 = 1 \mid H = 0)  \\
 =& 0.0003,
 \end{aligned}
 $$
 
 $$\begin{aligned}
-&P(D_1 = 1, D_2 = 1 \mid H = 1) \\
-=& P(D_1 = 1 \mid H = 1) P(D_2 = 1 \mid H = 1)  \\
+&P(D*1 = 1, D*2 = 1 \mid H = 1) \\
+=& P(D*1 = 1 \mid H = 1) P(D*2 = 1 \mid H = 1)  \\
 =& 0.98.
 \end{aligned}
 $$
@@ -367,9 +367,9 @@ $$
 Now we can apply marginalization and the multiplication rule:
 
 $$\begin{aligned}
-&P(D_1 = 1, D_2 = 1) \\
-=& P(D_1 = 1, D_2 = 1, H = 0) + P(D_1 = 1, D_2 = 1, H = 1)  \\
-=& P(D_1 = 1, D_2 = 1 \mid H = 0)P(H=0) + P(D_1 = 1, D_2 = 1 \mid H = 1)P(H=1)\\
+&P(D*1 = 1, D*2 = 1) \\
+=& P(D*1 = 1, D*2 = 1, H = 0) + P(D*1 = 1, D*2 = 1, H = 1)  \\
+=& P(D*1 = 1, D*2 = 1 \mid H = 0)P(H=0) + P(D*1 = 1, D*2 = 1 \mid H = 1)P(H=1)\\
 =& 0.00176955.
 \end{aligned}
 $$
@@ -377,8 +377,8 @@ $$
 In the end, the probability of the patient having HIV given both positive tests is
 
 $$\begin{aligned}
-&P(H = 1 \mid D_1 = 1, D_2 = 1)\\
-=& \frac{P(D_1 = 1, D_2 = 1 \mid H=1) P(H=1)}{P(D_1 = 1, D_2 = 1)} \\
+&P(H = 1 \mid D*1 = 1, D*2 = 1)\\
+=& \frac{P(D*1 = 1, D*2 = 1 \mid H=1) P(H=1)}{P(D*1 = 1, D*2 = 1)} \\
 =& 0.8307.
 \end{aligned}
 $$
@@ -387,7 +387,7 @@ That is, the second test allowed us to gain much higher confidence that not all 
 
 
 
-## Expectation and Variance
+# # Expectation and Variance
 
 To summarize key characteristics of probability distributions,
 we need some measures.
@@ -398,7 +398,7 @@ $$E[X] = \sum_{x} x P(X = x).$$
 When the input of a function $f(x)$ is a random variable drawn from the distribution $P$ with different values $x$,
 the expectation of $f(x)$ is computed as
 
-$$E_{x \sim P}[f(x)] = \sum_x f(x) P(x).$$
+$$E*{x \sim P}[f(x)] = \sum*x f(x) P(x).$$
 
 
 In many cases we want to measure by how much the random variable $X$ deviates from its expectation. This can be quantified by the variance
@@ -414,19 +414,19 @@ as different values $x$ of the random variable are sampled from its distribution
 $$\mathrm{Var}[f(x)] = E\left[\left(f(x) - E[f(x)]\right)^2\right].$$
 
 
-## Summary
+# # Summary
 
 * We can sample from probability distributions.
 * We can analyze multiple random variables using joint distribution, conditional distribution, Bayes' theorem, marginalization, and independence assumptions.
 * Expectation and variance offer useful measures to summarize key characteristics of probability distributions.
 
 
-## Exercises
+# # Exercises
 
 1. We conducted $m=500$ groups of experiments where each group draws $n=10$ samples. Vary $m$ and $n$. Observe and analyze the experimental results.
 1. Given two events with probability $P(\mathcal{A})$ and $P(\mathcal{B})$, compute upper and lower bounds on $P(\mathcal{A} \cup \mathcal{B})$ and $P(\mathcal{A} \cap \mathcal{B})$. (Hint: display the situation using a [Venn Diagram](https://en.wikipedia.org/wiki/Venn_diagram).)
 1. Assume that we have a sequence of random variables, say $A$, $B$, and $C$, where $B$ only depends on $A$, and $C$ only depends on $B$, can you simplify the joint probability $P(A, B, C)$? (Hint: this is a [Markov Chain](https://en.wikipedia.org/wiki/Markov_chain).)
-1. In :numref:`subsec_probability_hiv_app`, the first test is more accurate. Why not run the first test twice rather than run both the first and second tests?
+1. In :numref:`subsec*probability*hiv_app`, the first test is more accurate. Why not run the first test twice rather than run both the first and second tests?
 
 
 :begin_tab:`mxnet`

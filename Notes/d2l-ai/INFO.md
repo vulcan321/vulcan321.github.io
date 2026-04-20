@@ -1,4 +1,4 @@
-## 编译HTML版本
+# # 编译HTML版本
 
 所有markdown文件需要在提交前清除output，它们会在服务器上重新执行生成结果。所以需要保证每个notebook执行不要太久，目前限制是20min。
 
@@ -20,7 +20,7 @@ make html EVAL=0
 
 但这样生成的html将不含有输出结果。
 
-## 编译PDF版本
+# # 编译PDF版本
 
 编译pdf版本需要xelatex、librsvg2-bin（svg图片转pdf）和思源字体。在Ubuntu可以这样安装。
 
@@ -67,16 +67,16 @@ sudo fc-cache -f -v
 make pdf
 ```
 
-## 其他安装
+# # 其他安装
 
 ```
 python -m spacy download en # 需已 pip install spacy
 ```
 
-## 样式规范
+# # 样式规范
 
 贡献请遵照本教程的[样式规范](STYLE_GUIDE.md)。
 
-## 中英文术语对照
+# # 中英文术语对照
 
 翻译请参照[中英文术语对照](TERMINOLOGY.md)。

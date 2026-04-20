@@ -9,7 +9,7 @@
 以确保在服务器电源被不小心断掉时，我们不会损失几天的计算结果。
 因此，现在是时候学习如何加载和存储权重向量和整个模型了。
 
-## (**加载和保存张量**)
+# # (**加载和保存张量**)
 
 对于单个张量，我们可以直接调用`load`和`save`函数分别读写它们。
 这两个函数都要求我们提供一个名称，`save`要求将要保存的变量作为输入。
@@ -24,7 +24,7 @@ npx.save('x-file', x)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 import torch
 from torch import nn
 from torch.nn import functional as F
@@ -34,7 +34,7 @@ torch.save(x, 'x-file')
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 import tensorflow as tf
 import numpy as np
 
@@ -43,7 +43,7 @@ np.save('x-file.npy', x)
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 import warnings
 warnings.filterwarnings(action='ignore')
 import paddle
@@ -62,19 +62,19 @@ x2
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 x2 = torch.load('x-file')
 x2
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 x2 = np.load('x-file.npy', allow_pickle=True)
 x2
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 x2 = paddle.load('x-file')
 x2
 ```
@@ -89,7 +89,7 @@ x2, y2 = npx.load('x-files')
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 y = torch.zeros(4)
 torch.save([x, y],'x-files')
 x2, y2 = torch.load('x-files')
@@ -97,7 +97,7 @@ x2, y2 = torch.load('x-files')
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 y = tf.zeros(4)
 np.save('xy-files.npy', [x, y])
 x2, y2 = np.load('xy-files.npy', allow_pickle=True)
@@ -105,7 +105,7 @@ x2, y2 = np.load('xy-files.npy', allow_pickle=True)
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 y = paddle.zeros([4])
 paddle.save([x,y], 'x-file')
 x2, y2 = paddle.load('x-file')
@@ -123,7 +123,7 @@ mydict2
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 mydict = {'x': x, 'y': y}
 torch.save(mydict, 'mydict')
 mydict2 = torch.load('mydict')
@@ -131,7 +131,7 @@ mydict2
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 mydict = {'x': x, 'y': y}
 np.save('mydict.npy', mydict)
 mydict2 = np.load('mydict.npy', allow_pickle=True)
@@ -139,14 +139,14 @@ mydict2
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 mydict = {'x': x, 'y': y}
 paddle.save(mydict, 'mydict')
 mydict2 = paddle.load('mydict')
 mydict2
 ```
 
-## [**加载和保存模型参数**]
+# # [**加载和保存模型参数**]
 
 保存单个权重向量（或其他张量）确实有用，
 但是如果我们想保存整个模型，并在以后加载它们，
@@ -162,8 +162,8 @@ mydict2
 
 ```{.python .input}
 class MLP(nn.Block):
-    def __init__(self, **kwargs):
-        super(MLP, self).__init__(**kwargs)
+    def **init**(self, **kwargs):
+        super(MLP, self).**init**(**kwargs)
         self.hidden = nn.Dense(256, activation='relu')
         self.output = nn.Dense(10)
 
@@ -177,10 +177,10 @@ Y = net(X)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 class MLP(nn.Module):
-    def __init__(self):
-        super().__init__()
+    def **init**(self):
+        super().**init**()
         self.hidden = nn.Linear(20, 256)
         self.output = nn.Linear(256, 10)
 
@@ -193,10 +193,10 @@ Y = net(X)
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 class MLP(tf.keras.Model):
-    def __init__(self):
-        super().__init__()
+    def **init**(self):
+        super().**init**()
         self.flatten = tf.keras.layers.Flatten()
         self.hidden = tf.keras.layers.Dense(units=256, activation=tf.nn.relu)
         self.out = tf.keras.layers.Dense(units=10)
@@ -212,10 +212,10 @@ Y = net(X)
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 class MLP(nn.Layer):
-    def __init__(self):
-        super().__init__()
+    def **init**(self):
+        super().**init**()
         self.hidden = nn.Linear(20, 256)
         self.output = nn.Linear(256, 10)
 
@@ -234,17 +234,17 @@ net.save_parameters('mlp.params')
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 torch.save(net.state_dict(), 'mlp.params')
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 net.save_weights('mlp.params')
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 paddle.save(net.state_dict(), 'mlp.pdparams')
 ```
 
@@ -257,22 +257,22 @@ clone.load_parameters('mlp.params')
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 clone = MLP()
-clone.load_state_dict(torch.load('mlp.params'))
+clone.load*state*dict(torch.load('mlp.params'))
 clone.eval()
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 clone = MLP()
 clone.load_weights('mlp.params')
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 clone = MLP()
-clone.set_state_dict(paddle.load('mlp.pdparams'))
+clone.set*state*dict(paddle.load('mlp.pdparams'))
 clone.eval()
 ```
 
@@ -286,24 +286,24 @@ Y_clone == Y
 ```
 
 ```{.python .input}
-#@tab pytorch, paddle
+# @tab pytorch, paddle
 Y_clone = clone(X)
 Y_clone == Y
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 Y_clone = clone(X)
 Y_clone == Y
 ```
 
-## 小结
+# # 小结
 
 * `save`和`load`函数可用于张量对象的文件读写。
 * 我们可以通过参数字典保存和加载网络的全部参数。
 * 保存架构必须在代码中完成，而不是在参数中完成。
 
-## 练习
+# # 练习
 
 1. 即使不需要将经过训练的模型部署到不同的设备上，存储模型参数还有什么实际的好处？
 1. 假设我们只想复用网络的一部分，以将其合并到不同的网络架构中。比如想在一个新的网络中使用之前网络的前两层，该怎么做？

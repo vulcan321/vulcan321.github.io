@@ -12,7 +12,7 @@ npx.set_np()
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 from d2l import torch as d2l
 import torch
 from torch import nn
@@ -24,12 +24,12 @@ The batch size is 512 and the maximum length of a BERT input sequence is 64.
 Note that in the original BERT model, the maximum length is 512.
 
 ```{.python .input}
-#@tab all
-batch_size, max_len = 512, 64
-train_iter, vocab = d2l.load_data_wiki(batch_size, max_len)
+# @tab all
+batch*size, max*len = 512, 64
+train*iter, vocab = d2l.load*data*wiki(batch*size, max_len)
 ```
 
-## Pretraining BERT
+# # Pretraining BERT
 
 The original BERT has two versions of different model sizes :cite:`Devlin.Chang.Lee.ea.2018`.
 The base model ($\text{BERT}_{\text{BASE}}$) uses 12 layers (transformer encoder blocks)
@@ -41,26 +41,26 @@ For demonstration with ease,
 we define a small BERT, using 2 layers, 128 hidden units, and 2 self-attention heads.
 
 ```{.python .input}
-net = d2l.BERTModel(len(vocab), num_hiddens=128, ffn_num_hiddens=256,
-                    num_heads=2, num_layers=2, dropout=0.2)
-devices = d2l.try_all_gpus()
+net = d2l.BERTModel(len(vocab), num*hiddens=128, ffn*num_hiddens=256,
+                    num*heads=2, num*layers=2, dropout=0.2)
+devices = d2l.try*all*gpus()
 net.initialize(init.Xavier(), ctx=devices)
 loss = gluon.loss.SoftmaxCELoss()
 ```
 
 ```{.python .input}
-#@tab pytorch
-net = d2l.BERTModel(len(vocab), num_hiddens=128, norm_shape=[128],
-                    ffn_num_input=128, ffn_num_hiddens=256, num_heads=2,
-                    num_layers=2, dropout=0.2, key_size=128, query_size=128,
-                    value_size=128, hid_in_features=128, mlm_in_features=128,
-                    nsp_in_features=128)
-devices = d2l.try_all_gpus()
+# @tab pytorch
+net = d2l.BERTModel(len(vocab), num*hiddens=128, norm*shape=[128],
+                    ffn*num*input=128, ffn*num*hiddens=256, num_heads=2,
+                    num*layers=2, dropout=0.2, key*size=128, query_size=128,
+                    value*size=128, hid*in*features=128, mlm*in_features=128,
+                    nsp*in*features=128)
+devices = d2l.try*all*gpus()
 loss = nn.CrossEntropyLoss()
 ```
 
 Before defining the training loop,
-we define a helper function `_get_batch_loss_bert`.
+we define a helper function `*get*batch*loss*bert`.
 Given the shard of training examples,
 this function computes the loss for both the masked language modeling and next sentence prediction tasks.
 Note that the final loss of BERT pretraining
@@ -68,56 +68,56 @@ is just the sum of both the masked language modeling loss
 and the next sentence prediction loss.
 
 ```{.python .input}
-#@save
-def _get_batch_loss_bert(net, loss, vocab_size, tokens_X_shards,
-                         segments_X_shards, valid_lens_x_shards,
-                         pred_positions_X_shards, mlm_weights_X_shards,
-                         mlm_Y_shards, nsp_y_shards):
-    mlm_ls, nsp_ls, ls = [], [], []
-    for (tokens_X_shard, segments_X_shard, valid_lens_x_shard,
-         pred_positions_X_shard, mlm_weights_X_shard, mlm_Y_shard,
-         nsp_y_shard) in zip(
-        tokens_X_shards, segments_X_shards, valid_lens_x_shards,
-        pred_positions_X_shards, mlm_weights_X_shards, mlm_Y_shards,
-        nsp_y_shards):
+# @save
+def *get*batch*loss*bert(net, loss, vocab*size, tokens*X_shards,
+                         segments*X*shards, valid*lens*x_shards,
+                         pred*positions*X*shards, mlm*weights*X*shards,
+                         mlm*Y*shards, nsp*y*shards):
+    mlm*ls, nsp*ls, ls = [], [], []
+    for (tokens*X*shard, segments*X*shard, valid*lens*x_shard,
+         pred*positions*X*shard, mlm*weights*X*shard, mlm*Y*shard,
+         nsp*y*shard) in zip(
+        tokens*X*shards, segments*X*shards, valid*lens*x_shards,
+        pred*positions*X*shards, mlm*weights*X*shards, mlm*Y*shards,
+        nsp*y*shards):
         # Forward pass
-        _, mlm_Y_hat, nsp_Y_hat = net(
-            tokens_X_shard, segments_X_shard, valid_lens_x_shard.reshape(-1),
-            pred_positions_X_shard)
+        *, mlm*Y*hat, nsp*Y_hat = net(
+            tokens*X*shard, segments*X*shard, valid*lens*x_shard.reshape(-1),
+            pred*positions*X_shard)
         # Compute masked language model loss
         mlm_l = loss(
-            mlm_Y_hat.reshape((-1, vocab_size)), mlm_Y_shard.reshape(-1),
-            mlm_weights_X_shard.reshape((-1, 1)))
-        mlm_l = mlm_l.sum() / (mlm_weights_X_shard.sum() + 1e-8)
+            mlm*Y*hat.reshape((-1, vocab*size)), mlm*Y_shard.reshape(-1),
+            mlm*weights*X_shard.reshape((-1, 1)))
+        mlm*l = mlm*l.sum() / (mlm*weights*X_shard.sum() + 1e-8)
         # Compute next sentence prediction loss
-        nsp_l = loss(nsp_Y_hat, nsp_y_shard)
-        nsp_l = nsp_l.mean()
-        mlm_ls.append(mlm_l)
-        nsp_ls.append(nsp_l)
-        ls.append(mlm_l + nsp_l)
+        nsp*l = loss(nsp*Y*hat, nsp*y_shard)
+        nsp*l = nsp*l.mean()
+        mlm*ls.append(mlm*l)
+        nsp*ls.append(nsp*l)
+        ls.append(mlm*l + nsp*l)
         npx.waitall()
-    return mlm_ls, nsp_ls, ls
+    return mlm*ls, nsp*ls, ls
 ```
 
 ```{.python .input}
-#@tab pytorch
-#@save
-def _get_batch_loss_bert(net, loss, vocab_size, tokens_X,
-                         segments_X, valid_lens_x,
-                         pred_positions_X, mlm_weights_X,
-                         mlm_Y, nsp_y):
+# @tab pytorch
+# @save
+def *get*batch*loss*bert(net, loss, vocab*size, tokens*X,
+                         segments*X, valid*lens_x,
+                         pred*positions*X, mlm*weights*X,
+                         mlm*Y, nsp*y):
     # Forward pass
-    _, mlm_Y_hat, nsp_Y_hat = net(tokens_X, segments_X,
-                                  valid_lens_x.reshape(-1),
-                                  pred_positions_X)
+    *, mlm*Y*hat, nsp*Y*hat = net(tokens*X, segments_X,
+                                  valid*lens*x.reshape(-1),
+                                  pred*positions*X)
     # Compute masked language model loss
-    mlm_l = loss(mlm_Y_hat.reshape(-1, vocab_size), mlm_Y.reshape(-1)) *\
-    mlm_weights_X.reshape(-1, 1)
-    mlm_l = mlm_l.sum() / (mlm_weights_X.sum() + 1e-8)
+    mlm*l = loss(mlm*Y*hat.reshape(-1, vocab*size), mlm_Y.reshape(-1)) *\
+    mlm*weights*X.reshape(-1, 1)
+    mlm*l = mlm*l.sum() / (mlm*weights*X.sum() + 1e-8)
     # Compute next sentence prediction loss
-    nsp_l = loss(nsp_Y_hat, nsp_y)
-    l = mlm_l + nsp_l
-    return mlm_l, nsp_l, l
+    nsp*l = loss(nsp*Y*hat, nsp*y)
+    l = mlm*l + nsp*l
+    return mlm*l, nsp*l, l
 ```
 
 Invoking the two aforementioned helper functions,
@@ -125,12 +125,12 @@ the following `train_bert` function
 defines the procedure to pretrain BERT (`net`) on the WikiText-2 (`train_iter`) dataset.
 Training BERT can take very long.
 Instead of specifying the number of epochs for training
-as in the `train_ch13` function (see :numref:`sec_image_augmentation`),
+as in the `train*ch13` function (see :numref:`sec*image_augmentation`),
 the input `num_steps` of the following function
 specifies the number of iteration steps for training.
 
 ```{.python .input}
-def train_bert(train_iter, net, loss, vocab_size, devices, num_steps):
+def train*bert(train*iter, net, loss, vocab*size, devices, num*steps):
     trainer = gluon.Trainer(net.collect_params(), 'adam',
                             {'learning_rate': 1e-3})
     step, timer = 0, d2l.Timer()
@@ -139,31 +139,31 @@ def train_bert(train_iter, net, loss, vocab_size, devices, num_steps):
     # Sum of masked language modeling losses, sum of next sentence prediction
     # losses, no. of sentence pairs, count
     metric = d2l.Accumulator(4)
-    num_steps_reached = False
-    while step < num_steps and not num_steps_reached:
+    num*steps*reached = False
+    while step < num*steps and not num*steps_reached:
         for batch in train_iter:
-            (tokens_X_shards, segments_X_shards, valid_lens_x_shards,
-             pred_positions_X_shards, mlm_weights_X_shards,
-             mlm_Y_shards, nsp_y_shards) = [gluon.utils.split_and_load(
+            (tokens*X*shards, segments*X*shards, valid*lens*x_shards,
+             pred*positions*X*shards, mlm*weights*X*shards,
+             mlm*Y*shards, nsp*y*shards) = [gluon.utils.split*and*load(
                 elem, devices, even_split=False) for elem in batch]
             timer.start()
             with autograd.record():
-                mlm_ls, nsp_ls, ls = _get_batch_loss_bert(
-                    net, loss, vocab_size, tokens_X_shards, segments_X_shards,
-                    valid_lens_x_shards, pred_positions_X_shards,
-                    mlm_weights_X_shards, mlm_Y_shards, nsp_y_shards)
+                mlm*ls, nsp*ls, ls = *get*batch*loss*bert(
+                    net, loss, vocab*size, tokens*X*shards, segments*X_shards,
+                    valid*lens*x*shards, pred*positions*X*shards,
+                    mlm*weights*X*shards, mlm*Y*shards, nsp*y_shards)
             for l in ls:
                 l.backward()
             trainer.step(1)
-            mlm_l_mean = sum([float(l) for l in mlm_ls]) / len(mlm_ls)
-            nsp_l_mean = sum([float(l) for l in nsp_ls]) / len(nsp_ls)
-            metric.add(mlm_l_mean, nsp_l_mean, batch[0].shape[0], 1)
+            mlm*l*mean = sum([float(l) for l in mlm*ls]) / len(mlm*ls)
+            nsp*l*mean = sum([float(l) for l in nsp*ls]) / len(nsp*ls)
+            metric.add(mlm*l*mean, nsp*l*mean, batch[0].shape[0], 1)
             timer.stop()
             animator.add(step + 1,
                          (metric[0] / metric[3], metric[1] / metric[3]))
             step += 1
             if step == num_steps:
-                num_steps_reached = True
+                num*steps*reached = True
                 break
 
     print(f'MLM loss {metric[0] / metric[3]:.3f}, '
@@ -173,8 +173,8 @@ def train_bert(train_iter, net, loss, vocab_size, devices, num_steps):
 ```
 
 ```{.python .input}
-#@tab pytorch
-def train_bert(train_iter, net, loss, vocab_size, devices, num_steps):
+# @tab pytorch
+def train*bert(train*iter, net, loss, vocab*size, devices, num*steps):
     net = nn.DataParallel(net, device_ids=devices).to(devices[0])
     trainer = torch.optim.Adam(net.parameters(), lr=1e-3)
     step, timer = 0, d2l.Timer()
@@ -183,30 +183,30 @@ def train_bert(train_iter, net, loss, vocab_size, devices, num_steps):
     # Sum of masked language modeling losses, sum of next sentence prediction
     # losses, no. of sentence pairs, count
     metric = d2l.Accumulator(4)
-    num_steps_reached = False
-    while step < num_steps and not num_steps_reached:
-        for tokens_X, segments_X, valid_lens_x, pred_positions_X,\
-            mlm_weights_X, mlm_Y, nsp_y in train_iter:
-            tokens_X = tokens_X.to(devices[0])
-            segments_X = segments_X.to(devices[0])
-            valid_lens_x = valid_lens_x.to(devices[0])
-            pred_positions_X = pred_positions_X.to(devices[0])
-            mlm_weights_X = mlm_weights_X.to(devices[0])
-            mlm_Y, nsp_y = mlm_Y.to(devices[0]), nsp_y.to(devices[0])
+    num*steps*reached = False
+    while step < num*steps and not num*steps_reached:
+        for tokens*X, segments*X, valid*lens*x, pred*positions*X,\
+            mlm*weights*X, mlm*Y, nsp*y in train_iter:
+            tokens*X = tokens*X.to(devices[0])
+            segments*X = segments*X.to(devices[0])
+            valid*lens*x = valid*lens*x.to(devices[0])
+            pred*positions*X = pred*positions*X.to(devices[0])
+            mlm*weights*X = mlm*weights*X.to(devices[0])
+            mlm*Y, nsp*y = mlm*Y.to(devices[0]), nsp*y.to(devices[0])
             trainer.zero_grad()
             timer.start()
-            mlm_l, nsp_l, l = _get_batch_loss_bert(
-                net, loss, vocab_size, tokens_X, segments_X, valid_lens_x,
-                pred_positions_X, mlm_weights_X, mlm_Y, nsp_y)
+            mlm*l, nsp*l, l = *get*batch*loss*bert(
+                net, loss, vocab*size, tokens*X, segments*X, valid*lens_x,
+                pred*positions*X, mlm*weights*X, mlm*Y, nsp*y)
             l.backward()
             trainer.step()
-            metric.add(mlm_l, nsp_l, tokens_X.shape[0], 1)
+            metric.add(mlm*l, nsp*l, tokens_X.shape[0], 1)
             timer.stop()
             animator.add(step + 1,
                          (metric[0] / metric[3], metric[1] / metric[3]))
             step += 1
             if step == num_steps:
-                num_steps_reached = True
+                num*steps*reached = True
                 break
 
     print(f'MLM loss {metric[0] / metric[3]:.3f}, '
@@ -219,41 +219,41 @@ We can plot both the masked language modeling loss and the next sentence predict
 during BERT pretraining.
 
 ```{.python .input}
-#@tab all
-train_bert(train_iter, net, loss, len(vocab), devices, 50)
+# @tab all
+train*bert(train*iter, net, loss, len(vocab), devices, 50)
 ```
 
-## Representing Text with BERT
+# # Representing Text with BERT
 
 After pretraining BERT,
 we can use it to represent single text, text pairs, or any token in them.
 The following function returns the BERT (`net`) representations for all tokens
-in `tokens_a` and `tokens_b`.
+in `tokens*a` and `tokens*b`.
 
 ```{.python .input}
-def get_bert_encoding(net, tokens_a, tokens_b=None):
-    tokens, segments = d2l.get_tokens_and_segments(tokens_a, tokens_b)
-    token_ids = np.expand_dims(np.array(vocab[tokens], ctx=devices[0]),
+def get*bert*encoding(net, tokens*a, tokens*b=None):
+    tokens, segments = d2l.get*tokens*and*segments(tokens*a, tokens_b)
+    token*ids = np.expand*dims(np.array(vocab[tokens], ctx=devices[0]),
                                axis=0)
     segments = np.expand_dims(np.array(segments, ctx=devices[0]), axis=0)
-    valid_len = np.expand_dims(np.array(len(tokens), ctx=devices[0]), axis=0)
-    encoded_X, _, _ = net(token_ids, segments, valid_len)
+    valid*len = np.expand*dims(np.array(len(tokens), ctx=devices[0]), axis=0)
+    encoded*X, *, * = net(token*ids, segments, valid_len)
     return encoded_X
 ```
 
 ```{.python .input}
-#@tab pytorch
-def get_bert_encoding(net, tokens_a, tokens_b=None):
-    tokens, segments = d2l.get_tokens_and_segments(tokens_a, tokens_b)
+# @tab pytorch
+def get*bert*encoding(net, tokens*a, tokens*b=None):
+    tokens, segments = d2l.get*tokens*and*segments(tokens*a, tokens_b)
     token_ids = torch.tensor(vocab[tokens], device=devices[0]).unsqueeze(0)
     segments = torch.tensor(segments, device=devices[0]).unsqueeze(0)
     valid_len = torch.tensor(len(tokens), device=devices[0]).unsqueeze(0)
-    encoded_X, _, _ = net(token_ids, segments, valid_len)
+    encoded*X, *, * = net(token*ids, segments, valid_len)
     return encoded_X
 ```
 
 Consider the sentence "a crane is flying".
-Recall the input representation of BERT as discussed in :numref:`subsec_bert_input_rep`.
+Recall the input representation of BERT as discussed in :numref:`subsec*bert*input_rep`.
 After inserting special tokens “&lt;cls&gt;” (used for classification)
 and “&lt;sep&gt;” (used for separation),
 the BERT input sequence has a length of six.
@@ -263,13 +263,13 @@ To evaluate the polysemy token "crane",
 we also print out the first three elements of the BERT representation of the token.
 
 ```{.python .input}
-#@tab all
+# @tab all
 tokens_a = ['a', 'crane', 'is', 'flying']
-encoded_text = get_bert_encoding(net, tokens_a)
+encoded*text = get*bert*encoding(net, tokens*a)
 # Tokens: '<cls>', 'a', 'crane', 'is', 'flying', '<sep>'
-encoded_text_cls = encoded_text[:, 0, :]
-encoded_text_crane = encoded_text[:, 2, :]
-encoded_text.shape, encoded_text_cls.shape, encoded_text_crane[0][:3]
+encoded*text*cls = encoded_text[:, 0, :]
+encoded*text*crane = encoded_text[:, 2, :]
+encoded*text.shape, encoded*text*cls.shape, encoded*text_crane[0][:3]
 ```
 
 Now consider a sentence pair
@@ -279,27 +279,27 @@ Note that the first three elements of the polysemy token "crane" are different f
 This supports that BERT representations are context-sensitive.
 
 ```{.python .input}
-#@tab all
-tokens_a, tokens_b = ['a', 'crane', 'driver', 'came'], ['he', 'just', 'left']
-encoded_pair = get_bert_encoding(net, tokens_a, tokens_b)
+# @tab all
+tokens*a, tokens*b = ['a', 'crane', 'driver', 'came'], ['he', 'just', 'left']
+encoded*pair = get*bert*encoding(net, tokens*a, tokens_b)
 # Tokens: '<cls>', 'a', 'crane', 'driver', 'came', '<sep>', 'he', 'just',
 # 'left', '<sep>'
-encoded_pair_cls = encoded_pair[:, 0, :]
-encoded_pair_crane = encoded_pair[:, 2, :]
-encoded_pair.shape, encoded_pair_cls.shape, encoded_pair_crane[0][:3]
+encoded*pair*cls = encoded_pair[:, 0, :]
+encoded*pair*crane = encoded_pair[:, 2, :]
+encoded*pair.shape, encoded*pair*cls.shape, encoded*pair_crane[0][:3]
 ```
 
-In :numref:`chap_nlp_app`, we will fine-tune a pretrained BERT model
+In :numref:`chap*nlp*app`, we will fine-tune a pretrained BERT model
 for downstream natural language processing applications.
 
 
-## Summary
+# # Summary
 
 * The original BERT has two versions, where the base model has 110 million parameters and the large model has 340 million parameters.
 * After pretraining BERT, we can use it to represent single text, text pairs, or any token in them.
 * In the experiment, the same token has different BERT representation when their contexts are different. This supports that BERT representations are context-sensitive.
 
-## Exercises
+# # Exercises
 
 1. In the experiment, we can see that the masked language modeling loss is significantly higher than the next sentence prediction loss. Why?
 2. Set the maximum length of a BERT input sequence to be 512 (same as the original BERT model). Use the configurations of the original BERT model such as $\text{BERT}_{\text{LARGE}}$. Do you encounter any error when running this section? Why?

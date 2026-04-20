@@ -4,6 +4,6 @@
 
 本节包括以下章节：
 
-*   [*第 1 章*](01.html#_idTextAnchor015)，*安装 LLVM*
-*   [*第 2 章*](02.html#_idTextAnchor032)，*浏览 LLVM 源*
-*   [*第三章*](03.html#_idTextAnchor048)，*编译器的结构*
+*   [*第 1 章*](01.html# _idTextAnchor015)，*安装 LLVM*
+*   [*第 2 章*](02.html# _idTextAnchor032)，*浏览 LLVM 源*
+*   [*第三章*](03.html# _idTextAnchor048)，*编译器的结构*

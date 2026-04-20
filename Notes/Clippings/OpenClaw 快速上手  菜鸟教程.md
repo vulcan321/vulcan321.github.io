@@ -17,43 +17,43 @@ tags:
 - **渠道配置（可选）**：连接 Telegram Bot、WhatsApp 等聊天渠道
 - **安装系统服务**：`--install-daemon` 参数让 Gateway 开机自启
 
-## Gateway 基础操作
+# # Gateway 基础操作
 
 Gateway 是 OpenClaw 的核心进程，所有功能都依赖它运行：
 
-### 查看 Gateway 状态
+## # 查看 Gateway 状态
 
 openclaw gateway status
 
-### 在前台运行（适合调试）
+## # 在前台运行（适合调试）
 
 openclaw gateway --port 18789
 
-### 详细日志模式
+## # 详细日志模式
 
 openclaw gateway --port 18789 --verbose
 
-### 强制占用端口并启动（解决端口冲突）
+## # 强制占用端口并启动（解决端口冲突）
 
 openclaw gateway --force
 
-### 重启 Gateway
+## # 重启 Gateway
 
 openclaw gateway restart
 
-### 停止 Gateway
+## # 停止 Gateway
 
 openclaw gateway stop
 
-### 查看实时日志
+## # 查看实时日志
 
 openclaw logs --follow
 
-## 访问 Control UI
+# # 访问 Control UI
 
 Control UI 是 OpenClaw 的可视化管理界面：
 
-#### 打开 Control UI（自动在浏览器中打开）  
+### # 打开 Control UI（自动在浏览器中打开）  
 
 openclaw dashboard
 
@@ -69,7 +69,7 @@ Control UI 的主要功能：
 > 🚀 **最快体验路径**  
 > 打开 Control UI 后直接开始聊天——不需要配置任何Channel！这是最快验证 OpenClaw 正常工作的方式。
 
-### 关键命令速查
+## # 关键命令速查
 
 | 命令 | 说明 |
 | --- | --- |
@@ -91,7 +91,7 @@ Control UI 的主要功能：
 | `openclaw onboard` | 重新运行初始化配置向导 |
 | `openclaw secrets reload` | 热重载 Secrets 配置 |
 
-### Gateway 热重载机制
+## # Gateway 热重载机制
 
 OpenClaw 支持配置热重载，默认为 `hybrid` 模式：
 
@@ -104,17 +104,17 @@ OpenClaw 支持配置热重载，默认为 `hybrid` 模式：
 
 ---
 
-## TUI：终端聊天界面
+# # TUI：终端聊天界面
 
 除了浏览器 Control UI，OpenClaw 还提供了一个完全在终端里运行的交互界面——**TUI（Terminal UI）**，无需浏览器，SSH 连进服务器也能直接聊天。
 
-### 快速启动
+## # 快速启动
 
-### 第一步：确保 Gateway 已运行
+## # 第一步：确保 Gateway 已运行
 
 openclaw gateway
 
-### 第二步：打开 TUI
+## # 第二步：打开 TUI
 
 openclaw tui
 
@@ -124,13 +124,13 @@ openclaw tui
 openclaw tui --url ws://<host>:<port> --token <gateway-token>
 ```
 
-### 如果 Gateway 使用密码鉴权
+## # 如果 Gateway 使用密码鉴权
 
 ```
 openclaw tui --url ws://<host>:<port> --password <password>
 ```
 
-### 界面布局
+## # 界面布局
 
 TUI 启动后你会看到四个区域：
 
@@ -142,7 +142,7 @@ TUI 启动后你会看到四个区域：
 | **Footer（底栏）** | 连接状态 + Agent + Session + 模型 + Token 计数 |
 
 
-### 键盘快捷键
+## # 键盘快捷键
 
 | 快捷键 | 功能 |
 | --- | --- |
@@ -156,7 +156,7 @@ TUI 启动后你会看到四个区域：
 | `Ctrl+O` | 切换工具输出展开 / 折叠 |
 | `Ctrl+T` | 切换 Thinking 显示（会重新加载历史） |
 
-### 常用斜杠命令
+## # 常用斜杠命令
 
 使用 / 调出命令：
 
@@ -175,7 +175,7 @@ TUI 启动后你会看到四个区域：
 /exit                          # 退出 TUI
 ```
 
-### 本地 Shell 命令
+## # 本地 Shell 命令
 
 在输入框以 `!` 开头，可以直接执行本地 shell 命令：
 
@@ -186,7 +186,7 @@ TUI 启动后你会看到四个区域：
 
 > ⚠️ TUI 会在每次会话中首次使用 `!` 时提示确认授权，拒绝后本次会话内 `!` 将不可用。
 
-### 启动选项
+## # 启动选项
 
 | 参数 | 说明 | 默认值 |
 | --- | --- | --- |
@@ -199,22 +199,22 @@ TUI 启动后你会看到四个区域：
 | `--history-limit <n>` | 加载历史条数 | 200 |
 | `--timeout-ms <ms>` | Agent 超时时间 | 读取 agents.defaults.timeoutSeconds |
 
-### 第一步：安装 ClawHub CLI
+## # 第一步：安装 ClawHub CLI
 
 ```
 npm i -g clawhub
 clawhub --version
 ```
 
-### 第二步：搜索并安装 Skill
+## # 第二步：搜索并安装 Skill
 
-#### 搜索 Skill（支持自然语言）
+### # 搜索 Skill（支持自然语言）
 
 ```bash
 clawhub search "send emails automatically"
 ```
 
-#### 安装 Skill
+### # 安装 Skill
 
 ```
 clawhub install <slug>
@@ -226,7 +226,7 @@ clawhub install <slug>
 
 OpenClaw 会从 `<workspace>/skills` 加载 Skill，并在下一个 Session 中生效。
 
-### 第三步：重启 OpenClaw Session
+## # 第三步：重启 OpenClaw Session
 
 ```
 openclaw chat
@@ -253,7 +253,7 @@ skillhub install tavily-search
 
 ---
 
-## 常用 Skills
+# # 常用 Skills
 
 如果你刚上手OpenClaw，强烈建议的安装顺序是：
 
@@ -276,7 +276,7 @@ clawhub install self-improving-agent
 clawhub install summarize
 ```
 
-#### 批量更新全部
+### # 批量更新全部
 
 ```
 clawhub update --all
@@ -308,7 +308,7 @@ clawhub update --all
 
 ---
 
-## 制作自己的 Skill
+# # 制作自己的 Skill
 
 下面是一个最简单的 SKILL.md 示例：
 
@@ -320,11 +320,11 @@ description: Does a thing with an API.
 
 # My Skill
 
-## Rules
+# # Rules
 - Always confirm with the user before making destructive changes.
-- Use the credentials from environment variable MY_API_KEY.
+- Use the credentials from environment variable MY*API*KEY.
 
-## Usage
+# # Usage
 When the user asks to "do the thing", call the API endpoint at
 https://api.example.com/action with the provided payload.
 ```

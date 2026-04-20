@@ -16,7 +16,7 @@ tell application "Microsoft Word"
 
     save as active document file name myDocName file format format text
 
-    -- _all your other Word-specific code_
+    -- *all your other Word-specific code*
 
 end tell
 
@@ -28,11 +28,11 @@ Click Compile and you get this error message:
 
             Syntax Error : A class name can't go after this identifier.
 
-This is one of those obscure AppleScript errors. You‘ll note that 'active document' is selected behind the error message. That‘s because save and as are both built-in AppleScript language terms, whereas neither active nor active document are defined terms outside of a Word tell block. So the AppleScript compiler thinks that active is a variable (an "identifier"), and the keyword document (which _is_ another built-in AppleScript language term) cannot follow a variable (the supposed active variable name) without some sort of appropriate preposition between them. E.g.,
+This is one of those obscure AppleScript errors. You‘ll note that 'active document' is selected behind the error message. That‘s because save and as are both built-in AppleScript language terms, whereas neither active nor active document are defined terms outside of a Word tell block. So the AppleScript compiler thinks that active is a variable (an "identifier"), and the keyword document (which *is* another built-in AppleScript language term) cannot follow a variable (the supposed active variable name) without some sort of appropriate preposition between them. E.g.,
 
 save as active in document file name
 
-_would_ compile (before hitting another error at 'myDocName‘) although it doesn‘t mean anything outside Word and can‘t run: if you try to run it you get an
+*would* compile (before hitting another error at 'myDocName‘) although it doesn‘t mean anything outside Word and can‘t run: if you try to run it you get an
 
 AppleScript Error: Can't make file name into type reference
 
@@ -148,7 +148,7 @@ tell application "Microsoft Word"
 
         tell text object
 
-            tell (get find object) _\--_ _crucial!_
+            tell (get find object) *\--* *crucial!*
 
                set content to "blue"
 
@@ -165,13 +165,13 @@ tell application "Microsoft Word"
 end tell  
 \--> true
 
-In most applications, when this happens, the absence of an explicit get, when needed, results in an error: this can be perplexing, but at least you know _something_ is wrong. Here you get an incorrect result, which is worse. But it‘s very rare in Word (more common recently in Entourage, especially among the new Exchange properties, where you‘ll get either an error or _missing value_ as a result, without get.) When in doubt, throw in a get.
+In most applications, when this happens, the absence of an explicit get, when needed, results in an error: this can be perplexing, but at least you know *something* is wrong. Here you get an incorrect result, which is worse. But it‘s very rare in Word (more common recently in Entourage, especially among the new Exchange properties, where you‘ll get either an error or *missing value* as a result, without get.) When in doubt, throw in a get.
 
 One more "gotcha" that scripters familiar with VBA, or just about any language but AppleScript, tend to keep stumbling on, even when they know better: in AppleScript, the = sign is not used as an assignment operator (the implicit Let Method in VBA):
 
      someVariable = "text"
 
-In AppleScript, the = sign is used _only_ as an equality comparison operator:
+In AppleScript, the = sign is used *only* as an equality comparison operator:
 
    if someVariable = "text" then …
 
@@ -179,7 +179,7 @@ To assign a value to a variable, you must use set…to:
 
    set someVariable to "text"
 
-Also note that, unlike in VBA, there is no difference in the syntax whether you are assigning a basic type like string or integer to the variable, or an application object: you _always_ use set.
+Also note that, unlike in VBA, there is no difference in the syntax whether you are assigning a basic type like string or integer to the variable, or an application object: you *always* use set.
 
 Subs and Handlers
 
@@ -187,7 +187,7 @@ In a VBA macro, every line of code is in a Sub or Function. Even if there‘s on
 
 Actually, as the AppleScript books will tell you, the top level is an implicit 'run' handler, and you can make it explicit if you want by encasing it all in an on run/end run block. But there‘s almost never a reason for doing so, and almost no one ever does. There is only one rare situation where it is necessary: If you are loading and calling the script from another, external, script and need to pass it arguments. Normally, this would be done by calling a subroutine, but there are some rare circumstances – usually from an application, shell or Internet contexts outside AppleScript itself – that can only run a script, not call individual subroutines.
 
-There is another situation where it is customary although not necessary to include on run: if you are making a "droplet" (a script application activated by dropping files or folders on it) with the obligatory on open handler and _also_ want a separate procedure to engage if you double-click the droplet file: then you‘d put it in a 'run' handler.
+There is another situation where it is customary although not necessary to include on run: if you are making a "droplet" (a script application activated by dropping files or folders on it) with the obligatory on open handler and *also* want a separate procedure to engage if you double-click the droplet file: then you‘d put it in a 'run' handler.
 
 Many – perhaps most – simple scripts have only the top level, with no extra subroutines (handlers). If you are converting a macro that has just the one Sub(), that‘s all you‘ll need. But what about more complex macros that call other Subs or Functions? It‘s virtually identical in AppleScript, except that you don‘t use the word "Sub" or "Function" at all: the parentheses after a name is what tells AppleScript you‘re calling a handler. (There is another way to call and name handlers without parentheses, called "labeled parameters", but almost nobody uses them.)
 
@@ -203,7 +203,7 @@ becomes in AppleScript:
 
 SubroutineA()
 
-Except that when you are calling a handler from within an application tell block, as you will be doing virtually all the time, _you must precede the call with the keyword_ my_:_
+Except that when you are calling a handler from within an application tell block, as you will be doing virtually all the time, *you must precede the call with the keyword* my*:*
 
 tell application "Microsoft Word"
 
@@ -211,7 +211,7 @@ tell application "Microsoft Word"
 
 end tell
 
-or you will get an error. (Or you could use the synonym of me _after_ the handler name, if you prefer: SubroutineA() of me.) It‘s perfectly OK to use 'my' even when not in a tell block, so just do it every time and you can‘t go wrong. If you‘re wondering, the 'my' tells AppleScript that the user term SubroutineA belongs to the script itself, and not to the application (Word).
+or you will get an error. (Or you could use the synonym of me *after* the handler name, if you prefer: SubroutineA() of me.) It‘s perfectly OK to use 'my' even when not in a tell block, so just do it every time and you can‘t go wrong. If you‘re wondering, the 'my' tells AppleScript that the user term SubroutineA belongs to the script itself, and not to the application (Word).
 
 Similarly, if passing parameters to the subroutine, the VBA:
 
@@ -265,11 +265,11 @@ Modules
 
 People working on large-scale VBA projects, particularly projects involving several collaborators, may be accustomed to using multiple VBA Modules controlled from a "central" module with global variables passed down to subsidiary modules written by different collaborators.
 
-A similar modular structure is available in AppleScript using _script objects_. Script objects are often considered to be at the advanced end of AppleScript since they are not needed much in basic scripting, but they are fundamental to how AppleScript works. All of the AppleScript books discuss script objects: the Neuburg book is particularly good on script objects and discusses them early on.
+A similar modular structure is available in AppleScript using *script objects*. Script objects are often considered to be at the advanced end of AppleScript since they are not needed much in basic scripting, but they are fundamental to how AppleScript works. All of the AppleScript books discuss script objects: the Neuburg book is particularly good on script objects and discusses them early on.
 
 The script files – .scpt and .app – in which you save your scripts are one form of script object. As such, they may be loaded by other scripts using the load script command in the built-in Standard Additions collection of scripting additions. All their script properties, variables, and handlers become available to the calling script, which may also set its own script properties and variables to these for convenience. So one script can act as a master script, loading the collaborators' script files as script objects to be used in just the same way as with VBA Modules.
 
-Read up on script objects in the Neuburg and/or Rosenthal books (see Chapter 7: _Resources_ for URLs) if you need to learn more about them.
+Read up on script objects in the Neuburg and/or Rosenthal books (see Chapter 7: *Resources* for URLs) if you need to learn more about them.
 
 What About Dim?
 
@@ -283,7 +283,7 @@ property prop1 : "whatever"
 
 property prop2 : 3
 
-You _may_ choose to declare "ordinary" variables (i.e. not specifically declared as global or properties) as local, but are not required to: they are local by default whether you declare them as such or not. They are defined only for the handler or the top-level script in which they occur, and remain unknown to other handlers. However, such variables defined at the top level of a script without a declaration, although local to all intents and purposes, have certain quirks (namely retention) that are discussed in detail in the Neuburg book, which is especially good on _scope_ (i.e. the realms within a script where terms and keywords of various types hold sway) .
+You *may* choose to declare "ordinary" variables (i.e. not specifically declared as global or properties) as local, but are not required to: they are local by default whether you declare them as such or not. They are defined only for the handler or the top-level script in which they occur, and remain unknown to other handlers. However, such variables defined at the top level of a script without a declaration, although local to all intents and purposes, have certain quirks (namely retention) that are discussed in detail in the Neuburg book, which is especially good on *scope* (i.e. the realms within a script where terms and keywords of various types hold sway) .
 
 You can happily change the value of a variable to one of another data type without problem:
 
@@ -375,7 +375,7 @@ block. But in AppleScript, you can go a step further in condensing the script if
 
     end tell
 
-Note that setting multiple properties via a list only works in a tell block, not using of. On the other hand, you can _get_ multiple properties in a list using of:
+Note that setting multiple properties via a list only works in a tell block, not using of. On the other hand, you can *get* multiple properties in a list using of:
 
 get {forward, wrap, format, match all word forms, match case, ¬
 

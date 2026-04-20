@@ -1,14 +1,14 @@
 # Minibatch Stochastic Gradient Descent
-:label:`sec_minibatch_sgd`
+:label:`sec*minibatch*sgd`
 
-So far we encountered two extremes in the approach to gradient-based learning: :numref:`sec_gd` uses the full dataset to compute gradients and to update parameters, one pass at a time. Conversely :numref:`sec_sgd` processes one training example at a time to make progress.
+So far we encountered two extremes in the approach to gradient-based learning: :numref:`sec*gd` uses the full dataset to compute gradients and to update parameters, one pass at a time. Conversely :numref:`sec*sgd` processes one training example at a time to make progress.
 Either of them has its own drawbacks.
 Gradient descent is not particularly *data efficient* whenever data is very similar.
 Stochastic gradient descent is not particularly *computationally efficient* since CPUs and GPUs cannot exploit the full power of vectorization.
 This suggests that there might be something in between,
 and in fact, that is what we have been using so far in the examples we discussed.
 
-## Vectorization and Caches
+# # Vectorization and Caches
 
 At the heart of the decision to use minibatches is computational efficiency. This is most easily understood when considering parallelization to multiple GPUs and multiple servers. In this case we need to send at least one image to each GPU. With 8 GPUs per server and 16 servers we already arrive at a minibatch size no smaller than 128.
 
@@ -25,12 +25,12 @@ for a more in-depth discussion.
 
 The way to alleviate these constraints is to use a hierarchy of CPU caches that are actually fast enough to supply the processor with data. This is *the* driving force behind batching in deep learning. To keep matters simple, consider matrix-matrix multiplication, say $\mathbf{A} = \mathbf{B}\mathbf{C}$. We have a number of options for calculating $\mathbf{A}$. For instance, we could try the following:
 
-1. We could compute $\mathbf{A}_{ij} = \mathbf{B}_{i,:} \mathbf{C}_{:,j}^\top$, i.e., we could compute it elementwise by means of dot products.
-1. We could compute $\mathbf{A}_{:,j} = \mathbf{B} \mathbf{C}_{:,j}^\top$, i.e., we could compute it one column at a time. Likewise we could compute $\mathbf{A}$ one row $\mathbf{A}_{i,:}$ at a time.
+1. We could compute $\mathbf{A}*{ij} = \mathbf{B}*{i,:} \mathbf{C}_{:,j}^\top$, i.e., we could compute it elementwise by means of dot products.
+1. We could compute $\mathbf{A}*{:,j} = \mathbf{B} \mathbf{C}*{:,j}^\top$, i.e., we could compute it one column at a time. Likewise we could compute $\mathbf{A}$ one row $\mathbf{A}_{i,:}$ at a time.
 1. We could simply compute $\mathbf{A} = \mathbf{B} \mathbf{C}$.
 1. We could break $\mathbf{B}$ and $\mathbf{C}$ into smaller block matrices and compute $\mathbf{A}$ one block at a time.
 
-If we follow the first option, we will need to copy one row and one column vector into the CPU each time we want to compute an element $\mathbf{A}_{ij}$. Even worse, due to the fact that matrix elements are aligned sequentially we are thus required to access many disjoint locations for one of the two vectors as we read them from memory. The second option is much more favorable. In it, we are able to keep the column vector $\mathbf{C}_{:,j}$ in the CPU cache while we keep on traversing through $\mathbf{B}$. This halves the memory bandwidth requirement with correspondingly faster access. Of course, option 3 is most desirable. Unfortunately, most matrices might not entirely fit into cache (this is what we are discussing after all). However, option 4 offers a practically useful alternative: we can move blocks of the matrix into cache and multiply them locally. Optimized libraries take care of this for us. Let's have a look at how efficient these operations are in practice.
+If we follow the first option, we will need to copy one row and one column vector into the CPU each time we want to compute an element $\mathbf{A}*{ij}$. Even worse, due to the fact that matrix elements are aligned sequentially we are thus required to access many disjoint locations for one of the two vectors as we read them from memory. The second option is much more favorable. In it, we are able to keep the column vector $\mathbf{C}*{:,j}$ in the CPU cache while we keep on traversing through $\mathbf{B}$. This halves the memory bandwidth requirement with correspondingly faster access. Of course, option 3 is most desirable. Unfortunately, most matrices might not entirely fit into cache (this is what we are discussing after all). However, option 4 offers a practically useful alternative: we can move blocks of the matrix into cache and multiply them locally. Optimized libraries take care of this for us. Let's have a look at how efficient these operations are in practice.
 
 Beyond computational efficiency, the overhead introduced by Python and by the deep learning framework itself is considerable. Recall that each time we execute a command the Python interpreter sends a command to the MXNet engine which needs to insert it into the computational graph and deal with it during scheduling. Such overhead can be quite detrimental. In short, it is highly advisable to use vectorization (and matrices) whenever possible.
 
@@ -48,7 +48,7 @@ C = np.random.normal(0, 1, (256, 256))
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 %matplotlib inline
 from d2l import torch as d2l
 import torch
@@ -62,7 +62,7 @@ C = torch.randn(256, 256)
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 %matplotlib inline
 from d2l import tensorflow as d2l
 import tensorflow as tf
@@ -82,12 +82,12 @@ timer.start()
 for i in range(256):
     for j in range(256):
         A[i, j] = np.dot(B[i, :], C[:, j])
-A.wait_to_read()
+A.wait*to*read()
 timer.stop()
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 # Compute A = BC one element at a time
 timer.start()
 for i in range(256):
@@ -97,7 +97,7 @@ timer.stop()
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 # Compute A = BC one element at a time
 timer.start()
 for i in range(256):
@@ -113,12 +113,12 @@ A faster strategy is to perform column-wise assignment.
 timer.start()
 for j in range(256):
     A[:, j] = np.dot(B, C[:, j])
-A.wait_to_read()
+A.wait*to*read()
 timer.stop()
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 # Compute A = BC one column at a time
 timer.start()
 for j in range(256):
@@ -127,7 +127,7 @@ timer.stop()
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 timer.start()
 for j in range(256):
     A[:, j].assign(tf.tensordot(B, C[:, j], axes=1))
@@ -140,7 +140,7 @@ Last, the most effective manner is to perform the entire operation in one block.
 # Compute A = BC in one go
 timer.start()
 A = np.dot(B, C)
-A.wait_to_read()
+A.wait*to*read()
 timer.stop()
 
 # Multiply and add count as separate operations (fused in practice)
@@ -150,7 +150,7 @@ print(f'performance in Gigaflops: element {gigaflops[0]:.3f}, '
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 # Compute A = BC in one go
 timer.start()
 A = torch.mm(B, C)
@@ -163,7 +163,7 @@ print(f'performance in Gigaflops: element {gigaflops[0]:.3f}, '
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 timer.start()
 A.assign(tf.tensordot(B, C, axes=1))
 timer.stop()
@@ -174,19 +174,19 @@ print(f'performance in Gigaflops: element {gigaflops[0]:.3f}, '
       f'column {gigaflops[1]:.3f}, full {gigaflops[2]:.3f}')
 ```
 
-## Minibatches
+# # Minibatches
 
 :label:`sec_minibatches`
 
-In the past we took it for granted that we would read *minibatches* of data rather than single observations to update parameters. We now give a brief justification for it. Processing single observations requires us to perform many single matrix-vector (or even vector-vector) multiplications, which is quite expensive and which incurs a significant overhead on behalf of the underlying deep learning framework. This applies both to evaluating a network when applied to data (often referred to as inference) and when computing gradients to update parameters. That is, this applies whenever we perform $\mathbf{w} \leftarrow \mathbf{w} - \eta_t \mathbf{g}_t$ where
+In the past we took it for granted that we would read *minibatches* of data rather than single observations to update parameters. We now give a brief justification for it. Processing single observations requires us to perform many single matrix-vector (or even vector-vector) multiplications, which is quite expensive and which incurs a significant overhead on behalf of the underlying deep learning framework. This applies both to evaluating a network when applied to data (often referred to as inference) and when computing gradients to update parameters. That is, this applies whenever we perform $\mathbf{w} \leftarrow \mathbf{w} - \eta*t \mathbf{g}*t$ where
 
-$$\mathbf{g}_t = \partial_{\mathbf{w}} f(\mathbf{x}_{t}, \mathbf{w}).$$
+$$\mathbf{g}*t = \partial*{\mathbf{w}} f(\mathbf{x}_{t}, \mathbf{w}).$$
 
 We can increase the *computational* efficiency of this operation by applying it to a minibatch of observations at a time. That is, we replace the gradient $\mathbf{g}_t$ over a single observation by one over a small batch
 
-$$\mathbf{g}_t = \partial_{\mathbf{w}} \frac{1}{|\mathcal{B}_t|} \sum_{i \in \mathcal{B}_t} f(\mathbf{x}_{i}, \mathbf{w}).$$
+$$\mathbf{g}*t = \partial*{\mathbf{w}} \frac{1}{|\mathcal{B}*t|} \sum*{i \in \mathcal{B}*t} f(\mathbf{x}*{i}, \mathbf{w}).$$
 
-Let's see what this does to the statistical properties of $\mathbf{g}_t$: since both $\mathbf{x}_t$ and also all elements of the minibatch $\mathcal{B}_t$ are drawn uniformly at random from the training set, the expectation of the gradient remains unchanged. The variance, on the other hand, is reduced significantly. Since the minibatch gradient is composed of $b := |\mathcal{B}_t|$ independent gradients which are being averaged, its standard deviation is reduced by a factor of $b^{-\frac{1}{2}}$. This, by itself, is a good thing, since it means that the updates are more reliably aligned with the full gradient.
+Let's see what this does to the statistical properties of $\mathbf{g}*t$: since both $\mathbf{x}*t$ and also all elements of the minibatch $\mathcal{B}*t$ are drawn uniformly at random from the training set, the expectation of the gradient remains unchanged. The variance, on the other hand, is reduced significantly. Since the minibatch gradient is composed of $b := |\mathcal{B}*t|$ independent gradients which are being averaged, its standard deviation is reduced by a factor of $b^{-\frac{1}{2}}$. This, by itself, is a good thing, since it means that the updates are more reliably aligned with the full gradient.
 
 Naively this would indicate that choosing a large minibatch $\mathcal{B}_t$ would be universally desirable. Alas, after some point, the additional reduction in standard deviation is minimal when compared to the linear increase in computational cost. In practice we pick a minibatch that is large enough to offer good computational efficiency while still fitting into the memory of a GPU. To illustrate the savings let's have a look at some code. In it we perform the same matrix-matrix multiplication, but this time broken up into "minibatches" of 64 columns at a time.
 
@@ -199,7 +199,7 @@ print(f'performance in Gigaflops: block {2 / timer.times[3]:.3f}')
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 timer.start()
 for j in range(0, 256, 64):
     A[:, j:j+64] = torch.mm(B, C[:, j:j+64])
@@ -208,7 +208,7 @@ print(f'performance in Gigaflops: block {2 / timer.times[3]:.3f}')
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 timer.start()
 for j in range(0, 256, 64):
     A[:, j:j+64].assign(tf.tensordot(B, C[:, j:j+64], axes=1))
@@ -216,62 +216,62 @@ timer.stop()
 print(f'performance in Gigaflops: block {2 / timer.times[3]:.3f}')
 ```
 
-As we can see, the computation on the minibatch is essentially as efficient as on the full matrix. A word of caution is in order. In :numref:`sec_batch_norm` we used a type of regularization that was heavily dependent on the amount of variance in a minibatch. As we increase the latter, the variance decreases and with it the benefit of the noise-injection due to batch normalization. See e.g., :cite:`Ioffe.2017` for details on how to rescale and compute the appropriate terms.
+As we can see, the computation on the minibatch is essentially as efficient as on the full matrix. A word of caution is in order. In :numref:`sec*batch*norm` we used a type of regularization that was heavily dependent on the amount of variance in a minibatch. As we increase the latter, the variance decreases and with it the benefit of the noise-injection due to batch normalization. See e.g., :cite:`Ioffe.2017` for details on how to rescale and compute the appropriate terms.
 
-## Reading the Dataset
+# # Reading the Dataset
 
 Let's have a look at how minibatches are efficiently generated from data. In the following we use a dataset developed by NASA to test the wing [noise from different aircraft](https://archive.ics.uci.edu/ml/datasets/Airfoil+Self-Noise) to compare these optimization algorithms. For convenience we only use the first $1,500$ examples. The data is whitened for preprocessing, i.e., we remove the mean and rescale the variance to $1$ per coordinate.
 
 ```{.python .input}
-#@save
-d2l.DATA_HUB['airfoil'] = (d2l.DATA_URL + 'airfoil_self_noise.dat',
+# @save
+d2l.DATA*HUB['airfoil'] = (d2l.DATA*URL + 'airfoil*self*noise.dat',
                            '76e5be1548fd8222e5074cf0faae75edff8cf93f')
 
-#@save
-def get_data_ch11(batch_size=10, n=1500):
+# @save
+def get*data*ch11(batch_size=10, n=1500):
     data = np.genfromtxt(d2l.download('airfoil'),
                          dtype=np.float32, delimiter='\t')
     data = (data - data.mean(axis=0)) / data.std(axis=0)
-    data_iter = d2l.load_array(
-        (data[:n, :-1], data[:n, -1]), batch_size, is_train=True)
+    data*iter = d2l.load*array(
+        (data[:n, :-1], data[:n, -1]), batch*size, is*train=True)
     return data_iter, data.shape[1]-1
 ```
 
 ```{.python .input}
-#@tab pytorch
-#@save
-d2l.DATA_HUB['airfoil'] = (d2l.DATA_URL + 'airfoil_self_noise.dat',
+# @tab pytorch
+# @save
+d2l.DATA*HUB['airfoil'] = (d2l.DATA*URL + 'airfoil*self*noise.dat',
                            '76e5be1548fd8222e5074cf0faae75edff8cf93f')
 
-#@save
-def get_data_ch11(batch_size=10, n=1500):
+# @save
+def get*data*ch11(batch_size=10, n=1500):
     data = np.genfromtxt(d2l.download('airfoil'),
                          dtype=np.float32, delimiter='\t')
     data = torch.from_numpy((data - data.mean(axis=0)) / data.std(axis=0))
-    data_iter = d2l.load_array((data[:n, :-1], data[:n, -1]),
-                               batch_size, is_train=True)
+    data*iter = d2l.load*array((data[:n, :-1], data[:n, -1]),
+                               batch*size, is*train=True)
     return data_iter, data.shape[1]-1
 ```
 
 ```{.python .input}
-#@tab tensorflow
-#@save
-d2l.DATA_HUB['airfoil'] = (d2l.DATA_URL + 'airfoil_self_noise.dat',
+# @tab tensorflow
+# @save
+d2l.DATA*HUB['airfoil'] = (d2l.DATA*URL + 'airfoil*self*noise.dat',
                            '76e5be1548fd8222e5074cf0faae75edff8cf93f')
 
-#@save
-def get_data_ch11(batch_size=10, n=1500):
+# @save
+def get*data*ch11(batch_size=10, n=1500):
     data = np.genfromtxt(d2l.download('airfoil'),
                          dtype=np.float32, delimiter='\t')
     data = (data - data.mean(axis=0)) / data.std(axis=0)
-    data_iter = d2l.load_array((data[:n, :-1], data[:n, -1]),
-                               batch_size, is_train=True)
+    data*iter = d2l.load*array((data[:n, :-1], data[:n, -1]),
+                               batch*size, is*train=True)
     return data_iter, data.shape[1]-1
 ```
 
-## Implementation from Scratch
+# # Implementation from Scratch
 
-Recall the minibatch stochastic gradient descent implementation from :numref:`sec_linear_scratch`. In the following we provide a slightly more general implementation. For convenience it has the same call signature as the other optimization algorithms introduced later in this chapter. Specifically, we add the status
+Recall the minibatch stochastic gradient descent implementation from :numref:`sec*linear*scratch`. In the following we provide a slightly more general implementation. For convenience it has the same call signature as the other optimization algorithms introduced later in this chapter. Specifically, we add the status
 input `states` and place the hyperparameter in dictionary `hyperparams`. In
 addition, we will average the loss of each minibatch example in the training
 function, so the gradient in the optimization algorithm does not need to be
@@ -284,7 +284,7 @@ def sgd(params, states, hyperparams):
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 def sgd(params, states, hyperparams):
     for p in params:
         p.data.sub_(hyperparams['lr'] * p.grad)
@@ -292,7 +292,7 @@ def sgd(params, states, hyperparams):
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 def sgd(params, grads, states, hyperparams):
     for param, grad in zip(params, grads):
         param.assign_sub(hyperparams['lr']*grad)
@@ -301,9 +301,9 @@ def sgd(params, grads, states, hyperparams):
 Next, we implement a generic training function to facilitate the use of the other optimization algorithms introduced later in this chapter. It initializes a linear regression model and can be used to train the model with minibatch stochastic gradient descent and other algorithms introduced subsequently.
 
 ```{.python .input}
-#@save
-def train_ch11(trainer_fn, states, hyperparams, data_iter,
-               feature_dim, num_epochs=2):
+# @save
+def train*ch11(trainer*fn, states, hyperparams, data_iter,
+               feature*dim, num*epochs=2):
     # Initialization
     w = np.random.normal(scale=0.01, size=(feature_dim, 1))
     b = np.zeros(1)
@@ -314,7 +314,7 @@ def train_ch11(trainer_fn, states, hyperparams, data_iter,
     animator = d2l.Animator(xlabel='epoch', ylabel='loss',
                             xlim=[0, num_epochs], ylim=[0.22, 0.35])
     n, timer = 0, d2l.Timer()
-    for _ in range(num_epochs):
+    for * in range(num*epochs):
         for X, y in data_iter:
             with autograd.record():
                 l = loss(net(X), y).mean()
@@ -324,17 +324,17 @@ def train_ch11(trainer_fn, states, hyperparams, data_iter,
             if n % 200 == 0:
                 timer.stop()
                 animator.add(n/X.shape[0]/len(data_iter),
-                             (d2l.evaluate_loss(net, data_iter, loss),))
+                             (d2l.evaluate*loss(net, data*iter, loss),))
                 timer.start()
     print(f'loss: {animator.Y[0][-1]:.3f}, {timer.avg():.3f} sec/epoch')
     return timer.cumsum(), animator.Y[0]
 ```
 
 ```{.python .input}
-#@tab pytorch
-#@save
-def train_ch11(trainer_fn, states, hyperparams, data_iter,
-               feature_dim, num_epochs=2):
+# @tab pytorch
+# @save
+def train*ch11(trainer*fn, states, hyperparams, data_iter,
+               feature*dim, num*epochs=2):
     # Initialization
     w = torch.normal(mean=0.0, std=0.01, size=(feature_dim, 1),
                      requires_grad=True)
@@ -344,7 +344,7 @@ def train_ch11(trainer_fn, states, hyperparams, data_iter,
     animator = d2l.Animator(xlabel='epoch', ylabel='loss',
                             xlim=[0, num_epochs], ylim=[0.22, 0.35])
     n, timer = 0, d2l.Timer()
-    for _ in range(num_epochs):
+    for * in range(num*epochs):
         for X, y in data_iter:
             l = loss(net(X), y).mean()
             l.backward()
@@ -353,17 +353,17 @@ def train_ch11(trainer_fn, states, hyperparams, data_iter,
             if n % 200 == 0:
                 timer.stop()
                 animator.add(n/X.shape[0]/len(data_iter),
-                             (d2l.evaluate_loss(net, data_iter, loss),))
+                             (d2l.evaluate*loss(net, data*iter, loss),))
                 timer.start()
     print(f'loss: {animator.Y[0][-1]:.3f}, {timer.avg():.3f} sec/epoch')
     return timer.cumsum(), animator.Y[0]
 ```
 
 ```{.python .input}
-#@tab tensorflow
-#@save
-def train_ch11(trainer_fn, states, hyperparams, data_iter,
-               feature_dim, num_epochs=2):
+# @tab tensorflow
+# @save
+def train*ch11(trainer*fn, states, hyperparams, data_iter,
+               feature*dim, num*epochs=2):
     # Initialization
     w = tf.Variable(tf.random.normal(shape=(feature_dim, 1),
                                    mean=0, stddev=0.01),trainable=True)
@@ -375,7 +375,7 @@ def train_ch11(trainer_fn, states, hyperparams, data_iter,
                             xlim=[0, num_epochs], ylim=[0.22, 0.35])
     n, timer = 0, d2l.Timer()
 
-    for _ in range(num_epochs):
+    for * in range(num*epochs):
         for X, y in data_iter:
           with tf.GradientTape() as g:
             l = tf.math.reduce_mean(loss(net(X), y))
@@ -387,7 +387,7 @@ def train_ch11(trainer_fn, states, hyperparams, data_iter,
               timer.stop()
               p = n/X.shape[0]
               q = p/tf.data.experimental.cardinality(data_iter).numpy()
-              r = (d2l.evaluate_loss(net, data_iter, loss),)
+              r = (d2l.evaluate*loss(net, data*iter, loss),)
               animator.add(q, r)
               timer.start()
     print(f'loss: {animator.Y[0][-1]:.3f}, {timer.avg():.3f} sec/epoch')
@@ -397,64 +397,64 @@ def train_ch11(trainer_fn, states, hyperparams, data_iter,
 Let's see how optimization proceeds for batch gradient descent. This can be achieved by setting the minibatch size to 1500 (i.e., to the total number of examples). As a result the model parameters are updated only once per epoch. There is little progress. In fact, after 6 steps progress stalls.
 
 ```{.python .input}
-#@tab all
-def train_sgd(lr, batch_size, num_epochs=2):
-    data_iter, feature_dim = get_data_ch11(batch_size)
+# @tab all
+def train*sgd(lr, batch*size, num_epochs=2):
+    data*iter, feature*dim = get*data*ch11(batch_size)
     return train_ch11(
-        sgd, None, {'lr': lr}, data_iter, feature_dim, num_epochs)
+        sgd, None, {'lr': lr}, data*iter, feature*dim, num_epochs)
 
-gd_res = train_sgd(1, 1500, 10)
+gd*res = train*sgd(1, 1500, 10)
 ```
 
 When the batch size equals 1, we use stochastic gradient descent for optimization. For simplicity of implementation we picked a constant (albeit small) learning rate. In stochastic gradient descent, the model parameters are updated whenever an example is processed. In our case this amounts to 1500 updates per epoch. As we can see, the decline in the value of the objective function slows down after one epoch. Although both the procedures processed 1500 examples within one epoch, stochastic gradient descent consumes more time than gradient descent in our experiment. This is because stochastic gradient descent updated the parameters more frequently and since it is less efficient to process single observations one at a time.
 
 ```{.python .input}
-#@tab all
-sgd_res = train_sgd(0.005, 1)
+# @tab all
+sgd*res = train*sgd(0.005, 1)
 ```
 
 Finally, when the batch size equals 100, we use minibatch stochastic gradient descent for optimization. The time required per epoch is shorter than the time needed for stochastic gradient descent and the time for batch gradient descent.
 
 ```{.python .input}
-#@tab all
-mini1_res = train_sgd(.4, 100)
+# @tab all
+mini1*res = train*sgd(.4, 100)
 ```
 
 Reducing the batch size to 10, the time for each epoch increases because the workload for each batch is less efficient to execute.
 
 ```{.python .input}
-#@tab all
-mini2_res = train_sgd(.05, 10)
+# @tab all
+mini2*res = train*sgd(.05, 10)
 ```
 
 Now we can compare the time vs. loss for the previous four experiments. As can be seen, although stochastic gradient descent converges faster than GD in terms of number of examples processed, it uses more time to reach the same loss than GD because computing the gradient example by example is not as efficient. Minibatch stochastic gradient descent is able to trade-off convergence speed and computation efficiency. A minibatch size of 10 is more efficient than stochastic gradient descent; a minibatch size of 100 even outperforms GD in terms of runtime.
 
 ```{.python .input}
-#@tab all
+# @tab all
 d2l.set_figsize([6, 3])
-d2l.plot(*list(map(list, zip(gd_res, sgd_res, mini1_res, mini2_res))),
+d2l.plot(*list(map(list, zip(gd*res, sgd*res, mini1*res, mini2*res))),
          'time (sec)', 'loss', xlim=[1e-2, 10],
          legend=['gd', 'sgd', 'batch size=100', 'batch size=10'])
 d2l.plt.gca().set_xscale('log')
 ```
 
-## Concise Implementation
+# # Concise Implementation
 
 In Gluon, we can use the `Trainer` class to call optimization algorithms. This is used to implement a generic training function. We will use this throughout the current chapter.
 
 ```{.python .input}
-#@save
-def train_concise_ch11(tr_name, hyperparams, data_iter, num_epochs=2):
+# @save
+def train*concise*ch11(tr*name, hyperparams, data*iter, num_epochs=2):
     # Initialization
     net = nn.Sequential()
     net.add(nn.Dense(1))
     net.initialize(init.Normal(sigma=0.01))
-    trainer = gluon.Trainer(net.collect_params(), tr_name, hyperparams)
+    trainer = gluon.Trainer(net.collect*params(), tr*name, hyperparams)
     loss = gluon.loss.L2Loss()
     animator = d2l.Animator(xlabel='epoch', ylabel='loss',
                             xlim=[0, num_epochs], ylim=[0.22, 0.35])
     n, timer = 0, d2l.Timer()
-    for _ in range(num_epochs):
+    for * in range(num*epochs):
         for X, y in data_iter:
             with autograd.record():
                 l = loss(net(X), y)
@@ -464,15 +464,15 @@ def train_concise_ch11(tr_name, hyperparams, data_iter, num_epochs=2):
             if n % 200 == 0:
                 timer.stop()
                 animator.add(n/X.shape[0]/len(data_iter),
-                             (d2l.evaluate_loss(net, data_iter, loss),))
+                             (d2l.evaluate*loss(net, data*iter, loss),))
                 timer.start()
     print(f'loss: {animator.Y[0][-1]:.3f}, {timer.avg():.3f} sec/epoch')
 ```
 
 ```{.python .input}
-#@tab pytorch
-#@save
-def train_concise_ch11(trainer_fn, hyperparams, data_iter, num_epochs=4):
+# @tab pytorch
+# @save
+def train*concise*ch11(trainer*fn, hyperparams, data*iter, num_epochs=4):
     # Initialization
     net = nn.Sequential(nn.Linear(5, 1))
     def init_weights(m):
@@ -489,7 +489,7 @@ def train_concise_ch11(trainer_fn, hyperparams, data_iter, num_epochs=4):
     animator = d2l.Animator(xlabel='epoch', ylabel='loss',
                             xlim=[0, num_epochs], ylim=[0.22, 0.35])
     n, timer = 0, d2l.Timer()
-    for _ in range(num_epochs):
+    for * in range(num*epochs):
         for X, y in data_iter:
             optimizer.zero_grad()
             out = net(X)
@@ -501,19 +501,19 @@ def train_concise_ch11(trainer_fn, hyperparams, data_iter, num_epochs=4):
             if n % 200 == 0:
                 timer.stop()
                 animator.add(n/X.shape[0]/len(data_iter),
-                             (d2l.evaluate_loss(net, data_iter, loss)/2,))
+                             (d2l.evaluate*loss(net, data*iter, loss)/2,))
                 timer.start()
     print(f'loss: {animator.Y[0][-1]:.3f}, {timer.avg():.3f} sec/epoch')
 ```
 
 ```{.python .input}
-#@tab tensorflow
-#@save
-def train_concise_ch11(trainer_fn, hyperparams, data_iter, num_epochs=2):
+# @tab tensorflow
+# @save
+def train*concise*ch11(trainer*fn, hyperparams, data*iter, num_epochs=2):
     # Initialization
     net = tf.keras.Sequential()
     net.add(tf.keras.layers.Dense(1,
-            kernel_initializer=tf.random_normal_initializer(stddev=0.01)))
+            kernel*initializer=tf.random*normal_initializer(stddev=0.01)))
     optimizer = trainer_fn(**hyperparams)
     loss = tf.keras.losses.MeanSquaredError()
     # Note: L2 Loss = 1/2 * MSE Loss. TensorFlow has MSE Loss which is
@@ -522,7 +522,7 @@ def train_concise_ch11(trainer_fn, hyperparams, data_iter, num_epochs=2):
     animator = d2l.Animator(xlabel='epoch', ylabel='loss',
                             xlim=[0, num_epochs], ylim=[0.22, 0.35])
     n, timer = 0, d2l.Timer()
-    for _ in range(num_epochs):
+    for * in range(num*epochs):
         for X, y in data_iter:
             with tf.GradientTape() as g:
                 out = net(X)
@@ -535,7 +535,7 @@ def train_concise_ch11(trainer_fn, hyperparams, data_iter, num_epochs=2):
                 timer.stop()
                 p = n/X.shape[0]
                 q = p/tf.data.experimental.cardinality(data_iter).numpy()
-                r = (d2l.evaluate_loss(net, data_iter, loss)/2,)
+                r = (d2l.evaluate*loss(net, data*iter, loss)/2,)
                 animator.add(q, r)
                 timer.start()
     print(f'loss: {animator.Y[0][-1]:.3f}, {timer.avg():.3f} sec/epoch')
@@ -544,25 +544,25 @@ def train_concise_ch11(trainer_fn, hyperparams, data_iter, num_epochs=2):
 Using Gluon to repeat the last experiment shows identical behavior.
 
 ```{.python .input}
-data_iter, _ = get_data_ch11(10)
-train_concise_ch11('sgd', {'learning_rate': 0.05}, data_iter)
+data*iter, * = get*data*ch11(10)
+train*concise*ch11('sgd', {'learning*rate': 0.05}, data*iter)
 ```
 
 ```{.python .input}
-#@tab pytorch
-data_iter, _ = get_data_ch11(10)
+# @tab pytorch
+data*iter, * = get*data*ch11(10)
 trainer = torch.optim.SGD
-train_concise_ch11(trainer, {'lr': 0.05}, data_iter)
+train*concise*ch11(trainer, {'lr': 0.05}, data_iter)
 ```
 
 ```{.python .input}
-#@tab tensorflow
-data_iter, _ = get_data_ch11(10)
+# @tab tensorflow
+data*iter, * = get*data*ch11(10)
 trainer = tf.keras.optimizers.SGD
-train_concise_ch11(trainer, {'learning_rate': 0.05}, data_iter)
+train*concise*ch11(trainer, {'learning*rate': 0.05}, data*iter)
 ```
 
-## Summary
+# # Summary
 
 * Vectorization makes code more efficient due to reduced overhead arising from the deep learning framework and due to better memory locality and caching on CPUs and GPUs.
 * There is a trade-off between statistical efficiency arising from stochastic gradient descent and computational efficiency arising from processing large batches of data at a time.
@@ -571,10 +571,10 @@ train_concise_ch11(trainer, {'learning_rate': 0.05}, data_iter)
 * It is advisable to decay the learning rates during training.
 * In general, minibatch stochastic gradient descent is faster than stochastic gradient descent and gradient descent for convergence to a smaller risk, when measured in terms of clock time.
 
-## Exercises
+# # Exercises
 
 1. Modify the batch size and learning rate and observe the rate of decline for the value of the objective function and the time consumed in each epoch.
-1. Read the MXNet documentation and use the `Trainer` class `set_learning_rate` function to reduce the learning rate of the minibatch stochastic gradient descent to 1/10 of its previous value after each epoch.
+1. Read the MXNet documentation and use the `Trainer` class `set*learning*rate` function to reduce the learning rate of the minibatch stochastic gradient descent to 1/10 of its previous value after each epoch.
 1. Compare minibatch stochastic gradient descent with a variant that actually *samples with replacement* from the training set. What happens?
 1. An evil genie replicates your dataset without telling you (i.e., each observation occurs twice and your dataset grows to twice its original size, but nobody told you). How does the behavior of stochastic gradient descent, minibatch stochastic gradient descent and that of gradient descent change?
 

@@ -1,9 +1,9 @@
 第三部分、 c++11/c++14/c++17
-1、C++11 中有哪些智能指针？shared_ptr 的引用计数是如何实现的？unique_ptr 的unique 是如何实现的？make_shared 和 make_unique 的作用？智能指针使用注意事项？
-C++ 11 中的智能指针有：shared_ptr, unique_ptr 和 weak_ptr。
-shared_ptr 的引用计数是存放在堆上的，多个 shared_ptr 的对象的引用计数都指向同一个堆地址。
+1、C++11 中有哪些智能指针？shared*ptr 的引用计数是如何实现的？unique*ptr 的unique 是如何实现的？make*shared 和 make*unique 的作用？智能指针使用注意事项？
+C++ 11 中的智能指针有：shared*ptr, unique*ptr 和 weak_ptr。
+shared*ptr 的引用计数是存放在堆上的，多个 shared*ptr 的对象的引用计数都指向同一个堆地址。
 unique_ptr 中拷贝构造函数和赋值操作符都声明为delete或private。
-优先使用 make_shared 和 make_unique 的原因是为了避免内存泄露。参考 C++11 中的 Smart Pointer（shared_ptr/weak_ptr/unique_ptr） 总结
+优先使用 make*shared 和 make*unique 的原因是为了避免内存泄露。参考 C++11 中的 Smart Pointer（shared*ptr/weak*ptr/unique_ptr） 总结
 智能指针使用注意事项：
 不使用相同的内置指针值初始化，或reset多个智能指针
 不delete get()返回的指针
@@ -13,13 +13,13 @@ get()返回的智能指针可能变成dangling pointer
 拓展问题
 shared_ptr 是否线程安全？
 侵入式智能指针？
-从源码理解智能指针（二）—— shared_ptr、weak_ptr
+从源码理解智能指针（二）—— shared*ptr、weak*ptr
 在这里插入图片描述
 
 2、智能指针weak_ptr 能够破坏环型引用的原理（引用计数的原理）
-weak_ptr只是提供了对管理对象的一个访问手段。weak_ptr 设计的目的是为配合 shared_ptr 而引入的一种智能指针来协助 shared_ptr 工作, 它只可以从一个 shared_ptr 或另一个 weak_ptr 对象构造, 它的构造和析构不会引起引用记数的增加或减少。weak_ptr是用来解决shared_ptr相互引用时的死锁问题,如果说两个shared_ptr相互引用,那么这两个指针的引用计数永远不可能下降为0,资源永远不会释放。它是对对象的一种弱引用，不会增加对象的引用计数，和shared_ptr之间可以相互转化，shared_ptr可以直接赋值给它，它可以通过调用lock函数来获得shared_ptr。
+weak*ptr只是提供了对管理对象的一个访问手段。weak*ptr 设计的目的是为配合 shared*ptr 而引入的一种智能指针来协助 shared*ptr 工作, 它只可以从一个 shared*ptr 或另一个 weak*ptr 对象构造, 它的构造和析构不会引起引用记数的增加或减少。weak*ptr是用来解决shared*ptr相互引用时的死锁问题,如果说两个shared*ptr相互引用,那么这两个指针的引用计数永远不可能下降为0,资源永远不会释放。它是对对象的一种弱引用，不会增加对象的引用计数，和shared*ptr之间可以相互转化，shared*ptr可以直接赋值给它，它可以通过调用lock函数来获得shared*ptr。
 引用计数原理
-shared_ptr的实现是这样的: shared_ptr模板类有一个__shared_count类型的成员_M_refcount来处理引用计数的问题。__shared_count也是一个模板类，它的内部有一个指向Sp_counted_base_impl类型的指针_M_pi。所有引用同一个对象的shared_ptr都共用一个_M_pi指针。
+shared*ptr的实现是这样的: shared*ptr模板类有一个__shared*count类型的成员*M_refcount来处理引用计数的问题。__shared*count也是一个模板类，它的内部有一个指向Sp*counted*base*impl类型的指针*M*pi。所有引用同一个对象的shared*ptr都共用一个*M_pi指针。
 当我们谈论shared_ptr的线程安全性时，我们在谈论什么
 
 3、C++ 的闭包
@@ -46,7 +46,7 @@ C++11捕获外部变量总结
 [=, &x]	变量x以引用形式捕获，其余变量以传值形式捕获
 [&, x]	变量x以值的形式捕获，其余变量以引用形式捕获
 5、C++ 的垃圾回收机制
-很多语言都有对内存自动管理，即所谓的垃圾回收机制。所谓垃圾，指的是那些不再使用或者没有任何指针指向的内存空间，而“回收”则指的是将这些“垃圾”收集起来以便再次利用。C++采用 unique_ptr、shared_ptr 以及 weak_ptr 这 3 个智能指针来实现堆内存的自动回收。来实现自动释放分配的内存。
+很多语言都有对内存自动管理，即所谓的垃圾回收机制。所谓垃圾，指的是那些不再使用或者没有任何指针指向的内存空间，而“回收”则指的是将这些“垃圾”收集起来以便再次利用。C++采用 unique*ptr、shared*ptr 以及 weak_ptr 这 3 个智能指针来实现堆内存的自动回收。来实现自动释放分配的内存。
 C++之智能指针（C++的垃圾回收机制）
 
 6、vector的clear()的时间复杂度是多少？
@@ -75,7 +75,7 @@ enum class 一般总是前置声明，而 enum 只有在指定了潜在类型时
 例子参考： c++的lambda使用注意事项,可能导致的崩溃问题分析
 
 9、C++11的thread_local有没有使用过？
-有且只有thread_local关键字修饰的变量具有线程周期(thread duration)，这些变量(或者说对象）在线程开始的时候被生成(allocated)，在线程结束的时候被销毁(deallocated)。并且每 一个线程都拥有一个独立的变量实例(Each thread has its own instance of the object)。thread_local 可以和static 与 extern关键字联合使用，这将影响变量的链接属性(to adjust linkage)。
+有且只有thread*local关键字修饰的变量具有线程周期(thread duration)，这些变量(或者说对象）在线程开始的时候被生成(allocated)，在线程结束的时候被销毁(deallocated)。并且每 一个线程都拥有一个独立的变量实例(Each thread has its own instance of the object)。thread*local 可以和static 与 extern关键字联合使用，这将影响变量的链接属性(to adjust linkage)。
 那么，哪些变量可以被声明为thread_local？以下3类都是ok的
 
 命名空间下的全局变量

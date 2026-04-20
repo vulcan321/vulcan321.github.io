@@ -2,21 +2,21 @@
 
 > 该篇为我学习GLib 和 GTK 的笔记，只是记录一些知识点和写法，若碰巧浏览此篇，尽量不要以此篇为准！
 
-## GLib相关介绍
+# # GLib相关介绍
 
-### GObject
+## # GObject
 
-------
+---
 
 
 
-#### GObject简单声明定义
+### # GObject简单声明定义
 
 GObject实现中， 类是两个结构体的组合，一个是**实例结构体**（保存所有对象私有数据），另一个是**类结构体**（保存所有对象共享的数据），其结构关系图如下：
 
 ![image-01](..\..\images\3a319249-ea7d-4a8c-999f-fe360af493f0.png)
 
-#### GObject 构造和析构大致过程
+### # GObject 构造和析构大致过程
 
 构造过程：
 
@@ -25,7 +25,7 @@ GObject实现中， 类是两个结构体的组合，一个是**实例结构体*
 - 初始化 **GObjectClass** 结构体内存，这块内存是对象的类（类似C++类中的函数和静态变量）
 - 初始化 **GObject structure** 内存， 这块内存属于实例
 
-注意：初始化流程是在第一次调用 **g_object_new** 函数时进行的。在第二次后续调用 **g_object_new**时，它只执行两步：
+注意：初始化流程是在第一次调用 **g*object*new** 函数时进行的。在第二次后续调用 **g*object*new**时，它只执行两步：
 
 ① 给 **GObject structure** 分配内存
 
@@ -39,9 +39,9 @@ GObject实现中， 类是两个结构体的组合，一个是**实例结构体*
 
 ```c
 // dlist.h 实现一个列表类
-#include <glib-object.h>
+# include <glib-object.h>
 
-#define PM_TYPE_DLIST (pm_dlist_get_type())
+# define PM*TYPE*DLIST (pm*dlist*get_type())
 
 typedef struct _PMDListNode PMDListNode;
 struct  _PMDListNode {
@@ -63,23 +63,23 @@ struct _PMDListClass {
         GObjectClass parent_class;	// 类的结构体第一个成员必须是 父类的类结构体 !!!
 };
 
-GType pm_dlist_get_type (void);
+GType pm*dlist*get_type (void);
 ```
 
 ```c
 // dlist.cpp
-#include "dlist.h"
-// 对 pm_dlist_get_type 生成实现，返回类对象
-// #arg_1: 类名 	#arg_2: 成员函数命名前缀	#arg_3: 父类型
-G_DEFINE_TYPE (PMDList, pm_dlist, G_TYPE_OBJECT);
-static void pm_dlist_init (PMDList *self)
+# include "dlist.h"
+// 对 pm*dlist*get_type 生成实现，返回类对象
+// # arg*1: 类名 	# arg*2: 成员函数命名前缀	# arg_3: 父类型
+G*DEFINE*TYPE (PMDList, pm*dlist, G*TYPE_OBJECT);
+static void pm*dlist*init (PMDList *self)
 {
         g_printf ("\t实例结构体初始化！\n");
         self->head = NULL;
         self->tail = NULL;
 }
 
-static void pm_dlist_class_init (PMDListClass *klass)
+static void pm*dlist*class_init (PMDListClass *klass)
 {
         g_printf ("类结构体初始化!\n");
 }
@@ -87,11 +87,11 @@ static void pm_dlist_class_init (PMDListClass *klass)
 
 GObject具有功能：
 
-- 基于引用计数的内存管理 —— 结合 **g_object_ref** 和 **g_object_unref** 两个函数对引用计数进行加减
+- 基于引用计数的内存管理 —— 结合 **g*object*ref** 和 **g*object*unref** 两个函数对引用计数进行加减
 
   ```c
-  #define g_object_ref(Obj) ((glib_typeof (Obj)) (g_object_ref) (Obj))
-  void g_object_unref (gpointer object);
+  # define g*object*ref(Obj) ((glib*typeof (Obj)) (g*object_ref) (Obj))
+  void g*object*unref (gpointer object);
   ```
 
 - 对象的构造函数与析构函数
@@ -106,9 +106,9 @@ GObject具有功能：
 
 ```c
 PMDList *dlist; /* 类的实例化，产生对象 */
-dlist = g_object_new (PM_TYPE_DLIST, NULL); /* 创建对象的一个实例 并将其引用计数 +1 */
-g_object_unref (dlist); /* 将对象的实例引用计数 -1，并检测对象的实例的引用计数是否为 0，若为 0，那么便释放对象的实例的存储空间。 */
-dlist = g_object_new (PM_TYPE_DLIST, NULL); /* 再创建对象的一个实例 */
+dlist = g*object*new (PM*TYPE*DLIST, NULL); /* 创建对象的一个实例 并将其引用计数 +1 */
+g*object*unref (dlist); /* 将对象的实例引用计数 -1，并检测对象的实例的引用计数是否为 0，若为 0，那么便释放对象的实例的存储空间。 */
+dlist = g*object*new (PM*TYPE*DLIST, NULL); /* 再创建对象的一个实例 */
 ```
 
 
@@ -117,8 +117,8 @@ GObject子类化完整的过程：
 
 > ① 在 .h 文件中包含 glib-object.h；
 > ② 在 .h 文件中构建实例结构体与类结构体，并分别将 GObject 类的实例结构体与类结构体置于成员之首；
-> ③ 在 .h 文件中定义 P_TYPE_T 宏，并声明 p_t_get_type 函数；
-> ④ 在 .c 文件中调用 G_DEFINE_TYPE 宏产生类型注册代码。
+> ③ 在 .h 文件中定义 P*TYPE*T 宏，并声明 p*t*get_type 函数；
+> ④ 在 .c 文件中调用 G*DEFINE*TYPE 宏产生类型注册代码。
 
 声明的简单范例，参考地址： https://blog.csdn.net/knowledgebao/article/details/82418046
 
@@ -156,21 +156,21 @@ struct _GTypeInfo
 
 
 
-#### GObject 的属性信号
+### # GObject 的属性信号
 
 在设置属性时, GObject会发出通知信号. 当要连接这个信号时, 可以指定属性名称, 使用分割符 **"::"** 将详细信息添加到信号名称中
 
 ```c
-g_signal_connect (G_OBJECT (d1), "notify::value", G_CALLBACK (notify_cb), NULL);
+g*signal*connect (G*OBJECT (d1), "notify::value", G*CALLBACK (notify_cb), NULL);
 ```
 
 
 
-#### GObject 的继承
+### # GObject 的继承
 
 ```c
 // kb-Son.h
-#include "kb-Parent.h"
+# include "kb-Parent.h"
 
 typedef struct _KbSon KbSon;
 struct _KbSon {
@@ -186,7 +186,7 @@ struct _KParentClass {
 ```c
 // kb-Son.c
 ...
-G_DEFINE_TYPE(KbSon, kb_son, KB_TYPE_Parent);	// GType 设置成父类 其他代码一样
+G*DEFINE*TYPE(KbSon, kb*son, KB*TYPE_Parent);	// GType 设置成父类 其他代码一样
 ...
 ```
 
@@ -194,39 +194,39 @@ G_DEFINE_TYPE(KbSon, kb_son, KB_TYPE_Parent);	// GType 设置成父类 其他代
 
 ```c
 // 抽象类宏
-// Declaration of t_number_init () function.
-// Declaration of t_number_class_init () function.
-// Definition of t_number_get_type () function.
-// Definition of t_number_parent_class static variable that points the parent class.
-#define G_DEFINE_ABSTRACT_TYPE(TN, t_n, T_P)		    G_DEFINE_TYPE_EXTENDED (TN, t_n, T_P, G_TYPE_FLAG_ABSTRACT, {})
+// Declaration of t*number*init () function.
+// Declaration of t*number*class_init () function.
+// Definition of t*number*get_type () function.
+// Definition of t*number*parent_class static variable that points the parent class.
+# define G*DEFINE*ABSTRACT*TYPE(TN, t*n, T*P)		    G*DEFINE*TYPE*EXTENDED (TN, t*n, T*P, G*TYPE*FLAG_ABSTRACT, {})
 
-// 可派生宏，例如：  G_DECLARE_DERIVABLE_TYPE (TNumber, t_number, T, NUMBER, GObject)
-// 1.声明 t_number_get_type() 函数，这个函数必须定义在.c文件。定义通常使用 G_DEFINE_TYPE 或其系列宏完成。
+// 可派生宏，例如：  G*DECLARE*DERIVABLE*TYPE (TNumber, t*number, T, NUMBER, GObject)
+// 1.声明 t*number*get*type() 函数，这个函数必须定义在.c文件。定义通常使用 G*DEFINE_TYPE 或其系列宏完成。
 // 2.定义只有 GObject 成员的实例结构体
 // 3.声明 TNumberClass，它应该之后在.h声明
-// 4.定义了 T_NUMBER（转换为实例）、T_NUMBER_CLASS（转换为类）、T_IS_NUMBER（实例检查）、T_IS_NUMBER_CLASS（类检查）和 T_NUMBER_GET_CLASS。
+// 4.定义了 T*NUMBER（转换为实例）、T*NUMBER*CLASS（转换为类）、T*IS*NUMBER（实例检查）、T*IS*NUMBER*CLASS（类检查）和 T*NUMBER*GET_CLASS。
 // 5.g_autoptr() 支持
-#define G_DECLARE_DERIVABLE_TYPE(ModuleObjName, module_obj_name, MODULE, OBJ_NAME, ParentName) \
-  GType module_obj_name##_get_type (void);                                                               \
-  G_GNUC_BEGIN_IGNORE_DEPRECATIONS                                                                       \
-  typedef struct _##ModuleObjName ModuleObjName;                                                         \
-  typedef struct _##ModuleObjName##Class ModuleObjName##Class;                                           \
-  struct _##ModuleObjName { ParentName parent_instance; };                                               \
+# define G*DECLARE*DERIVABLE*TYPE(ModuleObjName, module*obj*name, MODULE, OBJ*NAME, ParentName) \
+  GType module*obj*name## *get*type (void);                                                               \
+  G*GNUC*BEGIN*IGNORE*DEPRECATIONS                                                                       \
+  typedef struct _## ModuleObjName ModuleObjName;                                                         \
+  typedef struct _## ModuleObjName## Class ModuleObjName## Class;                                           \
+  struct *## ModuleObjName { ParentName parent*instance; };                                               \
                                                                                                          \
-  _GLIB_DEFINE_AUTOPTR_CHAINUP (ModuleObjName, ParentName)                                               \
-  G_DEFINE_AUTOPTR_CLEANUP_FUNC (ModuleObjName##Class, g_type_class_unref)                               \
+  *GLIB*DEFINE*AUTOPTR*CHAINUP (ModuleObjName, ParentName)                                               \
+  G*DEFINE*AUTOPTR*CLEANUP*FUNC (ModuleObjName## Class, g*type*class_unref)                               \
                                                                                                          \
-  G_GNUC_UNUSED static inline ModuleObjName * MODULE##_##OBJ_NAME (gpointer ptr) {                       \
-    return G_TYPE_CHECK_INSTANCE_CAST (ptr, module_obj_name##_get_type (), ModuleObjName); }             \
-  G_GNUC_UNUSED static inline ModuleObjName##Class * MODULE##_##OBJ_NAME##_CLASS (gpointer ptr) {        \
-    return G_TYPE_CHECK_CLASS_CAST (ptr, module_obj_name##_get_type (), ModuleObjName##Class); }         \
-  G_GNUC_UNUSED static inline gboolean MODULE##_IS_##OBJ_NAME (gpointer ptr) {                           \
-    return G_TYPE_CHECK_INSTANCE_TYPE (ptr, module_obj_name##_get_type ()); }                            \
-  G_GNUC_UNUSED static inline gboolean MODULE##_IS_##OBJ_NAME##_CLASS (gpointer ptr) {                   \
-    return G_TYPE_CHECK_CLASS_TYPE (ptr, module_obj_name##_get_type ()); }                               \
-  G_GNUC_UNUSED static inline ModuleObjName##Class * MODULE##_##OBJ_NAME##_GET_CLASS (gpointer ptr) {    \
-    return G_TYPE_INSTANCE_GET_CLASS (ptr, module_obj_name##_get_type (), ModuleObjName##Class); }       \
-  G_GNUC_END_IGNORE_DEPRECATIONS
+  G*GNUC*UNUSED static inline ModuleObjName * MODULE## *## OBJ*NAME (gpointer ptr) {                       \
+    return G*TYPE*CHECK*INSTANCE*CAST (ptr, module*obj*name## *get*type (), ModuleObjName); }             \
+  G*GNUC*UNUSED static inline ModuleObjName## Class * MODULE## *## OBJ*NAME## _CLASS (gpointer ptr) {        \
+    return G*TYPE*CHECK*CLASS*CAST (ptr, module*obj*name## *get*type (), ModuleObjName## Class); }         \
+  G*GNUC*UNUSED static inline gboolean MODULE## *IS*## OBJ_NAME (gpointer ptr) {                           \
+    return G*TYPE*CHECK*INSTANCE*TYPE (ptr, module*obj*name## *get*type ()); }                            \
+  G*GNUC*UNUSED static inline gboolean MODULE## *IS*## OBJ*NAME## *CLASS (gpointer ptr) {                   \
+    return G*TYPE*CHECK*CLASS*TYPE (ptr, module*obj*name## *get*type ()); }                               \
+  G*GNUC*UNUSED static inline ModuleObjName## Class * MODULE## *## OBJ*NAME## *GET*CLASS (gpointer ptr) {    \
+    return G*TYPE*INSTANCE*GET*CLASS (ptr, module*obj*name## *get*type (), ModuleObjName## Class); }       \
+  G*GNUC*END*IGNORE*DEPRECATIONS
 
 ```
 
@@ -235,13 +235,13 @@ G_DEFINE_TYPE(KbSon, kb_son, KB_TYPE_Parent);	// GType 设置成父类 其他代
 继承常用的宏（其中P表示项目名称 	T表示类名称	PTPrivate表示私有数据结构体）：
 
 ```c
-#define P_TYPE_T (p_t_get_type())	// 仅在使用 g_object_new 进行对象实例化的时候使用一次，用于向 GObject 库的类型系统注册 PT 类
-#define P_T(obj) (G_TYPE_CHECK_INSTANCE_CAST ((obj), P_TYPE_T, PT))	// 用于将 obj 对象的类型强制转换为 P_T 类的实例结构体类型
-#define P_IS_T(obj) G_TYPE_CHECK_INSTANCE_TYPE((obj), P_TYPE_T)) // 用于判断 obj 对象的类型是否为 P_T 类的实例结构体类型
-#define P_T_CLASS(klass) (G_TYPE_CHECK_CLASS_CAST ((klass), P_TYPE_T, PTClass))// 用于将 kclass 类结构体得类型强制转换为 P_T 类的类结构体类型
-#define P_IS_T_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), P_TYPE_T))	// 用于判断 klass 类结构体的类型是否为 P_T 类的类结构体类型
-#define P_T_GET_CLASS(obj) (G_TYPE_INSTANCE_GET_CLASS((obj), P_TYPE_T, PTClass))	// 获取 obj 对象对应的类结构体类型
-#define P_T_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE((obj), P_TYPE_T, PTPrivate))	// 获取 obj 对象对应的私有数据
+# define P*TYPE*T (p*t*get*type())	// 仅在使用 g*object_new 进行对象实例化的时候使用一次，用于向 GObject 库的类型系统注册 PT 类
+# define P*T(obj) (G*TYPE*CHECK*INSTANCE*CAST ((obj), P*TYPE*T, PT))	// 用于将 obj 对象的类型强制转换为 P*T 类的实例结构体类型
+# define P*IS*T(obj) G*TYPE*CHECK*INSTANCE*TYPE((obj), P*TYPE*T)) // 用于判断 obj 对象的类型是否为 P_T 类的实例结构体类型
+# define P*T*CLASS(klass) (G*TYPE*CHECK*CLASS*CAST ((klass), P*TYPE*T, PTClass))// 用于将 kclass 类结构体得类型强制转换为 P_T 类的类结构体类型
+# define P*IS*T*CLASS(klass) (G*TYPE*CHECK*CLASS*TYPE ((klass), P*TYPE*T))	// 用于判断 klass 类结构体的类型是否为 P*T 类的类结构体类型
+# define P*T*GET*CLASS(obj) (G*TYPE*INSTANCE*GET*CLASS((obj), P*TYPE_T, PTClass))	// 获取 obj 对象对应的类结构体类型
+# define P*T*GET*PRIVATE(obj) (G*TYPE*INSTANCE*GET*PRIVATE((obj), P*TYPE_T, PTPrivate))	// 获取 obj 对象对应的私有数据
 ```
 
 
@@ -249,19 +249,19 @@ G_DEFINE_TYPE(KbSon, kb_son, KB_TYPE_Parent);	// GType 设置成父类 其他代
 接口常用的宏（其中 P 表示项目名称	T表示类名称	I是接口的缩写）
 
 ```c
-#define P_TYPE_IT (p_t_get_type())	// 仅在接口实现时使用一次，用于向 GObject 库的类型系统注册 PIT 接口
-#define P_IT(obj) (G_TYPE_CHECK_INSTANCE_CAST((obj), P_TYPE_IT, P_IT))	// 用于将 obj 对象的类型强制转换为 P_IT 接口的实例结构体类型
-#define P_IS_IT(obj) (G_TYPE_CHECK_INSTANCE_TYPE((obj), P_TYPE_IT))	// 用于判断 obj 对象是否为 P_IT接口的实例结构体类型
-#define P_IT_GET_INTERFACE(obj) (G_TYPE_INSTANCE_GET_INTERFACE ((obj), P_TYPE_IT, P_IT))	// 获取 obj 对象对应的 P_IT 接口的类结构体类型
+# define P*TYPE*IT (p*t*get_type())	// 仅在接口实现时使用一次，用于向 GObject 库的类型系统注册 PIT 接口
+# define P*IT(obj) (G*TYPE*CHECK*INSTANCE*CAST((obj), P*TYPE*IT, P*IT))	// 用于将 obj 对象的类型强制转换为 P_IT 接口的实例结构体类型
+# define P*IS*IT(obj) (G*TYPE*CHECK*INSTANCE*TYPE((obj), P*TYPE*IT))	// 用于判断 obj 对象是否为 P_IT接口的实例结构体类型
+# define P*IT*GET*INTERFACE(obj) (G*TYPE*INSTANCE*GET*INTERFACE ((obj), P*TYPE*IT, P*IT))	// 获取 obj 对象对应的 P_IT 接口的类结构体类型
 ```
 
 
 
-#### GObject 的信号使用
+### # GObject 的信号使用
 
 ```c
 // 新建信号
-guint g_signal_new (const gchar		*signal_name,
+guint g*signal*new (const gchar		*signal_name,
                     GType				   itype,
                     GSignalFlags	signal_flags,
                     guint           class_offset,
@@ -273,23 +273,23 @@ guint g_signal_new (const gchar		*signal_name,
                     ...);
 
 // 连接信号和回调函数
-#define g_signal_connect(instance, detailed_signal, c_handler, data) \
-    g_signal_connect_data ((instance), (detailed_signal), (c_handler), (data), NULL, (GConnectFlags) 0)
-gulong g_signal_connect_data (gpointer	instance, const gchar	*detailed_signal,
+# define g*signal*connect(instance, detailed*signal, c*handler, data) \
+    g*signal*connect*data ((instance), (detailed*signal), (c_handler), (data), NULL, (GConnectFlags) 0)
+gulong g*signal*connect*data (gpointer	instance, const gchar	*detailed*signal,
                               GCallback	  			c_handler,
                               gpointer		  			 data,
                               GClosureNotify	 destroy_data,
                               GConnectFlags	  	 connect_flags);
 
 // 发射信号
-void g_signal_emit_by_name (gpointer	instance, const gchar	*detailed_signal, ...);
+void g*signal*emit*by*name (gpointer	instance, const gchar	*detailed_signal, ...);
 ```
 
 信号编程步骤如下：
 
 - 注册信号，信号是依附于对象的，所以注册信号是在 class_init 函数中完成的
 - 编写槽函数，在信号发出时调用该槽函数
-- 通过 `g_connnect_signal` 连接信号和槽
+- 通过 `g*connnect*signal` 连接信号和槽
 - 发射信号
 
 
@@ -301,15 +301,15 @@ void g_signal_emit_by_name (gpointer	instance, const gchar	*detailed_signal, ...
 
 
 
-### GCoroutine
+## # GCoroutine
 
 `GCoroutine` 并非是GLib里的一部分，它是在 `spice-gtk` 中实现的！
 
 
 
-## GTK
+# # GTK
 
-##### GTK组件：
+#### # GTK组件：
 
 GTK —— 图形界面的工具包
 
@@ -350,7 +350,7 @@ ATK —— 复制工具包，用于实现对屏幕阅读器和其他工具的支
 
 ```c
 // 显示窗体
-void gtk_window_present (GtkWindow* window)
+void gtk*window*present (GtkWindow* window)
 ```
 
 

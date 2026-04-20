@@ -7,23 +7,23 @@ created: 2026-04-18
 description:
 tags:
 ---
-## **[Claude Code](https://zhida.zhihu.com/search?content_id=272317723&content_type=Article&match_order=1&q=Claude+Code&zhida_source=entity) 项目学习指南**
+# # **[Claude Code](https://zhida.zhihu.com/search?content*id=272317723&content*type=Article&match*order=1&q=Claude+Code&zhida*source=entity) 项目学习指南**
 
 > 本文档面向希望深入理解 Claude Code 源码的开发者，提供从架构概览到实践路径的完整学习地图。
 
-## **1\. 项目概览**
+# # **1\. 项目概览**
 
-Claude Code 是 [Anthropic](https://zhida.zhihu.com/search?content_id=272317723&content_type=Article&match_order=1&q=Anthropic&zhida_source=entity) 官方的 **AI 编程助手 [CLI](https://zhida.zhihu.com/search?content_id=272317723&content_type=Article&match_order=1&q=CLI&zhida_source=entity) 工具**，本质是一个在终端中运行的 AI Agent 系统。用户在终端输入自然语言指令，Claude Code 自主调用工具（文件读写、Shell 命令、搜索等）完成编程任务。
+Claude Code 是 [Anthropic](https://zhida.zhihu.com/search?content*id=272317723&content*type=Article&match*order=1&q=Anthropic&zhida*source=entity) 官方的 **AI 编程助手 [CLI](https://zhida.zhihu.com/search?content*id=272317723&content*type=Article&match*order=1&q=CLI&zhida*source=entity) 工具**，本质是一个在终端中运行的 AI Agent 系统。用户在终端输入自然语言指令，Claude Code 自主调用工具（文件读写、Shell 命令、搜索等）完成编程任务。
 
-### **`1.1 README.md`**
+## # **`1.1 README.md`**
 
 **你应该从这里确认什么**
 
 先确认四个基本事实：
 
 - 语言：TypeScript
-- 运行时：[Bun](https://zhida.zhihu.com/search?content_id=272317723&content_type=Article&match_order=1&q=Bun&zhida_source=entity)
-- UI：[React](https://zhida.zhihu.com/search?content_id=272317723&content_type=Article&match_order=1&q=React&zhida_source=entity) + [Ink](https://zhida.zhihu.com/search?content_id=272317723&content_type=Article&match_order=1&q=Ink&zhida_source=entity)
+- 运行时：[Bun](https://zhida.zhihu.com/search?content*id=272317723&content*type=Article&match*order=1&q=Bun&zhida*source=entity)
+- UI：[React](https://zhida.zhihu.com/search?content*id=272317723&content*type=Article&match*order=1&q=React&zhida*source=entity) + [Ink](https://zhida.zhihu.com/search?content*id=272317723&content*type=Article&match*order=1&q=Ink&zhida*source=entity)
 - 规模：约 1900 文件，50 万行以上
 
 这四个事实直接决定你的阅读策略：
@@ -44,7 +44,7 @@ Claude Code 是 [Anthropic](https://zhida.zhihu.com/search?content_id=272317723&
 
 这几个词不是 README 作者随便写的，它们和源码目录基本一一对应，是很好的导航锚点
 
-### 1.2 \`src/main.tsx\`
+## # 1.2 \`src/main.tsx\`
 
 `main.tsx` 是 Claude Code 的总启动入口，但它本质上不是“业务逻辑实现文件”，而是“启动编排器”。
 
@@ -70,9 +70,9 @@ Claude Code 是 [Anthropic](https://zhida.zhihu.com/search?content_id=272317723&
 
 所以阅读 `main.tsx` 时，不要试图线性看完所有分支。先抓启动主干。
 
-## **2\. 核心架构**
+# # **2\. 核心架构**
 
-### **2.1 整体数据流**
+## # **2.1 整体数据流**
 
 ```text
 用户输入（终端）
@@ -99,7 +99,7 @@ main.tsx                  ← CLI 启动编排器（4,683 行）
   Claude API    tools/*    ← 实际工具执行（Bash / File / Search / Agent 等）
 ```
 
-### **2.2 启动序列**
+## # **2.2 启动序列**
 
 ```text
 main.tsx 启动序列：
@@ -134,7 +134,7 @@ main.tsx 启动序列：
    └─ Assistant 模式     → KAIROS
 ```
 
-### **2.3 查询处理流程**
+## # **2.3 查询处理流程**
 
 ```text
 1. REPL.tsx（运行时壳层）
@@ -162,7 +162,7 @@ main.tsx 启动序列：
    └─ Token 成本计算
 ```
 
-### **2.4 权限系统**
+## # **2.4 权限系统**
 
 ```text
 权限模式（PermissionMode）：
@@ -170,16 +170,16 @@ main.tsx 启动序列：
 ├─ "auto"            完全自动批准
 ├─ "bypassPermissions" 绕过所有权限
 ├─ "plan"            计划模式（只读）
-├─ "plan_no_prompt"  计划模式无提示
+├─ "plan*no*prompt"  计划模式无提示
 └─ "never"           拒绝所有工具
 ​
 权限检查流程：
 useCanUseTool() → toolPermissionContext → getDenyRuleForTool()
 ```
 
-## **3\. 要模块说明**
+# # **3\. 要模块说明**
 
-### **3.1 核心文件**
+## # **3.1 核心文件**
 
 | 文件 | 行数 | 职责 |
 | --- | --- | --- |
@@ -195,7 +195,7 @@ useCanUseTool() → toolPermissionContext → getDenyRuleForTool()
 | src/cost-tracker.ts | 323 | Token 计数，USD 成本计算 |
 | src/Task.ts | 125 | 任务生命周期状态机 |
 
-### **3.2 tools/ 目录（40+ 工具）**
+## # **3.2 tools/ 目录（40+ 工具）**
 
 **基础工具：**
 
@@ -217,7 +217,7 @@ useCanUseTool() → toolPermissionContext → getDenyRuleForTool()
 | --- | --- |
 | AgentTool | 子代理生成与控制（递归能力的关键） |
 | SkillTool | 可复用工作流执行 |
-| MCPTool | [MCP 服务器](https://zhida.zhihu.com/search?content_id=272317723&content_type=Article&match_order=1&q=MCP+%E6%9C%8D%E5%8A%A1%E5%99%A8&zhida_source=entity)工具调用 |
+| MCPTool | [MCP 服务器](https://zhida.zhihu.com/search?content*id=272317723&content*type=Article&match*order=1&q=MCP+%E6%9C%8D%E5%8A%A1%E5%99%A8&zhida*source=entity)工具调用 |
 | LSPTool | 语言服务器集成 |
 
 **任务管理工具：**
@@ -241,7 +241,7 @@ useCanUseTool() → toolPermissionContext → getDenyRuleForTool()
 | SendMessageTool | 代理间通讯 |
 | TeamCreateTool / TeamDeleteTool | 多代理团队管理 |
 
-### **3.3 commands/ 目录（50+ 命令）**
+## # **3.3 commands/ 目录（50+ 命令）**
 
 | 命令 | 用途 |
 | --- | --- |
@@ -259,7 +259,7 @@ useCanUseTool() → toolPermissionContext → getDenyRuleForTool()
 | /resume | 恢复历史会话 |
 | /vim | Vim 模式切换 |
 
-### **3.4 services/ 目录（业务服务层）**
+## # **3.4 services/ 目录（业务服务层）**
 
 | 子目录 | 功能 |
 | --- | --- |
@@ -273,9 +273,9 @@ useCanUseTool() → toolPermissionContext → getDenyRuleForTool()
 | plugins/ | 插件加载器 |
 | SessionMemory/ | 会话记忆管理 |
 
-### **3.5 bridge/ 目录（IDE 集成）**
+## # **3.5 bridge/ 目录（IDE 集成）**
 
-Claude Code 通过 Bridge 系统与 [VS Code](https://zhida.zhihu.com/search?content_id=272317723&content_type=Article&match_order=1&q=VS+Code&zhida_source=entity) 和 [JetBrains](https://zhida.zhihu.com/search?content_id=272317723&content_type=Article&match_order=1&q=JetBrains&zhida_source=entity) 双向通讯：
+Claude Code 通过 Bridge 系统与 [VS Code](https://zhida.zhihu.com/search?content*id=272317723&content*type=Article&match*order=1&q=VS+Code&zhida*source=entity) 和 [JetBrains](https://zhida.zhihu.com/search?content*id=272317723&content*type=Article&match*order=1&q=JetBrains&zhida*source=entity) 双向通讯：
 
 | 文件 | 功能 |
 | --- | --- |
@@ -286,7 +286,7 @@ Claude Code 通过 Bridge 系统与 [VS Code](https://zhida.zhihu.com/search?con
 | sessionRunner.ts | 会话执行管理 |
 | codeSessionApi.ts | VS Code/JetBrains API |
 
-### **3.6 代码规模分布**
+## # **3.6 代码规模分布**
 
 ```text
 components/     389 files  11.0MB   UI 组件（最大）
@@ -303,13 +303,13 @@ coordinator/      1 file   24KB    多代理协调器
 
   
 
-## **4\. 学习路线图**
+# # **4\. 学习路线图**
 
-### **第一阶段：基础架构理解**
+## # **第一阶段：基础架构理解**
 
 **目标**：建立整体骨架认知，能说出完整数据流向。
 
-### **1.1 看懂启动流程**
+## # **1.1 看懂启动流程**
 
 - **文件**：`src/main.tsx`（前 300 行）
 - **重点**：
@@ -318,16 +318,16 @@ coordinator/      1 file   24KB    多代理协调器
 	- 5 种运行模式的分发逻辑
 - **目标**：能画出从 `main.tsx` 到 `launchRepl()` 的完整调用链
 
-### **1.2 理解核心数据流**
+## # **1.2 理解核心数据流**
 
 - **文件**：`src/query.ts` → `src/QueryEngine.ts`
 - **重点**：
 - 消息规范化与上下文注入
-	- 工具调用循环（tool\_use → tool\_result 的 back-and-forth）
+	- 工具调用循环（tool\*use → tool\*result 的 back-and-forth）
 	- 流式响应处理
 - **目标**：能描述一次用户输入从接收到 LLM 响应的完整过程
 
-### **1.3 认识工具系统基础**
+## # **1.3 认识工具系统基础**
 
 - **文件**：`src/Tool.ts`
 - **重点**：
@@ -338,11 +338,11 @@ coordinator/      1 file   24KB    多代理协调器
 
   
 
-### **第二阶段：工具系统深入**
+## # **第二阶段：工具系统深入**
 
 **目标**：理解 Agent 如何与操作系统和文件系统交互。
 
-### **2.1 四种典型工具对比阅读**
+## # **2.1 四种典型工具对比阅读**
 
 同时阅读以下 4 个工具，它们代表不同的实现模式：
 
@@ -360,7 +360,7 @@ coordinator/      1 file   24KB    多代理协调器
 3. 权限检查在哪里介入
 4. 错误如何返回给 LLM
 
-### **2.2 权限系统精读**
+## # **2.2 权限系统精读**
 
 - **文件**：
 - `src/hooks/useCanUseTool.ts`
@@ -371,7 +371,7 @@ coordinator/      1 file   24KB    多代理协调器
 	- 异步权限弹窗队列机制
 	- 用户拒绝历史追踪
 
-### **2.3 子代理工具（递归能力的关键）**
+## # **2.3 子代理工具（递归能力的关键）**
 
 - **文件**：`src/tools/AgentTool/AgentTool.tsx`
 - **重点**：
@@ -379,11 +379,11 @@ coordinator/      1 file   24KB    多代理协调器
 	- 子代理的工具隔离与权限继承
 	- 代理间结果传递
 
-### **第三阶段：UI 层与状态管理**
+## # **第三阶段：UI 层与状态管理**
 
 **目标**：理解终端 UI 的实现原理，能修改界面。
 
-### **3.1 React + Ink 终端渲染**
+## # **3.1 React + Ink 终端渲染**
 
 - **目录**：`src/components/`
 - **入门**：先理解 Ink 是什么（React 在终端的渲染器）
@@ -395,12 +395,12 @@ coordinator/      1 file   24KB    多代理协调器
 
   
 
-### **3.2 应用状态管理**
+## # **3.2 应用状态管理**
 
 - **文件**：`src/state/AppState.tsx`
 - **重点**：全局状态树结构，状态更新如何触发 UI 重渲染
 
-### **3.3 核心 React 钩子**
+## # **3.3 核心 React 钩子**
 
 - **文件**：
 - `src/hooks/useMessages.ts` — 消息队列管理
@@ -409,18 +409,18 @@ coordinator/      1 file   24KB    多代理协调器
 
   
 
-### **第四阶段：扩展机制（1-2 周）**
+## # **第四阶段：扩展机制（1-2 周）**
 
 **目标**：掌握项目的可扩展设计，能为项目添加新能力。
 
-### **4.1 命令系统（Slash Commands）**
+## # **4.1 命令系统（Slash Commands）**
 
 - **目录**：`src/commands/`
 - **入门**：先读一个简单命令，如 `/config` 或 `/memory`
 - **理解**：命令注册 → 执行 → UI 反馈 完整链路
 - **对比**：命令（Command）vs 工具（Tool）vs 技能（Skill）的使用场景区别
 
-### **4.2 MCP 协议集成**
+## # **4.2 MCP 协议集成**
 
 - **目录**：`src/services/mcp/`
 - **背景**：MCP（Model Context Protocol）是 Anthropic 定义的工具调用标准协议
@@ -431,7 +431,7 @@ coordinator/      1 file   24KB    多代理协调器
 
   
 
-### **4.3 技能系统（Skills）**
+## # **4.3 技能系统（Skills）**
 
 - **目录**：`src/skills/`
 - **核心文件**：`src/skills/loadSkillsDir.ts`
@@ -442,7 +442,7 @@ coordinator/      1 file   24KB    多代理协调器
 
   
 
-### **4.4 多代理系统**
+## # **4.4 多代理系统**
 
 - **文件**：
 - `src/tools/AgentTool/AgentTool.tsx`
@@ -455,11 +455,11 @@ coordinator/      1 file   24KB    多代理协调器
 
   
 
-### **第五阶段：服务层与外部集成**
+## # **第五阶段：服务层与外部集成**
 
 **目标**：理解云服务和外部系统集成。
 
-### **5.1 Anthropic API 集成**
+## # **5.1 Anthropic API 集成**
 
 - **目录**：`src/services/api/`
 - **重点**：
@@ -469,7 +469,7 @@ coordinator/      1 file   24KB    多代理协调器
 
   
 
-### **5.2 IDE 桥接系统**
+## # **5.2 IDE 桥接系统**
 
 - **目录**：`src/bridge/`
 - **重点**：
@@ -479,7 +479,7 @@ coordinator/      1 file   24KB    多代理协调器
 
   
 
-### **5.3 持久记忆系统**
+## # **5.3 持久记忆系统**
 
 - **目录**：`src/services/extractMemories/`、`src/memdir/`
 - **重点**：
@@ -487,9 +487,9 @@ coordinator/      1 file   24KB    多代理协调器
 	- CLAUDE.md 文件发现机制（从当前目录向上查找）
 	- 会话记忆与跨会话记忆的区别
 
-### **第六阶段：高级特性（选修）**
+## # **第六阶段：高级特性（选修）**
 
-### **6.1 特性标志与编译优化**
+## # **6.1 特性标志与编译优化**
 
 - **背景**：Bun 支持编译时特性标志，未激活的功能代码在打包时被完全移除（dead code elimination）
 - **常见标志**：
@@ -497,28 +497,28 @@ coordinator/      1 file   24KB    多代理协调器
 	- `KAIROS` — Assistant 模式
 	- `COORDINATOR_MODE` — 多代理协调
 	- `VOICE_MODE` — 语音输入
-	- `WEB_BROWSER_TOOL` — 网页浏览
+	- `WEB*BROWSER*TOOL` — 网页浏览
 
   
 
-### **6.2 计划任务系统**
+## # **6.2 计划任务系统**
 
 - **文件**：`src/tools/CronCreateTool.ts`
 - **重点**：Agent 触发器与后台执行，Cron 表达式解析
 
-### **6.3 Git Worktree 隔离**
+## # **6.3 Git Worktree 隔离**
 
 - **文件**：`src/tools/EnterWorktreeTool.ts`
 - **重点**：隔离代码修改的实现原理，worktree 生命周期管理
 
-### **6.4 插件系统**
+## # **6.4 插件系统**
 
 - **文件**：`src/utils/plugins/loadPluginCommands.ts`
 - **重点**：第三方插件如何注册命令和工具
 
   
 
-## **5\. 关键文件速查表**
+# # **5\. 关键文件速查表**
 
 | 想了解什么 | 看哪个文件 |
 | --- | --- |
@@ -539,7 +539,7 @@ coordinator/      1 file   24KB    多代理协调器
 
   
 
-## **6\. 实践项目建议**
+# # **6\. 实践项目建议**
 
 建议按以下顺序做练习，每个练习完成后再进入下一个：
 
@@ -557,13 +557,13 @@ coordinator/      1 file   24KB    多代理协调器
 
   
 
-## **7\. 学习建议**
+# # **7\. 学习建议**
 
-### **先用后读**
+## # **先用后读**
 
 在读代码之前，先实际使用 Claude Code 完成几个真实任务（修 bug、写代码、重构），建立用户视角的直觉，再看源码时会更有方向感。
 
-### **沿数据流读**
+## # **沿数据流读**
 
 不要从目录树自上而下读。要沿着数据流读：
 
@@ -573,7 +573,7 @@ coordinator/      1 file   24KB    多代理协调器
 
 把这条主链路读通后，再向外扩展到权限系统、UI 层、服务层。
 
-### **一文件一上下文**
+## # **一文件一上下文**
 
 每次只专注一个文件，先搞清楚：
 
@@ -583,10 +583,10 @@ coordinator/      1 file   24KB    多代理协调器
 
 然后再读实现细节。
 
-### **对照调试**
+## # **对照调试**
 
 在关键位置加 `console.log`，观察真实的数据结构。比如在 `QueryEngine.ts` 的工具调用循环里打印 `toolUseBlock`，能立刻理解 LLM 返回的工具调用格式。
 
-### **仿写是最快的学习方式**
+## # **仿写是最快的学习方式**
 
 读懂 `GrepTool.ts` 后，立刻仿照写一个自己的工具（比如 `WordCountTool`）。动手写一遍，比读十遍代码理解得更深。

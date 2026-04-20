@@ -16,7 +16,7 @@ I’ll show you two examples, the first one is mapping a drive for a department,
 
 In addition, I will use item level targeting to map drives based on specific conditions like group membership, OU, operating system, etc.
 
-## Logon Scripts VS Group Policy
+# # Logon Scripts VS Group Policy
 
 The ability to map a network drive with Group Policy was introduced in Server 2008.
 
@@ -35,13 +35,13 @@ Mapping Drives with Group Policy has the following advantages:
 
 Now let’s move on to some examples of mapping drives with group policy.
 
-## Example 1: Map a Department Network Drive Using Group Policy
+# # Example 1: Map a Department Network Drive Using Group Policy
 
 In this example, I’m going to map a network drive for the HR department. I’ll use item level targeting so it only maps this drive for users in the HR organizational unit.
 
 You could also use a Security Group to target a specific group of users. This will map to a network share that only the HR department has access to.
 
-### Step 1: Create & Link a new GPO
+## # Step 1: Create & Link a new GPO
 
 1\. Open the Group Policy Management Console
 
@@ -75,7 +75,7 @@ I can later add additional drive mappings to this GPO.
 
 The new GPO is now created and linked, now it’s time to configure the settings.
 
-### Step 2: Configure GPO Settings
+## # Step 2: Configure GPO Settings
 
 1\. On the GPO right click and select edit
 
@@ -144,7 +144,7 @@ Click OK, Click OK again to close the new drive properties
 
 This completes the GPO settings
 
-## Step 3: Reboot Computers to Process GPO
+# # Step 3: Reboot Computers to Process GPO
 
 For the GPO to run I will need to reboot the users PC or run gpupdate /force. The next time a user from the HR department logs in they should see a mapped drive.
 
@@ -168,7 +168,7 @@ It works.
 
 Now, any user I put in the HR folder will get this mapped drive. If you don’t want to use an OU you can also target a group of users by using a Security group.
 
-## Example 2: Using Group Policy to Map a Drive for Individual Users
+# # Example 2: Using Group Policy to Map a Drive for Individual Users
 
 This example will map a drive for individual users. This will give the users their own personal folder to save files.
 
@@ -180,7 +180,7 @@ I’ll be using Mark Foster as an example, the logon name is mfoster so I’ll n
 
 I’m not going to repeat every step, I’m basically starting at Step 3 from the first example.
 
-### Step 1: Create a New Drive Mapped drive
+## # Step 1: Create a New Drive Mapped drive
 
 Here are the drive map settings for mapping a drive for an individual user
 
@@ -214,7 +214,7 @@ Just have the user log off and back on and it should map the M drive
 
 Perfect! Now the user is mapping a department drive and a personal drive.
 
-## Final Thoughts
+# # Final Thoughts
 
 As you can see mapping drives with group policy is very easy. It doesn’t require any scripting experience, it’s just a matter of a few clicks and select your desired settings.
 
@@ -226,10 +226,10 @@ Now it’s time to switch over those logon scripts.
 
 [List NTFS Permissions on all folders](https://activedirectorypro.com/list-ntfs-permissions-all-folders/)
 
-## Recommended Tool: Permissions Analyzer for Active Directory
+# # Recommended Tool: Permissions Analyzer for Active Directory
 
 This FREE tool lets you get instant visibility into user and group permissions and allows you to quickly check user or group permissions for files, network, and folder shares.
 
 You can analyze user permissions based on an individual user or group membership.
 
-This is a Free tool, [download your copy here](https://www.solarwinds.com/free-tools/permissions-analyzer-for-active-directory/registration?a_aid=BIZ-PAP-ADP&a_bid=06714014&CMP=BIZ-PAP-ADP-XXXermissions-PAFT-DL).
+This is a Free tool, [download your copy here](https://www.solarwinds.com/free-tools/permissions-analyzer-for-active-directory/registration?a*aid=BIZ-PAP-ADP&a*bid=06714014&CMP=BIZ-PAP-ADP-XXXermissions-PAFT-DL).

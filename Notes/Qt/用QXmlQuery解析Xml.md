@@ -12,15 +12,15 @@
 使用以下代码在结果xml文件上使用QXmlQuery现在可以正常工作：
 
 ```cpp
-#include <QFile>
-#include <QXmlQuery>
-#include <QBuffer>
-#include <QXmlFormatter>
-#include <QException>
-#include <QAbstractMessageHandler>
-#include <iostream>
-#include <string.h>
-#include <QCoreApplication>
+# include <QFile>
+# include <QXmlQuery>
+# include <QBuffer>
+# include <QXmlFormatter>
+# include <QException>
+# include <QAbstractMessageHandler>
+# include <iostream>
+# include <string.h>
+# include <QCoreApplication>
 
 using namespace std;
 

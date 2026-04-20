@@ -20,7 +20,7 @@ npx.set_np()
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 from d2l import torch as d2l
 import math
 import torch
@@ -28,14 +28,14 @@ from torch import nn
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 from d2l import tensorflow as d2l
 import numpy as np
 import tensorflow as tf
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 from d2l import paddle as d2l
 import math
 import warnings
@@ -44,14 +44,14 @@ import paddle
 from paddle import nn
 ```
 
-## [**自注意力**]
+# # [**自注意力**]
 
-给定一个由词元组成的输入序列$\mathbf{x}_1, \ldots, \mathbf{x}_n$，
+给定一个由词元组成的输入序列$\mathbf{x}*1, \ldots, \mathbf{x}*n$，
 其中任意$\mathbf{x}_i \in \mathbb{R}^d$（$1 \leq i \leq n$）。
 该序列的自注意力输出为一个长度相同的序列
-$\mathbf{y}_1, \ldots, \mathbf{y}_n$，其中：
+$\mathbf{y}*1, \ldots, \mathbf{y}*n$，其中：
 
-$$\mathbf{y}_i = f(\mathbf{x}_i, (\mathbf{x}_1, \mathbf{x}_1), \ldots, (\mathbf{x}_n, \mathbf{x}_n)) \in \mathbb{R}^d$$
+$$\mathbf{y}*i = f(\mathbf{x}*i, (\mathbf{x}*1, \mathbf{x}*1), \ldots, (\mathbf{x}*n, \mathbf{x}*n)) \in \mathbb{R}^d$$
 
 根据 :eqref:`eq_attn-pooling`中定义的注意力汇聚函数$f$。
 下面的代码片段是基于多头注意力对一个张量完成自注意力的计算，
@@ -59,49 +59,49 @@ $$\mathbf{y}_i = f(\mathbf{x}_i, (\mathbf{x}_1, \mathbf{x}_1), \ldots, (\mathbf{
 输出与输入的张量形状相同。
 
 ```{.python .input}
-num_hiddens, num_heads = 100, 5
-attention = d2l.MultiHeadAttention(num_hiddens, num_heads, 0.5)
+num*hiddens, num*heads = 100, 5
+attention = d2l.MultiHeadAttention(num*hiddens, num*heads, 0.5)
 attention.initialize()
 ```
 
 ```{.python .input}
-#@tab pytorch
-num_hiddens, num_heads = 100, 5
-attention = d2l.MultiHeadAttention(num_hiddens, num_hiddens, num_hiddens,
-                                   num_hiddens, num_heads, 0.5)
+# @tab pytorch
+num*hiddens, num*heads = 100, 5
+attention = d2l.MultiHeadAttention(num*hiddens, num*hiddens, num_hiddens,
+                                   num*hiddens, num*heads, 0.5)
 attention.eval()
 ```
 
 ```{.python .input}
-#@tab tensorflow
-num_hiddens, num_heads = 100, 5
-attention = d2l.MultiHeadAttention(num_hiddens, num_hiddens, num_hiddens,
-                                   num_hiddens, num_heads, 0.5)
+# @tab tensorflow
+num*hiddens, num*heads = 100, 5
+attention = d2l.MultiHeadAttention(num*hiddens, num*hiddens, num_hiddens,
+                                   num*hiddens, num*heads, 0.5)
 ```
 
 ```{.python .input}
-#@tab paddle
-num_hiddens, num_heads = 100, 5
-attention = d2l.MultiHeadAttention(num_hiddens, num_hiddens, num_hiddens,
-                                   num_hiddens, num_heads, 0.5)
+# @tab paddle
+num*hiddens, num*heads = 100, 5
+attention = d2l.MultiHeadAttention(num*hiddens, num*hiddens, num_hiddens,
+                                   num*hiddens, num*heads, 0.5)
 attention.eval()
 ```
 
 ```{.python .input}
-#@tab mxnet, pytorch, paddle
-batch_size, num_queries, valid_lens = 2, 4, d2l.tensor([3, 2])
-X = d2l.ones((batch_size, num_queries, num_hiddens))
+# @tab mxnet, pytorch, paddle
+batch*size, num*queries, valid_lens = 2, 4, d2l.tensor([3, 2])
+X = d2l.ones((batch*size, num*queries, num_hiddens))
 attention(X, X, X, valid_lens).shape
 ```
 
 ```{.python .input}
-#@tab tensorflow
-batch_size, num_queries, valid_lens = 2, 4, tf.constant([3, 2])
-X = tf.ones((batch_size, num_queries, num_hiddens))
+# @tab tensorflow
+batch*size, num*queries, valid_lens = 2, 4, tf.constant([3, 2])
+X = tf.ones((batch*size, num*queries, num_hiddens))
 attention(X, X, X, valid_lens, training=False).shape
 ```
 
-## 比较卷积神经网络、循环神经网络和自注意力
+# # 比较卷积神经网络、循环神经网络和自注意力
 :label:`subsec_cnn-rnn-self-attention`
 
 接下来比较下面几个架构，目标都是将由$n$个词元组成的序列映射到另一个长度相等的序列，其中的每个输入词元或输出词元都由$d$维向量表示。具体来说，将比较的是卷积神经网络、循环神经网络和自注意力这几个架构的计算复杂性、顺序操作和最大路径长度。请注意，顺序操作会妨碍并行计算，而任意的序列位置组合之间的路径越短，则能更轻松地学习序列中的远距离依赖关系 :cite:`Hochreiter.Bengio.Frasconi.ea.2001`。
@@ -116,7 +116,7 @@ attention(X, X, X, valid_lens, training=False).shape
 如 :numref:`fig_cnn-rnn-self-attention`所示，
 卷积神经网络是分层的，因此为有$\mathcal{O}(1)$个顺序操作，
 最大路径长度为$\mathcal{O}(n/k)$。
-例如，$\mathbf{x}_1$和$\mathbf{x}_5$处于
+例如，$\mathbf{x}*1$和$\mathbf{x}*5$处于
  :numref:`fig_cnn-rnn-self-attention`中卷积核大小为3的双层卷积神经网络的感受野内。
 
 当更新循环神经网络的隐状态时，
@@ -126,7 +126,7 @@ $d \times d$权重矩阵和$d$维隐状态的乘法计算复杂度为$\mathcal{O
 有$\mathcal{O}(n)$个顺序操作无法并行化，最大路径长度也是$\mathcal{O}(n)$。
 
 在自注意力中，查询、键和值都是$n \times d$矩阵。
-考虑 :eqref:`eq_softmax_QK_V`中缩放的”点－积“注意力，
+考虑 :eqref:`eq*softmax*QK_V`中缩放的”点－积“注意力，
 其中$n \times d$矩阵乘以$d \times n$矩阵。
 之后输出的$n \times n$矩阵乘以$n \times d$矩阵。
 因此，自注意力具有$\mathcal{O}(n^2d)$计算复杂性。
@@ -139,7 +139,7 @@ $d \times d$权重矩阵和$d$维隐状态的乘法计算复杂度为$\mathcal{O
 而且自注意力的最大路径长度最短。
 但是因为其计算复杂度是关于序列长度的二次方，所以在很长的序列中计算会非常慢。
 
-## [**位置编码**]
+# # [**位置编码**]
 :label:`subsec_positional-encoding`
 
 在处理词元序列时，循环神经网络是逐个的重复地处理词元的，
@@ -156,44 +156,44 @@ $d \times d$权重矩阵和$d$维隐状态的乘法计算复杂度为$\mathcal{O
 $\mathbf{P} \in \mathbb{R}^{n \times d}$输出$\mathbf{X} + \mathbf{P}$，
 矩阵第$i$行、第$2j$列和$2j+1$列上的元素为：
 
-$$\begin{aligned} p_{i, 2j} &= \sin\left(\frac{i}{10000^{2j/d}}\right),\\p_{i, 2j+1} &= \cos\left(\frac{i}{10000^{2j/d}}\right).\end{aligned}$$
+$$\begin{aligned} p*{i, 2j} &= \sin\left(\frac{i}{10000^{2j/d}}\right),\\p*{i, 2j+1} &= \cos\left(\frac{i}{10000^{2j/d}}\right).\end{aligned}$$
 :eqlabel:`eq_positional-encoding-def`
 
 乍一看，这种基于三角函数的设计看起来很奇怪。
 在解释这个设计之前，让我们先在下面的`PositionalEncoding`类中实现它。
 
 ```{.python .input}
-#@save
+# @save
 class PositionalEncoding(nn.Block):
     """位置编码"""
-    def __init__(self, num_hiddens, dropout, max_len=1000):
-        super(PositionalEncoding, self).__init__()
+    def **init**(self, num*hiddens, dropout, max*len=1000):
+        super(PositionalEncoding, self).**init**()
         self.dropout = nn.Dropout(dropout)
         # 创建一个足够长的P
-        self.P = d2l.zeros((1, max_len, num_hiddens))
+        self.P = d2l.zeros((1, max*len, num*hiddens))
         X = d2l.arange(max_len).reshape(-1, 1) / np.power(
-            10000, np.arange(0, num_hiddens, 2) / num_hiddens)
+            10000, np.arange(0, num*hiddens, 2) / num*hiddens)
         self.P[:, :, 0::2] = np.sin(X)
         self.P[:, :, 1::2] = np.cos(X)
 
     def forward(self, X):
-        X = X + self.P[:, :X.shape[1], :].as_in_ctx(X.ctx)
+        X = X + self.P[:, :X.shape[1], :].as*in*ctx(X.ctx)
         return self.dropout(X)
 ```
 
 ```{.python .input}
-#@tab pytorch
-#@save
+# @tab pytorch
+# @save
 class PositionalEncoding(nn.Module):
     """位置编码"""
-    def __init__(self, num_hiddens, dropout, max_len=1000):
-        super(PositionalEncoding, self).__init__()
+    def **init**(self, num*hiddens, dropout, max*len=1000):
+        super(PositionalEncoding, self).**init**()
         self.dropout = nn.Dropout(dropout)
         # 创建一个足够长的P
-        self.P = d2l.zeros((1, max_len, num_hiddens))
+        self.P = d2l.zeros((1, max*len, num*hiddens))
         X = d2l.arange(max_len, dtype=torch.float32).reshape(
             -1, 1) / torch.pow(10000, torch.arange(
-            0, num_hiddens, 2, dtype=torch.float32) / num_hiddens)
+            0, num*hiddens, 2, dtype=torch.float32) / num*hiddens)
         self.P[:, :, 0::2] = torch.sin(X)
         self.P[:, :, 1::2] = torch.cos(X)
 
@@ -203,18 +203,18 @@ class PositionalEncoding(nn.Module):
 ```
 
 ```{.python .input}
-#@tab tensorflow
-#@save
+# @tab tensorflow
+# @save
 class PositionalEncoding(tf.keras.layers.Layer):
     """位置编码"""
-    def __init__(self, num_hiddens, dropout, max_len=1000):
-        super().__init__()
+    def **init**(self, num*hiddens, dropout, max*len=1000):
+        super().**init**()
         self.dropout = tf.keras.layers.Dropout(dropout)
         # 创建一个足够长的P
-        self.P = np.zeros((1, max_len, num_hiddens))
+        self.P = np.zeros((1, max*len, num*hiddens))
         X = np.arange(max_len, dtype=np.float32).reshape(
             -1,1)/np.power(10000, np.arange(
-            0, num_hiddens, 2, dtype=np.float32) / num_hiddens)
+            0, num*hiddens, 2, dtype=np.float32) / num*hiddens)
         self.P[:, :, 0::2] = np.sin(X)
         self.P[:, :, 1::2] = np.cos(X)
         
@@ -224,18 +224,18 @@ class PositionalEncoding(tf.keras.layers.Layer):
 ```
 
 ```{.python .input}
-#@tab paddle
-#@save
+# @tab paddle
+# @save
 class PositionalEncoding(nn.Layer):
     """位置编码"""
-    def __init__(self, num_hiddens, dropout, max_len=1000):
-        super(PositionalEncoding, self).__init__()
+    def **init**(self, num*hiddens, dropout, max*len=1000):
+        super(PositionalEncoding, self).**init**()
         self.dropout = nn.Dropout(dropout)
         # 创建一个足够长的P
-        self.P = paddle.zeros((1, max_len, num_hiddens))
+        self.P = paddle.zeros((1, max*len, num*hiddens))
         X = paddle.arange(max_len, dtype=paddle.float32).reshape(
             (-1, 1)) / paddle.pow(paddle.to_tensor([10000.0]), paddle.arange(
-            0, num_hiddens, 2, dtype=paddle.float32) / num_hiddens)
+            0, num*hiddens, 2, dtype=paddle.float32) / num*hiddens)
         self.P[:, :, 0::2] = paddle.sin(X)
         self.P[:, :, 1::2] = paddle.cos(X)
 
@@ -250,48 +250,48 @@ class PositionalEncoding(nn.Layer):
 第$6$列和第$7$列之间的偏移量（第$8$列和第$9$列相同）是由于正弦函数和余弦函数的交替。
 
 ```{.python .input}
-encoding_dim, num_steps = 32, 60
-pos_encoding = PositionalEncoding(encoding_dim, 0)
+encoding*dim, num*steps = 32, 60
+pos*encoding = PositionalEncoding(encoding*dim, 0)
 pos_encoding.initialize()
-X = pos_encoding(np.zeros((1, num_steps, encoding_dim)))
+X = pos*encoding(np.zeros((1, num*steps, encoding_dim)))
 P = pos_encoding.P[:, :X.shape[1], :]
 d2l.plot(d2l.arange(num_steps), P[0, :, 6:10].T, xlabel='Row (position)',
          figsize=(6, 2.5), legend=["Col %d" % d for d in d2l.arange(6, 10)])
 ```
 
 ```{.python .input}
-#@tab pytorch
-encoding_dim, num_steps = 32, 60
-pos_encoding = PositionalEncoding(encoding_dim, 0)
+# @tab pytorch
+encoding*dim, num*steps = 32, 60
+pos*encoding = PositionalEncoding(encoding*dim, 0)
 pos_encoding.eval()
-X = pos_encoding(d2l.zeros((1, num_steps, encoding_dim)))
+X = pos*encoding(d2l.zeros((1, num*steps, encoding_dim)))
 P = pos_encoding.P[:, :X.shape[1], :]
 d2l.plot(d2l.arange(num_steps), P[0, :, 6:10].T, xlabel='Row (position)',
          figsize=(6, 2.5), legend=["Col %d" % d for d in d2l.arange(6, 10)])
 ```
 
 ```{.python .input}
-#@tab tensorflow
-encoding_dim, num_steps = 32, 60
-pos_encoding = PositionalEncoding(encoding_dim, 0)
-X = pos_encoding(tf.zeros((1, num_steps, encoding_dim)), training=False)
+# @tab tensorflow
+encoding*dim, num*steps = 32, 60
+pos*encoding = PositionalEncoding(encoding*dim, 0)
+X = pos*encoding(tf.zeros((1, num*steps, encoding_dim)), training=False)
 P = pos_encoding.P[:, :X.shape[1], :]
 d2l.plot(np.arange(num_steps), P[0, :, 6:10].T, xlabel='Row (position)',
          figsize=(6, 2.5), legend=["Col %d" % d for d in np.arange(6, 10)])
 ```
 
 ```{.python .input}
-#@tab paddle
-encoding_dim, num_steps = 32, 60
-pos_encoding = PositionalEncoding(encoding_dim, 0)
+# @tab paddle
+encoding*dim, num*steps = 32, 60
+pos*encoding = PositionalEncoding(encoding*dim, 0)
 pos_encoding.eval()
-X = pos_encoding(paddle.zeros((1, num_steps, encoding_dim)))
+X = pos*encoding(paddle.zeros((1, num*steps, encoding_dim)))
 P = pos_encoding.P[:, :X.shape[1], :]
 d2l.plot(paddle.arange(num_steps), P[0, :, 6:10].T, xlabel='Row (position)',
          figsize=(6, 2.5), legend=["Col %d" % d for d in paddle.arange(6, 10)])
 ```
 
-### 绝对位置信息
+## # 绝对位置信息
 
 为了明白沿着编码维度单调降低的频率与绝对位置信息的关系，
 让我们打印出$0, 1, \ldots, 7$的[**二进制表示**]形式。
@@ -299,7 +299,7 @@ d2l.plot(paddle.arange(num_steps), P[0, :, 6:10].T, xlabel='Row (position)',
 在第一个最低位、第二个最低位和第三个最低位上分别交替。
 
 ```{.python .input}
-#@tab all
+# @tab all
 for i in range(8):
     print(f'{i}的二进制是：{i:>03b}')
 ```
@@ -309,33 +309,33 @@ for i in range(8):
 由于输出是浮点数，因此此类连续表示比二进制表示法更节省空间。
 
 ```{.python .input}
-P = np.expand_dims(np.expand_dims(P[0, :, :], 0), 0)
+P = np.expand*dims(np.expand*dims(P[0, :, :], 0), 0)
 d2l.show_heatmaps(P, xlabel='Column (encoding dimension)',
                   ylabel='Row (position)', figsize=(3.5, 4), cmap='Blues')
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 P = P[0, :, :].unsqueeze(0).unsqueeze(0)
 d2l.show_heatmaps(P, xlabel='Column (encoding dimension)',
                   ylabel='Row (position)', figsize=(3.5, 4), cmap='Blues')
 ```
 
 ```{.python .input}
-#@tab tensorflow
-P = tf.expand_dims(tf.expand_dims(P[0, :, :], axis=0), axis=0)
+# @tab tensorflow
+P = tf.expand*dims(tf.expand*dims(P[0, :, :], axis=0), axis=0)
 d2l.show_heatmaps(P, xlabel='Column (encoding dimension)',
                   ylabel='Row (position)', figsize=(3.5, 4), cmap='Blues')
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 P = P[0, :, :].unsqueeze(0).unsqueeze(0)
 d2l.show_heatmaps(P, xlabel='Column (encoding dimension)',
                   ylabel='Row (position)', figsize=(3.5, 4), cmap='Blues')
 ```
 
-### 相对位置信息
+## # 相对位置信息
 
 除了捕获绝对位置信息之外，上述的位置编码还允许模型学习得到输入序列中相对位置信息。
 这是因为对于任何确定的位置偏移$\delta$，位置$i + \delta$处
@@ -344,27 +344,27 @@ d2l.show_heatmaps(P, xlabel='Column (encoding dimension)',
 这种投影的数学解释是，令$\omega_j = 1/10000^{2j/d}$，
 对于任何确定的位置偏移$\delta$，
  :eqref:`eq_positional-encoding-def`中的任何一对
-$(p_{i, 2j}, p_{i, 2j+1})$都可以线性投影到
-$(p_{i+\delta, 2j}, p_{i+\delta, 2j+1})$：
+$(p*{i, 2j}, p*{i, 2j+1})$都可以线性投影到
+$(p*{i+\delta, 2j}, p*{i+\delta, 2j+1})$：
 
 $$\begin{aligned}
-&\begin{bmatrix} \cos(\delta \omega_j) & \sin(\delta \omega_j) \\  -\sin(\delta \omega_j) & \cos(\delta \omega_j) \\ \end{bmatrix}
-\begin{bmatrix} p_{i, 2j} \\  p_{i, 2j+1} \\ \end{bmatrix}\\
-=&\begin{bmatrix} \cos(\delta \omega_j) \sin(i \omega_j) + \sin(\delta \omega_j) \cos(i \omega_j) \\  -\sin(\delta \omega_j) \sin(i \omega_j) + \cos(\delta \omega_j) \cos(i \omega_j) \\ \end{bmatrix}\\
-=&\begin{bmatrix} \sin\left((i+\delta) \omega_j\right) \\  \cos\left((i+\delta) \omega_j\right) \\ \end{bmatrix}\\
+&\begin{bmatrix} \cos(\delta \omega*j) & \sin(\delta \omega*j) \\  -\sin(\delta \omega*j) & \cos(\delta \omega*j) \\ \end{bmatrix}
+\begin{bmatrix} p*{i, 2j} \\  p*{i, 2j+1} \\ \end{bmatrix}\\
+=&\begin{bmatrix} \cos(\delta \omega*j) \sin(i \omega*j) + \sin(\delta \omega*j) \cos(i \omega*j) \\  -\sin(\delta \omega*j) \sin(i \omega*j) + \cos(\delta \omega*j) \cos(i \omega*j) \\ \end{bmatrix}\\
+=&\begin{bmatrix} \sin\left((i+\delta) \omega*j\right) \\  \cos\left((i+\delta) \omega*j\right) \\ \end{bmatrix}\\
 =& 
-\begin{bmatrix} p_{i+\delta, 2j} \\  p_{i+\delta, 2j+1} \\ \end{bmatrix},
+\begin{bmatrix} p*{i+\delta, 2j} \\  p*{i+\delta, 2j+1} \\ \end{bmatrix},
 \end{aligned}$$
 
 $2\times 2$投影矩阵不依赖于任何位置的索引$i$。
 
-## 小结
+# # 小结
 
 * 在自注意力中，查询、键和值都来自同一组输入。
 * 卷积神经网络和自注意力都拥有并行计算的优势，而且自注意力的最大路径长度最短。但是因为其计算复杂度是关于序列长度的二次方，所以在很长的序列中计算会非常慢。
 * 为了使用序列的顺序信息，可以通过在输入表示中添加位置编码，来注入绝对的或相对的位置信息。
 
-## 练习
+# # 练习
 
 1. 假设设计一个深度架构，通过堆叠基于位置编码的自注意力层来表示序列。可能会存在什么问题？
 1. 请设计一种可学习的位置编码方法。

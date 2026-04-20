@@ -1,8 +1,8 @@
 # Concise Implementation for Multiple GPUs
-:label:`sec_multi_gpu_concise`
+:label:`sec*multi*gpu_concise`
 
 Implementing parallelism from scratch for every new model is no fun. Moreover, there is significant benefit in optimizing synchronization tools for high performance. In the following we will show how to do this using high-level APIs of deep learning frameworks.
-The math and the algorithms are the same as in :numref:`sec_multi_gpu`.
+The math and the algorithms are the same as in :numref:`sec*multi*gpu`.
 Quite unsurprisingly you will need at least two GPUs to run code of this section.
 
 ```{.python .input}
@@ -13,28 +13,28 @@ npx.set_np()
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 from d2l import torch as d2l
 import torch
 from torch import nn
 ```
 
-## A Toy Network
+# # A Toy Network
 
-Let us use a slightly more meaningful network than LeNet from :numref:`sec_multi_gpu` that is still sufficiently easy and quick to train. 
+Let us use a slightly more meaningful network than LeNet from :numref:`sec*multi*gpu` that is still sufficiently easy and quick to train. 
 We pick a ResNet-18 variant :cite:`He.Zhang.Ren.ea.2016`. Since the input images are tiny we modify it slightly. In particular, the difference from :numref:`sec_resnet` is that we use a smaller convolution kernel, stride, and padding at the beginning.
 Moreover, we remove the maximum pooling layer.
 
 ```{.python .input}
-#@save
+# @save
 def resnet18(num_classes):
     """A slightly modified ResNet-18 model."""
-    def resnet_block(num_channels, num_residuals, first_block=False):
+    def resnet*block(num*channels, num*residuals, first*block=False):
         blk = nn.Sequential()
         for i in range(num_residuals):
             if i == 0 and not first_block:
                 blk.add(d2l.Residual(
-                    num_channels, use_1x1conv=True, strides=2))
+                    num*channels, use*1x1conv=True, strides=2))
             else:
                 blk.add(d2l.Residual(num_channels))
         return blk
@@ -44,7 +44,7 @@ def resnet18(num_classes):
     # removes the maximum pooling layer
     net.add(nn.Conv2D(64, kernel_size=3, strides=1, padding=1),
             nn.BatchNorm(), nn.Activation('relu'))
-    net.add(resnet_block(64, 2, first_block=True),
+    net.add(resnet*block(64, 2, first*block=True),
             resnet_block(128, 2),
             resnet_block(256, 2),
             resnet_block(512, 2))
@@ -53,73 +53,73 @@ def resnet18(num_classes):
 ```
 
 ```{.python .input}
-#@tab pytorch
-#@save
-def resnet18(num_classes, in_channels=1):
+# @tab pytorch
+# @save
+def resnet18(num*classes, in*channels=1):
     """A slightly modified ResNet-18 model."""
-    def resnet_block(in_channels, out_channels, num_residuals,
+    def resnet*block(in*channels, out*channels, num*residuals,
                      first_block=False):
         blk = []
         for i in range(num_residuals):
             if i == 0 and not first_block:
-                blk.append(d2l.Residual(in_channels, out_channels,
+                blk.append(d2l.Residual(in*channels, out*channels,
                                         use_1x1conv=True, strides=2))
             else:
-                blk.append(d2l.Residual(out_channels, out_channels))
+                blk.append(d2l.Residual(out*channels, out*channels))
         return nn.Sequential(*blk)
 
     # This model uses a smaller convolution kernel, stride, and padding and
     # removes the maximum pooling layer
     net = nn.Sequential(
-        nn.Conv2d(in_channels, 64, kernel_size=3, stride=1, padding=1),
+        nn.Conv2d(in*channels, 64, kernel*size=3, stride=1, padding=1),
         nn.BatchNorm2d(64),
         nn.ReLU())
-    net.add_module("resnet_block1", resnet_block(64, 64, 2, first_block=True))
-    net.add_module("resnet_block2", resnet_block(64, 128, 2))
-    net.add_module("resnet_block3", resnet_block(128, 256, 2))
-    net.add_module("resnet_block4", resnet_block(256, 512, 2))
-    net.add_module("global_avg_pool", nn.AdaptiveAvgPool2d((1,1)))
+    net.add*module("resnet*block1", resnet*block(64, 64, 2, first*block=True))
+    net.add*module("resnet*block2", resnet_block(64, 128, 2))
+    net.add*module("resnet*block3", resnet_block(128, 256, 2))
+    net.add*module("resnet*block4", resnet_block(256, 512, 2))
+    net.add*module("global*avg_pool", nn.AdaptiveAvgPool2d((1,1)))
     net.add_module("fc", nn.Sequential(nn.Flatten(),
                                        nn.Linear(512, num_classes)))
     return net
 ```
 
-## Network Initialization
+# # Network Initialization
 
 :begin_tab:`mxnet`
 The `initialize` function allows us to initialize parameters on a device of our choice.
-For a refresher on initialization methods see :numref:`sec_numerical_stability`. What is particularly convenient is that it also allows us to initialize the network on *multiple* devices simultaneously. Let us try how this works in practice.
+For a refresher on initialization methods see :numref:`sec*numerical*stability`. What is particularly convenient is that it also allows us to initialize the network on *multiple* devices simultaneously. Let us try how this works in practice.
 :end_tab:
 
 :begin_tab:`pytorch`
 We will initialize the network inside the training loop.
-For a refresher on initialization methods see :numref:`sec_numerical_stability`.
+For a refresher on initialization methods see :numref:`sec*numerical*stability`.
 :end_tab:
 
 ```{.python .input}
 net = resnet18(10)
 # Get a list of GPUs
-devices = d2l.try_all_gpus()
+devices = d2l.try*all*gpus()
 # Initialize all the parameters of the network
 net.initialize(init=init.Normal(sigma=0.01), ctx=devices)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 net = resnet18(10)
 # Get a list of GPUs
-devices = d2l.try_all_gpus()
+devices = d2l.try*all*gpus()
 # We will initialize the network inside the training loop
 ```
 
 :begin_tab:`mxnet`
-Using the `split_and_load` function introduced in :numref:`sec_multi_gpu` we can divide a minibatch of data and copy portions to the list of devices provided by the `devices` variable. The network instance *automatically* uses the appropriate GPU to compute the value of the forward propagation. Here we generate 4 observations and split them over the GPUs.
+Using the `split*and*load` function introduced in :numref:`sec*multi*gpu` we can divide a minibatch of data and copy portions to the list of devices provided by the `devices` variable. The network instance *automatically* uses the appropriate GPU to compute the value of the forward propagation. Here we generate 4 observations and split them over the GPUs.
 :end_tab:
 
 ```{.python .input}
 x = np.random.uniform(size=(4, 1, 28, 28))
-x_shards = gluon.utils.split_and_load(x, devices)
-net(x_shards[0]), net(x_shards[1])
+x*shards = gluon.utils.split*and_load(x, devices)
+net(x*shards[0]), net(x*shards[1])
 ```
 
 :begin_tab:`mxnet`
@@ -138,28 +138,28 @@ weight.data(devices[0])[0], weight.data(devices[1])[0]
 ```
 
 :begin_tab:`mxnet`
-Next, let us replace the code to evaluate the accuracy by one that works in parallel across multiple devices. This serves as a replacement of the `evaluate_accuracy_gpu` function from :numref:`sec_lenet`. The main difference is that we split a minibatch before invoking the network. All else is essentially identical.
+Next, let us replace the code to evaluate the accuracy by one that works in parallel across multiple devices. This serves as a replacement of the `evaluate*accuracy*gpu` function from :numref:`sec_lenet`. The main difference is that we split a minibatch before invoking the network. All else is essentially identical.
 :end_tab:
 
 ```{.python .input}
-#@save
-def evaluate_accuracy_gpus(net, data_iter, split_f=d2l.split_batch):
+# @save
+def evaluate*accuracy*gpus(net, data*iter, split*f=d2l.split_batch):
     """Compute the accuracy for a model on a dataset using multiple GPUs."""
     # Query the list of devices
-    devices = list(net.collect_params().values())[0].list_ctx()
+    devices = list(net.collect*params().values())[0].list*ctx()
     # No. of correct predictions, no. of predictions
     metric = d2l.Accumulator(2)
     for features, labels in data_iter:
-        X_shards, y_shards = split_f(features, labels, devices)
+        X*shards, y*shards = split_f(features, labels, devices)
         # Run in parallel
-        pred_shards = [net(X_shard) for X_shard in X_shards]
-        metric.add(sum(float(d2l.accuracy(pred_shard, y_shard)) for
-                       pred_shard, y_shard in zip(
-                           pred_shards, y_shards)), labels.size)
+        pred*shards = [net(X*shard) for X*shard in X*shards]
+        metric.add(sum(float(d2l.accuracy(pred*shard, y*shard)) for
+                       pred*shard, y*shard in zip(
+                           pred*shards, y*shards)), labels.size)
     return metric[0] / metric[1]
 ```
 
-## Training
+# # Training
 
 As before, the training code needs to perform several basic functions for efficient parallelism:
 
@@ -171,9 +171,9 @@ As before, the training code needs to perform several basic functions for effici
 In the end we compute the accuracy (again in parallel) to report the final performance of the network. The training routine is quite similar to implementations in previous chapters, except that we need to split and aggregate data.
 
 ```{.python .input}
-def train(num_gpus, batch_size, lr):
-    train_iter, test_iter = d2l.load_data_fashion_mnist(batch_size)
-    ctx = [d2l.try_gpu(i) for i in range(num_gpus)]
+def train(num*gpus, batch*size, lr):
+    train*iter, test*iter = d2l.load*data*fashion*mnist(batch*size)
+    ctx = [d2l.try*gpu(i) for i in range(num*gpus)]
     net.initialize(init=init.Normal(sigma=0.01), ctx=ctx, force_reinit=True)
     trainer = gluon.Trainer(net.collect_params(), 'sgd',
                             {'learning_rate': lr})
@@ -183,25 +183,25 @@ def train(num_gpus, batch_size, lr):
     for epoch in range(num_epochs):
         timer.start()
         for features, labels in train_iter:
-            X_shards, y_shards = d2l.split_batch(features, labels, ctx)
+            X*shards, y*shards = d2l.split_batch(features, labels, ctx)
             with autograd.record():
-                ls = [loss(net(X_shard), y_shard) for X_shard, y_shard
-                      in zip(X_shards, y_shards)]
+                ls = [loss(net(X*shard), y*shard) for X*shard, y*shard
+                      in zip(X*shards, y*shards)]
             for l in ls:
                 l.backward()
             trainer.step(batch_size)
         npx.waitall()
         timer.stop()
-        animator.add(epoch + 1, (evaluate_accuracy_gpus(net, test_iter),))
+        animator.add(epoch + 1, (evaluate*accuracy*gpus(net, test_iter),))
     print(f'test acc: {animator.Y[0][-1]:.2f}, {timer.avg():.1f} sec/epoch '
           f'on {str(ctx)}')
 ```
 
 ```{.python .input}
-#@tab pytorch
-def train(net, num_gpus, batch_size, lr):
-    train_iter, test_iter = d2l.load_data_fashion_mnist(batch_size)
-    devices = [d2l.try_gpu(i) for i in range(num_gpus)]
+# @tab pytorch
+def train(net, num*gpus, batch*size, lr):
+    train*iter, test*iter = d2l.load*data*fashion*mnist(batch*size)
+    devices = [d2l.try*gpu(i) for i in range(num*gpus)]
     def init_weights(m):
         if type(m) in [nn.Linear, nn.Conv2d]:
             nn.init.normal_(m.weight, std=0.01)
@@ -222,7 +222,7 @@ def train(net, num_gpus, batch_size, lr):
             l.backward()
             trainer.step()
         timer.stop()
-        animator.add(epoch + 1, (d2l.evaluate_accuracy_gpu(net, test_iter),))
+        animator.add(epoch + 1, (d2l.evaluate*accuracy*gpu(net, test_iter),))
     print(f'test acc: {animator.Y[0][-1]:.2f}, {timer.avg():.1f} sec/epoch '
           f'on {str(devices)}')
 ```
@@ -230,28 +230,28 @@ def train(net, num_gpus, batch_size, lr):
 Let us see how this works in practice. As a warm-up we train the network on a single GPU.
 
 ```{.python .input}
-train(num_gpus=1, batch_size=256, lr=0.1)
+train(num*gpus=1, batch*size=256, lr=0.1)
 ```
 
 ```{.python .input}
-#@tab pytorch
-train(net, num_gpus=1, batch_size=256, lr=0.1)
+# @tab pytorch
+train(net, num*gpus=1, batch*size=256, lr=0.1)
 ```
 
 Next we use 2 GPUs for training. Compared with LeNet 
-evaluated in :numref:`sec_multi_gpu`,
+evaluated in :numref:`sec*multi*gpu`,
 the model for ResNet-18 is considerably more complex. This is where parallelization shows its advantage. The time for computation is meaningfully larger than the time for synchronizing parameters. This improves scalability since the overhead for parallelization is less relevant.
 
 ```{.python .input}
-train(num_gpus=2, batch_size=512, lr=0.2)
+train(num*gpus=2, batch*size=512, lr=0.2)
 ```
 
 ```{.python .input}
-#@tab pytorch
-train(net, num_gpus=2, batch_size=512, lr=0.2)
+# @tab pytorch
+train(net, num*gpus=2, batch*size=512, lr=0.2)
 ```
 
-## Summary
+# # Summary
 
 :begin_tab:`mxnet`
 * Gluon provides primitives for model initialization across multiple devices by providing a context list.
@@ -262,7 +262,7 @@ train(net, num_gpus=2, batch_size=512, lr=0.2)
 
 
 
-## Exercises
+# # Exercises
 
 :begin_tab:`mxnet`
 1. This section uses ResNet-18. Try different epochs, batch sizes, and learning rates. Use more GPUs for computation. What happens if you try this with 16 GPUs (e.g., on an AWS p2.16xlarge instance)?

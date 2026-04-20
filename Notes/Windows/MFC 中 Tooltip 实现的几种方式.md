@@ -2,7 +2,7 @@
 
 方法一：  
 利用CWnd本身自身支持的tooptip来实现，这种方法适用给控件增加tooltip，非常方便和简单方法如下：  
-1、在窗口中增加消息映射ON\_NOTIFY\_EX(TTN\_NEEDTEXT, 0, SetTipText)  
+1、在窗口中增加消息映射ON\*NOTIFY\*EX(TTN\_NEEDTEXT, 0, SetTipText)  
 SetTipText是个回调函数，名字叫什么无所谓，符合原型就行了，原型下面会说。  
     
 2、EnableToolTips(TRUE)，使用这个方法调用这个函数是必不可少的.建议在CDialog::OnInitDialog调用。
@@ -24,10 +24,10 @@ BOOL CWndYour::SetTipText(UINT id, NMHDR *pTTTStruct, LRESULT *pResult)
 
         switch(nID)
         {
-            case(IDC_YOUR_CONTROL1)                  
+            case(IDC*YOUR*CONTROL1)                  
             strcpy(pTTT->lpszText, your_string1);    
             break;  
-            case(IDC_YOUR_CONTROL2)  
+            case(IDC*YOUR*CONTROL2)  
             //设置相应的显示字串  
             break;  
             default:
@@ -50,7 +50,7 @@ BOOL CWndYour::SetTipText(UINT id, NMHDR *pTTTStruct, LRESULT *pResult)
 //创建m\_tooltip  
 m_tooltip.Create(pwnd);
 //将CToolTipCtrl与相应的控件对应起来  
-m_tooltip.AddTool(pwnd, TTS\_ALWAYSTIP);
+m*tooltip.AddTool(pwnd, TTS\*ALWAYSTIP);
 //设定文字的颜色  
 m_tooltipSetTipTextColor(RGB(0,0,255));  
   
@@ -61,7 +61,7 @@ m_tooltip.SetDelayTime(150);
 3、重载PreTranslateMessage(MSG\* pMsg)函数,增加如下代码:  
 
 ```cpp
-if(m_tooltip.m_hWnd!=NULL)
+if(m*tooltip.m*hWnd!=NULL)
   m_tooltip.RelayEvent(pMsg);
 ```
 
@@ -79,13 +79,13 @@ if(m_tooltip.m_hWnd!=NULL)
 ```cpp
 // 常量定义
 // tooltip
-#define TTS_BALLOON  0x40
-#define TTS_CLOSE  0x80
-#define TTS_NOFADE  0x20
+# define TTS_BALLOON  0x40
+# define TTS_CLOSE  0x80
+# define TTS_NOFADE  0x20
 
- m_tooltip.Create(this, TTS_BALLOON | TTS_ALWAYSTIP | TTS_CLOSE | TTS_NOFADE);
+ m*tooltip.Create(this, TTS*BALLOON | TTS*ALWAYSTIP | TTS*CLOSE | TTS_NOFADE);
  m_tooltip.Activate(TRUE);
- m_tooltip.AddTool(this, DEFINE_INFO_FLOATTIP);
+ m*tooltip.AddTool(this, DEFINE*INFO_FLOATTIP);
  m_tooltip.SetTipTextColor(RGB(0, 0, 255));
  m_tooltip.SetTipBkColor(RGB(255,0,255));
  m_tooltip.SetDelayTime(150);

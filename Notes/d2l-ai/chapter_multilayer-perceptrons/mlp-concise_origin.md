@@ -1,5 +1,5 @@
 # Concise Implementation of Multilayer Perceptrons
-:label:`sec_mlp_concise`
+:label:`sec*mlp*concise`
 
 As you might expect, by relying on the high-level APIs,
 we can implement MLPs even more concisely.
@@ -12,23 +12,23 @@ npx.set_np()
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 from d2l import torch as d2l
 import torch
 from torch import nn
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 from d2l import tensorflow as d2l
 import tensorflow as tf
 ```
 
-## Model
+# # Model
 
 As compared with our concise implementation
 of softmax regression implementation
-(:numref:`sec_softmax_concise`),
+(:numref:`sec*softmax*concise`),
 the only difference is that we add
 *two* fully-connected layers
 (previously, we added *one*).
@@ -45,7 +45,7 @@ net.initialize(init.Normal(sigma=0.01))
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 net = nn.Sequential(nn.Flatten(),
                     nn.Linear(784, 256),
                     nn.ReLU(),
@@ -59,7 +59,7 @@ net.apply(init_weights)
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 net = tf.keras.models.Sequential([
     tf.keras.layers.Flatten(),
     tf.keras.layers.Dense(256, activation='relu'),
@@ -73,37 +73,37 @@ matters concerning the model architecture
 from orthogonal considerations.
 
 ```{.python .input}
-batch_size, lr, num_epochs = 256, 0.1, 10
+batch*size, lr, num*epochs = 256, 0.1, 10
 loss = gluon.loss.SoftmaxCrossEntropyLoss()
-trainer = gluon.Trainer(net.collect_params(), 'sgd', {'learning_rate': lr})
+trainer = gluon.Trainer(net.collect*params(), 'sgd', {'learning*rate': lr})
 ```
 
 ```{.python .input}
-#@tab pytorch
-batch_size, lr, num_epochs = 256, 0.1, 10
+# @tab pytorch
+batch*size, lr, num*epochs = 256, 0.1, 10
 loss = nn.CrossEntropyLoss()
 trainer = torch.optim.SGD(net.parameters(), lr=lr)
 ```
 
 ```{.python .input}
-#@tab tensorflow
-batch_size, lr, num_epochs = 256, 0.1, 10
+# @tab tensorflow
+batch*size, lr, num*epochs = 256, 0.1, 10
 loss = tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True)
 trainer = tf.keras.optimizers.SGD(learning_rate=lr)
 ```
 
 ```{.python .input}
-#@tab all
-train_iter, test_iter = d2l.load_data_fashion_mnist(batch_size)
-d2l.train_ch3(net, train_iter, test_iter, loss, num_epochs, trainer)
+# @tab all
+train*iter, test*iter = d2l.load*data*fashion*mnist(batch*size)
+d2l.train*ch3(net, train*iter, test*iter, loss, num*epochs, trainer)
 ```
 
-## Summary
+# # Summary
 
 * Using high-level APIs, we can implement MLPs much more concisely.
 * For the same classification problem, the implementation of an MLP is the same as that of softmax regression except for additional hidden layers with activation functions.
 
-## Exercises
+# # Exercises
 
 1. Try adding different numbers of hidden layers (you may also modify the learning rate). What setting works best? 
 1. Try out different activation functions. Which one works best?

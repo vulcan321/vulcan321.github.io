@@ -8,7 +8,7 @@
 还被沿用到更高级的算法中。
 让我们从简单的一维梯度下降开始。
 
-## 一维梯度下降
+# # 一维梯度下降
 
 为什么梯度下降算法可以优化目标函数？
 一维中的梯度下降给我们很好的启发。
@@ -53,7 +53,7 @@ npx.set_np()
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 %matplotlib inline
 from d2l import torch as d2l
 import numpy as np
@@ -61,7 +61,7 @@ import torch
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 %matplotlib inline
 from d2l import tensorflow as d2l
 import numpy as np
@@ -69,7 +69,7 @@ import tensorflow as tf
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 %matplotlib inline
 from d2l import paddle as d2l
 import warnings
@@ -79,7 +79,7 @@ import paddle
 ```
 
 ```{.python .input}
-#@tab all
+# @tab all
 def f(x):  # 目标函数
     return x ** 2
 
@@ -91,7 +91,7 @@ def f_grad(x):  # 目标函数的梯度(导数)
 使用梯度下降法迭代$x$共10次，我们可以看到，$x$的值最终将接近最优解。
 
 ```{.python .input}
-#@tab mxnet, pytorch, tensorflow
+# @tab mxnet, pytorch, tensorflow
 def gd(eta, f_grad):
     x = 10.0
     results = [x]
@@ -105,7 +105,7 @@ results = gd(0.2, f_grad)
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 def gd(eta, f_grad):
     x = 10.0
     results = [x]
@@ -121,30 +121,30 @@ results = gd(0.2, f_grad)
 对进行$x$优化的过程可以绘制如下。
 
 ```{.python .input}
-#@tab mxnet, pytorch, tensorflow
+# @tab mxnet, pytorch, tensorflow
 def show_trace(results, f):
     n = max(abs(min(results)), abs(max(results)))
     f_line = d2l.arange(-n, n, 0.01)
     d2l.set_figsize()
-    d2l.plot([f_line, results], [[f(x) for x in f_line], [
+    d2l.plot([f*line, results], [[f(x) for x in f*line], [
         f(x) for x in results]], 'x', 'f(x)', fmts=['-', '-o'])
 
 show_trace(results, f)
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 def show_trace(results, f):
     n = max(abs(min(results)), abs(max(results)))
     f_line = d2l.arange(-n, n, 0.01, dtype='float32')
     d2l.set_figsize()
-    d2l.plot([f_line, results], [[f(x) for x in f_line], [
+    d2l.plot([f*line, results], [[f(x) for x in f*line], [
         f(x) for x in results]], 'x', 'f(x)', fmts=['-', '-o'])
 
 show_trace(results, f)
 ```
 
-### 学习率
+## # 学习率
 :label:`subsec_gd-learningrate`
 
 *学习率*（learning rate）决定目标函数能否收敛到局部最小值，以及何时收敛到最小值。
@@ -154,8 +154,8 @@ show_trace(results, f)
 如下所示，尽管经过了10个步骤，我们仍然离最优解很远。
 
 ```{.python .input}
-#@tab all
-show_trace(gd(0.05, f_grad), f)
+# @tab all
+show*trace(gd(0.05, f*grad), f)
 ```
 
 相反，如果我们使用过高的学习率，$\left|\eta f'(x)\right|$对于一阶泰勒展开式可能太大。
@@ -164,11 +164,11 @@ show_trace(gd(0.05, f_grad), f)
 例如，当学习率为$\eta=1.1$时，$x$超出了最优解$x=0$并逐渐发散。
 
 ```{.python .input}
-#@tab all
-show_trace(gd(1.1, f_grad), f)
+# @tab all
+show*trace(gd(1.1, f*grad), f)
 ```
 
-### 局部最小值
+## # 局部最小值
 
 为了演示非凸函数的梯度下降，考虑函数$f(x) = x \cdot \cos(cx)$，其中$c$为某常数。
 这个函数有无穷多个局部最小值。
@@ -176,7 +176,7 @@ show_trace(gd(1.1, f_grad), f)
 下面的例子说明了（不切实际的）高学习率如何导致较差的局部最小值。
 
 ```{.python .input}
-#@tab all
+# @tab all
 c = d2l.tensor(0.15 * np.pi)
 
 def f(x):  # 目标函数
@@ -185,18 +185,18 @@ def f(x):  # 目标函数
 def f_grad(x):  # 目标函数的梯度
     return d2l.cos(c * x) - c * x * d2l.sin(c * x)
 
-show_trace(gd(2, f_grad), f)
+show*trace(gd(2, f*grad), f)
 ```
 
-## 多元梯度下降
+# # 多元梯度下降
 
-现在我们对单变量的情况有了更好的理解，让我们考虑一下$\mathbf{x} = [x_1, x_2, \ldots, x_d]^\top$的情况。
+现在我们对单变量的情况有了更好的理解，让我们考虑一下$\mathbf{x} = [x*1, x*2, \ldots, x_d]^\top$的情况。
 即目标函数$f: \mathbb{R}^d \to \mathbb{R}$将向量映射成标量。
 相应地，它的梯度也是多元的，它是一个由$d$个偏导数组成的向量：
 
-$$\nabla f(\mathbf{x}) = \bigg[\frac{\partial f(\mathbf{x})}{\partial x_1}, \frac{\partial f(\mathbf{x})}{\partial x_2}, \ldots, \frac{\partial f(\mathbf{x})}{\partial x_d}\bigg]^\top.$$
+$$\nabla f(\mathbf{x}) = \bigg[\frac{\partial f(\mathbf{x})}{\partial x*1}, \frac{\partial f(\mathbf{x})}{\partial x*2}, \ldots, \frac{\partial f(\mathbf{x})}{\partial x_d}\bigg]^\top.$$
 
-梯度中的每个偏导数元素$\partial f(\mathbf{x})/\partial x_i$代表了当输入$x_i$时$f$在$\mathbf{x}$处的变化率。
+梯度中的每个偏导数元素$\partial f(\mathbf{x})/\partial x*i$代表了当输入$x*i$时$f$在$\mathbf{x}$处的变化率。
 和先前单变量的情况一样，我们可以对多变量函数使用相应的泰勒近似来思考。
 具体来说，
 
@@ -210,10 +210,10 @@ $$f(\mathbf{x} + \boldsymbol{\epsilon}) = f(\mathbf{x}) + \mathbf{\boldsymbol{\e
 $$\mathbf{x} \leftarrow \mathbf{x} - \eta \nabla f(\mathbf{x}).$$
 
 这个算法在实践中的表现如何呢？
-我们构造一个目标函数$f(\mathbf{x})=x_1^2+2x_2^2$，
-并有二维向量$\mathbf{x} = [x_1, x_2]^\top$作为输入，
+我们构造一个目标函数$f(\mathbf{x})=x*1^2+2x*2^2$，
+并有二维向量$\mathbf{x} = [x*1, x*2]^\top$作为输入，
 标量作为输出。
-梯度由$\nabla f(\mathbf{x}) = [2x_1, 4x_2]^\top$给出。
+梯度由$\nabla f(\mathbf{x}) = [2x*1, 4x*2]^\top$给出。
 我们将从初始位置$[-5, -2]$通过梯度下降观察$\mathbf{x}$的轨迹。
 
 我们还需要两个辅助函数：
@@ -221,8 +221,8 @@ $$\mathbf{x} \leftarrow \mathbf{x} - \eta \nabla f(\mathbf{x}).$$
 第二个函数会显示$\mathbf{x}$的轨迹。
 
 ```{.python .input}
-#@tab mxnet, pytorch, tensorflow
-def train_2d(trainer, steps=20, f_grad=None):  #@save
+# @tab mxnet, pytorch, tensorflow
+def train*2d(trainer, steps=20, f*grad=None):  # @save
     """用定制的训练机优化2D目标函数"""
     # s1和s2是稍后将使用的内部状态变量
     x1, x2, s1, s2 = -5, -2, 0, 0
@@ -236,20 +236,20 @@ def train_2d(trainer, steps=20, f_grad=None):  #@save
     print(f'epoch {i + 1}, x1: {float(x1):f}, x2: {float(x2):f}')
     return results
 
-def show_trace_2d(f, results):  #@save
+def show*trace*2d(f, results):  # @save
     """显示优化过程中2D变量的轨迹"""
     d2l.set_figsize()
-    d2l.plt.plot(*zip(*results), '-o', color='#ff7f0e')
+    d2l.plt.plot(*zip(*results), '-o', color='# ff7f0e')
     x1, x2 = d2l.meshgrid(d2l.arange(-5.5, 1.0, 0.1),
                           d2l.arange(-3.0, 1.0, 0.1))
-    d2l.plt.contour(x1, x2, f(x1, x2), colors='#1f77b4')
+    d2l.plt.contour(x1, x2, f(x1, x2), colors='# 1f77b4')
     d2l.plt.xlabel('x1')
     d2l.plt.ylabel('x2')
 ```
 
 ```{.python .input}
-#@tab paddle
-def train_2d(trainer, steps=20, f_grad=None):  #@save
+# @tab paddle
+def train*2d(trainer, steps=20, f*grad=None):  # @save
     """用定制的训练机优化2D目标函数"""
     # s1和s2是稍后将使用的内部状态变量
     x1, x2, s1, s2 = -5, -2, 0, 0
@@ -263,13 +263,13 @@ def train_2d(trainer, steps=20, f_grad=None):  #@save
     print(f'epoch {i + 1}, x1: {float(x1):f}, x2: {float(x2):f}')
     return results
 
-def show_trace_2d(f, results):  #@save
+def show*trace*2d(f, results):  # @save
     """显示优化过程中2D变量的轨迹"""
     d2l.set_figsize()
-    d2l.plt.plot(*zip(*results), '-o', color='#ff7f0e')
+    d2l.plt.plot(*zip(*results), '-o', color='# ff7f0e')
     x1, x2 = d2l.meshgrid(d2l.arange(-5.5, 1.0, 0.1, dtype='float32'),
                           d2l.arange(-3.0, 1.0, 0.1, dtype='float32'))
-    d2l.plt.contour(x1, x2, f(x1, x2), colors='#1f77b4')
+    d2l.plt.contour(x1, x2, f(x1, x2), colors='# 1f77b4')
     d2l.plt.xlabel('x1')
     d2l.plt.ylabel('x2')
 ```
@@ -279,22 +279,22 @@ def show_trace_2d(f, results):  #@save
 虽然进展相当顺利，但相当缓慢。
 
 ```{.python .input}
-#@tab all
+# @tab all
 def f_2d(x1, x2):  # 目标函数
     return x1 ** 2 + 2 * x2 ** 2
 
-def f_2d_grad(x1, x2):  # 目标函数的梯度
+def f*2d*grad(x1, x2):  # 目标函数的梯度
     return (2 * x1, 4 * x2)
 
-def gd_2d(x1, x2, s1, s2, f_grad):
+def gd*2d(x1, x2, s1, s2, f*grad):
     g1, g2 = f_grad(x1, x2)
     return (x1 - eta * g1, x2 - eta * g2, 0, 0)
 
 eta = 0.1
-show_trace_2d(f_2d, train_2d(gd_2d, f_grad=f_2d_grad))
+show*trace*2d(f*2d, train*2d(gd*2d, f*grad=f*2d*grad))
 ```
 
-## 自适应方法
+# # 自适应方法
 
 正如我们在 :numref:`subsec_gd-learningrate`中所看到的，选择“恰到好处”的学习率$\eta$是很棘手的。
 如果我们把它选得太小，就没有什么进展；如果太大，得到的解就会振荡，甚至可能发散。
@@ -302,7 +302,7 @@ show_trace_2d(f_2d, train_2d(gd_2d, f_grad=f_2d_grad))
 除了考虑目标函数的值和梯度、还考虑它的曲率的二阶方法可以帮我们解决这个问题。
 虽然由于计算代价的原因，这些方法不能直接应用于深度学习，但它们为如何设计高级优化算法提供了有用的思维直觉，这些算法可以模拟下面概述的算法的许多理想特性。
 
-### 牛顿法
+## # 牛顿法
 
 回顾一些函数$f: \mathbb{R}^d \rightarrow \mathbb{R}$的泰勒展开式，事实上我们可以把它写成
 
@@ -336,7 +336,7 @@ $$\nabla f(\mathbf{x}) + \mathbf{H} \boldsymbol{\epsilon} = 0 \text{ and hence }
 我们可以看到经过几次迭代后，得到了$x=0$处的全局最小值。
 
 ```{.python .input}
-#@tab all
+# @tab all
 c = d2l.tensor(0.5)
 
 def f(x):  # O目标函数
@@ -352,7 +352,7 @@ def newton(eta=1):
     x = 10.0
     results = [x]
     for i in range(10):
-        x -= eta * f_grad(x) / f_hess(x)
+        x -= eta * f*grad(x) / f*hess(x)
         results.append(float(x))
     print('epoch 10, x:', x)
     return results
@@ -367,7 +367,7 @@ show_trace(newton(), f)
 让我们看看实践中会发生什么。
 
 ```{.python .input}
-#@tab all
+# @tab all
 c = d2l.tensor(0.15 * np.pi)
 
 def f(x):  # 目标函数
@@ -389,11 +389,11 @@ show_trace(newton(), f)
 如我们所见，我们有了一个相当高效的算法。
 
 ```{.python .input}
-#@tab all
+# @tab all
 show_trace(newton(0.5), f)
 ```
 
-### 收敛性分析
+## # 收敛性分析
 
 在此，我们以部分目标凸函数$f$为例，分析它们的牛顿法收敛速度。
 这些目标凸函数三次可微，而且二阶导数不为零，即$f'' > 0$。
@@ -424,7 +424,7 @@ $$\left|e^{(k+1)}\right| \leq c (e^{(k)})^2.$$
 请注意，我们无法估计整体收敛的速度，但是一旦我们接近极小值，收敛将变得非常快。
 另外，这种分析要求$f$在高阶导数上表现良好，即确保$f$在如何变化它的值方面没有任何“超常”的特性。
 
-### 预处理
+## # 预处理
 
 计算和存储完整的Hessian非常昂贵，而改善这个问题的一种方法是“预处理”。
 它回避了计算整个Hessian，而只计算“对角线”项，即如下的算法更新：
@@ -439,7 +439,7 @@ $$\mathbf{x} \leftarrow \mathbf{x} - \eta \mathrm{diag}(\mathbf{H})^{-1} \nabla 
 梯度下降的有效预处理相当于为每个变量选择不同的学习率（矢量$\mathbf{x}$的坐标）。
 我们将在后面一节看到，预处理推动了随机梯度下降优化算法的一些创新。
 
-### 梯度下降和线搜索
+## # 梯度下降和线搜索
 
 梯度下降的一个关键问题是我们可能会超过目标或进展不足，
 解决这一问题的简单方法是结合使用线搜索和梯度下降。
@@ -450,7 +450,7 @@ $$\mathbf{x} \leftarrow \mathbf{x} - \eta \mathrm{diag}(\mathbf{H})^{-1} \nabla 
 然而，对深度学习而言，这不太可行。
 因为线搜索的每一步都需要评估整个数据集上的目标函数，实现它的方式太昂贵了。
 
-## 小结
+# # 小结
 
 * 学习率的大小很重要：学习率太大会使模型发散，学习率太小会没有进展。
 * 梯度下降会可能陷入局部极小值，而得不到全局最小值。
@@ -459,7 +459,7 @@ $$\mathbf{x} \leftarrow \mathbf{x} - \eta \mathrm{diag}(\mathbf{H})^{-1} \nabla 
 * 牛顿法在凸问题中一旦开始正常工作，速度就会快得多。
 * 对于非凸问题，不要不作任何调整就使用牛顿法。
 
-## 练习
+# # 练习
 
 1. 用不同的学习率和目标函数进行梯度下降实验。
 1. 在区间$[a, b]$中实现线搜索以最小化凸函数。

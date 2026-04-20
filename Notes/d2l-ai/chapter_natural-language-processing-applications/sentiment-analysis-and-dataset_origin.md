@@ -49,38 +49,38 @@ npx.set_np()
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 from d2l import torch as d2l
 import torch
 from torch import nn
 import os
 ```
 
-##  Reading the Dataset
+# #  Reading the Dataset
 
 First, download and extract this IMDb review dataset
 in the path `../data/aclImdb`.
 
 ```{.python .input}
-#@tab all
-#@save
+# @tab all
+# @save
 d2l.DATA_HUB['aclImdb'] = (
     'http://ai.stanford.edu/~amaas/data/sentiment/aclImdb_v1.tar.gz',
     '01ada507287d82875905620988597833ad4e0903')
 
-data_dir = d2l.download_extract('aclImdb', 'aclImdb')
+data*dir = d2l.download*extract('aclImdb', 'aclImdb')
 ```
 
 Next, read the training and test datasets. Each example is a review and its label: 1 for "positive" and 0 for "negative".
 
 ```{.python .input}
-#@tab all
-#@save
-def read_imdb(data_dir, is_train):
+# @tab all
+# @save
+def read*imdb(data*dir, is_train):
     """Read the IMDb review dataset text sequences and labels."""
     data, labels = [], []
     for label in ('pos', 'neg'):
-        folder_name = os.path.join(data_dir, 'train' if is_train else 'test',
+        folder*name = os.path.join(data*dir, 'train' if is_train else 'test',
                                    label)
         for file in os.listdir(folder_name):
             with open(os.path.join(folder_name, file), 'rb') as f:
@@ -89,22 +89,22 @@ def read_imdb(data_dir, is_train):
                 labels.append(1 if label == 'pos' else 0)
     return data, labels
 
-train_data = read_imdb(data_dir, is_train=True)
+train*data = read*imdb(data*dir, is*train=True)
 print('# trainings:', len(train_data[0]))
-for x, y in zip(train_data[0][:3], train_data[1][:3]):
+for x, y in zip(train*data[0][:3], train*data[1][:3]):
     print('label:', y, 'review:', x[0:60])
 ```
 
-## Preprocessing the Dataset
+# # Preprocessing the Dataset
 
 Treating each word as a token
 and filtering out words that appear less than 5 times,
 we create a vocabulary out of the training dataset.
 
 ```{.python .input}
-#@tab all
-train_tokens = d2l.tokenize(train_data[0], token='word')
-vocab = d2l.Vocab(train_tokens, min_freq=5, reserved_tokens=['<pad>'])
+# @tab all
+train*tokens = d2l.tokenize(train*data[0], token='word')
+vocab = d2l.Vocab(train*tokens, min*freq=5, reserved_tokens=['<pad>'])
 ```
 
 After tokenization,
@@ -112,7 +112,7 @@ let's plot the histogram of
 review lengths in tokens.
 
 ```{.python .input}
-#@tab all
+# @tab all
 d2l.set_figsize()
 d2l.plt.xlabel('# tokens per review')
 d2l.plt.ylabel('count')
@@ -127,23 +127,23 @@ we set the length of each review to 500 with truncation and padding,
 which is similar to 
 the preprocessing step 
 for the machine translation dataset
-in :numref:`sec_machine_translation`.
+in :numref:`sec*machine*translation`.
 
 ```{.python .input}
-#@tab all
+# @tab all
 num_steps = 500  # sequence length
-train_features = d2l.tensor([d2l.truncate_pad(
-    vocab[line], num_steps, vocab['<pad>']) for line in train_tokens])
+train*features = d2l.tensor([d2l.truncate*pad(
+    vocab[line], num*steps, vocab['<pad>']) for line in train*tokens])
 print(train_features.shape)
 ```
 
-## Creating Data Iterators
+# # Creating Data Iterators
 
 Now we can create data iterators.
 At each iteration, a minibatch of examples are returned.
 
 ```{.python .input}
-train_iter = d2l.load_array((train_features, train_data[1]), 64)
+train*iter = d2l.load*array((train*features, train*data[1]), 64)
 
 for X, y in train_iter:
     print('X:', X.shape, ', y:', y.shape)
@@ -152,8 +152,8 @@ print('# batches:', len(train_iter))
 ```
 
 ```{.python .input}
-#@tab pytorch
-train_iter = d2l.load_array((train_features, torch.tensor(train_data[1])), 64)
+# @tab pytorch
+train*iter = d2l.load*array((train*features, torch.tensor(train*data[1])), 64)
 
 for X, y in train_iter:
     print('X:', X.shape, ', y:', y.shape)
@@ -161,62 +161,62 @@ for X, y in train_iter:
 print('# batches:', len(train_iter))
 ```
 
-## Putting All Things Together
+# # Putting All Things Together
 
-Last, we wrap up the above steps into the `load_data_imdb` function.
+Last, we wrap up the above steps into the `load*data*imdb` function.
 It returns training and test data iterators and the vocabulary of the IMDb review dataset.
 
 ```{.python .input}
-#@save
-def load_data_imdb(batch_size, num_steps=500):
+# @save
+def load*data*imdb(batch*size, num*steps=500):
     """Return data iterators and the vocabulary of the IMDb review dataset."""
-    data_dir = d2l.download_extract('aclImdb', 'aclImdb')
-    train_data = read_imdb(data_dir, True)
-    test_data = read_imdb(data_dir, False)
-    train_tokens = d2l.tokenize(train_data[0], token='word')
-    test_tokens = d2l.tokenize(test_data[0], token='word')
-    vocab = d2l.Vocab(train_tokens, min_freq=5)
-    train_features = np.array([d2l.truncate_pad(
-        vocab[line], num_steps, vocab['<pad>']) for line in train_tokens])
-    test_features = np.array([d2l.truncate_pad(
-        vocab[line], num_steps, vocab['<pad>']) for line in test_tokens])
-    train_iter = d2l.load_array((train_features, train_data[1]), batch_size)
-    test_iter = d2l.load_array((test_features, test_data[1]), batch_size,
+    data*dir = d2l.download*extract('aclImdb', 'aclImdb')
+    train*data = read*imdb(data_dir, True)
+    test*data = read*imdb(data_dir, False)
+    train*tokens = d2l.tokenize(train*data[0], token='word')
+    test*tokens = d2l.tokenize(test*data[0], token='word')
+    vocab = d2l.Vocab(train*tokens, min*freq=5)
+    train*features = np.array([d2l.truncate*pad(
+        vocab[line], num*steps, vocab['<pad>']) for line in train*tokens])
+    test*features = np.array([d2l.truncate*pad(
+        vocab[line], num*steps, vocab['<pad>']) for line in test*tokens])
+    train*iter = d2l.load*array((train*features, train*data[1]), batch_size)
+    test*iter = d2l.load*array((test*features, test*data[1]), batch_size,
                                is_train=False)
-    return train_iter, test_iter, vocab
+    return train*iter, test*iter, vocab
 ```
 
 ```{.python .input}
-#@tab pytorch
-#@save
-def load_data_imdb(batch_size, num_steps=500):
+# @tab pytorch
+# @save
+def load*data*imdb(batch*size, num*steps=500):
     """Return data iterators and the vocabulary of the IMDb review dataset."""
-    data_dir = d2l.download_extract('aclImdb', 'aclImdb')
-    train_data = read_imdb(data_dir, True)
-    test_data = read_imdb(data_dir, False)
-    train_tokens = d2l.tokenize(train_data[0], token='word')
-    test_tokens = d2l.tokenize(test_data[0], token='word')
-    vocab = d2l.Vocab(train_tokens, min_freq=5)
-    train_features = torch.tensor([d2l.truncate_pad(
-        vocab[line], num_steps, vocab['<pad>']) for line in train_tokens])
-    test_features = torch.tensor([d2l.truncate_pad(
-        vocab[line], num_steps, vocab['<pad>']) for line in test_tokens])
-    train_iter = d2l.load_array((train_features, torch.tensor(train_data[1])),
+    data*dir = d2l.download*extract('aclImdb', 'aclImdb')
+    train*data = read*imdb(data_dir, True)
+    test*data = read*imdb(data_dir, False)
+    train*tokens = d2l.tokenize(train*data[0], token='word')
+    test*tokens = d2l.tokenize(test*data[0], token='word')
+    vocab = d2l.Vocab(train*tokens, min*freq=5)
+    train*features = torch.tensor([d2l.truncate*pad(
+        vocab[line], num*steps, vocab['<pad>']) for line in train*tokens])
+    test*features = torch.tensor([d2l.truncate*pad(
+        vocab[line], num*steps, vocab['<pad>']) for line in test*tokens])
+    train*iter = d2l.load*array((train*features, torch.tensor(train*data[1])),
                                 batch_size)
-    test_iter = d2l.load_array((test_features, torch.tensor(test_data[1])),
+    test*iter = d2l.load*array((test*features, torch.tensor(test*data[1])),
                                batch_size,
                                is_train=False)
-    return train_iter, test_iter, vocab
+    return train*iter, test*iter, vocab
 ```
 
-## Summary
+# # Summary
 
 * Sentiment analysis studies people's sentiments in their produced text, which is considered as a text classification problem that transforms a varying-length text sequence
 into a fixed-length text category.
 * After preprocessing, we can load Stanford's large movie review dataset (IMDb review dataset) into data iterators with a vocabulary.
 
 
-## Exercises
+# # Exercises
 
 
 1. What hyperparameters in this section can we modify to accelerate training sentiment analysis models?

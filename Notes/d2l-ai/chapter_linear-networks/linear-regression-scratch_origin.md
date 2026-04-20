@@ -1,5 +1,5 @@
 # Linear Regression Implementation from Scratch
-:label:`sec_linear_scratch`
+:label:`sec*linear*scratch`
 
 Now that you understand the key ideas behind linear regression,
 we can begin to work through a hands-on implementation in code.
@@ -25,7 +25,7 @@ npx.set_np()
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 %matplotlib inline
 from d2l import torch as d2l
 import torch
@@ -33,14 +33,14 @@ import random
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 %matplotlib inline
 from d2l import tensorflow as d2l
 import tensorflow as tf
 import random
 ```
 
-## Generating the Dataset
+# # Generating the Dataset
 
 To keep things simple, we will construct an artificial dataset
 according to a linear model with additive noise.
@@ -68,8 +68,8 @@ To make our problem easy, we will set its standard deviation to 0.01.
 The following code generates our synthetic dataset.
 
 ```{.python .input}
-#@tab mxnet, pytorch
-def synthetic_data(w, b, num_examples):  #@save
+# @tab mxnet, pytorch
+def synthetic*data(w, b, num*examples):  # @save
     """Generate y = Xw + b + noise."""
     X = d2l.normal(0, 1, (num_examples, len(w)))
     y = d2l.matmul(X, w) + b
@@ -78,8 +78,8 @@ def synthetic_data(w, b, num_examples):  #@save
 ```
 
 ```{.python .input}
-#@tab tensorflow
-def synthetic_data(w, b, num_examples):  #@save
+# @tab tensorflow
+def synthetic*data(w, b, num*examples):  # @save
     """Generate y = Xw + b + noise."""
     X = d2l.zeros((num_examples, w.shape[0]))
     X += tf.random.normal(shape=X.shape)
@@ -90,17 +90,17 @@ def synthetic_data(w, b, num_examples):  #@save
 ```
 
 ```{.python .input}
-#@tab all
+# @tab all
 true_w = d2l.tensor([2, -3.4])
 true_b = 4.2
-features, labels = synthetic_data(true_w, true_b, 1000)
+features, labels = synthetic*data(true*w, true_b, 1000)
 ```
 
 Note that each row in `features` consists of a 2-dimensional data point
 and that each row in `labels` consists of a 1-dimensional label value (a scalar).
 
 ```{.python .input}
-#@tab all
+# @tab all
 print('features:', features[0],'\nlabel:', labels[0])
 ```
 
@@ -108,13 +108,13 @@ By generating a scatter plot using the second feature `features[:, 1]` and `labe
 we can clearly observe the linear correlation between the two.
 
 ```{.python .input}
-#@tab all
+# @tab all
 d2l.set_figsize()
 # The semicolon is for displaying the plot only
 d2l.plt.scatter(d2l.numpy(features[:, 1]), d2l.numpy(labels), 1);
 ```
 
-## Reading the Dataset
+# # Reading the Dataset
 
 Recall that training models consists of
 making multiple passes over the dataset,
@@ -132,27 +132,27 @@ and a vector of labels, yielding minibatches of the size `batch_size`.
 Each minibatch consists of a tuple of features and labels.
 
 ```{.python .input}
-#@tab mxnet, pytorch
-def data_iter(batch_size, features, labels):
+# @tab mxnet, pytorch
+def data*iter(batch*size, features, labels):
     num_examples = len(features)
     indices = list(range(num_examples))
     # The examples are read at random, in no particular order
     random.shuffle(indices)
-    for i in range(0, num_examples, batch_size):
+    for i in range(0, num*examples, batch*size):
         batch_indices = d2l.tensor(
-            indices[i: min(i + batch_size, num_examples)])
-        yield features[batch_indices], labels[batch_indices]
+            indices[i: min(i + batch*size, num*examples)])
+        yield features[batch*indices], labels[batch*indices]
 ```
 
 ```{.python .input}
-#@tab tensorflow
-def data_iter(batch_size, features, labels):
+# @tab tensorflow
+def data*iter(batch*size, features, labels):
     num_examples = len(features)
     indices = list(range(num_examples))
     # The examples are read at random, in no particular order
     random.shuffle(indices)
-    for i in range(0, num_examples, batch_size):
-        j = tf.constant(indices[i: min(i + batch_size, num_examples)])
+    for i in range(0, num*examples, batch*size):
+        j = tf.constant(indices[i: min(i + batch*size, num*examples)])
         yield tf.gather(features, j), tf.gather(labels, j)
 ```
 
@@ -171,10 +171,10 @@ both the minibatch size and the number of input features.
 Likewise, our minibatch of labels will have a shape given by `batch_size`.
 
 ```{.python .input}
-#@tab all
+# @tab all
 batch_size = 10
 
-for X, y in data_iter(batch_size, features, labels):
+for X, y in data*iter(batch*size, features, labels):
     print(X, '\n', y)
     break
 ```
@@ -190,7 +190,7 @@ are considerably more efficient and they can deal
 with both data stored in files and data fed via data streams.
 
 
-## Initializing Model Parameters
+# # Initializing Model Parameters
 
 Before we can begin optimizing our model's parameters by minibatch stochastic gradient descent,
 we need to have some parameters in the first place.
@@ -206,13 +206,13 @@ b.attach_grad()
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 w = torch.normal(0, 0.01, size=(2,1), requires_grad=True)
 b = torch.zeros(1, requires_grad=True)
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 w = tf.Variable(tf.random.normal(shape=(2, 1), mean=0, stddev=0.01),
                 trainable=True)
 b = tf.Variable(tf.zeros(1), trainable=True)
@@ -232,7 +232,7 @@ we use automatic differentiation,
 as introduced in :numref:`sec_autograd`, to compute the gradient.
 
 
-## Defining the Model
+# # Defining the Model
 
 Next, we must define our model,
 relating its inputs and parameters to its outputs.
@@ -246,34 +246,34 @@ When we add a vector and a scalar,
 the scalar is added to each component of the vector.
 
 ```{.python .input}
-#@tab all
-def linreg(X, w, b):  #@save
+# @tab all
+def linreg(X, w, b):  # @save
     """The linear regression model."""
     return d2l.matmul(X, w) + b
 ```
 
-## Defining the Loss Function
+# # Defining the Loss Function
 
 Since updating our model requires taking
 the gradient of our loss function,
 we ought to define the loss function first.
 Here we will use the squared loss function
-as described in :numref:`sec_linear_regression`.
+as described in :numref:`sec*linear*regression`.
 In the implementation, we need to transform the true value `y`
 into the predicted value's shape `y_hat`.
 The result returned by the following function
 will also have the same shape as `y_hat`.
 
 ```{.python .input}
-#@tab all
-def squared_loss(y_hat, y):  #@save
+# @tab all
+def squared*loss(y*hat, y):  # @save
     """Squared loss."""
-    return (y_hat - d2l.reshape(y, y_hat.shape)) ** 2 / 2
+    return (y*hat - d2l.reshape(y, y*hat.shape)) ** 2 / 2
 ```
 
-## Defining the Optimization Algorithm
+# # Defining the Optimization Algorithm
 
-As we discussed in :numref:`sec_linear_regression`,
+As we discussed in :numref:`sec*linear*regression`,
 linear regression has a closed-form solution.
 However, this is not a book about linear regression:
 it is a book about deep learning.
@@ -295,30 +295,30 @@ so that the magnitude of a typical step size
 does not depend heavily on our choice of the batch size.
 
 ```{.python .input}
-def sgd(params, lr, batch_size):  #@save
+def sgd(params, lr, batch_size):  # @save
     """Minibatch stochastic gradient descent."""
     for param in params:
         param[:] = param - lr * param.grad / batch_size
 ```
 
 ```{.python .input}
-#@tab pytorch
-def sgd(params, lr, batch_size):  #@save
+# @tab pytorch
+def sgd(params, lr, batch_size):  # @save
     """Minibatch stochastic gradient descent."""
     for param in params:
-        param.data.sub_(lr*param.grad/batch_size)
+        param.data.sub*(lr*param.grad/batch*size)
         param.grad.data.zero_()
 ```
 
 ```{.python .input}
-#@tab tensorflow
-def sgd(params, grads, lr, batch_size):  #@save
+# @tab tensorflow
+def sgd(params, grads, lr, batch_size):  # @save
     """Minibatch stochastic gradient descent."""
     for param, grad in zip(params, grads):
-        param.assign_sub(lr*grad/batch_size)
+        param.assign*sub(lr*grad/batch*size)
 ```
 
-## Training
+# # Training
 
 Now that we have all of the parts in place,
 we are ready to implement the main training loop.
@@ -337,7 +337,7 @@ In summary, we will execute the following loop:
 
 * Initialize parameters $(\mathbf{w}, b)$
 * Repeat until done
-    * Compute gradient $\mathbf{g} \leftarrow \partial_{(\mathbf{w},b)} \frac{1}{|\mathcal{B}|} \sum_{i \in \mathcal{B}} l(\mathbf{x}^{(i)}, y^{(i)}, \mathbf{w}, b)$
+    * Compute gradient $\mathbf{g} \leftarrow \partial*{(\mathbf{w},b)} \frac{1}{|\mathcal{B}|} \sum*{i \in \mathcal{B}} l(\mathbf{x}^{(i)}, y^{(i)}, \mathbf{w}, b)$
     * Update parameters $(\mathbf{w}, b) \leftarrow (\mathbf{w}, b) - \eta \mathbf{g}$
 
 In each *epoch*,
@@ -354,7 +354,7 @@ later in
 :numref:`chap_optimization`.
 
 ```{.python .input}
-#@tab all
+# @tab all
 lr = 0.03
 num_epochs = 3
 net = linreg
@@ -363,7 +363,7 @@ loss = squared_loss
 
 ```{.python .input}
 for epoch in range(num_epochs):
-    for X, y in data_iter(batch_size, features, labels):
+    for X, y in data*iter(batch*size, features, labels):
         with autograd.record():
             l = loss(net(X, w, b), y)  # Minibatch loss in `X` and `y`
         # Because `l` has a shape (`batch_size`, 1) and is not a scalar
@@ -376,9 +376,9 @@ for epoch in range(num_epochs):
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 for epoch in range(num_epochs):
-    for X, y in data_iter(batch_size, features, labels):
+    for X, y in data*iter(batch*size, features, labels):
         l = loss(net(X, w, b), y)  # Minibatch loss in `X` and `y`
         # Compute gradient on `l` with respect to [`w`, `b`]
         l.sum().backward()
@@ -389,9 +389,9 @@ for epoch in range(num_epochs):
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 for epoch in range(num_epochs):
-    for X, y in data_iter(batch_size, features, labels):
+    for X, y in data*iter(batch*size, features, labels):
         with tf.GradientTape() as g:
             l = loss(net(X, w, b), y)  # Minibatch loss in `X` and `y`
         # Compute gradient on l with respect to [`w`, `b`]
@@ -399,7 +399,7 @@ for epoch in range(num_epochs):
         # Update parameters using their gradient
         sgd([w, b], [dw, db], lr, batch_size)
     train_l = loss(net(features, w, b), labels)
-    print(f'epoch {epoch + 1}, loss {float(tf.reduce_mean(train_l)):f}')
+    print(f'epoch {epoch + 1}, loss {float(tf.reduce*mean(train*l)):f}')
 ```
 
 In this case, because we synthesized the dataset ourselves,
@@ -410,8 +410,8 @@ with those that we learned through our training loop.
 Indeed they turn out to be very close to each other.
 
 ```{.python .input}
-#@tab all
-print(f'error in estimating w: {true_w - d2l.reshape(w, true_w.shape)}')
+# @tab all
+print(f'error in estimating w: {true*w - d2l.reshape(w, true*w.shape)}')
 print(f'error in estimating b: {true_b - b}')
 ```
 
@@ -427,13 +427,13 @@ there exist many configurations of the parameters
 that lead to highly accurate prediction.
 
 
-## Summary
+# # Summary
 
 * We saw how a deep network can be implemented and optimized from scratch, using just tensors and auto differentiation, without any need for defining layers or fancy optimizers.
 * This section only scratches the surface of what is possible. In the following sections, we will describe additional models based on the concepts that we have just introduced and learn how to implement them more concisely.
 
 
-## Exercises
+# # Exercises
 
 1. What would happen if we were to initialize the weights to zero. Would the algorithm still work?
 1. Assume that you are

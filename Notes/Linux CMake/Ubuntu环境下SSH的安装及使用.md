@@ -20,7 +20,7 @@ sudo apt-get install ssh  或者 sudo apt-get installopenssh-client
 
 (按回车设置默认值)
 
-按缺省生成id\_rsa和id\_rsa.pub文件，分别是私钥和公钥。
+按缺省生成id\*rsa和id\*rsa.pub文件，分别是私钥和公钥。
 
 **说明**：如果sudo apt-get insall ssh出错，无法安装可使用sudo apt-get install openssh-client进行安装。
 
@@ -63,7 +63,7 @@ sudo /etc/init.d/sshresart
 通过修改配置文件/etc/ssh/sshd\_config，可以改ssh登录端口和禁止root登录。改端口可以防止被端口扫描。
 
 ```javascript
-     sudo cp/etc/ssh/sshd_config /etc/ssh/sshd_config.original
+     sudo cp/etc/ssh/sshd*config /etc/ssh/sshd*config.original
      sudochmod a-w /etc/ssh/sshd_config.original
 ```
 
@@ -77,11 +77,11 @@ gedit /etc/ssh/sshd_config
 
 复制
 
-找到#Port 22，去掉注释，修改成一个五位的端口：
+找到# Port 22，去掉注释，修改成一个五位的端口：
 
 Port 22333
 
-找到#PermitRootLogin yes，去掉注释，修改为：
+找到# PermitRootLogin yes，去掉注释，修改为：
 
 PermitRootLogin no
 
@@ -156,7 +156,7 @@ ssh -p 22333 root@216.230.230.105
 
 　　找到 GSSAPI options 这一节，将下面两行注释掉：
 
-　　#GSSAPIAuthentication yes #GSSAPIDelegateCredentials no然后重新启动 ssh 服务即可：
+　　# GSSAPIAuthentication yes # GSSAPIDelegateCredentials no然后重新启动 ssh 服务即可：
 
 ```javascript
 　　sudo /etc/init.d/ssh restart
@@ -187,12 +187,12 @@ ssh -p 22333 root@216.230.230.105
 　　ssh-keygen 命令会生成两个密钥，首先我们需要将公钥改名留在服务器上：
 
 ```javascript
-　　cd ~/.ssh mv id_rsa.pub authorized_keys
+　　cd ~/.ssh mv id*rsa.pub authorized*keys
 ```
 
 复制
 
-        然后将私钥 id\_rsa 从服务器上复制出来，并删除掉服务器上的 id\_rsa 文件。
+        然后将私钥 id\*rsa 从服务器上复制出来，并删除掉服务器上的 id\*rsa 文件。
 
 　　服务器上的设置就做完了，下面的步骤需要在客户端电脑上来做。首先，我们需要将 id\_rsa 文件转化为 PuTTy 支持的格式。这里我们需要利用 PuTTyGEN 这个工具：
 

@@ -48,9 +48,9 @@ void CMyView::OnDraw(CDC \* pDC) 
 ```
 这两个例子显示出来的图形是一样的，都是从屏幕左上角开始的宽和高为200象素的方块，可以看出例子2将逻辑坐标（100，100）映射到了设备坐标（0，0）处，这样做有什么用？滚动窗口使用的就是这种变换。
 
-## 固定比例映射模式：
+# # 固定比例映射模式：
 
-MM_LOENGLISH、MM_HIENGLISH、MM_LOMETRIC、MM_HIMETRIC、MM_TWIPS这一组是Windows提供的重要的固定比例映射模式。
+MM*LOENGLISH、MM*HIENGLISH、MM*LOMETRIC、MM*HIMETRIC、MM_TWIPS这一组是Windows提供的重要的固定比例映射模式。
 
 它们都是x值向右方向递增，y值向下递减，并且无法改变。它们之间的区别在于比例因子见下：（我想书上P53页肯定是印错了，因为通过程序实验x值向右方向也是递增的）
 ```cpp
@@ -72,9 +72,9 @@ void CMyView::OnDraw(CDC \* pDC) 
     pDC->Rectangle(CRect(0,0,4000,-4000));
 }
 ```
-## 可变比例映射模式
-还有一种是可变比例映射模式，MM_ISOTROPIC、MM_ANISOTROPIC。用这种映射模式可以做到当窗口大小发生变化时图形的大小也会相应的发生改变，同样当翻转某个轴的伸展方向时图象也会以另外一个轴为轴心进行翻转，并且我们还可以定义任意的比例因子，怎么样很有用吧。   
-MM_ISOTROPIC、MM_ANISOTROPIC两种映射模式的区别在于MM_ISOTROPIC模式下无论比例因子如何变化纵横比是1：1而M_ANISOTROPIC模式则可以纵横比独立变化。
+# # 可变比例映射模式
+还有一种是可变比例映射模式，MM*ISOTROPIC、MM*ANISOTROPIC。用这种映射模式可以做到当窗口大小发生变化时图形的大小也会相应的发生改变，同样当翻转某个轴的伸展方向时图象也会以另外一个轴为轴心进行翻转，并且我们还可以定义任意的比例因子，怎么样很有用吧。   
+MM*ISOTROPIC、MM*ANISOTROPIC两种映射模式的区别在于MM*ISOTROPIC模式下无论比例因子如何变化纵横比是1：1而M*ANISOTROPIC模式则可以纵横比独立变化。
 
 ```cpp
 // 例子6-4   
@@ -96,7 +96,7 @@ void CMy002View::OnDraw(CDC\* pDC) 
     // TODO: add draw code for native data here   
 }
 ```
-怎么样，屏幕上有一个能跟随窗口大小改变而改变的椭圆。把 pDC->SetMapMode(MM_ANISOTROPIC)；这句改为pDC->SetMapMode(MM_ISOTROPIC)会怎样？大家可以试试。
+怎么样，屏幕上有一个能跟随窗口大小改变而改变的椭圆。把 pDC->SetMapMode(MM*ANISOTROPIC)；这句改为pDC->SetMapMode(MM*ISOTROPIC)会怎样？大家可以试试。
 
 ```
 Dx = ((Lx - WOx) * VEx / WEx) + VOx 
@@ -133,7 +133,7 @@ CDC的DPtoLP函数可以将设备坐标转换成逻辑坐标
 
 ■第一步：用AppWizard创建MyApp6。除了Setp 1 选择单文档视图和Setp 6 选择基类为CScrollView外其余均为确省。
 
-■第二步：在CMyApp6View类中增加m_rectEllipse和m_nColor两个私有数据成员。你可以手工在myapp6View.h添加，不过雷神建议这样做，在ClassView中选中CMyApp6View类，击右键选择Add Member Variable插入它们。
+■第二步：在CMyApp6View类中增加m*rectEllipse和m*nColor两个私有数据成员。你可以手工在myapp6View.h添加，不过雷神建议这样做，在ClassView中选中CMyApp6View类，击右键选择Add Member Variable插入它们。
 
 ```cpp
 // myapp6View.h   
@@ -142,7 +142,7 @@ int m_nColor; //存放椭圆颜色值 
 CRect m_rectEllipse; //存放椭圆外接矩形
 ```
 
-#### 问题1： 
+### # 问题1： 
 CRect是什么？   
 CRect是类，是从RECT结构派生的，和它类似的还有从POINT结构派生的CPoint、从SIZE派生的CSize。因此它们继承了结构中定义的公有整数数据成员，并且由于三个类的一些操作符被重载所以可以直接在三个类之间进行类的运算。
 ```cpp
@@ -171,7 +171,7 @@ void CMyApp6View::OnInitialUpdate() 
     SetScrollSizes(MM_HIMETRIC,sizeTotal,sizePage,sizeLine); 
 }
 ```
-#### 问题2： 
+### # 问题2： 
 关于void CMyApp6View::OnInitialUpdate()
 
 函数OnInitialUpdate()是一个非常重要的虚函数，在视图窗口完全建立后框架用的第一个函数，框架在第一次调用OnDraw前会调用它。因此这个函数是设置滚动视图的逻辑尺寸和映射模式的最佳地点。
@@ -184,6 +184,6 @@ void CMyApp6View::OnInitialUpdate() 
 CMyApp6View::CMyApp6View():
     m_rectEllipse(0,0,4000,-4000)
 {   
-    m_nColor=GRAY_BRUSH;//设定刷子颜色   
+    m*nColor=GRAY*BRUSH;//设定刷子颜色   
 }
 ```

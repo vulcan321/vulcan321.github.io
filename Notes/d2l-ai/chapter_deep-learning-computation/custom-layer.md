@@ -6,10 +6,10 @@
 有时我们会遇到或要自己发明一个现在在深度学习框架中还不存在的层。
 在这些情况下，必须构建自定义层。本节将展示如何构建自定义层。
 
-## 不带参数的层
+# # 不带参数的层
 
 首先，我们(**构造一个没有任何参数的自定义层**)。
-回忆一下在 :numref:`sec_model_construction`对块的介绍，
+回忆一下在 :numref:`sec*model*construction`对块的介绍，
 这应该看起来很眼熟。
 下面的`CenteredLayer`类要从其输入中减去均值。
 要构建它，我们只需继承基础层类并实现前向传播功能。
@@ -20,41 +20,41 @@ from mxnet.gluon import nn
 npx.set_np()
 
 class CenteredLayer(nn.Block):
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+    def **init**(self, **kwargs):
+        super().**init**(**kwargs)
 
     def forward(self, X):
         return X - X.mean()
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 import torch
 from torch import nn
 import torch.nn.functional as F
 
 class CenteredLayer(nn.Module):
-    def __init__(self):
-        super().__init__()
+    def **init**(self):
+        super().**init**()
 
     def forward(self, X):
         return X - X.mean()
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 import tensorflow as tf
 
 class CenteredLayer(tf.keras.Model):
-    def __init__(self):
-        super().__init__()
+    def **init**(self):
+        super().**init**()
 
     def call(self, inputs):
         return inputs - tf.reduce_mean(inputs)
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 import warnings
 warnings.filterwarnings(action='ignore')
 import paddle
@@ -62,8 +62,8 @@ from paddle import nn
 import paddle.nn.functional as F
 
 class CenteredLayer(nn.Layer):
-    def __init__(self):
-        super().__init__()
+    def **init**(self):
+        super().**init**()
 
     def forward(self, X):
         return X - X.mean()
@@ -77,19 +77,19 @@ layer(np.array([1, 2, 3, 4, 5]))
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 layer = CenteredLayer()
 layer(torch.FloatTensor([1, 2, 3, 4, 5]))
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 layer = CenteredLayer()
 layer(tf.constant([1, 2, 3, 4, 5]))
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 layer = CenteredLayer()
 layer(paddle.to_tensor([1, 2, 3, 4, 5], dtype='float32'))
 ```
@@ -103,12 +103,12 @@ net.initialize()
 ```
 
 ```{.python .input}
-#@tab pytorch, paddle
+# @tab pytorch, paddle
 net = nn.Sequential(nn.Linear(8, 128), CenteredLayer())
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 net = tf.keras.Sequential([tf.keras.layers.Dense(128), CenteredLayer()])
 ```
 
@@ -121,24 +121,24 @@ Y.mean()
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 Y = net(torch.rand(4, 8))
 Y.mean()
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 Y = net(tf.random.uniform((4, 8)))
 tf.reduce_mean(Y)
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 Y = net(paddle.rand([4, 8]))
 Y.mean()
 ```
 
-## [**带参数的层**]
+# # [**带参数的层**]
 
 以上我们知道了如何定义简单的层，下面我们继续定义具有参数的层，
 这些参数可以通过训练进行调整。
@@ -153,8 +153,8 @@ Y.mean()
 
 ```{.python .input}
 class MyDense(nn.Block):
-    def __init__(self, units, in_units, **kwargs):
-        super().__init__(**kwargs)
+    def **init**(self, units, in_units, **kwargs):
+        super().**init**(**kwargs)
         self.weight = self.params.get('weight', shape=(in_units, units))
         self.bias = self.params.get('bias', shape=(units,))
 
@@ -165,10 +165,10 @@ class MyDense(nn.Block):
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 class MyLinear(nn.Module):
-    def __init__(self, in_units, units):
-        super().__init__()
+    def **init**(self, in_units, units):
+        super().**init**()
         self.weight = nn.Parameter(torch.randn(in_units, units))
         self.bias = nn.Parameter(torch.randn(units,))
     def forward(self, X):
@@ -177,16 +177,16 @@ class MyLinear(nn.Module):
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 class MyDense(tf.keras.Model):
-    def __init__(self, units):
-        super().__init__()
+    def **init**(self, units):
+        super().**init**()
         self.units = units
 
     def build(self, X_shape):
         self.weight = self.add_weight(name='weight',
             shape=[X_shape[-1], self.units],
-            initializer=tf.random_normal_initializer())
+            initializer=tf.random*normal*initializer())
         self.bias = self.add_weight(
             name='bias', shape=[self.units],
             initializer=tf.zeros_initializer())
@@ -197,11 +197,11 @@ class MyDense(tf.keras.Model):
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 class MyLinear(nn.Layer):
-    def __init__(self, in_units, units):
-        super().__init__()
-        self.weight = paddle.create_parameter(shape=(in_units, units), dtype='float32')
+    def **init**(self, in_units, units):
+        super().**init**()
+        self.weight = paddle.create*parameter(shape=(in*units, units), dtype='float32')
         self.bias = paddle.create_parameter(shape=(units,), dtype='float32')
         
     def forward(self, X):
@@ -227,13 +227,13 @@ dense.params
 ```
 
 ```{.python .input}
-#@tab pytorch, paddle
+# @tab pytorch, paddle
 linear = MyLinear(5, 3)
 linear.weight
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 dense = MyDense(3)
 dense(tf.random.uniform((2, 5)))
 dense.get_weights()
@@ -247,17 +247,17 @@ dense(np.random.uniform(size=(2, 5)))
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 linear(torch.rand(2, 5))
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 dense(tf.random.uniform((2, 5)))
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 linear(paddle.randn([2, 5]))
 ```
 
@@ -272,32 +272,32 @@ net(np.random.uniform(size=(2, 64)))
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 net = nn.Sequential(MyLinear(64, 8), MyLinear(8, 1))
 net(torch.rand(2, 64))
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 net = tf.keras.models.Sequential([MyDense(8), MyDense(1)])
 net(tf.random.uniform((2, 64)))
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 net = nn.Sequential(MyLinear(64, 8), MyLinear(8, 1))
 net(paddle.rand([2, 64]))
 ```
 
-## 小结
+# # 小结
 
 * 我们可以通过基本层类设计自定义层。这允许我们定义灵活的新层，其行为与深度学习框架中的任何现有层不同。
 * 在自定义层定义完成后，我们就可以在任意环境和网络架构中调用该自定义层。
 * 层可以有局部参数，这些参数可以通过内置函数创建。
 
-## 练习
+# # 练习
 
-1. 设计一个接受输入并计算张量降维的层，它返回$y_k = \sum_{i, j} W_{ijk} x_i x_j$。
+1. 设计一个接受输入并计算张量降维的层，它返回$y*k = \sum*{i, j} W*{ijk} x*i x_j$。
 1. 设计一个返回输入数据的傅立叶系数前半部分的层。
 
 :begin_tab:`mxnet`

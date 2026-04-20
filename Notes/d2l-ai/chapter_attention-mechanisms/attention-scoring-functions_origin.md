@@ -24,7 +24,7 @@ we can use the above algorithm
 to instantiate the framework of attention mechanisms
 in :numref:`fig_qkv`.
 Denoting an attention scoring function by $a$,
-:numref:`fig_attention_output`
+:numref:`fig*attention*output`
 illustrates how the output of attention pooling
 can be computed as a weighted sum of values.
 Since attention weights are
@@ -33,18 +33,18 @@ the weighted sum is essentially
 a weighted average.
 
 ![Computing the output of attention pooling as a weighted average of values.](../img/attention-output.svg)
-:label:`fig_attention_output`
+:label:`fig*attention*output`
 
 
 
 Mathematically,
 suppose that we have
 a query $\mathbf{q} \in \mathbb{R}^q$
-and $m$ key-value pairs $(\mathbf{k}_1, \mathbf{v}_1), \ldots, (\mathbf{k}_m, \mathbf{v}_m)$, where any $\mathbf{k}_i \in \mathbb{R}^k$ and any $\mathbf{v}_i \in \mathbb{R}^v$.
+and $m$ key-value pairs $(\mathbf{k}*1, \mathbf{v}*1), \ldots, (\mathbf{k}*m, \mathbf{v}*m)$, where any $\mathbf{k}*i \in \mathbb{R}^k$ and any $\mathbf{v}*i \in \mathbb{R}^v$.
 The attention pooling $f$
 is instantiated as a weighted sum of the values:
 
-$$f(\mathbf{q}, (\mathbf{k}_1, \mathbf{v}_1), \ldots, (\mathbf{k}_m, \mathbf{v}_m)) = \sum_{i=1}^m \alpha(\mathbf{q}, \mathbf{k}_i) \mathbf{v}_i \in \mathbb{R}^v,$$
+$$f(\mathbf{q}, (\mathbf{k}*1, \mathbf{v}*1), \ldots, (\mathbf{k}*m, \mathbf{v}*m)) = \sum*{i=1}^m \alpha(\mathbf{q}, \mathbf{k}*i) \mathbf{v}_i \in \mathbb{R}^v,$$
 :eqlabel:`eq_attn-pooling`
 
 where
@@ -54,7 +54,7 @@ is computed by
 the softmax operation of
 an attention scoring function $a$ that maps two vectors to a scalar:
 
-$$\alpha(\mathbf{q}, \mathbf{k}_i) = \mathrm{softmax}(a(\mathbf{q}, \mathbf{k}_i)) = \frac{\exp(a(\mathbf{q}, \mathbf{k}_i))}{\sum_{j=1}^m \exp(a(\mathbf{q}, \mathbf{k}_j))} \in \mathbb{R}.$$
+$$\alpha(\mathbf{q}, \mathbf{k}*i) = \mathrm{softmax}(a(\mathbf{q}, \mathbf{k}*i)) = \frac{\exp(a(\mathbf{q}, \mathbf{k}*i))}{\sum*{j=1}^m \exp(a(\mathbf{q}, \mathbf{k}_j))} \in \mathbb{R}.$$
 :eqlabel:`eq_attn-scoring-alpha`
 
 As we can see,
@@ -74,14 +74,14 @@ npx.set_np()
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 from d2l import torch as d2l
 import math
 import torch
 from torch import nn
 ```
 
-## Masked Softmax Operation
+# # Masked Softmax Operation
 
 As we just mentioned,
 a softmax operation is used to
@@ -89,7 +89,7 @@ output a probability distribution as attention weights.
 In some cases,
 not all the values should be fed into attention pooling.
 For instance,
-for efficient minibatch processing in :numref:`sec_machine_translation`,
+for efficient minibatch processing in :numref:`sec*machine*translation`,
 some text sequences are padded with
 special tokens that do not carry meaning.
 To get an attention pooling
@@ -105,8 +105,8 @@ where any value beyond the valid length
 is masked as zero.
 
 ```{.python .input}
-#@save
-def masked_softmax(X, valid_lens):
+# @save
+def masked*softmax(X, valid*lens):
     """Perform softmax operation by masking elements on the last axis."""
     # `X`: 3D tensor, `valid_lens`: 1D or 2D tensor
     if valid_lens is None:
@@ -114,20 +114,20 @@ def masked_softmax(X, valid_lens):
     else:
         shape = X.shape
         if valid_lens.ndim == 1:
-            valid_lens = valid_lens.repeat(shape[1])
+            valid*lens = valid*lens.repeat(shape[1])
         else:
-            valid_lens = valid_lens.reshape(-1)
+            valid*lens = valid*lens.reshape(-1)
         # On the last axis, replace masked elements with a very large negative
         # value, whose exponentiation outputs 0
-        X = npx.sequence_mask(X.reshape(-1, shape[-1]), valid_lens, True,
+        X = npx.sequence*mask(X.reshape(-1, shape[-1]), valid*lens, True,
                               value=-1e6, axis=1)
         return npx.softmax(X).reshape(shape)
 ```
 
 ```{.python .input}
-#@tab pytorch
-#@save
-def masked_softmax(X, valid_lens):
+# @tab pytorch
+# @save
+def masked*softmax(X, valid*lens):
     """Perform softmax operation by masking elements on the last axis."""
     # `X`: 3D tensor, `valid_lens`: 1D or 2D tensor
     if valid_lens is None:
@@ -135,12 +135,12 @@ def masked_softmax(X, valid_lens):
     else:
         shape = X.shape
         if valid_lens.dim() == 1:
-            valid_lens = torch.repeat_interleave(valid_lens, shape[1])
+            valid*lens = torch.repeat*interleave(valid_lens, shape[1])
         else:
-            valid_lens = valid_lens.reshape(-1)
+            valid*lens = valid*lens.reshape(-1)
         # On the last axis, replace masked elements with a very large negative
         # value, whose exponentiation outputs 0
-        X = d2l.sequence_mask(X.reshape(-1, shape[-1]), valid_lens,
+        X = d2l.sequence*mask(X.reshape(-1, shape[-1]), valid*lens,
                               value=-1e6)
         return nn.functional.softmax(X.reshape(shape), dim=-1)
 ```
@@ -158,7 +158,7 @@ masked_softmax(np.random.uniform(size=(2, 2, 4)), d2l.tensor([2, 3]))
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 masked_softmax(torch.rand(2, 2, 4), torch.tensor([2, 3]))
 ```
 
@@ -173,11 +173,11 @@ masked_softmax(np.random.uniform(size=(2, 2, 4)),
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 masked_softmax(torch.rand(2, 2, 4), d2l.tensor([[1, 3], [2, 4]]))
 ```
 
-## Additive Attention
+# # Additive Attention
 :label:`subsec_additive-attention`
 
 In general,
@@ -188,12 +188,12 @@ Given a query $\mathbf{q} \in \mathbb{R}^q$
 and a key $\mathbf{k} \in \mathbb{R}^k$,
 the *additive attention* scoring function
 
-$$a(\mathbf q, \mathbf k) = \mathbf w_v^\top \text{tanh}(\mathbf W_q\mathbf q + \mathbf W_k \mathbf k) \in \mathbb{R},$$
+$$a(\mathbf q, \mathbf k) = \mathbf w*v^\top \text{tanh}(\mathbf W*q\mathbf q + \mathbf W_k \mathbf k) \in \mathbb{R},$$
 :eqlabel:`eq_additive-attn`
 
 where
 learnable parameters
-$\mathbf W_q\in\mathbb R^{h\times q}$, $\mathbf W_k\in\mathbb R^{h\times k}$, and $\mathbf w_v\in\mathbb R^{h}$.
+$\mathbf W*q\in\mathbb R^{h\times q}$, $\mathbf W*k\in\mathbb R^{h\times k}$, and $\mathbf w_v\in\mathbb R^{h}$.
 Equivalent to :eqref:`eq_additive-attn`,
 the query and the key are concatenated
 and fed into an MLP with a single hidden layer
@@ -203,52 +203,52 @@ bias terms,
 we implement additive attention in the following.
 
 ```{.python .input}
-#@save
+# @save
 class AdditiveAttention(nn.Block):
     """Additive attention."""
-    def __init__(self, num_hiddens, dropout, **kwargs):
-        super(AdditiveAttention, self).__init__(**kwargs)
+    def **init**(self, num_hiddens, dropout, **kwargs):
+        super(AdditiveAttention, self).**init**(**kwargs)
         # Use `flatten=False` to only transform the last axis so that the
         # shapes for the other axes are kept the same
-        self.W_k = nn.Dense(num_hiddens, use_bias=False, flatten=False)
-        self.W_q = nn.Dense(num_hiddens, use_bias=False, flatten=False)
-        self.w_v = nn.Dense(1, use_bias=False, flatten=False)
+        self.W*k = nn.Dense(num*hiddens, use_bias=False, flatten=False)
+        self.W*q = nn.Dense(num*hiddens, use_bias=False, flatten=False)
+        self.w*v = nn.Dense(1, use*bias=False, flatten=False)
         self.dropout = nn.Dropout(dropout)
 
     def forward(self, queries, keys, values, valid_lens):
-        queries, keys = self.W_q(queries), self.W_k(keys)
+        queries, keys = self.W*q(queries), self.W*k(keys)
         # After dimension expansion, shape of `queries`: (`batch_size`, no. of
-        # queries, 1, `num_hiddens`) and shape of `keys`: (`batch_size`, 1,
+        # queries, 1, `num*hiddens`) and shape of `keys`: (`batch*size`, 1,
         # no. of key-value pairs, `num_hiddens`). Sum them up with
         # broadcasting
-        features = np.expand_dims(queries, axis=2) + np.expand_dims(
+        features = np.expand*dims(queries, axis=2) + np.expand*dims(
             keys, axis=1)
         features = np.tanh(features)
         # There is only one output of `self.w_v`, so we remove the last
         # one-dimensional entry from the shape. Shape of `scores`:
         # (`batch_size`, no. of queries, no. of key-value pairs)
         scores = np.squeeze(self.w_v(features), axis=-1)
-        self.attention_weights = masked_softmax(scores, valid_lens)
+        self.attention*weights = masked*softmax(scores, valid_lens)
         # Shape of `values`: (`batch_size`, no. of key-value pairs, value
         # dimension)
-        return npx.batch_dot(self.dropout(self.attention_weights), values)
+        return npx.batch*dot(self.dropout(self.attention*weights), values)
 ```
 
 ```{.python .input}
-#@tab pytorch
-#@save
+# @tab pytorch
+# @save
 class AdditiveAttention(nn.Module):
-    def __init__(self, key_size, query_size, num_hiddens, dropout, **kwargs):
-        super(AdditiveAttention, self).__init__(**kwargs)
-        self.W_k = nn.Linear(key_size, num_hiddens, bias=False)
-        self.W_q = nn.Linear(query_size, num_hiddens, bias=False)
-        self.w_v = nn.Linear(num_hiddens, 1, bias=False)
+    def **init**(self, key*size, query*size, num_hiddens, dropout, **kwargs):
+        super(AdditiveAttention, self).**init**(**kwargs)
+        self.W*k = nn.Linear(key*size, num_hiddens, bias=False)
+        self.W*q = nn.Linear(query*size, num_hiddens, bias=False)
+        self.w*v = nn.Linear(num*hiddens, 1, bias=False)
         self.dropout = nn.Dropout(dropout)
 
     def forward(self, queries, keys, values, valid_lens):
-        queries, keys = self.W_q(queries), self.W_k(keys)
+        queries, keys = self.W*q(queries), self.W*k(keys)
         # After dimension expansion, shape of `queries`: (`batch_size`, no. of
-        # queries, 1, `num_hiddens`) and shape of `keys`: (`batch_size`, 1,
+        # queries, 1, `num*hiddens`) and shape of `keys`: (`batch*size`, 1,
         # no. of key-value pairs, `num_hiddens`). Sum them up with
         # broadcasting
         features = queries.unsqueeze(2) + keys.unsqueeze(1)
@@ -257,7 +257,7 @@ class AdditiveAttention(nn.Module):
         # one-dimensional entry from the shape. Shape of `scores`:
         # (`batch_size`, no. of queries, no. of key-value pairs)
         scores = self.w_v(features).squeeze(-1)
-        self.attention_weights = masked_softmax(scores, valid_lens)
+        self.attention*weights = masked*softmax(scores, valid_lens)
         # Shape of `values`: (`batch_size`, no. of key-value pairs, value
         # dimension)
         return torch.bmm(self.dropout(self.attention_weights), values)
@@ -284,14 +284,14 @@ attention(queries, keys, values, valid_lens)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 queries, keys = d2l.normal(0, 1, (2, 1, 20)), d2l.ones((2, 10, 2))
 # The two value matrices in the `values` minibatch are identical
 values = torch.arange(40, dtype=torch.float32).reshape(1, 10, 4).repeat(
     2, 1, 1)
 valid_lens = d2l.tensor([2, 6])
 
-attention = AdditiveAttention(key_size=2, query_size=20, num_hiddens=8,
+attention = AdditiveAttention(key*size=2, query*size=20, num_hiddens=8,
                               dropout=0.1)
 attention.eval()
 attention(queries, keys, values, valid_lens)
@@ -303,12 +303,12 @@ the attention weights are uniform,
 determined by the specified valid lengths.
 
 ```{.python .input}
-#@tab all
-d2l.show_heatmaps(d2l.reshape(attention.attention_weights, (1, 1, 2, 10)),
+# @tab all
+d2l.show*heatmaps(d2l.reshape(attention.attention*weights, (1, 1, 2, 10)),
                   xlabel='Keys', ylabel='Queries')
 ```
 
-## Scaled Dot-Product Attention
+# # Scaled Dot-Product Attention
 
 A more computationally efficient
 design for the scoring function can be
@@ -347,50 +347,50 @@ is
 
 
 $$ \mathrm{softmax}\left(\frac{\mathbf Q \mathbf K^\top }{\sqrt{d}}\right) \mathbf V \in \mathbb{R}^{n\times v}.$$
-:eqlabel:`eq_softmax_QK_V`
+:eqlabel:`eq*softmax*QK_V`
 
 In the following implementation of the scaled dot product attention, we use dropout for model regularization.
 
 ```{.python .input}
-#@save
+# @save
 class DotProductAttention(nn.Block):
     """Scaled dot product attention."""
-    def __init__(self, dropout, **kwargs):
-        super(DotProductAttention, self).__init__(**kwargs)
+    def **init**(self, dropout, **kwargs):
+        super(DotProductAttention, self).**init**(**kwargs)
         self.dropout = nn.Dropout(dropout)
 
     # Shape of `queries`: (`batch_size`, no. of queries, `d`)
     # Shape of `keys`: (`batch_size`, no. of key-value pairs, `d`)
     # Shape of `values`: (`batch_size`, no. of key-value pairs, value
     # dimension)
-    # Shape of `valid_lens`: (`batch_size`,) or (`batch_size`, no. of queries)
+    # Shape of `valid*lens`: (`batch*size`,) or (`batch_size`, no. of queries)
     def forward(self, queries, keys, values, valid_lens=None):
         d = queries.shape[-1]
         # Set `transpose_b=True` to swap the last two dimensions of `keys`
-        scores = npx.batch_dot(queries, keys, transpose_b=True) / math.sqrt(d)
-        self.attention_weights = masked_softmax(scores, valid_lens)
-        return npx.batch_dot(self.dropout(self.attention_weights), values)
+        scores = npx.batch*dot(queries, keys, transpose*b=True) / math.sqrt(d)
+        self.attention*weights = masked*softmax(scores, valid_lens)
+        return npx.batch*dot(self.dropout(self.attention*weights), values)
 ```
 
 ```{.python .input}
-#@tab pytorch
-#@save
+# @tab pytorch
+# @save
 class DotProductAttention(nn.Module):
     """Scaled dot product attention."""
-    def __init__(self, dropout, **kwargs):
-        super(DotProductAttention, self).__init__(**kwargs)
+    def **init**(self, dropout, **kwargs):
+        super(DotProductAttention, self).**init**(**kwargs)
         self.dropout = nn.Dropout(dropout)
 
     # Shape of `queries`: (`batch_size`, no. of queries, `d`)
     # Shape of `keys`: (`batch_size`, no. of key-value pairs, `d`)
     # Shape of `values`: (`batch_size`, no. of key-value pairs, value
     # dimension)
-    # Shape of `valid_lens`: (`batch_size`,) or (`batch_size`, no. of queries)
+    # Shape of `valid*lens`: (`batch*size`,) or (`batch_size`, no. of queries)
     def forward(self, queries, keys, values, valid_lens=None):
         d = queries.shape[-1]
         # Set `transpose_b=True` to swap the last two dimensions of `keys`
         scores = torch.bmm(queries, keys.transpose(1,2)) / math.sqrt(d)
-        self.attention_weights = masked_softmax(scores, valid_lens)
+        self.attention*weights = masked*softmax(scores, valid_lens)
         return torch.bmm(self.dropout(self.attention_weights), values)
 ```
 
@@ -409,7 +409,7 @@ attention(queries, keys, values, valid_lens)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 queries = d2l.normal(0, 1, (2, 1, 2))
 attention = DotProductAttention(dropout=0.5)
 attention.eval()
@@ -422,19 +422,19 @@ that cannot be differentiated by any query,
 uniform attention weights are obtained.
 
 ```{.python .input}
-#@tab all
-d2l.show_heatmaps(d2l.reshape(attention.attention_weights, (1, 1, 2, 10)),
+# @tab all
+d2l.show*heatmaps(d2l.reshape(attention.attention*weights, (1, 1, 2, 10)),
                   xlabel='Keys', ylabel='Queries')
 ```
 
-## Summary
+# # Summary
 
 * We can compute the output of attention pooling as a weighted average of values, where different choices of the attention scoring function lead to different behaviors of attention pooling.
 * When queries and keys are vectors of different lengths, we can use the additive attention scoring function. When they are the same, the scaled dot-product attention scoring function is more computationally efficient.
 
 
 
-## Exercises
+# # Exercises
 
 1. Modify keys in the toy example and visualize attention weights. Do additive attention and scaled dot-product attention still output the same attention weights? Why or why not?
 1. Using matrix multiplications only, can you design a new scoring function for queries and keys with different vector lengths?

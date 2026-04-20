@@ -4,7 +4,7 @@
 
 
 
-## 1 内存分区模型
+# # 1 内存分区模型
 
 C++程序在执行时，将内存大方向划分为**4个区域**
 
@@ -27,7 +27,7 @@ C++程序在执行时，将内存大方向划分为**4个区域**
 
 
 
-### 1.1 程序运行前
+## # 1.1 程序运行前
 
 ​	在程序编译后，生成了exe可执行程序，**未执行该程序前**分为两个区域
 
@@ -67,8 +67,8 @@ int g_a = 10;
 int g_b = 10;
 
 //全局常量
-const int c_g_a = 10;
-const int c_g_b = 10;
+const int c*g*a = 10;
+const int c*g*b = 10;
 
 int main() {
 
@@ -80,26 +80,26 @@ int main() {
 	cout << "局部变量a地址为： " << (int)&a << endl;
 	cout << "局部变量b地址为： " << (int)&b << endl;
 
-	cout << "全局变量g_a地址为： " <<  (int)&g_a << endl;
-	cout << "全局变量g_b地址为： " <<  (int)&g_b << endl;
+	cout << "全局变量g*a地址为： " <<  (int)&g*a << endl;
+	cout << "全局变量g*b地址为： " <<  (int)&g*b << endl;
 
 	//静态变量
 	static int s_a = 10;
 	static int s_b = 10;
 
-	cout << "静态变量s_a地址为： " << (int)&s_a << endl;
-	cout << "静态变量s_b地址为： " << (int)&s_b << endl;
+	cout << "静态变量s*a地址为： " << (int)&s*a << endl;
+	cout << "静态变量s*b地址为： " << (int)&s*b << endl;
 
 	cout << "字符串常量地址为： " << (int)&"hello world" << endl;
 	cout << "字符串常量地址为： " << (int)&"hello world1" << endl;
 
-	cout << "全局常量c_g_a地址为： " << (int)&c_g_a << endl;
-	cout << "全局常量c_g_b地址为： " << (int)&c_g_b << endl;
+	cout << "全局常量c*g*a地址为： " << (int)&c*g*a << endl;
+	cout << "全局常量c*g*b地址为： " << (int)&c*g*b << endl;
 
-	const int c_l_a = 10;
-	const int c_l_b = 10;
-	cout << "局部常量c_l_a地址为： " << (int)&c_l_a << endl;
-	cout << "局部常量c_l_b地址为： " << (int)&c_l_b << endl;
+	const int c*l*a = 10;
+	const int c*l*b = 10;
+	cout << "局部常量c*l*a地址为： " << (int)&c*l*a << endl;
+	cout << "局部常量c*l*b地址为： " << (int)&c*l*b << endl;
 
 	system("pause");
 
@@ -125,7 +125,7 @@ int main() {
 
 
 
-### 1.2 程序运行后
+## # 1.2 程序运行后
 
 
 
@@ -209,7 +209,7 @@ int main() {
 
 
 
-### 1.3 new操作符
+## # 1.3 new操作符
 
 
 
@@ -289,9 +289,9 @@ int main() {
 
 
 
-## 2 引用
+# # 2 引用
 
-### 2.1 引用的基本使用
+## # 2.1 引用的基本使用
 
 **作用： **给变量起别名
 
@@ -327,7 +327,7 @@ int main() {
 
 
 
-### 2.2 引用注意事项
+## # 2.2 引用注意事项
 
 * 引用必须初始化
 * 引用在初始化后，不可以改变
@@ -363,7 +363,7 @@ int main() {
 
 
 
-### 2.3 引用做函数参数
+## # 2.3 引用做函数参数
 
 **作用：**函数传参时，可以利用引用的技术让形参修饰实参
 
@@ -432,7 +432,7 @@ int main() {
 
 
 
-### 2.4 引用做函数返回值
+## # 2.4 引用做函数返回值
 
 
 
@@ -498,7 +498,7 @@ int main() {
 
 
 
-### 2.5 引用的本质
+## # 2.5 引用的本质
 
 本质：**引用的本质在c++内部实现是一个指针常量.**
 
@@ -538,7 +538,7 @@ int main(){
 
 
 
-### 2.6 常量引用
+## # 2.6 常量引用
 
 
 
@@ -588,9 +588,9 @@ int main() {
 
 
 
-## 3 函数提高
+# # 3 函数提高
 
-### 3.1 函数默认参数
+## # 3.1 函数默认参数
 
 
 
@@ -631,7 +631,7 @@ int main() {
 
 
 
-### 3.2 函数占位参数
+## # 3.2 函数占位参数
 
 
 
@@ -673,9 +673,9 @@ int main() {
 
 
 
-### 3.3 函数重载
+## # 3.3 函数重载
 
-#### 3.3.1 函数重载概述
+### # 3.3.1 函数重载概述
 
 
 
@@ -753,7 +753,7 @@ int main() {
 
 
 
-#### 3.3.2 函数重载注意事项
+### # 3.3.2 函数重载注意事项
 
 
 
@@ -814,7 +814,7 @@ int main() {
 
 
 
-## **4** 类和对象
+# # **4** 类和对象
 
 
 
@@ -834,9 +834,9 @@ C++认为==万事万物都皆为对象==，对象上有其属性和行为
 
 ​	具有相同性质的==对象==，我们可以抽象称为==类==，人属于人类，车属于车类
 
-### 4.1 封装
+## # 4.1 封装
 
-#### 4.1.1  封装的意义
+### # 4.1.1  封装的意义
 
 封装是C++面向对象三大特性之一
 
@@ -925,7 +925,7 @@ public:
 	}
 
 	void showStudent() {
-		cout << "name:" << m_name << " ID:" << m_id << endl;
+		cout << "name:" << m*name << " ID:" << m*id << endl;
 	}
 public:
 	string m_name;
@@ -1022,7 +1022,7 @@ int main() {
 
 
 
-#### 4.1.2 struct和class区别
+### # 4.1.2 struct和class区别
 
 
 
@@ -1072,7 +1072,7 @@ int main() {
 
 
 
-#### 4.1.3 成员属性设置为私有
+### # 4.1.3 成员属性设置为私有
 
 
 
@@ -1190,7 +1190,7 @@ int main() {
 
 
 
-### 4.2 对象的初始化和清理
+## # 4.2 对象的初始化和清理
 
 
 
@@ -1201,7 +1201,7 @@ int main() {
 
 
 
-#### 4.2.1 构造函数和析构函数
+### # 4.2.1 构造函数和析构函数
 
 对象的**初始化和清理**也是两个非常重要的安全问题
 
@@ -1290,7 +1290,7 @@ int main() {
 
 
 
-#### 4.2.2 构造函数的分类及调用
+### # 4.2.2 构造函数的分类及调用
 
 两种分类方式：
 
@@ -1385,7 +1385,7 @@ int main() {
 
 
 
-#### 4.2.3 拷贝构造函数调用时机
+### # 4.2.3 拷贝构造函数调用时机
 
 
 
@@ -1472,7 +1472,7 @@ int main() {
 
 
 
-#### 4.2.4 构造函数调用规则
+### # 4.2.4 构造函数调用规则
 
 默认情况下，c++编译器至少给一个类添加3个函数
 
@@ -1560,7 +1560,7 @@ int main() {
 
 
 
-#### 4.2.5 深拷贝与浅拷贝
+### # 4.2.5 深拷贝与浅拷贝
 
 
 
@@ -1598,8 +1598,8 @@ public:
 	Person(const Person& p) {
 		cout << "拷贝构造函数!" << endl;
 		//如果不利用深拷贝在堆区创建新内存，会导致浅拷贝带来的重复释放堆区问题
-		m_age = p.m_age;
-		m_height = new int(*p.m_height);
+		m*age = p.m*age;
+		m*height = new int(*p.m*height);
 		
 	}
 
@@ -1622,9 +1622,9 @@ void test01()
 
 	Person p2(p1);
 
-	cout << "p1的年龄： " << p1.m_age << " 身高： " << *p1.m_height << endl;
+	cout << "p1的年龄： " << p1.m*age << " 身高： " << *p1.m*height << endl;
 
-	cout << "p2的年龄： " << p2.m_age << " 身高： " << *p2.m_height << endl;
+	cout << "p2的年龄： " << p2.m*age << " 身高： " << *p2.m*height << endl;
 }
 
 int main() {
@@ -1647,7 +1647,7 @@ int main() {
 
 
 
-#### 4.2.6 初始化列表
+### # 4.2.6 初始化列表
 
 
 
@@ -1675,7 +1675,7 @@ public:
 	//}
 
 	//初始化列表方式初始化
-	Person(int a, int b, int c) :m_A(a), m_B(b), m_C(c) {}
+	Person(int a, int b, int c) :m*A(a), m*B(b), m_C(c) {}
 	void PrintPerson() {
 		cout << "mA:" << m_A << endl;
 		cout << "mB:" << m_B << endl;
@@ -1703,7 +1703,7 @@ int main() {
 
 
 
-#### 4.2.7 类对象作为类成员
+### # 4.2.7 类对象作为类成员
 
 
 
@@ -1758,7 +1758,7 @@ class Person
 public:
 
 	//初始化列表可以告诉编译器调用哪一个构造函数
-	Person(string name, string pName) :m_Name(name), m_Phone(pName)
+	Person(string name, string pName) :m*Name(name), m*Phone(pName)
 	{
 		cout << "Person构造" << endl;
 	}
@@ -1770,7 +1770,7 @@ public:
 
 	void playGame()
 	{
-		cout << m_Name << " 使用" << m_Phone.m_PhoneName << " 牌手机! " << endl;
+		cout << m*Name << " 使用" << m*Phone.m_PhoneName << " 牌手机! " << endl;
 	}
 
 	string m_Name;
@@ -1808,7 +1808,7 @@ int main() {
 
 
 
-#### 4.2.8 静态成员
+### # 4.2.8 静态成员
 
 静态成员就是在成员变量和成员函数前加上关键字static，称为静态成员
 
@@ -1858,18 +1858,18 @@ void test01()
 	//1、通过对象
 	Person p1;
 	p1.m_A = 100;
-	cout << "p1.m_A = " << p1.m_A << endl;
+	cout << "p1.m*A = " << p1.m*A << endl;
 
 	Person p2;
 	p2.m_A = 200;
-	cout << "p1.m_A = " << p1.m_A << endl; //共享同一份数据
-	cout << "p2.m_A = " << p2.m_A << endl;
+	cout << "p1.m*A = " << p1.m*A << endl; //共享同一份数据
+	cout << "p2.m*A = " << p2.m*A << endl;
 
 	//2、通过类名
-	cout << "m_A = " << Person::m_A << endl;
+	cout << "m*A = " << Person::m*A << endl;
 
 
-	//cout << "m_B = " << Person::m_B << endl; //私有权限访问不到
+	//cout << "m*B = " << Person::m*B << endl; //私有权限访问不到
 }
 
 int main() {
@@ -1949,11 +1949,11 @@ int main() {
 
 
 
-### 4.3 C++对象模型和this指针
+## # 4.3 C++对象模型和this指针
 
 
 
-#### 4.3.1 成员变量和成员函数分开存储
+### # 4.3.1 成员变量和成员函数分开存储
 
 
 
@@ -1998,7 +1998,7 @@ int main() {
 
 
 
-#### 4.3.2 this指针概念
+### # 4.3.2 this指针概念
 
 通过4.3.1我们知道在C++中成员变量和成员函数是分开存储的
 
@@ -2072,7 +2072,7 @@ int main() {
 
 
 
-#### 4.3.3 空指针访问成员函数
+### # 4.3.3 空指针访问成员函数
 
 
 
@@ -2131,7 +2131,7 @@ int main() {
 
 
 
-#### 4.3.4 const修饰成员函数
+### # 4.3.4 const修饰成员函数
 
 
 
@@ -2215,7 +2215,7 @@ int main() {
 
 
 
-### 4.4 友元
+## # 4.4 友元
 
 
 
@@ -2249,7 +2249,7 @@ int main() {
 
 
 
-#### 4.4.1 全局函数做友元
+### # 4.4.1 全局函数做友元
 
 ```C++
 class Building
@@ -2298,7 +2298,7 @@ int main(){
 
 
 
-#### 4.4.2 类做友元
+### # 4.4.2 类做友元
 
 
 
@@ -2367,7 +2367,7 @@ int main(){
 
 
 
-#### 4.4.3 成员函数做友元
+### # 4.4.3 成员函数做友元
 
 
 
@@ -2448,7 +2448,7 @@ int main(){
 
 
 
-### 4.5 运算符重载
+## # 4.5 运算符重载
 
 
 
@@ -2456,7 +2456,7 @@ int main(){
 
 
 
-#### 4.5.1 加号运算符重载
+### # 4.5.1 加号运算符重载
 
 
 
@@ -2476,8 +2476,8 @@ public:
 	//成员函数实现 + 号运算符重载
 	Person operator+(const Person& p) {
 		Person temp;
-		temp.m_A = this->m_A + p.m_A;
-		temp.m_B = this->m_B + p.m_B;
+		temp.m*A = this->m*A + p.m_A;
+		temp.m*B = this->m*B + p.m_B;
 		return temp;
 	}
 
@@ -2490,8 +2490,8 @@ public:
 //全局函数实现 + 号运算符重载
 //Person operator+(const Person& p1, const Person& p2) {
 //	Person temp(0, 0);
-//	temp.m_A = p1.m_A + p2.m_A;
-//	temp.m_B = p1.m_B + p2.m_B;
+//	temp.m*A = p1.m*A + p2.m_A;
+//	temp.m*B = p1.m*B + p2.m_B;
 //	return temp;
 //}
 
@@ -2499,8 +2499,8 @@ public:
 Person operator+(const Person& p2, int val)  
 {
 	Person temp;
-	temp.m_A = p2.m_A + val;
-	temp.m_B = p2.m_B + val;
+	temp.m*A = p2.m*A + val;
+	temp.m*B = p2.m*B + val;
 	return temp;
 }
 
@@ -2511,11 +2511,11 @@ void test() {
 
 	//成员函数方式
 	Person p3 = p2 + p1;  //相当于 p2.operaor+(p1)
-	cout << "mA:" << p3.m_A << " mB:" << p3.m_B << endl;
+	cout << "mA:" << p3.m*A << " mB:" << p3.m*B << endl;
 
 
 	Person p4 = p3 + 10; //相当于 operator+(p3,10)
-	cout << "mA:" << p4.m_A << " mB:" << p4.m_B << endl;
+	cout << "mA:" << p4.m*A << " mB:" << p4.m*B << endl;
 
 }
 
@@ -2541,7 +2541,7 @@ int main() {
 
 
 
-#### 4.5.2 左移运算符重载
+### # 4.5.2 左移运算符重载
 
 
 
@@ -2573,7 +2573,7 @@ private:
 //全局函数实现左移重载
 //ostream对象只能有一个
 ostream& operator<<(ostream& out, Person& p) {
-	out << "a:" << p.m_A << " b:" << p.m_B;
+	out << "a:" << p.m*A << " b:" << p.m*B;
 	return out;
 }
 
@@ -2610,7 +2610,7 @@ int main() {
 
 
 
-#### 4.5.3 递增运算符重载
+### # 4.5.3 递增运算符重载
 
 
 
@@ -2697,7 +2697,7 @@ int main() {
 
 
 
-#### 4.5.4 赋值运算符重载
+### # 4.5.4 赋值运算符重载
 
 
 
@@ -2740,10 +2740,10 @@ public:
 			m_Age = NULL;
 		}
 		//编译器提供的代码是浅拷贝
-		//m_Age = p.m_Age;
+		//m*Age = p.m*Age;
 
 		//提供深拷贝 解决浅拷贝的问题
-		m_Age = new int(*p.m_Age);
+		m*Age = new int(*p.m*Age);
 
 		//返回自身
 		return *this;
@@ -2809,7 +2809,7 @@ int main() {
 
 
 
-#### 4.5.5 关系运算符重载
+### # 4.5.5 关系运算符重载
 
 
 
@@ -2831,7 +2831,7 @@ public:
 
 	bool operator==(Person & p)
 	{
-		if (this->m_Name == p.m_Name && this->m_Age == p.m_Age)
+		if (this->m*Name == p.m*Name && this->m*Age == p.m*Age)
 		{
 			return true;
 		}
@@ -2843,7 +2843,7 @@ public:
 
 	bool operator!=(Person & p)
 	{
-		if (this->m_Name == p.m_Name && this->m_Age == p.m_Age)
+		if (this->m*Name == p.m*Name && this->m*Age == p.m*Age)
 		{
 			return false;
 		}
@@ -2899,7 +2899,7 @@ int main() {
 
 
 
-#### 4.5.6 函数调用运算符重载
+### # 4.5.6 函数调用运算符重载
 
 
 
@@ -2967,7 +2967,7 @@ int main() {
 
 
 
-### 4.6  继承
+## # 4.6  继承
 
 **继承是面向对象三大特性之一**
 
@@ -2981,7 +2981,7 @@ int main() {
 
 
 
-#### 4.6.1 继承的基本语法
+### # 4.6.1 继承的基本语法
 
 
 
@@ -3220,7 +3220,7 @@ B 类称为父类 或 基类
 
 
 
-#### 4.6.2 继承方式
+### # 4.6.2 继承方式
 
 
 
@@ -3342,7 +3342,7 @@ public:
 
 
 
-#### 4.6.3 继承中的对象模型
+### # 4.6.3 继承中的对象模型
 
 
 
@@ -3431,7 +3431,7 @@ int main() {
 
 
 
-#### 4.6.4 继承中构造和析构顺序
+### # 4.6.4 继承中构造和析构顺序
 
 
 
@@ -3504,7 +3504,7 @@ int main() {
 
 
 
-#### 4.6.5 继承同名成员处理方式
+### # 4.6.5 继承同名成员处理方式
 
 
 
@@ -3563,8 +3563,8 @@ void test01()
 {
 	Son s;
 
-	cout << "Son下的m_A = " << s.m_A << endl;
-	cout << "Base下的m_A = " << s.Base::m_A << endl;
+	cout << "Son下的m*A = " << s.m*A << endl;
+	cout << "Base下的m*A = " << s.Base::m*A << endl;
 
 	s.func();
 	s.Base::func();
@@ -3598,7 +3598,7 @@ int main() {
 
 
 
-#### 4.6.6 继承同名静态成员处理方式
+### # 4.6.6 继承同名静态成员处理方式
 
 
 
@@ -3651,13 +3651,13 @@ void test01()
 	//通过对象访问
 	cout << "通过对象访问： " << endl;
 	Son s;
-	cout << "Son  下 m_A = " << s.m_A << endl;
-	cout << "Base 下 m_A = " << s.Base::m_A << endl;
+	cout << "Son  下 m*A = " << s.m*A << endl;
+	cout << "Base 下 m*A = " << s.Base::m*A << endl;
 
 	//通过类名访问
 	cout << "通过类名访问： " << endl;
-	cout << "Son  下 m_A = " << Son::m_A << endl;
-	cout << "Base 下 m_A = " << Son::Base::m_A << endl;
+	cout << "Son  下 m*A = " << Son::m*A << endl;
+	cout << "Base 下 m*A = " << Son::Base::m*A << endl;
 }
 
 //同名成员函数
@@ -3700,7 +3700,7 @@ int main() {
 
 
 
-#### 4.6.7 多继承语法
+### # 4.6.7 多继承语法
 
 
 
@@ -3741,7 +3741,7 @@ class Base2 {
 public:
 	Base2()
 	{
-		m_A = 200;  //开始是m_B 不会出问题，但是改为mA就会出现不明确
+		m*A = 200;  //开始是m*B 不会出问题，但是改为mA就会出现不明确
 	}
 public:
 	int m_A;
@@ -3796,7 +3796,7 @@ int main() {
 
 
 
-#### 4.6.8 菱形继承
+### # 4.6.8 菱形继承
 
 
 
@@ -3814,7 +3814,7 @@ int main() {
 
 
 
-![IMG_256](assets/clip_image002.jpg)
+![IMG*256](assets/clip*image002.jpg)
 
 
 
@@ -3849,9 +3849,9 @@ void test01()
 	st.Sheep::m_Age = 100;
 	st.Tuo::m_Age = 200;
 
-	cout << "st.Sheep::m_Age = " << st.Sheep::m_Age << endl;
-	cout << "st.Tuo::m_Age = " <<  st.Tuo::m_Age << endl;
-	cout << "st.m_Age = " << st.m_Age << endl;
+	cout << "st.Sheep::m*Age = " << st.Sheep::m*Age << endl;
+	cout << "st.Tuo::m*Age = " <<  st.Tuo::m*Age << endl;
+	cout << "st.m*Age = " << st.m*Age << endl;
 }
 
 
@@ -3890,9 +3890,9 @@ int main() {
 
 
 
-### 4.7  多态
+## # 4.7  多态
 
-#### 4.7.1 多态的基本概念
+### # 4.7.1 多态的基本概念
 
 
 
@@ -4004,7 +4004,7 @@ int main() {
 
 
 
-#### 4.7.2 多态案例一-计算器类
+### # 4.7.2 多态案例一-计算器类
 
 
 
@@ -4031,13 +4031,13 @@ public:
 	int getResult(string oper)
 	{
 		if (oper == "+") {
-			return m_Num1 + m_Num2;
+			return m*Num1 + m*Num2;
 		}
 		else if (oper == "-") {
-			return m_Num1 - m_Num2;
+			return m*Num1 - m*Num2;
 		}
 		else if (oper == "*") {
-			return m_Num1 * m_Num2;
+			return m*Num1 * m*Num2;
 		}
 		//如果要提供新的运算，需要修改源码
 	}
@@ -4052,11 +4052,11 @@ void test01()
 	Calculator c;
 	c.m_Num1 = 10;
 	c.m_Num2 = 10;
-	cout << c.m_Num1 << " + " << c.m_Num2 << " = " << c.getResult("+") << endl;
+	cout << c.m*Num1 << " + " << c.m*Num2 << " = " << c.getResult("+") << endl;
 
-	cout << c.m_Num1 << " - " << c.m_Num2 << " = " << c.getResult("-") << endl;
+	cout << c.m*Num1 << " - " << c.m*Num2 << " = " << c.getResult("-") << endl;
 
-	cout << c.m_Num1 << " * " << c.m_Num2 << " = " << c.getResult("*") << endl;
+	cout << c.m*Num1 << " * " << c.m*Num2 << " = " << c.getResult("*") << endl;
 }
 
 
@@ -4083,7 +4083,7 @@ class AddCalculator :public AbstractCalculator
 public:
 	int getResult()
 	{
-		return m_Num1 + m_Num2;
+		return m*Num1 + m*Num2;
 	}
 };
 
@@ -4093,7 +4093,7 @@ class SubCalculator :public AbstractCalculator
 public:
 	int getResult()
 	{
-		return m_Num1 - m_Num2;
+		return m*Num1 - m*Num2;
 	}
 };
 
@@ -4103,7 +4103,7 @@ class MulCalculator :public AbstractCalculator
 public:
 	int getResult()
 	{
-		return m_Num1 * m_Num2;
+		return m*Num1 * m*Num2;
 	}
 };
 
@@ -4114,21 +4114,21 @@ void test02()
 	AbstractCalculator *abc = new AddCalculator;
 	abc->m_Num1 = 10;
 	abc->m_Num2 = 10;
-	cout << abc->m_Num1 << " + " << abc->m_Num2 << " = " << abc->getResult() << endl;
+	cout << abc->m*Num1 << " + " << abc->m*Num2 << " = " << abc->getResult() << endl;
 	delete abc;  //用完了记得销毁
 
 	//创建减法计算器
 	abc = new SubCalculator;
 	abc->m_Num1 = 10;
 	abc->m_Num2 = 10;
-	cout << abc->m_Num1 << " - " << abc->m_Num2 << " = " << abc->getResult() << endl;
+	cout << abc->m*Num1 << " - " << abc->m*Num2 << " = " << abc->getResult() << endl;
 	delete abc;  
 
 	//创建乘法计算器
 	abc = new MulCalculator;
 	abc->m_Num1 = 10;
 	abc->m_Num2 = 10;
-	cout << abc->m_Num1 << " * " << abc->m_Num2 << " = " << abc->getResult() << endl;
+	cout << abc->m*Num1 << " * " << abc->m*Num2 << " = " << abc->getResult() << endl;
 	delete abc;
 }
 
@@ -4162,7 +4162,7 @@ int main() {
 
 
 
-#### 4.7.3 纯虚函数和抽象类
+### # 4.7.3 纯虚函数和抽象类
 
 
 
@@ -4246,7 +4246,7 @@ int main() {
 
 
 
-#### 4.7.4 多态案例二-制作饮品
+### # 4.7.4 多态案例二-制作饮品
 
 **案例描述：**
 
@@ -4368,7 +4368,7 @@ int main() {
 
 
 
-#### 4.7.5 虚析构和纯虚析构
+### # 4.7.5 虚析构和纯虚析构
 
 
 
@@ -4501,7 +4501,7 @@ int main() {
 
 
 
-#### 4.7.6 多态案例三-电脑组装
+### # 4.7.6 多态案例三-电脑组装
 
 
 
@@ -4524,7 +4524,7 @@ int main() {
 **示例：**
 
 ```C++
-#include<iostream>
+# include<iostream>
 using namespace std;
 
 //抽象CPU类
@@ -4706,7 +4706,7 @@ void test01()
 
 
 
-## 5 文件操作
+# # 5 文件操作
 
 
 
@@ -4733,15 +4733,15 @@ C++中对文件操作需要包含头文件 ==&lt; fstream &gt;==
 
 
 
-### 5.1文本文件
+## # 5.1文本文件
 
-#### 5.1.1写文件
+### # 5.1.1写文件
 
    写文件步骤如下：
 
 1. 包含头文件   
 
-     \#include <fstream\>
+     \# include <fstream\>
 
 2. 创建流对象  
 
@@ -4783,7 +4783,7 @@ C++中对文件操作需要包含头文件 ==&lt; fstream &gt;==
 **示例：**
 
 ```C++
-#include <fstream>
+# include <fstream>
 
 void test01()
 {
@@ -4831,7 +4831,7 @@ int main() {
 
 
 
-#### 5.1.2读文件
+### # 5.1.2读文件
 
 
 
@@ -4843,7 +4843,7 @@ int main() {
 
 1. 包含头文件   
 
-     \#include <fstream\>
+     \# include <fstream\>
 
 2. 创建流对象  
 
@@ -4866,8 +4866,8 @@ int main() {
 **示例：**
 
 ```C++
-#include <fstream>
-#include <string>
+# include <fstream>
+# include <string>
 void test01()
 {
 	ifstream ifs;
@@ -4941,7 +4941,7 @@ int main() {
 
 
 
-### 5.2 二进制文件
+## # 5.2 二进制文件
 
 以二进制的方式对文件进行读写操作
 
@@ -4949,7 +4949,7 @@ int main() {
 
 
 
-#### 5.2.1 写文件
+### # 5.2.1 写文件
 
 二进制方式写文件主要利用流对象调用成员函数write
 
@@ -4962,8 +4962,8 @@ int main() {
 **示例：**
 
 ```C++
-#include <fstream>
-#include <string>
+# include <fstream>
+# include <string>
 
 class Person
 {
@@ -5016,7 +5016,7 @@ int main() {
 
 
 
-#### 5.2.2 读文件
+### # 5.2.2 读文件
 
 二进制方式读文件主要利用流对象调用成员函数read
 
@@ -5027,8 +5027,8 @@ int main() {
 示例：
 
 ```C++
-#include <fstream>
-#include <string>
+# include <fstream>
+# include <string>
 
 class Person
 {
@@ -5048,7 +5048,7 @@ void test01()
 	Person p;
 	ifs.read((char *)&p, sizeof(p));
 
-	cout << "姓名： " << p.m_Name << " 年龄： " << p.m_Age << endl;
+	cout << "姓名： " << p.m*Name << " 年龄： " << p.m*Age << endl;
 }
 
 int main() {

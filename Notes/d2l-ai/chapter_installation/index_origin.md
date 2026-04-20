@@ -6,7 +6,7 @@ we need to set you up with an environment for running Python,
 Jupyter notebooks, the relevant libraries,
 and the code needed to run the book itself.
 
-## Installing Miniconda
+# # Installing Miniconda
 
 The simplest way to get going will be to install
 [Miniconda](https://conda.io/en/latest/miniconda.html). The Python 3.x version
@@ -44,7 +44,7 @@ conda create --name d2l -y
 ```
 
 
-## Downloading the D2L Notebooks
+# # Downloading the D2L Notebooks
 
 Next, we need to download the code of this book. You can click the "All
 Notebooks" tab on the top of any HTML page to download and unzip the code.
@@ -66,7 +66,7 @@ conda install python=3.7 pip -y
 ```
 
 
-## Installing the Framework and the `d2l` Package
+# # Installing the Framework and the `d2l` Package
 
 :begin_tab:`mxnet,pytorch`
 Before installing the deep learning framework, please first check
@@ -134,7 +134,7 @@ before running the code of the book or updating the deep learning framework or t
 To exit the environment, run `conda deactivate`.
 
 
-## GPU Support
+# # GPU Support
 :label:`subsec_gpu`
 
 :begin_tab:`mxnet,pytorch`
@@ -205,7 +205,7 @@ You may change the last digits according to your CUDA version, e.g., `cu100` for
 CUDA 10.0 and `cu90` for CUDA 9.0.
 :end_tab:
 
-## Exercises
+# # Exercises
 
 1. Download the code for the book and install the runtime environment.
 

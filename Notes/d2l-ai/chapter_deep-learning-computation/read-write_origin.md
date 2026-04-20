@@ -14,7 +14,7 @@ Thus it is time to learn how to load and store
 both individual weight vectors and entire models.
 This section addresses both issues.
 
-## Loading and Saving Tensors
+# # Loading and Saving Tensors
 
 For individual tensors, we can directly
 invoke the `load` and `save` functions
@@ -32,7 +32,7 @@ npx.save('x-file', x)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 import torch
 from torch import nn
 from torch.nn import functional as F
@@ -42,7 +42,7 @@ torch.save(x, 'x-file')
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 import tensorflow as tf
 import numpy as np
 
@@ -58,13 +58,13 @@ x2
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 x2 = torch.load("x-file")
 x2
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 x2 = np.load('x-file.npy', allow_pickle=True)
 x2
 ```
@@ -79,7 +79,7 @@ x2, y2 = npx.load('x-files')
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 y = torch.zeros(4)
 torch.save([x, y],'x-files')
 x2, y2 = torch.load('x-files')
@@ -87,7 +87,7 @@ x2, y2 = torch.load('x-files')
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 y = tf.zeros(4)
 np.save('xy-files.npy', [x, y])
 x2, y2 = np.load('xy-files.npy', allow_pickle=True)
@@ -107,7 +107,7 @@ mydict2
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 mydict = {'x': x, 'y': y}
 torch.save(mydict, 'mydict')
 mydict2 = torch.load('mydict')
@@ -115,14 +115,14 @@ mydict2
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 mydict = {'x': x, 'y': y}
 np.save('mydict.npy', mydict)
 mydict2 = np.load('mydict.npy', allow_pickle=True)
 mydict2
 ```
 
-## Loading and Saving Model Parameters
+# # Loading and Saving Model Parameters
 
 Saving individual weight vectors (or other tensors) is useful,
 but it gets very tedious if we want to save
@@ -144,8 +144,8 @@ Let us start with our familiar MLP.
 
 ```{.python .input}
 class MLP(nn.Block):
-    def __init__(self, **kwargs):
-        super(MLP, self).__init__(**kwargs)
+    def **init**(self, **kwargs):
+        super(MLP, self).**init**(**kwargs)
         self.hidden = nn.Dense(256, activation='relu')
         self.output = nn.Dense(10)
 
@@ -159,10 +159,10 @@ Y = net(X)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 class MLP(nn.Module):
-    def __init__(self):
-        super().__init__()
+    def **init**(self):
+        super().**init**()
         self.hidden = nn.Linear(20, 256)
         self.output = nn.Linear(256, 10)
 
@@ -175,10 +175,10 @@ Y = net(X)
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 class MLP(tf.keras.Model):
-    def __init__(self):
-        super().__init__()
+    def **init**(self):
+        super().**init**()
         self.flatten = tf.keras.layers.Flatten()
         self.hidden = tf.keras.layers.Dense(units=256, activation=tf.nn.relu)
         self.out = tf.keras.layers.Dense(units=10)
@@ -200,12 +200,12 @@ net.save_parameters('mlp.params')
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 torch.save(net.state_dict(), 'mlp.params')
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 net.save_weights('mlp.params')
 ```
 
@@ -220,14 +220,14 @@ clone.load_parameters('mlp.params')
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 clone = MLP()
-clone.load_state_dict(torch.load("mlp.params"))
+clone.load*state*dict(torch.load("mlp.params"))
 clone.eval()
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 clone = MLP()
 clone.load_weights("mlp.params")
 ```
@@ -242,24 +242,24 @@ Y_clone == Y
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 Y_clone = clone(X)
 Y_clone == Y
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 Y_clone = clone(X)
 Y_clone == Y
 ```
 
-## Summary
+# # Summary
 
 * The `save` and `load` functions can be used to perform file I/O for tensor objects.
 * We can save and load the entire sets of parameters for a network via a parameter dictionary.
 * Saving the architecture has to be done in code rather than in parameters.
 
-## Exercises
+# # Exercises
 
 1. Even if there is no need to deploy trained models to a different device, what are the practical benefits of storing model parameters?
 1. Assume that we want to reuse only parts of a network to be incorporated into a network of a different architecture. How would you go about using, say the first two layers from a previous network in a new network?

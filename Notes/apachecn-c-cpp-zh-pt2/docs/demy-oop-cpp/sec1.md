@@ -8,7 +8,7 @@
 
 本节包括以下章节:
 
-*   [*第一章*](01.html#_idTextAnchor018)*，了解基本 C 假设*
-*   [*第二章*](02.html#_idTextAnchor066)*，增加语言必须品*
-*   [*第三章*](03.html#_idTextAnchor112)*，间接寻址指针*
-*   [*第四章*](04.html#_idTextAnchor169)*，间接寻址-引用*
+*   [*第一章*](01.html# _idTextAnchor018)*，了解基本 C 假设*
+*   [*第二章*](02.html# _idTextAnchor066)*，增加语言必须品*
+*   [*第三章*](03.html# _idTextAnchor112)*，间接寻址指针*
+*   [*第四章*](04.html# _idTextAnchor169)*，间接寻址-引用*

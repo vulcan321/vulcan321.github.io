@@ -1,5 +1,5 @@
 # Weight Decay
-:label:`sec_weight_decay`
+:label:`sec*weight*decay`
 
 Now that we have characterized the problem of overfitting,
 we can introduce some standard techniques for regularizing models.
@@ -14,7 +14,7 @@ and focus on regularization techniques.
 
 Recall that in our
 polynomial regression example
-(:numref:`sec_model_selection`)
+(:numref:`sec*model*selection`)
 we could limit our model's capacity
 simply by tweaking the degree
 of the fitted polynomial.
@@ -29,7 +29,7 @@ The natural extensions of polynomials
 to multivariate data are called *monomials*,
 which are simply products of powers of variables.
 The degree of a monomial is the sum of the powers.
-For example, $x_1^2 x_2$, and $x_3 x_5^2$
+For example, $x*1^2 x*2$, and $x*3 x*5^2$
 are both monomials of degree 3.
 
 Note that the number of terms with degree $d$
@@ -42,10 +42,10 @@ Thus we often need a more fine-grained tool
 for adjusting function complexity.
 
 
-## Norms and Weight Decay
+# # Norms and Weight Decay
 
 We have described 
-both the $L_2$ norm and the $L_1$ norm,
+both the $L*2$ norm and the $L*1$ norm,
 which are special cases of the more general $L_p$ norm
 in :numref:`subsec_lin-algebra-norms`.
 *Weight decay* (commonly called $L_2$ regularization),
@@ -84,7 +84,7 @@ vs. minimizing the training error.
 That is exactly what we want.
 To illustrate things in code,
 let us revive our previous example
-from :numref:`sec_linear_regression` for linear regression.
+from :numref:`sec*linear*regression` for linear regression.
 There, our loss was given by
 
 $$L(\mathbf{w}, b) = \frac{1}{n}\sum_{i=1}^n \frac{1}{2}\left(\mathbf{w}^\top \mathbf{x}^{(i)} + b - y^{(i)}\right)^2.$$
@@ -142,7 +142,7 @@ This is called *feature selection*,
 which may be desirable for other reasons.
 
 
-Using the same notation in :eqref:`eq_linreg_batch_update`,
+Using the same notation in :eqref:`eq*linreg*batch_update`,
 the minibatch stochastic gradient descent updates
 for $L_2$-regularized regression follow:
 
@@ -173,7 +173,7 @@ and may vary across layers of a neural network.
 Often, we do not regularize the bias term
 of a network's output layer.
 
-## High-Dimensional Linear Regression
+# # High-Dimensional Linear Regression
 
 We can illustrate the benefits of
 weight decay
@@ -188,7 +188,7 @@ npx.set_np()
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 %matplotlib inline
 from d2l import torch as d2l
 import torch
@@ -196,7 +196,7 @@ import torch.nn as nn
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 %matplotlib inline
 from d2l import tensorflow as d2l
 import tensorflow as tf
@@ -204,7 +204,7 @@ import tensorflow as tf
 
 First, we generate some data as before
 
-$$y = 0.05 + \sum_{i = 1}^d 0.01 x_i + \epsilon \text{ where }
+$$y = 0.05 + \sum*{i = 1}^d 0.01 x*i + \epsilon \text{ where }
 \epsilon \sim \mathcal{N}(0, 0.01^2).$$
 
 We choose our label to be a linear function of our inputs,
@@ -214,22 +214,22 @@ we can increase the dimensionality of our problem to $d = 200$
 and work with a small training set containing only 20 examples.
 
 ```{.python .input}
-#@tab all
-n_train, n_test, num_inputs, batch_size = 20, 100, 200, 5
-true_w, true_b = d2l.ones((num_inputs, 1)) * 0.01, 0.05
-train_data = d2l.synthetic_data(true_w, true_b, n_train)
-train_iter = d2l.load_array(train_data, batch_size)
-test_data = d2l.synthetic_data(true_w, true_b, n_test)
-test_iter = d2l.load_array(test_data, batch_size, is_train=False)
+# @tab all
+n*train, n*test, num*inputs, batch*size = 20, 100, 200, 5
+true*w, true*b = d2l.ones((num_inputs, 1)) * 0.01, 0.05
+train*data = d2l.synthetic*data(true*w, true*b, n_train)
+train*iter = d2l.load*array(train*data, batch*size)
+test*data = d2l.synthetic*data(true*w, true*b, n_test)
+test*iter = d2l.load*array(test*data, batch*size, is_train=False)
 ```
 
-## Implementation from Scratch
+# # Implementation from Scratch
 
 In the following, we will implement weight decay from scratch,
 simply by adding the squared $L_2$ penalty
 to the original target function.
 
-### Initializing Model Parameters
+## # Initializing Model Parameters
 
 First, we will define a function
 to randomly initialize our model parameters.
@@ -244,22 +244,22 @@ def init_params():
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 def init_params():
-    w = torch.normal(0, 1, size=(num_inputs, 1), requires_grad=True)
+    w = torch.normal(0, 1, size=(num*inputs, 1), requires*grad=True)
     b = torch.zeros(1, requires_grad=True)
     return [w, b]
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 def init_params():
     w = tf.Variable(tf.random.normal(mean=1, shape=(num_inputs, 1)))
     b = tf.Variable(tf.zeros(shape=(1, )))
     return [w, b]
 ```
 
-### Defining $L_2$ Norm Penalty
+## # Defining $L_2$ Norm Penalty
 
 Perhaps the most convenient way to implement this penalty
 is to square all terms in place and sum them up.
@@ -270,18 +270,18 @@ def l2_penalty(w):
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 def l2_penalty(w):
     return torch.sum(w.pow(2)) / 2
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 def l2_penalty(w):
     return tf.reduce_sum(tf.pow(w, 2)) / 2
 ```
 
-### Defining the Training Loop
+## # Defining the Training Loop
 
 The following code fits a model on the training set
 and evaluates it on the test set.
@@ -301,18 +301,18 @@ def train(lambd):
         for X, y in train_iter:
             with autograd.record():
                 # The L2 norm penalty term has been added, and broadcasting
-                # makes `l2_penalty(w)` a vector whose length is `batch_size`
+                # makes `l2*penalty(w)` a vector whose length is `batch*size`
                 l = loss(net(X), y) + lambd * l2_penalty(w)
             l.backward()
             d2l.sgd([w, b], lr, batch_size)
         if (epoch + 1) % 5 == 0:
-            animator.add(epoch + 1, (d2l.evaluate_loss(net, train_iter, loss),
-                                     d2l.evaluate_loss(net, test_iter, loss)))
+            animator.add(epoch + 1, (d2l.evaluate*loss(net, train*iter, loss),
+                                     d2l.evaluate*loss(net, test*iter, loss)))
     print('L2 norm of w:', np.linalg.norm(w))
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 def train(lambd):
     w, b = init_params()
     net, loss = lambda X: d2l.linreg(X, w, b), d2l.squared_loss
@@ -323,18 +323,18 @@ def train(lambd):
         for X, y in train_iter:
             with torch.enable_grad():
                 # The L2 norm penalty term has been added, and broadcasting
-                # makes `l2_penalty(w)` a vector whose length is `batch_size`
+                # makes `l2*penalty(w)` a vector whose length is `batch*size`
                 l = loss(net(X), y) + lambd * l2_penalty(w)
             l.sum().backward()
             d2l.sgd([w, b], lr, batch_size)
         if (epoch + 1) % 5 == 0:
-            animator.add(epoch + 1, (d2l.evaluate_loss(net, train_iter, loss),
-                                     d2l.evaluate_loss(net, test_iter, loss)))
+            animator.add(epoch + 1, (d2l.evaluate*loss(net, train*iter, loss),
+                                     d2l.evaluate*loss(net, test*iter, loss)))
     print('L2 norm of w:', torch.norm(w).item())
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 def train(lambd):
     w, b = init_params()
     net, loss = lambda X: d2l.linreg(X, w, b), d2l.squared_loss
@@ -345,17 +345,17 @@ def train(lambd):
         for X, y in train_iter:
             with tf.GradientTape() as tape:
                 # The L2 norm penalty term has been added, and broadcasting
-                # makes `l2_penalty(w)` a vector whose length is `batch_size`
+                # makes `l2*penalty(w)` a vector whose length is `batch*size`
                 l = loss(net(X), y) + lambd * l2_penalty(w)
             grads = tape.gradient(l, [w, b])
             d2l.sgd([w, b], grads, lr, batch_size)
         if (epoch + 1) % 5 == 0:
-            animator.add(epoch + 1, (d2l.evaluate_loss(net, train_iter, loss),
-                                     d2l.evaluate_loss(net, test_iter, loss)))
+            animator.add(epoch + 1, (d2l.evaluate*loss(net, train*iter, loss),
+                                     d2l.evaluate*loss(net, test*iter, loss)))
     print('L2 norm of w:', tf.norm(w).numpy())
 ```
 
-### Training without Regularization
+## # Training without Regularization
 
 We now run this code with `lambd = 0`,
 disabling weight decay.
@@ -364,11 +364,11 @@ decreasing the training error but not the
 test error---a textook case of overfitting.
 
 ```{.python .input}
-#@tab all
+# @tab all
 train(lambd=0)
 ```
 
-### Using Weight Decay
+## # Using Weight Decay
 
 Below, we run with substantial weight decay.
 Note that the training error increases
@@ -377,11 +377,11 @@ This is precisely the effect
 we expect from regularization.
 
 ```{.python .input}
-#@tab all
+# @tab all
 train(lambd=3)
 ```
 
-## Concise Implementation
+# # Concise Implementation
 
 Because weight decay is ubiquitous
 in neural network optimization,
@@ -433,7 +433,7 @@ def train_concise(wd):
     trainer = gluon.Trainer(net.collect_params(), 'sgd',
                             {'learning_rate': lr, 'wd': wd})
     # The bias parameter has not decayed. Bias names generally end with "bias"
-    net.collect_params('.*bias').setattr('wd_mult', 0)
+    net.collect*params('.*bias').setattr('wd*mult', 0)
     animator = d2l.Animator(xlabel='epochs', ylabel='loss', yscale='log',
                             xlim=[5, num_epochs], legend=['train', 'test'])
     for epoch in range(num_epochs):
@@ -443,13 +443,13 @@ def train_concise(wd):
             l.backward()
             trainer.step(batch_size)
         if (epoch + 1) % 5 == 0:
-            animator.add(epoch + 1, (d2l.evaluate_loss(net, train_iter, loss),
-                                     d2l.evaluate_loss(net, test_iter, loss)))
+            animator.add(epoch + 1, (d2l.evaluate*loss(net, train*iter, loss),
+                                     d2l.evaluate*loss(net, test*iter, loss)))
     print('L2 norm of w:', np.linalg.norm(net[0].weight.data()))
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 def train_concise(wd):
     net = nn.Sequential(nn.Linear(num_inputs, 1))
     for param in net.parameters():
@@ -470,18 +470,18 @@ def train_concise(wd):
             l.backward()
             trainer.step()
         if (epoch + 1) % 5 == 0:
-            animator.add(epoch + 1, (d2l.evaluate_loss(net, train_iter, loss),
-                                     d2l.evaluate_loss(net, test_iter, loss)))
+            animator.add(epoch + 1, (d2l.evaluate*loss(net, train*iter, loss),
+                                     d2l.evaluate*loss(net, test*iter, loss)))
     print('L2 norm of w:', net[0].weight.norm().item())
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 def train_concise(wd):
     net = tf.keras.models.Sequential()
     net.add(tf.keras.layers.Dense(
         1, kernel_regularizer=tf.keras.regularizers.l2(wd)))
-    net.build(input_shape=(1, num_inputs))
+    net.build(input*shape=(1, num*inputs))
     w, b = net.trainable_variables
     loss = tf.keras.losses.MeanSquaredError()
     num_epochs, lr = 100, 0.003
@@ -495,10 +495,10 @@ def train_concise(wd):
                 # layers manually for custom training loop.
                 l = loss(net(X), y) + net.losses
             grads = tape.gradient(l, net.trainable_variables)
-            trainer.apply_gradients(zip(grads, net.trainable_variables))
+            trainer.apply*gradients(zip(grads, net.trainable*variables))
         if (epoch + 1) % 5 == 0:
-            animator.add(epoch + 1, (d2l.evaluate_loss(net, train_iter, loss),
-                                     d2l.evaluate_loss(net, test_iter, loss)))
+            animator.add(epoch + 1, (d2l.evaluate*loss(net, train*iter, loss),
+                                     d2l.evaluate*loss(net, test*iter, loss)))
     print('L2 norm of w:', tf.norm(net.get_weights()[0]).numpy())
 ```
 
@@ -510,12 +510,12 @@ a benefit that will become more
 pronounced for larger problems.
 
 ```{.python .input}
-#@tab all
+# @tab all
 train_concise(0)
 ```
 
 ```{.python .input}
-#@tab all
+# @tab all
 train_concise(3)
 ```
 
@@ -523,7 +523,7 @@ So far, we only touched upon one notion of
 what constitutes a simple linear function.
 Moreover, what constitutes a simple nonlinear function
 can be an even more complex question.
-For instance, [reproducing kernel Hilbert space (RKHS)](https://en.wikipedia.org/wiki/Reproducing_kernel_Hilbert_space)
+For instance, [reproducing kernel Hilbert space (RKHS)](https://en.wikipedia.org/wiki/Reproducing*kernel*Hilbert_space)
 allows one to apply tools introduced
 for linear functions in a nonlinear context.
 Unfortunately, RKHS-based algorithms
@@ -531,7 +531,7 @@ tend to scale purely to large, high-dimensional data.
 In this book we will default to the simple heuristic
 of applying weight decay on all layers of a deep network.
 
-## Summary
+# # Summary
 
 * Regularization is a common method for dealing with overfitting. It adds a penalty term to the loss function on the training set to reduce the complexity of the learned model.
 * One particular choice for keeping the model simple is weight decay using an $L_2$ penalty. This leads to weight decay in the update steps of the learning algorithm.
@@ -540,11 +540,11 @@ of applying weight decay on all layers of a deep network.
 
 
 
-## Exercises
+# # Exercises
 
 1. Experiment with the value of $\lambda$ in the estimation problem in this section. Plot training and test accuracy as a function of $\lambda$. What do you observe?
 1. Use a validation set to find the optimal value of $\lambda$. Is it really the optimal value? Does this matter?
-1. What would the update equations look like if instead of $\|\mathbf{w}\|^2$ we used $\sum_i |w_i|$ as our penalty of choice ($L_1$ regularization)?
+1. What would the update equations look like if instead of $\|\mathbf{w}\|^2$ we used $\sum*i |w*i|$ as our penalty of choice ($L_1$ regularization)?
 1. We know that $\|\mathbf{w}\|^2 = \mathbf{w}^\top \mathbf{w}$. Can you find a similar equation for matrices (see the Frobenius norm in :numref:`subsec_lin-algebra-norms`)?
 1. Review the relationship between training error and generalization error. In addition to weight decay, increased training, and the use of a model of suitable complexity, what other ways can you think of to deal with overfitting?
 1. In Bayesian statistics we use the product of prior and likelihood to arrive at a posterior via $P(w \mid x) \propto P(x \mid w) P(w)$. How can you identify $P(w)$ with regularization?

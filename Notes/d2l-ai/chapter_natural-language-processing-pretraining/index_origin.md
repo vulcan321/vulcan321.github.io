@@ -1,5 +1,5 @@
 # Natural Language Processing: Pretraining
-:label:`chap_nlp_pretrain`
+:label:`chap*nlp*pretrain`
 
 
 Humans need to communicate.
@@ -7,7 +7,7 @@ Out of this basic need of the human condition, a vast amount of written text has
 Given rich text in social media, chat apps, emails, product reviews, news articles,  research papers, and books, it becomes vital to enable computers to understand them to offer assistance or make decisions based on human languages.
 
 *Natural language processing* studies interactions between computers and humans using natural languages.
-In practice, it is very common to use natural language processing techniques to process and analyze text (human natural language) data, such as language models in :numref:`sec_language_model` and machine translation models in :numref:`sec_machine_translation`.
+In practice, it is very common to use natural language processing techniques to process and analyze text (human natural language) data, such as language models in :numref:`sec*language*model` and machine translation models in :numref:`sec*machine*translation`.
 
 To understand text, we can begin by learning
 its representations.
@@ -50,7 +50,7 @@ For sight of the big picture,
 :numref:`fig_nlp-map-pretrain` shows that
 the pretrained text representations can be fed to
 a variety of deep learning architectures for different downstream natural language processing applications.
-We will cover them in :numref:`chap_nlp_app`.
+We will cover them in :numref:`chap*nlp*app`.
 
 ```toc
 :maxdepth: 2

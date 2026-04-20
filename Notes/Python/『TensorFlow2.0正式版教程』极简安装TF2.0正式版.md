@@ -1,4 +1,4 @@
-### 1.0 conda环境准备
+## # 1.0 conda环境准备
 
 conda是很好用python管理工具，可以方便建立管理多个python环境。后面安装的步骤里我也会介绍一些常用的conda指令。
 
@@ -8,9 +8,9 @@ miniconda推荐使用清华源下载：[https://mirrors.tuna.tsinghua.edu.cn/ana
 
 选择适合自己的版本就可以，
 
--   windows推荐地址：[https://mirrors.tuna.tsinghua.edu.cn/anaconda/miniconda/Miniconda3-4.7.10-Windows-x86\_64.exe](https://mirrors.tuna.tsinghua.edu.cn/anaconda/miniconda/Miniconda3-4.7.10-Windows-x86_64.exe)
--   ubuntu推荐地址：[https://mirrors.tuna.tsinghua.edu.cn/anaconda/miniconda/Miniconda3-4.7.10-Linux-x86\_64.sh](https://mirrors.tuna.tsinghua.edu.cn/anaconda/miniconda/Miniconda3-4.7.10-Linux-x86_64.sh)
--   Mac os推荐地址：[https://mirrors.tuna.tsinghua.edu.cn/anaconda/miniconda/Miniconda3-4.7.10-MacOSX-x86\_64.pkg](https://mirrors.tuna.tsinghua.edu.cn/anaconda/miniconda/Miniconda3-4.7.10-MacOSX-x86_64.pkg)
+-   windows推荐地址：[https://mirrors.tuna.tsinghua.edu.cn/anaconda/miniconda/Miniconda3-4.7.10-Windows-x86\*64.exe](https://mirrors.tuna.tsinghua.edu.cn/anaconda/miniconda/Miniconda3-4.7.10-Windows-x86*64.exe)
+-   ubuntu推荐地址：[https://mirrors.tuna.tsinghua.edu.cn/anaconda/miniconda/Miniconda3-4.7.10-Linux-x86\*64.sh](https://mirrors.tuna.tsinghua.edu.cn/anaconda/miniconda/Miniconda3-4.7.10-Linux-x86*64.sh)
+-   Mac os推荐地址：[https://mirrors.tuna.tsinghua.edu.cn/anaconda/miniconda/Miniconda3-4.7.10-MacOSX-x86\*64.pkg](https://mirrors.tuna.tsinghua.edu.cn/anaconda/miniconda/Miniconda3-4.7.10-MacOSX-x86*64.pkg)
 
 下以windows版本来安装miniconda作为演示，从上述下载合适版本，下载好后以管理员权限打开点击安装。
 
@@ -23,7 +23,7 @@ miniconda推荐使用清华源下载：[https://mirrors.tuna.tsinghua.edu.cn/ana
 下面介绍些cmd conda指令：
 
 1.  查看conda环境：conda env list
-2.  新建conda环境(env\_name就是创建的环境名，可以自定义)：conda create -n env\_name
+2.  新建conda环境(env\*name就是创建的环境名，可以自定义)：conda create -n env\*name
 3.  激活conda环境（ubuntu与Macos 将conda 替换为source）：conda activate env\_name
 4.  退出conda环境：conda deactivate
 5.  安装和卸载python包：conda install numpy # conda uninstall numpy
@@ -31,7 +31,7 @@ miniconda推荐使用清华源下载：[https://mirrors.tuna.tsinghua.edu.cn/ana
 
 知道这些指令就可以开始使用conda新建一个环境安装TF2.0了。
 
-### 1.1 TF2.0 CPU版本安装
+## # 1.1 TF2.0 CPU版本安装
 
 TF CPU安装比较简单，因为不需要配置GPU，所以windows ubuntu macOS安装方式都类似，缺点就是运行速度慢，但是用于日常学习使用还是可以的。
 
@@ -69,8 +69,8 @@ pip install tensorflow==2.0.0 -i https://pypi.tuna.tsinghua.edu.cn/simple
 
 ```python
 import tensorflow as tf
-version = tf.__version__
-gpu_ok = tf.test.is_gpu_available()
+version = tf.**version**
+gpu*ok = tf.test.is*gpu_available()
 print("tf version:",version,"\nuse GPU",gpu_ok)
 ```
 
@@ -81,7 +81,7 @@ tf version: 2.0.0
 use GPU False
 ```
 
-### 1.2 TF2.0 GPU版本安装
+## # 1.2 TF2.0 GPU版本安装
 
 GPU版本和CPU类似，但是会多一步对于GPU支持的安装。下面来一步步实现。安装之前确认你的电脑拥有Nvidia的GPU
 
@@ -127,8 +127,8 @@ pip install tensorflow-gpu==2.0.0 -i https://pypi.tuna.tsinghua.edu.cn/simple
 
 ```python
 import tensorflow as tf
-version = tf.__version__
-gpu_ok = tf.test.is_gpu_available()
+version = tf.**version**
+gpu*ok = tf.test.is*gpu_available()
 print("tf version:",version,"\nuse GPU",gpu_ok)
 ```
 
@@ -139,7 +139,7 @@ tf version: 2.0.0
 use GPU True
 ```
 
-### 1.2 最后我们测试一个使用TF2.0版本方式写的线性拟合代码
+## # 1.2 最后我们测试一个使用TF2.0版本方式写的线性拟合代码
 
 把下述代码保存为main.py
 
@@ -151,13 +151,13 @@ y = tf.constant([[10.0], [20.0]])
  
  
 class Linear(tf.keras.Model):
-    def __init__(self):
-        super().__init__()
+    def **init**(self):
+        super().**init**()
         self.dense = tf.keras.layers.Dense(
             units=1,
             activation=None,
-            kernel_initializer=tf.zeros_initializer(),
-            bias_initializer=tf.zeros_initializer()
+            kernel*initializer=tf.zeros*initializer(),
+            bias*initializer=tf.zeros*initializer()
         )
  
     def call(self, input):
@@ -170,17 +170,17 @@ model = Linear()
 optimizer = tf.keras.optimizers.SGD(learning_rate=0.01)
 for i in range(100):
     with tf.GradientTape() as tape:
-        y_pred = model(X)      # 调用模型 y_pred = model(X) 而不是显式写出 y_pred = a * X + b
-        loss = tf.reduce_mean(tf.square(y_pred - y))
+        y*pred = model(X)      # 调用模型 y*pred = model(X) 而不是显式写出 y_pred = a * X + b
+        loss = tf.reduce*mean(tf.square(y*pred - y))
      
     grads = tape.gradient(loss, model.variables)    # 使用 model.variables 这一属性直接获得模型中的所有变量
-    optimizer.apply_gradients(grads_and_vars=zip(grads, model.variables))
+    optimizer.apply*gradients(grads*and_vars=zip(grads, model.variables))
     if i % 10 == 0:
         print(i, loss.numpy())
 print(model.variables)
 ```
 
-### 输出结果如下：
+## # 输出结果如下：
 
 ```python
 0 250.0
@@ -201,7 +201,7 @@ array([[0.40784496],
 
 
 
-## 1. 后记
+# # 1. 后记
 
 回复两个评论区问的较为多的问题：
 

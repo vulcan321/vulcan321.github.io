@@ -38,7 +38,7 @@ https://zhuanlan.zhihu.com/p/21730929
 
 5.  **C/CPP Type to Rust**
 
-   参考：https://locka99.gitbooks.io/a-guide-to-porting-c-to-rust/content/features_of_rust/types.html
+   参考：https://locka99.gitbooks.io/a-guide-to-porting-c-to-rust/content/features*of*rust/types.html
 
    |         C/C++          |                   Rust                    |
    | :--------------------: | :---------------------------------------: |
@@ -84,15 +84,15 @@ https://zhuanlan.zhihu.com/p/21730929
 // Rust *mut u8 转换成 &[u8]
 unsafe {
     // data_ptr为 *mut u8, data为 &[u8]
-    // 使用 slice::from_raw_parts 不会发生拷贝，作用给这块内存创建一个切片
-    let data = slice::from_raw_parts(data_ptr, size);
+    // 使用 slice::from*raw*parts 不会发生拷贝，作用给这块内存创建一个切片
+    let data = slice::from*raw*parts(data_ptr, size);
 }
 
 // Rust *mut u8 转换成 &mut [u8]
 unsafe {
     // data_ptr为 *mut u8, data为 Vec[u8]
-    // 使用 Vec::from_raw_parts 不会发生拷贝，该块内存的所有权会被 data 接管
-    let data = Vec::from_raw_parts(data_ptr, size, size);
+    // 使用 Vec::from*raw*parts 不会发生拷贝，该块内存的所有权会被 data 接管
+    let data = Vec::from*raw*parts(data_ptr, size, size);
 }
 
 // &[u8] 转换成 * const u8
@@ -105,10 +105,10 @@ let ptr = data.as_ptr()
 
 ```Rust
 let a = &56;
-let a_raw_ptr = a as *const u32;
+let a*raw*ptr = a as *const u32;
 // or
 let b = &mut 5634.3;
-let b_mut_ptr = b as *mut T;
+let b*mut*ptr = b as *mut T;
 ```
 
 
@@ -131,13 +131,13 @@ let b_mut_ptr = b as *mut T;
 ```Rust
 // 此代码可以使task1 和 task2并发执行，根据 rust tokio调度器进行调度
 
-#[tokio::main]		// basic_scheduler threaded_scheduler 
+# [tokio::main]		// basic*scheduler threaded*scheduler 
 async fn main() -> Result<(), Box<dyn Error>> {
     // task1
     tokio::spawn(async move {
-        println!("########## {} current thread: {:?}", 1, std::thread::current().id());
+        println!("###### ### # {} current thread: {:?}", 1, std::thread::current().id());
         tokio::time::sleep(Duration::from_millis(3000)).await;
-        println!("########## {} currnet end", 1);
+        println!("###### ### # {} currnet end", 1);
     });
 
     // 此处休眠给 task1 进入 await状态时间, 交出它所在线程的执行权, 
@@ -147,9 +147,9 @@ async fn main() -> Result<(), Box<dyn Error>> {
 
     // task2
     tokio::spawn(async move {
-        println!("########## {} current thread: {:?}", 2, std::thread::current().id());
+        println!("###### ### # {} current thread: {:?}", 2, std::thread::current().id());
         tokio::time::sleep(Duration::from_millis(1000)).await;
-        println!("########## {} current end", 2);
+        println!("###### ### # {} current end", 2);
     });
 
     tokio::time::sleep(Duration::from_millis(10000)).await;
@@ -159,25 +159,25 @@ async fn main() -> Result<(), Box<dyn Error>> {
 
 ```Rust
 // 单线程异步代码块
-async fn do_stuff_async() -> Result<(), &'static str> {
-    println!("########## {} current thread: {:?}", 1, std::thread::current().id());
+async fn do*stuff*async() -> Result<(), &'static str> {
+    println!("###### ### # {} current thread: {:?}", 1, std::thread::current().id());
     tokio::time::sleep(Duration::from_millis(3000)).await;
-    println!("########## {} currnet end", 1);
+    println!("###### ### # {} currnet end", 1);
     Ok(())
 }
 
-async fn more_async_work() -> Result<(), &'static str> {
-    println!("########## {} current thread: {:?}", 2, std::thread::current().id());
+async fn more*async*work() -> Result<(), &'static str> {
+    println!("###### ### # {} current thread: {:?}", 2, std::thread::current().id());
     tokio::time::sleep(Duration::from_millis(1000)).await;
-    println!("########## {} current end", 2);
+    println!("###### ### # {} current end", 2);
     Ok(())
 }
 
-#[tokio::main]
+# [tokio::main]
 async fn main(){
-    // let a = do_stuff_async();
-    // let b = more_async_work();
-    tokio::try_join!(do_stuff_async(), more_async_work());
+    // let a = do*stuff*async();
+    // let b = more*async*work();
+    tokio::try*join!(do*stuff*async(), more*async_work());
 }
 ```
 
@@ -188,7 +188,7 @@ async fn main(){
 10. Box 可以在堆上申请内存，当我们想解除 Box 获取内存时代码如下：
 
     ```rust
-    let box_data_raw_ptr = Box::into_raw(box_data);
+    let box*data*raw*ptr = Box::into*raw(box_data);
     ```
 
     使用此方法后，Box 变量变回失效，不能再使用。
@@ -196,8 +196,8 @@ async fn main(){
     如果想把一块无人管理的内存转给 Box 管理，代码如下：
 
     ```rust
-    let box_data_raw_ptr = Box::into_raw(box_data);
-    let box_data_ptr = unsafe { Box::from_raw(box_data_raw_ptr) };
+    let box*data*raw*ptr = Box::into*raw(box_data);
+    let box*data*ptr = unsafe { Box::from*raw(box*data*raw*ptr) };
     ```
 
     
@@ -223,7 +223,7 @@ async fn main(){
     ```Rust
     use std::mem;
     
-    #[repr(packed)]
+    # [repr(packed)]
     struct Foo {
         bar: u8,
     }
@@ -231,13 +231,13 @@ async fn main(){
     let foo_array = [10u8];
     
     unsafe {
-        let mut foo_struct: Foo = mem::transmute_copy(&foo_array);
-        assert_eq!(foo_struct.bar, 10);
+        let mut foo*struct: Foo = mem::transmute*copy(&foo_array);
+        assert*eq!(foo*struct.bar, 10);
         
         foo_struct.bar = 20;
-        assert_eq!(foo_struct.bar, 20);
+        assert*eq!(foo*struct.bar, 20);
     }
-    assert_eq!(foo_array, [10]);
+    assert*eq!(foo*array, [10]);
     
     ```
 
@@ -274,12 +274,12 @@ async fn main(){
 20. Rust消除警告
 
     ```Rust
-    #![allow(dead_code)]
-    #![allow(unused_variables)]
-    #![allow(overflowing_literals)]
-    #![allow(non_snake_case)]
-    #![allow(non_camel_case_types)]
-    #![allow(unused_imports)]
+    # ![allow(dead_code)]
+    # ![allow(unused_variables)]
+    # ![allow(overflowing_literals)]
+    # ![allow(non*snake*case)]
+    # ![allow(non*camel*case_types)]
+    # ![allow(unused_imports)]
     ```
 
     
@@ -305,8 +305,8 @@ crate-type = ["cdylib"]
 ```
 
 ```rust
-// 带有 #[no_mangle]属性的函数, rust编译器不会为它进行函数名混淆
-#[no_mangle]
+// 带有 # [no_mangle]属性的函数, rust编译器不会为它进行函数名混淆
+# [no_mangle]
 pub extern "C" fn test_func(a: u32, b: u32) {
     let c = a + b;
     println!("print in rust, sum is: {}", c);

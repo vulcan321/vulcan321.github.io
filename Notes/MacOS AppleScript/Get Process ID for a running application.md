@@ -1,10 +1,10 @@
 
   
-## sysctl
+# # sysctl
 
 ```cpp
     struct kinfo_proc *result, *ptr; 
-    int name[] = { CTL_KERN, KERN_PROC, KERN_PROC_ALL, 0 }; 
+    int name[] = { CTL*KERN, KERN*PROC, KERN*PROC*ALL, 0 }; 
     size_t length, i; 
     result = NULL; 
     length = 0; 
@@ -23,10 +23,10 @@
 
     for (i = 0, ptr = result; (i < (length/sizeof(kinfo_proc)); ++i, ++ptr) 
     { 
-        // ptr->kp_proc.p_pid contains the pid 
-        // ptr->kp_proc.p_comm contains the name 
-        pid_t iCurrentPid = ptr->kp_proc.p_pid;
-        if (strncmp(processName, ptr->kp_proc.p_comm, MAXCOMLEN) == 0)  
+        // ptr->kp*proc.p*pid contains the pid 
+        // ptr->kp*proc.p*comm contains the name 
+        pid*t iCurrentPid = ptr->kp*proc.p_pid;
+        if (strncmp(processName, ptr->kp*proc.p*comm, MAXCOMLEN) == 0)  
         {
             free(sProcesses);
             return iCurrentPid;
@@ -36,7 +36,7 @@
     free(result);
 ```
 
-## "/proc"
+# # "/proc"
 ```cpp
 QDirIterator it("/proc", QDirIterator::Subdirectories)
 while (it.hasNext())
@@ -50,7 +50,7 @@ while (it.hasNext())
     ...
 }
 ```
-## "pgrep"
+# # "pgrep"
 ```cpp
 QProcess process;
 QString pgm("pgrep");
@@ -61,14 +61,14 @@ if(!process.readAllStandardOutput().isEmpty())
      // the app running
 ```
 
-## EnumProcessModules "pgrep"
+# # EnumProcessModules "pgrep"
 ```cpp
 unsigned int System::getProcessIdsByProcessName(const char* processName, QStringList &listOfPids)
 {
     // Clear content of returned list of PIDS
     listOfPids.clear();
  
-#if defined(Q_OS_WIN)
+# if defined(Q*OS*WIN)
     // Get the list of process identifiers.
     DWORD aProcesses[1024], cbNeeded, cProcesses;
     unsigned int i;
@@ -91,8 +91,8 @@ unsigned int System::getProcessIdsByProcessName(const char* processName, QString
             DWORD processID = aProcesses[i];
  
             // Get a handle to the process.
-            HANDLE hProcess = OpenProcess( PROCESS_QUERY_INFORMATION |
-                PROCESS_VM_READ,
+            HANDLE hProcess = OpenProcess( PROCESS*QUERY*INFORMATION |
+                PROCESS*VM*READ,
                 FALSE, processID);
  
             // Get the process name
@@ -118,7 +118,7 @@ unsigned int System::getProcessIdsByProcessName(const char* processName, QString
  
     return listOfPids.count();
  
-#else
+# else
  
     // Run pgrep, which looks through the currently running processses and lists the process IDs
     // which match the selection criteria to stdout.
@@ -143,6 +143,6 @@ unsigned int System::getProcessIdsByProcessName(const char* processName, QString
     listOfPids = QString(bytes).split("\n");
     return listOfPids.count();
  
-#endif
+# endif
 }
 ```

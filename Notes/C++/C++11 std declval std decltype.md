@@ -1,25 +1,25 @@
 # C++11: std::declval/std::decltype
 
 
-#### std::declval:
+### # std::declval:
 
 声明：
 
 ```cpp
 template<class T>
-typename std::add_rvalue_reference<T>::type declval() noexcept;
+typename std::add*rvalue*reference<T>::type declval() noexcept;
 ```
 
 将任何一个类型T转换成引用类型，令在decltype表达式中不必经过构造函数就能使用成员函数。
 
--   **add\_rvalue\_reference**：是C++标准库中的类模板，它的能力是**给进来一个类型，他能够返回该类型的右值引用类型**。比如：
+-   **add\*rvalue\*reference**：是C++标准库中的类模板，它的能力是**给进来一个类型，他能够返回该类型的右值引用类型**。比如：
     -   a)给进来一个int类型,返回的就是int &&
     -   b)给进来一个int &类型，返回的还是int &类型。这里用到了引用折叠。
     -   c)给进来一个int &&类型，返回的还是int &&类型。这里依旧用到了引用折叠知识。
 -   **std::declval的功能**：**返回某个类型T的右值引用，不管该类型是否有默认构造函数或者该类型是否可以创建对象。**
 -   返回某个类型T的右值引用 这个动作是在**编译时完成**的，所以很多人把std::declval也称为**编译时工具**。
 
-### **std::declval的作用**
+## # **std::declval的作用**
 
 > -   a)从**类型转换的角度**来讲，**将任意一个类型转换成右值引用类型**。
 > -   b)从**假想创建出某类型对象**的角度来说，配合decltype，令**在decltype表达式**中，不必经过该类型的构造函数就能使用该类型的成员函数。
@@ -27,8 +27,8 @@ typename std::add_rvalue_reference<T>::type declval() noexcept;
 >     -   但std::declval能在**不创建对象的情况下，达到创建了一个该类型对象的效果或者说可以假定创建出了一个该类型对象**。
 
 ```cpp
-#include <utility>
-#include <iostream>
+# include <utility>
+# include <iostream>
 
 struct Default { int foo() const { return 1; } };
 
@@ -48,7 +48,7 @@ int main()
 }
 ```
 
-#### decltype:
+### # decltype:
 
 给定一个变量或表达式，decltype能够推导出他的类型。最重要的是能够不需要计算表达式就可以推导出表达式所得值的类型。
 
@@ -65,8 +65,8 @@ decltype在推导一个成员函数的返回值类型时，会报出无默认构
 再看如下模板中，推导一个函数的返回值：
 
 ```ruby
-#include<utility>
-#include<iostream>
+# include<utility>
+# include<iostream>
 
 int test(int a,int b){
     int c = a+b;
@@ -109,7 +109,7 @@ int main(int agrc,char *argv[]){
 }
 ```
 
-如上看出std::declval 与decltype的用法，在test\_decltype1通过std::declval右值引用函数类型及参数类型，完成类型推导。在test\_decltype2中通过函数实例及参数实例完成返回值的类型推导。  
+如上看出std::declval 与decltype的用法，在test\*decltype1通过std::declval右值引用函数类型及参数类型，完成类型推导。在test\*decltype2中通过函数实例及参数实例完成返回值的类型推导。  
 但是在test\_decltype3中，其无法通过编译，decltype需要一个可实例的函子，但是利用std::declval可以避免构造的要求。
 
 # std::declval为什么返回右值引用类型  
@@ -126,9 +126,9 @@ T mydeclval() noexcept;
 
 ```cpp
 
-using boost::typeindex::type_id_with_cvr;
-cout << "mydeclval<A>()的返回类型=" <<  type_id_with_cvr<decltype(_mydeclval<A>() )>().pretty_name() << endl;
-cout << "mydeclval<A>().myfunc()的返回类型=" << type_id_with_cvr<decltype(mydeclval<A>().myfunc())>().pretty_name() << endl;
+using boost::typeindex::type*id*with_cvr;
+cout << "mydeclval<A>()的返回类型=" <<  type*id*with*cvr<decltype(*mydeclval<A>() )>().pretty_name() << endl;
+cout << "mydeclval<A>().myfunc()的返回类型=" << type*id*with*cvr<decltype(mydeclval<A>().myfunc())>().pretty*name() << endl;
 
 ```
 

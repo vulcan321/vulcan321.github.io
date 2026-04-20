@@ -14,8 +14,8 @@
 
 本节包括以下章节:
 
-*   [*第 11 章*](11.html#_idTextAnchor417)*，处理异常*
-*   [*第 12 章*](12.html#_idTextAnchor453)*，朋友和操作员重载*
-*   [*第 13 章*](13.html#_idTextAnchor486)*，使用模板*
-*   [*第 14 章*](14.html#_idTextAnchor518)*，了解 STL 基础*
-*   [*第 15 章*](15.html#_idTextAnchor572)*，测试类和组件*
+*   [*第 11 章*](11.html# _idTextAnchor417)*，处理异常*
+*   [*第 12 章*](12.html# _idTextAnchor453)*，朋友和操作员重载*
+*   [*第 13 章*](13.html# _idTextAnchor486)*，使用模板*
+*   [*第 14 章*](14.html# _idTextAnchor518)*，了解 STL 基础*
+*   [*第 15 章*](15.html# _idTextAnchor572)*，测试类和组件*

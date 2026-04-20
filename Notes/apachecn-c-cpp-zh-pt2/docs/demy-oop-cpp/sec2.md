@@ -14,9 +14,9 @@
 
 本节包括以下章节:
 
-*   [*第五章*](05.html#_idTextAnchor199)*，详细探究类*
-*   [*第六章*](06.html#_idTextAnchor262)*，实现单一继承的层次结构*
-*   [*第七章*](07.html#_idTextAnchor298)*，通过多态性利用动态结合*
-*   [*第八章*](08.html#_idTextAnchor335)*，掌握抽象类*
-*   [*第九章*](09.html#_idTextAnchor361)*，探索多重继承*
-*   [*第十章*](10.html#_idTextAnchor386)*，实现关联、聚合和组合*
+*   [*第五章*](05.html# _idTextAnchor199)*，详细探究类*
+*   [*第六章*](06.html# _idTextAnchor262)*，实现单一继承的层次结构*
+*   [*第七章*](07.html# _idTextAnchor298)*，通过多态性利用动态结合*
+*   [*第八章*](08.html# _idTextAnchor335)*，掌握抽象类*
+*   [*第九章*](09.html# _idTextAnchor361)*，探索多重继承*
+*   [*第十章*](10.html# _idTextAnchor386)*，实现关联、聚合和组合*

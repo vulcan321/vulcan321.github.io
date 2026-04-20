@@ -1,7 +1,7 @@
 # 深入理解Objective C的ARC机制
 
 
-## 什么是ARC？
+# # 什么是ARC？
 
 ARC的全称Auto Reference Counting. 也就是自动引用计数。那么，为什么要有ARC呢？
 
@@ -74,9 +74,9 @@ NSLog(@"%@",obj);
 
 > Tips： 以CF开头的（Core Foundation）的对象往往需要手动管理内存。
 
-___
+---
 
-## 属性所有权
+# # 属性所有权
 
 最后，我们在看看ARC中常见的所有权关键字，
 
@@ -87,11 +87,11 @@ ___
 -   `unsafe_unretained`对应关键字`__unsafe_unretained`
 -   `weak`对应关键字`__weak`。
 
-其中，`__weak`和`__strong`是本文要讲解的核心内容。
+其中，`**weak`和`**strong`是本文要讲解的核心内容。
 
-___
+---
 
-## ARC的内部实现
+# # ARC的内部实现
 
 ARC背后的引用计数主要依赖于这三个方法：
 
@@ -116,10 +116,10 @@ inline id objc_object::rootRetain()
 }
 ```
 
-所以说，本质上retain就是调用`sidetable_retain`，再看看`sitetable_retain`的实现：
+所以说，本质上retain就是调用`sidetable*retain`，再看看`sitetable*retain`的实现：
 
 ```objc
-id objc_object::sidetable_retain()
+id objc*object::sidetable*retain()
 {
     //获取table
     SideTable& table = SideTables()[this];
@@ -127,9 +127,9 @@ id objc_object::sidetable_retain()
     table.lock();
     //获取引用计数
     size_t& refcntStorage = table.refcnts[this];
-    if (! (refcntStorage & SIDE_TABLE_RC_PINNED)) {
+    if (! (refcntStorage & SIDE*TABLE*RC_PINNED)) {
          //增加引用计数
-        refcntStorage += SIDE_TABLE_RC_ONE;
+        refcntStorage += SIDE*TABLE*RC_ONE;
     }
     //解锁
     table.unlock();
@@ -140,11 +140,11 @@ id objc_object::sidetable_retain()
 到这里，retain如何实现就很清楚了，通过`SideTable`这个数据结构来存储引用计数。我们看看这个数据结构的实现：
 
 ```objc
-typedef objc::DenseMap<DisguisedPtr<objc_object>,size_t,true> RefcountMap;
+typedef objc::DenseMap<DisguisedPtr<objc*object>,size*t,true> RefcountMap;
 struct SideTable {
     spinlock_t slock;
     RefcountMap refcnts;
-    weak_table_t weak_table;
+    weak*table*t weak_table;
      //省略其他实现...
 };
 ```
@@ -163,27 +163,27 @@ struct SideTable {
     RefcountMap::iterator it = table.refcnts.find(this);
     if (it == table.refcnts.end()) { //找不到的话，执行dellloc
         do_dealloc = true;
-        table.refcnts[this] = SIDE_TABLE_DEALLOCATING;
-    } else if (it->second < SIDE_TABLE_DEALLOCATING) {//引用计数小于阈值，dealloc
+        table.refcnts[this] = SIDE*TABLE*DEALLOCATING;
+    } else if (it->second < SIDE*TABLE*DEALLOCATING) {//引用计数小于阈值，dealloc
         do_dealloc = true;
-        it->second |= SIDE_TABLE_DEALLOCATING;
-    } else if (! (it->second & SIDE_TABLE_RC_PINNED)) {
+        it->second |= SIDE*TABLE*DEALLOCATING;
+    } else if (! (it->second & SIDE*TABLE*RC_PINNED)) {
     //引用计数减去1
-        it->second -= SIDE_TABLE_RC_ONE;
+        it->second -= SIDE*TABLE*RC_ONE;
     }
     table.unlock();
     if (do_dealloc  &&  performDealloc) {
         //执行dealloc
-        ((void(*)(objc_object *, SEL))objc_msgSend)(this, SEL_dealloc);
+        ((void(*)(objc*object *, SEL))objc*msgSend)(this, SEL_dealloc);
     }
     return do_dealloc;
 ```
 
 > release的到这里也比较清楚了：查找map，对引用计数减1，如果引用计数小于阈值，则调用`SEL_dealloc`
 
-___
+---
 
-## Autorelease pool
+# # Autorelease pool
 
 上文提到了，autorelease方法的作用是把对象放到autorelease pool中，到pool drain的时候，会释放池中的对象。举个例子
 
@@ -214,7 +214,7 @@ ___
 
 那么AutoRelease pool又是如何实现的呢？
 
-我们先从`autorelease`方法[源码](https://so.csdn.net/so/search?q=%E6%BA%90%E7%A0%81&spm=1001.2101.3001.7020)入手
+我们先从`autorelease`方法源码入手
 
 ```objc
 //autorelease方法
@@ -251,7 +251,7 @@ public: static inline id autorelease(id obj)
         assert(obj);
         assert(!obj->isTaggedPointer());
         id *dest __unused = autoreleaseFast(obj);
-        assert(!dest  ||  dest == EMPTY_POOL_PLACEHOLDER  ||  *dest == obj);
+        assert(!dest  ||  dest == EMPTY*POOL*PLACEHOLDER  ||  *dest == obj);
         return obj;
     }
 
@@ -281,9 +281,9 @@ id *add(id obj)
 
 > autorelease方法会把对象存储到`AutoreleasePoolPage`的链表里。等到auto release pool被释放的时候，把链表内存储的对象删除。所以，AutoreleasePoolPage就是自动释放池的内部实现。
 
-___
+---
 
-## `__weak与__strong`
+# # `**weak与**strong`
 
 用过block的同学一定写过类似的代码：
 
@@ -301,12 +301,12 @@ __weak typeSelf(self) weakSelf = self;
 -   block会捕获外部变量，用`weakSelf`保证self不会被block被捕获，防止引起循环引用或者不必要的额外生命周期。
 -   用strongSelf则保证在block的执行过程中，对象不会被释放掉。
 
-首先`__strong`和`__weak`都是关键字，是给编译器理解的。为了理解其原理，我们需要查看它们编译后的代码，使用XCode，我们可以容易的获得一个文件的汇编代码。
+首先`**strong`和`**weak`都是关键字，是给编译器理解的。为了理解其原理，我们需要查看它们编译后的代码，使用XCode，我们可以容易的获得一个文件的汇编代码。
 
 比如，对于`Test.m`文件，当源代码如下时：
 
 ```objc
- #import "Test.h"
+ # import "Test.h"
 
  @implementation Test
 
@@ -327,25 +327,25 @@ Ltmp3:
     ldr     x9, [x9]
     ldr     x1, [x8]
     mov  x0, x9
-    bl  _objc_msgSend
-    adrp    x8, L_OBJC_SELECTOR_REFERENCES_.2@PAGE
-    add x8, x8, L_OBJC_SELECTOR_REFERENCES_.2@PAGEOFF
+    bl  *objc*msgSend
+    adrp    x8, L*OBJC*SELECTOR*REFERENCES*.2@PAGE
+    add x8, x8, L*OBJC*SELECTOR*REFERENCES*.2@PAGEOFF
     .loc    2 15 36 is_stmt 0       ; /Users/hl/Desktop/OCTest/OCTest/Test.m:15:36
     ldr     x1, [x8]
     .loc    2 15 36 discriminator 1 ; /Users/hl/Desktop/OCTest/OCTest/Test.m:15:36
-    bl  _objc_msgSend
-    mov x8, #0
-    add x9, sp, #8              ; =8
+    bl  *objc*msgSend
+    mov x8, # 0
+    add x9, sp, # 8              ; =8
     .loc    2 15 29                 ; /Users/hl/Desktop/OCTest/OCTest/Test.m:15:29
-    str x0, [sp, #8]
+    str x0, [sp, # 8]
 Ltmp4:
     .loc    2 16 5 is_stmt 1        ; /Users/hl/Desktop/OCTest/OCTest/Test.m:16:5
     mov  x0, x9
     mov  x1, x8
-    bl  _objc_storeStrong
+    bl  *objc*storeStrong
     .loc    2 17 1                  ; /Users/hl/Desktop/OCTest/OCTest/Test.m:17:1
-    ldp x29, x30, [sp, #32]     ; 8-byte Folded Reload
-    add sp, sp, #48             ; =48
+    ldp x29, x30, [sp, # 32]     ; 8-byte Folded Reload
+    add sp, sp, # 48             ; =48
     ret
 Ltmp5:
 ```
@@ -353,9 +353,9 @@ Ltmp5:
 即使你不懂汇编，也能很轻易的获取到调用顺序如下
 
 ```objc
-_objc_msgSend // alloc
-_objc_msgSend // init
-_objc_storeStrong // 强引用
+*objc*msgSend // alloc
+*objc*msgSend // init
+*objc*storeStrong // 强引用
 ```
 
 在结合Runtime的源码，我们看看最关键的objc\_storeStrong的实现
@@ -383,41 +383,41 @@ void objc_release(id obj) { [obj release]; }
     ldr     x9, [x9]
     ldr     x1, [x8]
     mov  x0, x9
-    bl  _objc_msgSend
-    adrp    x8, L_OBJC_SELECTOR_REFERENCES_.2@PAGE
-    add x8, x8, L_OBJC_SELECTOR_REFERENCES_.2@PAGEOFF
+    bl  *objc*msgSend
+    adrp    x8, L*OBJC*SELECTOR*REFERENCES*.2@PAGE
+    add x8, x8, L*OBJC*SELECTOR*REFERENCES*.2@PAGEOFF
     .loc    2 15 34 is_stmt 0       ; /Users/hl/Desktop/OCTest/OCTest/Test.m:15:34
     ldr     x1, [x8]
     .loc    2 15 34 discriminator 1 ; /Users/hl/Desktop/OCTest/OCTest/Test.m:15:34
-    bl  _objc_msgSend
-    add x8, sp, #24             ; =24
+    bl  *objc*msgSend
+    add x8, sp, # 24             ; =24
     .loc    2 15 27                 ; /Users/hl/Desktop/OCTest/OCTest/Test.m:15:27
     mov  x1, x0
     .loc    2 15 27 discriminator 2 ; /Users/hl/Desktop/OCTest/OCTest/Test.m:15:27
-    str x0, [sp, #16]           ; 8-byte Folded Spill
+    str x0, [sp, # 16]           ; 8-byte Folded Spill
     mov  x0, x8
-    bl  _objc_initWeak
+    bl  *objc*initWeak
     .loc    2 15 27                 ; /Users/hl/Desktop/OCTest/OCTest/Test.m:15:27
-    ldr x1, [sp, #16]           ; 8-byte Folded Reload
+    ldr x1, [sp, # 16]           ; 8-byte Folded Reload
     .loc    2 15 27 discriminator 3 ; /Users/hl/Desktop/OCTest/OCTest/Test.m:15:27
-    str x0, [sp, #8]            ; 8-byte Folded Spill
+    str x0, [sp, # 8]            ; 8-byte Folded Spill
     mov  x0, x1
-    bl  _objc_release
-    add x8, sp, #24  
+    bl  *objc*release
+    add x8, sp, # 24  
     Ltmp4:
     .loc    2 16 5 is_stmt 1        ; /Users/hl/Desktop/OCTest/OCTest/Test.m:16:5
     mov  x0, x8
-    bl  _objc_destroyWeak
+    bl  *objc*destroyWeak
     .loc    2 17 1                  ; /Users/hl/Desktop/OCTest/OCTest/Test.m:17:1
-    ldp x29, x30, [sp, #48]     ; 8-byte Folded Reload
-    add sp, sp, #64             ; =64
+    ldp x29, x30, [sp, # 48]     ; 8-byte Folded Reload
+    add sp, sp, # 64             ; =64
     ret
 ```
 
 可以看到，`__weak`本身实现的核心就是以下两个方法
 
--   `_objc_initWeak`
--   `_objc_destroyWeak`
+-   `*objc*initWeak`
+-   `*objc*destroyWeak`
 
 我们通过Runtime的源码分析这两个方法的实现：
 
@@ -442,8 +442,8 @@ void objc_destroyWeak(id *location)
 
 这就是在`weak`背后的黑魔法。
 
-___
+---
 
-## 总结
+# # 总结
 
 这篇文章属于想到哪里写到哪里的类型，后边有时间了在继续总结ARC的东西吧。

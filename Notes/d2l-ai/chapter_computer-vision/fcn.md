@@ -1,9 +1,9 @@
 # 全卷积网络
 :label:`sec_fcn`
 
-如 :numref:`sec_semantic_segmentation`中所介绍的那样，语义分割是对图像中的每个像素分类。
+如 :numref:`sec*semantic*segmentation`中所介绍的那样，语义分割是对图像中的每个像素分类。
 *全卷积网络*（fully convolutional network，FCN）采用卷积神经网络实现了从图像像素到像素类别的变换 :cite:`Long.Shelhamer.Darrell.2015`。
-与我们之前在图像分类或目标检测部分介绍的卷积神经网络不同，全卷积网络将中间层特征图的高和宽变换回输入图像的尺寸：这是通过在 :numref:`sec_transposed_conv`中引入的*转置卷积*（transposed convolution）实现的。
+与我们之前在图像分类或目标检测部分介绍的卷积神经网络不同，全卷积网络将中间层特征图的高和宽变换回输入图像的尺寸：这是通过在 :numref:`sec*transposed*conv`中引入的*转置卷积*（transposed convolution）实现的。
 因此，输出的类别预测与输入图像在像素级别上具有一一对应关系：通道维的输出即该位置对应像素的类别预测。
 
 ```{.python .input}
@@ -16,7 +16,7 @@ npx.set_np()
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 %matplotlib inline
 from d2l import torch as d2l
 import torch
@@ -26,7 +26,7 @@ from torch.nn import functional as F
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 %matplotlib inline
 from d2l import paddle as d2l
 import warnings
@@ -37,10 +37,10 @@ from paddle.nn import functional as F
 import paddle.vision as paddlevision
 ```
 
-## 构造模型
+# # 构造模型
 
 下面我们了解一下全卷积网络模型最基本的设计。
-如 :numref:`fig_fcn`所示，全卷积网络先使用卷积神经网络抽取图像特征，然后通过$1\times 1$卷积层将通道数变换为类别个数，最后在 :numref:`sec_transposed_conv`中通过转置卷积层将特征图的高和宽变换为输入图像的尺寸。
+如 :numref:`fig*fcn`所示，全卷积网络先使用卷积神经网络抽取图像特征，然后通过$1\times 1$卷积层将通道数变换为类别个数，最后在 :numref:`sec*transposed_conv`中通过转置卷积层将特征图的高和宽变换为输入图像的尺寸。
 因此，模型输出与输入图像的高和宽相同，且最终输出通道包含了该空间位置像素的类别预测。
 
 ![全卷积网络](../img/fcn.svg)
@@ -50,18 +50,18 @@ import paddle.vision as paddlevision
 ResNet-18模型的最后几层包括全局平均汇聚层和全连接层，然而全卷积网络中不需要它们。
 
 ```{.python .input}
-pretrained_net = gluon.model_zoo.vision.resnet18_v2(pretrained=True)
-pretrained_net.features[-3:], pretrained_net.output
+pretrained*net = gluon.model*zoo.vision.resnet18_v2(pretrained=True)
+pretrained*net.features[-3:], pretrained*net.output
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 pretrained_net = torchvision.models.resnet18(pretrained=True)
 list(pretrained_net.children())[-3:]
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 pretrained_net = paddlevision.models.resnet18(pretrained=True)
 list(pretrained_net.children())[-3:]
 ```
@@ -76,7 +76,7 @@ for layer in pretrained_net.features[:-2]:
 ```
 
 ```{.python .input}
-#@tab pytorch, paddle
+# @tab pytorch, paddle
 net = nn.Sequential(*list(pretrained_net.children())[:-2])
 ```
 
@@ -88,13 +88,13 @@ net(X).shape
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 X = torch.rand(size=(1, 3, 320, 480))
 net(X).shape
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 X = paddle.rand(shape=(1, 3, 320, 480))
 net(X).shape
 ```
@@ -107,28 +107,28 @@ net(X).shape
 
 ```{.python .input}
 num_classes = 21
-net.add(nn.Conv2D(num_classes, kernel_size=1),
+net.add(nn.Conv2D(num*classes, kernel*size=1),
         nn.Conv2DTranspose(
-            num_classes, kernel_size=64, padding=16, strides=32))
+            num*classes, kernel*size=64, padding=16, strides=32))
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 num_classes = 21
-net.add_module('final_conv', nn.Conv2d(512, num_classes, kernel_size=1))
-net.add_module('transpose_conv', nn.ConvTranspose2d(num_classes, num_classes,
+net.add*module('final*conv', nn.Conv2d(512, num*classes, kernel*size=1))
+net.add*module('transpose*conv', nn.ConvTranspose2d(num*classes, num*classes,
                                     kernel_size=64, padding=16, stride=32))
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 num_classes = 21
-net.add_sublayer('final_conv', nn.Conv2D(512, num_classes, kernel_size=1))
-net.add_sublayer('transpose_conv', nn.Conv2DTranspose(num_classes, num_classes,
+net.add*sublayer('final*conv', nn.Conv2D(512, num*classes, kernel*size=1))
+net.add*sublayer('transpose*conv', nn.Conv2DTranspose(num*classes, num*classes,
                                     kernel_size=64, padding=16, stride=32))
 ```
 
-## [**初始化转置卷积层**]
+# # [**初始化转置卷积层**]
 
 在图像处理中，我们有时需要将图像放大，即*上采样*（upsampling）。
 *双线性插值*（bilinear interpolation）
@@ -146,7 +146,7 @@ net.add_sublayer('transpose_conv', nn.Conv2DTranspose(num_classes, num_classes,
 限于篇幅，我们只给出`bilinear_kernel`函数的实现，不讨论算法的原理。
 
 ```{.python .input}
-def bilinear_kernel(in_channels, out_channels, kernel_size):
+def bilinear*kernel(in*channels, out*channels, kernel*size):
     factor = (kernel_size + 1) // 2
     if kernel_size % 2 == 1:
         center = factor - 1
@@ -156,14 +156,14 @@ def bilinear_kernel(in_channels, out_channels, kernel_size):
           np.arange(kernel_size).reshape(1, -1))
     filt = (1 - np.abs(og[0] - center) / factor) * \
            (1 - np.abs(og[1] - center) / factor)
-    weight = np.zeros((in_channels, out_channels, kernel_size, kernel_size))
-    weight[range(in_channels), range(out_channels), :, :] = filt
+    weight = np.zeros((in*channels, out*channels, kernel*size, kernel*size))
+    weight[range(in*channels), range(out*channels), :, :] = filt
     return np.array(weight)
 ```
 
 ```{.python .input}
-#@tab pytorch
-def bilinear_kernel(in_channels, out_channels, kernel_size):
+# @tab pytorch
+def bilinear*kernel(in*channels, out*channels, kernel*size):
     factor = (kernel_size + 1) // 2
     if kernel_size % 2 == 1:
         center = factor - 1
@@ -173,15 +173,15 @@ def bilinear_kernel(in_channels, out_channels, kernel_size):
           torch.arange(kernel_size).reshape(1, -1))
     filt = (1 - torch.abs(og[0] - center) / factor) * \
            (1 - torch.abs(og[1] - center) / factor)
-    weight = torch.zeros((in_channels, out_channels,
-                          kernel_size, kernel_size))
-    weight[range(in_channels), range(out_channels), :, :] = filt
+    weight = torch.zeros((in*channels, out*channels,
+                          kernel*size, kernel*size))
+    weight[range(in*channels), range(out*channels), :, :] = filt
     return weight
 ```
 
 ```{.python .input}
-#@tab paddle
-def bilinear_kernel(in_channels, out_channels, kernel_size):
+# @tab paddle
+def bilinear*kernel(in*channels, out*channels, kernel*size):
     factor = (kernel_size + 1) // 2
     if kernel_size % 2 == 1:
         center = factor - 1
@@ -191,9 +191,9 @@ def bilinear_kernel(in_channels, out_channels, kernel_size):
           paddle.arange(kernel_size).reshape([1, -1]))
     filt = (1 - paddle.abs(og[0] - center) / factor) * \
            (1 - paddle.abs(og[1] - center) / factor)
-    weight = paddle.zeros((in_channels, out_channels,
-                          kernel_size, kernel_size))
-    weight[range(in_channels), range(out_channels), :, :] = filt
+    weight = paddle.zeros((in*channels, out*channels,
+                          kernel*size, kernel*size))
+    weight[range(in*channels), range(out*channels), :, :] = filt
     return weight
 ```
 
@@ -201,22 +201,22 @@ def bilinear_kernel(in_channels, out_channels, kernel_size):
 我们构造一个将输入的高和宽放大2倍的转置卷积层，并将其卷积核用`bilinear_kernel`函数初始化。
 
 ```{.python .input}
-conv_trans = nn.Conv2DTranspose(3, kernel_size=4, padding=1, strides=2)
-conv_trans.initialize(init.Constant(bilinear_kernel(3, 3, 4)))
+conv*trans = nn.Conv2DTranspose(3, kernel*size=4, padding=1, strides=2)
+conv*trans.initialize(init.Constant(bilinear*kernel(3, 3, 4)))
 ```
 
 ```{.python .input}
-#@tab pytorch
-conv_trans = nn.ConvTranspose2d(3, 3, kernel_size=4, padding=1, stride=2,
+# @tab pytorch
+conv*trans = nn.ConvTranspose2d(3, 3, kernel*size=4, padding=1, stride=2,
                                 bias=False)
-conv_trans.weight.data.copy_(bilinear_kernel(3, 3, 4));
+conv*trans.weight.data.copy*(bilinear_kernel(3, 3, 4));
 ```
 
 ```{.python .input}
-#@tab paddle
-conv_trans = nn.Conv2DTranspose(3, 3, kernel_size=4, padding=1, stride=2,
+# @tab paddle
+conv*trans = nn.Conv2DTranspose(3, 3, kernel*size=4, padding=1, stride=2,
                                 bias_attr=False)
-conv_trans.weight.set_value(bilinear_kernel(3, 3, 4));
+conv*trans.weight.set*value(bilinear_kernel(3, 3, 4));
 ```
 
 读取图像`X`，将上采样的结果记作`Y`。为了打印图像，我们需要调整通道维的位置。
@@ -229,7 +229,7 @@ out_img = Y[0].transpose(1, 2, 0)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 img = torchvision.transforms.ToTensor()(d2l.Image.open('../img/catdog.jpg'))
 X = img.unsqueeze(0)
 Y = conv_trans(X)
@@ -237,7 +237,7 @@ out_img = Y[0].permute(1, 2, 0).detach()
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 img = paddlevision.transforms.ToTensor()(d2l.Image.open('../img/catdog.jpg'))
 X = img.unsqueeze(0)
 Y = conv_trans(X)
@@ -256,7 +256,7 @@ d2l.plt.imshow(out_img.asnumpy());
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 d2l.set_figsize()
 print('input image shape:', img.permute(1, 2, 0).shape)
 d2l.plt.imshow(img.permute(1, 2, 0));
@@ -265,7 +265,7 @@ d2l.plt.imshow(out_img);
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 d2l.set_figsize()
 print('input image shape:', img.transpose([1, 2, 0]).shape)
 d2l.plt.imshow(img.transpose([1, 2, 0]));
@@ -276,113 +276,113 @@ d2l.plt.imshow(out_img);
 全卷积网络[**用双线性插值的上采样初始化转置卷积层。对于$1\times 1$卷积层，我们使用Xavier初始化参数。**]
 
 ```{.python .input}
-W = bilinear_kernel(num_classes, num_classes, 64)
+W = bilinear*kernel(num*classes, num_classes, 64)
 net[-1].initialize(init.Constant(W))
 net[-2].initialize(init=init.Xavier())
 ```
 
 ```{.python .input}
-#@tab pytorch
-W = bilinear_kernel(num_classes, num_classes, 64)
-net.transpose_conv.weight.data.copy_(W);
+# @tab pytorch
+W = bilinear*kernel(num*classes, num_classes, 64)
+net.transpose*conv.weight.data.copy*(W);
 ```
 
 ```{.python .input}
-#@tab paddle
-W = bilinear_kernel(num_classes, num_classes, 64)
-net.transpose_conv.weight.set_value(W);
+# @tab paddle
+W = bilinear*kernel(num*classes, num_classes, 64)
+net.transpose*conv.weight.set*value(W);
 ```
 
-## [**读取数据集**]
+# # [**读取数据集**]
 
-我们用 :numref:`sec_semantic_segmentation`中介绍的语义分割读取数据集。
+我们用 :numref:`sec*semantic*segmentation`中介绍的语义分割读取数据集。
 指定随机裁剪的输出图像的形状为$320\times 480$：高和宽都可以被$32$整除。
 
 ```{.python .input}
-#@tab mxnet, pytorch
-batch_size, crop_size = 32, (320, 480)
-train_iter, test_iter = d2l.load_data_voc(batch_size, crop_size)
+# @tab mxnet, pytorch
+batch*size, crop*size = 32, (320, 480)
+train*iter, test*iter = d2l.load*data*voc(batch*size, crop*size)
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 import os    
-def load_data_voc(batch_size, crop_size):
+def load*data*voc(batch*size, crop*size):
     """加载VOC语义分割数据集
-    Defined in :numref:`sec_semantic_segmentation`"""
-    voc_dir = d2l.download_extract('voc2012', os.path.join(
+    Defined in :numref:`sec*semantic*segmentation`"""
+    voc*dir = d2l.download*extract('voc2012', os.path.join(
         'VOCdevkit', 'VOC2012'))
     train_iter = paddle.io.DataLoader(
-        d2l.VOCSegDataset(True, crop_size, voc_dir), batch_size=batch_size,
-        shuffle=True, return_list=True, drop_last=True, num_workers=0)
+        d2l.VOCSegDataset(True, crop*size, voc*dir), batch*size=batch*size,
+        shuffle=True, return*list=True, drop*last=True, num_workers=0)
     test_iter = paddle.io.DataLoader(
-        d2l.VOCSegDataset(False, crop_size, voc_dir), batch_size=batch_size,
-        drop_last=True, return_list=True, num_workers=0)
-    return train_iter, test_iter
+        d2l.VOCSegDataset(False, crop*size, voc*dir), batch*size=batch*size,
+        drop*last=True, return*list=True, num_workers=0)
+    return train*iter, test*iter
 
-batch_size, crop_size = 32, (320, 480)
-train_iter, test_iter = load_data_voc(batch_size, crop_size)
+batch*size, crop*size = 32, (320, 480)
+train*iter, test*iter = load*data*voc(batch*size, crop*size)
 ```
 
-## [**训练**]
+# # [**训练**]
 
 现在我们可以训练全卷积网络了。
 这里的损失函数和准确率计算与图像分类中的并没有本质上的不同，因为我们使用转置卷积层的通道来预测像素的类别，所以需要在损失计算中指定通道维。
 此外，模型基于每个像素的预测类别是否正确来计算准确率。
 
 ```{.python .input}
-num_epochs, lr, wd, devices = 5, 0.1, 1e-3, d2l.try_all_gpus()
+num*epochs, lr, wd, devices = 5, 0.1, 1e-3, d2l.try*all_gpus()
 loss = gluon.loss.SoftmaxCrossEntropyLoss(axis=1)
-net.collect_params().reset_ctx(devices)
+net.collect*params().reset*ctx(devices)
 trainer = gluon.Trainer(net.collect_params(), 'sgd',
                         {'learning_rate': lr, 'wd': wd})
-d2l.train_ch13(net, train_iter, test_iter, loss, trainer, num_epochs, devices)
+d2l.train*ch13(net, train*iter, test*iter, loss, trainer, num*epochs, devices)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 def loss(inputs, targets):
     return F.cross_entropy(inputs, targets, reduction='none').mean(1).mean(1)
 
-num_epochs, lr, wd, devices = 5, 0.001, 1e-3, d2l.try_all_gpus()
+num*epochs, lr, wd, devices = 5, 0.001, 1e-3, d2l.try*all_gpus()
 trainer = torch.optim.SGD(net.parameters(), lr=lr, weight_decay=wd)
-d2l.train_ch13(net, train_iter, test_iter, loss, trainer, num_epochs, devices)
+d2l.train*ch13(net, train*iter, test*iter, loss, trainer, num*epochs, devices)
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 def loss(inputs, targets):
     return F.cross_entropy(inputs.transpose([0, 2, 3, 1]), targets, reduction='none').mean(1).mean(1)
 
-num_epochs, lr, wd, devices = 5, 0.001, 1e-3, d2l.try_all_gpus()
-trainer = paddle.optimizer.SGD(learning_rate=lr, parameters=net.parameters(), weight_decay=wd)
-d2l.train_ch13(net, train_iter, test_iter, loss, trainer, num_epochs, devices[:1])
+num*epochs, lr, wd, devices = 5, 0.001, 1e-3, d2l.try*all_gpus()
+trainer = paddle.optimizer.SGD(learning*rate=lr, parameters=net.parameters(), weight*decay=wd)
+d2l.train*ch13(net, train*iter, test*iter, loss, trainer, num*epochs, devices[:1])
 ```
 
-## [**预测**]
+# # [**预测**]
 
 在预测时，我们需要将输入图像在各个通道做标准化，并转成卷积神经网络所需要的四维输入格式。
 
 ```{.python .input}
 def predict(img):
-    X = test_iter._dataset.normalize_image(img)
+    X = test*iter.*dataset.normalize_image(img)
     X = np.expand_dims(X.transpose(2, 0, 1), axis=0)
-    pred = net(X.as_in_ctx(devices[0])).argmax(axis=1)
+    pred = net(X.as*in*ctx(devices[0])).argmax(axis=1)
     return pred.reshape(pred.shape[1], pred.shape[2])
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 def predict(img):
-    X = test_iter.dataset.normalize_image(img).unsqueeze(0)
+    X = test*iter.dataset.normalize*image(img).unsqueeze(0)
     pred = net(X.to(devices[0])).argmax(dim=1)
     return pred.reshape(pred.shape[1], pred.shape[2])
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 def predict(img):
-    X = paddle.to_tensor(test_iter.dataset.normalize_image(img),dtype='float32').unsqueeze(0)
+    X = paddle.to*tensor(test*iter.dataset.normalize_image(img),dtype='float32').unsqueeze(0)
     pred = net(X).argmax(axis=1)
     return pred.reshape([pred.shape[1], pred.shape[2]])
 ```
@@ -397,7 +397,7 @@ def label2image(pred):
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 def label2image(pred):
     colormap = torch.tensor(d2l.VOC_COLORMAP, device=devices[0])
     X = pred.long()
@@ -405,9 +405,9 @@ def label2image(pred):
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 def label2image(pred):
-    colormap = paddle.to_tensor(d2l.VOC_COLORMAP)
+    colormap = paddle.to*tensor(d2l.VOC*COLORMAP)
     X = pred.astype(paddle.int32)
     return colormap[X]
 ```
@@ -422,53 +422,53 @@ def label2image(pred):
 对于这些测试图像，我们逐一打印它们截取的区域，再打印预测结果，最后打印标注的类别。
 
 ```{.python .input}
-voc_dir = d2l.download_extract('voc2012', 'VOCdevkit/VOC2012')
-test_images, test_labels = d2l.read_voc_images(voc_dir, False)
+voc*dir = d2l.download*extract('voc2012', 'VOCdevkit/VOC2012')
+test*images, test*labels = d2l.read*voc*images(voc_dir, False)
 n, imgs = 4, []
 for i in range(n):
     crop_rect = (0, 0, 480, 320)
-    X = image.fixed_crop(test_images[i], *crop_rect)
+    X = image.fixed*crop(test*images[i], *crop_rect)
     pred = label2image(predict(X))
-    imgs += [X, pred, image.fixed_crop(test_labels[i], *crop_rect)]
+    imgs += [X, pred, image.fixed*crop(test*labels[i], *crop_rect)]
 d2l.show_images(imgs[::3] + imgs[1::3] + imgs[2::3], 3, n, scale=2);
 ```
 
 ```{.python .input}
-#@tab pytorch
-voc_dir = d2l.download_extract('voc2012', 'VOCdevkit/VOC2012')
-test_images, test_labels = d2l.read_voc_images(voc_dir, False)
+# @tab pytorch
+voc*dir = d2l.download*extract('voc2012', 'VOCdevkit/VOC2012')
+test*images, test*labels = d2l.read*voc*images(voc_dir, False)
 n, imgs = 4, []
 for i in range(n):
     crop_rect = (0, 0, 320, 480)
-    X = torchvision.transforms.functional.crop(test_images[i], *crop_rect)
+    X = torchvision.transforms.functional.crop(test*images[i], *crop*rect)
     pred = label2image(predict(X))
     imgs += [X.permute(1,2,0), pred.cpu(),
              torchvision.transforms.functional.crop(
-                 test_labels[i], *crop_rect).permute(1,2,0)]
+                 test*labels[i], *crop*rect).permute(1,2,0)]
 d2l.show_images(imgs[::3] + imgs[1::3] + imgs[2::3], 3, n, scale=2);
 ```
 
 ```{.python .input}
-#@tab paddle
-voc_dir = d2l.download_extract('voc2012', 'VOCdevkit/VOC2012')
-test_images, test_labels = d2l.read_voc_images(voc_dir, False)
+# @tab paddle
+voc*dir = d2l.download*extract('voc2012', 'VOCdevkit/VOC2012')
+test*images, test*labels = d2l.read*voc*images(voc_dir, False)
 n, imgs = 4, []
 for i in range(n):
     crop_rect = (0, 0, 320, 480)
-    X = paddlevision.transforms.crop(test_images[i], *crop_rect)
+    X = paddlevision.transforms.crop(test*images[i], *crop*rect)
     pred = label2image(predict(X))
     imgs += [X.transpose([1,2,0]).astype('uint8'), pred,
              paddlevision.transforms.crop(
-                 test_labels[i], *crop_rect).transpose([1, 2, 0]).astype("uint8")]
+                 test*labels[i], *crop*rect).transpose([1, 2, 0]).astype("uint8")]
 d2l.show_images(imgs[::3] + imgs[1::3] + imgs[2::3], 3, n, scale=2);
 ```
 
-## 小结
+# # 小结
 
 * 全卷积网络先使用卷积神经网络抽取图像特征，然后通过$1\times 1$卷积层将通道数变换为类别个数，最后通过转置卷积层将特征图的高和宽变换为输入图像的尺寸。
 * 在全卷积网络中，我们可以将转置卷积层初始化为双线性插值的上采样。
 
-## 练习
+# # 练习
 
 1. 如果将转置卷积层改用Xavier随机初始化，结果有什么变化？
 1. 调节超参数，能进一步提升模型的精度吗？

@@ -4,9 +4,9 @@
 
 # 提纲
 
-![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/d3e43e64455e4c4490fe70643a3c6b88~noop.image?_iz=58558&from=article.pc_detail&x-expires=1672706706&x-signature=q3NbgBxFkrXDD19fpY0qJOObKR8%3D)
+![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/d3e43e64455e4c4490fe70643a3c6b88~noop.image?*iz=58558&from=article.pc*detail&x-expires=1672706706&x-signature=q3NbgBxFkrXDD19fpY0qJOObKR8%3D)
 
-___
+---
 
 # 文件系统的基本组成
 
@@ -16,10 +16,10 @@ ___
 
 Linux 最经典的一句话是：「**一切皆文件**」，不仅普通的文件和目录，就连块设备、管道、socket 等，也都是统一交给文件系统管理的。
 
-Linux 文件系统会为每个文件分配两个数据结构：**索引节点（_index node_）和目录项（_directory entry_）**，它们主要用来记录文件的元信息和目录层次结构。
+Linux 文件系统会为每个文件分配两个数据结构：**索引节点（*index node*）和目录项（*directory entry*）**，它们主要用来记录文件的元信息和目录层次结构。
 
--   索引节点，也就是 _inode_，用来记录文件的元信息，比如 inode 编号、文件大小、访问权限、创建时间、修改时间、**数据在磁盘的位置**等等。索引节点是文件的**唯一**标识，它们之间一一对应，也同样都会被存储在硬盘中，所以**索引节点同样占用磁盘空间**。
--   目录项，也就是 _dentry_，用来记录文件的名字、**索引节点指针**以及与其他目录项的层级关联关系。多个目录项关联起来，就会形成目录结构，但它与索引节点不同的是，**目录项是由内核维护的一个数据结构，不存放于磁盘，而是缓存在内存**。
+-   索引节点，也就是 *inode*，用来记录文件的元信息，比如 inode 编号、文件大小、访问权限、创建时间、修改时间、**数据在磁盘的位置**等等。索引节点是文件的**唯一**标识，它们之间一一对应，也同样都会被存储在硬盘中，所以**索引节点同样占用磁盘空间**。
+-   目录项，也就是 *dentry*，用来记录文件的名字、**索引节点指针**以及与其他目录项的层级关联关系。多个目录项关联起来，就会形成目录结构，但它与索引节点不同的是，**目录项是由内核维护的一个数据结构，不存放于磁盘，而是缓存在内存**。
 
 由于索引节点唯一标识一个文件，而目录项记录着文件的名，所以目录项和索引节点的关系是多对一，也就是说，一个文件可以有多个别字。比如，硬链接的实现就是多个目录项中的索引节点指向同一个文件。
 
@@ -41,48 +41,48 @@ Linux 文件系统会为每个文件分配两个数据结构：**索引节点（
 
 以上就是索引节点、目录项以及文件数据的关系，下面这个图就很好的展示了它们之间的关系：
 
-![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/96d77f1985d543ac8511cbbee15e9386~noop.image?_iz=58558&from=article.pc_detail&x-expires=1672706706&x-signature=0DpyH4OtoEgd1u3vqFA4jPqxXG0%3D)
+![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/96d77f1985d543ac8511cbbee15e9386~noop.image?*iz=58558&from=article.pc*detail&x-expires=1672706706&x-signature=0DpyH4OtoEgd1u3vqFA4jPqxXG0%3D)
 
 索引节点是存储在硬盘上的数据，那么为了加速文件的访问，通常会把索引节点加载到内存中。
 
 另外，磁盘进行格式化的时候，会被分成三个存储区域，分别是超级块、索引节点区和数据块区。
 
--   _超级块_，用来存储文件系统的详细信息，比如块个数、块大小、空闲块等等。
--   _索引节点区_，用来存储索引节点；
--   _数据块区_，用来存储文件或目录数据；
+-   *超级块*，用来存储文件系统的详细信息，比如块个数、块大小、空闲块等等。
+-   *索引节点区*，用来存储索引节点；
+-   *数据块区*，用来存储文件或目录数据；
 
 我们不可能把超级块和索引节点区全部加载到内存，这样内存肯定撑不住，所以只有当需要使用的时候，才将其加载进内存，它们加载进内存的时机是不同的：
 
 -   超级块：当文件系统挂载时进入内存；
 -   索引节点区：当文件被访问时进入内存；
 
-___
+---
 
 # 虚拟文件系统
 
-文件系统的种类众多，而操作系统希望**对用户提供一个统一的接口**，于是在用户层与文件系统层引入了中间层，这个中间层就称为**虚拟文件系统（_Virtual File System，VFS_）。**
+文件系统的种类众多，而操作系统希望**对用户提供一个统一的接口**，于是在用户层与文件系统层引入了中间层，这个中间层就称为**虚拟文件系统（*Virtual File System，VFS*）。**
 
 VFS 定义了一组所有文件系统都支持的数据结构和标准接口，这样程序员不需要了解文件系统的工作原理，只需要了解 VFS 提供的统一接口即可。
 
 在 Linux 文件系统中，用户空间、系统调用、虚拟机文件系统、缓存、文件系统以及存储之间的关系如下图：
 
-![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/19508d14b20c4b0c92ccece3e12e5942~noop.image?_iz=58558&from=article.pc_detail&x-expires=1672706706&x-signature=8epEIlgVxMQwvKVNlldNpcP0AFA%3D)
+![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/19508d14b20c4b0c92ccece3e12e5942~noop.image?*iz=58558&from=article.pc*detail&x-expires=1672706706&x-signature=8epEIlgVxMQwvKVNlldNpcP0AFA%3D)
 
 Linux 支持的文件系统也不少，根据存储位置的不同，可以把文件系统分为三类：
 
--   _磁盘的文件系统_，它是直接把数据存储在磁盘中，比如 Ext 2/3/4、XFS 等都是这类文件系统。
--   _内存的文件系统_，这类文件系统的数据不是存储在硬盘的，而是占用内存空间，我们经常用到的 /proc 和 /sys 文件系统都属于这一类，读写这类文件，实际上是读写内核中相关的数据数据。
--   _网络的文件系统_，用来访问其他计算机主机数据的文件系统，比如 NFS、SMB 等等。
+-   *磁盘的文件系统*，它是直接把数据存储在磁盘中，比如 Ext 2/3/4、XFS 等都是这类文件系统。
+-   *内存的文件系统*，这类文件系统的数据不是存储在硬盘的，而是占用内存空间，我们经常用到的 /proc 和 /sys 文件系统都属于这一类，读写这类文件，实际上是读写内核中相关的数据数据。
+-   *网络的文件系统*，用来访问其他计算机主机数据的文件系统，比如 NFS、SMB 等等。
 
 文件系统首先要先挂载到某个目录才可以正常使用，比如 Linux 系统在启动时，会把文件系统挂载到根目录。
 
-___
+---
 
 # 文件的使用
 
 我们从用户角度来看文件的话，就是我们要怎么使用文件？首先，我们得通过系统调用来打开一个文件。
 
-![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/058bd6336c7b455a82f5f202761f1e43~noop.image?_iz=58558&from=article.pc_detail&x-expires=1672706706&x-signature=%2FWSj6HSoV5khqfN0iHw086ZBpTM%3D)
+![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/058bd6336c7b455a82f5f202761f1e43~noop.image?*iz=58558&from=article.pc*detail&x-expires=1672706706&x-signature=%2FWSj6HSoV5khqfN0iHw086ZBpTM%3D)
 
 write 的过程
 
@@ -102,7 +102,7 @@ close(fd);             # 关闭文件
 
 我们打开了一个文件后，操作系统会跟踪进程打开的所有文件，所谓的跟踪呢，就是操作系统为每个进程维护一个打开文件表，文件表里的每一项代表「**文件描述符**」，所以说文件描述符是打开文件的标识。
 
-![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/810a20b4db754f3da060bef1f607f69e~noop.image?_iz=58558&from=article.pc_detail&x-expires=1672706706&x-signature=XGsEciYS%2FaGbWmT3DC550LftVhA%3D)
+![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/810a20b4db754f3da060bef1f607f69e~noop.image?*iz=58558&from=article.pc*detail&x-expires=1672706706&x-signature=XGsEciYS%2FaGbWmT3DC550LftVhA%3D)
 
 打开文件表
 
@@ -124,7 +124,7 @@ close(fd);             # 关闭文件
 
 所以说，**文件系统的基本操作单位是数据块**。
 
-___
+---
 
 # 文件的存储
 
@@ -147,7 +147,7 @@ ___
 
 注意，此处说的文件头，就类似于 Linux 的 inode。
 
-![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/ae1e55f3d4e84fa7bd74ea96376bbc0a~noop.image?_iz=58558&from=article.pc_detail&x-expires=1672706706&x-signature=ZV%2FPWUihVYdmSzojTwXPm8%2FogI0%3D)
+![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/ae1e55f3d4e84fa7bd74ea96376bbc0a~noop.image?*iz=58558&from=article.pc*detail&x-expires=1672706706&x-signature=ZV%2FPWUihVYdmSzojTwXPm8%2FogI0%3D)
 
 连续空间存放方式
 
@@ -155,7 +155,7 @@ ___
 
 如下图，如果文件 B 被删除，磁盘上就留下一块空缺，这时，如果新来的文件小于其中的一个空缺，我们就可以将其放在相应空缺里。但如果该文件的大小大于所有的空缺，但却小于空缺大小之和，则虽然磁盘上有足够的空缺，但该文件还是不能存放。当然了，我们可以通过将现有文件进行挪动来腾出空间以容纳新的文件，但是这个在磁盘挪动文件是非常耗时，所以这种方式不太现实。
 
-![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/13980ac100684a328869d9dbc17bc3bf~noop.image?_iz=58558&from=article.pc_detail&x-expires=1672706706&x-signature=6Y0lkW9Mvpq8rqtIrKr7zS5GcUw%3D)
+![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/13980ac100684a328869d9dbc17bc3bf~noop.image?*iz=58558&from=article.pc*detail&x-expires=1672706706&x-signature=6Y0lkW9Mvpq8rqtIrKr7zS5GcUw%3D)
 
 磁盘碎片
 
@@ -173,7 +173,7 @@ ___
 
 文件要以「**隐式链表**」的方式存放的话，**实现的方式是文件头要包含「第一块」和「最后一块」的位置，并且每个数据块里面留出一个指针空间，用来存放下一个数据块的位置**，这样一个数据块连着一个数据块，从链头开是就可以顺着指针找到所有的数据块，所以存放的方式可以是不连续的。
 
-![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/615f7d1bbb184b03ab5174e87165a8af~noop.image?_iz=58558&from=article.pc_detail&x-expires=1672706706&x-signature=lUk8jSckssgAqhMfND0nwZNRDik%3D)
+![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/615f7d1bbb184b03ab5174e87165a8af~noop.image?*iz=58558&from=article.pc*detail&x-expires=1672706706&x-signature=lUk8jSckssgAqhMfND0nwZNRDik%3D)
 
 隐式链表
 
@@ -181,9 +181,9 @@ ___
 
 如果取出每个磁盘块的指针，把它放在内存的一个表中，就可以解决上述隐式链表的两个不足。那么，这种实现方式是「**显式链接**」，它指**把用于链接文件各数据块的指针，显式地存放在内存的一张链接表中**，该表在整个磁盘仅设置一张，**每个表项中存放链接指针，指向下一个数据块号**。
 
-对于显式链接的工作方式，我们举个例子，文件 A 依次使用了磁盘块 4、7、2、10 和 12 ，文件 B 依次使用了磁盘块 6、3、11 和 14 。利用下图中的表，可以从第 4 块开始，顺着链走到最后，找到文件 A 的全部磁盘块。同样，从第 6 块开始，顺着链走到最后，也能够找出文件 B 的全部磁盘块。最后，这两个链都以一个不属于有效磁盘编号的特殊标记（如 -1 ）结束。内存中的这样一个表格称为**文件分配表（_File Allocation Table，FAT_）**。
+对于显式链接的工作方式，我们举个例子，文件 A 依次使用了磁盘块 4、7、2、10 和 12 ，文件 B 依次使用了磁盘块 6、3、11 和 14 。利用下图中的表，可以从第 4 块开始，顺着链走到最后，找到文件 A 的全部磁盘块。同样，从第 6 块开始，顺着链走到最后，也能够找出文件 B 的全部磁盘块。最后，这两个链都以一个不属于有效磁盘编号的特殊标记（如 -1 ）结束。内存中的这样一个表格称为**文件分配表（*File Allocation Table，FAT*）**。
 
-![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/bd07d76297044582a70558468006c1de~noop.image?_iz=58558&from=article.pc_detail&x-expires=1672706706&x-signature=o%2FLq1Ys86x1SjgqfMgqjX3m0gbE%3D)
+![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/bd07d76297044582a70558468006c1de~noop.image?*iz=58558&from=article.pc*detail&x-expires=1672706706&x-signature=o%2FLq1Ys86x1SjgqfMgqjX3m0gbE%3D)
 
 显式链接
 
@@ -201,7 +201,7 @@ ___
 
 创建文件时，索引块的所有指针都设为空。当首次写入第 i 块时，先从空闲空间中取得一个块，再将其地址写到索引块的第 i 个条目。
 
-![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/ad670282c9d1493e89a38ff9ee2cb918~noop.image?_iz=58558&from=article.pc_detail&x-expires=1672706706&x-signature=v5o8bOO61TBcbbmCBChxwsVksaM%3D)
+![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/ad670282c9d1493e89a38ff9ee2cb918~noop.image?*iz=58558&from=article.pc*detail&x-expires=1672706706&x-signature=v5o8bOO61TBcbbmCBChxwsVksaM%3D)
 
 索引的方式
 
@@ -217,13 +217,13 @@ ___
 
 先来看看链表 + 索引的组合，这种组合称为「**链式索引块**」，它的实现方式是**在索引数据块留出一个存放下一个索引数据块的指针**，于是当一个索引数据块的索引信息用完了，就可以通过指针的方式，找到下一个索引数据块的信息。那这种方式也会出现前面提到的链表方式的问题，万一某个指针损坏了，后面的数据也就会无法读取了。
 
-![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/c3a12cce4d3b46c386c7f7cf4ae592c2~noop.image?_iz=58558&from=article.pc_detail&x-expires=1672706706&x-signature=lAdrtWvE22FljAJcWebFucwP5sU%3D)
+![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/c3a12cce4d3b46c386c7f7cf4ae592c2~noop.image?*iz=58558&from=article.pc*detail&x-expires=1672706706&x-signature=lAdrtWvE22FljAJcWebFucwP5sU%3D)
 
 链式索引块
 
 还有另外一种组合方式是索引 + 索引的方式，这种组合称为「**多级索引块**」，实现方式是**通过一个索引块来存放多个索引数据块**，一层套一层索引，像极了俄罗斯套娃是吧。
 
-![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/bac7f918770542dd919c75ab5777215b~noop.image?_iz=58558&from=article.pc_detail&x-expires=1672706706&x-signature=m2wfit%2BJu4XKjLe3EnpjodVMA2Q%3D)
+![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/bac7f918770542dd919c75ab5777215b~noop.image?*iz=58558&from=article.pc*detail&x-expires=1672706706&x-signature=m2wfit%2BJu4XKjLe3EnpjodVMA2Q%3D)
 
 多级索引块
 
@@ -231,11 +231,11 @@ ___
 
 我们先把前面提到的文件实现方式，做个比较：
 
-![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/fbc394cd8c85453da4e3b012c40de265~noop.image?_iz=58558&from=article.pc_detail&x-expires=1672706706&x-signature=c5hFD1uDqQWQCaOlRmTcSIiw3Gk%3D)
+![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/fbc394cd8c85453da4e3b012c40de265~noop.image?*iz=58558&from=article.pc*detail&x-expires=1672706706&x-signature=c5hFD1uDqQWQCaOlRmTcSIiw3Gk%3D)
 
 那早期 Unix 文件系统是组合了前面的文件存放方式的优点，如下图：
 
-![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/a815b9748f4042fb814e97473b671e0e~noop.image?_iz=58558&from=article.pc_detail&x-expires=1672706706&x-signature=rO390%2BzhAST8IgZzyZcbSmW%2Bbc4%3D)
+![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/a815b9748f4042fb814e97473b671e0e~noop.image?*iz=58558&from=article.pc*detail&x-expires=1672706706&x-signature=rO390%2BzhAST8IgZzyZcbSmW%2Bbc4%3D)
 
 早期 Unix 文件系统
 
@@ -246,7 +246,7 @@ ___
 -   如果前面两种方式都不够存放大文件，则采用二级间接索引方式；
 -   如果二级间接索引也不够存放大文件，这采用三级间接索引方式；
 
-那么，文件头（_Inode_）就需要包含 13 个指针：
+那么，文件头（*Inode*）就需要包含 13 个指针：
 
 -   10 个指向数据块的指针；
 -   第 11 个指向索引块的指针；
@@ -262,7 +262,7 @@ ___
 
 为了解决这个问题，Ext 4 做了一定的改变，具体怎么解决的，本文就不展开了。
 
-___
+---
 
 # 空闲空间管理
 
@@ -278,7 +278,7 @@ ___
 
 空闲表法就是为所有空闲空间建立一张表，表内容包括空闲区的第一个块号和该空闲区的块个数，注意，这个方式是连续分配的。如下图：
 
-![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/7570bbfbceb04fdf8e5a946a073966c4~noop.image?_iz=58558&from=article.pc_detail&x-expires=1672706706&x-signature=QaJ3EJ%2Fc6SNT18sjZJMwcEcBDRY%3D)
+![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/7570bbfbceb04fdf8e5a946a073966c4~noop.image?*iz=58558&from=article.pc*detail&x-expires=1672706706&x-signature=QaJ3EJ%2Fc6SNT18sjZJMwcEcBDRY%3D)
 
 空闲表法
 
@@ -290,7 +290,7 @@ ___
 
 我们也可以使用「链表」的方式来管理空闲空间，每一个空闲块里有一个指针指向下一个空闲块，这样也能很方便的找到空闲块并管理起来。如下图：
 
-![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/2a312e09b4d841048c1b10b1603e219a~noop.image?_iz=58558&from=article.pc_detail&x-expires=1672706706&x-signature=4Endg3DuWY82A0qPs4OLUZlXfKI%3D)
+![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/2a312e09b4d841048c1b10b1603e219a~noop.image?*iz=58558&from=article.pc*detail&x-expires=1672706706&x-signature=4Endg3DuWY82A0qPs4OLUZlXfKI%3D)
 
 空闲链表法
 
@@ -312,7 +312,7 @@ ___
 
 在 Linux 文件系统就采用了位图的方式来管理空闲空间，不仅用于数据空闲块的管理，还用于 inode 空闲块的管理，因为 inode 也是存储在磁盘的，自然也要有对其管理。
 
-___
+---
 
 # 文件系统的结构
 
@@ -326,15 +326,15 @@ ___
 
 下图给出了 Linux Ext2 整个文件系统的结构和块组的内容，文件系统都由大量块组组成，在硬盘上相继排布：
 
-![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/82e09de68fb24e428c813429623b9c0d~noop.image?_iz=58558&from=article.pc_detail&x-expires=1672706706&x-signature=9cikcLpuxBavQPuOsnD5HCbmLVs%3D)
+![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/82e09de68fb24e428c813429623b9c0d~noop.image?*iz=58558&from=article.pc*detail&x-expires=1672706706&x-signature=9cikcLpuxBavQPuOsnD5HCbmLVs%3D)
 
 最前面的第一个块是引导块，在系统启动时用于启用引导，接着后面就是一个一个连续的块组了，块组的内容如下：
 
--   _超级块_，包含的是文件系统的重要信息，比如 inode 总个数、块总个数、每个块组的 inode 个数、每个块组的块个数等等。
--   _块组描述符_，包含文件系统中各个块组的状态，比如块组中空闲块和 inode 的数目等，每个块组都包含了文件系统中「所有块组的组描述符信息」。
--   _数据位图和 inode 位图_， 用于表示对应的数据块或 inode 是空闲的，还是被使用中。
--   _inode 列表_，包含了块组中所有的 inode，inode 用于保存文件系统中与各个文件和目录相关的所有元数据。
--   _数据块_，包含文件的有用数据。
+-   *超级块*，包含的是文件系统的重要信息，比如 inode 总个数、块总个数、每个块组的 inode 个数、每个块组的块个数等等。
+-   *块组描述符*，包含文件系统中各个块组的状态，比如块组中空闲块和 inode 的数目等，每个块组都包含了文件系统中「所有块组的组描述符信息」。
+-   *数据位图和 inode 位图*， 用于表示对应的数据块或 inode 是空闲的，还是被使用中。
+-   *inode 列表*，包含了块组中所有的 inode，inode 用于保存文件系统中与各个文件和目录相关的所有元数据。
+-   *数据块*，包含文件的有用数据。
 
 你可以会发现每个块组里有很多重复的信息，比如**超级块和块组描述符表，这两个都是全局信息，而且非常的重要**，这么做是有两个原因：
 
@@ -343,7 +343,7 @@ ___
 
 不过，Ext2 的后续版本采用了稀疏技术。该做法是，超级块和块组描述符表不再存储到文件系统的每个块组中，而是只写入到块组 0、块组 1 和其他 ID 可以表示为 3、 5、7 的幂的块组中。
 
-___
+---
 
 # 目录的存储
 
@@ -357,7 +357,7 @@ ___
 
 列表中每一项就代表该目录下的文件的文件名和对应的 inode，通过这个 inode，就可以找到真正的文件。
 
-![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/8d5cf9f5151c4581b2956e12c01dfaac~noop.image?_iz=58558&from=article.pc_detail&x-expires=1672706706&x-signature=RDFYd5l1J466bK8cu7E%2Buk6vSkg%3D)
+![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/8d5cf9f5151c4581b2956e12c01dfaac~noop.image?*iz=58558&from=article.pc*detail&x-expires=1672706706&x-signature=RDFYd5l1J466bK8cu7E%2Buk6vSkg%3D)
 
 目录格式哈希表
 
@@ -371,25 +371,25 @@ Linux 系统的 ext 文件系统就是采用了哈希表，来保存目录的内
 
 目录查询是通过在磁盘上反复搜索完成，需要不断地进行 I/O 操作，开销较大。所以，为了减少 I/O 操作，把当前使用的文件目录缓存在内存，以后要使用该文件时只要在内存中操作，从而降低了磁盘操作次数，提高了文件系统的访问速度。
 
-___
+---
 
 # 软链接和硬链接
 
-有时候我们希望给某个文件取个别名，那么在 Linux 中可以通过**硬链接（_Hard Link_）** 和**软链接（_Symbolic Link_）** 的方式来实现，它们都是比较特殊的文件，但是实现方式也是不相同的。
+有时候我们希望给某个文件取个别名，那么在 Linux 中可以通过**硬链接（*Hard Link*）** 和**软链接（*Symbolic Link*）** 的方式来实现，它们都是比较特殊的文件，但是实现方式也是不相同的。
 
 硬链接是**多个目录项中的「索引节点」指向一个文件**，也就是指向同一个 inode，但是 inode 是不可能跨越文件系统的，每个文件系统都有各自的 inode 数据结构和列表，所以**硬链接是不可用于跨文件系统的**。由于多个目录项都是指向一个 inode，那么**只有删除文件的所有硬链接以及源文件时，系统才会彻底删除该文件。**
 
-![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/aae70a811f204788abf7ae637d3fe37a~noop.image?_iz=58558&from=article.pc_detail&x-expires=1672706706&x-signature=u0HjfmksT4QygmnfQ2uIBoKOecQ%3D)
+![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/aae70a811f204788abf7ae637d3fe37a~noop.image?*iz=58558&from=article.pc*detail&x-expires=1672706706&x-signature=u0HjfmksT4QygmnfQ2uIBoKOecQ%3D)
 
 硬链接
 
 软链接相当于重新创建一个文件，这个文件有**独立的 inode**，但是这个**文件的内容是另外一个文件的路径**，所以访问软链接的时候，实际上相当于访问到了另外一个文件，所以**软链接是可以跨文件系统的**，甚至**目标文件被删除了，链接文件还是在的，只不过指向的文件找不到了而已。**
 
-![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/ed91ebe4c2314c05ba6df395771e14c2~noop.image?_iz=58558&from=article.pc_detail&x-expires=1672706706&x-signature=UQ%2BDqz8tPVMW%2BPoJuPxZfKtmlCc%3D)
+![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/ed91ebe4c2314c05ba6df395771e14c2~noop.image?*iz=58558&from=article.pc*detail&x-expires=1672706706&x-signature=UQ%2BDqz8tPVMW%2BPoJuPxZfKtmlCc%3D)
 
 软链接
 
-___
+---
 
 # 文件 I/O
 
@@ -440,13 +440,13 @@ ___
 
 注意，**阻塞等待的是「内核数据准备好」和「数据从内核态拷贝到用户态」这两个过程**。过程如下图：
 
-![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/cba903fb443a47c19415b3b6dfae8a41~noop.image?_iz=58558&from=article.pc_detail&x-expires=1672706706&x-signature=Kw4BIvsFR2msMaFBJHF0UJZNyMc%3D)
+![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/cba903fb443a47c19415b3b6dfae8a41~noop.image?*iz=58558&from=article.pc*detail&x-expires=1672706706&x-signature=Kw4BIvsFR2msMaFBJHF0UJZNyMc%3D)
 
 阻塞 I/O
 
 知道了阻塞 I/O ，来看看**非阻塞 I/O**，非阻塞的 read 请求在数据未准备好的情况下立即返回，可以继续往下执行，此时应用程序不断轮询内核，直到数据准备好，内核将数据拷贝到应用程序缓冲区，read 调用才可以获取到结果。过程如下图：
 
-![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/6ee4151cb7b442078d164a699951baf0~noop.image?_iz=58558&from=article.pc_detail&x-expires=1672706706&x-signature=zmywpPpSR9Ro85gCGlb9YeWyddU%3D)
+![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/6ee4151cb7b442078d164a699951baf0~noop.image?*iz=58558&from=article.pc*detail&x-expires=1672706706&x-signature=zmywpPpSR9Ro85gCGlb9YeWyddU%3D)
 
 非阻塞 I/O
 
@@ -462,7 +462,7 @@ ___
 
 下图是使用 select I/O 多路复用过程。注意，read 获取数据的过程（数据从内核态拷贝到用户态的过程），也是一个**同步的过程**，需要等待：
 
-![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/b43fe60f911a458e803d7cbd42d76657~noop.image?_iz=58558&from=article.pc_detail&x-expires=1672706706&x-signature=u0365laz91hPRSg7izYXxGFoNuU%3D)
+![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/b43fe60f911a458e803d7cbd42d76657~noop.image?*iz=58558&from=article.pc*detail&x-expires=1672706706&x-signature=u0365laz91hPRSg7izYXxGFoNuU%3D)
 
 I/O 多路复用
 
@@ -472,13 +472,13 @@ I/O 多路复用
 
 当我们发起 aio\_read 之后，就立即返回，内核自动将数据从内核空间拷贝到应用程序空间，这个拷贝过程同样是异步的，内核自动完成的，和前面的同步操作不一样，应用程序并不需要主动发起拷贝动作。过程如下图：
 
-![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/437517368622425086a5d93275c7d681~noop.image?_iz=58558&from=article.pc_detail&x-expires=1672706706&x-signature=awHjH8sDIZgpnePVchB3BB7vwGk%3D)
+![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/437517368622425086a5d93275c7d681~noop.image?*iz=58558&from=article.pc*detail&x-expires=1672706706&x-signature=awHjH8sDIZgpnePVchB3BB7vwGk%3D)
 
 异步 I/O
 
 下面这张图，总结了以上几种 I/O 模型：
 
-![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/d0056abb4ffd4796bfcd6390df1abbc6~noop.image?_iz=58558&from=article.pc_detail&x-expires=1672706706&x-signature=3ApWFBwnWZN%2FIWuta64lUsux0f8%3D)
+![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/d0056abb4ffd4796bfcd6390df1abbc6~noop.image?*iz=58558&from=article.pc*detail&x-expires=1672706706&x-signature=3ApWFBwnWZN%2FIWuta64lUsux0f8%3D)
 
 在前面我们知道了，I/O 是分为两个过程的：
 

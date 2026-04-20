@@ -1,29 +1,29 @@
 # Defining Classes
 
-## Classes Are Blueprints for Objects  
+# # Classes Are Blueprints for Objects  
 
-### Mutability Determines Whether a Represented Value Can Be Changed  
+## # Mutability Determines Whether a Represented Value Can Be Changed  
 
-Some classes define objects that are _immutable_. This means that the internal contents must be set when an object is created, and cannot subsequently be changed by other objects. In Objective-C, all basic `NSString` and `NSNumber` objects are immutable. If you need to represent a different number, you must use a new `NSNumber` instance.  
-某些类定义_不可变_的对象。这意味着必须在创建对象时设置内部内容，并且随后不能由其他对象更改。在 Objective-C 中，所有基本的 `NSString` 和 `NSNumber` 对象都是不可变的。如果需要表示不同的数字，则必须使用新的 `NSNumber` 实例。
+Some classes define objects that are *immutable*. This means that the internal contents must be set when an object is created, and cannot subsequently be changed by other objects. In Objective-C, all basic `NSString` and `NSNumber` objects are immutable. If you need to represent a different number, you must use a new `NSNumber` instance.  
+某些类定义*不可变*的对象。这意味着必须在创建对象时设置内部内容，并且随后不能由其他对象更改。在 Objective-C 中，所有基本的 `NSString` 和 `NSNumber` 对象都是不可变的。如果需要表示不同的数字，则必须使用新的 `NSNumber` 实例。
 
-Some immutable classes also offer a _mutable_ version. If you specifically need to change the contents of a string at runtime, for example by appending characters as they are received over a network connection, you can use an instance of the `NSMutableString` class. Instances of this class behave just like `NSString` objects, except that they also offer functionality to change the characters that the object represents.  
-一些不可变类也提供_可变_版本。如果特别需要在运行时更改字符串的内容，例如，在通过网络连接接收字符时追加字符，则可以使用 `NSMutableString` 类的实例。此类的实例的行为与 `NSString` 对象类似，只是它们还提供更改对象所表示的字符的功能。
+Some immutable classes also offer a *mutable* version. If you specifically need to change the contents of a string at runtime, for example by appending characters as they are received over a network connection, you can use an instance of the `NSMutableString` class. Instances of this class behave just like `NSString` objects, except that they also offer functionality to change the characters that the object represents.  
+一些不可变类也提供*可变*版本。如果特别需要在运行时更改字符串的内容，例如，在通过网络连接接收字符时追加字符，则可以使用 `NSMutableString` 类的实例。此类的实例的行为与 `NSString` 对象类似，只是它们还提供更改对象所表示的字符的功能。
 
 Although `NSString` and `NSMutableString` are different classes, they have many similarities. Rather than writing two completely separate classes from scratch that just happen to have some similar behavior, it makes sense to make use of inheritance.  
 尽管 `NSString` 和 `NSMutableString` 是不同的类，但它们有许多相似之处。与其从头开始编写两个完全独立的类，它们恰好具有一些相似的行为，不如使用继承是有意义的。
 
-### The Root Class Provides Base Functionality  
+## # The Root Class Provides Base Functionality  
 
 When an Objective-C object needs to work with an instance of another class, it is expected that the other class offers certain basic characteristics and behavior. For this reason, Objective-C defines a root class from which the vast majority of other classes inherit, called `NSObject`. When one object encounters another object, it expects to be able to interact using at least the basic behavior defined by the `NSObject` class description.  
 当 Objective-C 对象需要使用另一个类的实例时，预计另一个类提供某些基本特征和行为。出于这个原因，Objective-C 定义了一个根类，绝大多数其他类都从该根类继承，称为 `NSObject`。当一个对象遇到另一个对象时，它希望至少能够使用 `NSObject` 类描述定义的基本行为进行交互。
 
-## The Interface for a Class Defines Expected Interactions  
+# # The Interface for a Class Defines Expected Interactions  
 
 One of the many benefits of object-oriented programming is the idea mentioned earlier—all you need to know in order to use a class is how to interact with its instances. More specifically, an object should be designed to hide the details of its internal implementation.  
 面向对象编程的众多好处之一就是前面提到的思想——为了使用一个类，你需要知道的就是如何与它的实例进行交互。更具体地说，对象应该被设计为隐藏其内部实现的细节。
 
-### Basic Syntax基本语法
+## # Basic Syntax基本语法
 
 The Objective-C syntax used to declare a class interface looks like this:  
 用于声明类接口的 Objective-C 语法如下所示：
@@ -40,7 +40,7 @@ This example declares a class named `SimpleClass`, which inherits from `NSObject
 The public properties and behavior are defined inside the `@interface` declaration. In this example, nothing is specified beyond the superclass, so the only functionality expected to be available on instances of `SimpleClass` is the functionality inherited from `NSObject`.  
 公共属性和行为在 `@interface` 声明中定义。在此示例中，除了超类之外，未指定任何内容，因此 `SimpleClass` 实例上唯一可用的功能是从 `NSObject` 继承的功能。
 
-### Properties Control Access to an Object’s Values  
+## # Properties Control Access to an Object’s Values  
 
 Objects often have properties intended for public access. If you define a class to represent a human being in a record-keeping app, for example, you might decide you need properties for strings representing a person’s first and last names.  
 对象通常具有用于公共访问的属性。例如，如果在记录保存应用中定义一个类来表示一个人，你可能会决定需要表示一个人的名字和姓氏的字符串的属性。
@@ -61,8 +61,8 @@ Declarations for these properties should be added inside the interface, like thi
 In this example, the `Person` class declares two public properties, both of which are instances of the `NSString` class.  
 在此示例中，`Person` 类声明了两个公共属性，这两个属性都是 `NSString` 类的实例。
 
-Both these properties are for Objective-C objects, so they use an _asterisk_ to indicate that they are C pointers. They are also statements just like any other variable declaration in C, and therefore require a semi-colon at the end.  
-这两个属性都用于 Objective-C 对象，因此它们使用_星号_来指示它们是 C 指针。它们也是语句，就像 C 中的任何其他变量声明一样，因此需要在末尾使用分号。
+Both these properties are for Objective-C objects, so they use an *asterisk* to indicate that they are C pointers. They are also statements just like any other variable declaration in C, and therefore require a semi-colon at the end.  
+这两个属性都用于 Objective-C 对象，因此它们使用*星号*来指示它们是 C 指针。它们也是语句，就像 C 中的任何其他变量声明一样，因此需要在末尾使用分号。
 ```objc
 @interface SimpleClass : NSObject
 
@@ -86,7 +86,7 @@ but this might be considered overkill just to store a simple numeric value. One 
 @end
 ```
 
-#### Property Attributes Indicate Data Accessibility and Storage Considerations  
+### # Property Attributes Indicate Data Accessibility and Storage Considerations  
 
 ```objc
 @interface SimpleClass : NSObject
@@ -97,9 +97,9 @@ but this might be considered overkill just to store a simple numeric value. One 
 @end
 ```
 
-Property attributes are specified inside parentheses after the `@property` keyword, and are described fully in [Declare Public Properties for Exposed Data](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/DefiningClasses/DefiningClasses.html#//apple_ref/doc/uid/TP40011210-CH3-SW1../EncapsulatingData/EncapsulatingData.html#//apple_ref/doc/uid/TP40011210-CH5-SW4).  
+Property attributes are specified inside parentheses after the `@property` keyword, and are described fully in [Declare Public Properties for Exposed Data](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/DefiningClasses/DefiningClasses.html# //apple*ref/doc/uid/TP40011210-CH3-SW1../EncapsulatingData/EncapsulatingData.html# //apple*ref/doc/uid/TP40011210-CH5-SW4).  
 
-### Method Declarations Indicate the Messages an Object Can Receive  
+## # Method Declarations Indicate the Messages an Object Can Receive  
 
 Given that Objective-C software is built from a large network of objects, it’s important to note that those objects can interact with each other by sending messages. In Objective-C terms, one object sends a message to another object by calling a method on that object.  
 鉴于 Objective-C 软件是由大型对象网络构建的，因此需要注意的是，这些对象可以通过发送消息来相互交互。在 Objective-C 术语中，一个对象通过调用该对象上的方法将消息发送到另一个对象。
@@ -112,10 +112,10 @@ The equivalent Objective-C method declaration looks like this:
 - (void)someMethod;
 ```
 
-The minus sign (`-`) at the front of the method name indicates that it is an instance method, which can be called on any instance of the class. This differentiates it from class methods, which can be called on the class itself, as described in [Objective-C Classes Are also Objects](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/DefiningClasses/DefiningClasses.html#//apple_ref/doc/uid/TP40011210-CH3-SW1#//apple_ref/doc/uid/TP40011210-CH3-SW18).  
-方法名称前面的减号 （`-`） 表示它是一个实例方法，可以在类的任何实例上调用它。这使它与类方法不同，类方法可以在类本身上调用，如 [Objective-C 类也是对象](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/DefiningClasses/DefiningClasses.html#//apple_ref/doc/uid/TP40011210-CH3-SW1#//apple_ref/doc/uid/TP40011210-CH3-SW18)中所述。
+The minus sign (`-`) at the front of the method name indicates that it is an instance method, which can be called on any instance of the class. This differentiates it from class methods, which can be called on the class itself, as described in [Objective-C Classes Are also Objects](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/DefiningClasses/DefiningClasses.html# //apple*ref/doc/uid/TP40011210-CH3-SW1# //apple*ref/doc/uid/TP40011210-CH3-SW18).  
+方法名称前面的减号 （`-`） 表示它是一个实例方法，可以在类的任何实例上调用它。这使它与类方法不同，类方法可以在类本身上调用，如 [Objective-C 类也是对象](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/DefiningClasses/DefiningClasses.html# //apple*ref/doc/uid/TP40011210-CH3-SW1# //apple*ref/doc/uid/TP40011210-CH3-SW18)中所述。
 
-#### Methods Can Take Parameters  
+### # Methods Can Take Parameters  
 
 An Objective-C method declaration includes the parameters as part of its name, using colons, like this:  
 Objective-C 方法声明包含参数作为其名称的一部分，使用冒号，如下所示：
@@ -141,8 +141,8 @@ The order of the parameters in a method call must match the method declaration, 
 someMethodWithFirstValue:secondValue:
 ```
 
-This is one of the features that helps make Objective-C such a readable language, because the values passed by a method call are specified _inline_, next to the relevant portion of the method name, as described in [You Can Pass Objects for Method Parameters](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/DefiningClasses/DefiningClasses.html#//apple_ref/doc/uid/TP40011210-CH3-SW1../WorkingwithObjects/WorkingwithObjects.html#//apple_ref/doc/uid/TP40011210-CH4-SW13).  
-这是有助于使 Objective-C 成为一种可读语言的功能之一，因为方法调用传递的值是_内联_指定的，位于方法名称的相关部分旁边，如[您可以传递方法参数的对象](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/DefiningClasses/DefiningClasses.html#//apple_ref/doc/uid/TP40011210-CH3-SW1../WorkingwithObjects/WorkingwithObjects.html#//apple_ref/doc/uid/TP40011210-CH4-SW13)中所述。
+This is one of the features that helps make Objective-C such a readable language, because the values passed by a method call are specified *inline*, next to the relevant portion of the method name, as described in [You Can Pass Objects for Method Parameters](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/DefiningClasses/DefiningClasses.html# //apple*ref/doc/uid/TP40011210-CH3-SW1../WorkingwithObjects/WorkingwithObjects.html# //apple*ref/doc/uid/TP40011210-CH4-SW13).  
+这是有助于使 Objective-C 成为一种可读语言的功能之一，因为方法调用传递的值是*内联*指定的，位于方法名称的相关部分旁边，如[您可以传递方法参数的对象](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/DefiningClasses/DefiningClasses.html# //apple*ref/doc/uid/TP40011210-CH3-SW1../WorkingwithObjects/WorkingwithObjects.html# //apple*ref/doc/uid/TP40011210-CH4-SW13)中所述。
 
 **Note:** The `value1` and `value2` value names used above aren’t strictly part of the method declaration, which means it’s not necessary to use exactly the same value names in the declaration as you do in the implementation. The only requirement is that the signature matches, which means you must keep the name of the method as well as the parameter and return types exactly the same.  
 **注意：**上面使用的 `value1` 和 `value2` 值名称严格来说不是方法声明的一部分，这意味着不必在声明中使用与在实现中完全相同的值名称。唯一的要求是签名匹配，这意味着必须保持方法的名称以及参数和返回类型完全相同。
@@ -162,7 +162,7 @@ These methods have different signatures to the one above:
 - (void)someMethodWithFirstValue:(SomeType)info1 secondValue:(YetAnotherType)info2;
 ```
 
-### Class Names Must Be Unique  
+## # Class Names Must Be Unique  
 
 
 For this reason, it’s advisable to prefix the names of any classes you define, using three or more letters. These letters might relate to the app you’re currently writing, or to the name of a framework of reusable code, or perhaps just your initials.  
@@ -175,27 +175,27 @@ All examples given in the rest of this document use class name prefixes, like th
 @interface XYZPerson : NSObject@property (readonly) NSString *firstName;@property (readonly) NSString *lastName;@end
 ```
 
-Further naming conventions and suggestions are given in [Conventions](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/DefiningClasses/DefiningClasses.html#//apple_ref/doc/uid/TP40011210-CH3-SW1../Conventions/Conventions.html#//apple_ref/doc/uid/TP40011210-CH10-SW1).  
-进一步的命名约定和建议在[公约](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/DefiningClasses/DefiningClasses.html#//apple_ref/doc/uid/TP40011210-CH3-SW1../Conventions/Conventions.html#//apple_ref/doc/uid/TP40011210-CH10-SW1)中给出。
+Further naming conventions and suggestions are given in [Conventions](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/DefiningClasses/DefiningClasses.html# //apple*ref/doc/uid/TP40011210-CH3-SW1../Conventions/Conventions.html# //apple*ref/doc/uid/TP40011210-CH10-SW1).  
+进一步的命名约定和建议在[公约](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/DefiningClasses/DefiningClasses.html# //apple*ref/doc/uid/TP40011210-CH3-SW1../Conventions/Conventions.html# //apple*ref/doc/uid/TP40011210-CH10-SW1)中给出。
 
-## The Implementation of a Class Provides Its Internal Behavior  
+# # The Implementation of a Class Provides Its Internal Behavior  
 
-As stated earlier, the interface for a class is usually placed inside a dedicated file, often referred to as a _header file_, which generally has the filename extension `.h`. You write the implementation for an Objective-C class inside a source code file with the extension `.m`.  
-如前所述，类的接口通常放置在专用文件中，通常称为_头文件_，其文件扩展名通常为 `.h`。您可以在扩展名为 `.m` 的源代码文件中编写 Objective-C 类的实现。
+As stated earlier, the interface for a class is usually placed inside a dedicated file, often referred to as a *header file*, which generally has the filename extension `.h`. You write the implementation for an Objective-C class inside a source code file with the extension `.m`.  
+如前所述，类的接口通常放置在专用文件中，通常称为*头文件*，其文件扩展名通常为 `.h`。您可以在扩展名为 `.m` 的源代码文件中编写 Objective-C 类的实现。
 
-Whenever the interface is defined in a header file, you’ll need to tell the compiler to read it before trying to compile the implementation in the source code file. Objective-C provides a preprocessor directive, `#import`, for this purpose. It’s similar to the C `#include` directive, but makes sure that a file is only included once during compilation.  
-每当在头文件中定义接口时，都需要告诉编译器读取它，然后再尝试在源代码文件中编译实现。为此，Objective-C 提供了一个预处理器指令 `#import`。它类似于 C `#include` 指令，但确保文件在编译过程中只包含一次。
+Whenever the interface is defined in a header file, you’ll need to tell the compiler to read it before trying to compile the implementation in the source code file. Objective-C provides a preprocessor directive, `# import`, for this purpose. It’s similar to the C `# include` directive, but makes sure that a file is only included once during compilation.  
+每当在头文件中定义接口时，都需要告诉编译器读取它，然后再尝试在源代码文件中编译实现。为此，Objective-C 提供了一个预处理器指令 `# import`。它类似于 C `# include` 指令，但确保文件在编译过程中只包含一次。
 
 Note that preprocessor directives are different from traditional C statements and do not use a terminating semi-colon.  
 请注意，预处理器指令不同于传统的 C 语句，并且不使用终止分号。
 
-### Basic Syntax
+## # Basic Syntax
 
 The basic syntax to provide the implementation for a class looks like this:  
 为类提供实现的基本语法如下所示：
 
 ```objc
-#import "XYZPerson.h" 
+# import "XYZPerson.h" 
 @implementation XYZPerson 
 
 @end
@@ -204,7 +204,7 @@ The basic syntax to provide the implementation for a class looks like this:
 If you declare any methods in the class interface, you’ll need to implement them inside this file.  
 如果在类接口中声明任何方法，则需要在此文件中实现它们。
 
-### Implementing Methods实现方法
+## # Implementing Methods实现方法
 
 For a simple class interface with one method, like this:  
 对于具有一种方法的简单类接口，如下所示：
@@ -219,7 +219,7 @@ the implementation might look like this:
 实现可能如下所示：
 
 ```objc
-#import "XYZPerson.h" 
+# import "XYZPerson.h" 
 @implementation XYZPerson
 - (void)sayHello {    
     NSLog(@"Hello, World!");
@@ -242,19 +242,19 @@ Note also that whitespace is flexible in Objective-C. It’s customary to indent
 }
 ```
 
-Xcode, Apple’s integrated development environment (IDE) for creating OS X and iOS software, will automatically indent your code based on a set of customizable user preferences. See [Changing the Indent and Tab Width](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/DefiningClasses/DefiningClasses.html#//apple_ref/doc/uid/TP40011210-CH3-SW1../../../../DeveloperTools/Conceptual/XcodeWorkspace/100-The_Text_Editor/text_editor.html#//apple_ref/doc/uid/TP40002679-SW41) in _[Xcode Workspace Guide](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/DefiningClasses/DefiningClasses.html#//apple_ref/doc/uid/TP40011210-CH3-SW1../../../../DeveloperTools/Conceptual/XcodeWorkspace/000-Introduction/Introduction.html#//apple_ref/doc/uid/TP40006920)_ for more information.  
+Xcode, Apple’s integrated development environment (IDE) for creating OS X and iOS software, will automatically indent your code based on a set of customizable user preferences. See [Changing the Indent and Tab Width](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/DefiningClasses/DefiningClasses.html# //apple*ref/doc/uid/TP40011210-CH3-SW1../../../../DeveloperTools/Conceptual/XcodeWorkspace/100-The*Text*Editor/text*editor.html# //apple*ref/doc/uid/TP40002679-SW41) in *[Xcode Workspace Guide](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/DefiningClasses/DefiningClasses.html# //apple*ref/doc/uid/TP40011210-CH3-SW1../../../../DeveloperTools/Conceptual/XcodeWorkspace/000-Introduction/Introduction.html# //apple*ref/doc/uid/TP40006920)_ for more information.  
 
 
-You’ll see many more examples of method implementations in the next chapter, [Working with Objects](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/DefiningClasses/DefiningClasses.html#//apple_ref/doc/uid/TP40011210-CH3-SW1../WorkingwithObjects/WorkingwithObjects.html#//apple_ref/doc/uid/TP40011210-CH4-SW1).  
+You’ll see many more examples of method implementations in the next chapter, [Working with Objects](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/DefiningClasses/DefiningClasses.html# //apple*ref/doc/uid/TP40011210-CH3-SW1../WorkingwithObjects/WorkingwithObjects.html# //apple*ref/doc/uid/TP40011210-CH4-SW1).  
 
 
-## Objective-C Classes Are also Objects  
+# # Objective-C Classes Are also Objects  
 
 In Objective-C, a class is itself an object with an opaque type called `Class`. Classes can’t have properties defined using the declaration syntax shown earlier for instances, but they can receive messages.  
 在 Objective-C 中，类本身就是一个具有不透明类型的对象，称为 `Class`。类不能使用前面为实例显示的声明语法定义属性，但它们可以接收消息。
 
-The typical use for a class method is as a _factory method_, which is an alternative to the object allocation and initialization procedure described in [Objects Are Created Dynamically](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/DefiningClasses/DefiningClasses.html#//apple_ref/doc/uid/TP40011210-CH3-SW1../WorkingwithObjects/WorkingwithObjects.html#//apple_ref/doc/uid/TP40011210-CH4-SW7). The `NSString` class, for example, has a variety of factory methods available to create either an empty string object, or a string object initialized with specific characters, including:  
-类方法的典型用途是作为_工厂方法_，它是[动态创建对象](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/DefiningClasses/DefiningClasses.html#//apple_ref/doc/uid/TP40011210-CH3-SW1../WorkingwithObjects/WorkingwithObjects.html#//apple_ref/doc/uid/TP40011210-CH4-SW7)中描述的对象分配和初始化过程的替代方法。例如，`NSString` 类具有多种工厂方法，可用于创建空字符串对象或使用特定字符初始化的字符串对象，包括：
+The typical use for a class method is as a *factory method*, which is an alternative to the object allocation and initialization procedure described in [Objects Are Created Dynamically](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/DefiningClasses/DefiningClasses.html# //apple*ref/doc/uid/TP40011210-CH3-SW1../WorkingwithObjects/WorkingwithObjects.html# //apple*ref/doc/uid/TP40011210-CH4-SW7). The `NSString` class, for example, has a variety of factory methods available to create either an empty string object, or a string object initialized with specific characters, including:  
+类方法的典型用途是作为*工厂方法*，它是[动态创建对象](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/DefiningClasses/DefiningClasses.html# //apple*ref/doc/uid/TP40011210-CH3-SW1../WorkingwithObjects/WorkingwithObjects.html# //apple*ref/doc/uid/TP40011210-CH4-SW7)中描述的对象分配和初始化过程的替代方法。例如，`NSString` 类具有多种工厂方法，可用于创建空字符串对象或使用特定字符初始化的字符串对象，包括：
 
 ```objc
 + (id)string;
@@ -270,13 +270,13 @@ As shown in these examples, class methods are denoted by the use of a `+` sign, 
 Class method prototypes may be included in a class interface, just like instance method prototypes. Class methods are implemented in the same way as instance methods, inside the `@implementation` block for the class.  
 类方法原型可以包含在类接口中，就像实例方法原型一样。类方法的实现方式与实例方法相同，在类的 `@implementation` 块内。
 
-## Exercises
+# # Exercises
 
 **Note:** In order to follow the exercises given at the end of each chapter, you may wish to create an Xcode project. This will allow you to make sure that your code compiles without errors.  
 **注意：**为了遵循每章末尾给出的练习，您可能希望创建一个 Xcode 项目。这将使你能够确保你的代码编译时没有错误。
 
-Use Xcode’s New Project template window to create a _Command Line Tool_ from the available OS X Application project templates. When prompted, specify the project’s Type as _Foundation_.  
-使用 Xcode 的“新建项目”模板窗口，从可用的 OS X 应用程序项目模板创建_命令行工具_。出现提示时，将项目的“类型”指定为_“基础_”。
+Use Xcode’s New Project template window to create a *Command Line Tool* from the available OS X Application project templates. When prompted, specify the project’s Type as *Foundation*.  
+使用 Xcode 的“新建项目”模板窗口，从可用的 OS X 应用程序项目模板创建*命令行工具*。出现提示时，将项目的“类型”指定为*“基础*”。
 
 1.  Use Xcode’s New File template window to create the interface and implementation files for an Objective-C class called `XYZPerson`, which inherits from `NSObject`.
     

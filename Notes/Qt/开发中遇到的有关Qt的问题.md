@@ -1,4 +1,4 @@
-## 开发中遇到的有关Qt的问题
+# # 开发中遇到的有关Qt的问题
 
 1. 向下面的代码对某 a 列设置伸展属性后， 再设置 b 列的列宽为 0 时导致无法隐藏这一列，b 列会显示一个固定宽度
 
@@ -60,7 +60,7 @@
     QAbstractItemView *QCompleter::popup() const
     {
     	Q_D(const QCompleter);
-    #if QT_CONFIG(listview)
+    # if QT_CONFIG(listview)
     	if (!d->popup && completionMode() != QCompleter::InlineCompletion) {
     		QListView *listView = new QListView;
     		listView->setEditTriggers(QAbstractItemView::NoEditTriggers);
@@ -71,7 +71,7 @@
     		QCompleter *that = const_cast<QCompleter*>(this);
     		that->setPopup(listView);
     	}
-    #endif // QT_CONFIG(listview)
+    # endif // QT_CONFIG(listview)
     	return d->popup;
     }
     ```
@@ -129,7 +129,7 @@
 16. Qss 选择想要选择多个同级的控件, 用逗号分割，例如:
 
     ```css
-    QPushButton#button_1, QPushButton#button_2 { color:red; }
+    QPushButton# button*1, QPushButton# button*2 { color:red; }
     ```
 
     
@@ -140,58 +140,58 @@
     void resize(size_type __new_size)
     {
     	if (__new_size > size())
-    	  _M_default_append(__new_size - size());
+    	  *M*default_append(__new_size - size());
     	else if (__new_size < size())
-    	  _M_erase_at_end(this->_M_impl._M_start + __new_size);
+    	  *M*erase*at*end(this->*M*impl.*M*start + __new_size);
     }
     
-    template<typename _Tp, typename _Alloc>
-    void vector<_Tp, _Alloc>::_M_default_append(size_type __n)
+    template<typename *Tp, typename *Alloc>
+    void vector<*Tp, *Alloc>::*M*default*append(size*type __n)
     {
       if (__n != 0)
     	{
-    	  if (size_type(this->_M_impl._M_end_of_storage
-    					- this->_M_impl._M_finish) >= __n)
+    	  if (size*type(this->*M*impl.*M*end*of_storage
+    					- this->*M*impl.*M*finish) >= __n)
     		{
-    		  _GLIBCXX_ASAN_ANNOTATE_GROW(__n);
-    		  this->_M_impl._M_finish =
-    			std::__uninitialized_default_n_a(this->_M_impl._M_finish,
-    											 __n, _M_get_Tp_allocator());
-    		  _GLIBCXX_ASAN_ANNOTATE_GREW(__n);
+    		  *GLIBCXX*ASAN*ANNOTATE*GROW(__n);
+    		  this->*M*impl.*M*finish =
+    			std::__uninitialized*default*n*a(this->*M*impl.*M_finish,
+    											 __n, *M*get*Tp*allocator());
+    		  *GLIBCXX*ASAN*ANNOTATE*GREW(__n);
     		}
     	  else
     		{
     		  const size_type __len =
-    			_M_check_len(__n, "vector::_M_default_append");
+    			*M*check_len(__n, "vector::*M*default_append");
     		  const size_type __old_size = this->size();
-    		  pointer __new_start(this->_M_allocate(__len));
+    		  pointer __new*start(this->*M_allocate(__len));
     		  pointer __new_finish(__new_start);
     		  __try
     			{
     			  __new_finish
-    				= std::__uninitialized_move_if_noexcept_a
-    				(this->_M_impl._M_start, this->_M_impl._M_finish,
-    				 __new_start, _M_get_Tp_allocator());
+    				= std::__uninitialized*move*if*noexcept*a
+    				(this->*M*impl.*M*start, this->*M*impl.*M*finish,
+    				 __new*start, *M*get*Tp_allocator());
     			  __new_finish =
-    				std::__uninitialized_default_n_a(__new_finish, __n,
-    												 _M_get_Tp_allocator());
+    				std::__uninitialized*default*n_a(__new_finish, __n,
+    												 *M*get*Tp*allocator());
     			}
     		  __catch(...)
     			{
     			  std::_Destroy(__new_start, __new_finish,
-    							_M_get_Tp_allocator());
-    			  _M_deallocate(__new_start, __len);
-    			  __throw_exception_again;
+    							*M*get*Tp*allocator());
+    			  *M*deallocate(__new_start, __len);
+    			  __throw*exception*again;
     			}
-    		  _GLIBCXX_ASAN_ANNOTATE_REINIT;
-    		  std::_Destroy(this->_M_impl._M_start, this->_M_impl._M_finish,
-    						_M_get_Tp_allocator());
-    		  _M_deallocate(this->_M_impl._M_start,
-    						this->_M_impl._M_end_of_storage
-    						- this->_M_impl._M_start);
-    		  this->_M_impl._M_start = __new_start;
-    		  this->_M_impl._M_finish = __new_finish;
-    		  this->_M_impl._M_end_of_storage = __new_start + __len;
+    		  *GLIBCXX*ASAN*ANNOTATE*REINIT;
+    		  std::*Destroy(this->*M*impl.*M*start, this->*M*impl.*M_finish,
+    						*M*get*Tp*allocator());
+    		  *M*deallocate(this->*M*impl.*M*start,
+    						this->*M*impl.*M*end*of*storage
+    						- this->*M*impl.*M*start);
+    		  this->*M*impl.*M*start = __new_start;
+    		  this->*M*impl.*M*finish = __new_finish;
+    		  this->*M*impl.*M*end*of*storage = __new_start + __len;
     		}
     	}
     }
@@ -269,11 +269,11 @@
     	using QNonConstOverload<Args...>::operator();
     	
     	template <typename R>
-    	Q_DECL_CONSTEXPR auto operator()(R (*ptr)(Args...)) const Q_DECL_NOTHROW -> decltype(ptr)
+    	Q*DECL*CONSTEXPR auto operator()(R (*ptr)(Args...)) const Q*DECL*NOTHROW -> decltype(ptr)
     	{ return ptr; }
     	
     	template <typename R>
-    	static Q_DECL_CONSTEXPR auto of(R (*ptr)(Args...)) Q_DECL_NOTHROW -> decltype(ptr)
+    	static Q*DECL*CONSTEXPR auto of(R (*ptr)(Args...)) Q*DECL*NOTHROW -> decltype(ptr)
     	{ return ptr; }
     };
     ```
@@ -310,7 +310,7 @@
 24. **C++** 为保证每个实例在内存中是唯一的，编译器会给一个空类隐含的加一个字节, 保证实例化出的类是唯一的
 
     ```C++
-    #include<iostream>
+    # include<iostream>
     using namespace std
     class a{};
     int main()
@@ -327,15 +327,15 @@
     ```C++
     QScopedPointer<QObjectPrivate::Connection> c(new QObjectPrivate::Connection);
     c->sender = s;   //发送者
-    c->signal_index = signal_index;//信号索引
+    c->signal*index = signal*index;//信号索引
     c->receiver = r;//接收者
-    c->method_relative = method_index;//槽函数索引
-    c->method_offset = method_offset;//槽函数偏移 主要是区别于多个信号
+    c->method*relative = method*index;//槽函数索引
+    c->method*offset = method*offset;//槽函数偏移 主要是区别于多个信号
     c->connectionType = type;//连接类型
     c->isSlotObject = false;//是否是槽对象 默认是true
     c->argumentTypes.store(types);//参数类型
     c->nextConnectionList = 0;//指向下个连接对象
-    c->callFunction = callFunction;//静态回调函数，也就是qt_static_metacall
+    c->callFunction = callFunction;//静态回调函数，也就是qt*static*metacall
     
     QObjectPrivate::get(s)->addConnection(signal_index, c.data());
     ```

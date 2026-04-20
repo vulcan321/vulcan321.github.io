@@ -1,29 +1,29 @@
 
-## 9 Using History Interactively9 以交互方式使用历史记录
+# # 9 Using History Interactively9 以交互方式使用历史记录
 
 This chapter describes how to use the <small>GNU</small> History Library interactively, from a user’s standpoint. It should be considered a user’s guide. For information on using the <small>GNU</small> History Library in other programs, see the <small>GNU</small> Readline Library Manual. 本章介绍如何使用 <small>GNU</small>有关在其他程序中使用 <small>GNU</small>参见 <small>GNU</small> 历史库 从用户的角度来看，以交互方式进行。 它应该被视为用户指南。 历史库的信息， Readline 库手册。
 
--   [Bash History FacilitiesBash 历史设施](https://www.gnu.org/software/bash/manual/bash.html#Bash-History-Facilities)
--   [Bash History Builtins内置 Bash 历史记录](https://www.gnu.org/software/bash/manual/bash.html#Bash-History-Builtins)
--   [History Expansion历史扩展](https://www.gnu.org/software/bash/manual/bash.html#History-Interaction)
+-   [Bash History FacilitiesBash 历史设施](https://www.gnu.org/software/bash/manual/bash.html# Bash-History-Facilities)
+-   [Bash History Builtins内置 Bash 历史记录](https://www.gnu.org/software/bash/manual/bash.html# Bash-History-Builtins)
+-   [History Expansion历史扩展](https://www.gnu.org/software/bash/manual/bash.html# History-Interaction)
 
-___
+---
 
-### 9.1 Bash History Facilities
+## # 9.1 Bash History Facilities
 
-When the \-o history option to the `set` builtin is enabled (see [The Set Builtin](https://www.gnu.org/software/bash/manual/bash.html#The-Set-Builtin)), the shell provides access to the _command history_, the list of commands previously typed. The value of the `HISTSIZE` shell variable is used as the number of commands to save in a history list. The text of the last `$HISTSIZE` commands (default 500) is saved. The shell stores each command in the history list prior to parameter and variable expansion but after history expansion is performed, subject to the values of the shell variables `HISTIGNORE` and `HISTCONTROL`. 当 \-o history 选项`set`已启用（请参阅[内置设置](https://www.gnu.org/software/bash/manual/bash.html#The-Set-Builtin)shell 提供对_命令历史记录_`HISTSIZE`最后`$HISTSIZE``HISTIGNORE` 和 `HISTCONTROL` ）， 的访问， 以前键入的命令列表。 shell 变量的值用作 要保存在历史记录列表中的命令数。 的文本 保存命令（默认为 500）。 shell 将每个命令存储在历史记录列表中，然后 参数和变量扩展 但在执行历史扩展后，受制于 shell 变量的值
+When the \-o history option to the `set` builtin is enabled (see [The Set Builtin](https://www.gnu.org/software/bash/manual/bash.html# The-Set-Builtin)), the shell provides access to the *command history*, the list of commands previously typed. The value of the `HISTSIZE` shell variable is used as the number of commands to save in a history list. The text of the last `$HISTSIZE` commands (default 500) is saved. The shell stores each command in the history list prior to parameter and variable expansion but after history expansion is performed, subject to the values of the shell variables `HISTIGNORE` and `HISTCONTROL`. 当 \-o history 选项`set`已启用（请参阅[内置设置](https://www.gnu.org/software/bash/manual/bash.html# The-Set-Builtin)shell 提供对*命令历史记录*`HISTSIZE`最后`$HISTSIZE``HISTIGNORE` 和 `HISTCONTROL` ）， 的访问， 以前键入的命令列表。 shell 变量的值用作 要保存在历史记录列表中的命令数。 的文本 保存命令（默认为 500）。 shell 将每个命令存储在历史记录列表中，然后 参数和变量扩展 但在执行历史扩展后，受制于 shell 变量的值
 
-When the shell starts up, the history is initialized from the file named by the `HISTFILE` variable (default ~/.bash\_history). The file named by the value of `HISTFILE` is truncated, if necessary, to contain no more than the number of lines specified by the value of the `HISTFILESIZE` variable. When a shell with history enabled exits, the last `$HISTSIZE` lines are copied from the history list to the file named by `$HISTFILE`. If the `histappend` shell option is set (see [Bash Builtin Commands](https://www.gnu.org/software/bash/manual/bash.html#Bash-Builtins)), the lines are appended to the history file, otherwise the history file is overwritten. If `HISTFILE` is unset, or if the history file is unwritable, the history is not saved. After saving the history, the history file is truncated to contain no more than `$HISTFILESIZE` lines. If `HISTFILESIZE` is unset, or set to null, a non-numeric value, or a numeric value less than zero, the history file is not truncated. 由 `HISTFILE` 变量命名的文件（默认~/.bash\_history如果 `HISTFILE``HISTFILESIZE``$HISTSIZE`由`$HISTFILE`如果设置了 `histappend` shell 选项（请参阅 [Bash 内置命令](https://www.gnu.org/software/bash/manual/bash.html#Bash-Builtins)如果 `HISTFILE`包含不超过 `$HISTFILESIZE`如果 `HISTFILESIZE`当 shell 启动时，历史记录将从 ）。 的值命名的文件被截断，则 必需的，包含不超过 变量的值。 当启用了历史记录的 shell 退出时，最后一个 行从历史记录列表复制到文件中 命名。 ）， 这些行将附加到历史记录文件中， 否则，历史记录文件将被覆盖。 未设置，或者如果历史记录文件不可写，则不会保存历史记录。 保存历史记录后，历史记录文件将被截断 行。 未设置或设置为 null，则为非数值，或者 如果数值小于零，则历史记录文件不会被截断。
+When the shell starts up, the history is initialized from the file named by the `HISTFILE` variable (default ~/.bash\*history). The file named by the value of `HISTFILE` is truncated, if necessary, to contain no more than the number of lines specified by the value of the `HISTFILESIZE` variable. When a shell with history enabled exits, the last `$HISTSIZE` lines are copied from the history list to the file named by `$HISTFILE`. If the `histappend` shell option is set (see [Bash Builtin Commands](https://www.gnu.org/software/bash/manual/bash.html# Bash-Builtins)), the lines are appended to the history file, otherwise the history file is overwritten. If `HISTFILE` is unset, or if the history file is unwritable, the history is not saved. After saving the history, the history file is truncated to contain no more than `$HISTFILESIZE` lines. If `HISTFILESIZE` is unset, or set to null, a non-numeric value, or a numeric value less than zero, the history file is not truncated. 由 `HISTFILE` 变量命名的文件（默认~/.bash\*history如果 `HISTFILE``HISTFILESIZE``$HISTSIZE`由`$HISTFILE`如果设置了 `histappend` shell 选项（请参阅 [Bash 内置命令](https://www.gnu.org/software/bash/manual/bash.html# Bash-Builtins)如果 `HISTFILE`包含不超过 `$HISTFILESIZE`如果 `HISTFILESIZE`当 shell 启动时，历史记录将从 ）。 的值命名的文件被截断，则 必需的，包含不超过 变量的值。 当启用了历史记录的 shell 退出时，最后一个 行从历史记录列表复制到文件中 命名。 ）， 这些行将附加到历史记录文件中， 否则，历史记录文件将被覆盖。 未设置，或者如果历史记录文件不可写，则不会保存历史记录。 保存历史记录后，历史记录文件将被截断 行。 未设置或设置为 null，则为非数值，或者 如果数值小于零，则历史记录文件不会被截断。
 
 If the `HISTTIMEFORMAT` is set, the time stamp information associated with each history entry is written to the history file, marked with the history comment character. When the history file is read, lines beginning with the history comment character followed immediately by a digit are interpreted as timestamps for the following history entry. 如果设置了 `HISTTIMEFORMAT`，则时间戳信息 与每个历史记录条目关联的条目被写入历史记录文件， 标有历史注释字符。 读取历史记录文件时，以历史记录开头的行 注释字符后跟一个数字被解释 作为以下历史记录条目的时间戳。
 
-The builtin command `fc` may be used to list or edit and re-execute a portion of the history list. The `history` builtin may be used to display or modify the history list and manipulate the history file. When using command-line editing, search commands are available in each editing mode that provide access to the history list (see [Commands For Manipulating The History](https://www.gnu.org/software/bash/manual/bash.html#Commands-For-History)). 内置命令 `fc`内置`history`历史记录列表（请参阅[操作历史记录的命令](https://www.gnu.org/software/bash/manual/bash.html#Commands-For-History) 可用于列出或编辑并重新执行 历史记录列表的一部分。 可用于显示或修改历史记录 列出并操作历史记录文件。 使用命令行编辑时，搜索命令 在每种编辑模式中都可用，这些模式提供对 ）。
+The builtin command `fc` may be used to list or edit and re-execute a portion of the history list. The `history` builtin may be used to display or modify the history list and manipulate the history file. When using command-line editing, search commands are available in each editing mode that provide access to the history list (see [Commands For Manipulating The History](https://www.gnu.org/software/bash/manual/bash.html# Commands-For-History)). 内置命令 `fc`内置`history`历史记录列表（请参阅[操作历史记录的命令](https://www.gnu.org/software/bash/manual/bash.html# Commands-For-History) 可用于列出或编辑并重新执行 历史记录列表的一部分。 可用于显示或修改历史记录 列出并操作历史记录文件。 使用命令行编辑时，搜索命令 在每种编辑模式中都可用，这些模式提供对 ）。
 
-The shell allows control over which commands are saved on the history list. The `HISTCONTROL` and `HISTIGNORE` variables may be set to cause the shell to save only a subset of the commands entered. The `cmdhist` shell option, if enabled, causes the shell to attempt to save each line of a multi-line command in the same history entry, adding semicolons where necessary to preserve syntactic correctness. The `lithist` shell option causes the shell to save the command with embedded newlines instead of semicolons. The `shopt` builtin is used to set these options. See [The Shopt Builtin](https://www.gnu.org/software/bash/manual/bash.html#The-Shopt-Builtin), for a description of `shopt`. 列表。 `HISTCONTROL` 和 `HISTIGNORE``cmdhist``lithist``shopt`有关 `shopt` 的描述，请参阅 [The Shopt Builtin](https://www.gnu.org/software/bash/manual/bash.html#The-Shopt-Builtin)shell 允许控制哪些命令保存在历史记录中 变量可以设置为使 shell 仅保存 输入的命令。 shell 选项（如果启用），则会导致 shell 尝试保存每个 同一历史记录条目中的多行命令的行，添加 必要时使用分号以保持句法正确性。 shell 选项使 shell 保存带有嵌入换行符的命令 而不是分号。 内置用于设置这些选项。 。
+The shell allows control over which commands are saved on the history list. The `HISTCONTROL` and `HISTIGNORE` variables may be set to cause the shell to save only a subset of the commands entered. The `cmdhist` shell option, if enabled, causes the shell to attempt to save each line of a multi-line command in the same history entry, adding semicolons where necessary to preserve syntactic correctness. The `lithist` shell option causes the shell to save the command with embedded newlines instead of semicolons. The `shopt` builtin is used to set these options. See [The Shopt Builtin](https://www.gnu.org/software/bash/manual/bash.html# The-Shopt-Builtin), for a description of `shopt`. 列表。 `HISTCONTROL` 和 `HISTIGNORE``cmdhist``lithist``shopt`有关 `shopt` 的描述，请参阅 [The Shopt Builtin](https://www.gnu.org/software/bash/manual/bash.html# The-Shopt-Builtin)shell 允许控制哪些命令保存在历史记录中 变量可以设置为使 shell 仅保存 输入的命令。 shell 选项（如果启用），则会导致 shell 尝试保存每个 同一历史记录条目中的多行命令的行，添加 必要时使用分号以保持句法正确性。 shell 选项使 shell 保存带有嵌入换行符的命令 而不是分号。 内置用于设置这些选项。 。
 
-___
+---
 
-### 9.2 Bash History Builtins9.2 内置 Bash 历史记录
+## # 9.2 Bash History Builtins9.2 内置 Bash 历史记录
 
 Bash provides two builtin commands which manipulate the history list and history file. Bash 提供了两个内置命令，用于操作 历史记录列表和历史记录文件。
 
@@ -41,7 +41,7 @@ If last is not specified, it is set to first. If first is not specified, it is s
 
 In the second form, command is re-executed after each instance of pat in the selected command is replaced by rep. command is interpreted the same as first above. 在第二种command所选命令中的 pat 替换为 repcommand的解释与上面first命令在每个实例之后重新执行 。 相同。
 
-A useful alias to use with the `fc` command is `r='fc -s'`, so that typing ‘r cc’ runs the last command beginning with `cc` and typing ‘r’ re-executes the last command (see [Aliases](https://www.gnu.org/software/bash/manual/bash.html#Aliases)). 与 `fc` 命令一起使用的有用别名是 `r='fc -s'`键入“r cc”将运行以 `cc`键入“r”将重新执行最后一个命令（请参阅[别名](https://www.gnu.org/software/bash/manual/bash.html#Aliases)，所以 开头的最后一个命令 ）。
+A useful alias to use with the `fc` command is `r='fc -s'`, so that typing ‘r cc’ runs the last command beginning with `cc` and typing ‘r’ re-executes the last command (see [Aliases](https://www.gnu.org/software/bash/manual/bash.html# Aliases)). 与 `fc` 命令一起使用的有用别名是 `r='fc -s'`键入“r cc”将运行以 `cc`键入“r”将重新执行最后一个命令（请参阅[别名](https://www.gnu.org/software/bash/manual/bash.html# Aliases)，所以 开头的最后一个命令 ）。
 
 `history`
 
@@ -98,9 +98,9 @@ If a filename argument is supplied when any of the \-w, \-r, \-a, or \-n options
 
 The return value is 0 unless an invalid option is encountered, an error occurs while reading or writing the history file, an invalid offset or range is supplied as an argument to \-d, or the history expansion supplied as an argument to \-p fails. offset 或 range 作为 \-d作为 \-p返回值为 0，除非遇到无效选项，否则返回值为 读取或写入历史记录文件时发生错误，无效 的参数提供，或者 参数提供的历史扩展失败。
 
-___
+---
 
-### 9.3 History Expansion9.3 历史扩展
+## # 9.3 History Expansion9.3 历史扩展
 
 The History library provides a history expansion feature that is similar to the history expansion provided by `csh`. This section describes the syntax used to manipulate the history information. 到 `csh`历史记录库提供了类似的历史记录扩展功能 提供的历史扩展。 本节 描述用于操作历史记录信息的语法。
 
@@ -108,23 +108,23 @@ History expansions introduce words from the history list into the input stream, 
 
 History expansion is performed immediately after a complete line is read, before the shell breaks it into words, and is performed on each line individually. Bash attempts to inform the history expansion functions about quoting still in effect from previous lines. 在完成一行之后立即执行历史记录扩展 在 shell 将其分解成单词之前被读取，并被执行 分别在每一行上。 Bash 尝试告知历史记录 关于引用的扩展函数仍然有效。
 
-History expansion takes place in two parts. The first is to determine which line from the history list should be used during substitution. The second is to select portions of that line for inclusion into the current one. The line selected from the history is called the _event_, and the portions of that line that are acted upon are called _words_. Various _modifiers_ are available to manipulate the selected words. The line is broken into words in the same fashion that Bash does, so that several words surrounded by quotes are considered one word. History expansions are introduced by the appearance of the history expansion character, which is ‘!’ by default. _事件_称为_单词_。 可以使用各种_修饰符_历史扩展字符，默认为 '!历史扩展分为两部分。 首先是确定 在替换过程中应使用历史记录列表中的哪一行。 第二种是选择该行的部分内容以包含在 当前一个。 从历史记录中选择的行称为 ，并且该行中执行的部分是 进行操作 所选单词。 该行以相同的方式分解为单词 Bash 做到了，所以几个字 用引号括起来被认为是一个词。 历史扩展是通过 '。
+History expansion takes place in two parts. The first is to determine which line from the history list should be used during substitution. The second is to select portions of that line for inclusion into the current one. The line selected from the history is called the *event*, and the portions of that line that are acted upon are called *words*. Various *modifiers* are available to manipulate the selected words. The line is broken into words in the same fashion that Bash does, so that several words surrounded by quotes are considered one word. History expansions are introduced by the appearance of the history expansion character, which is ‘!’ by default. *事件*称为*单词*。 可以使用各种*修饰符*历史扩展字符，默认为 '!历史扩展分为两部分。 首先是确定 在替换过程中应使用历史记录列表中的哪一行。 第二种是选择该行的部分内容以包含在 当前一个。 从历史记录中选择的行称为 ，并且该行中执行的部分是 进行操作 所选单词。 该行以相同的方式分解为单词 Bash 做到了，所以几个字 用引号括起来被认为是一个词。 历史扩展是通过 '。
 
 History expansion implements shell-like quoting conventions: a backslash can be used to remove the special handling for the next character; single quotes enclose verbatim sequences of characters, and can be used to inhibit history expansion; and characters enclosed within double quotes may be subject to history expansion, since backslash can escape the history expansion character, but single quotes may not, since they are not treated specially within double quotes. 历史扩展实现了类似 shell 的引用约定： 可以使用反斜杠来删除下一个字符的特殊处理; 单引号将字符的逐字序列括起来，可用于 抑制历史扩展; 括在双引号内的字符可能受历史记录的约束 扩展，因为反斜杠可以转义历史扩展字符， 但单引号可能不会，因为它们在内部没有特殊处理 双引号。
 
 When using the shell, only ‘\\’ and ‘'’ may be used to escape the history expansion character, but the history expansion character is also treated as quoted if it immediately precedes the closing double quote in a double-quoted string. 使用 shell 时，只能使用 '\\' 和 ''' 来转义 历史扩展字符，但历史扩展字符是 如果它紧接在结束双引号之前，也被视为引号 在双引号字符串中。
 
-Several shell options settable with the `shopt` builtin (see [The Shopt Builtin](https://www.gnu.org/software/bash/manual/bash.html#The-Shopt-Builtin)) may be used to tailor the behavior of history expansion. If the `histverify` shell option is enabled, and Readline is being used, history substitutions are not immediately passed to the shell parser. Instead, the expanded line is reloaded into the Readline editing buffer for further modification. If Readline is being used, and the `histreedit` shell option is enabled, a failed history expansion will be reloaded into the Readline editing buffer for correction. The \-p option to the `history` builtin command may be used to see what a history expansion will do before using it. The \-s option to the `history` builtin may be used to add commands to the end of the history list without actually executing them, so that they are available for subsequent recall. This is most useful in conjunction with Readline. 可通过`shopt`builtin（参见 [The Shopt Builtin](https://www.gnu.org/software/bash/manual/bash.html#The-Shopt-Builtin)`histverify`如果正在使用 Readline，并且 `histreedit``history` 内置命令的 \-p内置`history`的 \-s设置多个shell选项 ）可用于定制 历史扩展的行为。 如果 shell 选项已启用，并且 Readline 正在使用中，历史替换不会立即传递给 shell 解析器。 相反，扩展的行将重新加载到 Readline 中 编辑缓冲区以进行进一步修改。 启用 shell 选项，失败的历史记录扩展将是 重新加载到 Readline 编辑缓冲区进行校正。 选项 可用于在使用历史扩展之前查看它的作用。 选项可用于 将命令添加到历史记录列表的末尾，而无需实际执行 它们，以便它们可用于后续召回。 这与 Readline 结合使用最有用。
+Several shell options settable with the `shopt` builtin (see [The Shopt Builtin](https://www.gnu.org/software/bash/manual/bash.html# The-Shopt-Builtin)) may be used to tailor the behavior of history expansion. If the `histverify` shell option is enabled, and Readline is being used, history substitutions are not immediately passed to the shell parser. Instead, the expanded line is reloaded into the Readline editing buffer for further modification. If Readline is being used, and the `histreedit` shell option is enabled, a failed history expansion will be reloaded into the Readline editing buffer for correction. The \-p option to the `history` builtin command may be used to see what a history expansion will do before using it. The \-s option to the `history` builtin may be used to add commands to the end of the history list without actually executing them, so that they are available for subsequent recall. This is most useful in conjunction with Readline. 可通过`shopt`builtin（参见 [The Shopt Builtin](https://www.gnu.org/software/bash/manual/bash.html# The-Shopt-Builtin)`histverify`如果正在使用 Readline，并且 `histreedit``history` 内置命令的 \-p内置`history`的 \-s设置多个shell选项 ）可用于定制 历史扩展的行为。 如果 shell 选项已启用，并且 Readline 正在使用中，历史替换不会立即传递给 shell 解析器。 相反，扩展的行将重新加载到 Readline 中 编辑缓冲区以进行进一步修改。 启用 shell 选项，失败的历史记录扩展将是 重新加载到 Readline 编辑缓冲区进行校正。 选项 可用于在使用历史扩展之前查看它的作用。 选项可用于 将命令添加到历史记录列表的末尾，而无需实际执行 它们，以便它们可用于后续召回。 这与 Readline 结合使用最有用。
 
-The shell allows control of the various characters used by the history expansion mechanism with the `histchars` variable, as explained above (see [Bash Variables](https://www.gnu.org/software/bash/manual/bash.html#Bash-Variables)). The shell uses the history comment character to mark history timestamps when writing the history file. 具有 `histchars`如上所述（请参阅 [Bash 变量](https://www.gnu.org/software/bash/manual/bash.html#Bash-Variables)shell 允许控制 变量的历史扩展机制， ）。 shell 使用 历史注释字符在以下情况下标记历史时间戳 写入历史记录文件。
+The shell allows control of the various characters used by the history expansion mechanism with the `histchars` variable, as explained above (see [Bash Variables](https://www.gnu.org/software/bash/manual/bash.html# Bash-Variables)). The shell uses the history comment character to mark history timestamps when writing the history file. 具有 `histchars`如上所述（请参阅 [Bash 变量](https://www.gnu.org/software/bash/manual/bash.html# Bash-Variables)shell 允许控制 变量的历史扩展机制， ）。 shell 使用 历史注释字符在以下情况下标记历史时间戳 写入历史记录文件。
 
--   [Event Designators事件指示符](https://www.gnu.org/software/bash/manual/bash.html#Event-Designators)
--   [Word Designators单词指示符](https://www.gnu.org/software/bash/manual/bash.html#Word-Designators)
--   [Modifiers修饰 符](https://www.gnu.org/software/bash/manual/bash.html#Modifiers)
+-   [Event Designators事件指示符](https://www.gnu.org/software/bash/manual/bash.html# Event-Designators)
+-   [Word Designators单词指示符](https://www.gnu.org/software/bash/manual/bash.html# Word-Designators)
+-   [Modifiers修饰 符](https://www.gnu.org/software/bash/manual/bash.html# Modifiers)
 
-___
+---
 
-#### 9.3.1 Event Designators9.3.1 事件指示符
+### # 9.3.1 Event Designators9.3.1 事件指示符
 
 An event designator is a reference to a command line entry in the history list. Unless the reference is absolute, events are relative to the current position in the history list. 事件指示符是对 历史记录列表。 除非引用是绝对的，否则事件是相对于当前事件的 在历史记录列表中的位置。
 
@@ -156,13 +156,13 @@ Refer to the most recent command preceding the current position in the history l
 
 Quick Substitution. Repeat the last command, replacing string1 with string2. Equivalent to `!!:s^string1^string2^`. 快速替换。 重复最后一个命令，替换 string1使用 string2！！：s^string1^string2 。 等效于 ^。
 
-`!#`
+`!# `
 
 The entire command line typed so far. 到目前为止，整个命令行都已键入。
 
-___
+---
 
-#### 9.3.2 Word Designators9.3.2 字指示符
+### # 9.3.2 Word Designators9.3.2 字指示符
 
 Word designators are used to select desired words from the event. A ‘:’ separates the event specification from the word designator. It may be omitted if the word designator begins with a ‘^’, ‘$’, ‘\*’, ‘\-’, or ‘%’. Words are numbered from the beginning of the line, with the first word being denoted by 0 (zero). Words are inserted into the current line separated by single spaces. “:如果指示符一词以 '^'、'$'\*'、'\-' 或 '%单词指示符用于从事件中选择所需的单词。 将事件规范与单词指示符分开。 它 ' 开头，则可以省略， '。 单词从头开始编号 ，第一个单词用 0（零）表示。 单词是 插入到由单个空格分隔的当前行中。
 
@@ -220,9 +220,9 @@ Abbreviates ‘x\-$’ like ‘x\*’, but omits the last word. If ‘x’ is mi
 
 If a word designator is supplied without an event specification, the previous command is used as the event. 如果提供的字指示符没有事件规范，则 上一个命令用作事件。
 
-___
+---
 
-#### 9.3.3 Modifiers9.3.3 修订
+### # 9.3.3 Modifiers9.3.3 修订
 
 After the optional word designator, you can add a sequence of one or more of the following modifiers, each preceded by a ‘:’. These modify, or edit, the word or words selected from the history event. 在以下修饰符中，每个修饰符前面都有一个 ':在可选的单词指示符之后，可以添加一个或多个序列 '。 它们修改或编辑从历史事件中选择的一个或多个单词。
 

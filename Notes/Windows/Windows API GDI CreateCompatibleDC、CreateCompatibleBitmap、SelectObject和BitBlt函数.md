@@ -1,7 +1,7 @@
 # Windows API GDI(2) CreateCompatibleDC、CreateCompatibleBitmap、SelectObject和BitBlt
 
 
-## CreateCompatibleDC
+# # CreateCompatibleDC
 
 **说明：**
 
@@ -21,7 +21,7 @@ HDC hdc
 ```
 
 **参数：**  
-_hdc:_ 现有设备上下文环境的句柄，如果该句柄为NULL，该函数创建一个与应用程序的当前显示器兼容的内存设备上下文环境。
+*hdc:* 现有设备上下文环境的句柄，如果该句柄为NULL，该函数创建一个与应用程序的当前显示器兼容的内存设备上下文环境。
 
 **返回值：**
 
@@ -35,7 +35,7 @@ _hdc:_ 现有设备上下文环境的句柄，如果该句柄为NULL，该函数
 3.  只适用于支持光栅操作的设备，应用程序可以通过调用GetDeviceCaps函数来确定一个设备是否支持这些操作。
 4.  不需要memory DC时，调用DeleteDc删除它。
 
-## CreateCompatibleBitmap
+# # CreateCompatibleBitmap
 
 **说明：**  
 该函数创建与指定的设备环境相关的设备兼容的位图。
@@ -51,9 +51,9 @@ int cy
 ```
 
 **参数：**  
-_hdc:_ 现有设备上下文环境的句柄，如果该句柄为NULL，该函数创建一个与应用程序的当前显示器兼容的内存设备上下文环境。  
-_cx:_ 指定位图的宽度，单位为像素。  
-_cy：_ 指定位图的高度，单位为像素。
+*hdc:* 现有设备上下文环境的句柄，如果该句柄为NULL，该函数创建一个与应用程序的当前显示器兼容的内存设备上下文环境。  
+*cx:* 指定位图的宽度，单位为像素。  
+*cy：* 指定位图的高度，单位为像素。
 
 **返回值：**
 
@@ -72,10 +72,10 @@ _cy：_ 指定位图的高度，单位为像素。
 
 **小结：**
 
-> 通常使用CreateCompatibleBitmap时候都会用到CreateCompatibleDC。而用CreateCompatibleDC的目的不是为CreateCompatibleBitmap而产生，它更多为了建立内存设备环境起一个绘图操作与显示设备之间的缓冲作用，而CreateCompatibleBitmap是为扩展内存设备环境的图像空间，值得注意的是这样创建出来的内存设备环境的图像空间尺寸是很小的，通常是1\*1像素大小，而且还是单色的，因此需要调用SelectObject函数来加载位图[bitmap](https://so.csdn.net/so/search?q=bitmap&spm=1001.2101.3001.7020)，这样加载的位图尺寸大小就相当于了内存设备环境尺寸大小。接下来才可以进行一系列绘图操作。  
+> 通常使用CreateCompatibleBitmap时候都会用到CreateCompatibleDC。而用CreateCompatibleDC的目的不是为CreateCompatibleBitmap而产生，它更多为了建立内存设备环境起一个绘图操作与显示设备之间的缓冲作用，而CreateCompatibleBitmap是为扩展内存设备环境的图像空间，值得注意的是这样创建出来的内存设备环境的图像空间尺寸是很小的，通常是1\*1像素大小，而且还是单色的，因此需要调用SelectObject函数来加载位图bitmap，这样加载的位图尺寸大小就相当于了内存设备环境尺寸大小。接下来才可以进行一系列绘图操作。  
 > 对于CreateCompatibleBitmap函数，是为了创建与指定的设备环境相关的设备兼容的位图。有时候会觉得直接从资源里加载位图资源即可，何必直接创建呢?但有时是必要的，比如你想直接对屏幕操作，又想避免闪烁。这时候就可以Create一个内存DC，使用CreateCompatibleBitmap产生一个bitmap，然后内存DC使用SelectObject加载bitmap，这样内存中才有一个固定大小的图像空间，其次再使用bitblt把屏幕copy到内存DC中，这样子你可以在内存dc中进行各种绘图操作。当然你也可以用在内存缓冲中完成对一张图片的操作（如缩放、透明等）,也有必要create一个bitmap
 
-## SelectObject
+# # SelectObject
 
 **说明：**  
 每个设备场景都可能有选入其中的图形对象。其中包括位图、刷子、字体、画笔以及区域等等。一次选入设备场景的只能有一个对象。选定的对象会在设备场景的绘图操作中使用。例如，当前选定的画笔决定了在设备场景中描绘的线段颜色及样式
@@ -90,18 +90,18 @@ HGDIOBJ h
 ```
 
 **参数：**  
-_hdc：_ 要载入的设备描述表句柄。  
-_h：_ 选择要载入的对象的句柄。
+*hdc：* 要载入的设备描述表句柄。  
+*h：* 选择要载入的对象的句柄。
 
 > 以下函数创建有效：  
-> ![在这里插入图片描述](https://img-blog.csdnimg.cn/20201222100929464.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3pqeTExNzUwNDQyMzI=,size_16,color_FFFFFF,t_70#pic_center)
+> ![在这里插入图片描述](https://img-blog.csdnimg.cn/20201222100929464.png?x-oss-process=image/watermark,type*ZmFuZ3poZW5naGVpdGk,shadow*10,text*aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3pqeTExNzUwNDQyMzI=,size*16,color*FFFFFF,t*70# pic_center)
 
 **返回值：**  
 如果选择对象不是区域并且函数执行成功，那么返回值是被取代的对象的句柄，零表示出错。如选定的对象是一个区域（Region），结果就是下列常数之一：SIMPLEREGION， COMPLEXREGION 或 NULLREGION 对区域进行描述， GDI\_ERROR 表示出错
 
-> ![在这里插入图片描述](https://img-blog.csdnimg.cn/20201222101114471.png#pic_center)
+> ![在这里插入图片描述](https://img-blog.csdnimg.cn/20201222101114471.png# pic_center)
 
-## BitBlt
+# # BitBlt
 
 **说明：**  
 将一幅位图从一个设备场景复制到另一个。源和目标DC相互间必须兼容。
@@ -123,12 +123,12 @@ DWORD rop
 ```
 
 **参数：**  
-_hdc：_ 目标设备场景  
-_x,y：_ 对目标DC中目标矩形左上角位置进行描述的那个点。用目标DC的逻辑坐标表示  
-_cx,cy：_ 欲传输图象的宽度和高度  
-_hdcSrc：_ 源设备场景。如光栅运算未指定源，则应设为0  
-_x1,y1：_ 对源DC中源矩形左上角位置进行描述的那个点。用源DC的逻辑坐标表示  
-_rop：_ 传输过程要执行的光栅运算
+*hdc：* 目标设备场景  
+*x,y：* 对目标DC中目标矩形左上角位置进行描述的那个点。用目标DC的逻辑坐标表示  
+*cx,cy：* 欲传输图象的宽度和高度  
+*hdcSrc：* 源设备场景。如光栅运算未指定源，则应设为0  
+*x1,y1：* 对源DC中源矩形左上角位置进行描述的那个点。用源DC的逻辑坐标表示  
+*rop：* 传输过程要执行的光栅运算
 
 > 下面列出了一些常见的光栅操作代码：  
 > BLACKNESS：表示使用与物理调色板的索引0相关的色彩来填充目标矩形区域，（对缺省的物理调色板而言，该颜色为黑色）。  
@@ -150,7 +150,7 @@ _rop：_ 传输过程要执行的光栅运算
 **返回值：**  
 非零表示成功，零表示失败。会设置GetLastError
 
-## 代码示例：
+# # 代码示例：
 
 ```cpp
 void OnDraw（HDC pDC）

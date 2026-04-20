@@ -1,5 +1,5 @@
 # 微调
-:label:`sec_fine_tuning`
+:label:`sec*fine*tuning`
 
 前面的一些章节介绍了如何在只有6万张图像的Fashion-MNIST训练数据集上训练模型。
 我们还描述了学术界当下使用最广泛的大规模图像数据集ImageNet，它有超过1000万的图像和1000类的物体。
@@ -20,7 +20,7 @@
 例如，尽管ImageNet数据集中的大多数图像与椅子无关，但在此数据集上训练的模型可能会提取更通用的图像特征，这有助于识别边缘、纹理、形状和对象组合。
 这些类似的特征也可能有效地识别椅子。
 
-## 步骤
+# # 步骤
 
 本节将介绍迁移学习中的常见技巧:*微调*（fine-tuning）。如 :numref:`fig_finetune`所示，微调包括以下四个步骤。
 
@@ -34,7 +34,7 @@
 
 当目标数据集比源数据集小得多时，微调有助于提高模型的泛化能力。
 
-## 热狗识别
+# # 热狗识别
 
 让我们通过具体案例演示微调：热狗识别。
 我们将在一个小型数据集上微调ResNet模型。该模型已在ImageNet数据集上进行了预训练。
@@ -51,7 +51,7 @@ npx.set_np()
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 %matplotlib inline
 from d2l import torch as d2l
 from torch import nn
@@ -61,7 +61,7 @@ import os
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 %matplotlib inline
 from d2l import paddle as d2l
 import warnings
@@ -72,7 +72,7 @@ import paddle.vision as paddlevision
 import os
 ```
 
-### 获取数据集
+## # 获取数据集
 
 我们使用的[**热狗数据集来源于网络**]。
 该数据集包含1400张热狗的“正类”图像，以及包含尽可能多的其他食物的“负类”图像。
@@ -83,12 +83,12 @@ import os
 子文件夹内都包含相应类的图像。
 
 ```{.python .input}
-#@tab all
-#@save
-d2l.DATA_HUB['hotdog'] = (d2l.DATA_URL + 'hotdog.zip', 
+# @tab all
+# @save
+d2l.DATA*HUB['hotdog'] = (d2l.DATA*URL + 'hotdog.zip', 
                          'fba480ffa8aa7e0febbb511d181409f899b9baa5')
 
-data_dir = d2l.download_extract('hotdog')
+data*dir = d2l.download*extract('hotdog')
 ```
 
 我们创建两个实例来分别读取训练和测试数据集中的所有图像文件。
@@ -101,24 +101,24 @@ test_imgs = gluon.data.vision.ImageFolderDataset(
 ```
 
 ```{.python .input}
-#@tab pytorch
-train_imgs = torchvision.datasets.ImageFolder(os.path.join(data_dir, 'train'))
-test_imgs = torchvision.datasets.ImageFolder(os.path.join(data_dir, 'test'))
+# @tab pytorch
+train*imgs = torchvision.datasets.ImageFolder(os.path.join(data*dir, 'train'))
+test*imgs = torchvision.datasets.ImageFolder(os.path.join(data*dir, 'test'))
 ```
 
 ```{.python .input}
-#@tab paddle
-train_imgs = paddlevision.datasets.DatasetFolder(os.path.join(data_dir, 'train'))
-test_imgs = paddlevision.datasets.DatasetFolder(os.path.join(data_dir, 'test'))
+# @tab paddle
+train*imgs = paddlevision.datasets.DatasetFolder(os.path.join(data*dir, 'train'))
+test*imgs = paddlevision.datasets.DatasetFolder(os.path.join(data*dir, 'test'))
 ```
 
 下面显示了前8个正类样本图片和最后8张负类样本图片。正如所看到的，[**图像的大小和纵横比各有不同**]。
 
 ```{.python .input}
-#@tab all
+# @tab all
 hotdogs = [train_imgs[i][0] for i in range(8)]
-not_hotdogs = [train_imgs[-i - 1][0] for i in range(8)]
-d2l.show_images(hotdogs + not_hotdogs, 2, 8, scale=1.4);
+not*hotdogs = [train*imgs[-i - 1][0] for i in range(8)]
+d2l.show*images(hotdogs + not*hotdogs, 2, 8, scale=1.4);
 ```
 
 在训练期间，我们首先从图像中裁切随机大小和随机长宽比的区域，然后将该区域缩放为$224 \times 224$输入图像。
@@ -147,7 +147,7 @@ test_augs = gluon.data.vision.transforms.Compose([
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 # 使用RGB通道的均值和标准差，以标准化每个通道
 normalize = torchvision.transforms.Normalize(
     [0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
@@ -166,7 +166,7 @@ test_augs = torchvision.transforms.Compose([
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 # 使用RGB通道的均值和标准差，以标准化每个通道
 normalize = paddle.vision.transforms.Normalize(
     [0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
@@ -184,23 +184,23 @@ test_augs = paddlevision.transforms.Compose([
     normalize])
 ```
 
-### [**定义和初始化模型**]
+## # [**定义和初始化模型**]
 
 我们使用在ImageNet数据集上预训练的ResNet-18作为源模型。
 在这里，我们指定`pretrained=True`以自动下载预训练的模型参数。
 如果首次使用此模型，则需要连接互联网才能下载。
 
 ```{.python .input}
-pretrained_net = gluon.model_zoo.vision.resnet18_v2(pretrained=True)
+pretrained*net = gluon.model*zoo.vision.resnet18_v2(pretrained=True)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 pretrained_net = torchvision.models.resnet18(pretrained=True)
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 pretrained_net = paddlevision.models.resnet18(pretrained=True)
 ```
 
@@ -228,7 +228,7 @@ pretrained_net.output
 ```
 
 ```{.python .input}
-#@tab pytorch, paddle
+# @tab pytorch, paddle
 pretrained_net.fc
 ```
 
@@ -243,160 +243,160 @@ pretrained_net.fc
 假设`Trainer`实例中的学习率为$\eta$，我们将成员变量`output`中参数的学习率设置为$10\eta$。
 
 ```{.python .input}
-finetune_net = gluon.model_zoo.vision.resnet18_v2(classes=2)
-finetune_net.features = pretrained_net.features
+finetune*net = gluon.model*zoo.vision.resnet18_v2(classes=2)
+finetune*net.features = pretrained*net.features
 finetune_net.output.initialize(init.Xavier())
 # 输出层中的学习率比其他层的学习率大十倍
-finetune_net.output.collect_params().setattr('lr_mult', 10)
+finetune*net.output.collect*params().setattr('lr_mult', 10)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 finetune_net = torchvision.models.resnet18(pretrained=True)
-finetune_net.fc = nn.Linear(finetune_net.fc.in_features, 2)
-nn.init.xavier_uniform_(finetune_net.fc.weight);
+finetune*net.fc = nn.Linear(finetune*net.fc.in_features, 2)
+nn.init.xavier*uniform*(finetune_net.fc.weight);
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 finetune_net = paddlevision.models.resnet18(pretrained=True)
-finetune_net.fc = nn.Linear(pretrained_net.fc.state_dict()['weight'].shape[0], 2)
-nn.initializer.XavierUniform(pretrained_net.fc.state_dict()['weight']);
+finetune*net.fc = nn.Linear(pretrained*net.fc.state_dict()['weight'].shape[0], 2)
+nn.initializer.XavierUniform(pretrained*net.fc.state*dict()['weight']);
 ```
 
-### [**微调模型**]
+## # [**微调模型**]
 
-首先，我们定义了一个训练函数`train_fine_tuning`，该函数使用微调，因此可以多次调用。
+首先，我们定义了一个训练函数`train*fine*tuning`，该函数使用微调，因此可以多次调用。
 
 ```{.python .input}
-def train_fine_tuning(net, learning_rate, batch_size=128, num_epochs=5):
+def train*fine*tuning(net, learning*rate, batch*size=128, num_epochs=5):
     train_iter = gluon.data.DataLoader(
-        train_imgs.transform_first(train_augs), batch_size, shuffle=True)
+        train*imgs.transform*first(train*augs), batch*size, shuffle=True)
     test_iter = gluon.data.DataLoader(
-        test_imgs.transform_first(test_augs), batch_size)
-    devices = d2l.try_all_gpus()
-    net.collect_params().reset_ctx(devices)
+        test*imgs.transform*first(test*augs), batch*size)
+    devices = d2l.try*all*gpus()
+    net.collect*params().reset*ctx(devices)
     net.hybridize()
     loss = gluon.loss.SoftmaxCrossEntropyLoss()
     trainer = gluon.Trainer(net.collect_params(), 'sgd', {
-        'learning_rate': learning_rate, 'wd': 0.001})
-    d2l.train_ch13(net, train_iter, test_iter, loss, trainer, num_epochs,
+        'learning*rate': learning*rate, 'wd': 0.001})
+    d2l.train*ch13(net, train*iter, test*iter, loss, trainer, num*epochs,
                    devices)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 # 如果param_group=True，输出层中的模型参数将使用十倍的学习率
-def train_fine_tuning(net, learning_rate, batch_size=128, num_epochs=5,
+def train*fine*tuning(net, learning*rate, batch*size=128, num_epochs=5,
                       param_group=True):
     train_iter = torch.utils.data.DataLoader(torchvision.datasets.ImageFolder(
-        os.path.join(data_dir, 'train'), transform=train_augs),
-        batch_size=batch_size, shuffle=True)
+        os.path.join(data*dir, 'train'), transform=train*augs),
+        batch*size=batch*size, shuffle=True)
     test_iter = torch.utils.data.DataLoader(torchvision.datasets.ImageFolder(
-        os.path.join(data_dir, 'test'), transform=test_augs),
-        batch_size=batch_size)
-    devices = d2l.try_all_gpus()
+        os.path.join(data*dir, 'test'), transform=test*augs),
+        batch*size=batch*size)
+    devices = d2l.try*all*gpus()
     loss = nn.CrossEntropyLoss(reduction="none")
     if param_group:
-        params_1x = [param for name, param in net.named_parameters()
+        params*1x = [param for name, param in net.named*parameters()
              if name not in ["fc.weight", "fc.bias"]]
         trainer = torch.optim.SGD([{'params': params_1x},
                                    {'params': net.fc.parameters(),
                                     'lr': learning_rate * 10}],
-                                lr=learning_rate, weight_decay=0.001)
+                                lr=learning*rate, weight*decay=0.001)
     else:
         trainer = torch.optim.SGD(net.parameters(), lr=learning_rate,
                                   weight_decay=0.001)    
-    d2l.train_ch13(net, train_iter, test_iter, loss, trainer, num_epochs,
+    d2l.train*ch13(net, train*iter, test*iter, loss, trainer, num*epochs,
                    devices)
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 # 如果param_group=True，输出层中的模型参数将使用十倍的学习率
-def train_fine_tuning(net, learning_rate, batch_size=128, num_epochs=5,
+def train*fine*tuning(net, learning*rate, batch*size=128, num_epochs=5,
                       param_group=True):
     train_iter = paddle.io.DataLoader(paddle.vision.datasets.DatasetFolder(
-        os.path.join(data_dir, 'train'), transform=train_augs),
-        batch_size=batch_size, shuffle=True)
+        os.path.join(data*dir, 'train'), transform=train*augs),
+        batch*size=batch*size, shuffle=True)
     test_iter = paddle.io.DataLoader(paddle.vision.datasets.DatasetFolder(
-        os.path.join(data_dir, 'test'), transform=test_augs),
-        batch_size=batch_size)
-    devices = d2l.try_all_gpus()
+        os.path.join(data*dir, 'test'), transform=test*augs),
+        batch*size=batch*size)
+    devices = d2l.try*all*gpus()
     loss = nn.CrossEntropyLoss(reduction="none")
     if param_group:
-        params_1x = [param for name, param in net.named_parameters()
+        params*1x = [param for name, param in net.named*parameters()
              if name not in ["fc.weight", "fc.bias"]]
-        trainer = paddle.optimizer.SGD(learning_rate=learning_rate, parameters=[{'params': params_1x},
+        trainer = paddle.optimizer.SGD(learning*rate=learning*rate, parameters=[{'params': params_1x},
                                    {'params': net.fc.parameters(),
-                                    'learning_rate': learning_rate * 10}],
+                                    'learning*rate': learning*rate * 10}],
                                     weight_decay=0.001)
     else:
-        trainer = paddle.optimizer.SGD(learning_rate=learning_rate, parameters=net.parameters(), 
+        trainer = paddle.optimizer.SGD(learning*rate=learning*rate, parameters=net.parameters(), 
                                   weight_decay=0.001)
-    d2l.train_ch13(net, train_iter, test_iter, loss, trainer, num_epochs, devices)
+    d2l.train*ch13(net, train*iter, test*iter, loss, trainer, num*epochs, devices)
 ```
 
 我们[**使用较小的学习率**]，通过*微调*预训练获得的模型参数。
 
 ```{.python .input}
-train_fine_tuning(finetune_net, 0.01)
+train*fine*tuning(finetune_net, 0.01)
 ```
 
 ```{.python .input}
-#@tab pytorch, paddle
-train_fine_tuning(finetune_net, 5e-5)
+# @tab pytorch, paddle
+train*fine*tuning(finetune_net, 5e-5)
 ```
 
 [**为了进行比较，**]我们定义了一个相同的模型，但是将其(**所有模型参数初始化为随机值**)。
 由于整个模型需要从头开始训练，因此我们需要使用更大的学习率。
 
 ```{.python .input}
-scratch_net = gluon.model_zoo.vision.resnet18_v2(classes=2)
+scratch*net = gluon.model*zoo.vision.resnet18_v2(classes=2)
 scratch_net.initialize(init=init.Xavier())
-train_fine_tuning(scratch_net, 0.1)
+train*fine*tuning(scratch_net, 0.1)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 scratch_net = torchvision.models.resnet18()
-scratch_net.fc = nn.Linear(scratch_net.fc.in_features, 2)
-train_fine_tuning(scratch_net, 5e-4, param_group=False)
+scratch*net.fc = nn.Linear(scratch*net.fc.in_features, 2)
+train*fine*tuning(scratch*net, 5e-4, param*group=False)
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 scratch_net = paddlevision.models.resnet18()
-scratch_net.fc = nn.Linear(pretrained_net.fc.state_dict()['weight'].shape[0], 2)
-train_fine_tuning(scratch_net, 5e-4, param_group=False)
+scratch*net.fc = nn.Linear(pretrained*net.fc.state_dict()['weight'].shape[0], 2)
+train*fine*tuning(scratch*net, 5e-4, param*group=False)
 ```
 
 意料之中，微调模型往往表现更好，因为它的初始参数值更有效。
 
-## 小结
+# # 小结
 
 * 迁移学习将从源数据集中学到的知识*迁移*到目标数据集，微调是迁移学习的常见技巧。
 * 除输出层外，目标模型从源模型中复制所有模型设计及其参数，并根据目标数据集对这些参数进行微调。但是，目标模型的输出层需要从头开始训练。
 * 通常，微调参数使用较小的学习率，而从头开始训练输出层可以使用更大的学习率。
 
-## 练习
+# # 练习
 
 1. 继续提高`finetune_net`的学习率，模型的准确性如何变化？
-2. 在比较实验中进一步调整`finetune_net`和`scratch_net`的超参数。它们的准确性还有不同吗？
+2. 在比较实验中进一步调整`finetune*net`和`scratch*net`的超参数。它们的准确性还有不同吗？
 3. 将输出层`finetune_net`之前的参数设置为源模型的参数，在训练期间不要更新它们。模型的准确性如何变化？提示：可以使用以下代码。
 
 ```{.python .input}
-finetune_net.features.collect_params().setattr('grad_req', 'null')
+finetune*net.features.collect*params().setattr('grad_req', 'null')
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 for param in finetune_net.parameters():
     param.requires_grad = False
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 for param in finetune_net.parameters():
     param.stop_gradient = True
 ```
@@ -410,14 +410,14 @@ hotdog_w.shape
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 weight = pretrained_net.fc.weight
 hotdog_w = torch.split(weight.data, 1, dim=0)[934]
 hotdog_w.shape
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 weight = pretrained_net.fc.weight
 hotdog_w = paddle.split(weight.T, 1000, axis=0)[713]
 hotdog_w.shape

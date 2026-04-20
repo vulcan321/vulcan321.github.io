@@ -8,9 +8,9 @@ In fact, these word embedding models are all *context-independent*.
 Let us begin by illustrating this property.
 
 
-## From Context-Independent to Context-Sensitive
+# # From Context-Independent to Context-Sensitive
 
-Recall the experiments in :numref:`sec_word2vec_pretraining` and :numref:`sec_synonyms`.
+Recall the experiments in :numref:`sec*word2vec*pretraining` and :numref:`sec_synonyms`.
 For instance, word2vec and GloVe both assign the same pretrained vector to the same word regardless of the context of the word (if any).
 Formally, a context-independent representation of any token $x$
 is a function $f(x)$ that only takes $x$ as its input.
@@ -45,7 +45,7 @@ semantic role labeling, coreference resolution,
 named entity recognition, and question answering.
 
 
-## From Task-Specific to Task-Agnostic
+# # From Task-Specific to Task-Agnostic
 
 Although ELMo has significantly improved solutions to a diverse set of natural language processing tasks,
 each solution still hinges on a *task-specific* architecture.
@@ -73,7 +73,7 @@ GPT will return the same representation for "bank",
 though it has different meanings.
 
 
-## BERT: Combining the Best of Both Worlds
+# # BERT: Combining the Best of Both Worlds
 
 As we have seen,
 ELMo encodes context bidirectionally but uses task-specific architectures;
@@ -107,7 +107,7 @@ conceptually simple yet empirically powerful pretraining of deep representations
 
 In the rest of this chapter,
 we will dive into the pretraining of BERT.
-When natural language processing applications are explained in :numref:`chap_nlp_app`,
+When natural language processing applications are explained in :numref:`chap*nlp*app`,
 we will illustrate fine-tuning of BERT for downstream applications.
 
 ```{.python .input}
@@ -119,14 +119,14 @@ npx.set_np()
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 from d2l import torch as d2l
 import torch
 from torch import nn
 ```
 
-## Input Representation
-:label:`subsec_bert_input_rep`
+# # Input Representation
+:label:`subsec*bert*input_rep`
 
 In natural language processing,
 some tasks (e.g., sentiment analysis) take single text as the input,
@@ -147,18 +147,18 @@ from other types of "sequences".
 For instance, one *BERT input sequence* may include either one *text sequence* or two *text sequences*.
 
 To distinguish text pairs,
-the learned segment embeddings $\mathbf{e}_A$ and $\mathbf{e}_B$
+the learned segment embeddings $\mathbf{e}*A$ and $\mathbf{e}*B$
 are added to the token embeddings of the first sequence and the second sequence, respectively.
 For single text inputs, only $\mathbf{e}_A$ is used.
 
-The following `get_tokens_and_segments` takes either one sentence or two sentences
+The following `get*tokens*and_segments` takes either one sentence or two sentences
 as the input, then returns tokens of the BERT input sequence
 and their corresponding segment IDs.
 
 ```{.python .input}
-#@tab all
-#@save
-def get_tokens_and_segments(tokens_a, tokens_b=None):
+# @tab all
+# @save
+def get*tokens*and*segments(tokens*a, tokens_b=None):
     """Get tokens of the BERT input sequence and their segment IDs."""
     tokens = ['<cls>'] + tokens_a + ['<sep>']
     # 0 and 1 are marking segment A and B, respectively
@@ -188,27 +188,27 @@ Different from `TransformerEncoder`, `BERTEncoder` uses
 segment embeddings and learnable positional embeddings.
 
 ```{.python .input}
-#@save
+# @save
 class BERTEncoder(nn.Block):
     """BERT encoder."""
-    def __init__(self, vocab_size, num_hiddens, ffn_num_hiddens, num_heads,
-                 num_layers, dropout, max_len=1000, **kwargs):
-        super(BERTEncoder, self).__init__(**kwargs)
-        self.token_embedding = nn.Embedding(vocab_size, num_hiddens)
-        self.segment_embedding = nn.Embedding(2, num_hiddens)
+    def **init**(self, vocab*size, num*hiddens, ffn*num*hiddens, num_heads,
+                 num*layers, dropout, max*len=1000, **kwargs):
+        super(BERTEncoder, self).**init**(**kwargs)
+        self.token*embedding = nn.Embedding(vocab*size, num_hiddens)
+        self.segment*embedding = nn.Embedding(2, num*hiddens)
         self.blks = nn.Sequential()
-        for _ in range(num_layers):
+        for * in range(num*layers):
             self.blks.add(d2l.EncoderBlock(
-                num_hiddens, ffn_num_hiddens, num_heads, dropout, True))
+                num*hiddens, ffn*num*hiddens, num*heads, dropout, True))
         # In BERT, positional embeddings are learnable, thus we create a
         # parameter of positional embeddings that are long enough
-        self.pos_embedding = self.params.get('pos_embedding',
-                                             shape=(1, max_len, num_hiddens))
+        self.pos*embedding = self.params.get('pos*embedding',
+                                             shape=(1, max*len, num*hiddens))
 
     def forward(self, tokens, segments, valid_lens):
         # Shape of `X` remains unchanged in the following code snippet:
         # (batch size, max sequence length, `num_hiddens`)
-        X = self.token_embedding(tokens) + self.segment_embedding(segments)
+        X = self.token*embedding(tokens) + self.segment*embedding(segments)
         X = X + self.pos_embedding.data(ctx=X.ctx)[:, :X.shape[1], :]
         for blk in self.blks:
             X = blk(X, valid_lens)
@@ -216,31 +216,31 @@ class BERTEncoder(nn.Block):
 ```
 
 ```{.python .input}
-#@tab pytorch
-#@save
+# @tab pytorch
+# @save
 class BERTEncoder(nn.Module):
     """BERT encoder."""
-    def __init__(self, vocab_size, num_hiddens, norm_shape, ffn_num_input,
-                 ffn_num_hiddens, num_heads, num_layers, dropout,
-                 max_len=1000, key_size=768, query_size=768, value_size=768,
+    def **init**(self, vocab*size, num*hiddens, norm*shape, ffn*num_input,
+                 ffn*num*hiddens, num*heads, num*layers, dropout,
+                 max*len=1000, key*size=768, query*size=768, value*size=768,
                  **kwargs):
-        super(BERTEncoder, self).__init__(**kwargs)
-        self.token_embedding = nn.Embedding(vocab_size, num_hiddens)
-        self.segment_embedding = nn.Embedding(2, num_hiddens)
+        super(BERTEncoder, self).**init**(**kwargs)
+        self.token*embedding = nn.Embedding(vocab*size, num_hiddens)
+        self.segment*embedding = nn.Embedding(2, num*hiddens)
         self.blks = nn.Sequential()
         for i in range(num_layers):
             self.blks.add_module(f"{i}", d2l.EncoderBlock(
-                key_size, query_size, value_size, num_hiddens, norm_shape,
-                ffn_num_input, ffn_num_hiddens, num_heads, dropout, True))
+                key*size, query*size, value*size, num*hiddens, norm_shape,
+                ffn*num*input, ffn*num*hiddens, num_heads, dropout, True))
         # In BERT, positional embeddings are learnable, thus we create a
         # parameter of positional embeddings that are long enough
-        self.pos_embedding = nn.Parameter(torch.randn(1, max_len,
+        self.pos*embedding = nn.Parameter(torch.randn(1, max*len,
                                                       num_hiddens))
 
     def forward(self, tokens, segments, valid_lens):
         # Shape of `X` remains unchanged in the following code snippet:
         # (batch size, max sequence length, `num_hiddens`)
-        X = self.token_embedding(tokens) + self.segment_embedding(segments)
+        X = self.token*embedding(tokens) + self.segment*embedding(segments)
         X = X + self.pos_embedding.data[:, :X.shape[1], :]
         for blk in self.blks:
             X = blk(X, valid_lens)
@@ -252,19 +252,19 @@ To demonstrate forward inference of `BERTEncoder`,
 let us create an instance of it and initialize its parameters.
 
 ```{.python .input}
-vocab_size, num_hiddens, ffn_num_hiddens, num_heads = 10000, 768, 1024, 4
+vocab*size, num*hiddens, ffn*num*hiddens, num_heads = 10000, 768, 1024, 4
 num_layers, dropout = 2, 0.2
-encoder = BERTEncoder(vocab_size, num_hiddens, ffn_num_hiddens, num_heads,
+encoder = BERTEncoder(vocab*size, num*hiddens, ffn*num*hiddens, num_heads,
                       num_layers, dropout)
 encoder.initialize()
 ```
 
 ```{.python .input}
-#@tab pytorch
-vocab_size, num_hiddens, ffn_num_hiddens, num_heads = 10000, 768, 1024, 4
-norm_shape, ffn_num_input, num_layers, dropout = [768], 768, 2, 0.2
-encoder = BERTEncoder(vocab_size, num_hiddens, norm_shape, ffn_num_input,
-                      ffn_num_hiddens, num_heads, num_layers, dropout)
+# @tab pytorch
+vocab*size, num*hiddens, ffn*num*hiddens, num_heads = 10000, 768, 1024, 4
+norm*shape, ffn*num*input, num*layers, dropout = [768], 768, 2, 0.2
+encoder = BERTEncoder(vocab*size, num*hiddens, norm*shape, ffn*num_input,
+                      ffn*num*hiddens, num*heads, num*layers, dropout)
 ```
 
 We define `tokens` to be 2 BERT input sequences of length 8,
@@ -283,15 +283,15 @@ encoded_X.shape
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 tokens = torch.randint(0, vocab_size, (2, 8))
 segments = torch.tensor([[0, 0, 0, 0, 1, 1, 1, 1], [0, 0, 0, 1, 1, 1, 1, 1]])
 encoded_X = encoder(tokens, segments, None)
 encoded_X.shape
 ```
 
-## Pretraining Tasks
-:label:`subsec_bert_pretraining_tasks`
+# # Pretraining Tasks
+:label:`subsec*bert*pretraining_tasks`
 
 The forward inference of `BERTEncoder` gives the BERT representation
 of each token of the input text and the inserted
@@ -301,10 +301,10 @@ for pretraining BERT.
 The pretraining is composed of the following two tasks:
 masked language modeling and next sentence prediction.
 
-### Masked Language Modeling
+## # Masked Language Modeling
 :label:`subsec_mlm`
 
-As illustrated in :numref:`sec_language_model`,
+As illustrated in :numref:`sec*language*model`,
 a language model predicts a token using the context on its left.
 To encode context bidirectionally for representing each token,
 BERT randomly masks tokens and uses tokens from the bidirectional context to
@@ -336,11 +336,11 @@ the encoded result of `BERTEncoder` and the token positions for prediction.
 The output is the prediction results at these positions.
 
 ```{.python .input}
-#@save
+# @save
 class MaskLM(nn.Block):
     """The masked language model task of BERT."""
-    def __init__(self, vocab_size, num_hiddens, **kwargs):
-        super(MaskLM, self).__init__(**kwargs)
+    def **init**(self, vocab*size, num*hiddens, **kwargs):
+        super(MaskLM, self).**init**(**kwargs)
         self.mlp = nn.Sequential()
         self.mlp.add(
             nn.Dense(num_hiddens, flatten=False, activation='relu'))
@@ -348,89 +348,89 @@ class MaskLM(nn.Block):
         self.mlp.add(nn.Dense(vocab_size, flatten=False))
 
     def forward(self, X, pred_positions):
-        num_pred_positions = pred_positions.shape[1]
-        pred_positions = pred_positions.reshape(-1)
+        num*pred*positions = pred_positions.shape[1]
+        pred*positions = pred*positions.reshape(-1)
         batch_size = X.shape[0]
-        batch_idx = np.arange(0, batch_size)
-        # Suppose that `batch_size` = 2, `num_pred_positions` = 3, then
+        batch*idx = np.arange(0, batch*size)
+        # Suppose that `batch*size` = 2, `num*pred_positions` = 3, then
         # `batch_idx` is `np.array([0, 0, 0, 1, 1, 1])`
-        batch_idx = np.repeat(batch_idx, num_pred_positions)
-        masked_X = X[batch_idx, pred_positions]
-        masked_X = masked_X.reshape((batch_size, num_pred_positions, -1))
-        mlm_Y_hat = self.mlp(masked_X)
-        return mlm_Y_hat
+        batch*idx = np.repeat(batch*idx, num*pred*positions)
+        masked*X = X[batch*idx, pred_positions]
+        masked*X = masked*X.reshape((batch*size, num*pred_positions, -1))
+        mlm*Y*hat = self.mlp(masked_X)
+        return mlm*Y*hat
 ```
 
 ```{.python .input}
-#@tab pytorch
-#@save
+# @tab pytorch
+# @save
 class MaskLM(nn.Module):
     """The masked language model task of BERT."""
-    def __init__(self, vocab_size, num_hiddens, num_inputs=768, **kwargs):
-        super(MaskLM, self).__init__(**kwargs)
-        self.mlp = nn.Sequential(nn.Linear(num_inputs, num_hiddens),
+    def **init**(self, vocab*size, num*hiddens, num_inputs=768, **kwargs):
+        super(MaskLM, self).**init**(**kwargs)
+        self.mlp = nn.Sequential(nn.Linear(num*inputs, num*hiddens),
                                  nn.ReLU(),
                                  nn.LayerNorm(num_hiddens),
-                                 nn.Linear(num_hiddens, vocab_size))
+                                 nn.Linear(num*hiddens, vocab*size))
 
     def forward(self, X, pred_positions):
-        num_pred_positions = pred_positions.shape[1]
-        pred_positions = pred_positions.reshape(-1)
+        num*pred*positions = pred_positions.shape[1]
+        pred*positions = pred*positions.reshape(-1)
         batch_size = X.shape[0]
-        batch_idx = torch.arange(0, batch_size)
-        # Suppose that `batch_size` = 2, `num_pred_positions` = 3, then
+        batch*idx = torch.arange(0, batch*size)
+        # Suppose that `batch*size` = 2, `num*pred_positions` = 3, then
         # `batch_idx` is `torch.tensor([0, 0, 0, 1, 1, 1])`
-        batch_idx = torch.repeat_interleave(batch_idx, num_pred_positions)
-        masked_X = X[batch_idx, pred_positions]
-        masked_X = masked_X.reshape((batch_size, num_pred_positions, -1))
-        mlm_Y_hat = self.mlp(masked_X)
-        return mlm_Y_hat
+        batch*idx = torch.repeat*interleave(batch*idx, num*pred_positions)
+        masked*X = X[batch*idx, pred_positions]
+        masked*X = masked*X.reshape((batch*size, num*pred_positions, -1))
+        mlm*Y*hat = self.mlp(masked_X)
+        return mlm*Y*hat
 ```
 
 To demonstrate the forward inference of `MaskLM`,
 we create its instance `mlm` and initialize it.
 Recall that `encoded_X` from the forward inference of `BERTEncoder`
 represents 2 BERT input sequences.
-We define `mlm_positions` as the 3 indices to predict in either BERT input sequence of `encoded_X`.
-The forward inference of `mlm` returns prediction results `mlm_Y_hat`
-at all the masked positions `mlm_positions` of `encoded_X`.
+We define `mlm*positions` as the 3 indices to predict in either BERT input sequence of `encoded*X`.
+The forward inference of `mlm` returns prediction results `mlm*Y*hat`
+at all the masked positions `mlm*positions` of `encoded*X`.
 For each prediction, the size of the result is equal to the vocabulary size.
 
 ```{.python .input}
-mlm = MaskLM(vocab_size, num_hiddens)
+mlm = MaskLM(vocab*size, num*hiddens)
 mlm.initialize()
 mlm_positions = np.array([[1, 5, 2], [6, 1, 5]])
-mlm_Y_hat = mlm(encoded_X, mlm_positions)
-mlm_Y_hat.shape
+mlm*Y*hat = mlm(encoded*X, mlm*positions)
+mlm*Y*hat.shape
 ```
 
 ```{.python .input}
-#@tab pytorch
-mlm = MaskLM(vocab_size, num_hiddens)
+# @tab pytorch
+mlm = MaskLM(vocab*size, num*hiddens)
 mlm_positions = torch.tensor([[1, 5, 2], [6, 1, 5]])
-mlm_Y_hat = mlm(encoded_X, mlm_positions)
-mlm_Y_hat.shape
+mlm*Y*hat = mlm(encoded*X, mlm*positions)
+mlm*Y*hat.shape
 ```
 
-With the ground truth labels `mlm_Y` of the predicted tokens `mlm_Y_hat` under masks,
+With the ground truth labels `mlm*Y` of the predicted tokens `mlm*Y_hat` under masks,
 we can calculate the cross-entropy loss of the masked language model task in BERT pretraining.
 
 ```{.python .input}
 mlm_Y = np.array([[7, 8, 9], [10, 20, 30]])
 loss = gluon.loss.SoftmaxCrossEntropyLoss()
-mlm_l = loss(mlm_Y_hat.reshape((-1, vocab_size)), mlm_Y.reshape(-1))
+mlm*l = loss(mlm*Y*hat.reshape((-1, vocab*size)), mlm_Y.reshape(-1))
 mlm_l.shape
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 mlm_Y = torch.tensor([[7, 8, 9], [10, 20, 30]])
 loss = nn.CrossEntropyLoss(reduction='none')
-mlm_l = loss(mlm_Y_hat.reshape((-1, vocab_size)), mlm_Y.reshape(-1))
+mlm*l = loss(mlm*Y*hat.reshape((-1, vocab*size)), mlm_Y.reshape(-1))
 mlm_l.shape
 ```
 
-### Next Sentence Prediction
+## # Next Sentence Prediction
 :label:`subsec_nsp`
 
 Although masked language modeling is able to encode bidirectional context
@@ -452,11 +452,11 @@ Hence, the output layer (`self.output`) of the MLP classifier takes `X` as the i
 where `X` is the output of the MLP hidden layer whose input is the encoded “&lt;cls&gt;” token.
 
 ```{.python .input}
-#@save
+# @save
 class NextSentencePred(nn.Block):
     """The next sentence prediction task of BERT."""
-    def __init__(self, **kwargs):
-        super(NextSentencePred, self).__init__(**kwargs)
+    def **init**(self, **kwargs):
+        super(NextSentencePred, self).**init**(**kwargs)
         self.output = nn.Dense(2)
 
     def forward(self, X):
@@ -465,12 +465,12 @@ class NextSentencePred(nn.Block):
 ```
 
 ```{.python .input}
-#@tab pytorch
-#@save
+# @tab pytorch
+# @save
 class NextSentencePred(nn.Module):
     """The next sentence prediction task of BERT."""
-    def __init__(self, num_inputs, **kwargs):
-        super(NextSentencePred, self).__init__(**kwargs)
+    def **init**(self, num_inputs, **kwargs):
+        super(NextSentencePred, self).**init**(**kwargs)
         self.output = nn.Linear(num_inputs, 2)
 
     def forward(self, X):
@@ -484,33 +484,33 @@ returns binary predictions for each BERT input sequence.
 ```{.python .input}
 nsp = NextSentencePred()
 nsp.initialize()
-nsp_Y_hat = nsp(encoded_X)
-nsp_Y_hat.shape
+nsp*Y*hat = nsp(encoded_X)
+nsp*Y*hat.shape
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 # PyTorch by default won't flatten the tensor as seen in mxnet where, if
 # flatten=True, all but the first axis of input data are collapsed together
-encoded_X = torch.flatten(encoded_X, start_dim=1)
-# input_shape for NSP: (batch size, `num_hiddens`)
+encoded*X = torch.flatten(encoded*X, start_dim=1)
+# input*shape for NSP: (batch size, `num*hiddens`)
 nsp = NextSentencePred(encoded_X.shape[-1])
-nsp_Y_hat = nsp(encoded_X)
-nsp_Y_hat.shape
+nsp*Y*hat = nsp(encoded_X)
+nsp*Y*hat.shape
 ```
 
 The cross-entropy loss of the 2 binary classifications can also be computed.
 
 ```{.python .input}
 nsp_y = np.array([0, 1])
-nsp_l = loss(nsp_Y_hat, nsp_y)
+nsp*l = loss(nsp*Y*hat, nsp*y)
 nsp_l.shape
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 nsp_y = torch.tensor([0, 1])
-nsp_l = loss(nsp_Y_hat, nsp_y)
+nsp*l = loss(nsp*Y*hat, nsp*y)
 nsp_l.shape
 ```
 
@@ -522,74 +522,74 @@ These two text corpora are huge:
 they have 800 million words and 2.5 billion words, respectively.
 
 
-## Putting All Things Together
+# # Putting All Things Together
 
 When pretraining BERT, the final loss function is a linear combination of
 both the loss functions for masked language modeling and next sentence prediction.
 Now we can define the `BERTModel` class by instantiating the three classes
 `BERTEncoder`, `MaskLM`, and `NextSentencePred`.
 The forward inference returns the encoded BERT representations `encoded_X`,
-predictions of masked language modeling `mlm_Y_hat`,
-and next sentence predictions `nsp_Y_hat`.
+predictions of masked language modeling `mlm*Y*hat`,
+and next sentence predictions `nsp*Y*hat`.
 
 ```{.python .input}
-#@save
+# @save
 class BERTModel(nn.Block):
     """The BERT model."""
-    def __init__(self, vocab_size, num_hiddens, ffn_num_hiddens, num_heads,
-                 num_layers, dropout, max_len=1000):
-        super(BERTModel, self).__init__()
-        self.encoder = BERTEncoder(vocab_size, num_hiddens, ffn_num_hiddens,
-                                   num_heads, num_layers, dropout, max_len)
+    def **init**(self, vocab*size, num*hiddens, ffn*num*hiddens, num_heads,
+                 num*layers, dropout, max*len=1000):
+        super(BERTModel, self).**init**()
+        self.encoder = BERTEncoder(vocab*size, num*hiddens, ffn*num*hiddens,
+                                   num*heads, num*layers, dropout, max_len)
         self.hidden = nn.Dense(num_hiddens, activation='tanh')
-        self.mlm = MaskLM(vocab_size, num_hiddens)
+        self.mlm = MaskLM(vocab*size, num*hiddens)
         self.nsp = NextSentencePred()
 
-    def forward(self, tokens, segments, valid_lens=None, pred_positions=None):
-        encoded_X = self.encoder(tokens, segments, valid_lens)
+    def forward(self, tokens, segments, valid*lens=None, pred*positions=None):
+        encoded*X = self.encoder(tokens, segments, valid*lens)
         if pred_positions is not None:
-            mlm_Y_hat = self.mlm(encoded_X, pred_positions)
+            mlm*Y*hat = self.mlm(encoded*X, pred*positions)
         else:
-            mlm_Y_hat = None
+            mlm*Y*hat = None
         # The hidden layer of the MLP classifier for next sentence prediction.
         # 0 is the index of the '<cls>' token
-        nsp_Y_hat = self.nsp(self.hidden(encoded_X[:, 0, :]))
-        return encoded_X, mlm_Y_hat, nsp_Y_hat
+        nsp*Y*hat = self.nsp(self.hidden(encoded_X[:, 0, :]))
+        return encoded*X, mlm*Y*hat, nsp*Y_hat
 ```
 
 ```{.python .input}
-#@tab pytorch
-#@save
+# @tab pytorch
+# @save
 class BERTModel(nn.Module):
     """The BERT model."""
-    def __init__(self, vocab_size, num_hiddens, norm_shape, ffn_num_input,
-                 ffn_num_hiddens, num_heads, num_layers, dropout,
-                 max_len=1000, key_size=768, query_size=768, value_size=768,
-                 hid_in_features=768, mlm_in_features=768,
-                 nsp_in_features=768):
-        super(BERTModel, self).__init__()
-        self.encoder = BERTEncoder(vocab_size, num_hiddens, norm_shape,
-                    ffn_num_input, ffn_num_hiddens, num_heads, num_layers,
-                    dropout, max_len=max_len, key_size=key_size,
-                    query_size=query_size, value_size=value_size)
-        self.hidden = nn.Sequential(nn.Linear(hid_in_features, num_hiddens),
+    def **init**(self, vocab*size, num*hiddens, norm*shape, ffn*num_input,
+                 ffn*num*hiddens, num*heads, num*layers, dropout,
+                 max*len=1000, key*size=768, query*size=768, value*size=768,
+                 hid*in*features=768, mlm*in*features=768,
+                 nsp*in*features=768):
+        super(BERTModel, self).**init**()
+        self.encoder = BERTEncoder(vocab*size, num*hiddens, norm_shape,
+                    ffn*num*input, ffn*num*hiddens, num*heads, num*layers,
+                    dropout, max*len=max*len, key*size=key*size,
+                    query*size=query*size, value*size=value*size)
+        self.hidden = nn.Sequential(nn.Linear(hid*in*features, num_hiddens),
                                     nn.Tanh())
-        self.mlm = MaskLM(vocab_size, num_hiddens, mlm_in_features)
-        self.nsp = NextSentencePred(nsp_in_features)
+        self.mlm = MaskLM(vocab*size, num*hiddens, mlm*in*features)
+        self.nsp = NextSentencePred(nsp*in*features)
 
-    def forward(self, tokens, segments, valid_lens=None, pred_positions=None):
-        encoded_X = self.encoder(tokens, segments, valid_lens)
+    def forward(self, tokens, segments, valid*lens=None, pred*positions=None):
+        encoded*X = self.encoder(tokens, segments, valid*lens)
         if pred_positions is not None:
-            mlm_Y_hat = self.mlm(encoded_X, pred_positions)
+            mlm*Y*hat = self.mlm(encoded*X, pred*positions)
         else:
-            mlm_Y_hat = None
+            mlm*Y*hat = None
         # The hidden layer of the MLP classifier for next sentence prediction.
         # 0 is the index of the '<cls>' token
-        nsp_Y_hat = self.nsp(self.hidden(encoded_X[:, 0, :]))
-        return encoded_X, mlm_Y_hat, nsp_Y_hat
+        nsp*Y*hat = self.nsp(self.hidden(encoded_X[:, 0, :]))
+        return encoded*X, mlm*Y*hat, nsp*Y_hat
 ```
 
-## Summary
+# # Summary
 
 * Word embedding models such as word2vec and GloVe are context-independent. They assign the same pretrained vector to the same word regardless of the context of the word (if any). It is hard for them to handle well polysemy or complex semantics in natural languages.
 * For context-sensitive word representations such as ELMo and GPT, representations of words depend on their contexts.
@@ -599,7 +599,7 @@ class BERTModel(nn.Module):
 * Pretraining BERT is composed of two tasks: masked language modeling and next sentence prediction. The former is able to encode bidirectional context for representing words, while the latter explicitly models the logical relationship between text pairs.
 
 
-## Exercises
+# # Exercises
 
 1. Why does BERT succeed?
 1. All other things being equal, will a masked language model require more or fewer pretraining steps to converge than a left-to-right language model? Why?

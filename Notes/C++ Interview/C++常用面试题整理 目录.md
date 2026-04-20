@@ -5,14 +5,14 @@ c++常用面试题整理 目录
 2、C++中指针和引用的区别
 3、结构体struct和共同体union（联合）的区别
 4、struct 和 class 的区别？
-5、#define和const的区别
+5、# define和const的区别
 6、重载overload，覆盖（重写）override，隐藏（重定义）overwrite，这三者之间的区别
 7、new 和 delete 是如何实现的，与 malloc 和 free有什么异同？
 8、delete和delete[]的区别
 9、const知道吗？解释一下其作用
 10、关键字static的作用
 11、堆和栈的区别
-12、#include<file.h> #include "file.h" 的区别
+12、# include<file.h> # include "file.h" 的区别
 13、什么是内存泄漏？面对内存泄漏和指针越界，你有哪些方法？
 14、定义和声明的区别
 15、C++文件编译与执行的四个阶段
@@ -56,7 +56,7 @@ c++常用面试题整理 目录
 16、C++的空类有哪些成员函数
 17、C++中的五种构造函数
 第三部分、 c++11/c++14/c++17
-1、C++11 中有哪些智能指针？shared_ptr 的引用计数是如何实现的？unique_ptr 的unique 是如何实现的？make_shared 和 make_unique 的作用？智能指针使用注意事项？
+1、C++11 中有哪些智能指针？shared*ptr 的引用计数是如何实现的？unique*ptr 的unique 是如何实现的？make*shared 和 make*unique 的作用？智能指针使用注意事项？
 2、智能指针weak_ptr 能够破坏环型引用的原理（引用计数的原理）
 3、C++ 的闭包
 4、lambda 表达式、怎么捕获外部变量
@@ -82,12 +82,12 @@ c++常用面试题整理 目录
 3、 STL库用过吗？常见的STL容器有哪些？算法用过几个？
 4、STL中map 、set、multiset、multimap的底层原理（关联式容器）
 5、map 、set、multiset、multimap的特点
-6、hash_map与map的区别？什么时候用hash_map，什么时候用map？
+6、hash*map与map的区别？什么时候用hash*map，什么时候用map？
 7、STL中unordered_map和map的区别
 8、STL中的vector的实现，是怎么扩容的？
 9、C++中vector和list的区别
 10、STL内存优化？
-11、正确释放vector的内存(clear(), swap(), shrink_to_fit())
+11、正确释放vector的内存(clear(), swap(), shrink*to*fit())
 12、什么情况下用vector，什么情况下用list，什么情况下用deque
 13、priority_queue的底层原理
 14、 STL线程不安全的情况

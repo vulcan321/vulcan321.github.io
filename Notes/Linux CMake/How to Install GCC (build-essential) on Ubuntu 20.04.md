@@ -2,7 +2,7 @@ The GNU Compiler Collection (GCC) is a collection of compilers and libraries for
 
 This article explains how to install GCC on Ubuntu 20.04.
 
-## Installing GCC on Ubuntu 20.04 [#](https://linuxize.com/post/how-to-install-gcc-on-ubuntu-20-04//#installing-gcc-on-ubuntu-2004)
+# # Installing GCC on Ubuntu 20.04 [# ](https://linuxize.com/post/how-to-install-gcc-on-ubuntu-20-04//# installing-gcc-on-ubuntu-2004)
 
 The default Ubuntu repositories contain a meta-package named “build-essential” that includes the GNU compiler collection, GNU debugger, and other development libraries and tools required for compiling software.
 
@@ -12,9 +12,9 @@ To install the Development Tools packages, run the following command as root or 
 sudo apt update
 ```
 
-The command installs a lot of packages, including `gcc`, `g++` and `make`.if(typeof ez\_ad\_units != 'undefined'){ez\_ad\_units.push(\[\[728,90\],'linuxize\_com-box-3','ezslot\_2',139,'0','0'\])};\_\_ez\_fad\_position('div-gpt-ad-linuxize\_com-box-3-0');
+The command installs a lot of packages, including `gcc`, `g++` and `make`.if(typeof ez\*ad\*units != 'undefined'){ez\*ad\*units.push(\[\[728,90\],'linuxize\*com-box-3','ezslot\*2',139,'0','0'\])};\*\*ez\*fad\*position('div-gpt-ad-linuxize\_com-box-3-0');
 
-You may also want to install the manual pages about using GNU/Linux for development:if(typeof ez\_ad\_units != 'undefined'){ez\_ad\_units.push(\[\[336,280\],'linuxize\_com-medrectangle-3','ezslot\_1',156,'0','0'\])};\_\_ez\_fad\_position('div-gpt-ad-linuxize\_com-medrectangle-3-0');
+You may also want to install the manual pages about using GNU/Linux for development:if(typeof ez\*ad\*units != 'undefined'){ez\*ad\*units.push(\[\[336,280\],'linuxize\*com-medrectangle-3','ezslot\*1',156,'0','0'\])};\*\*ez\*fad\*position('div-gpt-ad-linuxize\_com-medrectangle-3-0');
 
 ```
 sudo apt-get install manpages-dev
@@ -37,7 +37,7 @@ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 That’s it. GCC tools and libraries have been installed on your Ubuntu system.
 
-## Compiling a Hello World Example [#](https://linuxize.com/post/how-to-install-gcc-on-ubuntu-20-04//#compiling-a-hello-world-example)
+# # Compiling a Hello World Example [# ](https://linuxize.com/post/how-to-install-gcc-on-ubuntu-20-04//# compiling-a-hello-world-example)
 
 Compiling a basic C or C++ program using GCC is pretty easy. Open your [text editor](https://linuxize.com/post/how-to-install-visual-studio-code-on-ubuntu-18-04/) and create the following file:
 
@@ -49,7 +49,7 @@ hello.c
 
 ```c
 // hello.c
-#include <stdio.h>
+# include <stdio.h>
  
 int main() {
     printf("Hello, world!\n");
@@ -65,7 +65,7 @@ Save the file and compile it into an executable:
 gcc hello.c -o hello
 ```
 
-This creates a binary file named `hello` in the same directory where you run the command.if(typeof ez\_ad\_units != 'undefined'){ez\_ad\_units.push(\[\[580,400\],'linuxize\_com-medrectangle-4','ezslot\_3',142,'0','0'\])};\_\_ez\_fad\_position('div-gpt-ad-linuxize\_com-medrectangle-4-0');
+This creates a binary file named `hello` in the same directory where you run the command.if(typeof ez\*ad\*units != 'undefined'){ez\*ad\*units.push(\[\[580,400\],'linuxize\*com-medrectangle-4','ezslot\*3',142,'0','0'\])};\*\*ez\*fad\*position('div-gpt-ad-linuxize\_com-medrectangle-4-0');
 
 Execute the `hello` program with:
 
@@ -79,13 +79,13 @@ The program should print:
 Hello World!
 ```
 
-## Installing Multiple GCC Versions [#](https://linuxize.com/post/how-to-install-gcc-on-ubuntu-20-04//#installing-multiple-gcc-versions)
+# # Installing Multiple GCC Versions [# ](https://linuxize.com/post/how-to-install-gcc-on-ubuntu-20-04//# installing-multiple-gcc-versions)
 
 This section provides instructions about how to install and use multiple versions of GCC on Ubuntu 20.04. The newer versions of the GCC compiler include new functions and optimization improvements.
 
-At the time of writing this article, the default Ubuntu repositories include several GCC versions, from `7.x.x` to `10.x.x`.if(typeof ez\_ad\_units != 'undefined'){ez\_ad\_units.push(\[\[728,90\],'linuxize\_com-box-4','ezslot\_4',143,'0','0'\])};\_\_ez\_fad\_position('div-gpt-ad-linuxize\_com-box-4-0');
+At the time of writing this article, the default Ubuntu repositories include several GCC versions, from `7.x.x` to `10.x.x`.if(typeof ez\*ad\*units != 'undefined'){ez\*ad\*units.push(\[\[728,90\],'linuxize\*com-box-4','ezslot\*4',143,'0','0'\])};\*\*ez\*fad\*position('div-gpt-ad-linuxize\_com-box-4-0');
 
-if(typeof ez\_ad\_units != 'undefined'){ez\_ad\_units.push(\[\[728,90\],'linuxize\_com-banner-1','ezslot\_6',161,'0','0'\])};\_\_ez\_fad\_position('div-gpt-ad-linuxize\_com-banner-1-0');In the following example, we will install the latest three versions of GCC and G++.
+if(typeof ez\*ad\*units != 'undefined'){ez\*ad\*units.push(\[\[728,90\],'linuxize\*com-banner-1','ezslot\*6',161,'0','0'\])};\*\*ez\*fad\*position('div-gpt-ad-linuxize\_com-banner-1-0');In the following example, we will install the latest three versions of GCC and G++.
 
 Install the desired GCC and G++ versions by typing:
 
@@ -111,7 +111,7 @@ sudo update-alternatives --config gcc
 There are 3 choices for the alternative gcc (providing /usr/bin/gcc).
 
   Selection    Path            Priority   Status
-------------------------------------------------------------
+---
 * 0            /usr/bin/gcc-10   100       auto mode
   1            /usr/bin/gcc-10   100       manual mode
   2            /usr/bin/gcc-8    80        manual mode
@@ -120,11 +120,11 @@ There are 3 choices for the alternative gcc (providing /usr/bin/gcc).
 Press <enter> to keep the current choice[*], or type selection number:
 ```
 
-You will be presented with a list of all installed GCC versions on your Ubuntu system. Enter the number of the version you want to be used as a default and press `Enter`.if(typeof ez\_ad\_units != 'undefined'){ez\_ad\_units.push(\[\[580,400\],'linuxize\_com-large-mobile-banner-1','ezslot\_7',157,'0','0'\])};\_\_ez\_fad\_position('div-gpt-ad-linuxize\_com-large-mobile-banner-1-0');
+You will be presented with a list of all installed GCC versions on your Ubuntu system. Enter the number of the version you want to be used as a default and press `Enter`.if(typeof ez\*ad\*units != 'undefined'){ez\*ad\*units.push(\[\[580,400\],'linuxize\*com-large-mobile-banner-1','ezslot\*7',157,'0','0'\])};\*\*ez\*fad\*position('div-gpt-ad-linuxize\_com-large-mobile-banner-1-0');
 
 The command will create [symbolic links](https://linuxize.com/post/how-to-create-symbolic-links-in-linux-using-the-ln-command/) to the specific versions of GCC and G++.
 
-## Conclusion [#](https://linuxize.com/post/how-to-install-gcc-on-ubuntu-20-04//#conclusion)
+# # Conclusion [# ](https://linuxize.com/post/how-to-install-gcc-on-ubuntu-20-04//# conclusion)
 
 We’ve shown you how to installed GCC on Ubuntu 20.04. You can now visit the official [GCC Documentation](https://gcc.gnu.org/onlinedocs/) page and learn how to use GCC and G++ to compile your C and C++ programs.
 

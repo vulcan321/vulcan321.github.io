@@ -7,7 +7,7 @@
 
 在异常处理的代码中，程序员有可能看到过如下的异常声明表达形式：void excpt_func() throw(int, double) { ... }   
 
-在excpt\_func函数声明之后，我们定义了一个动态异常声明throw(int, double)，该声明指出了excpt\_func可能抛出的异常的类型。事实上，该特性很少被使用，因此在C++11中被弃用了（参见附录B），而表示函数不会抛出异常的动态异常声明throw()也被新的noexcept异常声明所取代。
+在excpt\*func函数声明之后，我们定义了一个动态异常声明throw(int, double)，该声明指出了excpt\*func可能抛出的异常的类型。事实上，该特性很少被使用，因此在C++11中被弃用了（参见附录B），而表示函数不会抛出异常的动态异常声明throw()也被新的noexcept异常声明所取代。
 
   
 
@@ -25,7 +25,7 @@ noexcept形如其名地，表示其修饰的函数不会抛出异常。不过与
 在通常情况下，在C++11中使用noexcept可以有效地阻止异常的传播与扩散。我们可以看看下面这个例子，如下代码：
 
 ```cpp
-#include <iostream> 
+# include <iostream> 
 using namespace std;  
 void Throw() { throw 1; }  
 void NoBlockThrow() { Throw(); }  
@@ -100,8 +100,8 @@ template<class T> class A {
 又比如，在C++98中，new可能会包含一些抛出的std::bad\_alloc异常。  
 
 ```cpp
-void* operator new(std::size_t) throw(std::bad_alloc);    
-void* operator new[](std::size_t) throw(std::bad_alloc); 
+void* operator new(std::size*t) throw(std::bad*alloc);    
+void* operator new[](std::size*t) throw(std::bad*alloc); 
 ```
 
 而在C++11中，则使用noexcept(false)来进行替代。  
@@ -123,7 +123,7 @@ void operator delete[](void*) noexcept; 
 当然，如果程序员显式地为析构函数指定了noexcept，或者类的基类或成员有noexcept(false)的析构函数，析构函数就不会再保持默认值。我们可以看看下面的例子，如下代码：  
 
 ```cpp
-#include <iostream> 
+# include <iostream> 
 using namespace std;  
  
 struct A {  

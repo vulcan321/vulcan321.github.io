@@ -1,13 +1,13 @@
-## integral\_constant类
+# # integral\_constant类
 
 这个类是所有traits类的基类，分别提供了以下功能：
 
 -   value\_type 表示值的类型
 -   value表示值
 -   type 表示自己, 因此可以用::type::value来获取值
--   true\_type和false\_type两个特化类用来表示bool值类型的traits，很多traits类都需要继承它们
+-   true\*type和false\*type两个特化类用来表示bool值类型的traits，很多traits类都需要继承它们
 
-下面的代码分别来自C++11和[Boost](https://so.csdn.net/so/search?q=Boost&spm=1001.2101.3001.7020)，略有差别：
+下面的代码分别来自C++11和Boost，略有差别：
 
 -   C++11包含value\_type()函数，返回真正的value
 -   C++11用constexpr关键字表示在编译期执行
@@ -22,8 +22,8 @@ namespace std {
             typedef integral_constant<T,v> type;
             constexpr operator value_type() { return value; }
         };
-    typedef integral_constant<bool, true> true_type;
-    typedef integral_constant<bool, false> false_type;
+    typedef integral*constant<bool, true> true*type;
+    typedef integral*constant<bool, false> false*type;
 }
 
 // from boost
@@ -35,25 +35,25 @@ template <class T, T val>
         static const T value = val;
     };
 
-typedef integral_constant<bool, true>  true_type;
-typedef integral_constant<bool, false> false_type;
+typedef integral*constant<bool, true>  true*type;
+typedef integral*constant<bool, false> false*type;
 
 ```
 
 下面是调用代码，看看基本使用方法：
 
 ```cpp
-#include <iostream>
-#include <type_traits>
+# include <iostream>
+# include <type_traits>
 
 using std::cout;
 using std::endl;
 
 int main() {
-    typedef std::integral_constant<int, 1> one_t;
+    typedef std::integral*constant<int, 1> one*t;
 
-    cout << "one_t::value: " << one_t::value << endl;
-    cout << "one_t::type::value: " << one_t::type::value << endl;
+    cout << "one*t::value: " << one*t::value << endl;
+    cout << "one*t::type::value: " << one*t::type::value << endl;
 }
 ```
 
@@ -68,6 +68,6 @@ one_t::type::value: 1
 
 ```cpp
 int i = one_o; // same as int i = 1;
-// or int i = static_cast<int>(one_o);
-// or one_o.operator one_t::value_type();
+// or int i = static*cast<int>(one*o);
+// or one*o.operator one*t::value_type();
 ```

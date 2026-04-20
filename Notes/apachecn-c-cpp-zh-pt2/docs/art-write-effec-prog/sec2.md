@@ -4,6 +4,6 @@
 
 本节包括以下章节:
 
-*   [*第六章*](06.html#_idTextAnchor103)，*并发和性能*
-*   [*第七章*](07.html#_idTextAnchor117)，*并发的数据结构*
-*   [*第 8 章*](08.html#_idTextAnchor138)，*C 中的并发*
+*   [*第六章*](06.html# _idTextAnchor103)，*并发和性能*
+*   [*第七章*](07.html# _idTextAnchor117)，*并发的数据结构*
+*   [*第 8 章*](08.html# _idTextAnchor138)，*C 中的并发*

@@ -71,7 +71,7 @@ a powerful set of techniques
 driving innovations in areas as diverse as computer vision,
 natural language processing, healthcare, and genomics.
 
-## A Motivating Example
+# # A Motivating Example
 
 Before beginning writing, the authors of this book,
 like much of the work force, had to become caffeinated.
@@ -95,7 +95,7 @@ Imagine just writing a program to respond to a *wake word*
 such as "Alexa", "OK Google", and "Hey Siri".
 Try coding it up in a room by yourself
 with nothing but a computer and a code editor,
-as illustrated in :numref:`fig_wake_word`.
+as illustrated in :numref:`fig*wake*word`.
 How would you write such a program from first principles?
 Think about it... the problem is hard.
 Every second, the microphone will collect roughly 
@@ -109,7 +109,7 @@ We do not know how to write such a program from scratch either.
 That is why we use machine learning.
 
 ![Identify a wake word.](../img/wake-word.svg)
-:label:`fig_wake_word`
+:label:`fig*wake*word`
 
 
 Here is the trick.
@@ -179,7 +179,7 @@ by which we discover the right setting of the knobs
 coercing the desired behavior from our model.
 In other words,
 we *train* our model with data.
-As shown in :numref:`fig_ml_loop`, the training process usually looks like the following:
+As shown in :numref:`fig*ml*loop`, the training process usually looks like the following:
 
 1. Start off with a randomly initialized model that cannot do anything useful.
 1. Grab some of your data (e.g., audio snippets and corresponding $\{\text{yes}, \text{no}\}$ labels).
@@ -187,7 +187,7 @@ As shown in :numref:`fig_ml_loop`, the training process usually looks like the f
 1. Repeat Step 2 and 3 until the model is awesome.
 
 ![A typical training process.](../img/ml-loop.svg)
-:label:`fig_ml_loop`
+:label:`fig*ml*loop`
 
 To summarize, rather than code up a wake word recognizer,
 we code up a program that can *learn* to recognize wake words,
@@ -205,7 +205,7 @@ which we will explain in greater detail later,
 is just one among many popular methods
 for solving machine learning problems.
 
-## Key Components
+# # Key Components
 
 In our wake word example, we described a dataset
 consisting of audio snippets and binary labels, 
@@ -228,7 +228,7 @@ that will follow us around, no matter what kind of machine learning problem we t
 1. An *objective function* that quantifies how well (or badly) the model is doing.
 1. An *algorithm* to adjust the model's parameters to optimize the objective function.
 
-### Data
+## # Data
 
 It might go without saying that you cannot do data science without data.
 We could lose hundreds of pages pondering what precisely constitutes data,
@@ -322,7 +322,7 @@ Note that this can all happen without the data scientist
 actively conspiring, or even being aware.
 
 
-### Models
+## # Models
 
 Most machine learning involves transforming the data in some sense.
 We might want to build a system that ingests photos and predicts smiley-ness.
@@ -345,7 +345,7 @@ that are chained together top to bottom, thus the name *deep learning*.
 On our way to discussing deep models,
 we will also discuss some more traditional methods.
 
-### Objective Functions
+## # Objective Functions
 
 Earlier, we introduced machine learning as learning from experience.
 By *learning* here,
@@ -407,7 +407,7 @@ In real-life terms, this is like flunking the real exam
 despite doing well on practice exams.
 
 
-### Optimization Algorithms
+## # Optimization Algorithms
 
 Once we have got some data source and representation,
 a model, and a well-defined objective function,
@@ -422,7 +422,7 @@ if you perturbed that parameter just a small amount.
 It then updates
 the parameter in the direction that may reduce the loss.
 
-## Kinds of Machine Learning Problems
+# # Kinds of Machine Learning Problems
 
 The wake word problem in our motivating example
 is just one among
@@ -435,7 +435,7 @@ We will constantly refer to
 our aforementioned concepts 
 such as data, models, and training techniques.
 
-### Supervised Learning
+## # Supervised Learning
 
 Supervised learning addresses the task of
 predicting labels given input features.
@@ -498,12 +498,12 @@ a function that takes as input a dataset
 and outputs another function: the learned model.
 Finally, we can feed previously unseen inputs to the learned model,
 using its outputs as predictions of the corresponding label.
-The full process is drawn in :numref:`fig_supervised_learning`.
+The full process is drawn in :numref:`fig*supervised*learning`.
 
 ![Supervised learning.](../img/supervised-learning.svg)
-:label:`fig_supervised_learning`
+:label:`fig*supervised*learning`
 
-#### Regression
+### # Regression
 
 Perhaps the simplest supervised learning task
 to wrap your head around is *regression*.
@@ -583,7 +583,7 @@ minimizing the squared error loss function.
 As we will see later, this loss corresponds to the assumption
 that our data were corrupted by Gaussian noise.
 
-#### Classification
+### # Classification
 
 While regression models are great for addressing *how many?* questions,
 lots of problems do not bend comfortably to this template.
@@ -647,17 +647,17 @@ via an introduction to information theory in subsequent chapters.
 Note that the most likely class is not necessarily
 the one that you are going to use for your decision.
 Assume that you find a beautiful mushroom in your backyard
-as shown in :numref:`fig_death_cap`.
+as shown in :numref:`fig*death*cap`.
 
 ![Death cap---do not eat!](../img/death-cap.jpg)
 :width:`200px`
-:label:`fig_death_cap`
+:label:`fig*death*cap`
 
 Now, assume that you built a classifier and trained it
 to predict if a mushroom is poisonous based on a photograph.
 Say our poison-detection classifier outputs
 that the probability that
-:numref:`fig_death_cap` contains a death cap is 0.2.
+:numref:`fig*death*cap` contains a death cap is 0.2.
 In other words, the classifier is 80\% sure
 that our mushroom is not a death cap.
 Still, you would have to be a fool to eat it.
@@ -675,7 +675,7 @@ whereas the loss of discarding it is
 $0.2 \times 0 + 0.8 \times 1 = 0.8$.
 Our caution was justified:
 as any mycologist would tell us,
-the mushroom in :numref:`fig_death_cap` actually
+the mushroom in :numref:`fig*death*cap` actually
 is a death cap.
 
 Classification can get much more complicated than just
@@ -698,7 +698,7 @@ For example, rattle snakes and garter snakes
 might be close on the phylogenetic tree,
 but mistaking a rattler for a garter could be deadly.
 
-#### Tagging
+### # Tagging
 
 Some classification problems fit neatly
 into the binary or multiclass classification setups.
@@ -753,7 +753,7 @@ until each article can have a proper manual review.
 Indeed, for several years, the BioASQ organization
 has [hosted competitions](http://bioasq.org/) to do precisely this.
 
-#### Search 
+### # Search 
 
 Sometimes we do not just want to assign each example to a bucket
 or to a real value. In the field of information retrieval,
@@ -787,8 +787,8 @@ Nowadays, search engines use machine learning and behavioral models
 to obtain query-dependent relevance scores.
 There are entire academic conferences devoted to this subject.
 
-#### Recommender Systems
-:label:`subsec_recommender_systems`
+### # Recommender Systems
+:label:`subsec*recommender*systems`
 
 Recommender systems are another problem setting
 that is related to search and ranking.
@@ -823,11 +823,11 @@ we could retrieve the set of objects with the largest scores,
 which could then be recommended to the user.
 Production systems are considerably more advanced and take
 detailed user activity and item characteristics into account
-when computing such scores. :numref:`fig_deeplearning_amazon` is an example
+when computing such scores. :numref:`fig*deeplearning*amazon` is an example
 of deep learning books recommended by Amazon based on personalization algorithms tuned to capture one's preferences.
 
 ![Deep learning books recommended by Amazon.](../img/deeplearning-amazon.jpg)
-:label:`fig_deeplearning_amazon`
+:label:`fig*deeplearning*amazon`
 
 Despite their tremendous economic value,
 recommendation systems
@@ -849,7 +849,7 @@ and in turn is recommended even more frequently.
 Many of these problems about how to deal with censoring,
 incentives, and feedback loops, are important open research questions.
 
-#### Sequence Learning
+### # Sequence Learning
 
 So far, we have looked at problems where we have
 some fixed number of inputs and produce a fixed number of outputs.
@@ -957,7 +957,7 @@ across long temporal distances.
 These are active areas of research.
 
 
-### Unsupervised learning
+## # Unsupervised learning
 
 All the examples so far were related to supervised learning,
 i.e., situations where we feed the model a giant dataset
@@ -1020,7 +1020,7 @@ even complicated structured data like images and audio.
 The underlying statistical mechanisms are tests
 to check whether real and fake data are the same.
 
-### Interacting with an Environment
+## # Interacting with an Environment
 
 So far, we have not discussed where data actually
 come from,
@@ -1034,10 +1034,10 @@ Because all of the learning takes place
 after the algorithm is disconnected from the environment,
 this is sometimes called *offline learning*.
 For supervised learning,
-the process by considering data collection from an environment looks like :numref:`fig_data_collection`.
+the process by considering data collection from an environment looks like :numref:`fig*data*collection`.
 
 ![Collecting data for supervised learning from an environment.](../img/data-collection.svg)
-:label:`fig_data_collection`
+:label:`fig*data*collection`
 
 This simplicity of offline learning has its charms.
 The upside is that
@@ -1076,7 +1076,7 @@ while the homework was composed by his teaching assistants.
 Next, we will briefly describe reinforcement learning,
 a setting that explicitly considers interactions with an environment.
 
-### Reinforcement Learning
+## # Reinforcement Learning
 
 If you are interested in using machine learning
 to develop an agent that interacts with an environment
@@ -1176,7 +1176,7 @@ When there is no state, just a set of available actions
 with initially unknown rewards, this problem
 is the classic *multi-armed bandit problem*.
 
-## Roots
+# # Roots
 
 We have just reviewed
 a small subset of problems that machine learning 
@@ -1193,7 +1193,7 @@ and to predict future outcomes for long
 and much of natural science has its roots in this.
 For instance, the Bernoulli distribution is named after
 [Jacob Bernoulli (1655--1705)](https://en.wikipedia.org/wiki/Jacob_Bernoulli), and the Gaussian distribution was discovered
-by [Carl Friedrich Gauss (1777--1855)](https://en.wikipedia.org/wiki/Carl_Friedrich_Gauss).
+by [Carl Friedrich Gauss (1777--1855)](https://en.wikipedia.org/wiki/Carl*Friedrich*Gauss).
 He invented, for instance, the least mean squares algorithm,
 which is still used today for countless problems
 from insurance calculations to medical diagnostics.
@@ -1236,7 +1236,7 @@ has as long and enduring a history as its productive use
 in industry and the natural sciences.
 
 A second influence for machine learning came from information theory by
-[Claude Shannon (1916--2001)](https://en.wikipedia.org/wiki/Claude_Shannon) and the theory of computation via [Alan Turing (1912--1954)](https://en.wikipedia.org/wiki/Alan_Turing).
+[Claude Shannon (1916--2001)](https://en.wikipedia.org/wiki/Claude*Shannon) and the theory of computation via [Alan Turing (1912--1954)](https://en.wikipedia.org/wiki/Alan*Turing).
 Turing posed the question "can machines think?”
 in his famous paper *Computing Machinery and Intelligence* :cite:`Turing.1950`.
 In what he described as the Turing test, a machine
@@ -1249,7 +1249,7 @@ After all, humans clearly exhibit intelligent behavior.
 It is thus only reasonable to ask whether one could explain
 and possibly reverse engineer this capacity.
 One of the oldest algorithms inspired in this fashion
-was formulated by [Donald Hebb (1904--1985)](https://en.wikipedia.org/wiki/Donald_O._Hebb).
+was formulated by [Donald Hebb (1904--1985)](https://en.wikipedia.org/wiki/Donald*O.*Hebb).
 In his groundbreaking book *The Organization of Behavior* :cite:`Hebb.Hebb.1949`,
 he posited that neurons learn by positive reinforcement.
 This became known as the Hebbian learning rule.
@@ -1288,7 +1288,7 @@ Unlike neural networks, they did not require weeks to train
 and provided predictable results with strong theoretical guarantees.
 
 
-## The Road to Deep Learning
+# # The Road to Deep Learning
 
 Much of this changed with 
 the ready availability of large amounts of data,
@@ -1300,7 +1300,7 @@ cheap data storage (Kryder's law),
 and cheap computation (Moore's law), in particular in the form of GPUs, originally engineered for computer gaming.
 Suddenly algorithms and models that seemed computationally infeasible
 became relevant (and vice versa).
-This is best illustrated in :numref:`tab_intro_decade`.
+This is best illustrated in :numref:`tab*intro*decade`.
 
 :Dataset vs. computer memory and computational power
 
@@ -1312,7 +1312,7 @@ This is best illustrated in :numref:`tab_intro_decade`.
 |2000|10 M (web pages)|100 MB|1 GF (Intel Core)|
 |2010|10 G (advertising)|1 GB|1 TF (Nvidia C2050)|
 |2020|1 T (social network)|100 GB|1 PF (Nvidia DGX-2)|
-:label:`tab_intro_decade`
+:label:`tab*intro*decade`
 
 It is evident that random-access memory has not kept pace with the growth in data.
 At the same time, the increase in computational power
@@ -1436,7 +1436,7 @@ Ph.D. students at Carnegie Mellon University in 2014.
 By now, this task can be accomplished with less than 10 lines of code,
 putting it firmly into the grasp of programmers.
 
-## Success Stories
+# # Success Stories
 
 AI has a long history of delivering results
 that would be difficult to accomplish otherwise.
@@ -1544,7 +1544,7 @@ With what we know today, this strikes us a much more pressing concern
 than the potential of malevolent superintelligence to destroy humanity.
 
 
-## Characteristics
+# # Characteristics
 
 Thus far, we have talked about machine learning broadly, which is both a branch of AI and an approach to AI.
 Though deep learning is a subset of machine learning,
@@ -1613,7 +1613,7 @@ It is in this spirit that the notebooks forming this book are freely available f
 
 
 
-## Summary
+# # Summary
 
 * Machine learning studies how computer systems can leverage experience (often data) to improve performance at specific tasks. It combines ideas from statistics, data mining, and optimization. Often, it is used as a means of implementing AI solutions.
 * As a class of machine learning, representational learning focuses on how to automatically find the appropriate way to represent data. Deep learning is multi-level representation learning through learning many layers of transformations.
@@ -1621,11 +1621,11 @@ It is in this spirit that the notebooks forming this book are freely available f
 * Much of the recent progress in deep learning has been triggered by an abundance of data arising from cheap sensors and Internet-scale applications, and by significant progress in computation, mostly through GPUs.
 * Whole system optimization is a key component in obtaining high performance. The availability of efficient deep learning frameworks has made design and implementation of this significantly easier.
 
-## Exercises
+# # Exercises
 
 1. Which parts of code that you are currently writing could be "learned", i.e., improved by learning and automatically determining design choices that are made in your code? Does your code include heuristic design choices?
 1. Which problems that you encounter have many examples for how to solve them, yet no specific way to automate them? These may be prime candidates for using deep learning.
 1. Viewing the development of AI as a new industrial revolution, what is the relationship between algorithms and data? Is it similar to steam engines and coal? What is the fundamental difference?
-1. Where else can you apply the end-to-end training approach, such as in :numref:`fig_ml_loop`, physics, engineering, and econometrics?
+1. Where else can you apply the end-to-end training approach, such as in :numref:`fig*ml*loop`, physics, engineering, and econometrics?
 
 [Discussions](https://discuss.d2l.ai/t/22)

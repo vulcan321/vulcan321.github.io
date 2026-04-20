@@ -4,8 +4,8 @@
 In :numref:`chap_linear`, we introduced
 softmax regression (:numref:`sec_softmax`),
 implementing the algorithm from scratch
-(:numref:`sec_softmax_scratch`) and using high-level APIs
-(:numref:`sec_softmax_concise`),
+(:numref:`sec*softmax*scratch`) and using high-level APIs
+(:numref:`sec*softmax*concise`),
 and training classifiers to recognize
 10 categories of clothing from low-resolution images.
 Along the way, we learned how to wrangle data,
@@ -19,10 +19,10 @@ the comparatively rich class of models
 with which this book is primarily concerned.
 
 
-## Hidden Layers
+# # Hidden Layers
 
 We have described the affine transformation in
-:numref:`subsec_linear_model`,
+:numref:`subsec*linear*model`,
 which is a linear transformation added by a bias.
 To begin, recall the model architecture
 corresponding to our softmax regression example,
@@ -35,7 +35,7 @@ to our input data by an affine transformation,
 then this approach would be sufficient.
 But linearity in affine transformations is a *strong* assumption.
 
-### Linear Models May Go Wrong
+## # Linear Models May Go Wrong
 
 For example, linearity implies the *weaker*
 assumption of *monotonicity*:
@@ -106,7 +106,7 @@ to jointly learn both a representation via hidden layers
 and a linear predictor that acts upon that representation.
 
 
-### Incorporating Hidden Layers
+## # Incorporating Hidden Layers
 
 We can overcome these limitations of linear models
 and handle a more general class of functions
@@ -138,7 +138,7 @@ Every input influences every neuron in the hidden layer,
 and each of these in turn influences
 every neuron in the output layer.
 
-### From Linear to Nonlinear
+## # From Linear to Nonlinear
 
 
 As before, by the matrix $\mathbf{X} \in \mathbb{R}^{n \times d}$,
@@ -215,7 +215,7 @@ with some abuse of notation, we define the nonlinearity
 $\sigma$ to apply to its inputs in a rowwise fashion,
 i.e., one example at a time.
 Note that we used the notation for softmax
-in the same way to denote a rowwise operation in :numref:`subsec_softmax_vectorization`.
+in the same way to denote a rowwise operation in :numref:`subsec*softmax*vectorization`.
 Often, as in this section, the activation functions
 that we apply to hidden layers are not merely rowwise,
 but elementwise.
@@ -231,7 +231,7 @@ e.g., $\mathbf{H}^{(1)} = \sigma_1(\mathbf{X} \mathbf{W}^{(1)} + \mathbf{b}^{(1)
 and $\mathbf{H}^{(2)} = \sigma_2(\mathbf{H}^{(1)} \mathbf{W}^{(2)} + \mathbf{b}^{(2)})$,
 one atop another, yielding ever more expressive models.
 
-### Universal Approximators
+## # Universal Approximators
 
 MLPs can capture complex interactions
 among our inputs via their hidden neurons,
@@ -270,20 +270,20 @@ npx.set_np()
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 %matplotlib inline
 from d2l import torch as d2l
 import torch
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 %matplotlib inline
 from d2l import tensorflow as d2l
 import tensorflow as tf
 ```
 
-## Activation Functions
+# # Activation Functions
 
 Activation functions decide whether a neuron should be activated or not by
 calculating the weighted sum and further adding bias with it.
@@ -292,7 +292,7 @@ while most of them add non-linearity.
 Because activation functions are fundamental to deep learning,
 let us briefly survey some common activation functions.
 
-### ReLU Function
+## # ReLU Function
 
 The most popular choice,
 due to both simplicity of implementation and
@@ -319,14 +319,14 @@ d2l.plot(x, y, 'x', 'relu(x)', figsize=(5, 2.5))
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 x = torch.arange(-8.0, 8.0, 0.1, requires_grad=True)
 y = torch.relu(x)
 d2l.plot(x.detach(), y.detach(), 'x', 'relu(x)', figsize=(5, 2.5))
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 x = tf.Variable(tf.range(-8.0, 8.0, 0.1), dtype=tf.float32)
 y = tf.nn.relu(x)
 d2l.plot(x.numpy(), y.numpy(), 'x', 'relu(x)', figsize=(5, 2.5))
@@ -353,13 +353,13 @@ d2l.plot(x, x.grad, 'x', 'grad of relu', figsize=(5, 2.5))
 ```
 
 ```{.python .input}
-#@tab pytorch
-y.backward(torch.ones_like(x), retain_graph=True)
+# @tab pytorch
+y.backward(torch.ones*like(x), retain*graph=True)
 d2l.plot(x.detach(), x.grad, 'x', 'grad of relu', figsize=(5, 2.5))
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 with tf.GradientTape() as t:
     y = tf.nn.relu(x)
 d2l.plot(x.numpy(), t.gradient(y, x).numpy(), 'x', 'grad of relu',
@@ -382,7 +382,7 @@ even when the argument is negative:
 
 $$\operatorname{pReLU}(x) = \max(0, x) + \alpha \min(0, x).$$
 
-### Sigmoid Function
+## # Sigmoid Function
 
 The *sigmoid function* transforms its inputs,
 for which values lie in the domain $\mathbb{R}$,
@@ -434,13 +434,13 @@ d2l.plot(x, y, 'x', 'sigmoid(x)', figsize=(5, 2.5))
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 y = torch.sigmoid(x)
 d2l.plot(x.detach(), y.detach(), 'x', 'sigmoid(x)', figsize=(5, 2.5))
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 y = tf.nn.sigmoid(x)
 d2l.plot(x.numpy(), y.numpy(), 'x', 'sigmoid(x)', figsize=(5, 2.5))
 ```
@@ -463,22 +463,22 @@ d2l.plot(x, x.grad, 'x', 'grad of sigmoid', figsize=(5, 2.5))
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 # Clear out previous gradients
 x.grad.data.zero_()
-y.backward(torch.ones_like(x),retain_graph=True)
+y.backward(torch.ones*like(x),retain*graph=True)
 d2l.plot(x.detach(), x.grad, 'x', 'grad of sigmoid', figsize=(5, 2.5))
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 with tf.GradientTape() as t:
     y = tf.nn.sigmoid(x)
 d2l.plot(x.numpy(), t.gradient(y, x).numpy(), 'x', 'grad of sigmoid',
          figsize=(5, 2.5))
 ```
 
-### Tanh Function
+## # Tanh Function
 
 Like the sigmoid function, the tanh (hyperbolic tangent)
 function also squashes its inputs,
@@ -496,13 +496,13 @@ d2l.plot(x, y, 'x', 'tanh(x)', figsize=(5, 2.5))
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 y = torch.tanh(x)
 d2l.plot(x.detach(), y.detach(), 'x', 'tanh(x)', figsize=(5, 2.5))
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 y = tf.nn.tanh(x)
 d2l.plot(x.numpy(), y.numpy(), 'x', 'tanh(x)', figsize=(5, 2.5))
 ```
@@ -524,15 +524,15 @@ d2l.plot(x, x.grad, 'x', 'grad of tanh', figsize=(5, 2.5))
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 # Clear out previous gradients.
 x.grad.data.zero_()
-y.backward(torch.ones_like(x),retain_graph=True)
+y.backward(torch.ones*like(x),retain*graph=True)
 d2l.plot(x.detach(), x.grad, 'x', 'grad of tanh', figsize=(5, 2.5))
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 with tf.GradientTape() as t:
     y = tf.nn.tanh(x)
 d2l.plot(x.numpy(), t.gradient(y, x).numpy(), 'x', 'grad of tanh',
@@ -553,13 +553,13 @@ Previously, training these networks
 required researchers to code up
 thousands of lines of C and Fortran.
 
-## Summary
+# # Summary
 
 * MLP adds one or multiple fully-connected hidden layers between the output and input layers and transforms the output of the hidden layer via an activation function.
 * Commonly-used activation functions include the ReLU function, the sigmoid function, and the tanh function.
 
 
-## Exercises
+# # Exercises
 
 1. Compute the derivative of the pReLU activation function.
 1. Show that an MLP using only ReLU (or pReLU) constructs a continuous piecewise linear function.

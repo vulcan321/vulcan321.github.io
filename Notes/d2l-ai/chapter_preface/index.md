@@ -4,11 +4,11 @@
 
 就在过去的五年里，深度学习给世界带来了惊喜，推动了计算机视觉、自然语言处理、自动语音识别、强化学习和统计建模等领域的快速发展。有了这些进步，我们现在可以制造比以往任何时候都更自主的汽车（不过可能没有一些公司试图让大家相信的那么自主），可以自动起草普通邮件的智能回复系统，帮助人们从令人压抑的大收件箱中解放出来。在围棋等棋类游戏中，软件超越了世界上最优秀的人，这曾被认为是几十年后的事。这些工具已经对工业和社会产生了越来越广泛的影响，改变了电影的制作方式、疾病的诊断方式，并在基础科学中扮演着越来越重要的角色——从天体物理学到生物学。
 
-## 关于本书
+# # 关于本书
 
 这本书代表了我们的尝试——让深度学习可平易近人，教会人们*概念*、*背景*和*代码*。
 
-### 一种结合了代码、数学和HTML的媒介
+## # 一种结合了代码、数学和HTML的媒介
 
 任何一种计算技术要想发挥其全部影响力，都必须得到充分的理解、充分的文档记录，并得到成熟的、维护良好的工具的支持。关键思想应该被清楚地提炼出来，尽可能减少需要让新的从业者跟上时代的入门时间。成熟的库应该自动化常见的任务，示例代码应该使从业者可以轻松地修改、应用和扩展常见的应用程序，以满足他们的需求。以动态网页应用为例。尽管许多公司，如亚马逊，在20世纪90年代开发了成功的数据库驱动网页应用程序。但在过去的10年里，这项技术在帮助创造性企业家方面的潜力已经得到了更大程度的发挥，部分原因是开发了功能强大、文档完整的框架。
 
@@ -18,9 +18,9 @@
 
 我们着手创建的资源可以：（1）每个人都可以免费获得；（2）提供足够的技术深度，为真正成为一名应用机器学习科学家提供起步；（3）包括可运行的代码，向读者展示如何解决实践中的问题；（4）允许我们和社区的快速更新;（5）由一个[论坛](http://discuss.d2l.ai)作为补充，用于技术细节的互动讨论和回答问题。
 
-这些目标经常是相互冲突的。公式、定理和引用最好用LaTeX来管理和布局。代码最好用Python描述。网页原生是HTML和JavaScript的。此外，我们希望内容既可以作为可执行代码访问、作为纸质书访问，作为可下载的PDF访问，也可以作为网站在互联网上访问。目前还没有完全适合这些需求的工具和工作流程，所以我们不得不自行组装。我们在 :numref:`sec_how_to_contribute` 中详细描述了我们的方法。我们选择GitHub来共享源代码并允许编辑，选择Jupyter记事本来混合代码、公式和文本，选择Sphinx作为渲染引擎来生成多个输出，并为论坛提供讨论。虽然我们的体系尚不完善，但这些选择在相互冲突的问题之间提供了一个很好的妥协。我们相信，这可能是第一本使用这种集成工作流程出版的书。
+这些目标经常是相互冲突的。公式、定理和引用最好用LaTeX来管理和布局。代码最好用Python描述。网页原生是HTML和JavaScript的。此外，我们希望内容既可以作为可执行代码访问、作为纸质书访问，作为可下载的PDF访问，也可以作为网站在互联网上访问。目前还没有完全适合这些需求的工具和工作流程，所以我们不得不自行组装。我们在 :numref:`sec*how*to_contribute` 中详细描述了我们的方法。我们选择GitHub来共享源代码并允许编辑，选择Jupyter记事本来混合代码、公式和文本，选择Sphinx作为渲染引擎来生成多个输出，并为论坛提供讨论。虽然我们的体系尚不完善，但这些选择在相互冲突的问题之间提供了一个很好的妥协。我们相信，这可能是第一本使用这种集成工作流程出版的书。
 
-### 在实践中学习
+## # 在实践中学习
 
 许多教科书教授一系列的主题，每一个都非常详细。例如，Chris Bishop的优秀教科书 :cite:`Bishop.2006` ，对每个主题都教得很透彻，以至于要读到线性回归这一章需要大量的工作。虽然专家们喜欢这本书正是因为它的透彻性，但对初学者来说，这一特性限制了它作为介绍性文本的实用性。
 
@@ -32,38 +32,38 @@
 
 这本书将从头开始教授深度学习的概念。有时，我们想深入研究模型的细节，这些的细节通常会被深度学习框架的高级抽象隐藏起来。特别是在基础教程中，我们希望读者了解在给定层或优化器中发生的一切。在这些情况下，我们通常会提供两个版本的示例：一个是我们从零开始实现一切，仅依赖张量操作和自动微分；另一个是更实际的示例，我们使用深度学习框架的高级API编写简洁的代码。一旦我们教了您一些组件是如何工作的，我们就可以在随后的教程中使用高级API了。
 
-### 内容和结构
+## # 内容和结构
 
-全书大致可分为三个部分，在 :numref:`fig_book_org` 中用不同的颜色呈现：
+全书大致可分为三个部分，在 :numref:`fig*book*org` 中用不同的颜色呈现：
 
 ![全书结构](../img/book-org.svg)
-:label:`fig_book_org`
+:label:`fig*book*org`
 
 * 第一部分包括基础知识和预备知识。
-:numref:`chap_introduction` 提供深度学习的入门课程。然后在 :numref:`chap_preliminaries` 中，我们将快速介绍实践深度学习所需的前提条件，例如如何存储和处理数据，以及如何应用基于线性代数、微积分和概率基本概念的各种数值运算。 :numref:`chap_linear` 和 :numref:`chap_perceptrons` 涵盖了深度学习的最基本概念和技术，例如线性回归、多层感知机和正则化。
+:numref:`chap*introduction` 提供深度学习的入门课程。然后在 :numref:`chap*preliminaries` 中，我们将快速介绍实践深度学习所需的前提条件，例如如何存储和处理数据，以及如何应用基于线性代数、微积分和概率基本概念的各种数值运算。 :numref:`chap*linear` 和 :numref:`chap*perceptrons` 涵盖了深度学习的最基本概念和技术，例如线性回归、多层感知机和正则化。
 
 * 接下来的五章集中讨论现代深度学习技术。
-:numref:`chap_computation` 描述了深度学习计算的各种关键组件，并为我们随后实现更复杂的模型奠定了基础。接下来，在 :numref:`chap_cnn` 和 :numref:`chap_modern_cnn` 中，我们介绍了卷积神经网络（convolutional neural network，CNN），这是构成大多数现代计算机视觉系统骨干的强大工具。随后，在 :numref:`chap_rnn` 和 :numref:`chap_modern_rnn` 中，我们引入了循环神经网络(recurrent neural network，RNN)，这是一种利用数据中的时间或序列结构的模型，通常用于自然语言处理和时间序列预测。在 :numref:`chap_attention` 中，我们介绍了一类新的模型，它采用了一种称为注意力机制的技术，最近它们已经开始在自然语言处理中取代循环神经网络。这一部分将帮助读者快速了解大多数现代深度学习应用背后的基本工具。
+:numref:`chap*computation` 描述了深度学习计算的各种关键组件，并为我们随后实现更复杂的模型奠定了基础。接下来，在 :numref:`chap*cnn` 和 :numref:`chap*modern*cnn` 中，我们介绍了卷积神经网络（convolutional neural network，CNN），这是构成大多数现代计算机视觉系统骨干的强大工具。随后，在 :numref:`chap*rnn` 和 :numref:`chap*modern*rnn` 中，我们引入了循环神经网络(recurrent neural network，RNN)，这是一种利用数据中的时间或序列结构的模型，通常用于自然语言处理和时间序列预测。在 :numref:`chap*attention` 中，我们介绍了一类新的模型，它采用了一种称为注意力机制的技术，最近它们已经开始在自然语言处理中取代循环神经网络。这一部分将帮助读者快速了解大多数现代深度学习应用背后的基本工具。
 
 * 第三部分讨论可伸缩性、效率和应用程序。
-首先，在 :numref:`chap_optimization` 中，我们讨论了用于训练深度学习模型的几种常用优化算法。下一章 :numref:`chap_performance` 将探讨影响深度学习代码计算性能的几个关键因素。在 :numref:`chap_cv` 中，我们展示了深度学习在计算机视觉中的主要应用。在 :numref:`chap_nlp_pretrain` 和 :numref:`chap_nlp_app` 中，我们展示了如何预训练语言表示模型并将其应用于自然语言处理任务。
+首先，在 :numref:`chap*optimization` 中，我们讨论了用于训练深度学习模型的几种常用优化算法。下一章 :numref:`chap*performance` 将探讨影响深度学习代码计算性能的几个关键因素。在 :numref:`chap*cv` 中，我们展示了深度学习在计算机视觉中的主要应用。在 :numref:`chap*nlp*pretrain` 和 :numref:`chap*nlp_app` 中，我们展示了如何预训练语言表示模型并将其应用于自然语言处理任务。
 
-### 代码
+## # 代码
 :label:`sec_code`
 
 本书的大部分章节都以可执行代码为特色，因为我们相信交互式学习体验在深度学习中的重要性。目前，某些直觉只能通过试错、小幅调整代码并观察结果来发展。理想情况下，一个优雅的数学理论可能会精确地告诉我们如何调整代码以达到期望的结果。不幸的是，这种优雅的理论目前还没有出现。尽管我们尽了最大努力，但仍然缺乏对各种技术的正式解释，这既是因为描述这些模型的数学可能非常困难，也是因为对这些主题的认真研究最近才进入高潮。我们希望随着深度学习理论的发展，这本书的未来版本将能够在当前版本无法提供的地方提供见解。
 
-有时，为了避免不必要的重复，我们将本书中经常导入和引用的函数、类等封装在`d2l`包中。对于要保存到包中的任何代码块，比如一个函数、一个类或者多个导入，我们都会标记为`#@save`。我们在 :numref:`sec_d2l` 中提供了这些函数和类的详细描述。`d2l`软件包是轻量级的，仅需要以下软件包和模块作为依赖项：
+有时，为了避免不必要的重复，我们将本书中经常导入和引用的函数、类等封装在`d2l`包中。对于要保存到包中的任何代码块，比如一个函数、一个类或者多个导入，我们都会标记为`# @save`。我们在 :numref:`sec_d2l` 中提供了这些函数和类的详细描述。`d2l`软件包是轻量级的，仅需要以下软件包和模块作为依赖项：
 
 ```{.python .input}
-#@tab all
-#@save
+# @tab all
+# @save
 import collections
 from collections import defaultdict
 from IPython import display
 import math
 from matplotlib import pyplot as plt
-from matplotlib_inline import backend_inline
+from matplotlib*inline import backend*inline
 import os
 import pandas as pd
 import random
@@ -75,7 +75,7 @@ import time
 import requests
 import zipfile
 import hashlib
-d2l = sys.modules[__name__]
+d2l = sys.modules[**name**]
 ```
 
 :begin_tab:`mxnet`
@@ -101,14 +101,14 @@ d2l = sys.modules[__name__]
 :end_tab:
 
 ```{.python .input}
-#@save
+# @save
 from mxnet import autograd, context, gluon, image, init, np, npx
 from mxnet.gluon import nn, rnn
 ```
 
 ```{.python .input}
-#@tab pytorch
-#@save
+# @tab pytorch
+# @save
 import numpy as np
 import torch
 import torchvision
@@ -120,15 +120,15 @@ from PIL import Image
 ```
 
 ```{.python .input}
-#@tab tensorflow
-#@save
+# @tab tensorflow
+# @save
 import numpy as np
 import tensorflow as tf
 ```
 
 ```{.python .input}
-#@tab paddle
-#@save
+# @tab paddle
+# @save
 import numpy as np
 import warnings
 warnings.filterwarnings("ignore")
@@ -138,18 +138,18 @@ from paddle.nn import functional as F
 from paddle.vision import transforms
 import paddle.vision as paddlevision
 from PIL import Image
-paddle.disable_signal_handler()
+paddle.disable*signal*handler()
 ```
 
-### 目标受众
+## # 目标受众
 
 本书面向学生（本科生或研究生）、工程师和研究人员，他们希望扎实掌握深度学习的实用技术。因为我们从头开始解释每个概念，所以不需要过往的深度学习或机器学习背景。全面解释深度学习的方法需要一些数学和编程，但我们只假设读者了解一些基础知识，包括线性代数、微积分、概率和非常基础的Python编程。此外，在附录中，我们提供了本书所涵盖的大多数数学知识的复习。大多数时候，我们会优先考虑直觉和想法，而不是数学的严谨性。有许多很棒的书可以引导感兴趣的读者走得更远。Bela Bollobas的《线性分析》 :cite:`Bollobas.1999` 对线性代数和函数分析进行了深入的研究。 :cite:`Wasserman.2013` 是一本很好的统计学指南。如果读者以前没有使用过Python语言，那么可以仔细阅读这个[Python教程](http://learnpython.org/)。
 
-### 论坛
+## # 论坛
 
 与本书相关，我们已经启动了一个论坛，在[discuss.d2l.ai](https://discuss.d2l.ai/)。当对本书的任何一节有疑问时，请在每一节的末尾找到相关的讨论页链接。
 
-## 致谢
+# # 致谢
 
 感谢中英文草稿的数百位撰稿人。他们帮助改进了内容并提供了宝贵的反馈。
 感谢Anirudh Dagar和唐源将部分较早版本的MXNet实现分别改编为PyTorch和TensorFlow实现。
@@ -188,7 +188,7 @@ thebesttv, Quanshangze Du, Yanbo Chen。
 
 我们感谢Amazon Web Services，特别是Swami Sivasubramanian、Peter DeSantis、Adam Selipsky和Andrew Jassy对撰写本书的慷慨支持。如果没有可用的时间、资源、与同事的讨论和不断的鼓励，这本书就不会出版。
 
-## 小结
+# # 小结
 
 * 深度学习已经彻底改变了模式识别，引入了一系列技术，包括计算机视觉、自然语言处理、自动语音识别。
 * 要成功地应用深度学习，必须知道如何抛出一个问题、建模的数学方法、将模型与数据拟合的算法，以及实现所有这些的工程技术。
@@ -196,7 +196,7 @@ thebesttv, Quanshangze Du, Yanbo Chen。
 * 要回答与本书相关的问题，请访问我们的论坛[discuss.d2l.ai](https://discuss.d2l.ai/).
 * 所有Jupyter记事本都可以在GitHub上下载。
 
-## 练习
+# # 练习
 
 1. 在本书[discuss.d2l.ai](https://discuss.d2l.ai/)的论坛上注册帐户。
 1. 在计算机上安装Python。

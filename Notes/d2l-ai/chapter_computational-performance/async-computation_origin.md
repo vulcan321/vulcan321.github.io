@@ -16,14 +16,14 @@ npx.set_np()
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 from d2l import torch as d2l
 import numpy, os, subprocess
 import torch
 from torch import nn
 ```
 
-## Asynchrony via Backend
+# # Asynchrony via Backend
 
 :begin_tab:`mxnet`
 For a warmup consider the following toy problem: we want to generate a random matrix and multiply it. Let us do that both in NumPy and in `mxnet.np` to see the difference.
@@ -47,7 +47,7 @@ with d2l.Benchmark('mxnet.np'):
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 # Warmup for GPU computation
 device = d2l.try_gpu()
 a = torch.randn(size=(1000, 1000), device=device)
@@ -90,7 +90,7 @@ with d2l.Benchmark():
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 with d2l.Benchmark():
     for _ in range(10):
         a = torch.randn(size=(1000, 1000), device=device)
@@ -127,7 +127,7 @@ z
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 x = torch.ones((1, 2), device=device)
 y = torch.ones((1, 2), device=device)
 z = x * y + 2
@@ -148,13 +148,13 @@ Whenever the Python frontend thread executes one of the first three statements, 
 
 
 
-## Barriers and Blockers
+# # Barriers and Blockers
 
 :begin_tab:`mxnet`
 There are a number of operations that will force Python to wait for completion:
 
 * Most obviously `npx.waitall()` waits until all computation has completed, regardless of when the compute instructions were issued. In practice it is a bad idea to use this operator unless absolutely necessary since it can lead to poor performance.
-* If we just want to wait until a specific variable is available we can call `z.wait_to_read()`. In this case MXNet blocks return to Python until the variable `z` has been computed. Other computation may well continue afterwards.
+* If we just want to wait until a specific variable is available we can call `z.wait*to*read()`. In this case MXNet blocks return to Python until the variable `z` has been computed. Other computation may well continue afterwards.
 
 Let us see how this works in practice.
 :end_tab:
@@ -164,9 +164,9 @@ with d2l.Benchmark('waitall'):
     b = np.dot(a, a)
     npx.waitall()
 
-with d2l.Benchmark('wait_to_read'):
+with d2l.Benchmark('wait*to*read'):
     b = np.dot(a, a)
-    b.wait_to_read()
+    b.wait*to*read()
 ```
 
 :begin_tab:`mxnet`
@@ -185,17 +185,17 @@ with d2l.Benchmark('scalar conversion'):
     b.sum().item()
 ```
 
-## Improving Computation
+# # Improving Computation
 
 :begin_tab:`mxnet`
-On a heavily multithreaded system (even regular laptops have 4 threads or more and on multi-socket servers this number can exceed 256) the overhead of scheduling operations can become significant. This is why it is highly desirable to have computation and scheduling occur asynchronously and in parallel. To illustrate the benefit of doing so let us see what happens if we increment a variable by 1 multiple times, both in sequence or asynchronously. We simulate synchronous execution by inserting a `wait_to_read` barrier in between each addition.
+On a heavily multithreaded system (even regular laptops have 4 threads or more and on multi-socket servers this number can exceed 256) the overhead of scheduling operations can become significant. This is why it is highly desirable to have computation and scheduling occur asynchronously and in parallel. To illustrate the benefit of doing so let us see what happens if we increment a variable by 1 multiple times, both in sequence or asynchronously. We simulate synchronous execution by inserting a `wait*to*read` barrier in between each addition.
 :end_tab:
 
 ```{.python .input}
 with d2l.Benchmark('synchronous'):
     for _ in range(10000):
         y = x + 1
-        y.wait_to_read()
+        y.wait*to*read()
 
 with d2l.Benchmark('asynchronous'):
     for _ in range(10000):
@@ -208,11 +208,11 @@ A slightly simplified interaction between the Python frontend thread and the C++
 1. The frontend orders the backend to insert the computation task `y = x + 1` into the queue.
 1. The backend then receives the computation tasks from the queue and performs the actual computations.
 1. The backend then returns the computation results to the frontend.
-Assume that the durations of these three stages are $t_1, t_2$ and $t_3$, respectively. If we do not use asynchronous programming, the total time taken to perform 10000 computations is approximately $10000 (t_1+ t_2 + t_3)$. If asynchronous programming is used, the total time taken to perform 10000 computations can be reduced to $t_1 + 10000 t_2 + t_3$ (assuming $10000 t_2 > 9999t_1$), since the frontend does not have to wait for the backend to return computation results for each loop.
+Assume that the durations of these three stages are $t*1, t*2$ and $t*3$, respectively. If we do not use asynchronous programming, the total time taken to perform 10000 computations is approximately $10000 (t*1+ t*2 + t*3)$. If asynchronous programming is used, the total time taken to perform 10000 computations can be reduced to $t*1 + 10000 t*2 + t*3$ (assuming $10000 t*2 > 9999t_1$), since the frontend does not have to wait for the backend to return computation results for each loop.
 :end_tab:
 
 
-## Summary
+# # Summary
 
 
 * Deep learning frameworks may decouple the Python frontend from an execution backend. This allows for fast asynchronous insertion of commands into the backend and associated parallelism.
@@ -224,11 +224,11 @@ Assume that the durations of these three stages are $t_1, t_2$ and $t_3$, respec
 :end_tab:
 
 
-## Exercises
+# # Exercises
 
 :begin_tab:`mxnet`
-1. We mentioned above that using asynchronous computation can reduce the total amount of time needed to perform 10000 computations to $t_1 + 10000 t_2 + t_3$. Why do we have to assume $10000 t_2 > 9999 t_1$ here?
-1. Measure the difference between `waitall` and `wait_to_read`. Hint: perform a number of instructions and synchronize for an intermediate result.
+1. We mentioned above that using asynchronous computation can reduce the total amount of time needed to perform 10000 computations to $t*1 + 10000 t*2 + t*3$. Why do we have to assume $10000 t*2 > 9999 t_1$ here?
+1. Measure the difference between `waitall` and `wait*to*read`. Hint: perform a number of instructions and synchronize for an intermediate result.
 :end_tab:
 
 :begin_tab:`pytorch`

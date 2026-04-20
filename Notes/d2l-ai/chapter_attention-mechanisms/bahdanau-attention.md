@@ -1,5 +1,5 @@
 # Bahdanau 注意力
-:label:`sec_seq2seq_attention`
+:label:`sec*seq2seq*attention`
 
  :numref:`sec_seq2seq`中探讨了机器翻译问题：
 通过设计一个基于两个循环神经网络的编码器-解码器架构，
@@ -20,28 +20,28 @@ Graves设计了一种可微注意力模型，
 可微注意力模型 :cite:`Bahdanau.Cho.Bengio.2014`。
 在预测词元时，如果不是所有输入词元都相关，模型将仅对齐（或参与）输入序列中与当前预测相关的部分。这是通过将上下文变量视为注意力集中的输出来实现的。
 
-## 模型
+# # 模型
 
 下面描述的Bahdanau注意力模型
 将遵循 :numref:`sec_seq2seq`中的相同符号表达。
 这个新的基于注意力的模型与 :numref:`sec_seq2seq`中的模型相同，
-只不过 :eqref:`eq_seq2seq_s_t`中的上下文变量$\mathbf{c}$
+只不过 :eqref:`eq*seq2seq*s_t`中的上下文变量$\mathbf{c}$
 在任何解码时间步$t'$都会被$\mathbf{c}_{t'}$替换。
 假设输入序列中有$T$个词元，
 解码时间步$t'$的上下文变量是注意力集中的输出：
 
-$$\mathbf{c}_{t'} = \sum_{t=1}^T \alpha(\mathbf{s}_{t' - 1}, \mathbf{h}_t) \mathbf{h}_t,$$
+$$\mathbf{c}*{t'} = \sum*{t=1}^T \alpha(\mathbf{s}*{t' - 1}, \mathbf{h}*t) \mathbf{h}_t,$$
 
 其中，时间步$t' - 1$时的解码器隐状态$\mathbf{s}_{t' - 1}$是查询，
 编码器隐状态$\mathbf{h}_t$既是键，也是值，
 注意力权重$\alpha$是使用 :eqref:`eq_attn-scoring-alpha`
 所定义的加性注意力打分函数计算的。
 
-与 :numref:`fig_seq2seq_details`中的循环神经网络编码器-解码器架构略有不同，
- :numref:`fig_s2s_attention_details`描述了Bahdanau注意力的架构。
+与 :numref:`fig*seq2seq*details`中的循环神经网络编码器-解码器架构略有不同，
+ :numref:`fig*s2s*attention_details`描述了Bahdanau注意力的架构。
 
 ![一个带有Bahdanau注意力的循环神经网络编码器-解码器模型](../img/seq2seq-attention-details.svg)
-:label:`fig_s2s_attention_details`
+:label:`fig*s2s*attention_details`
 
 ```{.python .input}
 from d2l import mxnet as d2l
@@ -51,20 +51,20 @@ npx.set_np()
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 from d2l import torch as d2l
 import torch
 from torch import nn
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 from d2l import tensorflow as d2l
 import tensorflow as tf
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 from d2l import paddle as d2l
 import warnings
 warnings.filterwarnings("ignore")
@@ -72,7 +72,7 @@ import paddle
 from paddle import nn
 ```
 
-## 定义注意力解码器
+# # 定义注意力解码器
 
 下面看看如何定义Bahdanau注意力，实现循环神经网络编码器-解码器。
 其实，我们只需重新定义解码器即可。
@@ -80,12 +80,12 @@ from paddle import nn
 以下`AttentionDecoder`类定义了[**带有注意力机制解码器的基本接口**]。
 
 ```{.python .input}
-#@tab all
-#@save
+# @tab all
+# @save
 class AttentionDecoder(d2l.Decoder):
     """带有注意力机制解码器的基本接口"""
-    def __init__(self, **kwargs):
-        super(AttentionDecoder, self).__init__(**kwargs)
+    def **init**(self, **kwargs):
+        super(AttentionDecoder, self).**init**(**kwargs)
 
     @property
     def attention_weights(self):
@@ -105,238 +105,238 @@ class AttentionDecoder(d2l.Decoder):
 
 ```{.python .input}
 class Seq2SeqAttentionDecoder(AttentionDecoder):
-    def __init__(self, vocab_size, embed_size, num_hiddens, num_layers,
+    def **init**(self, vocab*size, embed*size, num*hiddens, num*layers,
                  dropout=0, **kwargs):
-        super(Seq2SeqAttentionDecoder, self).__init__(**kwargs)
+        super(Seq2SeqAttentionDecoder, self).**init**(**kwargs)
         self.attention = d2l.AdditiveAttention(num_hiddens, dropout)
-        self.embedding = nn.Embedding(vocab_size, embed_size)
-        self.rnn = rnn.GRU(num_hiddens, num_layers, dropout=dropout)
+        self.embedding = nn.Embedding(vocab*size, embed*size)
+        self.rnn = rnn.GRU(num*hiddens, num*layers, dropout=dropout)
         self.dense = nn.Dense(vocab_size, flatten=False)
 
-    def init_state(self, enc_outputs, enc_valid_lens, *args):
-        # outputs的形状为(num_steps，batch_size，num_hiddens)
-        # hidden_state[0]的形状为(num_layers，batch_size，num_hiddens)
-        outputs, hidden_state = enc_outputs
-        return (outputs.swapaxes(0, 1), hidden_state, enc_valid_lens)
+    def init*state(self, enc*outputs, enc*valid*lens, *args):
+        # outputs的形状为(num*steps，batch*size，num_hiddens)
+        # hidden*state[0]的形状为(num*layers，batch*size，num*hiddens)
+        outputs, hidden*state = enc*outputs
+        return (outputs.swapaxes(0, 1), hidden*state, enc*valid_lens)
 
     def forward(self, X, state):
-        # enc_outputs的形状为(batch_size,num_steps,num_hiddens).
-        # hidden_state[0]的形状为(num_layers,batch_size,
+        # enc*outputs的形状为(batch*size,num*steps,num*hiddens).
+        # hidden*state[0]的形状为(num*layers,batch_size,
         # num_hiddens)
-        enc_outputs, hidden_state, enc_valid_lens = state
-        # 输出X的形状为(num_steps,batch_size,embed_size)
+        enc*outputs, hidden*state, enc*valid*lens = state
+        # 输出X的形状为(num*steps,batch*size,embed_size)
         X = self.embedding(X).swapaxes(0, 1)
-        outputs, self._attention_weights = [], []
+        outputs, self.*attention*weights = [], []
         for x in X:
-            # query的形状为(batch_size,1,num_hiddens)
-            query = np.expand_dims(hidden_state[0][-1], axis=1)
-            # context的形状为(batch_size,1,num_hiddens)
+            # query的形状为(batch*size,1,num*hiddens)
+            query = np.expand*dims(hidden*state[0][-1], axis=1)
+            # context的形状为(batch*size,1,num*hiddens)
             context = self.attention(
-                query, enc_outputs, enc_outputs, enc_valid_lens)
+                query, enc*outputs, enc*outputs, enc*valid*lens)
             # 在特征维度上连结
             x = np.concatenate((context, np.expand_dims(x, axis=1)), axis=-1)
-            # 将x变形为(1,batch_size,embed_size+num_hiddens)
-            out, hidden_state = self.rnn(x.swapaxes(0, 1), hidden_state)
+            # 将x变形为(1,batch*size,embed*size+num_hiddens)
+            out, hidden*state = self.rnn(x.swapaxes(0, 1), hidden*state)
             outputs.append(out)
-            self._attention_weights.append(self.attention.attention_weights)
+            self.*attention*weights.append(self.attention.attention_weights)
         # 全连接层变换后，outputs的形状为
-        # (num_steps,batch_size,vocab_size)
+        # (num*steps,batch*size,vocab_size)
         outputs = self.dense(np.concatenate(outputs, axis=0))
-        return outputs.swapaxes(0, 1), [enc_outputs, hidden_state,
-                                        enc_valid_lens]
+        return outputs.swapaxes(0, 1), [enc*outputs, hidden*state,
+                                        enc*valid*lens]
 
     @property
     def attention_weights(self):
-        return self._attention_weights
+        return self.*attention*weights
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 class Seq2SeqAttentionDecoder(AttentionDecoder):
-    def __init__(self, vocab_size, embed_size, num_hiddens, num_layers,
+    def **init**(self, vocab*size, embed*size, num*hiddens, num*layers,
                  dropout=0, **kwargs):
-        super(Seq2SeqAttentionDecoder, self).__init__(**kwargs)
+        super(Seq2SeqAttentionDecoder, self).**init**(**kwargs)
         self.attention = d2l.AdditiveAttention(
-            num_hiddens, num_hiddens, num_hiddens, dropout)
-        self.embedding = nn.Embedding(vocab_size, embed_size)
+            num*hiddens, num*hiddens, num_hiddens, dropout)
+        self.embedding = nn.Embedding(vocab*size, embed*size)
         self.rnn = nn.GRU(
-            embed_size + num_hiddens, num_hiddens, num_layers,
+            embed*size + num*hiddens, num*hiddens, num*layers,
             dropout=dropout)
-        self.dense = nn.Linear(num_hiddens, vocab_size)
+        self.dense = nn.Linear(num*hiddens, vocab*size)
 
-    def init_state(self, enc_outputs, enc_valid_lens, *args):
-        # outputs的形状为(batch_size，num_steps，num_hiddens).
-        # hidden_state的形状为(num_layers，batch_size，num_hiddens)
-        outputs, hidden_state = enc_outputs
-        return (outputs.permute(1, 0, 2), hidden_state, enc_valid_lens)
+    def init*state(self, enc*outputs, enc*valid*lens, *args):
+        # outputs的形状为(batch*size，num*steps，num_hiddens).
+        # hidden*state的形状为(num*layers，batch*size，num*hiddens)
+        outputs, hidden*state = enc*outputs
+        return (outputs.permute(1, 0, 2), hidden*state, enc*valid_lens)
 
     def forward(self, X, state):
-        # enc_outputs的形状为(batch_size,num_steps,num_hiddens).
-        # hidden_state的形状为(num_layers,batch_size,
+        # enc*outputs的形状为(batch*size,num*steps,num*hiddens).
+        # hidden*state的形状为(num*layers,batch_size,
         # num_hiddens)
-        enc_outputs, hidden_state, enc_valid_lens = state
-        # 输出X的形状为(num_steps,batch_size,embed_size)
+        enc*outputs, hidden*state, enc*valid*lens = state
+        # 输出X的形状为(num*steps,batch*size,embed_size)
         X = self.embedding(X).permute(1, 0, 2)
-        outputs, self._attention_weights = [], []
+        outputs, self.*attention*weights = [], []
         for x in X:
-            # query的形状为(batch_size,1,num_hiddens)
+            # query的形状为(batch*size,1,num*hiddens)
             query = torch.unsqueeze(hidden_state[-1], dim=1)
-            # context的形状为(batch_size,1,num_hiddens)
+            # context的形状为(batch*size,1,num*hiddens)
             context = self.attention(
-                query, enc_outputs, enc_outputs, enc_valid_lens)
+                query, enc*outputs, enc*outputs, enc*valid*lens)
             # 在特征维度上连结
             x = torch.cat((context, torch.unsqueeze(x, dim=1)), dim=-1)
-            # 将x变形为(1,batch_size,embed_size+num_hiddens)
-            out, hidden_state = self.rnn(x.permute(1, 0, 2), hidden_state)
+            # 将x变形为(1,batch*size,embed*size+num_hiddens)
+            out, hidden*state = self.rnn(x.permute(1, 0, 2), hidden*state)
             outputs.append(out)
-            self._attention_weights.append(self.attention.attention_weights)
+            self.*attention*weights.append(self.attention.attention_weights)
         # 全连接层变换后，outputs的形状为
-        # (num_steps,batch_size,vocab_size)
+        # (num*steps,batch*size,vocab_size)
         outputs = self.dense(torch.cat(outputs, dim=0))
-        return outputs.permute(1, 0, 2), [enc_outputs, hidden_state,
-                                          enc_valid_lens]
+        return outputs.permute(1, 0, 2), [enc*outputs, hidden*state,
+                                          enc*valid*lens]
     
     @property
     def attention_weights(self):
-        return self._attention_weights
+        return self.*attention*weights
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 class Seq2SeqAttentionDecoder(AttentionDecoder):
-    def __init__(self, vocab_size, embed_size, num_hiddens, num_layers,
+    def **init**(self, vocab*size, embed*size, num*hiddens, num*layers,
                  dropout=0, **kwargs):
-        super().__init__(**kwargs)
-        self.attention = d2l.AdditiveAttention(num_hiddens, num_hiddens,
+        super().**init**(**kwargs)
+        self.attention = d2l.AdditiveAttention(num*hiddens, num*hiddens,
                                                num_hiddens, dropout)
-        self.embedding = tf.keras.layers.Embedding(vocab_size, embed_size)
+        self.embedding = tf.keras.layers.Embedding(vocab*size, embed*size)
         self.rnn = tf.keras.layers.RNN(tf.keras.layers.StackedRNNCells(
             [tf.keras.layers.GRUCell(num_hiddens, dropout=dropout)
-             for _ in range(num_layers)]),
+             for * in range(num*layers)]),
                                       return_sequences=True, 
                                       return_state=True)
         self.dense = tf.keras.layers.Dense(vocab_size)
 
-    def init_state(self, enc_outputs, enc_valid_lens, *args):
-       # outputs的形状为(num_steps，batch_size，num_hiddens)
-        # hidden_state[0]的形状为(num_layers，batch_size，num_hiddens)
+    def init*state(self, enc*outputs, enc*valid*lens, *args):
+       # outputs的形状为(num*steps，batch*size，num_hiddens)
+        # hidden*state[0]的形状为(num*layers，batch*size，num*hiddens)
 
-        outputs, hidden_state = enc_outputs
-        return (outputs, hidden_state, enc_valid_lens)
+        outputs, hidden*state = enc*outputs
+        return (outputs, hidden*state, enc*valid_lens)
 
     def call(self, X, state, **kwargs):
-        # enc_outputs的形状为(batch_size,num_steps,num_hiddens)
-        # hidden_state[0]的形状为(num_layers,batch_size, num_hiddens)
-        enc_outputs, hidden_state, enc_valid_lens = state
-        # 输出X的形状为(num_steps,batch_size,embed_size)
-        X = self.embedding(X) # 输入X的形状为(batch_size,num_steps)
+        # enc*outputs的形状为(batch*size,num*steps,num*hiddens)
+        # hidden*state[0]的形状为(num*layers,batch*size, num*hiddens)
+        enc*outputs, hidden*state, enc*valid*lens = state
+        # 输出X的形状为(num*steps,batch*size,embed_size)
+        X = self.embedding(X) # 输入X的形状为(batch*size,num*steps)
         X = tf.transpose(X, perm=(1, 0, 2))
-        outputs, self._attention_weights = [], []
+        outputs, self.*attention*weights = [], []
         for x in X:
-            # query的形状为(batch_size,1,num_hiddens)
-            query = tf.expand_dims(hidden_state[-1], axis=1)
-            # context的形状为(batch_size,1,num_hiddens)
-            context = self.attention(query, enc_outputs, enc_outputs,
-                                     enc_valid_lens, **kwargs)
+            # query的形状为(batch*size,1,num*hiddens)
+            query = tf.expand*dims(hidden*state[-1], axis=1)
+            # context的形状为(batch*size,1,num*hiddens)
+            context = self.attention(query, enc*outputs, enc*outputs,
+                                     enc*valid*lens, **kwargs)
             # 在特征维度上连结
             x = tf.concat((context, tf.expand_dims(x, axis=1)), axis=-1)
             out = self.rnn(x, hidden_state, **kwargs)
             hidden_state = out[1:]
             outputs.append(out[0])
-            self._attention_weights.append(self.attention.attention_weights)
-        # 全连接层变换后，outputs的形状为(num_steps,batch_size,vocab_size)
+            self.*attention*weights.append(self.attention.attention_weights)
+        # 全连接层变换后，outputs的形状为(num*steps,batch*size,vocab_size)
         outputs = self.dense(tf.concat(outputs, axis=1))
-        return outputs, [enc_outputs, hidden_state, enc_valid_lens]
+        return outputs, [enc*outputs, hidden*state, enc*valid*lens]
 
     @property
     def attention_weights(self):
-        return self._attention_weights
+        return self.*attention*weights
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 class Seq2SeqAttentionDecoder(AttentionDecoder):
-    def __init__(self, vocab_size, embed_size, num_hiddens, num_layers,
+    def **init**(self, vocab*size, embed*size, num*hiddens, num*layers,
                  dropout=0, **kwargs):
-        super(Seq2SeqAttentionDecoder, self).__init__(**kwargs)
+        super(Seq2SeqAttentionDecoder, self).**init**(**kwargs)
         self.attention = d2l.AdditiveAttention(
-            num_hiddens, num_hiddens, num_hiddens, dropout)
-        self.embedding = nn.Embedding(vocab_size, embed_size)
-        self.rnn = nn.GRU(embed_size + num_hiddens, num_hiddens, 
-                          num_layers, bias_ih_attr=True,
+            num*hiddens, num*hiddens, num_hiddens, dropout)
+        self.embedding = nn.Embedding(vocab*size, embed*size)
+        self.rnn = nn.GRU(embed*size + num*hiddens, num_hiddens, 
+                          num*layers, bias*ih_attr=True,
                           time_major=True, dropout=dropout)
-        self.dense = nn.Linear(num_hiddens, vocab_size)
+        self.dense = nn.Linear(num*hiddens, vocab*size)
 
-    def init_state(self, enc_outputs, enc_valid_lens, *args):
-        # outputs的形状为(batch_size，num_steps，num_hiddens).
-        # hidden_state的形状为(num_layers，batch_size，num_hiddens)
-        outputs, hidden_state = enc_outputs
-        return (outputs.transpose((1, 0, 2)), hidden_state, enc_valid_lens)
+    def init*state(self, enc*outputs, enc*valid*lens, *args):
+        # outputs的形状为(batch*size，num*steps，num_hiddens).
+        # hidden*state的形状为(num*layers，batch*size，num*hiddens)
+        outputs, hidden*state = enc*outputs
+        return (outputs.transpose((1, 0, 2)), hidden*state, enc*valid_lens)
 
     def forward(self, X, state):
-        # enc_outputs的形状为(batch_size,num_steps,num_hiddens).
-        # hidden_state的形状为(num_layers,batch_size,num_hiddens)
-        enc_outputs, hidden_state, enc_valid_lens = state
-        # 输出X的形状为(num_steps,batch_size,embed_size)
+        # enc*outputs的形状为(batch*size,num*steps,num*hiddens).
+        # hidden*state的形状为(num*layers,batch*size,num*hiddens)
+        enc*outputs, hidden*state, enc*valid*lens = state
+        # 输出X的形状为(num*steps,batch*size,embed_size)
         X = self.embedding(X).transpose((1, 0, 2))
-        outputs, self._attention_weights = [], []
+        outputs, self.*attention*weights = [], []
         for x in X:
-            # query的形状为(batch_size,1,num_hiddens)
+            # query的形状为(batch*size,1,num*hiddens)
             query = paddle.unsqueeze(hidden_state[-1], axis=1)
-            # context的形状为(batch_size,1,num_hiddens)
+            # context的形状为(batch*size,1,num*hiddens)
             context = self.attention(
-                query, enc_outputs, enc_outputs, enc_valid_lens)
+                query, enc*outputs, enc*outputs, enc*valid*lens)
             # 在特征维度上连结
             x = paddle.concat((context, paddle.unsqueeze(x, axis=1)), axis=-1)
-            # 将x变形为(1,batch_size,embed_size+num_hiddens)
-            out, hidden_state = self.rnn(x.transpose((1, 0, 2)), hidden_state)
+            # 将x变形为(1,batch*size,embed*size+num_hiddens)
+            out, hidden*state = self.rnn(x.transpose((1, 0, 2)), hidden*state)
             outputs.append(out)
-            self._attention_weights.append(self.attention.attention_weights)
+            self.*attention*weights.append(self.attention.attention_weights)
         # 全连接层变换后，outputs的形状为
-        # (num_steps,batch_size,vocab_size)
+        # (num*steps,batch*size,vocab_size)
         outputs = self.dense(paddle.concat(outputs, axis=0))
-        return outputs.transpose((1, 0, 2)), [enc_outputs, hidden_state, 
-                                              enc_valid_lens]
+        return outputs.transpose((1, 0, 2)), [enc*outputs, hidden*state, 
+                                              enc*valid*lens]
 
     @property
     def attention_weights(self):
-        return self._attention_weights
+        return self.*attention*weights
 ```
 
 接下来，使用包含7个时间步的4个序列输入的小批量[**测试Bahdanau注意力解码器**]。
 
 ```{.python .input}
-encoder = d2l.Seq2SeqEncoder(vocab_size=10, embed_size=8, num_hiddens=16,
+encoder = d2l.Seq2SeqEncoder(vocab*size=10, embed*size=8, num_hiddens=16,
                              num_layers=2)
 encoder.initialize()
-decoder = Seq2SeqAttentionDecoder(vocab_size=10, embed_size=8, num_hiddens=16,
+decoder = Seq2SeqAttentionDecoder(vocab*size=10, embed*size=8, num_hiddens=16,
                                   num_layers=2)
 decoder.initialize()
-X = d2l.zeros((4, 7))  # (batch_size,num_steps)
+X = d2l.zeros((4, 7))  # (batch*size,num*steps)
 state = decoder.init_state(encoder(X), None)
 output, state = decoder(X, state)
 output.shape, len(state), state[0].shape, len(state[1]), state[1][0].shape
 ```
 
 ```{.python .input}
-#@tab pytorch
-encoder = d2l.Seq2SeqEncoder(vocab_size=10, embed_size=8, num_hiddens=16,
+# @tab pytorch
+encoder = d2l.Seq2SeqEncoder(vocab*size=10, embed*size=8, num_hiddens=16,
                              num_layers=2)
 encoder.eval()
-decoder = Seq2SeqAttentionDecoder(vocab_size=10, embed_size=8, num_hiddens=16,
+decoder = Seq2SeqAttentionDecoder(vocab*size=10, embed*size=8, num_hiddens=16,
                                   num_layers=2)
 decoder.eval()
-X = d2l.zeros((4, 7), dtype=torch.long)  # (batch_size,num_steps)
+X = d2l.zeros((4, 7), dtype=torch.long)  # (batch*size,num*steps)
 state = decoder.init_state(encoder(X), None)
 output, state = decoder(X, state)
 output.shape, len(state), state[0].shape, len(state[1]), state[1][0].shape
 ```
 
 ```{.python .input}
-#@tab tensorflow
-encoder = d2l.Seq2SeqEncoder(vocab_size=10, embed_size=8, num_hiddens=16,
+# @tab tensorflow
+encoder = d2l.Seq2SeqEncoder(vocab*size=10, embed*size=8, num_hiddens=16,
                              num_layers=2)
-decoder = Seq2SeqAttentionDecoder(vocab_size=10, embed_size=8, num_hiddens=16,
+decoder = Seq2SeqAttentionDecoder(vocab*size=10, embed*size=8, num_hiddens=16,
                                   num_layers=2)
 X = tf.zeros((4, 7))
 state = decoder.init_state(encoder(X, training=False), None)
@@ -345,70 +345,70 @@ output.shape, len(state), state[0].shape, len(state[1]), state[1][0].shape
 ```
 
 ```{.python .input}
-#@tab paddle
-encoder = d2l.Seq2SeqEncoder(vocab_size=10, embed_size=8, num_hiddens=16,
+# @tab paddle
+encoder = d2l.Seq2SeqEncoder(vocab*size=10, embed*size=8, num_hiddens=16,
                              num_layers=2)
 encoder.eval()
-decoder = Seq2SeqAttentionDecoder(vocab_size=10, embed_size=8, num_hiddens=16,
+decoder = Seq2SeqAttentionDecoder(vocab*size=10, embed*size=8, num_hiddens=16,
                                   num_layers=2)
 decoder.eval()
-X = paddle.zeros((4, 7), dtype='int64')  # (batch_size,num_steps)
+X = paddle.zeros((4, 7), dtype='int64')  # (batch*size,num*steps)
 state = decoder.init_state(encoder(X), None)
 output, state = decoder(X, state)
 output.shape, len(state), state[0].shape, len(state[1]), state[1][0].shape
 ```
 
-## [**训练**]
+# # [**训练**]
 
-与 :numref:`sec_seq2seq_training`类似，
+与 :numref:`sec*seq2seq*training`类似，
 我们在这里指定超参数，实例化一个带有Bahdanau注意力的编码器和解码器，
 并对这个模型进行机器翻译训练。
 由于新增的注意力机制，训练要比没有注意力机制的
- :numref:`sec_seq2seq_training`慢得多。
+ :numref:`sec*seq2seq*training`慢得多。
 
 ```{.python .input}
-#@tab all
-embed_size, num_hiddens, num_layers, dropout = 32, 32, 2, 0.1
-batch_size, num_steps = 64, 10
-lr, num_epochs, device = 0.005, 250, d2l.try_gpu()
+# @tab all
+embed*size, num*hiddens, num_layers, dropout = 32, 32, 2, 0.1
+batch*size, num*steps = 64, 10
+lr, num*epochs, device = 0.005, 250, d2l.try*gpu()
 
-train_iter, src_vocab, tgt_vocab = d2l.load_data_nmt(batch_size, num_steps)
+train*iter, src*vocab, tgt*vocab = d2l.load*data*nmt(batch*size, num_steps)
 encoder = d2l.Seq2SeqEncoder(
-    len(src_vocab), embed_size, num_hiddens, num_layers, dropout)
+    len(src*vocab), embed*size, num*hiddens, num*layers, dropout)
 decoder = Seq2SeqAttentionDecoder(
-    len(tgt_vocab), embed_size, num_hiddens, num_layers, dropout)
+    len(tgt*vocab), embed*size, num*hiddens, num*layers, dropout)
 net = d2l.EncoderDecoder(encoder, decoder)
-d2l.train_seq2seq(net, train_iter, lr, num_epochs, tgt_vocab, device)
+d2l.train*seq2seq(net, train*iter, lr, num*epochs, tgt*vocab, device)
 ```
 
 模型训练后，我们用它[**将几个英语句子翻译成法语**]并计算它们的BLEU分数。
 
 ```{.python .input}
-#@tab mxnet, pytorch, paddle
+# @tab mxnet, pytorch, paddle
 engs = ['go .', "i lost .", 'he\'s calm .', 'i\'m home .']
 fras = ['va !', 'j\'ai perdu .', 'il est calme .', 'je suis chez moi .']
 for eng, fra in zip(engs, fras):
-    translation, dec_attention_weight_seq = d2l.predict_seq2seq(
-        net, eng, src_vocab, tgt_vocab, num_steps, device, True)
+    translation, dec*attention*weight*seq = d2l.predict*seq2seq(
+        net, eng, src*vocab, tgt*vocab, num_steps, device, True)
     print(f'{eng} => {translation}, ',
           f'bleu {d2l.bleu(translation, fra, k=2):.3f}')
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 engs = ['go .', "i lost .", 'he\'s calm .', 'i\'m home .']
 fras = ['va !', 'j\'ai perdu .', 'il est calme .', 'je suis chez moi .']
 for eng, fra in zip(engs, fras):
-    translation, dec_attention_weight_seq = d2l.predict_seq2seq(
-        net, eng, src_vocab, tgt_vocab, num_steps, True)
+    translation, dec*attention*weight*seq = d2l.predict*seq2seq(
+        net, eng, src*vocab, tgt*vocab, num_steps, True)
     print(f'{eng} => {translation}, ',
           f'bleu {d2l.bleu(translation, fra, k=2):.3f}')
 ```
 
 ```{.python .input}
-#@tab all
+# @tab all
 attention_weights = d2l.reshape(
-    d2l.concat([step[0][0][0] for step in dec_attention_weight_seq], 0),
+    d2l.concat([step[0][0][0] for step in dec*attention*weight_seq], 0),
     (1, 1, -1, num_steps))
 ```
 
@@ -424,7 +424,7 @@ d2l.show_heatmaps(
 ```
 
 ```{.python .input}
-#@tab pytorch, paddle
+# @tab pytorch, paddle
 # 加上一个包含序列结束词元
 d2l.show_heatmaps(
     attention_weights[:, :, :, :len(engs[-1].split()) + 1].cpu(),
@@ -432,18 +432,18 @@ d2l.show_heatmaps(
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 # 加上一个包含序列结束词元
-d2l.show_heatmaps(attention_weights[:, :, :, :len(engs[-1].split()) + 1],
+d2l.show*heatmaps(attention*weights[:, :, :, :len(engs[-1].split()) + 1],
                   xlabel='Key posistions', ylabel='Query posistions')
 ```
 
-## 小结
+# # 小结
 
 * 在预测词元时，如果不是所有输入词元都是相关的，那么具有Bahdanau注意力的循环神经网络编码器-解码器会有选择地统计输入序列的不同部分。这是通过将上下文变量视为加性注意力池化的输出来实现的。
 * 在循环神经网络编码器-解码器中，Bahdanau注意力将上一时间步的解码器隐状态视为查询，在所有时间步的编码器隐状态同时视为键和值。
 
-## 练习
+# # 练习
 
 1. 在实验中用LSTM替换GRU。
 1. 修改实验以将加性注意力打分函数替换为缩放点积注意力，它如何影响训练效率？

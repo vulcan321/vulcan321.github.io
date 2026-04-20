@@ -6,7 +6,7 @@
 	
 <img width="70%" height="70%" src="https://user-images.githubusercontent.com/87457873/134297801-d13053cc-0a5d-4efd-9f02-9343b513fc33.png"/>
 	
-## 🚀 直达  [（# C++11）](#cpp_11) [（# C++14）](#cpp_14) [（# C++17）](#cpp_17) [（# C++20）](#cpp_20) [（# C++23）](#cpp_23)
+# # 🚀 直达  [（# C++11）](# cpp*11) [（# C++14）](# cpp*14) [（# C++17）](# cpp*17) [（# C++20）](# cpp*20) [（# C++23）](# cpp_23)
 
 <br>
 
@@ -31,52 +31,52 @@
 
 
 # 🚪 入门教程 
-### [C++ 入门教程（41课时） - 阿里云大学](https://github.com/0voice/cpp_new_features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md)
-* [C++ 教程](https://github.com/0voice/cpp_new_features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md#c-%E6%95%99%E7%A8%8B)
-* [C++ 简介](https://github.com/0voice/cpp_new_features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md#c-%E7%AE%80%E4%BB%8B)
-* [C++ 环境设置](https://github.com/0voice/cpp_new_features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md#c-%E7%8E%AF%E5%A2%83%E8%AE%BE%E7%BD%AE)
-* [C++ 基本语法](https://github.com/0voice/cpp_new_features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md#c-%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95)
-* [C++ 注释](https://github.com/0voice/cpp_new_features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md#c-%E6%B3%A8%E9%87%8A)
-* [C++ 数据类型](https://github.com/0voice/cpp_new_features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md#c-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B)
-* [C++ 变量类型](https://github.com/0voice/cpp_new_features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md#c-%E5%8F%98%E9%87%8F%E7%B1%BB%E5%9E%8B)
-* [C++ 变量作用域](https://github.com/0voice/cpp_new_features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md#c-%E5%8F%98%E9%87%8F%E4%BD%9C%E7%94%A8%E5%9F%9F)
-* [C++ 常量](https://github.com/0voice/cpp_new_features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md#c-%E5%B8%B8%E9%87%8F)
-* [C++ 修饰符类型](https://github.com/0voice/cpp_new_features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md#c-%E4%BF%AE%E9%A5%B0%E7%AC%A6%E7%B1%BB%E5%9E%8B)
-* [C++ 存储类](https://github.com/0voice/cpp_new_features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md#c-%E5%AD%98%E5%82%A8%E7%B1%BB)
-* [C++ 运算符](https://github.com/0voice/cpp_new_features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md#c-%E8%BF%90%E7%AE%97%E7%AC%A6)
-* [C++ 循环](https://github.com/0voice/cpp_new_features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md#c-%E5%BE%AA%E7%8E%AF)
-* [C++ 判断](https://github.com/0voice/cpp_new_features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md#c-%E5%88%A4%E6%96%AD)
-* [C++ 函数](https://github.com/0voice/cpp_new_features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md#c-%E5%87%BD%E6%95%B0)
-* [C++ 数字](https://github.com/0voice/cpp_new_features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md#c-%E6%95%B0%E5%AD%97)
-* [C++ 数组](https://github.com/0voice/cpp_new_features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md#c-%E6%95%B0%E7%BB%84)
-* [C++ 字符串](https://github.com/0voice/cpp_new_features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md#c-%E5%AD%97%E7%AC%A6%E4%B8%B2)
-* [C++ 指针](https://github.com/0voice/cpp_new_features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md#c-%E6%8C%87%E9%92%88)
-* [C++ 引用](https://github.com/0voice/cpp_new_features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md#c-%E5%BC%95%E7%94%A8)
-* [C++ 日期 & 时间](https://github.com/0voice/cpp_new_features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md#c-%E6%97%A5%E6%9C%9F--%E6%97%B6%E9%97%B4)
-* [C++ 基本的输入输出](https://github.com/0voice/cpp_new_features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md#c-%E5%9F%BA%E6%9C%AC%E7%9A%84%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA)
-* [C++ 数据结构](https://github.com/0voice/cpp_new_features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md#c-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84)
-* [C++ 类 & 对象](https://github.com/0voice/cpp_new_features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md#c-%E7%B1%BB--%E5%AF%B9%E8%B1%A1)
-* [C++ 继承](https://github.com/0voice/cpp_new_features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md#c-%E7%BB%A7%E6%89%BF)
-* [C++ 重载运算符和重载函数](https://github.com/0voice/cpp_new_features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md#c-%E9%87%8D%E8%BD%BD%E8%BF%90%E7%AE%97%E7%AC%A6%E5%92%8C%E9%87%8D%E8%BD%BD%E5%87%BD%E6%95%B0)
-* [C++ 多态](https://github.com/0voice/cpp_new_features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md#c-%E5%A4%9A%E6%80%81)
-* [C++ 数据抽象](https://github.com/0voice/cpp_new_features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md#c-%E6%95%B0%E6%8D%AE%E6%8A%BD%E8%B1%A1)
-* [C++ 数据封装](https://github.com/0voice/cpp_new_features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md#c-%E6%95%B0%E6%8D%AE%E5%B0%81%E8%A3%85)
-* [C++ 接口（抽象类）](https://github.com/0voice/cpp_new_features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md#c-%E6%8E%A5%E5%8F%A3%E6%8A%BD%E8%B1%A1%E7%B1%BB)
-* [C++ 文件和流](https://github.com/0voice/cpp_new_features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md#c-%E6%96%87%E4%BB%B6%E5%92%8C%E6%B5%81)
-* [C++ 异常处理](https://github.com/0voice/cpp_new_features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md#c-%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86)
-* [C++ 动态内存](https://github.com/0voice/cpp_new_features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md#c-%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98)
-* [C++ 命名空间](https://github.com/0voice/cpp_new_features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md#c-%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4)
-* [C++ 模板](https://github.com/0voice/cpp_new_features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md#c-%E6%A8%A1%E6%9D%BF)
-* [C++ 预处理器](https://github.com/0voice/cpp_new_features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md#c-%E9%A2%84%E5%A4%84%E7%90%86%E5%99%A8)
-* [C++ 信号处理](https://github.com/0voice/cpp_new_features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md#c-%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86)
-* [C++ 多线程](https://github.com/0voice/cpp_new_features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md#c-%E5%A4%9A%E7%BA%BF%E7%A8%8B)
-* [C++ Web 编程](https://github.com/0voice/cpp_new_features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md#c-web-%E7%BC%96%E7%A8%8B)
-* [C++ STL 教程](https://github.com/0voice/cpp_new_features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md#c-stl-%E6%95%99%E7%A8%8B)
-* [C++ 标准库](https://github.com/0voice/cpp_new_features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md#c-%E6%A0%87%E5%87%86%E5%BA%93)
+## # [C++ 入门教程（41课时） - 阿里云大学](https://github.com/0voice/cpp*new*features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md)
+* [C++ 教程](https://github.com/0voice/cpp*new*features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md# c-%E6%95%99%E7%A8%8B)
+* [C++ 简介](https://github.com/0voice/cpp*new*features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md# c-%E7%AE%80%E4%BB%8B)
+* [C++ 环境设置](https://github.com/0voice/cpp*new*features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md# c-%E7%8E%AF%E5%A2%83%E8%AE%BE%E7%BD%AE)
+* [C++ 基本语法](https://github.com/0voice/cpp*new*features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md# c-%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95)
+* [C++ 注释](https://github.com/0voice/cpp*new*features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md# c-%E6%B3%A8%E9%87%8A)
+* [C++ 数据类型](https://github.com/0voice/cpp*new*features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md# c-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B)
+* [C++ 变量类型](https://github.com/0voice/cpp*new*features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md# c-%E5%8F%98%E9%87%8F%E7%B1%BB%E5%9E%8B)
+* [C++ 变量作用域](https://github.com/0voice/cpp*new*features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md# c-%E5%8F%98%E9%87%8F%E4%BD%9C%E7%94%A8%E5%9F%9F)
+* [C++ 常量](https://github.com/0voice/cpp*new*features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md# c-%E5%B8%B8%E9%87%8F)
+* [C++ 修饰符类型](https://github.com/0voice/cpp*new*features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md# c-%E4%BF%AE%E9%A5%B0%E7%AC%A6%E7%B1%BB%E5%9E%8B)
+* [C++ 存储类](https://github.com/0voice/cpp*new*features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md# c-%E5%AD%98%E5%82%A8%E7%B1%BB)
+* [C++ 运算符](https://github.com/0voice/cpp*new*features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md# c-%E8%BF%90%E7%AE%97%E7%AC%A6)
+* [C++ 循环](https://github.com/0voice/cpp*new*features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md# c-%E5%BE%AA%E7%8E%AF)
+* [C++ 判断](https://github.com/0voice/cpp*new*features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md# c-%E5%88%A4%E6%96%AD)
+* [C++ 函数](https://github.com/0voice/cpp*new*features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md# c-%E5%87%BD%E6%95%B0)
+* [C++ 数字](https://github.com/0voice/cpp*new*features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md# c-%E6%95%B0%E5%AD%97)
+* [C++ 数组](https://github.com/0voice/cpp*new*features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md# c-%E6%95%B0%E7%BB%84)
+* [C++ 字符串](https://github.com/0voice/cpp*new*features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md# c-%E5%AD%97%E7%AC%A6%E4%B8%B2)
+* [C++ 指针](https://github.com/0voice/cpp*new*features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md# c-%E6%8C%87%E9%92%88)
+* [C++ 引用](https://github.com/0voice/cpp*new*features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md# c-%E5%BC%95%E7%94%A8)
+* [C++ 日期 & 时间](https://github.com/0voice/cpp*new*features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md# c-%E6%97%A5%E6%9C%9F--%E6%97%B6%E9%97%B4)
+* [C++ 基本的输入输出](https://github.com/0voice/cpp*new*features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md# c-%E5%9F%BA%E6%9C%AC%E7%9A%84%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA)
+* [C++ 数据结构](https://github.com/0voice/cpp*new*features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md# c-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84)
+* [C++ 类 & 对象](https://github.com/0voice/cpp*new*features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md# c-%E7%B1%BB--%E5%AF%B9%E8%B1%A1)
+* [C++ 继承](https://github.com/0voice/cpp*new*features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md# c-%E7%BB%A7%E6%89%BF)
+* [C++ 重载运算符和重载函数](https://github.com/0voice/cpp*new*features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md# c-%E9%87%8D%E8%BD%BD%E8%BF%90%E7%AE%97%E7%AC%A6%E5%92%8C%E9%87%8D%E8%BD%BD%E5%87%BD%E6%95%B0)
+* [C++ 多态](https://github.com/0voice/cpp*new*features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md# c-%E5%A4%9A%E6%80%81)
+* [C++ 数据抽象](https://github.com/0voice/cpp*new*features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md# c-%E6%95%B0%E6%8D%AE%E6%8A%BD%E8%B1%A1)
+* [C++ 数据封装](https://github.com/0voice/cpp*new*features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md# c-%E6%95%B0%E6%8D%AE%E5%B0%81%E8%A3%85)
+* [C++ 接口（抽象类）](https://github.com/0voice/cpp*new*features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md# c-%E6%8E%A5%E5%8F%A3%E6%8A%BD%E8%B1%A1%E7%B1%BB)
+* [C++ 文件和流](https://github.com/0voice/cpp*new*features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md# c-%E6%96%87%E4%BB%B6%E5%92%8C%E6%B5%81)
+* [C++ 异常处理](https://github.com/0voice/cpp*new*features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md# c-%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86)
+* [C++ 动态内存](https://github.com/0voice/cpp*new*features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md# c-%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98)
+* [C++ 命名空间](https://github.com/0voice/cpp*new*features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md# c-%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4)
+* [C++ 模板](https://github.com/0voice/cpp*new*features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md# c-%E6%A8%A1%E6%9D%BF)
+* [C++ 预处理器](https://github.com/0voice/cpp*new*features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md# c-%E9%A2%84%E5%A4%84%E7%90%86%E5%99%A8)
+* [C++ 信号处理](https://github.com/0voice/cpp*new*features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md# c-%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86)
+* [C++ 多线程](https://github.com/0voice/cpp*new*features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md# c-%E5%A4%9A%E7%BA%BF%E7%A8%8B)
+* [C++ Web 编程](https://github.com/0voice/cpp*new*features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md# c-web-%E7%BC%96%E7%A8%8B)
+* [C++ STL 教程](https://github.com/0voice/cpp*new*features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md# c-stl-%E6%95%99%E7%A8%8B)
+* [C++ 标准库](https://github.com/0voice/cpp*new*features/blob/main/C%2B%2B%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%8841%E8%AF%BE%E6%97%B6%EF%BC%89%20-%20%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%A7%E5%AD%A6.md# c-%E6%A0%87%E5%87%86%E5%BA%93)
 
-### [C++ 学习笔记](https://github.com/0voice/cpp_new_features/blob/main/C%2B%2B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.md)
+## # [C++ 学习笔记](https://github.com/0voice/cpp*new*features/blob/main/C%2B%2B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.md)
 
-* [一、基础知识](https://github.com/0voice/cpp_new_features/blob/main/C%2B%2B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.md#%E4%B8%80%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86)
+* [一、基础知识](https://github.com/0voice/cpp*new*features/blob/main/C%2B%2B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.md# %E4%B8%80%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86)
   * 1、goto 语句(不建议使用)
   * 2、一维数组
   * 3、二维数组
@@ -100,7 +100,7 @@
     * 8.5 结构体嵌套结构体
     * 8.6 结构体做函数参数
     * 8.7 结构体中 const使用场景
-* [二、核心编程](https://github.com/0voice/cpp_new_features/blob/main/C%2B%2B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.md#%E4%BA%8C%E6%A0%B8%E5%BF%83%E7%BC%96%E7%A8%8B)
+* [二、核心编程](https://github.com/0voice/cpp*new*features/blob/main/C%2B%2B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.md# %E4%BA%8C%E6%A0%B8%E5%BF%83%E7%BC%96%E7%A8%8B)
   * 1、内存分区模型
     * 1.1 程序运行前
     * 1.2 程序运行后
@@ -143,30 +143,30 @@
 * [《泛型编程与STL》](https://book.douban.com/subject/1241423/)
 
 # 📰 文章推荐
-* [每个c++开发人员都应该使用的10个c++11特性](https://github.com/0voice/cpp_new_features/blob/main/%E6%AF%8F%E4%B8%AAc%2B%2B%E5%BC%80%E5%8F%91%E4%BA%BA%E5%91%98%E9%83%BD%E5%BA%94%E8%AF%A5%E4%BD%BF%E7%94%A8%E7%9A%8410%E4%B8%AAc%2B%2B%2011%E7%89%B9%E6%80%A7.md)
-* [在c++项目中你必须真正使用的15个c++11特性](https://github.com/0voice/cpp_new_features/blob/main/%E5%9C%A8c%2B%2B%E9%A1%B9%E7%9B%AE%E4%B8%AD%E4%BD%A0%E5%BF%85%E9%A1%BB%E7%9C%9F%E6%AD%A3%E4%BD%BF%E7%94%A8%E7%9A%8415%E4%B8%AAc%2B%2B%E7%89%B9%E6%80%A7.md)
-* [如何在 C++11 中使用 Lambda 表达式](https://github.com/0voice/cpp_new_features/blob/main/%E5%A6%82%E4%BD%95%E5%9C%A8%20C%2B%2B11%20%E4%B8%AD%E4%BD%BF%E7%94%A8%20Lambda%20%E8%A1%A8%E8%BE%BE%E5%BC%8F.md)
-* [深入理解C++11](https://github.com/0voice/cpp_new_features/blob/main/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3C%2B%2B11.md)
-* [吐血整理：C++11新特性](https://github.com/0voice/cpp_new_features/blob/main/%E5%90%90%E8%A1%80%E6%95%B4%E7%90%86%EF%BC%9AC%2B%2B11%E6%96%B0%E7%89%B9%E6%80%A7.md)
-* [C++11新特性之auto和decltype知识点](https://github.com/0voice/cpp_new_features/blob/main/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%9AC++%2011%E6%96%B0%E7%89%B9%E6%80%A7.md#c11%E6%96%B0%E7%89%B9%E6%80%A7%E4%B9%8Bauto%E5%92%8Cdecltype%E7%9F%A5%E8%AF%86%E7%82%B9)
-* [C++11新特性之左值引用、右值引用、移动语义、完美转发](https://github.com/0voice/cpp_new_features/blob/main/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%9AC++%2011%E6%96%B0%E7%89%B9%E6%80%A7.md#c11%E6%96%B0%E7%89%B9%E6%80%A7%E4%B9%8B%E5%B7%A6%E5%80%BC%E5%BC%95%E7%94%A8%E5%8F%B3%E5%80%BC%E5%BC%95%E7%94%A8%E7%A7%BB%E5%8A%A8%E8%AF%AD%E4%B9%89%E5%AE%8C%E7%BE%8E%E8%BD%AC%E5%8F%91)
-* [C++11新特性之列表初始化](https://github.com/0voice/cpp_new_features/blob/main/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%9AC++%2011%E6%96%B0%E7%89%B9%E6%80%A7.md#c11%E6%96%B0%E7%89%B9%E6%80%A7%E4%B9%8B%E5%88%97%E8%A1%A8%E5%88%9D%E5%A7%8B%E5%8C%96)
-* [C++11新特性std::function和lambda表达式](https://github.com/0voice/cpp_new_features/blob/main/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%9AC++%2011%E6%96%B0%E7%89%B9%E6%80%A7.md#c11%E6%96%B0%E7%89%B9%E6%80%A7stdfunction%E5%92%8Clambda%E8%A1%A8%E8%BE%BE%E5%BC%8F)
-* [C++11新特性之模板改进](https://github.com/0voice/cpp_new_features/blob/main/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%9AC++%2011%E6%96%B0%E7%89%B9%E6%80%A7.md#c11%E6%96%B0%E7%89%B9%E6%80%A7%E4%B9%8B%E6%A8%A1%E6%9D%BF%E6%94%B9%E8%BF%9B)
-* [C++11新特性之线程相关知识点](https://github.com/0voice/cpp_new_features/blob/main/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%9AC++%2011%E6%96%B0%E7%89%B9%E6%80%A7.md#c11%E6%96%B0%E7%89%B9%E6%80%A7%E4%B9%8B%E7%BA%BF%E7%A8%8B%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E7%82%B9)
-* [C++11新特性之异步操作-async](https://github.com/0voice/cpp_new_features/blob/main/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%9AC++%2011%E6%96%B0%E7%89%B9%E6%80%A7.md#c11-%E7%9A%84%E5%BC%82%E6%AD%A5%E6%93%8D%E4%BD%9C-async)
-* [C++11新特性之智能指针](https://github.com/0voice/cpp_new_features/blob/main/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%9AC++%2011%E6%96%B0%E7%89%B9%E6%80%A7.md#c11%E6%96%B0%E7%89%B9%E6%80%A7%E4%B9%8B%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88)
-* [C++11常用新特性（一）](https://github.com/0voice/cpp_new_features/blob/main/C%2B%2B11%E5%B8%B8%E7%94%A8%E6%96%B0%E7%89%B9%E6%80%A7%EF%BC%88%E4%B8%80%EF%BC%89.md)
-* [C++11常用新特性（二）](https://github.com/0voice/cpp_new_features/blob/main/C++11%E5%B8%B8%E7%94%A8%E6%96%B0%E7%89%B9%E6%80%A7%EF%BC%88%E4%BA%8C%EF%BC%89.md)
-* [C++14新特性浅谈](https://github.com/0voice/cpp_new_features/blob/main/%E3%80%8CNotes%E3%80%8DC%2B%2B14%E6%96%B0%E7%89%B9%E6%80%A7%E6%B5%85%E8%B0%88.md)
-* [C++14新特性的所有知识点全在这儿啦](https://github.com/0voice/cpp_new_features/blob/main/C%2B%2B14%E6%96%B0%E7%89%B9%E6%80%A7%E7%9A%84%E6%89%80%E6%9C%89%E7%9F%A5%E8%AF%86%E7%82%B9%E5%85%A8%E5%9C%A8%E8%BF%99%E5%84%BF%E5%95%A6%EF%BC%81.md)
-* [总结归纳：C++17新特性](https://github.com/0voice/cpp_new_features/blob/main/%E6%80%BB%E7%BB%93%E5%BD%92%E7%BA%B3%EF%BC%9AC%2B%2B17%E6%96%B0%E7%89%B9%E6%80%A7.md)
-* [C++ 20语言特性](https://github.com/0voice/cpp_new_features/blob/main/C%2B%2B%2020%E8%AF%AD%E8%A8%80%E7%89%B9%E6%80%A7.md)
+* [每个c++开发人员都应该使用的10个c++11特性](https://github.com/0voice/cpp*new*features/blob/main/%E6%AF%8F%E4%B8%AAc%2B%2B%E5%BC%80%E5%8F%91%E4%BA%BA%E5%91%98%E9%83%BD%E5%BA%94%E8%AF%A5%E4%BD%BF%E7%94%A8%E7%9A%8410%E4%B8%AAc%2B%2B%2011%E7%89%B9%E6%80%A7.md)
+* [在c++项目中你必须真正使用的15个c++11特性](https://github.com/0voice/cpp*new*features/blob/main/%E5%9C%A8c%2B%2B%E9%A1%B9%E7%9B%AE%E4%B8%AD%E4%BD%A0%E5%BF%85%E9%A1%BB%E7%9C%9F%E6%AD%A3%E4%BD%BF%E7%94%A8%E7%9A%8415%E4%B8%AAc%2B%2B%E7%89%B9%E6%80%A7.md)
+* [如何在 C++11 中使用 Lambda 表达式](https://github.com/0voice/cpp*new*features/blob/main/%E5%A6%82%E4%BD%95%E5%9C%A8%20C%2B%2B11%20%E4%B8%AD%E4%BD%BF%E7%94%A8%20Lambda%20%E8%A1%A8%E8%BE%BE%E5%BC%8F.md)
+* [深入理解C++11](https://github.com/0voice/cpp*new*features/blob/main/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3C%2B%2B11.md)
+* [吐血整理：C++11新特性](https://github.com/0voice/cpp*new*features/blob/main/%E5%90%90%E8%A1%80%E6%95%B4%E7%90%86%EF%BC%9AC%2B%2B11%E6%96%B0%E7%89%B9%E6%80%A7.md)
+* [C++11新特性之auto和decltype知识点](https://github.com/0voice/cpp*new*features/blob/main/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%9AC++%2011%E6%96%B0%E7%89%B9%E6%80%A7.md# c11%E6%96%B0%E7%89%B9%E6%80%A7%E4%B9%8Bauto%E5%92%8Cdecltype%E7%9F%A5%E8%AF%86%E7%82%B9)
+* [C++11新特性之左值引用、右值引用、移动语义、完美转发](https://github.com/0voice/cpp*new*features/blob/main/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%9AC++%2011%E6%96%B0%E7%89%B9%E6%80%A7.md# c11%E6%96%B0%E7%89%B9%E6%80%A7%E4%B9%8B%E5%B7%A6%E5%80%BC%E5%BC%95%E7%94%A8%E5%8F%B3%E5%80%BC%E5%BC%95%E7%94%A8%E7%A7%BB%E5%8A%A8%E8%AF%AD%E4%B9%89%E5%AE%8C%E7%BE%8E%E8%BD%AC%E5%8F%91)
+* [C++11新特性之列表初始化](https://github.com/0voice/cpp*new*features/blob/main/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%9AC++%2011%E6%96%B0%E7%89%B9%E6%80%A7.md# c11%E6%96%B0%E7%89%B9%E6%80%A7%E4%B9%8B%E5%88%97%E8%A1%A8%E5%88%9D%E5%A7%8B%E5%8C%96)
+* [C++11新特性std::function和lambda表达式](https://github.com/0voice/cpp*new*features/blob/main/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%9AC++%2011%E6%96%B0%E7%89%B9%E6%80%A7.md# c11%E6%96%B0%E7%89%B9%E6%80%A7stdfunction%E5%92%8Clambda%E8%A1%A8%E8%BE%BE%E5%BC%8F)
+* [C++11新特性之模板改进](https://github.com/0voice/cpp*new*features/blob/main/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%9AC++%2011%E6%96%B0%E7%89%B9%E6%80%A7.md# c11%E6%96%B0%E7%89%B9%E6%80%A7%E4%B9%8B%E6%A8%A1%E6%9D%BF%E6%94%B9%E8%BF%9B)
+* [C++11新特性之线程相关知识点](https://github.com/0voice/cpp*new*features/blob/main/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%9AC++%2011%E6%96%B0%E7%89%B9%E6%80%A7.md# c11%E6%96%B0%E7%89%B9%E6%80%A7%E4%B9%8B%E7%BA%BF%E7%A8%8B%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E7%82%B9)
+* [C++11新特性之异步操作-async](https://github.com/0voice/cpp*new*features/blob/main/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%9AC++%2011%E6%96%B0%E7%89%B9%E6%80%A7.md# c11-%E7%9A%84%E5%BC%82%E6%AD%A5%E6%93%8D%E4%BD%9C-async)
+* [C++11新特性之智能指针](https://github.com/0voice/cpp*new*features/blob/main/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%9AC++%2011%E6%96%B0%E7%89%B9%E6%80%A7.md# c11%E6%96%B0%E7%89%B9%E6%80%A7%E4%B9%8B%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88)
+* [C++11常用新特性（一）](https://github.com/0voice/cpp*new*features/blob/main/C%2B%2B11%E5%B8%B8%E7%94%A8%E6%96%B0%E7%89%B9%E6%80%A7%EF%BC%88%E4%B8%80%EF%BC%89.md)
+* [C++11常用新特性（二）](https://github.com/0voice/cpp*new*features/blob/main/C++11%E5%B8%B8%E7%94%A8%E6%96%B0%E7%89%B9%E6%80%A7%EF%BC%88%E4%BA%8C%EF%BC%89.md)
+* [C++14新特性浅谈](https://github.com/0voice/cpp*new*features/blob/main/%E3%80%8CNotes%E3%80%8DC%2B%2B14%E6%96%B0%E7%89%B9%E6%80%A7%E6%B5%85%E8%B0%88.md)
+* [C++14新特性的所有知识点全在这儿啦](https://github.com/0voice/cpp*new*features/blob/main/C%2B%2B14%E6%96%B0%E7%89%B9%E6%80%A7%E7%9A%84%E6%89%80%E6%9C%89%E7%9F%A5%E8%AF%86%E7%82%B9%E5%85%A8%E5%9C%A8%E8%BF%99%E5%84%BF%E5%95%A6%EF%BC%81.md)
+* [总结归纳：C++17新特性](https://github.com/0voice/cpp*new*features/blob/main/%E6%80%BB%E7%BB%93%E5%BD%92%E7%BA%B3%EF%BC%9AC%2B%2B17%E6%96%B0%E7%89%B9%E6%80%A7.md)
+* [C++ 20语言特性](https://github.com/0voice/cpp*new*features/blob/main/C%2B%2B%2020%E8%AF%AD%E8%A8%80%E7%89%B9%E6%80%A7.md)
 
 
 # ▶ 教学视频
 
-#### [【GeekBand】侯捷 - C++面向对象高级编程](https://www.aliyundrive.com/s/HapPXxjQ1U7)
+### # [【GeekBand】侯捷 - C++面向对象高级编程](https://www.aliyundrive.com/s/HapPXxjQ1U7)
 
 * [P1 C++编程简介](https://www.aliyundrive.com/s/HapPXxjQ1U7)
 * [P2 头文件与类的声明](https://www.aliyundrive.com/s/HapPXxjQ1U7)
@@ -208,9 +208,9 @@
 
 
 # 🌰 干货铺
-* [C++ Standard Library](http://en.wikipedia.org/wiki/C%2B%2B_Standard_Library) - 一系列类和函数的集合，使用核心语言编写，也是C++ISO自身标准的一部分
-* [Standard Template Library](https://en.wikipedia.org/wiki/Standard_Template_Library) - 标准模板库
-* [C POSIX library](https://en.wikipedia.org/wiki/C_POSIX_library) - POSIX系统的C标准库规范
+* [C++ Standard Library](http://en.wikipedia.org/wiki/C%2B%2B*Standard*Library) - 一系列类和函数的集合，使用核心语言编写，也是C++ISO自身标准的一部分
+* [Standard Template Library](https://en.wikipedia.org/wiki/Standard*Template*Library) - 标准模板库
+* [C POSIX library](https://en.wikipedia.org/wiki/C*POSIX*library) - POSIX系统的C标准库规范
 * [ISO C++ Standards Committee](https://github.com/cplusplus) - C++标准委员会
 * [C++ FAQ](https://isocpp.org/faq) − C++ 常见问题
 * [Free Country](https://www.thefreecountry.com/sourcecode/cpp.shtml?spm=5176.10731542.0.0.4fc35bde2jHhz4) − Free Country 提供了免费的 C++ 源代码和 C++ 库，这些源代码和库涵盖了压缩、存档、游戏编程、标准模板库和 GUI 编程等 C++ 编程领域。
@@ -222,7 +222,7 @@
 * [Free C/C++ Libraries](https://www.programmerworld.net/resources/c_library.htm) - 免费C++源代码和其它有用的工具
 * [The C++ Standard Library](http://www.josuttis.com/libbook/examples.html) - 这是一个收集了数C/C++网站链接列表的网页
 * [cplusplus](http://www.cplusplus.com/) - C++学习网站
-* [C++ Source Codes](https://people.sc.fsu.edu/~jburkardt/cpp_src/cpp_src.html) - 这是一个全面的关于C++的345个源代码清单
+* [C++ Source Codes](https://people.sc.fsu.edu/~jburkardt/cpp*src/cpp*src.html) - 这是一个全面的关于C++的345个源代码清单
 
 # 🗜 框架
 * [Apache C++ Standard Library](http://stdcxx.apache.org/) : 是一系列算法，容器，迭代器和其他基本组件的集合
@@ -252,7 +252,7 @@
 
 <br>
 
-### 异步事件循环
+## # 异步事件循环
 * [Boost.Asio](https://think-async.com/Asio/) : 用于网络和底层I/O编程的跨平台的C++库。
 * [libev](http://libev.schmorp.de/) : 功能齐全，高性能的时间循环，轻微地仿效libevent，但是不再像libevent一样有局限性，也修复了它的一些bug。
 * [libevent](http://libevent.org/) : 事件通知库
@@ -263,7 +263,7 @@
 
 <br>
 
-### 网络库
+## # 网络库
 * [ACE](https://github.com/cflowe/ACE) : C++面向对象网络变成工具包
 * [Casablanca](https://archive.codeplex.com/?p=casablanca) : C++ REST SDK
 * [cpp-netlib](https://cpp-netlib.org/) : 高级网络编程的开源库集合
@@ -280,7 +280,7 @@
 
 <br>
 
-### TCP/IP协议栈
+## # TCP/IP协议栈
 * [f-stack](https://github.com/f-stack/f-stack) : 腾讯开源的协议栈，基于DPDK的高性能用户态协议栈。
 * [NtyTcp](https://github.com/wangbojing/NtyTcp) : 单线程的协议栈的，基于netmap,DPDK,rawSocket的实现。
 * [LWIP](http://savannah.nongnu.org/projects/lwip/) : 针对 RAM 平台的精简版的 TCP/IP 协议栈实现。
@@ -289,7 +289,7 @@
 
 <br>
 
-### WEB应用框架
+## # WEB应用框架
 
 * [Nginx](http://nginx.org/) : 一个高性能的HTTP和反向代理web服务器，同时也提供了IMAP/POP3/SMTP服务。
 * [Lighttpd](http://www.lighttpd.net/) : 一款开源 Web 服务器软件，安全快速,符合行业标准,适配性强并且针对高配置环境进行了优化。
@@ -305,12 +305,12 @@
 
 <br>
 
-### 标准库，算法与函数
-* [C++ Standard Library](http://en.wikipedia.org/wiki/C%2B%2B_Standard_Library) : 是一系列类和函数的集合，使用核心语言编写，也是C++ISO自身标准的一部分。
+## # 标准库，算法与函数
+* [C++ Standard Library](http://en.wikipedia.org/wiki/C%2B%2B*Standard*Library) : 是一系列类和函数的集合，使用核心语言编写，也是C++ISO自身标准的一部分。
 
 <br>
 
-### 音频库
+## # 音频库
 * [FMOD](https://www.fmod.com/) : 易于使用的跨平台的音频引擎和音频内容的游戏创作工具。
 * [Maximilian](https://github.com/micknoise/Maximilian) : C++音频和音乐数字信号处理库
 * [OpenAL](http://www.openal.org/) : 开源音频库—跨平台的音频API
@@ -321,7 +321,7 @@
 
 <br>
 
-### 生态学
+## # 生态学
 * [lisequence](http://molpopgen.github.io/libsequence/) : 用于表示和分析群体遗传学数据的C++库。
 * [SeqAn](http://www.seqan.de/) : 专注于生物数据序列分析的算法和数据结构。
 * [Vcflib](https://github.com/vcflib/vcflib) : 用于解析和处理VCF文件的C++库
@@ -329,7 +329,7 @@
 
 <br>
 
-### 压缩
+## # 压缩
 * [bzip2](http://www.bzip.org/) : 一个完全免费，免费专利和高质量的数据压缩
 * [doboz](https://bitbucket.org/attila_afra/doboz/src) : 能够快速解压缩的压缩库
 * [PhysicsFS](https://icculus.org/physfs/) : 对各种归档提供抽象访问的库，主要用于视频游戏，设计灵感部分来自于Quake3的文件子系统。
@@ -346,7 +346,7 @@
 
 <br>
 
-### 并发性
+## # 并发性
 * [Boost.Compute](https://github.com/boostorg/compute) : 用于OpenCL的C++GPU计算库
 * [Bolt](https://github.com/HSA-Libraries/Bolt) :  针对GPU进行优化的C++模板库
 * [C++React](https://github.com/schlangster/cpp.react) : 用于C++11的反应性编程库
@@ -361,7 +361,7 @@
 
 <br>
 
-### 密码学
+## # 密码学
 * [Bcrypt](http://bcrypt.sourceforge.net/) : 一个跨平台的文件加密工具，加密文件可以移植到所有可支持的操作系统和处理器中。
 * [BeeCrypt](https://github.com/klchang/beecrypt) : 快速的加密图形库，功能强大，接口方便。
 * [Botan](https://botan.randombit.net/) : C++加密库
@@ -378,7 +378,7 @@
 
 <br>
 
-### 数据库
+## # 数据库
 * [hiberlite](https://github.com/paulftw/hiberlite) : 用于Sqlite3的C++对象关系映射
 * [LevelDB](https://github.com/google/leveldb) : 快速键值存储库
 * [LMDB](https://symas.com/lmdb/technical/) : 符合数据库四大基本元素的嵌入键值存储
@@ -389,7 +389,7 @@
 
 <br>
 
-### 调试
+## # 调试
 * [Boost.Test](https://www.boost.org/doc/libs/master/libs/test/doc/html/index.html) : Boost测试库
 * [Catch](https://github.com/catchorg/Catch2) : 一个很时尚的，C++原生的框架，只包含头文件，用于单元测试，测试驱动开发和行为驱动开发。
 * [CppUnit](https://www.freedesktop.org/wiki/Software/cppunit/) : 由JUnit移植过来的C++测试框架
@@ -402,22 +402,22 @@
 
 <br>
 
-### 容器
+## # 容器
 * [C++ B-Tree](https://code.google.com/p/cpp-btree/) : 基于B树数据结构，实现命令内存容器的模板库
 * [Hashmaps](https://github.com/goossaert/hashmap) : C++中开放寻址哈希表算法的实现
 
 <br>
 
-### 游戏引擎
+## # 游戏引擎
 * [Cocos2d-x](https://cocos2d-x.org/) : 一个跨平台框架，用于构建2D游戏，互动图书，演示和其他图形应用程序。
 * [Grit](http://gritengine.com/) : 社区项目，用于构建一个免费的游戏引擎，实现开放的世界3D游戏。
-* [lrrlicht](http://irrlicht.sourceforge.net/) : C++语言编写的开源高性能的实时#D引擎
+* [lrrlicht](http://irrlicht.sourceforge.net/) : C++语言编写的开源高性能的实时# D引擎
 * [PolyCode](http://polycode.org/) : C++实现的用于创建游戏的开源框架（与Lua绑定）。
 
 
 <br>
 
-### 图形库
+## # 图形库
 * [bgfx](https://github.com/bkaradzic/bgfx) : 跨平台的渲染库
 * [Cairo](http://www.cairographics.org/) : 支持多种输出设备的2D图形库
 * [Horde3D](https://github.com/horde3d/Horde3D) : 一个小型的3D渲染和动画引擎
@@ -430,8 +430,8 @@
 
 <br>
 
-### 图像处理
-* [Boost.GIL](https://www.boost.org/doc/libs/1_56_0/libs/gil/doc/index.html) : 通用图像库
+## # 图像处理
+* [Boost.GIL](https://www.boost.org/doc/libs/1*56*0/libs/gil/doc/index.html) : 通用图像库
 * [CImg](https://sourceforge.net/projects/cimg/) : 用于图像处理的小型开源C++工具包
 * [FreeImage](http://freeimage.sourceforge.net/) : 开源库，支持现在多媒体应用所需的通用图片格式和其他格式。
 * [GDCM](http://gdcm.sourceforge.net/wiki/index.php/Main_Page) : Grassroots DICOM 库
@@ -445,7 +445,7 @@
 
 <br>
 
-### 国际化
+## # 国际化
 * [gettext](http://www.gnu.org/software/gettext/) :  GNU gettext
 * [IBM ICU](http://site.icu-project.org/) : 提供Unicode 和全球化支持的C、C++ 和Java库
 * [libiconv](http://www.gnu.org/software/libiconv/) : 用于不同字符编码之间的编码转换库
@@ -453,7 +453,7 @@
 
 <br>
 
-### Json库
+## # Json库
 * [frozen](https://github.com/cesanta/frozen) : C/C++的Jason解析生成器
 * [Jansson](https://github.com/akheron/jansson) : 进行编解码和处理Jason数据的C语言库
 * [jbson](https://github.com/chrismanning/jbson) : C++14中构建和迭代BSON data,和Json 文档的库
@@ -472,8 +472,8 @@
 
 <br>
 
-### 日志
-* [Boost.Log](http://www.boost.org/doc/libs/1_56_0/libs/log/doc/html/index.html) : 设计非常模块化，并且具有扩展性
+## # 日志
+* [Boost.Log](http://www.boost.org/doc/libs/1*56*0/libs/log/doc/html/index.html) : 设计非常模块化，并且具有扩展性
 * [easyloggingpp](https://github.com/zuhd-org/easyloggingpp) : C++日志库，只包含单一的头文件。
 * [Log4cpp](http://log4cpp.sourceforge.net/) : 一系列C++类库，灵活添加日志到文件，系统日志，IDSA和其他地方。
 * [templog](http://www.templog.org/) : 轻量级C++库，可以添加日志到你的C++应用程序中
@@ -481,7 +481,7 @@
 
 <br>
 
-### 机器学习，人工智能
+## # 机器学习，人工智能
 
 * [btsk](https://github.com/aigamedev/btsk) : 游戏行为树启动器工具
 * [Evolving Objects](http://eodev.sourceforge.net/) : 基于模板的，ANSI C++演化计算库，能够帮助你非常快速地编写出自己的随机优化算法。
@@ -497,7 +497,7 @@
 
 <br>
 
-### 数学库
+## # 数学库
 
 * [Armadillo](http://arma.sourceforge.net/) : 高质量的C++线性代数库，速度和易用性做到了很好的平衡。语法和MatlAB很相似
 * [blaze](https://code.google.com/p/blaze-lib/) : 高性能的C++数学库，用于密集和稀疏算法。
@@ -511,7 +511,7 @@
 
 <br>
 
-### 多媒体库
+## # 多媒体库
 
 * [GStreamer](https://gstreamer.freedesktop.org/) : 构建媒体处理组件图形的库
 * [LIVE555 Streaming Media](http://www.live555.com/liveMedia/) : 使用开放标准协议(RTP/RTCP, RTSP, SIP) 的多媒体流库
@@ -523,7 +523,7 @@
 
 <br>
 
-### 物理学
+## # 物理学
 * [Box2D](https://code.google.com/p/box2d/) : 2D的游戏物理引擎。
 * [Bullet](https://github.com/bulletphysics/bullet3) : 3D的游戏物理引擎。
 * [Chipmunk](https://github.com/slembcke/Chipmunk2D) : 快速，轻量级的2D游戏物理库
@@ -534,7 +534,7 @@
 
 <br>
 
-### 机器人学
+## # 机器人学
 * [MOOS-Ivp](http://moos-ivp.org/) : 一组开源C++模块，提供机器人平台的自主权，尤其是自主的海洋车辆。
 * [MRPT](https://www.mrpt.org/) : 移动机器人编程工具包
 * [PCL](https://github.com/PointCloudLibrary/pcl) : 点云库是一个独立的，大规模的开放项目，用于2D/3D图像和点云处理。
@@ -547,7 +547,7 @@
 
 <br>
 
-### 脚本
+## # 脚本
 * [ChaiScript](https://github.com/ChaiScript/ChaiScript/) : 用于C++的易于使用的嵌入式脚本语言。
 * [Lua](http://www.lua.org/) : 用于配置文件和基本应用程序脚本的小型快速脚本引擎。
 * [luacxx](https://github.com/dafrito/luacxx) : 用于创建Lua绑定的C++ 11 API
@@ -557,19 +557,19 @@
 
 <br>
 
-### 序列化
+## # 序列化
 * [Cap'n Proto](https://capnproto.org/) : 快速数据交换格式和RPC系统。
 * [cereal](https://github.com/USCiLab/cereal) : C++11 序列化库
 * [FlatBuffers](https://github.com/google/flatbuffers) : 内存高效的序列化库
 * [MessagePack](https://github.com/msgpack/msgpack-c) : C/C++的高效二进制序列化库，例如 JSON
 * [ProtoBuf](http://code.google.com/p/protobuf/) : 协议缓冲，谷歌的数据交换格式。
 * [SimpleBinaryEncoding](https://github.com/real-logic/simple-binary-encoding) : 用于低延迟应用程序的对二进制格式的应用程序信息的编码和解码。
-* [Thrift](https://thrift.apache.org/) : 高效的跨语言IPC/RPC，用于C++，Java，Python，PHP，C#和其它多种语言中，最初由Facebook开发。
+* [Thrift](https://thrift.apache.org/) : 高效的跨语言IPC/RPC，用于C++，Java，Python，PHP，C# 和其它多种语言中，最初由Facebook开发。
 
 
 <br>
 
-### 视频库
+## # 视频库
 * [libvpx](http://www.webmproject.org/code/) : VP8/VP9编码解码SDK
 * [FFMpeg](https://www.ffmpeg.org/) : 一个完整的，跨平台的解决方案，用于记录，转换视频和音频流。
 * [libde265](https://github.com/strukturag/libde265) : 开放的h.265视频编解码器的实现。
@@ -580,7 +580,7 @@
 
 <br>
 
-### XML库
+## # XML库
 
 * [LibXml++](http://libxmlplusplus.sourceforge.net/) : C++的xml解析器
 * [PugiXML](https://pugixml.org/) : 用于C++的，支持XPath的轻量级，简单快速的XML解析器。
@@ -597,386 +597,386 @@
 
 # 🖥 部分代码案例
 
-### <h3 id="cpp_11_keywords">关键字</h3>
+## # <h3 id="cpp*11*keywords">关键字</h3>
 
-#### <h5 id="cpp_11_new_keywords">新增关键字</h5>
+### # <h5 id="cpp*11*new_keywords">新增关键字</h5>
 
-* [thread_local](https://github.com/0voice/cpp_new_features/blob/main/cpp_11/001_new_keywords_README.md#thread_local)
-* [static_assert](https://github.com/0voice/cpp_new_features/blob/main/cpp_11/001_new_keywords_README.md#static_assert)
-* [nullptr](https://github.com/0voice/cpp_new_features/blob/main/cpp_11/001_new_keywords_README.md#nullptr)
-* [noexcept](https://github.com/0voice/cpp_new_features/blob/main/cpp_11/001_new_keywords_README.md#noexcept)
-* [decltype](https://github.com/0voice/cpp_new_features/blob/main/cpp_11/001_new_keywords_README.md#decltype)
-* [constexpr](https://github.com/0voice/cpp_new_features/blob/main/cpp_11/001_new_keywords_README.md#constexpr)
-* [char16_t](https://github.com/0voice/cpp_new_features/blob/main/cpp_11/001_new_keywords_README.md#char16_t)
-* [char32_t](https://github.com/0voice/cpp_new_features/blob/main/cpp_11/001_new_keywords_README.md#char16_t)
-* [alignof](https://github.com/0voice/cpp_new_features/blob/main/cpp_11/001_new_keywords_README.md#alignof)
-* [alignas](https://github.com/0voice/cpp_new_features/blob/main/cpp_11/001_new_keywords_README.md#alignof)
-
-
-#### <h5 id="cpp_11_meaning_changed__OR__new_meaning_added">含义变化或者新增含义关键字（meaning changed or new meaning added）</h5>
-
-* [auto](https://github.com/0voice/cpp_new_features/blob/main/cpp_11/001_meaning_keywords_README.md#auto)
-* [class](https://github.com/0voice/cpp_new_features/blob/main/cpp_11/001_meaning_keywords_README.md#clazz)
-* [default](https://github.com/0voice/cpp_new_features/blob/main/cpp_11/001_meaning_keywords_README.md#default)
-* [delete](https://github.com/0voice/cpp_new_features/blob/main/cpp_11/001_meaning_keywords_README.md#delete)
-* [export](https://github.com/0voice/cpp_new_features/blob/main/cpp_11/001_meaning_keywords_README.md#export)
-* [extern](https://github.com/0voice/cpp_new_features/blob/main/cpp_11/001_meaning_keywords_README.md#extern)
-* [inline](https://github.com/0voice/cpp_new_features/blob/main/cpp_11/001_meaning_keywords_README.md#inline)
-* [mutable](https://github.com/0voice/cpp_new_features/blob/main/cpp_11/001_meaning_keywords_README.md#mutable)
-* [sizeof](https://github.com/0voice/cpp_new_features/blob/main/cpp_11/001_meaning_keywords_README.md#sizeof)
-* [struct](https://github.com/0voice/cpp_new_features/blob/main/cpp_11/001_meaning_keywords_README.md#struct)
-* [using](https://github.com/0voice/cpp_new_features/blob/main/cpp_11/001_meaning_keywords_README.md#using)
-
-### <h3 id="cpp_11_RTTI">类型支持（基本类型、RTTI、类型特性）</h3>
-
-#### <h5 id="cpp_11_RTTI_Primary_type_categories">Defined in header &lt;type_traits&gt;</h5>
-
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_rtti_std_is_void.cpp">is_void</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_rtti_std_is_integral.cpp">is_integral</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_rtti_std_is_floating_point.cpp">is_floating_point</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_rtti_std_is_array.cpp">is_array</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_rtti_std_is_enum.cpp">is_enum</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_rtti_std_is_union.cpp">is_union</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_rtti_std_is_class.cpp">is_class</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_rtti_std_is_function.cpp">is_function</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_rtti_std_is_pointer.cpp">is_pointer</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_rtti_std_is_lvalue_reference.cpp">is_lvalue_reference</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_rtti_std_is_rvalue_reference.cpp">is_rvalue_reference</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_rtti_std_is_member_object_pointer.cpp">is_member_object_pointer</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_rtti_std_is_member_function_pointer.cpp">is_member_function_pointer</a>
-
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_rtti_std_is_fundamental.cpp">is_fundamental</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_rtti_std_is_arithmetic.cpp">is_arithmetic</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_rtti_std_is_scalar.cpp">is_scalar</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_rtti_std_is_object.cpp">is_object</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_rtti_std_is_compound.cpp">is_compound</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_rtti_std_is_reference.cpp">is_reference</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_rtti_std_is_member_pointer.cpp">is_member_pointer</a>
-
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_rtti_std_is_const.cpp">is_const</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_rtti_std_is_volatile.cpp">is_volatile</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_rtti_std_is_trivial.cpp">is_trivial</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_rtti_std_is_trivially_copyable.cpp">is_trivially_copyable</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_rtti_std_is_standard_layout.cpp">is_standard_layout</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_rtti_std_is_literal_type.cpp">is_literal_type</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_rtti_std_is_empty.cpp">is_empty</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_rtti_std_is_polymorphic.cpp">is_polymorphic</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_rtti_std_is_abstract.cpp">is_abstract</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_rtti_std_is_signed.cpp">is_signed</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_rtti_std_is_unsigned.cpp">is_unsigned</a>
-
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_rtti_std_is_constructible.cpp">is_constructible</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_rtti_std_is_trivially_constructible.cpp">is_trivially_constructible</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_rtti_std_is_nothrow_constructible.cpp">is_nothrow_constructible</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_rtti_std_is_default_constructible.cpp">is_default_constructible</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_rtti_std_is_trivially_default_constructible.cpp">is_trivially_default_constructible</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_rtti_std_is_nothrow_default_constructible.cpp">is_nothrow_default_constructible</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_rtti_std_is_copy_constructible.cpp">is_copy_constructible</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_rtti_std_is_trivially_copy_constructible.cpp">is_trivially_copy_constructible</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_rtti_std_is_nothrow_copy_constructible.cpp">is_nothrow_copy_constructible</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_rtti_std_is_move_constructible.cpp">is_move_constructible</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_rtti_std_is_trivially_move_constructible.cpp">is_trivially_move_constructible</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_rtti_std_is_nothrow_move_constructible.cpp">is_nothrow_move_constructible</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_rtti_std_is_assignable.cpp">is_assignable</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_rtti_std_is_trivially_assignable.cpp">is_trivially_assignable</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_rtti_std_is_nothrow_assignable.cpp">is_nothrow_assignable</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_rtti_std_is_copy_assignable.cpp">is_copy_assignable</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_rtti_std_is_trivially_copy_assignable.cpp">is_trivially_copy_assignable</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_rtti_std_is_nothrow_copy_assignable.cpp">is_nothrow_copy_assignable</a>
-
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_rtti_std_is_is_move_assignable.cpp">is_move_assignable</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_rtti_std_is_trivially_move_assignable.cpp">is_trivially_move_assignable</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_rtti_std_is_nothrow_move_assignable.cpp">is_nothrow_move_assignable</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_rtti_std_is_destructible.cpp">is_destructible</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_rtti_std_is_trivially_destructible.cpp">is_trivially_destructible</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_rtti_std_is_nothrow_destructible.cpp">is_nothrow_destructible</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_rtti_std_has_virtual_destructor.cpp">has_virtual_destructor</a>
+* [thread*local](https://github.com/0voice/cpp*new*features/blob/main/cpp*11/001*new*keywords*README.md# thread*local)
+* [static*assert](https://github.com/0voice/cpp*new*features/blob/main/cpp*11/001*new*keywords*README.md# static*assert)
+* [nullptr](https://github.com/0voice/cpp*new*features/blob/main/cpp*11/001*new*keywords*README.md# nullptr)
+* [noexcept](https://github.com/0voice/cpp*new*features/blob/main/cpp*11/001*new*keywords*README.md# noexcept)
+* [decltype](https://github.com/0voice/cpp*new*features/blob/main/cpp*11/001*new*keywords*README.md# decltype)
+* [constexpr](https://github.com/0voice/cpp*new*features/blob/main/cpp*11/001*new*keywords*README.md# constexpr)
+* [char16*t](https://github.com/0voice/cpp*new*features/blob/main/cpp*11/001*new*keywords*README.md# char16*t)
+* [char32*t](https://github.com/0voice/cpp*new*features/blob/main/cpp*11/001*new*keywords*README.md# char16*t)
+* [alignof](https://github.com/0voice/cpp*new*features/blob/main/cpp*11/001*new*keywords*README.md# alignof)
+* [alignas](https://github.com/0voice/cpp*new*features/blob/main/cpp*11/001*new*keywords*README.md# alignof)
 
 
-### <h3 id="cpp_11_stl">STL容器</h3>
+### # <h5 id="cpp*11*meaning*changed**OR**new*meaning_added">含义变化或者新增含义关键字（meaning changed or new meaning added）</h5>
 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_stl_std_array.cpp">std::array</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_stl_std_forward_list.cpp">std::forward_list</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_stl_std_begin.cpp">std::begin</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_stl_std_end.cpp">std::end</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_stl_std_move.cpp">std::move</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_stl_container_init.cpp">容器初始化</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_stl_emplace.cpp">emplace</a>
+* [auto](https://github.com/0voice/cpp*new*features/blob/main/cpp*11/001*meaning*keywords*README.md# auto)
+* [class](https://github.com/0voice/cpp*new*features/blob/main/cpp*11/001*meaning*keywords*README.md# clazz)
+* [default](https://github.com/0voice/cpp*new*features/blob/main/cpp*11/001*meaning*keywords*README.md# default)
+* [delete](https://github.com/0voice/cpp*new*features/blob/main/cpp*11/001*meaning*keywords*README.md# delete)
+* [export](https://github.com/0voice/cpp*new*features/blob/main/cpp*11/001*meaning*keywords*README.md# export)
+* [extern](https://github.com/0voice/cpp*new*features/blob/main/cpp*11/001*meaning*keywords*README.md# extern)
+* [inline](https://github.com/0voice/cpp*new*features/blob/main/cpp*11/001*meaning*keywords*README.md# inline)
+* [mutable](https://github.com/0voice/cpp*new*features/blob/main/cpp*11/001*meaning*keywords*README.md# mutable)
+* [sizeof](https://github.com/0voice/cpp*new*features/blob/main/cpp*11/001*meaning*keywords*README.md# sizeof)
+* [struct](https://github.com/0voice/cpp*new*features/blob/main/cpp*11/001*meaning*keywords*README.md# struct)
+* [using](https://github.com/0voice/cpp*new*features/blob/main/cpp*11/001*meaning*keywords*README.md# using)
 
-#### <h5 id="cpp_11_unordered_containers">无序容器</h5>
+## # <h3 id="cpp*11*RTTI">类型支持（基本类型、RTTI、类型特性）</h3>
 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_stl_std_unordered_map.cpp">std::unordered_map</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_stl_std_unordered_multimap.cpp">std::unordered_multimap</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_stl_std_unordered_set.cpp">std::unordered_set</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_stl_std_unordered_multiset.cpp">std::unordered_multiset</a>
+### # <h5 id="cpp*11*RTTI*Primary*type*categories">Defined in header &lt;type*traits&gt;</h5>
 
-#### <h5 id="cpp_11_tuple">元组std::tuple</h5>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*rtti*std*is*void.cpp">is*void</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*rtti*std*is*integral.cpp">is*integral</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*rtti*std*is*floating*point.cpp">is*floating*point</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*rtti*std*is*array.cpp">is*array</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*rtti*std*is*enum.cpp">is*enum</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*rtti*std*is*union.cpp">is*union</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*rtti*std*is*class.cpp">is*class</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*rtti*std*is*function.cpp">is*function</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*rtti*std*is*pointer.cpp">is*pointer</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*rtti*std*is*lvalue*reference.cpp">is*lvalue*reference</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*rtti*std*is*rvalue*reference.cpp">is*rvalue*reference</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*rtti*std*is*member*object*pointer.cpp">is*member*object*pointer</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*rtti*std*is*member*function*pointer.cpp">is*member*function*pointer</a>
 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_stl_std_make_tuple.cpp">std::make_tuple</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_stl_std_get.cpp">std::get</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_stl_std_tie.cpp">std::tie</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*rtti*std*is*fundamental.cpp">is*fundamental</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*rtti*std*is*arithmetic.cpp">is*arithmetic</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*rtti*std*is*scalar.cpp">is*scalar</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*rtti*std*is*object.cpp">is*object</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*rtti*std*is*compound.cpp">is*compound</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*rtti*std*is*reference.cpp">is*reference</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*rtti*std*is*member*pointer.cpp">is*member*pointer</a>
 
-#### <h5 id="cpp_11_hash">hash</h5>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*rtti*std*is*const.cpp">is*const</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*rtti*std*is*volatile.cpp">is*volatile</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*rtti*std*is*trivial.cpp">is*trivial</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*rtti*std*is*trivially*copyable.cpp">is*trivially*copyable</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*rtti*std*is*standard*layout.cpp">is*standard*layout</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*rtti*std*is*literal*type.cpp">is*literal*type</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*rtti*std*is*empty.cpp">is*empty</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*rtti*std*is*polymorphic.cpp">is*polymorphic</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*rtti*std*is*abstract.cpp">is*abstract</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*rtti*std*is*signed.cpp">is*signed</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*rtti*std*is*unsigned.cpp">is*unsigned</a>
 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_stl_std_hash_std_string.cpp">std::hash&lt;std::string&gt;</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_stl_std_hash_std_u16string.cpp">std::hash&lt;std::u16string&gt;</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_stl_std_hash_std_u32string.cpp">std::hash&lt;std::u32string&gt;</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_stl_std_hash_std_wstring.cpp">std::hash&lt;std::wstring&gt;</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_stl_std_hash_std_error_code.cpp">std::hash&lt;std::error_code&gt;</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_stl_std_hash_std_bitset.cpp">std::hash&lt;std::bitset&gt;</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_stl_std_hash_std_type_index.cpp">std::hash&lt;std::type_index&gt;</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_stl_std_hash_std_vector_bool.cpp">std::hash&lt;std::vector&lt;bool&gt;&gt;</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*rtti*std*is*constructible.cpp">is*constructible</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*rtti*std*is*trivially*constructible.cpp">is*trivially*constructible</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*rtti*std*is*nothrow*constructible.cpp">is*nothrow*constructible</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*rtti*std*is*default*constructible.cpp">is*default*constructible</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*rtti*std*is*trivially*default*constructible.cpp">is*trivially*default*constructible</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*rtti*std*is*nothrow*default*constructible.cpp">is*nothrow*default*constructible</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*rtti*std*is*copy*constructible.cpp">is*copy*constructible</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*rtti*std*is*trivially*copy*constructible.cpp">is*trivially*copy*constructible</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*rtti*std*is*nothrow*copy*constructible.cpp">is*nothrow*copy*constructible</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*rtti*std*is*move*constructible.cpp">is*move*constructible</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*rtti*std*is*trivially*move*constructible.cpp">is*trivially*move*constructible</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*rtti*std*is*nothrow*move*constructible.cpp">is*nothrow*move*constructible</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*rtti*std*is*assignable.cpp">is*assignable</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*rtti*std*is*trivially*assignable.cpp">is*trivially*assignable</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*rtti*std*is*nothrow*assignable.cpp">is*nothrow*assignable</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*rtti*std*is*copy*assignable.cpp">is*copy*assignable</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*rtti*std*is*trivially*copy*assignable.cpp">is*trivially*copy*assignable</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*rtti*std*is*nothrow*copy*assignable.cpp">is*nothrow*copy*assignable</a>
+
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*rtti*std*is*is*move*assignable.cpp">is*move_assignable</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*rtti*std*is*trivially*move*assignable.cpp">is*trivially*move*assignable</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*rtti*std*is*nothrow*move*assignable.cpp">is*nothrow*move*assignable</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*rtti*std*is*destructible.cpp">is*destructible</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*rtti*std*is*trivially*destructible.cpp">is*trivially*destructible</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*rtti*std*is*nothrow*destructible.cpp">is*nothrow*destructible</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*rtti*std*has*virtual*destructor.cpp">has*virtual*destructor</a>
+
+
+## # <h3 id="cpp*11*stl">STL容器</h3>
+
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*stl*std*array.cpp">std::array</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*stl*std*forward*list.cpp">std::forward*list</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*stl*std*begin.cpp">std::begin</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*stl*std*end.cpp">std::end</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*stl*std*move.cpp">std::move</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*stl*container*init.cpp">容器初始化</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*stl_emplace.cpp">emplace</a>
+
+### # <h5 id="cpp*11*unordered_containers">无序容器</h5>
+
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*stl*std*unordered*map.cpp">std::unordered*map</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*stl*std*unordered*multimap.cpp">std::unordered*multimap</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*stl*std*unordered*set.cpp">std::unordered*set</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*stl*std*unordered*multiset.cpp">std::unordered*multiset</a>
+
+### # <h5 id="cpp*11*tuple">元组std::tuple</h5>
+
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*stl*std*make*tuple.cpp">std::make*tuple</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*stl*std*get.cpp">std::get</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*stl*std*tie.cpp">std::tie</a>
+
+### # <h5 id="cpp*11*hash">hash</h5>
+
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*stl*std*hash*std*string.cpp">std::hash&lt;std::string&gt;</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*stl*std*hash*std*u16string.cpp">std::hash&lt;std::u16string&gt;</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*stl*std*hash*std*u32string.cpp">std::hash&lt;std::u32string&gt;</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*stl*std*hash*std*wstring.cpp">std::hash&lt;std::wstring&gt;</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*stl*std*hash*std*error*code.cpp">std::hash&lt;std::error*code&gt;</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*stl*std*hash*std*bitset.cpp">std::hash&lt;std::bitset&gt;</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*stl*std*hash*std*type*index.cpp">std::hash&lt;std::type*index&gt;</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*stl*std*hash*std*vector_bool.cpp">std::hash&lt;std::vector&lt;bool&gt;&gt;</a>
 <!-- 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_stl_hash_std_thread_id.cpp">std::hash&lt;std&#58;&#58;thread&#58;&#58;id&gt;</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*stl*hash*std*thread*id.cpp">std::hash&lt;std&# 58;&# 58;thread&# 58;&# 58;id&gt;</a>
  -->
 
-### <h3 id="cpp_11_smart_pointer">智能指针</h3>
+## # <h3 id="cpp*11*smart_pointer">智能指针</h3>
 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_stl_std_shared_ptr.cpp">std::shared_ptr</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_stl_std_weak_ptr.cpp">std::weak_ptr</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_stl_std_unique_ptr.cpp">std::unique_ptr</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_stl_auto_ptr.cpp">auto_ptr(弃用)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*stl*std*shared*ptr.cpp">std::shared*ptr</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*stl*std*weak*ptr.cpp">std::weak*ptr</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*stl*std*unique*ptr.cpp">std::unique*ptr</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*stl*auto*ptr.cpp">auto_ptr(弃用)</a>
 
-### <h3 id="cpp_11_regex">正则表达式</h3>
+## # <h3 id="cpp*11*regex">正则表达式</h3>
 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_stl_std_shared_ptr.cpp">basic_regex</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_stl_std_weak_ptr.cpp">sub_match</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_stl_std_unique_ptr.cpp">match_results</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*stl*std*shared*ptr.cpp">basic*regex</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*stl*std*weak*ptr.cpp">sub*match</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*stl*std*unique*ptr.cpp">match*results</a>
 
-### <h3 id="cpp_11_function">函数</h3>
+## # <h3 id="cpp*11*function">函数</h3>
 
-#### <h5 id="cpp_11_function_nonstatic">非静态成员函数</h5>
+### # <h5 id="cpp*11*function_nonstatic">非静态成员函数</h5>
 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_stl_std_shared_ptr.cpp">cv限定函数</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_stl_std_weak_ptr.cpp">引用限定</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*stl*std*shared_ptr.cpp">cv限定函数</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*stl*std*weak_ptr.cpp">引用限定</a>
 
-#### <h5 id="cpp_11_function_template">函数对象模板</h5>
+### # <h5 id="cpp*11*function_template">函数对象模板</h5>
 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_stl_std_unique_ptr.cpp">std::function</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_stl_std_unique_ptr.cpp">std::bind</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_stl_std_unique_ptr.cpp">std::bad_function_call</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_stl_std_unique_ptr.cpp">mem_fn</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*stl*std*unique_ptr.cpp">std::function</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*stl*std*unique_ptr.cpp">std::bind</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*stl*std*unique*ptr.cpp">std::bad*function_call</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*stl*std*unique*ptr.cpp">mem*fn</a>
 
-### <h3 id="cpp_11_class">类</h3>
+## # <h3 id="cpp*11*class">类</h3>
 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_class_type_alias.cpp">类型别名</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_class_member_init.cpp">类成员初始化</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_class_functor.cpp">仿函数(functor)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_class_delegating_constructors.cpp">委托构造函数</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_class_inheritance_constructor.cpp">继承构造函数</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_class_move_constructor.cpp">移动构造函数</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_class_move_assignment_operator.cpp">移动赋值运算符</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*class*type*alias.cpp">类型别名</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*class*member*init.cpp">类成员初始化</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*class_functor.cpp">仿函数(functor)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*class*delegating*constructors.cpp">委托构造函数</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*class*inheritance*constructor.cpp">继承构造函数</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*class*move*constructor.cpp">移动构造函数</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*class*move*assignment_operator.cpp">移动赋值运算符</a>
 
-### <h3 id="cpp_11_template">模板</h3>
+## # <h3 id="cpp*11*template">模板</h3>
 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_template_angle_bracket.cpp">尖括号“>”</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_template_aliases.cpp">别名模板</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_template_external_template.cpp">外部模板</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_template_variable_parameter_template.cpp">可变参数模板</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_template_default_template_parameters.cpp">默认模板参数</a>
-
-
-### <h3 id="cpp_11_template">原子操作</h3>
-
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_std_atomic_bool.cpp">std::atomic&lt;bool&gt;</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_std_atomic_char.cpp">std::atomic&lt;char&gt;</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_std_atomic_signed_char.cpp">std::atomic&lt;signed char&gt;</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_std_atomic_unsigned_char.cpp">std::atomic&lt;unsigned char&gt;</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_std_atomic_short.cpp">std::atomic&lt;short&gt;</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_std_atomic_unsigned_short.cpp">std::atomic&lt;unsigned short&gt;</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_std_atomic_int.cpp">std::atomic&lt;int&gt;</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_std_atomic_unsigned_int.cpp">std::atomic&lt;unsigned int&gt;</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_std_atomic_long.cpp">std::atomic&lt;long&gt;</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_std_atomic_unsigned_long.cpp">std::atomic&lt;unsigned long&gt;</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_std_atomic_long_long.cpp">std::atomic&lt;long long&gt;</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_std_atomic_unsigned_long_long.cpp">std::atomic&lt;unsigned long long&gt;</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_std_atomic_char8_t.cpp">std::atomic&lt;char8_t&gt;</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_std_atomic_char16_t.cpp">std::atomic&lt;char16_t&gt;</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_std_atomic_char32_t.cpp">std::atomic&lt;char32_t&gt;</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_std_atomic_wchar_t.cpp">std::atomic&lt;wchar_t&gt;</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_std_atomic_std_int8_t.cpp">std::atomic&lt;std::int8_t&gt;</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_std_atomic_std_uint8_t.cpp">std::atomic&lt;std::uint8_t&gt;</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_std_atomic_std_int16_t.cpp">std::atomic&lt;std::int16_t&gt;</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_std_atomic_std_uint16_t.cpp">std::atomic&lt;std::uint16_t&gt;</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_std_atomic_std_int32_t.cpp">std::atomic&lt;std::int32_t&gt;</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_std_atomic_std_uint32_t.cpp">std::atomic&lt;std::uint32_t&gt;</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_std_atomic_std_int64_t.cpp">std::atomic&lt;std::int64_t&gt;</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_std_atomic_std_uint64_t.cpp">std::atomic&lt;std::uint64_t&gt;</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_std_atomic_std_int_least8_t.cpp">std::atomic&lt;std::int_least8_t&gt;</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_std_atomic_std_uint_least8_t.cpp">std::atomic&lt;std::uint_least8_t&gt;</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_std_atomic_std_int_least16_t.cpp">std::atomic&lt;std::int_least16_t&gt;</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_std_atomic_std_uint_least16_t.cpp">std::atomic&lt;std::uint_least16_t&gt;</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_std_atomic_std_int_least32_t.cpp">std::atomic&lt;std::int_least32_t&gt;</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_std_atomic_std_uint_least32_t.cpp">std::atomic&lt;std::uint_least32_t&gt;</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_std_atomic_std_int_least64_t.cpp">std::atomic&lt;std::int_least64_t&gt;</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_std_atomic_std_uint_least64_t.cpp">std::atomic&lt;std::uint_least64_t&gt;</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_std_atomic_std_int_fast8_t.cpp">std::atomic&lt;std::int_fast8_t&gt;</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_std_atomic_std_uint_fast8_t.cpp">std::atomic&lt;std::uint_fast8_t&gt;</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_std_atomic_std_int_fast16_t.cpp">std::atomic&lt;std::int_fast16_t&gt;</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_std_atomic_std_uint_fast16_t.cpp">std::atomic&lt;std::uint_fast16_t&gt;</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_std_atomic_std_int_fast32_t.cpp">std::atomic&lt;std::int_fast32_t&gt;</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_std_atomic_std_uint_fast32_t.cpp">std::atomic&lt;std::uint_fast32_t&gt;</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_std_atomic_std_int_fast64_t.cpp">std::atomic&lt;std::int_fast64_t&gt;</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_std_atomic_std_uint_fast64_t.cpp">std::atomic&lt;std::uint_fast64_t&gt;</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*template*angle*bracket.cpp">尖括号“>”</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*template_aliases.cpp">别名模板</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*template*external*template.cpp">外部模板</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*template*variable*parameter_template.cpp">可变参数模板</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*template*default*template_parameters.cpp">默认模板参数</a>
 
 
-### <h3 id="cpp_11_template">线程</h3>
+## # <h3 id="cpp*11*template">原子操作</h3>
 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_std_thread_std_thread.cpp">std::thread</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_std_thread_std_mutex.cpp">std::mutex</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_std_thread_std_lock.cpp">std::lock</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_std_thread_std_call_once.cpp">std::call_once</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_std_thread_std_atomic.cpp">std::atomic</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_std_thread_std_cond_ition_variable.cpp">std::cond_ition_variable</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_std_thread_async.cpp">std::async</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_std_thread_volatile.cpp">volatile</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_std_thread_std_future.cpp">std::future</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_std_thread_std_thread_local.cpp">std::thread_local</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*std*atomic*bool.cpp">std::atomic&lt;bool&gt;</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*std*atomic*char.cpp">std::atomic&lt;char&gt;</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*std*atomic*signed_char.cpp">std::atomic&lt;signed char&gt;</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*std*atomic*unsigned_char.cpp">std::atomic&lt;unsigned char&gt;</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*std*atomic*short.cpp">std::atomic&lt;short&gt;</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*std*atomic*unsigned_short.cpp">std::atomic&lt;unsigned short&gt;</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*std*atomic*int.cpp">std::atomic&lt;int&gt;</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*std*atomic*unsigned_int.cpp">std::atomic&lt;unsigned int&gt;</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*std*atomic*long.cpp">std::atomic&lt;long&gt;</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*std*atomic*unsigned_long.cpp">std::atomic&lt;unsigned long&gt;</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*std*atomic*long_long.cpp">std::atomic&lt;long long&gt;</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*std*atomic*unsigned*long*long.cpp">std::atomic&lt;unsigned long long&gt;</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*std*atomic*char8*t.cpp">std::atomic&lt;char8*t&gt;</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*std*atomic*char16*t.cpp">std::atomic&lt;char16*t&gt;</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*std*atomic*char32*t.cpp">std::atomic&lt;char32*t&gt;</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*std*atomic*wchar*t.cpp">std::atomic&lt;wchar*t&gt;</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*std*atomic*std*int8*t.cpp">std::atomic&lt;std::int8_t&gt;</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*std*atomic*std*uint8*t.cpp">std::atomic&lt;std::uint8_t&gt;</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*std*atomic*std*int16*t.cpp">std::atomic&lt;std::int16_t&gt;</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*std*atomic*std*uint16*t.cpp">std::atomic&lt;std::uint16_t&gt;</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*std*atomic*std*int32*t.cpp">std::atomic&lt;std::int32_t&gt;</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*std*atomic*std*uint32*t.cpp">std::atomic&lt;std::uint32_t&gt;</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*std*atomic*std*int64*t.cpp">std::atomic&lt;std::int64_t&gt;</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*std*atomic*std*uint64*t.cpp">std::atomic&lt;std::uint64_t&gt;</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*std*atomic*std*int*least8*t.cpp">std::atomic&lt;std::int*least8_t&gt;</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*std*atomic*std*uint*least8*t.cpp">std::atomic&lt;std::uint*least8_t&gt;</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*std*atomic*std*int*least16*t.cpp">std::atomic&lt;std::int*least16_t&gt;</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*std*atomic*std*uint*least16*t.cpp">std::atomic&lt;std::uint*least16_t&gt;</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*std*atomic*std*int*least32*t.cpp">std::atomic&lt;std::int*least32_t&gt;</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*std*atomic*std*uint*least32*t.cpp">std::atomic&lt;std::uint*least32_t&gt;</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*std*atomic*std*int*least64*t.cpp">std::atomic&lt;std::int*least64_t&gt;</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*std*atomic*std*uint*least64*t.cpp">std::atomic&lt;std::uint*least64_t&gt;</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*std*atomic*std*int*fast8*t.cpp">std::atomic&lt;std::int*fast8_t&gt;</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*std*atomic*std*uint*fast8*t.cpp">std::atomic&lt;std::uint*fast8_t&gt;</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*std*atomic*std*int*fast16*t.cpp">std::atomic&lt;std::int*fast16_t&gt;</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*std*atomic*std*uint*fast16*t.cpp">std::atomic&lt;std::uint*fast16_t&gt;</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*std*atomic*std*int*fast32*t.cpp">std::atomic&lt;std::int*fast32_t&gt;</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*std*atomic*std*uint*fast32*t.cpp">std::atomic&lt;std::uint*fast32_t&gt;</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*std*atomic*std*int*fast64*t.cpp">std::atomic&lt;std::int*fast64_t&gt;</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*std*atomic*std*uint*fast64*t.cpp">std::atomic&lt;std::uint*fast64_t&gt;</a>
 
 
-### <h3 id="cpp_11_exception">异常</h3>
+## # <h3 id="cpp*11*template">线程</h3>
 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_exception_std_exception_ptr.cpp">std::exception_ptr</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_exception_std_make_exception_ptr.cpp">std::make_exception_ptr</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_exception_std_current_exception.cpp">std::current_exception</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_exception_std_rethrow_exception.cpp">std::rethrow_exception</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_exception_std_nested_exception.cpp">std::nested_exception</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_exception_std_throw_with_nested.cpp">std::throw_with_nested</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_exception_std_rethrow_if_nested.cpp">std::rethrow_if_nested</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*std*thread*std_thread.cpp">std::thread</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*std*thread*std_mutex.cpp">std::mutex</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*std*thread*std_lock.cpp">std::lock</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*std*thread*std*call*once.cpp">std::call_once</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*std*thread*std_atomic.cpp">std::atomic</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*std*thread*std*cond*ition*variable.cpp">std::cond*ition_variable</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*std*thread*async.cpp">std::async</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*std*thread*volatile.cpp">volatile</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*std*thread*std_future.cpp">std::future</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*std*thread*std*thread*local.cpp">std::thread_local</a>
+
+
+## # <h3 id="cpp*11*exception">异常</h3>
+
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*exception*std*exception*ptr.cpp">std::exception*ptr</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*exception*std*make*exception*ptr.cpp">std::make*exception*ptr</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*exception*std*current*exception.cpp">std::current*exception</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*exception*std*rethrow*exception.cpp">std::rethrow*exception</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*exception*std*nested*exception.cpp">std::nested*exception</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*exception*std*throw*with*nested.cpp">std::throw*with*nested</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*exception*std*rethrow*if*nested.cpp">std::rethrow*if*nested</a>
 <!--
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_exception_std_noexcept.cpp">std::noexcept</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_exception_std_terminate_handler.cpp">std::terminate_handler</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*exception*std*noexcept.cpp">std::noexcept</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*exception*std*terminate*handler.cpp">std::terminate*handler</a>
 -->
-### <h3 id="cpp_11_error">错误</h3>
+## # <h3 id="cpp*11*error">错误</h3>
 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_error_std_error_category.cpp">std::error_category</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_error_std_generic_category.cpp">std::generic_category</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_error_std_error_condition.cpp">std::error_condition</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_error_std_errc.cpp">std::errc</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_error_std_error_code.cpp">std::error_code</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/003_error_std_system_error.cpp">std::system_error</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*error*std*error*category.cpp">std::error*category</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*error*std*generic*category.cpp">std::generic*category</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*error*std*error*condition.cpp">std::error*condition</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*error*std*errc.cpp">std::errc</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*error*std*error*code.cpp">std::error*code</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/003*error*std*system*error.cpp">std::system*error</a>
 
 
-### <h3 id="cpp_11_keywords">新语法</h3>
+## # <h3 id="cpp*11*keywords">新语法</h3>
 
-#### <h5 id="cpp_11_new_pretreatment">预处理</h5>
+### # <h5 id="cpp*11*new_pretreatment">预处理</h5>
 
 * <p>语法：__pragma(字符串字面量)</p>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/002_grammar_pragma.cpp">_Pragma运算符</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/002*grammar*pragma.cpp">*Pragma运算符</a>
 
-#### <h5 id="cpp_11_cplusplus_macro">C++宏(cplusplus macro)</h5>
+### # <h5 id="cpp*11*cplusplus_macro">C++宏(cplusplus macro)</h5>
 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/002_grammar_cpluscplus.h">_cplusplus宏</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/002*grammar*cpluscplus.h">*cplusplus宏</a>
 
-#### <h5 id="cpp_11_for">基于范围的for语句</h5>
+### # <h5 id="cpp*11*for">基于范围的for语句</h5>
 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/002_grammar_for_loop.cpp">for循环 for(x:range)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/002*grammar*for*loop.cpp">for循环 for(x:range)</a>
 
-####  <h5 id="cpp_11_alignment_support">对齐支持(alignment support)</h5>
+### #  <h5 id="cpp*11*alignment_support">对齐支持(alignment support)</h5>
 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/002_grammar_alignof.cpp">alignof</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/002_grammar_alignas.cpp">alignas</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/002_grammar_alignment_of.cpp">std::alignment_of</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/002_grammar_aligned_storage.cpp">std::aligned_storage</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/002_grammar_max_align_t.cpp">std::max_align_t</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/002_grammar_align.cpp">std::align</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/002*grammar_alignof.cpp">alignof</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/002*grammar_alignas.cpp">alignas</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/002*grammar*alignment*of.cpp">std::alignment_of</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/002*grammar*aligned*storage.cpp">std::aligned_storage</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/002*grammar*max*align*t.cpp">std::max*align_t</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/002*grammar_align.cpp">std::align</a>
 
-####  <h5 id="cpp_11_explicit_conversion_operators">显式转换操作符(explicit conversion operators)</h5>
+### #  <h5 id="cpp*11*explicit*conversion*operators">显式转换操作符(explicit conversion operators)</h5>
 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/002_grammar_explicit.cpp">explicit关键字</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/002*grammar_explicit.cpp">explicit关键字</a>
 
-####  <h5 id="cpp_11_static_assert">静态断言(static assert)</h5>
+### #  <h5 id="cpp*11*static_assert">静态断言(static assert)</h5>
 
 * <p>语法：static_assert(常量表达式，"提示字符串")</p>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/002_grammar_static_assert.cpp">static assert</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/002*grammar*static*assert.cpp">static assert</a>
 
-####  <h5 id="cpp_11_numeric_limits">数字限制(numeric limits)</h5>
+### #  <h5 id="cpp*11*numeric_limits">数字限制(numeric limits)</h5>
 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/002_grammar_numeric_limits.cpp">数字限制</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/002*grammar*numeric*limits.cpp">数字限制</a>
 
-####  <h5 id="cpp_11_raw_string">原始字符串(raw string)</h5>
+### #  <h5 id="cpp*11*raw_string">原始字符串(raw string)</h5>
 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/002_grammar_raw_string.cpp">原始字符串</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/002*grammar*raw*string.cpp">原始字符串</a>
 
-####  <h5 id="cpp_11_trailing_return_type_syntax">追踪返回类型语法(trailing return type syntax)</h5>
+### #  <h5 id="cpp*11*trailing*return*type_syntax">追踪返回类型语法(trailing return type syntax)</h5>
 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/002_grammar_trailing_return_type_syntax.cpp">追踪返回类型语法</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/002*grammar*trailing*return*type*syntax.cpp">追踪返回类型语法</a>
 
-####  <h5 id="cpp_11_extended_friend_syntax">扩展的friend语法(extended friend syntax)</h5>
+### #  <h5 id="cpp*11*extended*friend*syntax">扩展的friend语法(extended friend syntax)</h5>
 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/002_grammar_extended_friend_syntax.cpp">扩展的friend语法</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/002*grammar*extended*friend_syntax.cpp">扩展的friend语法</a>
 
-####  <h5 id="cpp_11_extended_integer_types">扩展的整型(extended integer types)</h5>
+### #  <h5 id="cpp*11*extended*integer*types">扩展的整型(extended integer types)</h5>
 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/002_grammar_extended_integer_types.cpp">扩展的整型</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/002*grammar*extended*integer_types.cpp">扩展的整型</a>
 
-####  <h5 id="cpp_11_unrestricted_union">非受限联合体(unrestricted union)</h5>
+### #  <h5 id="cpp*11*unrestricted_union">非受限联合体(unrestricted union)</h5>
 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/002_grammar_unrestricted_union.cpp">非受限联合体</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/002*grammar*unrestricted*union.cpp">非受限联合体</a>
 
-####  <h5 id="cpp_11_lnline_namespace">内联名字空间(lnline namespace)</h5>
+### #  <h5 id="cpp*11*lnline_namespace">内联名字空间(lnline namespace)</h5>
 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/002_grammar_lnline.cpp">内联名字空间</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/002*grammar_lnline.cpp">内联名字空间</a>
 
-####  <h5 id="cpp_11_user_defined_literals">用户定义的字面量(user-defined literals)</h5>
+### #  <h5 id="cpp*11*user*defined*literals">用户定义的字面量(user-defined literals)</h5>
 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/002_grammar_user_defined_literals.cpp">用户定义的字面量</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/002*grammar*user*defined_literals.cpp">用户定义的字面量</a>
 
-####  <h5 id="cpp_11_enum_class">强类型枚举(scoped and strongly typed enums)</h5>
+### #  <h5 id="cpp*11*enum_class">强类型枚举(scoped and strongly typed enums)</h5>
 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/002_grammar_scoped_and_strongly_typed_enums.cpp">强类型枚举</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/002*grammar*scoped*and*strongly*typed_enums.cpp">强类型枚举</a>
 
-####  <h5 id="cpp_11_random_device">随机装置(random device)</h5>
+### #  <h5 id="cpp*11*random_device">随机装置(random device)</h5>
 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/002_grammar_random_device.cpp">random device</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/002*grammar*random*device.cpp">random device</a>
 
-####  <h5 id="cpp_11_stdref_std_cref">std::ref和std::cref</h5>
+### #  <h5 id="cpp*11*stdref*std*cref">std::ref和std::cref</h5>
 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/002_grammar_stdref_stdcref.cpp">std::ref和std::cref</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/002*grammar*stdref*stdcref.cpp">std::ref和std::cref</a>
 
-####  <h5 id="cpp_11_constexpr">常量表达式(constexpr)</h5>
+### #  <h5 id="cpp*11*constexpr">常量表达式(constexpr)</h5>
 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/002_grammar_constexpr.cpp">constexpr</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/002*grammar_constexpr.cpp">constexpr</a>
 
-####  <h5 id="cpp_11_lamda">lamda表达式</h5>
+### #  <h5 id="cpp*11*lamda">lamda表达式</h5>
 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/002_grammar_lamda.cpp">lamda表达式</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/002*grammar_lamda.cpp">lamda表达式</a>
 
-####  <h5 id="cpp_11_nullptr">指针空值(nullptr)</h5>
+### #  <h5 id="cpp*11*nullptr">指针空值(nullptr)</h5>
 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/002_grammar_nullptr.cpp">nullptr</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/002*grammar_nullptr.cpp">nullptr</a>
 
-####  <h5 id="cpp_11_preventing_narrowing">防止类型收窄(Preventing narrowing)</h5>
+### #  <h5 id="cpp*11*preventing_narrowing">防止类型收窄(Preventing narrowing)</h5>
 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/002_grammar_preventing_narrowing.cpp">防止类型收窄</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/002*grammar*preventing*narrowing.cpp">防止类型收窄</a>
 
-####  <h5 id="cpp_11_initializer_lists">初始化列表(initializer lists)</h5>
+### #  <h5 id="cpp*11*initializer_lists">初始化列表(initializer lists)</h5>
 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/002_grammar_initializer_lists01.cpp">初始化列表——Initializer List</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/002_grammar_initializer_lists02.cpp">initializer_list<T>(作入参)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/002*grammar*initializer*lists01.cpp">初始化列表——Initializer List</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/002*grammar*initializer*lists02.cpp">initializer_list<T>(作入参)</a>
 
-####  <h5 id="cpp_11_Uniform_initialization_syntax_and_semantics">统一的初始化语法和语义(Uniform initialization syntax and semantics)</h5>
+### #  <h5 id="cpp*11*Uniform*initialization*syntax*and*semantics">统一的初始化语法和语义(Uniform initialization syntax and semantics)</h5>
 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/002_grammar_Uniform_initialization_syntax_and_semantics.cpp">统一的初始化语法和语义</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/002*grammar*Uniform*initialization*syntax*and_semantics.cpp">统一的初始化语法和语义</a>
 
-####  <h5 id="cpp_11_POD">POD(plain old data)</h5>
+### #  <h5 id="cpp*11*POD">POD(plain old data)</h5>
 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/002_grammar_POD.cpp">POD</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/002*grammar_POD.cpp">POD</a>
 							
-####  <h5 id="cpp_11_POD">long long整型</h5>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/002_grammar_long_long.cpp">long long</a>
+### #  <h5 id="cpp*11*POD">long long整型</h5>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/002*grammar*long*long.cpp">long long</a>
 	
-####  <h5 id="cpp_11_move_semantics">移动语义(move semantics)</h5>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/002_grammar_move_semantics.cpp">move semantics</a>
+### #  <h5 id="cpp*11*move_semantics">移动语义(move semantics)</h5>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/002*grammar*move*semantics.cpp">move semantics</a>
 	
-####  <h5 id="cpp_11_rvalue_reference">右值引用(rvalue reference)</h5>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/002_grammar_rvalue_reference.cpp">rvalue reference</a>
+### #  <h5 id="cpp*11*rvalue_reference">右值引用(rvalue reference)</h5>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/002*grammar*rvalue*reference.cpp">rvalue reference</a>
 
-####  <h5 id="cpp_11_c99">c99特性(c99)</h5>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/002_grammar_c99.cpp">c99特性</a>
+### #  <h5 id="cpp*11*c99">c99特性(c99)</h5>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/002*grammar_c99.cpp">c99特性</a>
 
-####  <h5 id="cpp_11_SFINAE">一般化的SFINAE规则(generalized SFINAE rules)</h5>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_11/002_grammar_SFINAE.cpp">generalized SFINAE rules</a>
+### #  <h5 id="cpp*11*SFINAE">一般化的SFINAE规则(generalized SFINAE rules)</h5>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*11/002*grammar_SFINAE.cpp">generalized SFINAE rules</a>
 	
 -----	
 	
@@ -987,71 +987,71 @@
 </div>		
 	
 
-### <h3 id="cpp_14_RTTI">类型支持（基本类型、RTTI、类型特性）</h3>
+## # <h3 id="cpp*14*RTTI">类型支持（基本类型、RTTI、类型特性）</h3>
 	
-### <h5 id="cpp_headfile_type_traits">Defined in header&lt;type_traits&gt;</h5>
+## # <h5 id="cpp*headfile*type*traits">Defined in header&lt;type*traits&gt;</h5>
 	
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_14/001_type_traits_is_null_pointer.cpp">检查类型是否为 std::nullptr_t</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_14/001_type_traits_is_final.cpp">is_final(检查类型是否为 final 类类型)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*14/001*type*traits*is*null*pointer.cpp">检查类型是否为 std::nullptr_t</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*14/001*type*traits*is*final.cpp">is*final(检查类型是否为 final 类类型)</a>
 
-### <h5 id="cpp_headfile_utility">Defined in header&lt;utility&gt;</h5>
+## # <h5 id="cpp*headfile*utility">Defined in header&lt;utility&gt;</h5>
 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_14/001_utility_exchange.cpp">exchange(将实参替换为一个新值，并返回其先前值)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_14/001_utility_integer_sequence.cpp">integer_sequence(实现编译时整数数列)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*14/001*utility_exchange.cpp">exchange(将实参替换为一个新值，并返回其先前值)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*14/001*utility*integer*sequence.cpp">integer_sequence(实现编译时整数数列)</a>
 
-### <h5 id="cpp_headfile_initializer_list">Defined in header&lt;initializer_list&gt;</h5>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_14/001_initializer_list_rbegin.cpp">rbegin(返回指向一个容器或数组的逆向迭代器)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_14/001_initializer_list_crbegin.cpp">crbegin(返回指向一个容器或数组的逆向迭代器)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_14/001_initializer_list_rend.cpp">rend(返回容器或数组的逆向尾迭代器)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_14/001_initializer_list_crend.cpp">crend(返回容器或数组的逆向尾迭代器)</a>
+## # <h5 id="cpp*headfile*initializer*list">Defined in header&lt;initializer*list&gt;</h5>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*14/001*initializer*list*rbegin.cpp">rbegin(返回指向一个容器或数组的逆向迭代器)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*14/001*initializer*list*crbegin.cpp">crbegin(返回指向一个容器或数组的逆向迭代器)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*14/001*initializer*list*rend.cpp">rend(返回容器或数组的逆向尾迭代器)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*14/001*initializer*list*crend.cpp">crend(返回容器或数组的逆向尾迭代器)</a>
 
-### <h5 id="cpp_headfile_initializer_list">Defined in header&lt;iterator&gt;</h5>
-### <h5 id="cpp_headfile_initializer_list">Defined in namespace std</h5>
+## # <h5 id="cpp*headfile*initializer_list">Defined in header&lt;iterator&gt;</h5>
+## # <h5 id="cpp*headfile*initializer_list">Defined in namespace std</h5>
 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_14/001_iterator_make_reverse_iterator.cpp">make_reverse_iterator(创建拥有从实参推出的类型的 std::reverse_iterator)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*14/001*iterator*make*reverse*iterator.cpp">make*reverse*iterator(创建拥有从实参推出的类型的 std::reverse*iterator)</a>
 
-### <h5 id="cpp_headfile_initializer_list">Defined in header &lt;array&gt;</h5>
-### <h5 id="cpp_headfile_initializer_list">Defined in header &lt;deque&gt;</h5>	
-### <h5 id="cpp_headfile_initializer_list">Defined in header &lt;forward_list&gt;</h5>
-### <h5 id="cpp_headfile_initializer_list">Defined in header &lt;iterator&gt;</h5>
-### <h5 id="cpp_headfile_initializer_list">Defined in header &lt;list&gt;</h5>	
-### <h5 id="cpp_headfile_initializer_list">Defined in header &lt;map&gt;</h5>
-### <h5 id="cpp_headfile_initializer_list">Defined in header &lt;regex&gt;</h5>
-### <h5 id="cpp_headfile_initializer_list">Defined in header &lt;set&gt;</h5>	
-### <h5 id="cpp_headfile_initializer_list">Defined in header &lt;span&gt;</h5>
-### <h5 id="cpp_headfile_initializer_list">Defined in header &lt;string&gt;</h5>
-### <h5 id="cpp_headfile_initializer_list">Defined in header &lt;string_view&gt;</h5>	
-### <h5 id="cpp_headfile_initializer_list">Defined in header &lt;unordered_map&gt;</h5>
-### <h5 id="cpp_headfile_initializer_list">Defined in header &lt;unordered_set&gt;</h5>
-### <h5 id="cpp_headfile_initializer_list">Defined in header &lt;vector&gt;</h5>
-### <h5 id="cpp_headfile_initializer_list">Defined in namespace std</h5>
+## # <h5 id="cpp*headfile*initializer_list">Defined in header &lt;array&gt;</h5>
+## # <h5 id="cpp*headfile*initializer_list">Defined in header &lt;deque&gt;</h5>	
+## # <h5 id="cpp*headfile*initializer*list">Defined in header &lt;forward*list&gt;</h5>
+## # <h5 id="cpp*headfile*initializer_list">Defined in header &lt;iterator&gt;</h5>
+## # <h5 id="cpp*headfile*initializer_list">Defined in header &lt;list&gt;</h5>	
+## # <h5 id="cpp*headfile*initializer_list">Defined in header &lt;map&gt;</h5>
+## # <h5 id="cpp*headfile*initializer_list">Defined in header &lt;regex&gt;</h5>
+## # <h5 id="cpp*headfile*initializer_list">Defined in header &lt;set&gt;</h5>	
+## # <h5 id="cpp*headfile*initializer_list">Defined in header &lt;span&gt;</h5>
+## # <h5 id="cpp*headfile*initializer_list">Defined in header &lt;string&gt;</h5>
+## # <h5 id="cpp*headfile*initializer*list">Defined in header &lt;string*view&gt;</h5>	
+## # <h5 id="cpp*headfile*initializer*list">Defined in header &lt;unordered*map&gt;</h5>
+## # <h5 id="cpp*headfile*initializer*list">Defined in header &lt;unordered*set&gt;</h5>
+## # <h5 id="cpp*headfile*initializer_list">Defined in header &lt;vector&gt;</h5>
+## # <h5 id="cpp*headfile*initializer_list">Defined in namespace std</h5>
 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_14/001_stl_begin.cpp">begin(返回指向容器或数组起始的迭代器)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_14/001_stl_cbegin.cpp">cbegin(返回指向容器或数组起始的迭代器)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_14/001_stl_end.cpp">end(返回指向容器或数组结尾的迭代器)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_14/001_stl_cend.cpp">cend(返回指向容器或数组结尾的迭代器)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*14/001*stl_begin.cpp">begin(返回指向容器或数组起始的迭代器)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*14/001*stl_cbegin.cpp">cbegin(返回指向容器或数组起始的迭代器)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*14/001*stl_end.cpp">end(返回指向容器或数组结尾的迭代器)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*14/001*stl_cend.cpp">cend(返回指向容器或数组结尾的迭代器)</a>
 	
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_14/001_stl_rbegin.cpp">rbegin(返回指向一个容器或数组的逆向迭代器)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_14/001_stl_crbegin.cpp">crbegin(返回指向一个容器或数组的逆向迭代器)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_14/001_stl_rend.cpp">rend(返回容器或数组的逆向尾迭代器)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_14/001_stl_crend.cpp">crend(返回容器或数组的逆向尾迭代器)</a>	
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*14/001*stl_rbegin.cpp">rbegin(返回指向一个容器或数组的逆向迭代器)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*14/001*stl_crbegin.cpp">crbegin(返回指向一个容器或数组的逆向迭代器)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*14/001*stl_rend.cpp">rend(返回容器或数组的逆向尾迭代器)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*14/001*stl_crend.cpp">crend(返回容器或数组的逆向尾迭代器)</a>	
 
 
 <!--	
-* [函数返回值类型推导](https://github.com/0voice/cpp_new_features/blob/main/cpp_14/README.md#cpp_14_01)
-* [lambda参数auto](https://github.com/0voice/cpp_new_features/blob/main/cpp_14/README.md#cpp_14_02)
-* [变量模板](https://github.com/0voice/cpp_new_features/blob/main/cpp_14/README.md#cpp_14_03)
-* [别名模板](https://github.com/0voice/cpp_new_features/blob/main/cpp_14/README.md#cpp_14_04)
-* [[[deprecated]]标记](https://github.com/0voice/cpp_new_features/blob/main/cpp_14/README.md#cpp_14_05)
-* [二进制字面量与整形字面量分隔符](https://github.com/0voice/cpp_new_features/blob/main/cpp_14/README.md#cpp_14_06)
-* [std::make_unique](https://github.com/0voice/cpp_new_features/blob/main/cpp_14/README.md#cpp_14_07)
-* [std::shared_timed_mutex与std::shared_lock](https://github.com/0voice/cpp_new_features/blob/main/cpp_14/README.md#cpp_14_08)
-* [std::integer_sequence](https://github.com/0voice/cpp_new_features/blob/main/cpp_14/README.md#cpp_14_09)
-* [std::exchange](https://github.com/0voice/cpp_new_features/blob/main/cpp_14/README.md#cpp_14_10)
-* [std::quoted](https://github.com/0voice/cpp_new_features/blob/main/cpp_14/README.md#cpp_14_11)
+* [函数返回值类型推导](https://github.com/0voice/cpp*new*features/blob/main/cpp*14/README.md# cpp*14_01)
+* [lambda参数auto](https://github.com/0voice/cpp*new*features/blob/main/cpp*14/README.md# cpp*14_02)
+* [变量模板](https://github.com/0voice/cpp*new*features/blob/main/cpp*14/README.md# cpp*14_03)
+* [别名模板](https://github.com/0voice/cpp*new*features/blob/main/cpp*14/README.md# cpp*14_04)
+* [[[deprecated]]标记](https://github.com/0voice/cpp*new*features/blob/main/cpp*14/README.md# cpp*14_05)
+* [二进制字面量与整形字面量分隔符](https://github.com/0voice/cpp*new*features/blob/main/cpp*14/README.md# cpp*14_06)
+* [std::make*unique](https://github.com/0voice/cpp*new*features/blob/main/cpp*14/README.md# cpp*14*07)
+* [std::shared*timed*mutex与std::shared*lock](https://github.com/0voice/cpp*new*features/blob/main/cpp*14/README.md# cpp*14*08)
+* [std::integer*sequence](https://github.com/0voice/cpp*new*features/blob/main/cpp*14/README.md# cpp*14*09)
+* [std::exchange](https://github.com/0voice/cpp*new*features/blob/main/cpp*14/README.md# cpp*14_10)
+* [std::quoted](https://github.com/0voice/cpp*new*features/blob/main/cpp*14/README.md# cpp*14_11)
 -->
 	
------
+---
 
 <div id="cpp_17" align=center>
 	
@@ -1060,126 +1060,126 @@
 </div>	
 	
 
-### <h3 id="cpp_17_keywords">关键字</h3>
+## # <h3 id="cpp*17*keywords">关键字</h3>
 
-#### <h5 id="cpp_17_meaning_changed__OR__new_meaning_added">含义变化或者新增含义关键字（meaning changed or new meaning added）</h5>
+### # <h5 id="cpp*17*meaning*changed**OR**new*meaning_added">含义变化或者新增含义关键字（meaning changed or new meaning added）</h5>
 
-* [register](https://github.com/0voice/cpp_new_features/blob/main/cpp_17/001_keywords_README.md#register)
+* [register](https://github.com/0voice/cpp*new*features/blob/main/cpp*17/001*keywords_README.md# register)
 	
-### <h3 id="cpp_17_RTTI">类型支持（基本类型、RTTI、类型特性）</h3>
+## # <h3 id="cpp*17*RTTI">类型支持（基本类型、RTTI、类型特性）</h3>
 	
-### <h5 id="cpp_headfile_type_traits">Defined in header&lt;type_traits&gt;</h5>
+## # <h5 id="cpp*headfile*type*traits">Defined in header&lt;type*traits&gt;</h5>
 	
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_17/002_type_traits_byte.cpp">byte(字节类型)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_17/002_type_traits_is_aggregate.cpp">is_aggregate(检查类型是否聚合类型)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_17/002_type_traits_is_swappable_with.cpp">is_swappable_with(检查一个类型的对象是否能与同类型或不同类型的对象交换)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_17/002_type_traits_is_swappable.cpp">is_swappable(检查一个类型的对象是否能与同类型或不同类型的对象交换)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_17/002_type_traits_is_nothrow_swappable_with.cpp">is_nothrow_swappable_with(检查一个类型的对象是否能与同类型或不同类型的对象交换)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_17/002_type_traits_is_nothrow_swappable.cpp">is_nothrow_swappable(检查一个类型的对象是否能与同类型或不同类型的对象交换)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_17/002_type_traits_is_invocable.cpp">is_invocable(检查类型能否以给定的实参类型调用（如同以 std::invoke）)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_17/002_type_traits_is_invocable_r.cpp">is_invocable_r(检查类型能否以给定的实参类型调用（如同以 std::invoke）)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_17/002_type_traits_is_nothrow_invocable.cpp">is_nothrow_invocable(检查类型能否以给定的实参类型调用（如同以 std::invoke）)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_17/002_type_traits_is_nothrow_invocable_r.cpp">is_nothrow_invocable_r(检查类型能否以给定的实参类型调用（如同以 std::invoke）)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_17/002_type_traits_invoke_result.cpp">invoke_result(推导以一组实参调用一个可调用对象的结果类型)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_17/002_type_traits_void_t.cpp">void_t(变参别名模板)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*17/002*type*traits*byte.cpp">byte(字节类型)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*17/002*type*traits*is*aggregate.cpp">is*aggregate(检查类型是否聚合类型)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*17/002*type*traits*is*swappable*with.cpp">is*swappable*with(检查一个类型的对象是否能与同类型或不同类型的对象交换)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*17/002*type*traits*is*swappable.cpp">is*swappable(检查一个类型的对象是否能与同类型或不同类型的对象交换)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*17/002*type*traits*is*nothrow*swappable*with.cpp">is*nothrow*swappable*with(检查一个类型的对象是否能与同类型或不同类型的对象交换)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*17/002*type*traits*is*nothrow*swappable.cpp">is*nothrow*swappable(检查一个类型的对象是否能与同类型或不同类型的对象交换)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*17/002*type*traits*is*invocable.cpp">is*invocable(检查类型能否以给定的实参类型调用（如同以 std::invoke）)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*17/002*type*traits*is*invocable*r.cpp">is*invocable*r(检查类型能否以给定的实参类型调用（如同以 std::invoke）)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*17/002*type*traits*is*nothrow*invocable.cpp">is*nothrow*invocable(检查类型能否以给定的实参类型调用（如同以 std::invoke）)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*17/002*type*traits*is*nothrow*invocable*r.cpp">is*nothrow*invocable*r(检查类型能否以给定的实参类型调用（如同以 std::invoke）)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*17/002*type*traits*invoke*result.cpp">invoke*result(推导以一组实参调用一个可调用对象的结果类型)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*17/002*type*traits*void*t.cpp">void*t(变参别名模板)</a>
 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_17/002_type_traits_conjunction.cpp">conjunction(变参的逻辑与元函数)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_17/002_type_traits_disjunction.cpp">disjunction(变参的逻辑或元函数)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_17/002_type_traits_ndisjunctionegation.cpp">ndisjunctionegation(逻辑非元函数)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_17/002_type_traits_integral_constant.cpp">integral_constant(具有指定值的指定类型的编译期常量)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*17/002*type*traits*conjunction.cpp">conjunction(变参的逻辑与元函数)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*17/002*type*traits*disjunction.cpp">disjunction(变参的逻辑或元函数)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*17/002*type*traits*ndisjunctionegation.cpp">ndisjunctionegation(逻辑非元函数)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*17/002*type*traits*integral*constant.cpp">integral*constant(具有指定值的指定类型的编译期常量)</a>
 
-### <h5 id="cpp_headfile_utility">Defined in header&lt;utility&gt;</h5>
+## # <h5 id="cpp*headfile*utility">Defined in header&lt;utility&gt;</h5>
 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_17/003_utility_as_const.cpp">as_const(获得到其实参的 const 引用)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*17/003*utility*as*const.cpp">as_const(获得到其实参的 const 引用)</a>
 <!--
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_17/003_utility_in_place.cpp">in_place(原位构造标签)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_17/003_utility_in_place_type.cpp">in_place_type(原位构造标签)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_17/003_utility_in_place_index.cpp">in_place_index(原位构造标签)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_17/003_utility_in_place_t.cpp">in_place_t(原位构造标签)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_17/003_utility_in_place_type_t.cpp">in_place_type_t(原位构造标签)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_17/003_utility_in_place_index_t.cpp">in_place_index_t(原位构造标签)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*17/003*utility*in*place.cpp">in_place(原位构造标签)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*17/003*utility*in*place*type.cpp">in*place_type(原位构造标签)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*17/003*utility*in*place*index.cpp">in*place_index(原位构造标签)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*17/003*utility*in*place*t.cpp">in*place_t(原位构造标签)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*17/003*utility*in*place*type*t.cpp">in*place*type_t(原位构造标签)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*17/003*utility*in*place*index*t.cpp">in*place*index_t(原位构造标签)</a>
 -->
 	
-### <h5 id="cpp_headfile_tuple">Defined in header&lt;tuple&gt;</h5>
+## # <h5 id="cpp*headfile*tuple">Defined in header&lt;tuple&gt;</h5>
 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_17/004_tuple_apply.cpp">apply(以一个实参的元组来调用函数)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_17/004_tuple_make_from_tuple.cpp">make_from_tuple(以一个实参元组构造对象)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*17/004*tuple_apply.cpp">apply(以一个实参的元组来调用函数)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*17/004*tuple*make*from*tuple.cpp">make*from_tuple(以一个实参元组构造对象)</a>
 
-### <h5 id="cpp_headfile_optional">Defined in header&lt;optional&gt;</h5>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_17/005_optional_optional.cpp">optional(可能或可能不保有一个对象的包装器)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_17/005_optional_make_optional.cpp">make_optional(创建一个 optional 对象)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_17/005_optional_std_swap.cpp">std::swap(std::optional)(特化 std::swap 算法)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_17/005_optional_std_hash.cpp">std::hash&lt;std::optional&gt;(特化 std::hash 算法)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_17/005_optional_nullopt_t.cpp">nullopt_t(带未初始化状态的 optional 类型的指示器)</a>	
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_17/005_optional_bad_optional_access.cpp">bad_optional_access(指示进行了到不含值的 optional 的有检查访问的异常)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_17/005_optional_nullopt.cpp">nullopt(nullopt_t 类型对象)</a>
+## # <h5 id="cpp*headfile*optional">Defined in header&lt;optional&gt;</h5>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*17/005*optional_optional.cpp">optional(可能或可能不保有一个对象的包装器)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*17/005*optional*make*optional.cpp">make_optional(创建一个 optional 对象)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*17/005*optional*std*swap.cpp">std::swap(std::optional)(特化 std::swap 算法)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*17/005*optional*std*hash.cpp">std::hash&lt;std::optional&gt;(特化 std::hash 算法)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*17/005*optional*nullopt*t.cpp">nullopt_t(带未初始化状态的 optional 类型的指示器)</a>	
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*17/005*optional*bad*optional*access.cpp">bad*optional_access(指示进行了到不含值的 optional 的有检查访问的异常)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*17/005*optional*nullopt.cpp">nullopt(nullopt*t 类型对象)</a>
 
-### <h5 id="cpp_headfile_variant">Defined in header&lt;variant&gt;</h5>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_17/006_variant_variant.cpp">variant(类型安全的可辨识联合体)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_17/006_variant_visit.cpp">visit(以一或多个 variant 所保有的各实参调用所提供的函数对象)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_17/006_variant_holds_alternative.cpp">holds_alternative(检查某个 variant 是否当前持有某个给定类型)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_17/006_variant_std_get.cpp">std::get(std::variant)(以给定索引或类型（若类型唯一）读取 variant 的值，错误时抛出异常)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_17/006_variant_get_if.cpp">get_if(以给定索引或类型（若其唯一），获得指向被指向的 variant 的值的指针，错误时返回空指针)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_17/006_variant_std_swap.cpp">std::swap(std::variant)(特化 std::swap 算法)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_17/006_variant_monostate.cpp">monostate(用作非可默认构造类型的 variant 的首个可选项的占位符类型)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_17/006_variant_bad_variant_access.cpp">bad_variant_access(非法地访问 variant 的值时抛出的异常)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_17/006_variant_variant_size.cpp">variant_size(在编译时获得 variant 可选项列表的大小)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_17/006_variant_variant_size_v.cpp">variant_size_v(在编译时获得 variant 可选项列表的大小)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_17/006_variant_variant_alternative.cpp">variant_alternative(在编译时获得以其下标指定的可选项的类型)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_17/006_variant_variant_alternative_t.cpp">variant_alternative_t(在编译时获得以其下标指定的可选项的类型)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_17/006_variant_std_hash.cpp">std::hash&lt;std::variant&gt;(特化 std::hash 算法)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_17/006_variant_variant_npos.cpp">variant_npos(非法状态的 variant 的下标)</a>
+## # <h5 id="cpp*headfile*variant">Defined in header&lt;variant&gt;</h5>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*17/006*variant_variant.cpp">variant(类型安全的可辨识联合体)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*17/006*variant_visit.cpp">visit(以一或多个 variant 所保有的各实参调用所提供的函数对象)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*17/006*variant*holds*alternative.cpp">holds_alternative(检查某个 variant 是否当前持有某个给定类型)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*17/006*variant*std*get.cpp">std::get(std::variant)(以给定索引或类型（若类型唯一）读取 variant 的值，错误时抛出异常)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*17/006*variant*get*if.cpp">get_if(以给定索引或类型（若其唯一），获得指向被指向的 variant 的值的指针，错误时返回空指针)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*17/006*variant*std*swap.cpp">std::swap(std::variant)(特化 std::swap 算法)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*17/006*variant_monostate.cpp">monostate(用作非可默认构造类型的 variant 的首个可选项的占位符类型)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*17/006*variant*bad*variant*access.cpp">bad*variant_access(非法地访问 variant 的值时抛出的异常)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*17/006*variant*variant*size.cpp">variant_size(在编译时获得 variant 可选项列表的大小)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*17/006*variant*variant*size*v.cpp">variant*size_v(在编译时获得 variant 可选项列表的大小)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*17/006*variant*variant*alternative.cpp">variant_alternative(在编译时获得以其下标指定的可选项的类型)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*17/006*variant*variant*alternative*t.cpp">variant*alternative_t(在编译时获得以其下标指定的可选项的类型)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*17/006*variant*std*hash.cpp">std::hash&lt;std::variant&gt;(特化 std::hash 算法)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*17/006*variant*variant*npos.cpp">variant_npos(非法状态的 variant 的下标)</a>
 	
-### <h5 id="cpp_headfile_any">Defined in header&lt;any&gt;</h5>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_17/007_any_any.cpp">any(可保有任何可复制构造 (CopyConstructible) 类型的实例的对象)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_17/007_any_std_swap.cpp">std::swap(std::any)(特化 std::swap 算法)</a>	
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_17/007_any_any_cast.cpp">any_cast(对被容纳对象的类型安全访问)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_17/007_any_make_any.cpp">make_any(创建 any 对象)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_17/007_any_bad_any_cast.cpp">bad_any_cast(当类型不匹配时按值返回形式的 any_cast 所抛出的异常)</a>
+## # <h5 id="cpp*headfile*any">Defined in header&lt;any&gt;</h5>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*17/007*any_any.cpp">any(可保有任何可复制构造 (CopyConstructible) 类型的实例的对象)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*17/007*any*std*swap.cpp">std::swap(std::any)(特化 std::swap 算法)</a>	
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*17/007*any*any*cast.cpp">any_cast(对被容纳对象的类型安全访问)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*17/007*any*make*any.cpp">make_any(创建 any 对象)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*17/007*any*bad*any*cast.cpp">bad*any*cast(当类型不匹配时按值返回形式的 any*cast 所抛出的异常)</a>
 
-### <h5 id="cpp_headfile_charconv">Defined in header&lt;charconv&gt;</h5>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_17/008_charconv_to_chars.cpp">to_chars(转换整数或浮点值到字符序列象)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_17/008_charconv_from_chars.cpp">from_chars(转换字符序列到整数或浮点值)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_17/008_charconv_chars_format.cpp">chars_format(指定 std::to_chars 和 std::from_chars 所用的格式)</a>
+## # <h5 id="cpp*headfile*charconv">Defined in header&lt;charconv&gt;</h5>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*17/008*charconv*to*chars.cpp">to_chars(转换整数或浮点值到字符序列象)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*17/008*charconv*from*chars.cpp">from_chars(转换字符序列到整数或浮点值)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*17/008*charconv*chars*format.cpp">chars*format(指定 std::to*chars 和 std::from_chars 所用的格式)</a>
 
-### <h5 id="cpp_headfile_initializer_list">Defined in header&lt;initializer_list&gt;</h5>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_17/009_initializer_list_empty.cpp">empty(检查容器是否为空)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_17/009_initializer_list_data.cpp">data(获得指向底层数组的指针)</a>
+## # <h5 id="cpp*headfile*initializer*list">Defined in header&lt;initializer*list&gt;</h5>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*17/009*initializer*list*empty.cpp">empty(检查容器是否为空)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*17/009*initializer*list*data.cpp">data(获得指向底层数组的指针)</a>
 
-### <h3 id="cpp_17_Containers_library">容器库</h3>
-### <h5 id="cpp_headfile_map">Defined in header&lt;map&gt;</h5>
+## # <h3 id="cpp*17*Containers_library">容器库</h3>
+## # <h5 id="cpp*headfile*map">Defined in header&lt;map&gt;</h5>
 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_17/010_map_insert_or_assign.cpp">insert_or_assign(插入元素，或若键已存在则赋值给当前元素)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_17/010_map_try_emplace.cpp">try_emplace(若键不存在则原位插入，若键存在则不做任何事)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_17/010_map_extract.cpp">extract(从另一容器释出结点)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_17/010_map_merge.cpp">merge(从另一容器接合结点)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*17/010*map*insert*or*assign.cpp">insert*or_assign(插入元素，或若键已存在则赋值给当前元素)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*17/010*map*try*emplace.cpp">try_emplace(若键不存在则原位插入，若键存在则不做任何事)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*17/010*map_extract.cpp">extract(从另一容器释出结点)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*17/010*map_merge.cpp">merge(从另一容器接合结点)</a>
 
-### <h5 id="cpp_headfile_unordered_map">Defined in header&lt;unordered_map&gt;</h5>
+## # <h5 id="cpp*headfile*unordered*map">Defined in header&lt;unordered*map&gt;</h5>
 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_17/011_unordered_map_insert_or_assign.cpp">insert_or_assign(插入元素，或若键已存在则赋值给当前元素)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_17/011_unordered_map_try_emplace.cpp">try_emplace(若键不存在则原位插入，若键存在则不做任何事)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_17/011_unordered_map_extract.cpp">extract(从另一容器释出结点)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_17/011_unordered_map_merge.cpp">merge(从另一容器接合结点)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*17/011*unordered*map*insert*or*assign.cpp">insert*or*assign(插入元素，或若键已存在则赋值给当前元素)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*17/011*unordered*map*try*emplace.cpp">try*emplace(若键不存在则原位插入，若键存在则不做任何事)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*17/011*unordered*map*extract.cpp">extract(从另一容器释出结点)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*17/011*unordered*map*merge.cpp">merge(从另一容器接合结点)</a>
 
-### <h5 id="cpp_headfile_initializer_list">Defined in header &lt;array&gt;</h5>
-### <h5 id="cpp_headfile_initializer_list">Defined in header &lt;deque&gt;</h5>	
-### <h5 id="cpp_headfile_initializer_list">Defined in header &lt;forward_list&gt;</h5>
-### <h5 id="cpp_headfile_initializer_list">Defined in header &lt;iterator&gt;</h5>
-### <h5 id="cpp_headfile_initializer_list">Defined in header &lt;list&gt;</h5>	
-### <h5 id="cpp_headfile_initializer_list">Defined in header &lt;map&gt;</h5>
-### <h5 id="cpp_headfile_initializer_list">Defined in header &lt;regex&gt;</h5>
-### <h5 id="cpp_headfile_initializer_list">Defined in header &lt;set&gt;</h5>	
-### <h5 id="cpp_headfile_initializer_list">Defined in header &lt;span&gt;</h5>
-### <h5 id="cpp_headfile_initializer_list">Defined in header &lt;string&gt;</h5>
-### <h5 id="cpp_headfile_initializer_list">Defined in header &lt;string_view&gt;</h5>	
-### <h5 id="cpp_headfile_initializer_list">Defined in header &lt;unordered_map&gt;</h5>
-### <h5 id="cpp_headfile_initializer_list">Defined in header &lt;unordered_set&gt;</h5>
-### <h5 id="cpp_headfile_initializer_list">Defined in header &lt;vector&gt;</h5>
-### <h5 id="cpp_headfile_initializer_list">Defined in namespace std</h5>
+## # <h5 id="cpp*headfile*initializer_list">Defined in header &lt;array&gt;</h5>
+## # <h5 id="cpp*headfile*initializer_list">Defined in header &lt;deque&gt;</h5>	
+## # <h5 id="cpp*headfile*initializer*list">Defined in header &lt;forward*list&gt;</h5>
+## # <h5 id="cpp*headfile*initializer_list">Defined in header &lt;iterator&gt;</h5>
+## # <h5 id="cpp*headfile*initializer_list">Defined in header &lt;list&gt;</h5>	
+## # <h5 id="cpp*headfile*initializer_list">Defined in header &lt;map&gt;</h5>
+## # <h5 id="cpp*headfile*initializer_list">Defined in header &lt;regex&gt;</h5>
+## # <h5 id="cpp*headfile*initializer_list">Defined in header &lt;set&gt;</h5>	
+## # <h5 id="cpp*headfile*initializer_list">Defined in header &lt;span&gt;</h5>
+## # <h5 id="cpp*headfile*initializer_list">Defined in header &lt;string&gt;</h5>
+## # <h5 id="cpp*headfile*initializer*list">Defined in header &lt;string*view&gt;</h5>	
+## # <h5 id="cpp*headfile*initializer*list">Defined in header &lt;unordered*map&gt;</h5>
+## # <h5 id="cpp*headfile*initializer*list">Defined in header &lt;unordered*set&gt;</h5>
+## # <h5 id="cpp*headfile*initializer_list">Defined in header &lt;vector&gt;</h5>
+## # <h5 id="cpp*headfile*initializer_list">Defined in namespace std</h5>
 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_17/012_stl_size.cpp">size(返回容器或数组的大小)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_17/012_stl_empty.cpp">empty(检查容器是否为空)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_17/012_stl_data.cpp">data(获得指向底层数组的指针)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*17/012*stl_size.cpp">size(返回容器或数组的大小)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*17/012*stl_empty.cpp">empty(检查容器是否为空)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*17/012*stl_data.cpp">data(获得指向底层数组的指针)</a>
 
 ---- 
 	
@@ -1189,454 +1189,454 @@
 
 </div>		
 	
-### <h3 id="cpp_20_keywords">关键字</h3>
+## # <h3 id="cpp*20*keywords">关键字</h3>
 
-#### <h5 id="cpp_20_new_keywords">新增关键字</h5>
+### # <h5 id="cpp*20*new_keywords">新增关键字</h5>
 
-* [char8_t](https://github.com/0voice/cpp_new_features/blob/main/cpp_20/001_keywords_README.md#char8_t)
-* [concept](https://github.com/0voice/cpp_new_features/blob/main/cpp_20/001_keywords_README.md#concept)
-* [consteval](https://github.com/0voice/cpp_new_features/blob/main/cpp_20/001_keywords_README.md#consteval)
-* [co_await](https://github.com/0voice/cpp_new_features/blob/main/cpp_20/001_keywords_README.md#co_await)
-* [co_return](https://github.com/0voice/cpp_new_features/blob/main/cpp_20/001_keywords_README.md#co_return)
-* [co_yield](https://github.com/0voice/cpp_new_features/blob/main/cpp_20/001_keywords_README.md#co_yield)
-* [requires](https://github.com/0voice/cpp_new_features/blob/main/cpp_20/001_keywords_README.md#requires)
+* [char8*t](https://github.com/0voice/cpp*new*features/blob/main/cpp*20/001*keywords*README.md# char8_t)
+* [concept](https://github.com/0voice/cpp*new*features/blob/main/cpp*20/001*keywords_README.md# concept)
+* [consteval](https://github.com/0voice/cpp*new*features/blob/main/cpp*20/001*keywords_README.md# consteval)
+* [co*await](https://github.com/0voice/cpp*new*features/blob/main/cpp*20/001*keywords*README.md# co_await)
+* [co*return](https://github.com/0voice/cpp*new*features/blob/main/cpp*20/001*keywords*README.md# co_return)
+* [co*yield](https://github.com/0voice/cpp*new*features/blob/main/cpp*20/001*keywords*README.md# co_yield)
+* [requires](https://github.com/0voice/cpp*new*features/blob/main/cpp*20/001*keywords_README.md# requires)
 	
-#### <h5 id="cpp_20_meaning_changed__OR__new_meaning_added">含义变化或者新增含义关键字（meaning changed or new meaning added）</h5>
+### # <h5 id="cpp*20*meaning*changed**OR**new*meaning_added">含义变化或者新增含义关键字（meaning changed or new meaning added）</h5>
 
-* [export](https://github.com/0voice/cpp_new_features/blob/main/cpp_20/001_keywords_README.md#export)
+* [export](https://github.com/0voice/cpp*new*features/blob/main/cpp*20/001*keywords_README.md# export)
 	
-### <h3 id="cpp_20_RTTI">类型支持（基本类型、RTTI、类型特性）</h3>
+## # <h3 id="cpp*20*RTTI">类型支持（基本类型、RTTI、类型特性）</h3>
 
-### <h5 id="cpp_headfile_type_traits">Defined in header&lt;type_traits&gt;</h5>
+## # <h5 id="cpp*headfile*type*traits">Defined in header&lt;type*traits&gt;</h5>
 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/002_rtti_is_bounded_array.cpp">is_bounded_array(检查类型是否为有已知边界的数组类型)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/002_rtti_is_unbounded_array.cpp">is_unbounded_array(检查类型是否为有未知边界的数组类型)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/002*rtti*is*bounded*array.cpp">is*bounded_array(检查类型是否为有已知边界的数组类型)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/002*rtti*is*unbounded*array.cpp">is*unbounded_array(检查类型是否为有未知边界的数组类型)</a>
 	
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/002_rtti_is_layout_compatible.cpp">is_layout_compatible(检查二个类型是否布局兼容)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/002_rtti_is_pointer_interconvertible_base_of.cpp">is_pointer_interconvertible_base_of(检查一个类型是否为另一类型的指针可互转换（起始）基类)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/002_rtti_is_pointer_interconvertible_with_class.cpp">is_pointer_interconvertible_with_class(检查一个类型的对象是否与该类型的指定子对象指针可互转换)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/002_rtti_is_corresponding_member.cpp">is_corresponding_member(检查二个指定成员是否在二个指定类型中的公共起始序列中彼此对应)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/002_rtti_is_nothrow_convertible.cpp">is_nothrow_convertible(检查是否能转换一个类型为另一类型)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/002*rtti*is*layout*compatible.cpp">is*layout_compatible(检查二个类型是否布局兼容)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/002*rtti*is*pointer*interconvertible*base*of.cpp">is*pointer*interconvertible*base_of(检查一个类型是否为另一类型的指针可互转换（起始）基类)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/002*rtti*is*pointer*interconvertible*with*class.cpp">is*pointer*interconvertible*with_class(检查一个类型的对象是否与该类型的指定子对象指针可互转换)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/002*rtti*is*corresponding*member.cpp">is*corresponding_member(检查二个指定成员是否在二个指定类型中的公共起始序列中彼此对应)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/002*rtti*is*nothrow*convertible.cpp">is*nothrow_convertible(检查是否能转换一个类型为另一类型)</a>
 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/002_rtti_remove_cvref.cpp">remove_cvref(将 std::remove_cv 与 std::remove_reference 结合)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/002*rtti*remove*cvref.cpp">remove*cvref(将 std::remove*cv 与 std::remove_reference 结合)</a>
 <!--
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/002_rtti_common_reference.cpp">common_reference(确定类型组的共用引用类型)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/002_rtti_basic_common_reference.cpp">basic_common_reference(确定类型组的共用引用类型)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/002*rtti*common*reference.cpp">common_reference(确定类型组的共用引用类型)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/002*rtti*basic*common*reference.cpp">basic*common_reference(确定类型组的共用引用类型)</a>
 -->
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/002_rtti_type_identity.cpp">type_identity(返回不更改的类型实参)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/002_rtti_is_constant_evaluated.cpp">is_constant_evaluated(检测调用是否在常量求值的语境内发生)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/002*rtti*type*identity.cpp">type_identity(返回不更改的类型实参)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/002*rtti*is*constant*evaluated.cpp">is*constant_evaluated(检测调用是否在常量求值的语境内发生)</a>
 
-### <h3 id="cpp_20_Coroutine">协程支持</h3>
+## # <h3 id="cpp*20*Coroutine">协程支持</h3>
 
-### <h5 id="cpp_headfile_coroutine">Defined in header&lt;coroutine&gt;</h5>
+## # <h5 id="cpp*headfile*coroutine">Defined in header&lt;coroutine&gt;</h5>
 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/003_rtti_coroutine_traits.cpp">coroutine_traits(用于发现协程承诺类型的特征类型)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/003_rtti_coroutine_handle.cpp">coroutine_handle(用于指代暂停或执行的协程)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/003_rtti_noop_coroutine.cpp">noop_coroutine(创建在等待或销毁时无操作的协程柄)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/003_rtti_noop_coroutine_promise.cpp">noop_coroutine_promise(用于无可观察作用的协程)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/003_rtti_noop_coroutine_handle.cpp">noop_coroutine_handle(std::coroutine_handle&lt;std::noop_coroutine_promise&gt; ，有意用于指代无操作协程)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/003_rtti_suspend_never.cpp">suspend_never(指示 await 表达式应该决不暂停)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/003_rtti_suspend_always.cpp">suspend_always(指示 await 表达式应该始终暂停)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/003*rtti*coroutine*traits.cpp">coroutine_traits(用于发现协程承诺类型的特征类型)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/003*rtti*coroutine*handle.cpp">coroutine_handle(用于指代暂停或执行的协程)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/003*rtti*noop*coroutine.cpp">noop_coroutine(创建在等待或销毁时无操作的协程柄)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/003*rtti*noop*coroutine*promise.cpp">noop*coroutine_promise(用于无可观察作用的协程)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/003*rtti*noop*coroutine*handle.cpp">noop*coroutine*handle(std::coroutine*handle&lt;std::noop*coroutine*promise&gt; ，有意用于指代无操作协程)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/003*rtti*suspend*never.cpp">suspend_never(指示 await 表达式应该决不暂停)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/003*rtti*suspend*always.cpp">suspend_always(指示 await 表达式应该始终暂停)</a>
 
-### <h3 id="cpp_20_compare">三路比较</h3>
+## # <h3 id="cpp*20*compare">三路比较</h3>
 
-### <h5 id="cpp_headfile_compare">Defined in header&lt;compare&gt;</h5>
+## # <h5 id="cpp*headfile*compare">Defined in header&lt;compare&gt;</h5>
 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/004_rtti_compare_std_coroutine_traits.cpp">std::coroutine_traits</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/004_rtti_compare_std_coroutine_handle.cpp">std::coroutine_handle</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/004_rtti_compare_three_way_comparable.cpp">three_way_comparable(指定运算符 <=> 在给定类型上产生一致的结果)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/004_rtti_compare_three_way_comparable_with.cpp">three_way_comparable_with(指定运算符 <=> 在给定类型上产生一致的结果)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/004_rtti_compare_partial_ordering.cpp">partial_ordering(三路比较的结果类型，支持所有 6 种运算符，不可替换，并允许不可比较的值)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/004_rtti_compare_weak_ordering.cpp">weak_ordering(三路比较的结果类型，支持所有 6 种运算符且不可替换)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/004_rtti_compare_strong_ordering.cpp">strong_ordering(三路比较的结果类型，支持所有 6 种运算符且可替换)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/004_rtti_compare_is_eq.cpp">is_eq(具名比较函数)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/004_rtti_compare_is_neq.cpp">is_neq(具名比较函数)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/004_rtti_compare_is_lt.cpp">is_lt(具名比较函数)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/004_rtti_compare_is_lteq.cpp">is_lteq(具名比较函数)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/004_rtti_compare_is_gt.cpp">is_gt(具名比较函数)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/004_rtti_compare_is_gteq.cpp">is_gteq(具名比较函数)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/004_rtti_compare_compare_three_way.cpp">compare_three_way(实现 x <=> y 的函数对象)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/004_rtti_compare_compare_three_way_result.cpp">compare_three_way_result(获得三路比较运算符 <=> 在给定类型上的结果)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/004_rtti_compare_common_comparison_category.cpp">common_comparison_category(给定的全部类型都能转换到的最强比较类别)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/004_rtti_compare_strong_order.cpp">strong_order(进行三路比较并产生 std::strong_ordering 类型结果)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/004_rtti_compare_weak_order.cpp">weak_order(进行三路比较并产生 std::weak_ordering 类型结果)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/004_rtti_compare_partial_order.cpp">partial_order(进行三路比较并产生 std::partial_ordering 类型结果)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/004_rtti_compare_compare_strong_order_fallback.cpp">compare_strong_order_fallback(进行三路比较并产生 std::strong_ordering 类型的结果，即使 operator<=> 不可用)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/004_rtti_compare_compare_weak_order_fallback.cpp">compare_weak_order_fallback(进行三路比较并产生 std::weak_ordering 类型的结果，即使 operator<=> 不可用)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/004_rtti_compare_compare_partial_order_fallback.cpp">compare_partial_order_fallback(进行三路比较并产生 std::partial_ordering 类型的结果，即使 operator<=> 不可用</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/004*rtti*compare*std*coroutine*traits.cpp">std::coroutine_traits</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/004*rtti*compare*std*coroutine*handle.cpp">std::coroutine_handle</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/004*rtti*compare*three*way*comparable.cpp">three*way*comparable(指定运算符 <=> 在给定类型上产生一致的结果)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/004*rtti*compare*three*way*comparable*with.cpp">three*way*comparable*with(指定运算符 <=> 在给定类型上产生一致的结果)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/004*rtti*compare*partial*ordering.cpp">partial*ordering(三路比较的结果类型，支持所有 6 种运算符，不可替换，并允许不可比较的值)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/004*rtti*compare*weak*ordering.cpp">weak*ordering(三路比较的结果类型，支持所有 6 种运算符且不可替换)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/004*rtti*compare*strong*ordering.cpp">strong*ordering(三路比较的结果类型，支持所有 6 种运算符且可替换)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/004*rtti*compare*is*eq.cpp">is*eq(具名比较函数)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/004*rtti*compare*is*neq.cpp">is*neq(具名比较函数)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/004*rtti*compare*is*lt.cpp">is*lt(具名比较函数)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/004*rtti*compare*is*lteq.cpp">is*lteq(具名比较函数)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/004*rtti*compare*is*gt.cpp">is*gt(具名比较函数)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/004*rtti*compare*is*gteq.cpp">is*gteq(具名比较函数)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/004*rtti*compare*compare*three*way.cpp">compare*three*way(实现 x <=> y 的函数对象)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/004*rtti*compare*compare*three*way*result.cpp">compare*three*way*result(获得三路比较运算符 <=> 在给定类型上的结果)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/004*rtti*compare*common*comparison*category.cpp">common*comparison*category(给定的全部类型都能转换到的最强比较类别)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/004*rtti*compare*strong*order.cpp">strong*order(进行三路比较并产生 std::strong_ordering 类型结果)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/004*rtti*compare*weak*order.cpp">weak*order(进行三路比较并产生 std::weak_ordering 类型结果)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/004*rtti*compare*partial*order.cpp">partial*order(进行三路比较并产生 std::partial_ordering 类型结果)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/004*rtti*compare*compare*strong*order*fallback.cpp">compare*strong*order*fallback(进行三路比较并产生 std::strong_ordering 类型的结果，即使 operator<=> 不可用)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/004*rtti*compare*compare*weak*order*fallback.cpp">compare*weak*order*fallback(进行三路比较并产生 std::weak_ordering 类型的结果，即使 operator<=> 不可用)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/004*rtti*compare*compare*partial*order*fallback.cpp">compare*partial*order*fallback(进行三路比较并产生 std::partial_ordering 类型的结果，即使 operator<=> 不可用</a>
 
-### <h5 id="cpp_headfile_concepts">Defined in header&lt;concepts&gt;</h5>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/005_rtti_concepts_ranges_swap.cpp">ranges::swap(交换两个对象的值)</a>
+## # <h5 id="cpp*headfile*concepts">Defined in header&lt;concepts&gt;</h5>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/005*rtti*concepts*ranges_swap.cpp">ranges::swap(交换两个对象的值)</a>
 
-### <h5 id="cpp_headfile_utility">Defined in header&lt;utility&gt;</h5>
+## # <h5 id="cpp*headfile*utility">Defined in header&lt;utility&gt;</h5>
 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/006_utility_cmp_equal.cpp">cmp_equal(比较二个整数值，而无转换所致的值更改)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/006_utility_cmp_not_equal.cpp">cmp_not_equal(比较二个整数值，而无转换所致的值更改)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/006_utility_cmp_less.cpp">cmp_less(比较二个整数值，而无转换所致的值更改)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/006_utility_cmp_less_equal.cpp">cmp_less_equal(比较二个整数值，而无转换所致的值更改)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/006_utility_cmp_greater_equal.cpp">cmp_greater_equal(比较二个整数值，而无转换所致的值更改)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/006_utility_in_range.cpp">in_range(检查整数值是否在给定整数类型的范围内)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/006*utility*cmp*equal.cpp">cmp_equal(比较二个整数值，而无转换所致的值更改)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/006*utility*cmp*not*equal.cpp">cmp*not_equal(比较二个整数值，而无转换所致的值更改)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/006*utility*cmp*less.cpp">cmp_less(比较二个整数值，而无转换所致的值更改)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/006*utility*cmp*less*equal.cpp">cmp*less_equal(比较二个整数值，而无转换所致的值更改)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/006*utility*cmp*greater*equal.cpp">cmp*greater_equal(比较二个整数值，而无转换所致的值更改)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/006*utility*in*range.cpp">in_range(检查整数值是否在给定整数类型的范围内)</a>
 
 <!--
-### <h5 id="cpp_headfile_format">Defined in header&lt;format&gt;</h5>
+## # <h5 id="cpp*headfile*format">Defined in header&lt;format&gt;</h5>
 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/007_format_format.cpp">format(在新 string 中存储参数的格式化表示)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/007_format_format_to.cpp">format_to(通过输出迭代器写其参数的格式化表示)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/007_format_format_to_n.cpp">format_to_n(通过输出迭代器写其参数的格式化表示，不超出指定的大小)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/007_format_formatted_size.cpp">formatted_size(确定存储其参数的格式化表示所需的字符数)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/007_format_vformat.cpp">vformat(std::format 的使用类型擦除的参数表示的非模板变体)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/007_format_vformat_to.cpp">vformat_to(std::format_to 的使用类型擦除的参数表示的非模板变体)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/007_format_formatter.cpp">formatter(定义给定类型的格式化规则的类模板)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/007_format_format_error.cpp">format_error(格式化错误时抛出的异常类型)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/007*format_format.cpp">format(在新 string 中存储参数的格式化表示)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/007*format*format*to.cpp">format_to(通过输出迭代器写其参数的格式化表示)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/007*format*format*to*n.cpp">format*to_n(通过输出迭代器写其参数的格式化表示，不超出指定的大小)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/007*format*formatted*size.cpp">formatted_size(确定存储其参数的格式化表示所需的字符数)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/007*format_vformat.cpp">vformat(std::format 的使用类型擦除的参数表示的非模板变体)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/007*format*vformat*to.cpp">vformat*to(std::format*to 的使用类型擦除的参数表示的非模板变体)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/007*format_formatter.cpp">formatter(定义给定类型的格式化规则的类模板)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/007*format*format*error.cpp">format_error(格式化错误时抛出的异常类型)</a>
 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/007_format_basic_format_arg.cpp">basic_format_arg(提供对用户定义格式化器的格式化参数的访问的类模板)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/007_format_basic_format_parse_context.cpp">basic_format_parse_context(格式化字符串分析器状态)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/007_format_format_parse_context.cpp">format_parse_context(格式化字符串分析器状态)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/007_format_wformat_parse_context.cpp">wformat_parse_context(格式化字符串分析器状态)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/007_format_basic_format_context.cpp">basic_format_context(格式化状态，包括所有格式化参数和输出迭代器)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/007_format_format_context.cpp">format_context(格式化状态，包括所有格式化参数和输出迭代器)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/007_format_wformat_context.cpp">wformat_context(格式化状态，包括所有格式化参数和输出迭代器)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/007_format_visit_format_arg.cpp">visit_format_arg(用户定义格式化器的参数观览接口)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/007_format_make_format_args.cpp">make_format_args(创建引用所有格式化参数的类型擦除对象，可转换到 format_args)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/007_format_make_wformat_args.cpp">make_wformat_args(创建引用所有格式化参数的类型擦除对象，可转换到 format_args)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/007_format_basic_format_args.cpp">basic_format_args(提供对所有格式化参数的访问的类)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/007_format_format_args.cpp">format_args(提供对所有格式化参数的访问的类)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/007_format_wformat_args.cpp">wformat_args(提供对所有格式化参数的访问的类)</a>
--->
-
-### <h5 id="cpp_headfile_memory">Defined in header&lt;memory&gt;</h5>
-	
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/008_memory_uninitialized_move.cpp">uninitialized_move(移动一个范围的对象到未初始化的内存区域)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/008_memory_uninitialized_move_n.cpp">uninitialized_move_n(移动一定数量对象到未初始化内存区域)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/008_memory_uninitialized_default_construct.cpp">uninitialized_default_construct(在范围所定义的未初始化的内存区域以默认初始化构造对象)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/008_memory_uninitialized_default_construct_n.cpp">uninitialized_default_construct_n(在起始和计数所定义的未初始化内存区域用默认初始化构造对象)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/008_memory_uninitialized_value_construct.cpp">uninitialized_value_construct(在范围所定义的未初始化内存中用值初始化构造对象)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/008_memory_uninitialized_value_construct_n.cpp">uninitialized_value_construct_n(在起始和计数所定义的未初始化内存区域以值初始化构造对象)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/008_memory_destroy_at.cpp">destroy_at(销毁在给定地址的对象)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/008_memory_destroy.cpp">destroy(销毁一个范围中的对象)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/008_memory_destroy_n.cpp">destroy_n(销毁范围中一定数量的对象)</a>
-
-	
-<!--
-### <h5 id="cpp_headfile_concepts">Defined in header&lt;memory_resource&gt;</h5>
-	
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/009_memory_resource_polymorphic_allocator.cpp">polymorphic_allocator(以 std::memory_resource 构造，支持基于它的运行时多态的分配器)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/009_memory_resource_memory_resource.cpp">memory_resource(一个抽象接口，用于各种封装内存资源的类)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/009_memory_resource_new_delete_resource.cpp">new_delete_resource(返回一个静态的程序范围 std::pmr::memory_resource，它使用全局 operator new 与 operator delete 分配和解分配内存</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/009_memory_resource_null_memory_resource.cpp">null_memory_resource(返回一个不进行任何分配的静态 std::pmr::memory_resource)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/009_memory_resource_get_default_resource.cpp">get_default_resource(获取缺省 std::pmr::memory_resource)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/009_memory_resource_set_default_resource.cpp">set_default_resource(设置缺省 std::pmr::memory_resource)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/009_memory_resource_pool_options.cpp">pool_options(一组池资源的构造函数选项)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/009_memory_resource_synchronized_pool_resource.cpp">synchronized_pool_resource(线程安全的 std::pmr::memory_resource，用于管理具有不同块大小的池中的分配)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/009_memory_resource_unsynchronized_pool_resource.cpp">unsynchronized_pool_resource(线程不安全的 std::pmr::memory_resource，用于管理具有不同块大小的池中的分配)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/009_memory_resource_monotonic_buffer_resource.cpp">monotonic_buffer_resource(一种特殊用途的 std::pmr::memory_resource，仅在资源被销毁时才释放所分配内存)</a>	
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/007*format*basic*format*arg.cpp">basic*format_arg(提供对用户定义格式化器的格式化参数的访问的类模板)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/007*format*basic*format*parse*context.cpp">basic*format*parse_context(格式化字符串分析器状态)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/007*format*format*parse*context.cpp">format*parse_context(格式化字符串分析器状态)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/007*format*wformat*parse*context.cpp">wformat*parse_context(格式化字符串分析器状态)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/007*format*basic*format*context.cpp">basic*format_context(格式化状态，包括所有格式化参数和输出迭代器)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/007*format*format*context.cpp">format_context(格式化状态，包括所有格式化参数和输出迭代器)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/007*format*wformat*context.cpp">wformat_context(格式化状态，包括所有格式化参数和输出迭代器)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/007*format*visit*format*arg.cpp">visit*format_arg(用户定义格式化器的参数观览接口)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/007*format*make*format*args.cpp">make*format*args(创建引用所有格式化参数的类型擦除对象，可转换到 format*args)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/007*format*make*wformat*args.cpp">make*wformat*args(创建引用所有格式化参数的类型擦除对象，可转换到 format*args)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/007*format*basic*format*args.cpp">basic*format_args(提供对所有格式化参数的访问的类)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/007*format*format*args.cpp">format_args(提供对所有格式化参数的访问的类)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/007*format*wformat*args.cpp">wformat_args(提供对所有格式化参数的访问的类)</a>
 -->
 
-### <h3 id="cpp_20_compare">Concepts library(概念库)</h3>
-
-### <h5 id="cpp_headfile_concepts">Defined in header&lt;concepts&gt;</h5>
-
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/010_concepts_same_as.cpp">same_as(指定一个类型与另一类型相同)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/010_concepts_derived_from.cpp">derived_from(指定一个类型派生自另一类型)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/010_concepts_convertible_to.cpp">convertible_to(指定一个类型能隐式转换成另一类型)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/010_concepts_common_reference_with.cpp">common_reference_with(指定两个类型共有一个公共引用类型)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/010_concepts_common_with.cpp">common_with(指定两个类型共有一个公共类型)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/010_concepts_integral.cpp">integral(指定类型为整型类型)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/010_concepts_signed_integral.cpp">signed_integral(指定类型为有符号的整型类型)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/010_concepts_unsigned_integral.cpp">unsigned_integral(指定类型为无符号的整型类型)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/010_concepts_floating_point.cpp">floating_point(指定类型为浮点类型)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/010_concepts_assignable_from.cpp">assignable_from(指定一个类型能从另一类型赋值)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/010_concepts_swappable.cpp">swappable(指定一个类型能进行交换，或两个类型能彼此交换)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/010_concepts_swappable_with.cpp">swappable_with(指定一个类型能进行交换，或两个类型能彼此交换)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/010_concepts_destructible.cpp">destructible(指定能销毁该类型的对象)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/010_concepts_constructible_from.cpp">constructible_from(指定该类型的变量能从一组实参类型进行构造，或绑定到一组实参类型)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/010_concepts_default_initializable.cpp">default_initializable(指定能默认构造一个类型的对象)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/010_concepts_move_constructible.cpp">move_constructible(指定能移动构造一个类型的对象)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/010_concepts_copy_constructible.cpp">copy_constructible(指定能复制构造和移动构造一个类型的对象)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/010_concepts_boolean_testable.cpp">boolean-testable(指定能用于布尔语境的类型)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/010_concepts_equality_comparable.cpp">equality_comparable(指定运算符 == 为等价关系)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/010_concepts_equality_comparable_with.cpp">equality_comparable_with(指定运算符 == 为等价关系)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/010_concepts_totally_ordered.cpp">totally_ordered(指定比较运算符在该类型上产生全序)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/010_concepts_totally_ordered_with.cpp">totally_ordered_with(指定比较运算符在该类型上产生全序)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/010_concepts_movable.cpp">movable(指定能移动及交换一个类型的对象)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/010_concepts_copyable.cpp">copyable(指定能复制、移动及交换一个类型的对象)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/010_concepts_semiregular.cpp">semiregular(指定能赋值、移动、交换及默认构造一个类型的对象)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/010_concepts_regular.cpp">regular(指定类型为正则，即它既为 semiregular 亦为 equality_comparable)</a>	
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/010_concepts_invocable.cpp">invocable(指定能以给定的一组实参类型调用的可调用类型)</a>	
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/010_concepts_regular_invocable.cpp">regular_invocable(指定能以给定的一组实参类型调用的可调用类型)</a>	
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/010_concepts_predicate.cpp">predicate(指定可调用类型为布尔谓词)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/010_concepts_relation.cpp">relation(指定可调用类型为二元关系)</a>	
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/010_concepts_equivalence_relation.cpp">equivalence_relation(指定 relation 施加等价关系)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/010_concepts_strict_weak_order.cpp">strict_weak_order(指定一个 relation 所强加的是严格弱序)</a>
-
-### <h3 id="cpp_20_memory">动态内存管理</h3>
-
-### <h5 id="cpp_headfile_memory">Defined in header&lt;memory&gt;</h5>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/011_memory_uses_allocator_construction_args.cpp">uses_allocator_construction_args(准备匹配给定类型所要求的使用分配器构造的口味的参数列表)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/011_memory_make_obj_using_allocator.cpp">make_obj_using_allocator(以使用分配器构造的手段创建给类型的对象)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/011_memory_uninitialized_construct_using_allocator.cpp">uninitialized_construct_using_allocator(以使用分配器构造的手段在指定的内存位置创建给定类型的对象)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/011_memory_construct_at.cpp">construct_at(在给定地址创建对象)</a>
+## # <h5 id="cpp*headfile*memory">Defined in header&lt;memory&gt;</h5>
 	
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/011_memory_no-throw-input-iterator.cpp">no-throw-input-iterator(指定迭代器、哨位和范围上的某些操作不抛出)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/011_memory_no-throw-forward-iterator.cpp">no-throw-forward-iterator(指定迭代器、哨位和范围上的某些操作不抛出)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/011_memory_no-throw-sentinel-for.cpp">no-throw-sentinel-for(指定迭代器、哨位和范围上的某些操作不抛出)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/011_memory_no-throw-input-range.cpp">no-throw-input-range(指定迭代器、哨位和范围上的某些操作不抛出)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/011_memory_no-throw-forward-range.cpp">no-throw-forward-range(指定迭代器、哨位和范围上的某些操作不抛出)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/011_memory_ranges_uninitialized_copy.cpp">ranges::uninitialized_copy(复制元素范围到未初始化的内存区域)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/011_memory_ranges_uninitialized_copy_n.cpp">ranges::uninitialized_copy_n(复制一定量元素到未初始化的内存区域)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/011_memory_ranges_uninitialized_fill.cpp">ranges::uninitialized_fill(复制一个对象到范围所定义的未初始化的内存区域)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/011_memory_ranges_uninitialized_fill_n.cpp">ranges::uninitialized_fill_n(复制一个对象到起始与计数所定义的未初始化的内存区域)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/011_memory_ranges_uninitialized_move.cpp">ranges::uninitialized_move(移动对象范围到未初始化的内存区域)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/011_memory_ranges_uninitialized_move_n.cpp">ranges::uninitialized_move_n(移动一定量对象到未初始化的内存区域)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/011_memory_ranges_uninitialized_default_construct.cpp">ranges::uninitialized_default_construct(在范围所定义的未初始化的内存区域以默认初始化构造对象)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/011_memory_ranges_uninitialized_default_construct_n.cpp">ranges::uninitialized_default_construct_n(在起始与计数所定义的未初始化的内存区域以默认初始化构造对象)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/011_memory_ranges_uninitialized_value_construct.cpp">ranges::uninitialized_value_construct(在范围所定义的未初始化的内存区域以值初始化构造对象)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/011_memory_ranges_uninitialized_value_construct_n.cpp">ranges::uninitialized_value_construct_n(在起始与计数所定义的未初始化的内存区域以值初始化构造对象)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/011_memory_ranges_destroy_at.cpp">ranges::destroy_at(销毁位于给定地址的元素)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/011_memory_ranges_destroy.cpp">ranges::destroy(销毁范围中的元素)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/011_memory_ranges_destroy_n.cpp">ranges::destroy_n(销毁范围中一定量的元素)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/011_memory_ranges_construct_at.cpp">ranges::construct_at(在给定地址创建对象)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/008*memory*uninitialized*move.cpp">uninitialized_move(移动一个范围的对象到未初始化的内存区域)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/008*memory*uninitialized*move*n.cpp">uninitialized*move_n(移动一定数量对象到未初始化内存区域)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/008*memory*uninitialized*default*construct.cpp">uninitialized*default_construct(在范围所定义的未初始化的内存区域以默认初始化构造对象)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/008*memory*uninitialized*default*construct*n.cpp">uninitialized*default*construct_n(在起始和计数所定义的未初始化内存区域用默认初始化构造对象)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/008*memory*uninitialized*value*construct.cpp">uninitialized*value_construct(在范围所定义的未初始化内存中用值初始化构造对象)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/008*memory*uninitialized*value*construct*n.cpp">uninitialized*value*construct_n(在起始和计数所定义的未初始化内存区域以值初始化构造对象)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/008*memory*destroy*at.cpp">destroy_at(销毁在给定地址的对象)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/008*memory_destroy.cpp">destroy(销毁一个范围中的对象)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/008*memory*destroy*n.cpp">destroy_n(销毁范围中一定数量的对象)</a>
 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/011_memory_to_address.cpp">to_address(从指针式类型获得裸指针)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/011_memory_assume_aligned.cpp">assume_aligned(告知编译器指针已对齐)</a>
-
-### <h3 id="cpp_20_memory">日期和时间工具</h3>
-
-### <h5 id="cpp_headfile_chrono">Defined in header&lt;chrono&gt;</h5>
-
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/012_chrono_is_clock.cpp">is_clock(确定类型是否为时钟 (Clock))</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/012_chrono_is_clock_v.cpp">is_clock_v(确定类型是否为时钟 (Clock))</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/012_chrono_utc_clock.cpp">utc_clock(协调世界时 (UTC) 的时钟 (Clock))</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/012_chrono_tai_clock.cpp">tai_clock(国际原子时 (TAI) 的时钟 (Clock))</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/012_chrono_gps_clock.cpp">gps_clock(GPS 时间的时钟 (Clock))</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/012_chrono_file_clock.cpp">file_clock(用于文件时间的时钟 (Clock))</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/012_chrono_local_t.cpp">local_t(表示本地时间的伪时钟)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/012_chrono_clock_time_conversion.cpp">clock_time_conversion(定义如何转换一个时钟的时间点为另一个的特性类)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/012_chrono_clock_cast.cpp">clock_cast(转换一个时钟的时间点为另一个)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/012_chrono_time_of_day.cpp">time_of_day(表示一日中的时间)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/012_chrono_is_am.cpp">is_am(在 12 时和 24 时格式当天时刻之间翻译)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/012_chrono_is_pm.cpp">is_pm(在 12 时和 24 时格式当天时刻之间翻译)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/012_chrono_make12.cpp">make12(在 12 时和 24 时格式当天时刻之间翻译)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/012_chrono_make24.cpp">make24(在 12 时和 24 时格式当天时刻之间翻译)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/012_chrono_last_spec.cpp">last_spec(指示一个月中最后日期或星期的标签类)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/012_chrono_day.cpp">day(表示月之日期)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/012_chrono_month.cpp">month(表示年之月份)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/012_chrono_year.cpp">year(表示格里高利历中的年)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/012_chrono_weekday.cpp">weekday(表示格里高利历中星期之日)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/012_chrono_weekday_indexed.cpp">weekday_indexed(表示月份的第 n 个 weekday)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/012_chrono_weekday_last.cpp">weekday_last(表示月份的最后一个 weekday)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/012_chrono_month_day.cpp">month_day(表示特定 month 的特定 day)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/012_chrono_month_day_last.cpp">month_day_last(表示特定 month 的最后一日)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/012_chrono_month_weekday.cpp">month_weekday(表示特定 month 的第 n 个 weekday)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/012_chrono_month_weekday_last.cpp">month_weekday_last(表示特定 month 的最后一个 weekday)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/012_chrono_year_month.cpp">year_month(表示特定 year 的特定 month)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/012_chrono_year_month_day.cpp">year_month_day(表示特定的 year 、 month 和 day)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/012_chrono_year_month_day_last.cpp">year_month_day_last(表示特定 year 和 month 的最后一日)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/012_chrono_year_month_weekday.cpp">year_month_weekday(表示特定 year 和 month 的第 n 个 weekday)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/012_chrono_year_month_weekday_last.cpp">year_month_weekday_last(表示特定 year 和 month 的最后一个 weekday)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/012_chrono_operator.cpp">operator/(创建格里高利历日期的约定语法)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/012_chrono_tzdb.cpp">tzdb(描述 IANA 时区数据库的副本)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/012_chrono_tzdb_list.cpp">tzdb_list(表示 tzdb 的链表)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/012_chrono_get_tzdb.cpp">get_tzdb(访问和控制全球时区数据库信息)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/012_chrono_get_tzdb_list.cpp">get_tzdb_list(访问和控制全球时区数据库信息)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/012_chrono_reload_tzdb.cpp">reload_tzdb(访问和控制全球时区数据库信息)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/012_chrono_remote_version.cpp">remote_version(访问和控制全球时区数据库信息)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/012_chrono_locate_zone.cpp">locate_zone(定位基于其名称的 time_zone)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/012_chrono_current_zone.cpp">current_zone(返回当前的 time_zone)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/012_chrono_time_zone.cpp">time_zone(表示时区)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/012_chrono_sys_info.cpp">sys_info(表示在特定时间点的关于时区的信息)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/012_chrono_local_info.cpp">local_info(表示关于从本地时间转换到 UNIX 时间的信息)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/012_chrono_choose.cpp">choose(选择应如何解析歧义的本地时间)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/012_chrono_zoned_traits.cpp">zoned_traits(zoned_time 所用的时区指针的特性类)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/012_chrono_zoned_time.cpp">zoned_time(表示时区和时间点)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/012_chrono_leap_second.cpp">leap_second(含有关于插入闰秒的信息)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/012_chrono_time_zone_link.cpp">time_zone_link(表示时区的替用名)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/012_chrono_nonexistent_local_time.cpp">nonexistent_local_time(抛出以报告本地时间不存在的异常)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/012_chrono_ambiguous_local_time.cpp">ambiguous_local_time(抛出以报告本地时间有歧义的异常)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/012_chrono_parse.cpp">parse(从流分析 chrono 对象)</a>
 	
-### <h3 id="cpp_20_string">字符串</h3>
-
-### <h5 id="cpp_headfile_string">Defined in header&lt;string&gt;</h5>
+<!--
+## # <h5 id="cpp*headfile*concepts">Defined in header&lt;memory_resource&gt;</h5>
 	
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/013_string_starts_with.cpp">starts_with(检查 string 是否始于给定前缀)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/013_string_ends_with.cpp">ends_with(检查 string 是否终于给定后缀)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/009*memory*resource*polymorphic*allocator.cpp">polymorphic*allocator(以 std::memory_resource 构造，支持基于它的运行时多态的分配器)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/009*memory*resource*memory*resource.cpp">memory*resource(一个抽象接口，用于各种封装内存资源的类)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/009*memory*resource*new*delete*resource.cpp">new*delete*resource(返回一个静态的程序范围 std::pmr::memory_resource，它使用全局 operator new 与 operator delete 分配和解分配内存</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/009*memory*resource*null*memory*resource.cpp">null*memory*resource(返回一个不进行任何分配的静态 std::pmr::memory_resource)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/009*memory*resource*get*default*resource.cpp">get*default*resource(获取缺省 std::pmr::memory_resource)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/009*memory*resource*set*default*resource.cpp">set*default*resource(设置缺省 std::pmr::memory_resource)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/009*memory*resource*pool*options.cpp">pool*options(一组池资源的构造函数选项)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/009*memory*resource*synchronized*pool*resource.cpp">synchronized*pool*resource(线程安全的 std::pmr::memory_resource，用于管理具有不同块大小的池中的分配)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/009*memory*resource*unsynchronized*pool*resource.cpp">unsynchronized*pool*resource(线程不安全的 std::pmr::memory_resource，用于管理具有不同块大小的池中的分配)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/009*memory*resource*monotonic*buffer*resource.cpp">monotonic*buffer*resource(一种特殊用途的 std::pmr::memory_resource，仅在资源被销毁时才释放所分配内存)</a>	
+-->
+
+## # <h3 id="cpp*20*compare">Concepts library(概念库)</h3>
+
+## # <h5 id="cpp*headfile*concepts">Defined in header&lt;concepts&gt;</h5>
+
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/010*concepts*same*as.cpp">same_as(指定一个类型与另一类型相同)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/010*concepts*derived*from.cpp">derived_from(指定一个类型派生自另一类型)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/010*concepts*convertible*to.cpp">convertible_to(指定一个类型能隐式转换成另一类型)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/010*concepts*common*reference*with.cpp">common*reference_with(指定两个类型共有一个公共引用类型)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/010*concepts*common*with.cpp">common_with(指定两个类型共有一个公共类型)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/010*concepts_integral.cpp">integral(指定类型为整型类型)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/010*concepts*signed*integral.cpp">signed_integral(指定类型为有符号的整型类型)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/010*concepts*unsigned*integral.cpp">unsigned_integral(指定类型为无符号的整型类型)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/010*concepts*floating*point.cpp">floating_point(指定类型为浮点类型)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/010*concepts*assignable*from.cpp">assignable_from(指定一个类型能从另一类型赋值)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/010*concepts_swappable.cpp">swappable(指定一个类型能进行交换，或两个类型能彼此交换)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/010*concepts*swappable*with.cpp">swappable_with(指定一个类型能进行交换，或两个类型能彼此交换)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/010*concepts_destructible.cpp">destructible(指定能销毁该类型的对象)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/010*concepts*constructible*from.cpp">constructible_from(指定该类型的变量能从一组实参类型进行构造，或绑定到一组实参类型)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/010*concepts*default*initializable.cpp">default_initializable(指定能默认构造一个类型的对象)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/010*concepts*move*constructible.cpp">move_constructible(指定能移动构造一个类型的对象)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/010*concepts*copy*constructible.cpp">copy_constructible(指定能复制构造和移动构造一个类型的对象)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/010*concepts*boolean*testable.cpp">boolean-testable(指定能用于布尔语境的类型)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/010*concepts*equality*comparable.cpp">equality_comparable(指定运算符 == 为等价关系)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/010*concepts*equality*comparable*with.cpp">equality*comparable_with(指定运算符 == 为等价关系)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/010*concepts*totally*ordered.cpp">totally_ordered(指定比较运算符在该类型上产生全序)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/010*concepts*totally*ordered*with.cpp">totally*ordered_with(指定比较运算符在该类型上产生全序)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/010*concepts_movable.cpp">movable(指定能移动及交换一个类型的对象)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/010*concepts_copyable.cpp">copyable(指定能复制、移动及交换一个类型的对象)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/010*concepts_semiregular.cpp">semiregular(指定能赋值、移动、交换及默认构造一个类型的对象)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/010*concepts*regular.cpp">regular(指定类型为正则，即它既为 semiregular 亦为 equality*comparable)</a>	
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/010*concepts_invocable.cpp">invocable(指定能以给定的一组实参类型调用的可调用类型)</a>	
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/010*concepts*regular*invocable.cpp">regular_invocable(指定能以给定的一组实参类型调用的可调用类型)</a>	
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/010*concepts_predicate.cpp">predicate(指定可调用类型为布尔谓词)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/010*concepts_relation.cpp">relation(指定可调用类型为二元关系)</a>	
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/010*concepts*equivalence*relation.cpp">equivalence_relation(指定 relation 施加等价关系)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/010*concepts*strict*weak*order.cpp">strict*weak_order(指定一个 relation 所强加的是严格弱序)</a>
+
+## # <h3 id="cpp*20*memory">动态内存管理</h3>
+
+## # <h5 id="cpp*headfile*memory">Defined in header&lt;memory&gt;</h5>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/011*memory*uses*allocator*construction*args.cpp">uses*allocator*construction_args(准备匹配给定类型所要求的使用分配器构造的口味的参数列表)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/011*memory*make*obj*using*allocator.cpp">make*obj*using_allocator(以使用分配器构造的手段创建给类型的对象)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/011*memory*uninitialized*construct*using*allocator.cpp">uninitialized*construct*using_allocator(以使用分配器构造的手段在指定的内存位置创建给定类型的对象)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/011*memory*construct*at.cpp">construct_at(在给定地址创建对象)</a>
 	
-### <h5 id="cpp_headfile_string_view">Defined in header&lt;string_view&gt;</h5>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/011*memory_no-throw-input-iterator.cpp">no-throw-input-iterator(指定迭代器、哨位和范围上的某些操作不抛出)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/011*memory_no-throw-forward-iterator.cpp">no-throw-forward-iterator(指定迭代器、哨位和范围上的某些操作不抛出)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/011*memory_no-throw-sentinel-for.cpp">no-throw-sentinel-for(指定迭代器、哨位和范围上的某些操作不抛出)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/011*memory_no-throw-input-range.cpp">no-throw-input-range(指定迭代器、哨位和范围上的某些操作不抛出)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/011*memory_no-throw-forward-range.cpp">no-throw-forward-range(指定迭代器、哨位和范围上的某些操作不抛出)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/011*memory*ranges*uninitialized*copy.cpp">ranges::uninitialized*copy(复制元素范围到未初始化的内存区域)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/011*memory*ranges*uninitialized*copy*n.cpp">ranges::uninitialized*copy*n(复制一定量元素到未初始化的内存区域)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/011*memory*ranges*uninitialized*fill.cpp">ranges::uninitialized*fill(复制一个对象到范围所定义的未初始化的内存区域)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/011*memory*ranges*uninitialized*fill*n.cpp">ranges::uninitialized*fill*n(复制一个对象到起始与计数所定义的未初始化的内存区域)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/011*memory*ranges*uninitialized*move.cpp">ranges::uninitialized*move(移动对象范围到未初始化的内存区域)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/011*memory*ranges*uninitialized*move*n.cpp">ranges::uninitialized*move*n(移动一定量对象到未初始化的内存区域)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/011*memory*ranges*uninitialized*default*construct.cpp">ranges::uninitialized*default*construct(在范围所定义的未初始化的内存区域以默认初始化构造对象)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/011*memory*ranges*uninitialized*default*construct*n.cpp">ranges::uninitialized*default*construct*n(在起始与计数所定义的未初始化的内存区域以默认初始化构造对象)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/011*memory*ranges*uninitialized*value*construct.cpp">ranges::uninitialized*value*construct(在范围所定义的未初始化的内存区域以值初始化构造对象)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/011*memory*ranges*uninitialized*value*construct*n.cpp">ranges::uninitialized*value*construct*n(在起始与计数所定义的未初始化的内存区域以值初始化构造对象)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/011*memory*ranges*destroy*at.cpp">ranges::destroy*at(销毁位于给定地址的元素)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/011*memory*ranges*destroy.cpp">ranges::destroy(销毁范围中的元素)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/011*memory*ranges*destroy*n.cpp">ranges::destroy*n(销毁范围中一定量的元素)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/011*memory*ranges*construct*at.cpp">ranges::construct*at(在给定地址创建对象)</a>
+
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/011*memory*to*address.cpp">to_address(从指针式类型获得裸指针)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/011*memory*assume*aligned.cpp">assume_aligned(告知编译器指针已对齐)</a>
+
+## # <h3 id="cpp*20*memory">日期和时间工具</h3>
+
+## # <h5 id="cpp*headfile*chrono">Defined in header&lt;chrono&gt;</h5>
+
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/012*chrono*is*clock.cpp">is_clock(确定类型是否为时钟 (Clock))</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/012*chrono*is*clock*v.cpp">is*clock_v(确定类型是否为时钟 (Clock))</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/012*chrono*utc*clock.cpp">utc_clock(协调世界时 (UTC) 的时钟 (Clock))</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/012*chrono*tai*clock.cpp">tai_clock(国际原子时 (TAI) 的时钟 (Clock))</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/012*chrono*gps*clock.cpp">gps_clock(GPS 时间的时钟 (Clock))</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/012*chrono*file*clock.cpp">file_clock(用于文件时间的时钟 (Clock))</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/012*chrono*local*t.cpp">local_t(表示本地时间的伪时钟)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/012*chrono*clock*time*conversion.cpp">clock*time_conversion(定义如何转换一个时钟的时间点为另一个的特性类)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/012*chrono*clock*cast.cpp">clock_cast(转换一个时钟的时间点为另一个)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/012*chrono*time*of*day.cpp">time*of_day(表示一日中的时间)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/012*chrono*is*am.cpp">is_am(在 12 时和 24 时格式当天时刻之间翻译)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/012*chrono*is*pm.cpp">is_pm(在 12 时和 24 时格式当天时刻之间翻译)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/012*chrono_make12.cpp">make12(在 12 时和 24 时格式当天时刻之间翻译)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/012*chrono_make24.cpp">make24(在 12 时和 24 时格式当天时刻之间翻译)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/012*chrono*last*spec.cpp">last_spec(指示一个月中最后日期或星期的标签类)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/012*chrono_day.cpp">day(表示月之日期)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/012*chrono_month.cpp">month(表示年之月份)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/012*chrono_year.cpp">year(表示格里高利历中的年)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/012*chrono_weekday.cpp">weekday(表示格里高利历中星期之日)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/012*chrono*weekday*indexed.cpp">weekday_indexed(表示月份的第 n 个 weekday)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/012*chrono*weekday*last.cpp">weekday_last(表示月份的最后一个 weekday)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/012*chrono*month*day.cpp">month_day(表示特定 month 的特定 day)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/012*chrono*month*day*last.cpp">month*day_last(表示特定 month 的最后一日)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/012*chrono*month*weekday.cpp">month_weekday(表示特定 month 的第 n 个 weekday)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/012*chrono*month*weekday*last.cpp">month*weekday_last(表示特定 month 的最后一个 weekday)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/012*chrono*year*month.cpp">year_month(表示特定 year 的特定 month)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/012*chrono*year*month*day.cpp">year*month_day(表示特定的 year 、 month 和 day)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/012*chrono*year*month*day*last.cpp">year*month*day_last(表示特定 year 和 month 的最后一日)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/012*chrono*year*month*weekday.cpp">year*month_weekday(表示特定 year 和 month 的第 n 个 weekday)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/012*chrono*year*month*weekday*last.cpp">year*month*weekday_last(表示特定 year 和 month 的最后一个 weekday)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/012*chrono_operator.cpp">operator/(创建格里高利历日期的约定语法)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/012*chrono_tzdb.cpp">tzdb(描述 IANA 时区数据库的副本)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/012*chrono*tzdb*list.cpp">tzdb_list(表示 tzdb 的链表)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/012*chrono*get*tzdb.cpp">get_tzdb(访问和控制全球时区数据库信息)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/012*chrono*get*tzdb*list.cpp">get*tzdb_list(访问和控制全球时区数据库信息)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/012*chrono*reload*tzdb.cpp">reload_tzdb(访问和控制全球时区数据库信息)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/012*chrono*remote*version.cpp">remote_version(访问和控制全球时区数据库信息)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/012*chrono*locate*zone.cpp">locate*zone(定位基于其名称的 time*zone)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/012*chrono*current*zone.cpp">current*zone(返回当前的 time*zone)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/012*chrono*time*zone.cpp">time_zone(表示时区)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/012*chrono*sys*info.cpp">sys_info(表示在特定时间点的关于时区的信息)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/012*chrono*local*info.cpp">local_info(表示关于从本地时间转换到 UNIX 时间的信息)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/012*chrono_choose.cpp">choose(选择应如何解析歧义的本地时间)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/012*chrono*zoned*traits.cpp">zoned*traits(zoned*time 所用的时区指针的特性类)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/012*chrono*zoned*time.cpp">zoned_time(表示时区和时间点)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/012*chrono*leap*second.cpp">leap_second(含有关于插入闰秒的信息)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/012*chrono*time*zone*link.cpp">time*zone_link(表示时区的替用名)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/012*chrono*nonexistent*local*time.cpp">nonexistent*local_time(抛出以报告本地时间不存在的异常)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/012*chrono*ambiguous*local*time.cpp">ambiguous*local_time(抛出以报告本地时间有歧义的异常)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/012*chrono_parse.cpp">parse(从流分析 chrono 对象)</a>
 	
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/014_string_view_starts_with.cpp">starts_with(检查 string_view 是否始于给定前缀)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/014_string_view_ends_with.cpp">ends_with(检查 string_view 是否终于给定后缀)</a>
+## # <h3 id="cpp*20*string">字符串</h3>
+
+## # <h5 id="cpp*headfile*string">Defined in header&lt;string&gt;</h5>
 	
-### <h5 id="cpp_headfile_cuchar">Defined in header&lt;cuchar&gt;</h5>
-
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/015_cuchar_mbrtoc8.cpp">mbrtoc8(转换窄多字节字符为 UTF-8 编码)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/015_cuchar_c8rtomb.cpp">c8rtomb(转换 UTF-8 字符串为窄多字节编码)</a>	
-
-### <h3 id="cpp_20_Containers_library">容器库</h3>
-
-### <h5 id="cpp_headfile_array">Defined in header&lt;array&gt;</h5>
-
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/016_array_to_array.cpp">to_array(从内建数组创建 std::array 对象)</a>
-
-### <h5 id="cpp_headfile_vector">Defined in header&lt;vector&gt;</h5>
-
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/017_vector_erase.cpp">erase(std::vector)(擦除所有满足特定判别标准的元素)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/017_vector_erase_if.cpp">erase_if(std::vector)(擦除所有满足特定判别标准的元素)</a>
-
-### <h5 id="cpp_headfile_map">Defined in header&lt;map&gt;</h5>
-
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/018_map_contains.cpp">contains(检查容器是否含有带特定键的元素)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/018_map_erase_if.cpp">erase_if(std::map)(擦除所有满足特定判别标准的元素)</a>
-
-### <h5 id="cpp_headfile_unordered_map">Defined in header&lt;unordered_map&gt;</h5>
-
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/019_unordered_map_contains.cpp">contains(检查容器是否含有带特定键的元素)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/019_unordered_map_erase_if.cpp">erase_if(std::unordered_map)(擦除所有满足特定判别标准的元素)</a>
-
-### <h5 id="cpp_headfile_span">Defined in header&lt;span&gt;</h5>
-
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/020_span_begin.cpp">begin(返回指向起始的迭代器)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/020_span_end.cpp">end(返回指向末尾的迭代器)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/020_span_rbegin.cpp">rbegin(返回指向起始的逆向迭代器)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/020_span_rend.cpp">rend(返回指向末尾的逆向迭代器)</a> 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/020_span_front.cpp">front(访问第一个元素)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/020_span_back.cpp">back(访问最后一个元素)</a> 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/020_span_dynamic_extent.cpp">dynamic_extent(size_t 类型常量，指明 span 拥有动态长度)</a>
-
-### <h5 id="cpp_headfile_span">Defined in namespace std</h5>
-
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/021_std_indirectly_readable.cpp">indirectly_readable(指定类型通过应用运算符 * 可读)</a> 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/021_std_indirectly_writable.cpp">indirectly_writable(指定可向迭代器所引用的对象写入值)</a> 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/021_std_weakly_incrementable.cpp">weakly_incrementable(指定 semiregular 类型能以前后自增运算符自增)</a> 	
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/021_std_incrementable.cpp">incrementable(指定 weakly_incrementable 类型上的自增操作保持相等性，而且该类型为 equality_comparable)</a> 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/021_std_input_or_output_iterator.cpp">input_or_output_iterator(指定该类型对象可以自增且可以解引用)</a> 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/021_std_sentinel_for.cpp">sentinel_for(指定类型为某个 input_or_output_iterator 类型的哨位类型)</a> 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/021_std_sized_sentinel_for.cpp">sized_sentinel_for(指定可对一个迭代器和一个哨位应用 - 运算符，以在常数时间计算其距离)</a> 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/021_std_input_iterator.cpp">input_iterator(指定类型为输入迭代器，即可读取其所引用的值，且可前/后自增)</a> 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/021_std_output_iterator.cpp">output_iterator(指定类型为给定的值类型的输出迭代器，即可向其写入该类型的值，且可前/后自增)</a> 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/021_std_forward_iterator.cpp">forward_iterator(指定 input_iterator 为向前迭代器，支持相等比较与多趟操作)</a> 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/021_std_bidirectional_iterator.cpp">bidirectional_iterator(指定 forward_iterator 为双向迭代器，支持向后移动)</a> 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/021_std_random_access_iterator.cpp">random_access_iterator(指定 bidirectional_iterator 为随机访问迭代器，支持常数时间内的前进和下标访问)</a> 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/021_std_contiguous_iterator.cpp">contiguous_iterator(指定 random_access_iterator 为连续迭代器，指代内存中连续相接的元素)</a> 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/021_std_indirectly_readable_traits.cpp">indirectly_readable_traits(计算 indirectly_readable 类型的值类型)</a> 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/021_std_iter_value_t.cpp">iter_value_t(计算迭代器的关联类型)</a> 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/021_std_iter_reference_t.cpp">iter_reference_t(计算迭代器的关联类型)</a> 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/021_std_iter_difference_t.cpp">iter_difference_t(计算迭代器的关联类型)</a> 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/021_std_iter_rvalue_reference_t.cpp">iter_rvalue_reference_t(计算迭代器的关联类型)</a> 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/021_std_iter_common_reference_t.cpp">iter_common_reference_t(计算迭代器的关联类型)</a> 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/021_std_iterator_traits.cpp">iterator_traits(为迭代器各项性质提供统一接口)</a> 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/021_std_input_iterator_tag.cpp">input_iterator_tag(用于指示迭代器类别的空类类型)</a> 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/021_std_output_iterator_tag.cpp">output_iterator_tag(用于指示迭代器类别的空类类型)</a> 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/021_std_forward_iterator_tag.cpp">forward_iterator_tag(用于指示迭代器类别的空类类型)</a> 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/021_std_bidirectional_iterator_tag.cpp">bidirectional_iterator_tag(用于指示迭代器类别的空类类型)</a> 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/021_std_random_access_iterator_tag.cpp">random_access_iterator_tag(用于指示迭代器类别的空类类型)</a> 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/021_std_contiguous_iterator_tag.cpp">contiguous_iterator_tag(用于指示迭代器类别的空类类型)</a> 
-
-### <h5 id="cpp_headfile_span">Defined in namespace std::ranges</h5>
-
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/022_ranges_iter_move.cpp">iter_move(将解引用迭代器的结果转型为其关联的右值引用类型)</a> 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/022_ranges_iter_swap.cpp">iter_swap(交换两个可解引用对象所引用的值)</a> 
-
-### <h5 id="cpp_headfile_span">Defined in namespace std</h5>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/023_std_indirectly_readable.cpp">indirectly_readable(指定类型通过应用运算符 * 可读)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/023_std_indirectly_writable.cpp">indirectly_writable(指定可向迭代器所引用的对象写入值)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/023_std_weakly_incrementable.cpp">weakly_incrementable(指定 semiregular 类型能以前后自增运算符自增)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/023_std_incrementable.cpp">incrementable(指定 weakly_incrementable 类型上的自增操作保持相等性，而且该类型为 equality_comparable)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/023_std_input_or_output_iterator.cpp">input_or_output_iterator(指定该类型对象可以自增且可以解引用)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/023_std_sentinel_for.cpp">sentinel_for(指定类型为某个 input_or_output_iterator 类型的哨位类型)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/023_std_sized_sentinel_for.cpp">sized_sentinel_for(指定可对一个迭代器和一个哨位应用 - 运算符，以在常数时间计算其距离)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/023_std_input_iterator.cpp">input_iterator(指定类型为输入迭代器，即可读取其所引用的值，且可前/后自增)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/023_std_output_iterator.cpp">output_iterator(指定类型为给定的值类型的输出迭代器，即可向其写入该类型的值，且可前/后自增)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/023_std_forward_iterator.cpp">forward_iterator(指定 input_iterator 为向前迭代器，支持相等比较与多趟操作)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/023_std_bidirectional_iterator.cpp">bidirectional_iterator(指定 forward_iterator 为双向迭代器，支持向后移动)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/023_std_random_access_iterator.cpp">random_access_iterator(指定 bidirectional_iterator 为随机访问迭代器，支持常数时间内的前进和下标访问)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/023_std_contiguous_iterator.cpp">contiguous_iterator(指定 random_access_iterator 为连续迭代器，指代内存中连续相接的元素)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/023_std_incrementable_traits.cpp">incrementable_traits(计算 weakly_incrementable 类型的差类型)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/023_std_indirectly_readable_traits.cpp">indirectly_readable_traits(计算 indirectly_readable 类型的值类型)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/023_std_iter_value_t.cpp">iter_value_t(计算迭代器的关联类型)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/023_std_iter_reference_t.cpp">iter_reference_t(计算迭代器的关联类型)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/023_std_iter_difference_t.cpp">iter_difference_t(计算迭代器的关联类型)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/023_std_iter_rvalue_reference_t.cpp">iter_rvalue_reference_t(计算迭代器的关联类型)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/023_std_iter_common_reference_t.cpp">iter_common_reference_t(计算迭代器的关联类型)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/023_std_iterator_traits.cpp">iterator_traits(为迭代器各项性质提供统一接口)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/023_std_input_iterator_tag.cpp">input_iterator_tag(用于指示迭代器类别的空类类型)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/023_std_output_iterator_tag.cpp">output_iterator_tag(用于指示迭代器类别的空类类型)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/023_std_forward_iterator_tag.cpp">forward_iterator_tag(用于指示迭代器类别的空类类型)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/023_std_bidirectional_iterator_tag.cpp">bidirectional_iterator_tag(用于指示迭代器类别的空类类型)</a>	
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/023_std_random_access_iterator_tag.cpp">random_access_iterator_tag(用于指示迭代器类别的空类类型)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/023_std_contiguous_iterator_tag.cpp">contiguous_iterator_tag(用于指示迭代器类别的空类类型)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/013*string*starts*with.cpp">starts_with(检查 string 是否始于给定前缀)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/013*string*ends*with.cpp">ends_with(检查 string 是否终于给定后缀)</a>
 	
-### <h5 id="cpp_headfile_span">Defined in header <iterator></h5>
-### <h5 id="cpp_headfile_span">Defined in namespace std</h5>
-
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/024_iterator_indirectly_unary_invocable.cpp">indirectly_unary_invocable(指定可调用类型能以解引用某个 indirectly_readable 类型的结果进行调用)</a> 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/024_iterator_indirectly_regular_unary_invocable.cpp">indirectly_regular_unary_invocable(指定可调用类型能以解引用某个 indirectly_readable 类型的结果进行调用)</a> 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/024_iterator_indirect_unary_predicate.cpp">indirect_unary_predicate(指定可调用类型，在以解引用一个 indirectly_readable 类型的结果进行调用时，满足 predicate)</a> 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/024_iterator_indirect_binary_predicate.cpp">indirect_binary_predicate(指定可调用类型，在以解引用两个 indirectly_readable 类型的结果进行调用时，满足 predicate)</a> 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/024_iterator_indirect_equivalence_relation.cpp">indirect_equivalence_relation(指定可调用类型，在以解引用两个 indirectly_readable 类型的结果进行调用时，满足 equivalence_relation)</a> 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/024_iterator_indirect_strict_weak_order.cpp">indirect_strict_weak_order(指定可调用类型，在以解引用两个 indirectly_readable 类型的结果进行调用时，满足 strict_weak_order)</a> 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/024_iterator_indirectly_movable.cpp">indirectly_movable(指定可从 indirectly_readable 类型移动值给 indirectly_writable 类型)</a> 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/024_iterator_indirectly_movable_storable.cpp">indirectly_movable_storable(指定可从 indirectly_readable 类型移动值给 indirectly_writable 类型，且该移动可以通过中间对象进行)</a> 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/024_iterator_indirectly_copyable.cpp">indirectly_copyable(指定可从 indirectly_readable 类型复制值给 indirectly_writable 类型)</a> 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/024_iterator_indirectly_copyable_storable.cpp">indirectly_copyable_storable(指定可从 indirectly_readable 类型复制值给 indirectly_writable 类型，且该复制可以通过中间对象进行)</a> 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/024_iterator_indirectly_swappable.cpp">indirectly_swappable(指定能交换两个 indirectly_readable 类型所引用的值)</a> 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/024_iterator_indirectly_comparable.cpp">indirectly_comparable(指定能比较两个 indirectly_readable 类型所引用的值)</a> 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/024_iterator_permutable.cpp">permutable(指定在原位重排元素的算法的共用要求)</a> 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/024_iterator_mergeable.cpp">mergeable(指定通过复制元素将已排序序列归并到输出序列中的算法的要求)</a> 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/024_iterator_sortable.cpp">sortable(指定重排序列为有序序列的算法的共用要求)</a> 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/024_iterator_indirect_result_t.cpp">indirect_result_t(计算在解引用某组 indirectly_readable 类型的结果上调用可调用对象的结果)</a> 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/024_iterator_projected.cpp">projected(用于对接受投影的算法指定约束的辅助模板)</a> 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/024_iterator_move_sentinel.cpp">move_sentinel(用于 std::move_iterator 的哨位适配器)</a> 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/024_iterator_common_iterator.cpp">common_iterator(适配一个迭代器类型及其哨位为一个公共迭代器类型)</a> 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/024_iterator_default_sentinel_t.cpp">default_sentinel_t(用于知晓其边界的迭代器的默认哨位)</a> 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/024_iterator_counted_iterator.cpp">counted_iterator(对到范围结尾距离进行跟踪的迭代器适配器)</a> 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/024_iterator_unreachable_sentinel_t.cpp">unreachable_sentinel_t(始终与任何 weakly_incrementable 类型比较都不相等的哨位)</a> 
-
-### <h5 id="cpp_headfile_span">Defined in header <iterator></h5>
-
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/025_iterator_ranges_advanc.cpp">ranges::advance(令迭代器前进给定的距离或到给定的边界)</a> 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/025_iterator_ranges_distance.cpp">ranges::distance(返回迭代器与哨位间的距离，或范围起始与结尾间的距离)</a> 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/025_iterator_ranges_next.cpp">ranges::next(自增迭代器给定的距离或到边界)</a> 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/025_iterator_ranges_prev.cpp">ranges::prev(自减迭代器给定的距离或到边界)</a> 
-
-### <h5 id="cpp_headfile_initializer_list">Defined in header &lt;array&gt;</h5>
-### <h5 id="cpp_headfile_initializer_list">Defined in header &lt;deque&gt;</h5>	
-### <h5 id="cpp_headfile_initializer_list">Defined in header &lt;forward_list&gt;</h5>
-### <h5 id="cpp_headfile_initializer_list">Defined in header &lt;iterator&gt;</h5>
-### <h5 id="cpp_headfile_initializer_list">Defined in header &lt;list&gt;</h5>	
-### <h5 id="cpp_headfile_initializer_list">Defined in header &lt;map&gt;</h5>
-### <h5 id="cpp_headfile_initializer_list">Defined in header &lt;regex&gt;</h5>
-### <h5 id="cpp_headfile_initializer_list">Defined in header &lt;set&gt;</h5>	
-### <h5 id="cpp_headfile_initializer_list">Defined in header &lt;span&gt;</h5>
-### <h5 id="cpp_headfile_initializer_list">Defined in header &lt;string&gt;</h5>
-### <h5 id="cpp_headfile_initializer_list">Defined in header &lt;string_view&gt;</h5>	
-### <h5 id="cpp_headfile_initializer_list">Defined in header &lt;unordered_map&gt;</h5>
-### <h5 id="cpp_headfile_initializer_list">Defined in header &lt;unordered_set&gt;</h5>
-### <h5 id="cpp_headfile_initializer_list">Defined in header &lt;vector&gt;</h5>
-### <h5 id="cpp_headfile_initializer_list">Defined in namespace std</h5>
-
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/026_std_ssize.cpp">ssize(返回容器或数组的大小)</a> 
-
-### <h5 id="cpp_headfile_span">Defined in header &lt;ranges&gt;</h5>
-### <h5 id="cpp_headfile_span">Defined in header &lt;iterator&gt;</h5>
-### <h5 id="cpp_headfile_span">Defined in namespace std::ranges</h5>
+## # <h5 id="cpp*headfile*string*view">Defined in header&lt;string*view&gt;</h5>
 	
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/027_ranges_ranges_begin.cpp">ranges::begin(返回指向范围起始的迭代器)</a> 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/027_ranges_ranges_cbegin.cpp">ranges::cbegin(返回指向只读范围起始的迭代器)</a> 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/027_ranges_ranges_end.cpp">ranges::end(返回指示范围结尾的哨位)</a> 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/027_ranges_ranges_cend.cpp">ranges::cend(返回指示只读范围结尾的哨位)</a> 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/027_ranges_ranges_rbegin.cpp">ranges::rbegin(返回指向范围的逆向迭代器)</a> 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/027_ranges_ranges_crbegin.cpp">ranges::crbegin(返回指向只读范围的逆向迭代器)</a> 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/027_ranges_ranges_rend.cpp">ranges::rend(返回指向范围的逆向尾迭代器)</a> 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/027_ranges_ranges_crend.cpp">ranges::crend(返回指向只读范围的逆向尾迭代器)</a> 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/027_ranges_ranges_size.cpp">ranges::size(获得能在常数时间内计算大小的范围的大小)</a> 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/027_ranges_ranges_ssize.cpp">ranges::ssize(获得能在常数时间内计算大小的范围的大小，并将它转换成有符号整数)</a> 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/027_ranges_ranges_empty.cpp">ranges::empty(检查范围是否为空)</a> 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/027_ranges_ranges_data.cpp">ranges::data(获得指向连续范围的起始的指针)</a> 	
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_20/027_ranges_ranges_cdata.cpp">ranges::cdata(获得指向只读连续范围的起始的指针)</a> 
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/014*string*view*starts*with.cpp">starts*with(检查 string_view 是否始于给定前缀)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/014*string*view*ends*with.cpp">ends*with(检查 string_view 是否终于给定后缀)</a>
+	
+## # <h5 id="cpp*headfile*cuchar">Defined in header&lt;cuchar&gt;</h5>
+
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/015*cuchar_mbrtoc8.cpp">mbrtoc8(转换窄多字节字符为 UTF-8 编码)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/015*cuchar_c8rtomb.cpp">c8rtomb(转换 UTF-8 字符串为窄多字节编码)</a>	
+
+## # <h3 id="cpp*20*Containers_library">容器库</h3>
+
+## # <h5 id="cpp*headfile*array">Defined in header&lt;array&gt;</h5>
+
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/016*array*to*array.cpp">to_array(从内建数组创建 std::array 对象)</a>
+
+## # <h5 id="cpp*headfile*vector">Defined in header&lt;vector&gt;</h5>
+
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/017*vector_erase.cpp">erase(std::vector)(擦除所有满足特定判别标准的元素)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/017*vector*erase*if.cpp">erase_if(std::vector)(擦除所有满足特定判别标准的元素)</a>
+
+## # <h5 id="cpp*headfile*map">Defined in header&lt;map&gt;</h5>
+
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/018*map_contains.cpp">contains(检查容器是否含有带特定键的元素)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/018*map*erase*if.cpp">erase_if(std::map)(擦除所有满足特定判别标准的元素)</a>
+
+## # <h5 id="cpp*headfile*unordered*map">Defined in header&lt;unordered*map&gt;</h5>
+
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/019*unordered*map*contains.cpp">contains(检查容器是否含有带特定键的元素)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/019*unordered*map*erase*if.cpp">erase*if(std::unordered_map)(擦除所有满足特定判别标准的元素)</a>
+
+## # <h5 id="cpp*headfile*span">Defined in header&lt;span&gt;</h5>
+
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/020*span_begin.cpp">begin(返回指向起始的迭代器)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/020*span_end.cpp">end(返回指向末尾的迭代器)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/020*span_rbegin.cpp">rbegin(返回指向起始的逆向迭代器)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/020*span_rend.cpp">rend(返回指向末尾的逆向迭代器)</a> 
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/020*span_front.cpp">front(访问第一个元素)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/020*span_back.cpp">back(访问最后一个元素)</a> 
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/020*span*dynamic*extent.cpp">dynamic*extent(size*t 类型常量，指明 span 拥有动态长度)</a>
+
+## # <h5 id="cpp*headfile*span">Defined in namespace std</h5>
+
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/021*std*indirectly*readable.cpp">indirectly_readable(指定类型通过应用运算符 * 可读)</a> 
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/021*std*indirectly*writable.cpp">indirectly_writable(指定可向迭代器所引用的对象写入值)</a> 
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/021*std*weakly*incrementable.cpp">weakly_incrementable(指定 semiregular 类型能以前后自增运算符自增)</a> 	
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/021*std*incrementable.cpp">incrementable(指定 weakly*incrementable 类型上的自增操作保持相等性，而且该类型为 equality_comparable)</a> 
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/021*std*input*or*output*iterator.cpp">input*or*output_iterator(指定该类型对象可以自增且可以解引用)</a> 
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/021*std*sentinel*for.cpp">sentinel*for(指定类型为某个 input*or*output*iterator 类型的哨位类型)</a> 
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/021*std*sized*sentinel*for.cpp">sized*sentinel_for(指定可对一个迭代器和一个哨位应用 - 运算符，以在常数时间计算其距离)</a> 
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/021*std*input*iterator.cpp">input_iterator(指定类型为输入迭代器，即可读取其所引用的值，且可前/后自增)</a> 
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/021*std*output*iterator.cpp">output_iterator(指定类型为给定的值类型的输出迭代器，即可向其写入该类型的值，且可前/后自增)</a> 
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/021*std*forward*iterator.cpp">forward*iterator(指定 input*iterator 为向前迭代器，支持相等比较与多趟操作)</a> 
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/021*std*bidirectional*iterator.cpp">bidirectional*iterator(指定 forward*iterator 为双向迭代器，支持向后移动)</a> 
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/021*std*random*access*iterator.cpp">random*access*iterator(指定 bidirectional*iterator 为随机访问迭代器，支持常数时间内的前进和下标访问)</a> 
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/021*std*contiguous*iterator.cpp">contiguous*iterator(指定 random*access_iterator 为连续迭代器，指代内存中连续相接的元素)</a> 
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/021*std*indirectly*readable*traits.cpp">indirectly*readable*traits(计算 indirectly*readable 类型的值类型)</a> 
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/021*std*iter*value*t.cpp">iter*value_t(计算迭代器的关联类型)</a> 
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/021*std*iter*reference*t.cpp">iter*reference_t(计算迭代器的关联类型)</a> 
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/021*std*iter*difference*t.cpp">iter*difference_t(计算迭代器的关联类型)</a> 
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/021*std*iter*rvalue*reference*t.cpp">iter*rvalue*reference_t(计算迭代器的关联类型)</a> 
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/021*std*iter*common*reference*t.cpp">iter*common*reference_t(计算迭代器的关联类型)</a> 
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/021*std*iterator*traits.cpp">iterator_traits(为迭代器各项性质提供统一接口)</a> 
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/021*std*input*iterator*tag.cpp">input*iterator_tag(用于指示迭代器类别的空类类型)</a> 
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/021*std*output*iterator*tag.cpp">output*iterator_tag(用于指示迭代器类别的空类类型)</a> 
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/021*std*forward*iterator*tag.cpp">forward*iterator_tag(用于指示迭代器类别的空类类型)</a> 
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/021*std*bidirectional*iterator*tag.cpp">bidirectional*iterator_tag(用于指示迭代器类别的空类类型)</a> 
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/021*std*random*access*iterator*tag.cpp">random*access*iterator_tag(用于指示迭代器类别的空类类型)</a> 
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/021*std*contiguous*iterator*tag.cpp">contiguous*iterator_tag(用于指示迭代器类别的空类类型)</a> 
+
+## # <h5 id="cpp*headfile*span">Defined in namespace std::ranges</h5>
+
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/022*ranges*iter*move.cpp">iter_move(将解引用迭代器的结果转型为其关联的右值引用类型)</a> 
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/022*ranges*iter*swap.cpp">iter_swap(交换两个可解引用对象所引用的值)</a> 
+
+## # <h5 id="cpp*headfile*span">Defined in namespace std</h5>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/023*std*indirectly*readable.cpp">indirectly_readable(指定类型通过应用运算符 * 可读)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/023*std*indirectly*writable.cpp">indirectly_writable(指定可向迭代器所引用的对象写入值)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/023*std*weakly*incrementable.cpp">weakly_incrementable(指定 semiregular 类型能以前后自增运算符自增)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/023*std*incrementable.cpp">incrementable(指定 weakly*incrementable 类型上的自增操作保持相等性，而且该类型为 equality_comparable)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/023*std*input*or*output*iterator.cpp">input*or*output_iterator(指定该类型对象可以自增且可以解引用)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/023*std*sentinel*for.cpp">sentinel*for(指定类型为某个 input*or*output*iterator 类型的哨位类型)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/023*std*sized*sentinel*for.cpp">sized*sentinel_for(指定可对一个迭代器和一个哨位应用 - 运算符，以在常数时间计算其距离)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/023*std*input*iterator.cpp">input_iterator(指定类型为输入迭代器，即可读取其所引用的值，且可前/后自增)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/023*std*output*iterator.cpp">output_iterator(指定类型为给定的值类型的输出迭代器，即可向其写入该类型的值，且可前/后自增)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/023*std*forward*iterator.cpp">forward*iterator(指定 input*iterator 为向前迭代器，支持相等比较与多趟操作)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/023*std*bidirectional*iterator.cpp">bidirectional*iterator(指定 forward*iterator 为双向迭代器，支持向后移动)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/023*std*random*access*iterator.cpp">random*access*iterator(指定 bidirectional*iterator 为随机访问迭代器，支持常数时间内的前进和下标访问)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/023*std*contiguous*iterator.cpp">contiguous*iterator(指定 random*access_iterator 为连续迭代器，指代内存中连续相接的元素)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/023*std*incrementable*traits.cpp">incrementable*traits(计算 weakly*incrementable 类型的差类型)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/023*std*indirectly*readable*traits.cpp">indirectly*readable*traits(计算 indirectly*readable 类型的值类型)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/023*std*iter*value*t.cpp">iter*value_t(计算迭代器的关联类型)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/023*std*iter*reference*t.cpp">iter*reference_t(计算迭代器的关联类型)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/023*std*iter*difference*t.cpp">iter*difference_t(计算迭代器的关联类型)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/023*std*iter*rvalue*reference*t.cpp">iter*rvalue*reference_t(计算迭代器的关联类型)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/023*std*iter*common*reference*t.cpp">iter*common*reference_t(计算迭代器的关联类型)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/023*std*iterator*traits.cpp">iterator_traits(为迭代器各项性质提供统一接口)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/023*std*input*iterator*tag.cpp">input*iterator_tag(用于指示迭代器类别的空类类型)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/023*std*output*iterator*tag.cpp">output*iterator_tag(用于指示迭代器类别的空类类型)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/023*std*forward*iterator*tag.cpp">forward*iterator_tag(用于指示迭代器类别的空类类型)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/023*std*bidirectional*iterator*tag.cpp">bidirectional*iterator_tag(用于指示迭代器类别的空类类型)</a>	
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/023*std*random*access*iterator*tag.cpp">random*access*iterator_tag(用于指示迭代器类别的空类类型)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/023*std*contiguous*iterator*tag.cpp">contiguous*iterator_tag(用于指示迭代器类别的空类类型)</a>
+	
+## # <h5 id="cpp*headfile*span">Defined in header <iterator></h5>
+## # <h5 id="cpp*headfile*span">Defined in namespace std</h5>
+
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/024*iterator*indirectly*unary*invocable.cpp">indirectly*unary*invocable(指定可调用类型能以解引用某个 indirectly*readable 类型的结果进行调用)</a> 
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/024*iterator*indirectly*regular*unary*invocable.cpp">indirectly*regular*unary*invocable(指定可调用类型能以解引用某个 indirectly*readable 类型的结果进行调用)</a> 
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/024*iterator*indirect*unary*predicate.cpp">indirect*unary*predicate(指定可调用类型，在以解引用一个 indirectly*readable 类型的结果进行调用时，满足 predicate)</a> 
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/024*iterator*indirect*binary*predicate.cpp">indirect*binary*predicate(指定可调用类型，在以解引用两个 indirectly*readable 类型的结果进行调用时，满足 predicate)</a> 
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/024*iterator*indirect*equivalence*relation.cpp">indirect*equivalence*relation(指定可调用类型，在以解引用两个 indirectly*readable 类型的结果进行调用时，满足 equivalence_relation)</a> 
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/024*iterator*indirect*strict*weak*order.cpp">indirect*strict*weak*order(指定可调用类型，在以解引用两个 indirectly*readable 类型的结果进行调用时，满足 strict*weak*order)</a> 
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/024*iterator*indirectly*movable.cpp">indirectly*movable(指定可从 indirectly*readable 类型移动值给 indirectly_writable 类型)</a> 
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/024*iterator*indirectly*movable*storable.cpp">indirectly*movable*storable(指定可从 indirectly*readable 类型移动值给 indirectly_writable 类型，且该移动可以通过中间对象进行)</a> 
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/024*iterator*indirectly*copyable.cpp">indirectly*copyable(指定可从 indirectly*readable 类型复制值给 indirectly_writable 类型)</a> 
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/024*iterator*indirectly*copyable*storable.cpp">indirectly*copyable*storable(指定可从 indirectly*readable 类型复制值给 indirectly_writable 类型，且该复制可以通过中间对象进行)</a> 
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/024*iterator*indirectly*swappable.cpp">indirectly*swappable(指定能交换两个 indirectly*readable 类型所引用的值)</a> 
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/024*iterator*indirectly*comparable.cpp">indirectly*comparable(指定能比较两个 indirectly*readable 类型所引用的值)</a> 
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/024*iterator_permutable.cpp">permutable(指定在原位重排元素的算法的共用要求)</a> 
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/024*iterator_mergeable.cpp">mergeable(指定通过复制元素将已排序序列归并到输出序列中的算法的要求)</a> 
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/024*iterator_sortable.cpp">sortable(指定重排序列为有序序列的算法的共用要求)</a> 
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/024*iterator*indirect*result*t.cpp">indirect*result*t(计算在解引用某组 indirectly*readable 类型的结果上调用可调用对象的结果)</a> 
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/024*iterator_projected.cpp">projected(用于对接受投影的算法指定约束的辅助模板)</a> 
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/024*iterator*move*sentinel.cpp">move*sentinel(用于 std::move*iterator 的哨位适配器)</a> 
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/024*iterator*common*iterator.cpp">common_iterator(适配一个迭代器类型及其哨位为一个公共迭代器类型)</a> 
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/024*iterator*default*sentinel*t.cpp">default*sentinel_t(用于知晓其边界的迭代器的默认哨位)</a> 
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/024*iterator*counted*iterator.cpp">counted_iterator(对到范围结尾距离进行跟踪的迭代器适配器)</a> 
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/024*iterator*unreachable*sentinel*t.cpp">unreachable*sentinel*t(始终与任何 weakly*incrementable 类型比较都不相等的哨位)</a> 
+
+## # <h5 id="cpp*headfile*span">Defined in header <iterator></h5>
+
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/025*iterator*ranges*advanc.cpp">ranges::advance(令迭代器前进给定的距离或到给定的边界)</a> 
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/025*iterator*ranges*distance.cpp">ranges::distance(返回迭代器与哨位间的距离，或范围起始与结尾间的距离)</a> 
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/025*iterator*ranges*next.cpp">ranges::next(自增迭代器给定的距离或到边界)</a> 
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/025*iterator*ranges*prev.cpp">ranges::prev(自减迭代器给定的距离或到边界)</a> 
+
+## # <h5 id="cpp*headfile*initializer_list">Defined in header &lt;array&gt;</h5>
+## # <h5 id="cpp*headfile*initializer_list">Defined in header &lt;deque&gt;</h5>	
+## # <h5 id="cpp*headfile*initializer*list">Defined in header &lt;forward*list&gt;</h5>
+## # <h5 id="cpp*headfile*initializer_list">Defined in header &lt;iterator&gt;</h5>
+## # <h5 id="cpp*headfile*initializer_list">Defined in header &lt;list&gt;</h5>	
+## # <h5 id="cpp*headfile*initializer_list">Defined in header &lt;map&gt;</h5>
+## # <h5 id="cpp*headfile*initializer_list">Defined in header &lt;regex&gt;</h5>
+## # <h5 id="cpp*headfile*initializer_list">Defined in header &lt;set&gt;</h5>	
+## # <h5 id="cpp*headfile*initializer_list">Defined in header &lt;span&gt;</h5>
+## # <h5 id="cpp*headfile*initializer_list">Defined in header &lt;string&gt;</h5>
+## # <h5 id="cpp*headfile*initializer*list">Defined in header &lt;string*view&gt;</h5>	
+## # <h5 id="cpp*headfile*initializer*list">Defined in header &lt;unordered*map&gt;</h5>
+## # <h5 id="cpp*headfile*initializer*list">Defined in header &lt;unordered*set&gt;</h5>
+## # <h5 id="cpp*headfile*initializer_list">Defined in header &lt;vector&gt;</h5>
+## # <h5 id="cpp*headfile*initializer_list">Defined in namespace std</h5>
+
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/026*std_ssize.cpp">ssize(返回容器或数组的大小)</a> 
+
+## # <h5 id="cpp*headfile*span">Defined in header &lt;ranges&gt;</h5>
+## # <h5 id="cpp*headfile*span">Defined in header &lt;iterator&gt;</h5>
+## # <h5 id="cpp*headfile*span">Defined in namespace std::ranges</h5>
+	
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/027*ranges*ranges*begin.cpp">ranges::begin(返回指向范围起始的迭代器)</a> 
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/027*ranges*ranges*cbegin.cpp">ranges::cbegin(返回指向只读范围起始的迭代器)</a> 
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/027*ranges*ranges*end.cpp">ranges::end(返回指示范围结尾的哨位)</a> 
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/027*ranges*ranges*cend.cpp">ranges::cend(返回指示只读范围结尾的哨位)</a> 
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/027*ranges*ranges*rbegin.cpp">ranges::rbegin(返回指向范围的逆向迭代器)</a> 
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/027*ranges*ranges*crbegin.cpp">ranges::crbegin(返回指向只读范围的逆向迭代器)</a> 
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/027*ranges*ranges*rend.cpp">ranges::rend(返回指向范围的逆向尾迭代器)</a> 
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/027*ranges*ranges*crend.cpp">ranges::crend(返回指向只读范围的逆向尾迭代器)</a> 
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/027*ranges*ranges*size.cpp">ranges::size(获得能在常数时间内计算大小的范围的大小)</a> 
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/027*ranges*ranges*ssize.cpp">ranges::ssize(获得能在常数时间内计算大小的范围的大小，并将它转换成有符号整数)</a> 
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/027*ranges*ranges*empty.cpp">ranges::empty(检查范围是否为空)</a> 
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/027*ranges*ranges*data.cpp">ranges::data(获得指向连续范围的起始的指针)</a> 	
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*20/027*ranges*ranges*cdata.cpp">ranges::cdata(获得指向只读连续范围的起始的指针)</a> 
 
 
------
+---
 	
 <div id="cpp_23" align=center>
 	
@@ -1644,49 +1644,49 @@
 
 </div>		
 	
-### <h3 id="cpp_23_RTTI">类型支持（基本类型、RTTI、类型特性）</h3>
+## # <h3 id="cpp*23*RTTI">类型支持（基本类型、RTTI、类型特性）</h3>
 
-### <h5 id="cpp_headfile_type_traits">Defined in header&lt;type_traits&gt;</h5>
+## # <h5 id="cpp*headfile*type*traits">Defined in header&lt;type*traits&gt;</h5>
 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_23/001_rtti_is_scoped_enum.cpp">is_scoped_enum(检查类型是否为有作用域枚举类型)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*23/001*rtti*is*scoped*enum.cpp">is*scoped_enum(检查类型是否为有作用域枚举类型)</a>
 
-### <h5 id="cpp_headfile_utility">Defined in header&lt;utility&gt;</h5>
+## # <h5 id="cpp*headfile*utility">Defined in header&lt;utility&gt;</h5>
 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_23/002_utility_to_underlying.cpp">to_underlying(转换枚举到其底层类型)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*23/002*utility*to*underlying.cpp">to_underlying(转换枚举到其底层类型)</a>
 
-### <h5 id="cpp_headfile_stacktrace">Defined in header&lt;stacktrace&gt;</h5>
+## # <h5 id="cpp*headfile*stacktrace">Defined in header&lt;stacktrace&gt;</h5>
 
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_23/003_stacktrace_stacktrace_entry.cpp">stacktrace_entry(栈踪中求值的表示)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_23/003_stacktrace_basic_stacktrace.cpp">basic_stacktrace(由栈踪条目组成的调用序列的近似表示)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*23/003*stacktrace*stacktrace*entry.cpp">stacktrace_entry(栈踪中求值的表示)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*23/003*stacktrace*basic*stacktrace.cpp">basic_stacktrace(由栈踪条目组成的调用序列的近似表示)</a>
 
-### <h3 id="cpp_23_memory">动态内存管理</h3>
+## # <h3 id="cpp*23*memory">动态内存管理</h3>
 
-### <h5 id="cpp_headfile_memory">Defined in header&lt;memory&gt;</h5>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_23/004_memory_out_ptr_t.cpp">out_ptr_t(与外来指针设置器交互，并在析构时重设智能指针)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_23/004_memory_out_ptr.cpp">out_ptr(以关联的智能指针和重设参数创建 out_ptr_t)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_23/004_memory_inout_ptr_t.cpp">inout_ptr_t(与外来指针设置器交互，从智能指针获得初始指针值，并在析构时重设它)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_23/004_memory_inout_ptr.cpp">inout_ptr(以关联的智能指针和重设参数创建 inout_ptr_t)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_23/004_memory_allocation_result.cpp">allocation_result(记录由 allocate_at_least 分配的存储的地址与实际大小)</a>
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_23/004_memory_allocate_at_least.cpp">allocate_at_least(经由分配器分配至少与请求的大小一样大的存储)</a>
+## # <h5 id="cpp*headfile*memory">Defined in header&lt;memory&gt;</h5>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*23/004*memory*out*ptr*t.cpp">out*ptr_t(与外来指针设置器交互，并在析构时重设智能指针)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*23/004*memory*out*ptr.cpp">out*ptr(以关联的智能指针和重设参数创建 out*ptr_t)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*23/004*memory*inout*ptr*t.cpp">inout*ptr_t(与外来指针设置器交互，从智能指针获得初始指针值，并在析构时重设它)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*23/004*memory*inout*ptr.cpp">inout*ptr(以关联的智能指针和重设参数创建 inout*ptr_t)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*23/004*memory*allocation*result.cpp">allocation*result(记录由 allocate*at_least 分配的存储的地址与实际大小)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*23/004*memory*allocate*at*least.cpp">allocate*at_least(经由分配器分配至少与请求的大小一样大的存储)</a>
 	
-### <h3 id="cpp_23_string">字符串</h3>
+## # <h3 id="cpp*23*string">字符串</h3>
 
-### <h5 id="cpp_headfile_string">Defined in header&lt;string&gt;</h5>
+## # <h5 id="cpp*headfile*string">Defined in header&lt;string&gt;</h5>
 	
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_23/005_string_contains.cpp">contains(检查字符串是否含有给定的子串或字符)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*23/005*string_contains.cpp">contains(检查字符串是否含有给定的子串或字符)</a>
 
-### <h5 id="cpp_headfile_string_view">Defined in header&lt;string_view&gt;</h5>
+## # <h5 id="cpp*headfile*string*view">Defined in header&lt;string*view&gt;</h5>
 	
-* <a href="https://github.com/0voice/cpp_new_features/blob/main/cpp_23/005_string_view_contains.cpp">contains(检查字符串视图是否含有给定的子串或字符)</a>
+* <a href="https://github.com/0voice/cpp*new*features/blob/main/cpp*23/005*string*view*contains.cpp">contains(检查字符串视图是否含有给定的子串或字符)</a>
 
 ---
 
 
-## 联系专栏
+# # 联系专栏
 
-#### 零声教育，专注于c/c++Linux后台服务器开发架构技术学习提升。<br>
+### # 零声教育，专注于c/c++Linux后台服务器开发架构技术学习提升。<br>
 每天晚上8点【免费技术直播】：[分享Linux，Nginx，ZeroMQ，MySQL，Redis，fastdfs，MongoDB，ZK，流媒体，CDN，P2P，K8S，Docker，TCP/IP，协程，DPDK等技术内容，立即学习。](https://ke.qq.com/course/417774?flowToken=1037711)
 
-#### 关注微信公众号【后台服务架构师】——【联系我们】，获取本repo最全PDF学习文档！
+### # 关注微信公众号【后台服务架构师】——【联系我们】，获取本repo最全PDF学习文档！
 
 <img width="65%" height="65%" src="https://user-images.githubusercontent.com/87457873/130796999-03af3f54-3719-47b4-8e41-2e762ab1c68b.png"/>

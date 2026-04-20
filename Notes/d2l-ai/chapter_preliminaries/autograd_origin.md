@@ -20,7 +20,7 @@ Here, *backpropagate* simply means to trace through the computational graph,
 filling in the partial derivatives with respect to each parameter.
 
 
-## A Simple Example
+# # A Simple Example
 
 As a toy example, say that we are interested
 in (**differentiating the function
@@ -37,7 +37,7 @@ x
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 import torch
 
 x = torch.arange(4.0)
@@ -45,7 +45,7 @@ x
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 import tensorflow as tf
 
 x = tf.range(4, dtype=tf.float32)
@@ -73,13 +73,13 @@ x.grad
 ```
 
 ```{.python .input}
-#@tab pytorch
-x.requires_grad_(True)  # Same as `x = torch.arange(4.0, requires_grad=True)`
+# @tab pytorch
+x.requires*grad*(True)  # Same as `x = torch.arange(4.0, requires_grad=True)`
 x.grad  # The default value is None
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 x = tf.Variable(x)
 ```
 
@@ -94,13 +94,13 @@ y
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 y = 2 * torch.dot(x, x)
 y
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 # Record all computations onto a tape
 with tf.GradientTape() as t:
     y = 2 * tf.tensordot(x, x, axes=1)
@@ -120,13 +120,13 @@ x.grad
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 y.backward()
 x.grad
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 x_grad = t.gradient(y, x)
 x_grad
 ```
@@ -140,12 +140,12 @@ x.grad == 4 * x
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 x.grad == 4 * x
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 x_grad == 4 * x
 ```
 
@@ -159,7 +159,7 @@ x.grad  # Overwritten by the newly calculated gradient
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 # PyTorch accumulates the gradient in default, we need to clear the previous
 # values
 x.grad.zero_()
@@ -169,13 +169,13 @@ x.grad
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 with tf.GradientTape() as t:
     y = tf.reduce_sum(x)
 t.gradient(y, x)  # Overwritten by the newly calculated gradient
 ```
 
-## Backward for Non-Scalar Variables
+# # Backward for Non-Scalar Variables
 
 Technically, when `y` is not a scalar,
 the most natural interpretation of the differentiation of a vector `y`
@@ -203,7 +203,7 @@ x.grad  # Equals to y = sum(x * x)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 # Invoking `backward` on a non-scalar requires passing in a `gradient` argument
 # which specifies the gradient of the differentiated function w.r.t `self`.
 # In our case, we simply want to sum the partial derivatives, so passing
@@ -216,13 +216,13 @@ x.grad
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 with tf.GradientTape() as t:
     y = x * x
 t.gradient(y, x)  # Same as `y = tf.reduce_sum(x * x)`
 ```
 
-## Detaching Computation
+# # Detaching Computation
 
 Sometimes, we wish to [**move some calculations
 outside of the recorded computational graph.**]
@@ -252,7 +252,7 @@ x.grad == u
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 x.grad.zero_()
 y = x * x
 u = y.detach()
@@ -263,7 +263,7 @@ x.grad == u
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 # Set `persistent=True` to run `t.gradient` more than once
 with tf.GradientTape(persistent=True) as t:
     y = x * x
@@ -283,18 +283,18 @@ x.grad == 2 * x
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 x.grad.zero_()
 y.sum().backward()
 x.grad == 2 * x
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 t.gradient(y, x) == 2 * x
 ```
 
-## Computing the Gradient of Python Control Flow
+# # Computing the Gradient of Python Control Flow
 
 One benefit of using automatic differentiation
 is that [**even if**] building the computational graph of (**a function
@@ -319,7 +319,7 @@ def f(a):
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 def f(a):
     b = a * 2
     while b.norm() < 1000:
@@ -332,7 +332,7 @@ def f(a):
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 def f(a):
     b = a * 2
     while tf.norm(b) < 1000:
@@ -355,14 +355,14 @@ d.backward()
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 a = torch.randn(size=(), requires_grad=True)
 d = f(a)
 d.backward()
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 a = tf.Variable(tf.random.normal(shape=()))
 with tf.GradientTape() as t:
     d = f(a)
@@ -381,21 +381,21 @@ a.grad == d / a
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 a.grad == d / a
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 d_grad == d / a
 ```
 
-## Summary
+# # Summary
 
 * Deep learning frameworks can automate the calculation of derivatives. To use it, we first attach gradients to those variables with respect to which we desire partial derivatives. We then record the computation of our target value, execute its function for backpropagation, and access the resulting gradient.
 
 
-## Exercises
+# # Exercises
 
 1. Why is the second derivative much more expensive to compute than the first derivative?
 1. After running the function for backpropagation, immediately run it again and see what happens.

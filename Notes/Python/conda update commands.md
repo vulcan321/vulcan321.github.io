@@ -33,9 +33,9 @@ anaconda安装最新的TensorFlow版本
 5. 第4步会提供一个下载地址，使用下面命令就可安装1.8.0版本tensorflow
 conda install --channel https://conda.anaconda.org/anaconda tensorflow=1.8.0
 更新，卸载安装包：
-conda list #查看已经安装的文件包
-conda update xxx   #更新xxx文件包
-conda uninstall xxx   #卸载xxx文件包
+conda list # 查看已经安装的文件包
+conda update xxx   # 更新xxx文件包
+conda uninstall xxx   # 卸载xxx文件包
 删除虚拟环境
 conda remove -n xxxx --all //创建xxxx虚拟环境
 清理（conda瘦身）
@@ -46,9 +46,9 @@ conda clean -t      //tar打包
 jupyter notebook默认工作目录设置
 参考：https://blog.csdn.net/liwei1205/article/details/78818568 1）在Anaconda Prompt终端中输入下面命令，查看你的notebook配置文件在哪里：
 jupyter notebook --generate-config
-//会生成文件C:\Users\用户\.jupyter\jupyter_notebook_config.py
-2）打开jupyter_notebook_config.py文件通过搜索关键词：c.NotebookApp.notebook_dir，修改如下
-c.NotebookApp.notebook_dir = 'E:\\tf_models'     //修改到自定义文件夹
+//会生成文件C:\Users\用户\.jupyter\jupyter*notebook*config.py
+2）打开jupyter*notebook*config.py文件通过搜索关键词：c.NotebookApp.notebook_dir，修改如下
+c.NotebookApp.notebook*dir = 'E:\\tf*models'     //修改到自定义文件夹
 3）然后重启notebook服务器就可以了 注：其它方法直接命令到指定目录，Anaconda Prompt终端中输：jupyter notebook 目录地址
 
 您可以使用以下命令在conda中将python版本更新为3.8

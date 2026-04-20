@@ -2,7 +2,7 @@
 :label:`sec_encoder-decoder`
 
 As we have discussed in 
-:numref:`sec_machine_translation`,
+:numref:`sec*machine*translation`,
 machine translation
 is a major problem domain for sequence transduction models,
 whose input and output are
@@ -15,10 +15,10 @@ The second component is a *decoder*:
 it maps the encoded state of a fixed shape
 to a variable-length sequence.
 This is called an *encoder-decoder* architecture,
-which is depicted in :numref:`fig_encoder_decoder`.
+which is depicted in :numref:`fig*encoder*decoder`.
 
 ![The encoder-decoder architecture.](../img/encoder-decoder.svg)
-:label:`fig_encoder_decoder`
+:label:`fig*encoder*decoder`
 
 Let us take machine translation from English to French
 as an example.
@@ -37,7 +37,7 @@ in subsequent sections,
 this section will convert this architecture
 into an interface that will be implemented later.
 
-## Encoder
+# # Encoder
 
 In the encoder interface,
 we just specify that
@@ -48,31 +48,31 @@ by any model that inherits this base `Encoder` class.
 ```{.python .input}
 from mxnet.gluon import nn
 
-#@save
+# @save
 class Encoder(nn.Block):
     """The base encoder interface for the encoder-decoder architecture."""
-    def __init__(self, **kwargs):
-        super(Encoder, self).__init__(**kwargs)
+    def **init**(self, **kwargs):
+        super(Encoder, self).**init**(**kwargs)
 
     def forward(self, X, *args):
         raise NotImplementedError
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 from torch import nn
 
-#@save
+# @save
 class Encoder(nn.Module):
     """The base encoder interface for the encoder-decoder architecture."""
-    def __init__(self, **kwargs):
-        super(Encoder, self).__init__(**kwargs)
+    def **init**(self, **kwargs):
+        super(Encoder, self).**init**(**kwargs)
 
     def forward(self, X, *args):
         raise NotImplementedError
 ```
 
-## Decoder
+# # Decoder
 
 In the following decoder interface,
 we add an additional `init_state` function
@@ -82,7 +82,7 @@ Note that this step
 may need extra inputs such as 
 the valid length of the input,
 which was explained
-in :numref:`subsec_mt_data_loading`.
+in :numref:`subsec*mt*data_loading`.
 To generate a variable-length sequence token by token,
 every time the decoder
 may map an input (e.g., the generated token at the previous time step)
@@ -90,13 +90,13 @@ and the encoded state
 into an output token at the current time step.
 
 ```{.python .input}
-#@save
+# @save
 class Decoder(nn.Block):
     """The base decoder interface for the encoder-decoder architecture."""
-    def __init__(self, **kwargs):
-        super(Decoder, self).__init__(**kwargs)
+    def **init**(self, **kwargs):
+        super(Decoder, self).**init**(**kwargs)
 
-    def init_state(self, enc_outputs, *args):
+    def init*state(self, enc*outputs, *args):
         raise NotImplementedError
 
     def forward(self, X, state):
@@ -104,21 +104,21 @@ class Decoder(nn.Block):
 ```
 
 ```{.python .input}
-#@tab pytorch
-#@save
+# @tab pytorch
+# @save
 class Decoder(nn.Module):
     """The base decoder interface for the encoder-decoder architecture."""
-    def __init__(self, **kwargs):
-        super(Decoder, self).__init__(**kwargs)
+    def **init**(self, **kwargs):
+        super(Decoder, self).**init**(**kwargs)
 
-    def init_state(self, enc_outputs, *args):
+    def init*state(self, enc*outputs, *args):
         raise NotImplementedError
 
     def forward(self, X, state):
         raise NotImplementedError
 ```
 
-## Putting the Encoder and Decoder Together
+# # Putting the Encoder and Decoder Together
 
 In the end,
 the encoder-decoder architecture
@@ -131,34 +131,34 @@ and this state
 will be further used by the decoder as one of its input.
 
 ```{.python .input}
-#@save
+# @save
 class EncoderDecoder(nn.Block):
     """The base class for the encoder-decoder architecture."""
-    def __init__(self, encoder, decoder, **kwargs):
-        super(EncoderDecoder, self).__init__(**kwargs)
+    def **init**(self, encoder, decoder, **kwargs):
+        super(EncoderDecoder, self).**init**(**kwargs)
         self.encoder = encoder
         self.decoder = decoder
 
-    def forward(self, enc_X, dec_X, *args):
-        enc_outputs = self.encoder(enc_X, *args)
-        dec_state = self.decoder.init_state(enc_outputs, *args)
-        return self.decoder(dec_X, dec_state)
+    def forward(self, enc*X, dec*X, *args):
+        enc*outputs = self.encoder(enc*X, *args)
+        dec*state = self.decoder.init*state(enc_outputs, *args)
+        return self.decoder(dec*X, dec*state)
 ```
 
 ```{.python .input}
-#@tab pytorch
-#@save
+# @tab pytorch
+# @save
 class EncoderDecoder(nn.Module):
     """The base class for the encoder-decoder architecture."""
-    def __init__(self, encoder, decoder, **kwargs):
-        super(EncoderDecoder, self).__init__(**kwargs)
+    def **init**(self, encoder, decoder, **kwargs):
+        super(EncoderDecoder, self).**init**(**kwargs)
         self.encoder = encoder
         self.decoder = decoder
 
-    def forward(self, enc_X, dec_X, *args):
-        enc_outputs = self.encoder(enc_X, *args)
-        dec_state = self.decoder.init_state(enc_outputs, *args)
-        return self.decoder(dec_X, dec_state)
+    def forward(self, enc*X, dec*X, *args):
+        enc*outputs = self.encoder(enc*X, *args)
+        dec*state = self.decoder.init*state(enc_outputs, *args)
+        return self.decoder(dec*X, dec*state)
 ```
 
 The term "state" in the encoder-decoder architecture
@@ -170,14 +170,14 @@ sequence transduction models based on
 this encoder-decoder architecture.
 
 
-## Summary
+# # Summary
 
 * The encoder-decoder architecture can handle inputs and outputs that are both variable-length sequences, thus is suitable for sequence transduction problems such as machine translation.
 * The encoder takes a variable-length sequence as the input and transforms it into a state with a fixed shape.
 * The decoder maps the encoded state of a fixed shape to a variable-length sequence.
 
 
-## Exercises
+# # Exercises
 
 1. Suppose that we use neural networks to implement the encoder-decoder architecture. Do the encoder and the decoder have to be the same type of neural network?  
 1. Besides machine translation, can you think of another application where the encoder-decoder architecture can be applied?

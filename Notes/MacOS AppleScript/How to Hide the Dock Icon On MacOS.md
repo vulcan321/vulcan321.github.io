@@ -1,7 +1,7 @@
 # How to hide the Dock icon
 
 
-## Solution 1
+# # Solution 1
 
 I think you are looking for the `LSUIElement` in the Info.plist
 
@@ -10,11 +10,11 @@ I think you are looking for the `LSUIElement` in the Info.plist
 See a short discussion [here](http://www.cocoabuilder.com/archive/message/cocoa/2009/2/3/229461) about turning it on/off
 
 
-## Solution 2
+# # Solution 2
 
 You can use what is called Activation Policy:
 
-### Objective-C
+## # Objective-C
 
 ```objectivec
 // The application is an ordinary app that appears in the Dock and may
@@ -31,7 +31,7 @@ You can use what is called Activation Policy:
 [NSApp setActivationPolicy: NSApplicationActivationPolicyProhibited];
 ```
 
-### Swift 4
+## # Swift 4
 
 ```swift
 // The application is an ordinary app that appears in the Dock and may
@@ -50,13 +50,13 @@ NSApp.setActivationPolicy(.prohibited)
 
 This should hide the dock icon.
 
-### See also
+## # See also
 
 -   Answer that inspired this one: [How to create a helper application (LSUIElement) that also has a (removable) dock icon](https://stackoverflow.com/a/5384319/133374)
 -   [Documentation for `NSRunningApplicationActivationPolicy`](https://developer.apple.com/documentation/appkit/nsapplication/activationpolicy).
 -   A related question: ["Start a GUI process in Mac OS X without dock icon"](https://stackoverflow.com/q/6796028/3939277).
 
-## Solution 3
+# # Solution 3
 
 To do it while abiding to the Apple guidelines of not modifying application bundles and to guarantee that Mac App Store apps/(Lion apps ?) will not have their signature broken by info.plist modification you can set LSUIElement to 1 by default then when the application launches do :
 

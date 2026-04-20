@@ -1,5 +1,5 @@
 # 自然语言处理：预训练
-:label:`chap_nlp_pretrain`
+:label:`chap*nlp*pretrain`
 
 人与人之间需要交流。
 出于人类这种基本需要，每天都有大量的书面文本产生。
@@ -9,8 +9,8 @@
 
 *自然语言处理*是指研究使用自然语言的计算机和人类之间的交互。
 在实践中，使用自然语言处理技术来处理和分析文本数据是非常常见的，
-例如 :numref:`sec_language_model`的语言模型
-和 :numref:`sec_machine_translation`的机器翻译模型。
+例如 :numref:`sec*language*model`的语言模型
+和 :numref:`sec*machine*translation`的机器翻译模型。
 
 要理解文本，我们可以从学习它的表示开始。
 利用来自大型语料库的现有文本序列，
@@ -36,7 +36,7 @@
 
  :numref:`fig_nlp-map-pretrain`显示了
 预训练好的文本表示可以放入各种深度学习架构，应用于不同自然语言处理任务。
-我们将在 :numref:`chap_nlp_app`中介绍它们。
+我们将在 :numref:`chap*nlp*app`中介绍它们。
 
 
 ```toc

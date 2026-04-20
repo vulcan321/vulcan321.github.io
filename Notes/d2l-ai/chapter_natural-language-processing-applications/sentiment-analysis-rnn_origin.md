@@ -1,5 +1,5 @@
 # Sentiment Analysis: Using Recurrent Neural Networks
-:label:`sec_sentiment_rnn`
+:label:`sec*sentiment*rnn`
 
 
 Like word similarity and analogy tasks,
@@ -36,20 +36,20 @@ from mxnet.gluon import nn, rnn
 npx.set_np()
 
 batch_size = 64
-train_iter, test_iter, vocab = d2l.load_data_imdb(batch_size)
+train*iter, test*iter, vocab = d2l.load*data*imdb(batch_size)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 from d2l import torch as d2l
 import torch
 from torch import nn
 
 batch_size = 64
-train_iter, test_iter, vocab = d2l.load_data_imdb(batch_size)
+train*iter, test*iter, vocab = d2l.load*data*imdb(batch_size)
 ```
 
-## Representing Single Text with RNNs
+# # Representing Single Text with RNNs
 
 In text classifications tasks,
 such as sentiment analysis,
@@ -76,13 +76,13 @@ with two outputs ("positive" and "negative").
 
 ```{.python .input}
 class BiRNN(nn.Block):
-    def __init__(self, vocab_size, embed_size, num_hiddens,
+    def **init**(self, vocab*size, embed*size, num_hiddens,
                  num_layers, **kwargs):
-        super(BiRNN, self).__init__(**kwargs)
-        self.embedding = nn.Embedding(vocab_size, embed_size)
+        super(BiRNN, self).**init**(**kwargs)
+        self.embedding = nn.Embedding(vocab*size, embed*size)
         # Set `bidirectional` to True to get a bidirectional RNN
-        self.encoder = rnn.LSTM(num_hiddens, num_layers=num_layers,
-                                bidirectional=True, input_size=embed_size)
+        self.encoder = rnn.LSTM(num*hiddens, num*layers=num_layers,
+                                bidirectional=True, input*size=embed*size)
         self.decoder = nn.Dense(2)
 
     def forward(self, inputs):
@@ -105,14 +105,14 @@ class BiRNN(nn.Block):
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 class BiRNN(nn.Module):
-    def __init__(self, vocab_size, embed_size, num_hiddens,
+    def **init**(self, vocab*size, embed*size, num_hiddens,
                  num_layers, **kwargs):
-        super(BiRNN, self).__init__(**kwargs)
-        self.embedding = nn.Embedding(vocab_size, embed_size)
+        super(BiRNN, self).**init**(**kwargs)
+        self.embedding = nn.Embedding(vocab*size, embed*size)
         # Set `bidirectional` to True to get a bidirectional RNN
-        self.encoder = nn.LSTM(embed_size, num_hiddens, num_layers=num_layers,
+        self.encoder = nn.LSTM(embed*size, num*hiddens, num*layers=num*layers,
                                 bidirectional=True)
         self.decoder = nn.Linear(4 * num_hiddens, 2)
 
@@ -142,9 +142,9 @@ class BiRNN(nn.Module):
 Let's construct a bidirectional RNN with two hidden layers to represent single text for sentiment analysis.
 
 ```{.python .input}
-#@tab all
-embed_size, num_hiddens, num_layers, devices = 100, 100, 2, d2l.try_all_gpus()
-net = BiRNN(len(vocab), embed_size, num_hiddens, num_layers)
+# @tab all
+embed*size, num*hiddens, num*layers, devices = 100, 100, 2, d2l.try*all_gpus()
+net = BiRNN(len(vocab), embed*size, num*hiddens, num_layers)
 ```
 
 ```{.python .input}
@@ -152,23 +152,23 @@ net.initialize(init.Xavier(), ctx=devices)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 def init_weights(m):
     if type(m) == nn.Linear:
-        nn.init.xavier_uniform_(m.weight)
+        nn.init.xavier*uniform*(m.weight)
     if type(m) == nn.LSTM:
-        for param in m._flat_weights_names:
+        for param in m.*flat*weights_names:
             if "weight" in param:
-                nn.init.xavier_uniform_(m._parameters[param])
+                nn.init.xavier*uniform*(m._parameters[param])
 net.apply(init_weights);
 ```
 
-## Loading Pretrained Word Vectors
+# # Loading Pretrained Word Vectors
 
 Below we load the pretrained 100-dimensional (needs to be consistent with `embed_size`) GloVe embeddings for tokens in the vocabulary.
 
 ```{.python .input}
-#@tab all
+# @tab all
 glove_embedding = d2l.TokenEmbedding('glove.6b.100d')
 ```
 
@@ -176,8 +176,8 @@ Print the shape of the vectors
 for all the tokens in the vocabulary.
 
 ```{.python .input}
-#@tab all
-embeds = glove_embedding[vocab.idx_to_token]
+# @tab all
+embeds = glove*embedding[vocab.idx*to_token]
 embeds.shape
 ```
 
@@ -189,38 +189,38 @@ these vectors during training.
 
 ```{.python .input}
 net.embedding.weight.set_data(embeds)
-net.embedding.collect_params().setattr('grad_req', 'null')
+net.embedding.collect*params().setattr('grad*req', 'null')
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 net.embedding.weight.data.copy_(embeds)
 net.embedding.weight.requires_grad = False
 ```
 
-## Training and Evaluating the Model
+# # Training and Evaluating the Model
 
 Now we can train the bidirectional RNN for sentiment analysis.
 
 ```{.python .input}
 lr, num_epochs = 0.01, 5
-trainer = gluon.Trainer(net.collect_params(), 'adam', {'learning_rate': lr})
+trainer = gluon.Trainer(net.collect*params(), 'adam', {'learning*rate': lr})
 loss = gluon.loss.SoftmaxCrossEntropyLoss()
-d2l.train_ch13(net, train_iter, test_iter, loss, trainer, num_epochs, devices)
+d2l.train*ch13(net, train*iter, test*iter, loss, trainer, num*epochs, devices)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 lr, num_epochs = 0.01, 5
 trainer = torch.optim.Adam(net.parameters(), lr=lr)
 loss = nn.CrossEntropyLoss(reduction="none")
-d2l.train_ch13(net, train_iter, test_iter, loss, trainer, num_epochs, devices)
+d2l.train*ch13(net, train*iter, test*iter, loss, trainer, num*epochs, devices)
 ```
 
 We define the following function to predict the sentiment of a text sequence using the trained model `net`.
 
 ```{.python .input}
-#@save
+# @save
 def predict_sentiment(net, vocab, sequence):
     """Predict the sentiment of a text sequence."""
     sequence = np.array(vocab[sequence.split()], ctx=d2l.try_gpu())
@@ -229,8 +229,8 @@ def predict_sentiment(net, vocab, sequence):
 ```
 
 ```{.python .input}
-#@tab pytorch
-#@save
+# @tab pytorch
+# @save
 def predict_sentiment(net, vocab, sequence):
     """Predict the sentiment of a text sequence."""
     sequence = torch.tensor(vocab[sequence.split()], device=d2l.try_gpu())
@@ -241,27 +241,27 @@ def predict_sentiment(net, vocab, sequence):
 Finally, let's use the trained model to predict the sentiment for two simple sentences.
 
 ```{.python .input}
-#@tab all
+# @tab all
 predict_sentiment(net, vocab, 'this movie is so great')
 ```
 
 ```{.python .input}
-#@tab all
+# @tab all
 predict_sentiment(net, vocab, 'this movie is so bad')
 ```
 
-## Summary
+# # Summary
 
 * Pretrained word vectors can represent individual tokens in a text sequence.
 * Bidirectional RNNs can represent a text sequence, such as via the concatenation of its hidden states at the initial and final time steps. This single text representation can be transformed into categories using a fully connected layer.
 
 
 
-## Exercises
+# # Exercises
 
 1. Increase the number of epochs. Can you improve the training and testing accuracies? How about tuning other hyperparameters?
 1. Use larger pretrained word vectors, such as 300-dimensional GloVe embeddings. Does it improve classification accuracy?
-1. Can we improve the classification accuracy by using the spaCy tokenization? You need to install spaCy (`pip install spacy`) and install the English package (`python -m spacy download en`). In the code, first, import spaCy (`import spacy`). Then, load the spaCy English package (`spacy_en = spacy.load('en')`). Finally, define the function `def tokenizer(text): return [tok.text for tok in spacy_en.tokenizer(text)]` and replace the original `tokenizer` function. Note the different forms of phrase tokens in GloVe and spaCy. For example, the phrase token "new york" takes the form of "new-york" in GloVe and the form of "new york" after the spaCy tokenization.
+1. Can we improve the classification accuracy by using the spaCy tokenization? You need to install spaCy (`pip install spacy`) and install the English package (`python -m spacy download en`). In the code, first, import spaCy (`import spacy`). Then, load the spaCy English package (`spacy*en = spacy.load('en')`). Finally, define the function `def tokenizer(text): return [tok.text for tok in spacy*en.tokenizer(text)]` and replace the original `tokenizer` function. Note the different forms of phrase tokens in GloVe and spaCy. For example, the phrase token "new york" takes the form of "new-york" in GloVe and the form of "new york" after the spaCy tokenization.
 
 :begin_tab:`mxnet`
 [Discussions](https://discuss.d2l.ai/t/392)

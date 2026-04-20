@@ -11,7 +11,7 @@
 自动微分使系统能够随后反向传播梯度。
 这里，*反向传播*（backpropagate）意味着跟踪整个计算图，填充关于每个参数的偏导数。
 
-## 一个简单的例子
+# # 一个简单的例子
 
 作为一个演示例子，(**假设我们想对函数$y=2\mathbf{x}^{\top}\mathbf{x}$关于列向量$\mathbf{x}$求导**)。
 首先，我们创建变量`x`并为其分配一个初始值。
@@ -25,7 +25,7 @@ x
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 import torch
 
 x = torch.arange(4.0)
@@ -33,7 +33,7 @@ x
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 import tensorflow as tf
 
 x = tf.range(4, dtype=tf.float32)
@@ -41,7 +41,7 @@ x
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 import warnings
 warnings.filterwarnings(action='ignore')
 import paddle
@@ -63,19 +63,19 @@ x.grad
 ```
 
 ```{.python .input}
-#@tab pytorch
-x.requires_grad_(True)  # 等价于x=torch.arange(4.0,requires_grad=True)
+# @tab pytorch
+x.requires*grad*(True)  # 等价于x=torch.arange(4.0,requires_grad=True)
 x.grad  # 默认值是None
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 x = tf.Variable(x)
 ```
 
 ```{.python .input}
-#@tab paddle
-x = paddle.to_tensor(x, stop_gradient=False)
+# @tab paddle
+x = paddle.to*tensor(x, stop*gradient=False)
 x.grad  # 默认值是None
 ```
 
@@ -89,13 +89,13 @@ y
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 y = 2 * torch.dot(x, x)
 y
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 # 把所有计算记录在磁带上
 with tf.GradientTape() as t:
     y = 2 * tf.tensordot(x, x, axes=1)
@@ -103,7 +103,7 @@ y
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 y = 2 * paddle.dot(x, x)
 y
 ```
@@ -117,19 +117,19 @@ x.grad
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 y.backward()
 x.grad
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 x_grad = t.gradient(y, x)
 x_grad
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 y.backward()
 x.grad
 ```
@@ -142,17 +142,17 @@ x.grad == 4 * x
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 x.grad == 4 * x
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 x_grad == 4 * x
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 x.grad == 4 * x
 ```
 
@@ -166,7 +166,7 @@ x.grad  # 被新计算的梯度覆盖
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 # 在默认情况下，PyTorch会累积梯度，我们需要清除之前的值
 x.grad.zero_()
 y = x.sum()
@@ -175,14 +175,14 @@ x.grad
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 with tf.GradientTape() as t:
     y = tf.reduce_sum(x)
 t.gradient(y, x)  # 被新计算的梯度覆盖
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 # 在默认情况下，PaddlePaddle会累积梯度，我们需要清除之前的值
 x.clear_gradient()
 y = paddle.sum(x)
@@ -190,7 +190,7 @@ y.backward()
 x.grad
 ```
 
-## 非标量变量的反向传播
+# # 非标量变量的反向传播
 
 当`y`不是标量时，向量`y`关于向量`x`的导数的最自然解释是一个矩阵。
 对于高阶和高维的`y`和`x`，求导的结果可以是一个高阶张量。
@@ -209,7 +209,7 @@ x.grad  # 等价于y=sum(x*x)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 # 对非标量调用backward需要传入一个gradient参数，该参数指定微分函数关于self的梯度。
 # 本例只想求偏导数的和，所以传递一个1的梯度是合适的
 x.grad.zero_()
@@ -220,21 +220,21 @@ x.grad
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 with tf.GradientTape() as t:
     y = x * x
 t.gradient(y, x)  # 等价于y=tf.reduce_sum(x*x)
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 x.clear_gradient()
 y = x * x
 paddle.sum(y).backward() 
 x.grad
 ```
 
-## 分离计算
+# # 分离计算
 
 有时，我们希望[**将某些计算移动到记录的计算图之外**]。
 例如，假设`y`是作为`x`的函数计算的，而`z`则是作为`y`和`x`的函数计算的。
@@ -257,7 +257,7 @@ x.grad == u
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 x.grad.zero_()
 y = x * x
 u = y.detach()
@@ -268,7 +268,7 @@ x.grad == u
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 # 设置persistent=True来运行t.gradient多次
 with tf.GradientTape(persistent=True) as t:
     y = x * x
@@ -280,7 +280,7 @@ x_grad == u
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 x.clear_gradient()
 y = x * x
 u = y.detach()
@@ -299,25 +299,25 @@ x.grad == 2 * x
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 x.grad.zero_()
 y.sum().backward()
 x.grad == 2 * x
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 t.gradient(y, x) == 2 * x
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 x.clear_gradient()
 paddle.sum(y).backward()
 x.grad == 2 * x
 ```
 
-## Python控制流的梯度计算
+# # Python控制流的梯度计算
 
 使用自动微分的一个好处是：
 [**即使构建函数的计算图需要通过Python控制流（例如，条件、循环或任意函数调用），我们仍然可以计算得到的变量的梯度**]。
@@ -336,7 +336,7 @@ def f(a):
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 def f(a):
     b = a * 2
     while b.norm() < 1000:
@@ -349,7 +349,7 @@ def f(a):
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 def f(a):
     b = a * 2
     while tf.norm(b) < 1000:
@@ -362,7 +362,7 @@ def f(a):
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 def f(a):
     b = a * 2
     while paddle.norm(b) < 1000:
@@ -385,14 +385,14 @@ d.backward()
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 a = torch.randn(size=(), requires_grad=True)
 d = f(a)
 d.backward()
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 a = tf.Variable(tf.random.normal(shape=()))
 with tf.GradientTape() as t:
     d = f(a)
@@ -401,8 +401,8 @@ d_grad
 ```
 
 ```{.python .input}
-#@tab paddle
-a = paddle.to_tensor(paddle.randn(shape=[1]), stop_gradient=False)
+# @tab paddle
+a = paddle.to*tensor(paddle.randn(shape=[1]), stop*gradient=False)
 d = f(a)
 d.backward()
 ```
@@ -416,25 +416,25 @@ a.grad == d / a
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 a.grad == d / a
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 d_grad == d / a
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 a.grad == d / a
 ```
 
-## 小结
+# # 小结
 
 * 深度学习框架可以自动计算导数：我们首先将梯度附加到想要对其计算偏导数的变量上，然后记录目标值的计算，执行它的反向传播函数，并访问得到的梯度。
 
-## 练习
+# # 练习
 
 1. 为什么计算二阶导数比一阶导数的开销要更大？
 1. 在运行反向传播函数之后，立即再次运行它，看看会发生什么。

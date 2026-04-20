@@ -23,9 +23,9 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 
 ```
 
-If we want to handle mouse clicks, we need to add a `WM_LBUTTONDOWN` handler (or `WM_RBUTTONDOWN`, `WM_MBUTTONDOWN`, for right and middle clicks respectively).
+If we want to handle mouse clicks, we need to add a `WM*LBUTTONDOWN` handler (or `WM*RBUTTONDOWN`, `WM_MBUTTONDOWN`, for right and middle clicks respectively).
 
-If I or someone else refers to _handling a message_ they mean to add it into the `WndProc()` of your window class as follows:
+If I or someone else refers to *handling a message* they mean to add it into the `WndProc()` of your window class as follows:
 
 ```c++
 LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
@@ -55,7 +55,7 @@ First I will present the code we want to add (that will show the user the filena
 
 ```
 GetModuleFileName(hInstance, szFileName, MAX_PATH);
-MessageBox(hwnd, szFileName, "This program is:", MB_OK | MB_ICONINFORMATION);
+MessageBox(hwnd, szFileName, "This program is:", MB*OK | MB*ICONINFORMATION);
 
 ```
 
@@ -73,7 +73,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
             HINSTANCE hInstance = GetModuleHandle(NULL);
 
             GetModuleFileName(hInstance, szFileName, MAX_PATH);
-            MessageBox(hwnd, szFileName, "This program is:", MB_OK | MB_ICONINFORMATION);
+            MessageBox(hwnd, szFileName, "This program is:", MB*OK | MB*ICONINFORMATION);
         }
 // END NEW CODE
         break;
@@ -95,21 +95,21 @@ Note the new set of curly braces {} . These are required when declaring variable
 
 So if you've added in that code, compile it now. If it works, click on the window and you should see a box with the name of the .exe pop up.
 
-You'll notice we've added two variables, `hInstance` and `szFileName`. Look up `GetModuleFileName()` and you will see that the first parameter is a `HINSTANCE` refering to the executable module (our program, the .exe file). Where do we get such a thing? `GetModuleHandle()` is the answer. The references for `GetModuleHandle()` indicate that passing in NULL will return us "_a handle to the file used to create the calling process_", which is exactly what we need, the `HINSTANCE` just mentioned. Putting all this information together we end up with the following declaration:
+You'll notice we've added two variables, `hInstance` and `szFileName`. Look up `GetModuleFileName()` and you will see that the first parameter is a `HINSTANCE` refering to the executable module (our program, the .exe file). Where do we get such a thing? `GetModuleHandle()` is the answer. The references for `GetModuleHandle()` indicate that passing in NULL will return us "*a handle to the file used to create the calling process*", which is exactly what we need, the `HINSTANCE` just mentioned. Putting all this information together we end up with the following declaration:
 
 ```
 HINSTANCE hInstance = GetModuleHandle(NULL);
 
 ```
 
-Now on to the second parameter, again turning to our trusty reference manual, we see that it is " _a pointer to a buffer that receives the path and file name of the specified module_" and the data type is `LPTSTR` (or `LPSTR` if your references are old). Since `LPSTR` is equivalent to `char*` we can declare an array of `char`'s like this:
+Now on to the second parameter, again turning to our trusty reference manual, we see that it is " *a pointer to a buffer that receives the path and file name of the specified module*" and the data type is `LPTSTR` (or `LPSTR` if your references are old). Since `LPSTR` is equivalent to `char*` we can declare an array of `char`'s like this:
 
 ```
 char szFileName[MAX_PATH];
 
 ```
 
-`MAX_PATH` is a handy macro included via `<windows.h>` that is defined to the maximum length of a buffer needed to store a filename under Win32. We also pass `MAX_PATH` to `GetModuleFileName()` so it knows the size of the buffer.
+`MAX*PATH` is a handy macro included via `<windows.h>` that is defined to the maximum length of a buffer needed to store a filename under Win32. We also pass `MAX*PATH` to `GetModuleFileName()` so it knows the size of the buffer.
 
 After `GetModuleFileName()` is called, the buffer `szFileName` will be filled with a null terminated string containing the name of our .exe file. We pass this value to `MessageBox()` as an easy way of displaying it to the user.
 
@@ -118,7 +118,7 @@ So if you've added in that code, compile it now. If it works, click on the windo
 If it doesn't work, here's the full code to the program. Compare it to what you have and see what, if any, mistakes you made.
 
 ```
-#include <windows.h>
+# include <windows.h>
 
 const char g_szClassName[] = "myWindowClass";
 
@@ -132,7 +132,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
             HINSTANCE hInstance = GetModuleHandle(NULL);
 
             GetModuleFileName(hInstance, szFileName, MAX_PATH);
-            MessageBox(hwnd, szFileName, "This program is:", MB_OK | MB_ICONINFORMATION);
+            MessageBox(hwnd, szFileName, "This program is:", MB*OK | MB*ICONINFORMATION);
         }
         break;
         case WM_CLOSE:
@@ -170,22 +170,22 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
     if(!RegisterClassEx(&wc))
     {
         MessageBox(NULL, "Window Registration Failed!", "Error!",
-            MB_ICONEXCLAMATION | MB_OK);
+            MB*ICONEXCLAMATION | MB*OK);
         return 0;
     }
 
     hwnd = CreateWindowEx(
-        WS_EX_CLIENTEDGE,
+        WS*EX*CLIENTEDGE,
         g_szClassName,
         "The title of my window",
         WS_OVERLAPPEDWINDOW,
-        CW_USEDEFAULT, CW_USEDEFAULT, 240, 120,
+        CW*USEDEFAULT, CW*USEDEFAULT, 240, 120,
         NULL, NULL, hInstance, NULL);
 
     if(hwnd == NULL)
     {
         MessageBox(NULL, "Window Creation Failed!", "Error!",
-            MB_ICONEXCLAMATION | MB_OK);
+            MB*ICONEXCLAMATION | MB*OK);
         return 0;
     }
 

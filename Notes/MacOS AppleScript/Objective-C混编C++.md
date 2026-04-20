@@ -10,33 +10,33 @@
 -   如果要两者混编, 需要把.m 文件改成 .mm ,这个OC调用C++, 如果是C++调用OC把.cpp 改成.mm
 -   注意.h 中不能混编的,因为.h一般是拷贝.我们可以在.h中定义一个struct, 请往下看.
 
-#### 开始吧
+### # 开始吧
 
 首先我的结构是
 
--   注意 C++_Class.cpp , 要改成C++_Class.mm , 因为里面用到OC.
+-   注意 C++*Class.cpp , 要改成C++*Class.mm , 因为里面用到OC.
 
-#### OC_Class.h
+### # OC_Class.h
 
 ```objc
-#import <Foundation/Foundation.h>
+# import <Foundation/Foundation.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS*ASSUME*NONNULL_BEGIN
 
 @interface OC_Class : NSObject
 - (void)OCEat;
 - (void)CPPEat;
 @end
 
-NS_ASSUME_NONNULL_END
+NS*ASSUME*NONNULL_END
 
 ```
 
-#### OC_Class.mm
+### # OC_Class.mm
 
 ```objc
-#import "OC_Class.h"
-#import "C++_Class.hpp"
+# import "OC_Class.h"
+# import "C++_Class.hpp"
 @interface OC_Class() {
     CPP_Class *cppClass;
 }
@@ -68,14 +68,14 @@ NS_ASSUME_NONNULL_END
 @end
 ```
 
-#### C++_Class.hpp
+### # C++_Class.hpp
 
 ```c++
-#ifndef C___Class_hpp
-#define C___Class_hpp
+# ifndef C___Class_hpp
+# define C___Class_hpp
 
-#include <stdio.h>
-#include <string>
+# include <stdio.h>
+# include <string>
 
 struct OCStruct;
 class CPP_Class {
@@ -89,24 +89,24 @@ private:
     void initOcStruct();
 };
 
-#endif 
+# endif 
 ```
 
-#### C++_Class.mm
+### # C++_Class.mm
 
 ```c++
-#include "C++_Class.hpp"
-#import "OC_Class.h"
-#include <iostream>
+# include "C++_Class.hpp"
+# import "OC_Class.h"
+# include <iostream>
 
 struct OCStruct {
     OC_Class* ocClass;
 };
-CPP_Class::CPP_Class() {
+CPP*Class::CPP*Class() {
    
 };
 
-CPP_Class::~CPP_Class() {
+CPP*Class::~CPP*Class() {
     std::cout << "C++class ~~ deinit " << std::endl;
     if (ocStruct) {
         //[ocStruct->ocClass relase];  //arc的话，忽略它
@@ -115,7 +115,7 @@ CPP_Class::~CPP_Class() {
 };
 void CPP_Class::initOcStruct() {
     if (!ocStruct) {
-        OC_Class* oc = [[OC_Class alloc]init];
+        OC*Class* oc = [[OC*Class alloc]init];
         ocStruct = new OCStruct;
         ocStruct->ocClass = oc;
     }
@@ -134,11 +134,11 @@ void CPP_Class::OCEat() {
 };
 ```
 
-#### 使用
+### # 使用
 
 ```objc
-#import "OC_Class.h"
-OC_Class * oc = [[OC_Class alloc]init];
+# import "OC_Class.h"
+OC*Class * oc = [[OC*Class alloc]init];
 [oc CPPEat];
 ```
 # [C++、Objective-C 混合编程](https://www.cnblogs.com/zsychanpin/p/6747110.html)
@@ -163,7 +163,7 @@ public:  
     }  
     void show() {  
         printf("%s\\n",[str_ UTF8String]);  
-        NSLog(@"str_ is:%@\\n",str_);  
+        NSLog(@"str* is:%@\\n",str*);  
     }  
 };  
 ```

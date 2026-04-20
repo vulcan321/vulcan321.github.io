@@ -14,7 +14,7 @@ with varying shapes
 are generated for each pixel as their center,
 over two million anchor boxes ($561 \times 728 \times 5$) need to be labeled and predicted on the image.
 
-## Multiscale Anchor Boxes
+# # Multiscale Anchor Boxes
 :label:`subsec_multiscale-anchor-boxes`
 
 You may realize that
@@ -54,7 +54,7 @@ h, w
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 %matplotlib inline
 from d2l import torch as d2l
 import torch
@@ -64,7 +64,7 @@ h, w = img.shape[:2]
 h, w
 ```
 
-Recall that in :numref:`sec_conv_layer`
+Recall that in :numref:`sec*conv*layer`
 we call a two-dimensional array output of 
 a convolutional layer a feature map.
 By defining the feature map shape,
@@ -85,19 +85,19 @@ these centers must be *uniformly* distributed
 on any input image
 in terms of their relative spatial positions.
 More concretely,
-given the width and height of the feature map `fmap_w` and `fmap_h`, respectively,
+given the width and height of the feature map `fmap*w` and `fmap*h`, respectively,
 the following function will *uniformly* sample
-pixels in `fmap_h` rows and `fmap_w` columns
+pixels in `fmap*h` rows and `fmap*w` columns
 on any input image.
 Centered on these uniformly sampled pixels,
 anchor boxes of size `s` (assuming the length of the list `s` is 1) and different aspect ratios (`ratios`)
 will be generated.
 
 ```{.python .input}
-def display_anchors(fmap_w, fmap_h, s):
+def display*anchors(fmap*w, fmap_h, s):
     d2l.set_figsize()
     # Values on the first two dimensions do not affect the output
-    fmap = np.zeros((1, 10, fmap_h, fmap_w))
+    fmap = np.zeros((1, 10, fmap*h, fmap*w))
     anchors = npx.multibox_prior(fmap, sizes=s, ratios=[1, 2, 0.5])
     bbox_scale = np.array((w, h, w, h))
     d2l.show_bboxes(d2l.plt.imshow(img.asnumpy()).axes,
@@ -105,11 +105,11 @@ def display_anchors(fmap_w, fmap_h, s):
 ```
 
 ```{.python .input}
-#@tab pytorch
-def display_anchors(fmap_w, fmap_h, s):
+# @tab pytorch
+def display*anchors(fmap*w, fmap_h, s):
     d2l.set_figsize()
     # Values on the first two dimensions do not affect the output
-    fmap = d2l.zeros((1, 10, fmap_h, fmap_w))
+    fmap = d2l.zeros((1, 10, fmap*h, fmap*w))
     anchors = d2l.multibox_prior(fmap, sizes=s, ratios=[1, 2, 0.5])
     bbox_scale = d2l.tensor((w, h, w, h))
     d2l.show_bboxes(d2l.plt.imshow(img).axes,
@@ -124,26 +124,26 @@ and the height and width of the feature map are set to 4. We can see
 that the centers of the anchor boxes in 4 rows and 4 columns on the image are uniformly distributed.
 
 ```{.python .input}
-#@tab all
-display_anchors(fmap_w=4, fmap_h=4, s=[0.15])
+# @tab all
+display*anchors(fmap*w=4, fmap_h=4, s=[0.15])
 ```
 
 We move on to reduce the height and width of the feature map by half and use larger anchor boxes to detect larger objects. When the scale is set to 0.4, 
 some anchor boxes will overlap with each other.
 
 ```{.python .input}
-#@tab all
-display_anchors(fmap_w=2, fmap_h=2, s=[0.4])
+# @tab all
+display*anchors(fmap*w=2, fmap_h=2, s=[0.4])
 ```
 
 Finally, we further reduce the height and width of the feature map by half and increase the anchor box scale to 0.8. Now the center of the anchor box is the center of the image.
 
 ```{.python .input}
-#@tab all
-display_anchors(fmap_w=1, fmap_h=1, s=[0.8])
+# @tab all
+display*anchors(fmap*w=1, fmap_h=1, s=[0.8])
 ```
 
-## Multiscale Detection
+# # Multiscale Detection
 
 
 Since we have generated multiscale anchor boxes,
@@ -174,7 +174,7 @@ by the CNN forward propagation based on the input image. Since there are $hw$ di
 the same spatial position can be 
 thought of as having $c$ units.
 According to the
-definition of receptive field in :numref:`sec_conv_layer`,
+definition of receptive field in :numref:`sec*conv*layer`,
 these $c$ units at the same spatial position
 of the feature maps
 have the same receptive field on the input image:
@@ -202,16 +202,16 @@ so they can detect larger objects from the input image.
 
 
 
-## Summary
+# # Summary
 
 * At multiple scales, we can generate anchor boxes with different sizes to detect objects with different sizes.
 * By defining the shape of feature maps, we can determine centers of uniformly sampled anchor boxes on any image.
 * We use the information of the input image in a certain receptive field to predict the classes and offsets of the anchor boxes that are close to that receptive field on the input image.
 
 
-## Exercises
+# # Exercises
 
-1. At the first scale (`fmap_w=4, fmap_h=4`) in the experiments in :numref:`subsec_multiscale-anchor-boxes`, generate uniformly distributed anchor boxes that may overlap.
+1. At the first scale (`fmap*w=4, fmap*h=4`) in the experiments in :numref:`subsec_multiscale-anchor-boxes`, generate uniformly distributed anchor boxes that may overlap.
 1. Given a feature map variable with shape $1 \times c \times h \times w$, where $c$, $h$, and $w$ are the number of channels, height, and width of the feature maps, respectively. How can you transform this variable into the classes and offsets of anchor boxes? What is the shape of the output?
 
 :begin_tab:`mxnet`

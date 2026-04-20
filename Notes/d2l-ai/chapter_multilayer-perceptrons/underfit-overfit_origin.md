@@ -1,5 +1,5 @@
 # Model Selection, Underfitting, and Overfitting
-:label:`sec_model_selection`
+:label:`sec*model*selection`
 
 As machine learning scientists,
 our goal is to discover *patterns*.
@@ -53,7 +53,7 @@ this effect while experimenting with the Fashion-MNIST dataset.
 If you altered the model structure or the hyperparameters during the experiment, you might have noticed that with enough neurons, layers, and training epochs, the model can eventually reach perfect accuracy on the training set, even as the accuracy on test data deteriorates.
 
 
-## Training Error and Generalization Error
+# # Training Error and Generalization Error
 
 In order to discuss this phenomenon more formally,
 we need to differentiate between training error and generalization error.
@@ -109,7 +109,7 @@ the probability that the fraction of heads
 will deviate significantly from $\frac{1}{2}$ diminishes,
 and our training error would come to match the generalization error.
 
-### Statistical Learning Theory
+## # Statistical Learning Theory
 
 Since generalization is the fundamental problem in machine learning,
 you might not be surprised to learn
@@ -180,7 +180,7 @@ This is precisely what we want to avoid or at least control.
 Many of the techniques in deep learning are heuristics and tricks
 aimed at guarding against overfitting.
 
-### Model Complexity
+## # Model Complexity
 
 When we have simple models and abundant data,
 we expect the generalization error to resemble the training error.
@@ -222,7 +222,7 @@ to influence the generalizability of a model class:
 1. The values taken by the parameters. When weights can take a wider range of values, models can be more susceptible to overfitting.
 1. The number of training examples. It is trivially easy to overfit a dataset containing only one or two examples even if your model is simple. But overfitting a dataset with millions of examples requires an extremely flexible model.
 
-## Model Selection
+# # Model Selection
 
 In machine learning, we usually select our final model
 after evaluating several candidate models.
@@ -244,7 +244,7 @@ In order to determine the best among our candidate models,
 we will typically employ a validation dataset.
 
 
-### Validation Dataset
+## # Validation Dataset
 
 In principle we should not touch our test set
 until after we have chosen all our hyperparameters.
@@ -281,7 +281,7 @@ we are really working with what should rightly be called
 training data and validation data, with no true test sets.
 Therefore, the accuracy reported in each experiment of the book is really the validation accuracy and not a true test set accuracy.
 
-### $K$-Fold Cross-Validation
+## # $K$-Fold Cross-Validation
 
 When training data is scarce,
 we might not even be able to afford to hold out
@@ -295,7 +295,7 @@ on a different subset (the one not used for training in that round).
 Finally, the training and validation errors are estimated
 by averaging over the results from the $K$ experiments.
 
-## Underfitting or Overfitting?
+# # Underfitting or Overfitting?
 
 When we compare the training and validation errors,
 we want to be mindful of two common situations.
@@ -327,7 +327,7 @@ both on the complexity of our model
 and the size of the available training datasets,
 two topics that we discuss below.
 
-### Model Complexity
+## # Model Complexity
 
 To illustrate some classical intuition
 about overfitting and model complexity,
@@ -336,7 +336,7 @@ Given training data consisting of a single feature $x$
 and a corresponding real-valued label $y$,
 we try to find the polynomial of degree $d$
 
-$$\hat{y}= \sum_{i=0}^d x^i w_i$$
+$$\hat{y}= \sum*{i=0}^d x^i w*i$$
 
 to estimate the labels $y$.
 This is just a linear regression problem
@@ -359,12 +359,12 @@ In fact, whenever the data points each have a distinct value of $x$,
 a polynomial function with degree equal to the number of data points
 can fit the training set perfectly.
 We visualize the relationship between polynomial degree
-and underfitting vs. overfitting in :numref:`fig_capacity_vs_error`.
+and underfitting vs. overfitting in :numref:`fig*capacity*vs_error`.
 
 ![Influence of model complexity on underfitting and overfitting](../img/capacity-vs-error.svg)
-:label:`fig_capacity_vs_error`
+:label:`fig*capacity*vs_error`
 
-### Dataset Size
+## # Dataset Size
 
 The other big consideration to bear in mind is the dataset size.
 Fixing our model, the fewer samples we have in the training dataset,
@@ -383,7 +383,7 @@ owes to the current abundance of massive datasets
 due to Internet companies, cheap storage, connected devices,
 and the broad digitization of the economy.
 
-## Polynomial Regression
+# # Polynomial Regression
 
 We can now explore these concepts interactively
 by fitting polynomials to data.
@@ -397,7 +397,7 @@ npx.set_np()
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 from d2l import torch as d2l
 import torch
 from torch import nn
@@ -406,14 +406,14 @@ import math
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 from d2l import tensorflow as d2l
 import tensorflow as tf
 import numpy as np
 import math
 ```
 
-### Generating the Dataset
+## # Generating the Dataset
 
 First we need data. Given $x$, we will use the following cubic polynomial to generate the labels on training and test data:
 
@@ -430,19 +430,19 @@ It allows us to avoid very large values for large exponents $i$.
 We will synthesize 100 samples each for the training set and test set.
 
 ```{.python .input}
-#@tab all
+# @tab all
 max_degree = 20  # Maximum degree of the polynomial
-n_train, n_test = 100, 100  # Training and test dataset sizes
-true_w = np.zeros(max_degree)  # Allocate lots of empty space
+n*train, n*test = 100, 100  # Training and test dataset sizes
+true*w = np.zeros(max*degree)  # Allocate lots of empty space
 true_w[0:4] = np.array([5, 1.2, -3.4, 5.6])
 
-features = np.random.normal(size=(n_train + n_test, 1))
+features = np.random.normal(size=(n*train + n*test, 1))
 np.random.shuffle(features)
-poly_features = np.power(features, np.arange(max_degree).reshape(1, -1))
+poly*features = np.power(features, np.arange(max*degree).reshape(1, -1))
 for i in range(max_degree):
     poly_features[:, i] /= math.gamma(i + 1)  # `gamma(n)` = (n-1)!
-# Shape of `labels`: (`n_train` + `n_test`,)
-labels = np.dot(poly_features, true_w)
+# Shape of `labels`: (`n*train` + `n*test`,)
+labels = np.dot(poly*features, true*w)
 labels += np.random.normal(scale=0.1, size=labels.shape)
 ```
 
@@ -454,24 +454,24 @@ The value 1 is technically a feature,
 namely the constant feature corresponding to the bias.
 
 ```{.python .input}
-#@tab pytorch, tensorflow
+# @tab pytorch, tensorflow
 # Convert from NumPy ndarrays to tensors
-true_w, features, poly_features, labels = [d2l.tensor(x, dtype=
-    d2l.float32) for x in [true_w, features, poly_features, labels]]
+true*w, features, poly*features, labels = [d2l.tensor(x, dtype=
+    d2l.float32) for x in [true*w, features, poly*features, labels]]
 ```
 
 ```{.python .input}
-#@tab all
+# @tab all
 features[:2], poly_features[:2, :], labels[:2]
 ```
 
-### Training and Testing the Model
+## # Training and Testing the Model
 
 Let us first implement a function to evaluate the loss on a given dataset.
 
 ```{.python .input}
-#@tab all
-def evaluate_loss(net, data_iter, loss):  #@save
+# @tab all
+def evaluate*loss(net, data*iter, loss):  # @save
     """Evaluate the loss of a model on the given dataset."""
     metric = d2l.Accumulator(2)  # Sum of losses, no. of examples
     for X, y in data_iter:
@@ -483,7 +483,7 @@ def evaluate_loss(net, data_iter, loss):  #@save
 Now define the training function.
 
 ```{.python .input}
-def train(train_features, test_features, train_labels, test_labels,
+def train(train*features, test*features, train*labels, test*labels,
           num_epochs=400):
     loss = gluon.loss.L2Loss()
     net = nn.Sequential()
@@ -491,9 +491,9 @@ def train(train_features, test_features, train_labels, test_labels,
     # features
     net.add(nn.Dense(1, use_bias=False))
     net.initialize()
-    batch_size = min(10, train_labels.shape[0])
-    train_iter = d2l.load_array((train_features, train_labels), batch_size)
-    test_iter = d2l.load_array((test_features, test_labels), batch_size,
+    batch*size = min(10, train*labels.shape[0])
+    train*iter = d2l.load*array((train*features, train*labels), batch_size)
+    test*iter = d2l.load*array((test*features, test*labels), batch_size,
                                is_train=False)
     trainer = gluon.Trainer(net.collect_params(), 'sgd',
                             {'learning_rate': 0.01})
@@ -501,66 +501,66 @@ def train(train_features, test_features, train_labels, test_labels,
                             xlim=[1, num_epochs], ylim=[1e-3, 1e2],
                             legend=['train', 'test'])
     for epoch in range(num_epochs):
-        d2l.train_epoch_ch3(net, train_iter, loss, trainer)
+        d2l.train*epoch*ch3(net, train_iter, loss, trainer)
         if epoch == 0 or (epoch + 1) % 20 == 0:
-            animator.add(epoch + 1, (evaluate_loss(net, train_iter, loss),
-                                     evaluate_loss(net, test_iter, loss)))
+            animator.add(epoch + 1, (evaluate*loss(net, train*iter, loss),
+                                     evaluate*loss(net, test*iter, loss)))
     print('weight:', net[0].weight.data().asnumpy())
 ```
 
 ```{.python .input}
-#@tab pytorch
-def train(train_features, test_features, train_labels, test_labels,
+# @tab pytorch
+def train(train*features, test*features, train*labels, test*labels,
           num_epochs=400):
     loss = nn.MSELoss()
-    input_shape = train_features.shape[-1]
+    input*shape = train*features.shape[-1]
     # Switch off the bias since we already catered for it in the polynomial
     # features
     net = nn.Sequential(nn.Linear(input_shape, 1, bias=False))
-    batch_size = min(10, train_labels.shape[0])
-    train_iter = d2l.load_array((train_features, train_labels.reshape(-1,1)),
+    batch*size = min(10, train*labels.shape[0])
+    train*iter = d2l.load*array((train*features, train*labels.reshape(-1,1)),
                                 batch_size)
-    test_iter = d2l.load_array((test_features, test_labels.reshape(-1,1)),
-                               batch_size, is_train=False)
+    test*iter = d2l.load*array((test*features, test*labels.reshape(-1,1)),
+                               batch*size, is*train=False)
     trainer = torch.optim.SGD(net.parameters(), lr=0.01)
     animator = d2l.Animator(xlabel='epoch', ylabel='loss', yscale='log',
                             xlim=[1, num_epochs], ylim=[1e-3, 1e2],
                             legend=['train', 'test'])
     for epoch in range(num_epochs):
-        d2l.train_epoch_ch3(net, train_iter, loss, trainer)
+        d2l.train*epoch*ch3(net, train_iter, loss, trainer)
         if epoch == 0 or (epoch + 1) % 20 == 0:
-            animator.add(epoch + 1, (evaluate_loss(net, train_iter, loss),
-                                     evaluate_loss(net, test_iter, loss)))
+            animator.add(epoch + 1, (evaluate*loss(net, train*iter, loss),
+                                     evaluate*loss(net, test*iter, loss)))
     print('weight:', net[0].weight.data.numpy())
 ```
 
 ```{.python .input}
-#@tab tensorflow
-def train(train_features, test_features, train_labels, test_labels,
+# @tab tensorflow
+def train(train*features, test*features, train*labels, test*labels,
           num_epochs=400):
     loss = tf.losses.MeanSquaredError()
-    input_shape = train_features.shape[-1]
+    input*shape = train*features.shape[-1]
     # Switch off the bias since we already catered for it in the polynomial
     # features
     net = tf.keras.Sequential()
     net.add(tf.keras.layers.Dense(1, use_bias=False))
-    batch_size = min(10, train_labels.shape[0])
-    train_iter = d2l.load_array((train_features, train_labels), batch_size)
-    test_iter = d2l.load_array((test_features, test_labels), batch_size,
+    batch*size = min(10, train*labels.shape[0])
+    train*iter = d2l.load*array((train*features, train*labels), batch_size)
+    test*iter = d2l.load*array((test*features, test*labels), batch_size,
                                is_train=False)
     trainer = tf.keras.optimizers.SGD(learning_rate=.01)
     animator = d2l.Animator(xlabel='epoch', ylabel='loss', yscale='log',
                             xlim=[1, num_epochs], ylim=[1e-3, 1e2],
                             legend=['train', 'test'])
     for epoch in range(num_epochs):
-        d2l.train_epoch_ch3(net, train_iter, loss, trainer)
+        d2l.train*epoch*ch3(net, train_iter, loss, trainer)
         if epoch == 0 or (epoch + 1) % 20 == 0:
-            animator.add(epoch + 1, (evaluate_loss(net, train_iter, loss),
-                                     evaluate_loss(net, test_iter, loss)))
+            animator.add(epoch + 1, (evaluate*loss(net, train*iter, loss),
+                                     evaluate*loss(net, test*iter, loss)))
     print('weight:', net.get_weights()[0].T)
 ```
 
-### Third-Order Polynomial Function Fitting (Normal)
+## # Third-Order Polynomial Function Fitting (Normal)
 
 We will begin by first using a third-order polynomial function, which is the same order as that of the data generation function.
 The results show that this model's training and test losses can be both effectively reduced.
@@ -568,14 +568,14 @@ The learned model parameters are also close
 to the true values $w = [5, 1.2, -3.4, 5.6]$.
 
 ```{.python .input}
-#@tab all
+# @tab all
 # Pick the first four dimensions, i.e., 1, x, x^2/2!, x^3/3! from the
 # polynomial features
-train(poly_features[:n_train, :4], poly_features[n_train:, :4],
-      labels[:n_train], labels[n_train:])
+train(poly*features[:n*train, :4], poly*features[n*train:, :4],
+      labels[:n*train], labels[n*train:])
 ```
 
-### Linear Function Fitting (Underfitting)
+## # Linear Function Fitting (Underfitting)
 
 Let us take another look at linear function fitting.
 After the decline in early epochs,
@@ -588,13 +588,13 @@ When used to fit nonlinear patterns
 linear models are liable to underfit.
 
 ```{.python .input}
-#@tab all
+# @tab all
 # Pick the first two dimensions, i.e., 1, x, from the polynomial features
-train(poly_features[:n_train, :2], poly_features[n_train:, :2],
-      labels[:n_train], labels[n_train:])
+train(poly*features[:n*train, :2], poly*features[n*train:, :2],
+      labels[:n*train], labels[n*train:])
 ```
 
-### Higher-Order Polynomial Function Fitting  (Overfitting)
+## # Higher-Order Polynomial Function Fitting  (Overfitting)
 
 Now let us try to train the model
 using a polynomial of too high degree.
@@ -609,10 +609,10 @@ It shows that
 the complex model overfits the data.
 
 ```{.python .input}
-#@tab all
+# @tab all
 # Pick all the dimensions from the polynomial features
-train(poly_features[:n_train, :], poly_features[n_train:, :],
-      labels[:n_train], labels[n_train:], num_epochs=1500)
+train(poly*features[:n*train, :], poly*features[n*train:, :],
+      labels[:n*train], labels[n*train:], num_epochs=1500)
 ```
 
 In the subsequent sections, we will continue
@@ -621,7 +621,7 @@ and methods for dealing with them,
 such as weight decay and dropout.
 
 
-## Summary
+# # Summary
 
 * Since the generalization error cannot be estimated based on the training error, simply minimizing the training error will not necessarily mean a reduction in the generalization error. Machine learning models need to be careful to safeguard against overfitting so as to minimize the generalization error.
 * A validation set can be used for model selection, provided that it is not used too liberally.
@@ -629,7 +629,7 @@ such as weight decay and dropout.
 * We should choose an appropriately complex model and avoid using insufficient training samples.
 
 
-## Exercises
+# # Exercises
 
 1. Can you solve the polynomial regression problem exactly? Hint: use linear algebra.
 1. Concider model selection for polynomials:

@@ -1,5 +1,5 @@
 # Batch Normalization
-:label:`sec_batch_norm`
+:label:`sec*batch*norm`
 
 Training deep neural networks is difficult.
 And getting them to converge in a reasonable amount of time can be tricky.
@@ -11,14 +11,14 @@ to routinely train networks with over 100 layers.
 
 
 
-## Training Deep Networks
+# # Training Deep Networks
 
 To motivate batch normalization, let us review
 a few practical challenges that arise
 when training machine learning models and neural networks in particular.
 
 First, choices regarding data preprocessing often make an enormous difference in the final results.
-Recall our application of MLPs to predicting house prices (:numref:`sec_kaggle_house`).
+Recall our application of MLPs to predicting house prices (:numref:`sec*kaggle*house`).
 Our first step when working with real data
 was to standardize our input features
 to each have a mean of zero and variance of one.
@@ -66,7 +66,7 @@ that is from a minibatch $\mathcal{B}$,
 batch normalization transforms $\mathbf{x}$
 according to the following expression:
 
-$$\mathrm{BN}(\mathbf{x}) = \boldsymbol{\gamma} \odot \frac{\mathbf{x} - \hat{\boldsymbol{\mu}}_\mathcal{B}}{\hat{\boldsymbol{\sigma}}_\mathcal{B}} + \boldsymbol{\beta}.$$
+$$\mathrm{BN}(\mathbf{x}) = \boldsymbol{\gamma} \odot \frac{\mathbf{x} - \hat{\boldsymbol{\mu}}*\mathcal{B}}{\hat{\boldsymbol{\sigma}}*\mathcal{B}} + \boldsymbol{\beta}.$$
 :eqlabel:`eq_batchnorm`
 
 In :eqref:`eq_batchnorm`,
@@ -86,22 +86,22 @@ Note that $\boldsymbol{\gamma}$ and $\boldsymbol{\beta}$ are
 Consequently, the variable magnitudes
 for intermediate layers cannot diverge during training
 because batch normalization actively centers and rescales them back
-to a given mean and size (via $\hat{\boldsymbol{\mu}}_\mathcal{B}$ and ${\hat{\boldsymbol{\sigma}}_\mathcal{B}}$).
+to a given mean and size (via $\hat{\boldsymbol{\mu}}*\mathcal{B}$ and ${\hat{\boldsymbol{\sigma}}*\mathcal{B}}$).
 One piece of practitioner's intuition or wisdom
 is that batch normalization seems to allow for more aggressive learning rates.
 
 
 Formally, 
-we calculate $\hat{\boldsymbol{\mu}}_\mathcal{B}$ and ${\hat{\boldsymbol{\sigma}}_\mathcal{B}}$ in :eqref:`eq_batchnorm` as follows:
+we calculate $\hat{\boldsymbol{\mu}}*\mathcal{B}$ and ${\hat{\boldsymbol{\sigma}}*\mathcal{B}}$ in :eqref:`eq_batchnorm` as follows:
 
-$$\begin{aligned} \hat{\boldsymbol{\mu}}_\mathcal{B} &= \frac{1}{|\mathcal{B}|} \sum_{\mathbf{x} \in \mathcal{B}} \mathbf{x},\\
-\hat{\boldsymbol{\sigma}}_\mathcal{B}^2 &= \frac{1}{|\mathcal{B}|} \sum_{\mathbf{x} \in \mathcal{B}} (\mathbf{x} - \hat{\boldsymbol{\mu}}_{\mathcal{B}})^2 + \epsilon.\end{aligned}$$
+$$\begin{aligned} \hat{\boldsymbol{\mu}}*\mathcal{B} &= \frac{1}{|\mathcal{B}|} \sum*{\mathbf{x} \in \mathcal{B}} \mathbf{x},\\
+\hat{\boldsymbol{\sigma}}*\mathcal{B}^2 &= \frac{1}{|\mathcal{B}|} \sum*{\mathbf{x} \in \mathcal{B}} (\mathbf{x} - \hat{\boldsymbol{\mu}}_{\mathcal{B}})^2 + \epsilon.\end{aligned}$$
 
 Note that we add a small constant $\epsilon > 0$
 to the variance estimate
 to ensure that we never attempt division by zero,
 even in cases where the empirical variance estimate might vanish.
-The estimates $\hat{\boldsymbol{\mu}}_\mathcal{B}$ and ${\hat{\boldsymbol{\sigma}}_\mathcal{B}}$ counteract the scaling issue
+The estimates $\hat{\boldsymbol{\mu}}*\mathcal{B}$ and ${\hat{\boldsymbol{\sigma}}*\mathcal{B}}$ counteract the scaling issue
 by using noisy estimates of mean and variance.
 You might think that this noisiness should be a problem.
 As it turns out, this is actually beneficial.
@@ -139,7 +139,7 @@ and in *prediction mode* (normalizing by dataset statistics).
 We are now ready to take a look at how batch normalization works in practice.
 
 
-## Batch Normalization Layers
+# # Batch Normalization Layers
 
 Batch normalization implementations for fully-connected layers
 and convolutional layers are slightly different.
@@ -149,7 +149,7 @@ is that because batch normalization operates on a full minibatch at a time,
 we cannot just ignore the batch dimension
 as we did before when introducing other layers.
 
-### Fully-Connected Layers
+## # Fully-Connected Layers
 
 When applying batch normalization to fully-connected layers,
 the original paper inserts batch normalization after the affine transformation
@@ -167,7 +167,7 @@ Recall that mean and variance are computed
 on the *same* minibatch 
 on which the transformation is applied.
 
-### Convolutional Layers
+## # Convolutional Layers
 
 Similarly, with convolutional layers,
 we can apply batch normalization after the convolution
@@ -190,7 +190,7 @@ within a given channel
 to normalize the value at each spatial location.
 
 
-### Batch Normalization During Prediction
+## # Batch Normalization During Prediction
 
 As we mentioned earlier, batch normalization typically behaves differently
 in training mode and prediction mode.
@@ -208,7 +208,7 @@ and then fix them at prediction time.
 Consequently, batch normalization behaves differently during training and at test time.
 Recall that dropout also exhibits this characteristic.
 
-## Implementation from Scratch
+# # Implementation from Scratch
 
 Below, we implement a batch normalization layer with tensors from scratch.
 
@@ -218,13 +218,13 @@ from mxnet import autograd, np, npx, init
 from mxnet.gluon import nn
 npx.set_np()
 
-def batch_norm(X, gamma, beta, moving_mean, moving_var, eps, momentum):
+def batch*norm(X, gamma, beta, moving*mean, moving_var, eps, momentum):
     # Use `autograd` to determine whether the current mode is training mode or
     # prediction mode
     if not autograd.is_training():
         # If it is prediction mode, directly use the mean and variance
         # obtained by moving average
-        X_hat = (X - moving_mean) / np.sqrt(moving_var + eps)
+        X*hat = (X - moving*mean) / np.sqrt(moving_var + eps)
     else:
         assert len(X.shape) in (2, 4)
         if len(X.shape) == 2:
@@ -243,25 +243,25 @@ def batch_norm(X, gamma, beta, moving_mean, moving_var, eps, momentum):
         # standardization
         X_hat = (X - mean) / np.sqrt(var + eps)
         # Update the mean and variance using moving average
-        moving_mean = momentum * moving_mean + (1.0 - momentum) * mean
-        moving_var = momentum * moving_var + (1.0 - momentum) * var
+        moving*mean = momentum * moving*mean + (1.0 - momentum) * mean
+        moving*var = momentum * moving*var + (1.0 - momentum) * var
     Y = gamma * X_hat + beta  # Scale and shift
-    return Y, moving_mean, moving_var
+    return Y, moving*mean, moving*var
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 from d2l import torch as d2l
 import torch
 from torch import nn
 
-def batch_norm(X, gamma, beta, moving_mean, moving_var, eps, momentum):
-    # Use `is_grad_enabled` to determine whether the current mode is training
+def batch*norm(X, gamma, beta, moving*mean, moving_var, eps, momentum):
+    # Use `is*grad*enabled` to determine whether the current mode is training
     # mode or prediction mode
-    if not torch.is_grad_enabled():
+    if not torch.is*grad*enabled():
         # If it is prediction mode, directly use the mean and variance
         # obtained by moving average
-        X_hat = (X - moving_mean) / torch.sqrt(moving_var + eps)
+        X*hat = (X - moving*mean) / torch.sqrt(moving_var + eps)
     else:
         assert len(X.shape) in (2, 4)
         if len(X.shape) == 2:
@@ -280,18 +280,18 @@ def batch_norm(X, gamma, beta, moving_mean, moving_var, eps, momentum):
         # standardization
         X_hat = (X - mean) / torch.sqrt(var + eps)
         # Update the mean and variance using moving average
-        moving_mean = momentum * moving_mean + (1.0 - momentum) * mean
-        moving_var = momentum * moving_var + (1.0 - momentum) * var
+        moving*mean = momentum * moving*mean + (1.0 - momentum) * mean
+        moving*var = momentum * moving*var + (1.0 - momentum) * var
     Y = gamma * X_hat + beta  # Scale and shift
-    return Y, moving_mean.data, moving_var.data
+    return Y, moving*mean.data, moving*var.data
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 from d2l import tensorflow as d2l
 import tensorflow as tf
 
-def batch_norm(X, gamma, beta, moving_mean, moving_var, eps):
+def batch*norm(X, gamma, beta, moving*mean, moving_var, eps):
     # Compute reciprocal of square root of the moving variance element-wise
     inv = tf.cast(tf.math.rsqrt(moving_var + eps), X.dtype)
     # Scale and shift
@@ -327,8 +327,8 @@ class BatchNorm(nn.Block):
     # `num_features`: the number of outputs for a fully-connected layer
     # or the number of output channels for a convolutional layer. `num_dims`:
     # 2 for a fully-connected layer and 4 for a convolutional layer
-    def __init__(self, num_features, num_dims, **kwargs):
-        super().__init__(**kwargs)
+    def **init**(self, num*features, num*dims, **kwargs):
+        super().**init**(**kwargs)
         if num_dims == 2:
             shape = (1, num_features)
         else:
@@ -345,23 +345,23 @@ class BatchNorm(nn.Block):
         # If `X` is not on the main memory, copy `moving_mean` and
         # `moving_var` to the device where `X` is located
         if self.moving_mean.ctx != X.ctx:
-            self.moving_mean = self.moving_mean.copyto(X.ctx)
-            self.moving_var = self.moving_var.copyto(X.ctx)
-        # Save the updated `moving_mean` and `moving_var`
-        Y, self.moving_mean, self.moving_var = batch_norm(
+            self.moving*mean = self.moving*mean.copyto(X.ctx)
+            self.moving*var = self.moving*var.copyto(X.ctx)
+        # Save the updated `moving*mean` and `moving*var`
+        Y, self.moving*mean, self.moving*var = batch_norm(
             X, self.gamma.data(), self.beta.data(), self.moving_mean,
             self.moving_var, eps=1e-12, momentum=0.9)
         return Y
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 class BatchNorm(nn.Module):
     # `num_features`: the number of outputs for a fully-connected layer
     # or the number of output channels for a convolutional layer. `num_dims`:
     # 2 for a fully-connected layer and 4 for a convolutional layer
-    def __init__(self, num_features, num_dims):
-        super().__init__()
+    def **init**(self, num*features, num*dims):
+        super().**init**()
         if num_dims == 2:
             shape = (1, num_features)
         else:
@@ -378,39 +378,39 @@ class BatchNorm(nn.Module):
         # If `X` is not on the main memory, copy `moving_mean` and
         # `moving_var` to the device where `X` is located
         if self.moving_mean.device != X.device:
-            self.moving_mean = self.moving_mean.to(X.device)
-            self.moving_var = self.moving_var.to(X.device)
-        # Save the updated `moving_mean` and `moving_var`
-        Y, self.moving_mean, self.moving_var = batch_norm(
+            self.moving*mean = self.moving*mean.to(X.device)
+            self.moving*var = self.moving*var.to(X.device)
+        # Save the updated `moving*mean` and `moving*var`
+        Y, self.moving*mean, self.moving*var = batch_norm(
             X, self.gamma, self.beta, self.moving_mean,
             self.moving_var, eps=1e-5, momentum=0.9)
         return Y
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 class BatchNorm(tf.keras.layers.Layer):
-    def __init__(self, **kwargs):
-        super(BatchNorm, self).__init__(**kwargs)
+    def **init**(self, **kwargs):
+        super(BatchNorm, self).**init**(**kwargs)
 
     def build(self, input_shape):
-        weight_shape = [input_shape[-1], ]
+        weight*shape = [input*shape[-1], ]
         # The scale parameter and the shift parameter (model parameters) are
         # initialized to 1 and 0, respectively
-        self.gamma = self.add_weight(name='gamma', shape=weight_shape,
+        self.gamma = self.add*weight(name='gamma', shape=weight*shape,
             initializer=tf.initializers.ones, trainable=True)
-        self.beta = self.add_weight(name='beta', shape=weight_shape,
+        self.beta = self.add*weight(name='beta', shape=weight*shape,
             initializer=tf.initializers.zeros, trainable=True)
         # The variables that are not model parameters are initialized to 0
-        self.moving_mean = self.add_weight(name='moving_mean',
+        self.moving*mean = self.add*weight(name='moving_mean',
             shape=weight_shape, initializer=tf.initializers.zeros,
             trainable=False)
-        self.moving_variance = self.add_weight(name='moving_variance',
+        self.moving*variance = self.add*weight(name='moving_variance',
             shape=weight_shape, initializer=tf.initializers.zeros,
             trainable=False)
         super(BatchNorm, self).build(input_shape)
 
-    def assign_moving_average(self, variable, value):
+    def assign*moving*average(self, variable, value):
         momentum = 0.9
         delta = variable * momentum + value * (1 - momentum)
         return variable.assign(delta)
@@ -419,26 +419,26 @@ class BatchNorm(tf.keras.layers.Layer):
     def call(self, inputs, training):
         if training:
             axes = list(range(len(inputs.shape) - 1))
-            batch_mean = tf.reduce_mean(inputs, axes, keepdims=True)
-            batch_variance = tf.reduce_mean(tf.math.squared_difference(
-                inputs, tf.stop_gradient(batch_mean)), axes, keepdims=True)
-            batch_mean = tf.squeeze(batch_mean, axes)
-            batch_variance = tf.squeeze(batch_variance, axes)
-            mean_update = self.assign_moving_average(
-                self.moving_mean, batch_mean)
-            variance_update = self.assign_moving_average(
-                self.moving_variance, batch_variance)
-            self.add_update(mean_update)
-            self.add_update(variance_update)
-            mean, variance = batch_mean, batch_variance
+            batch*mean = tf.reduce*mean(inputs, axes, keepdims=True)
+            batch*variance = tf.reduce*mean(tf.math.squared_difference(
+                inputs, tf.stop*gradient(batch*mean)), axes, keepdims=True)
+            batch*mean = tf.squeeze(batch*mean, axes)
+            batch*variance = tf.squeeze(batch*variance, axes)
+            mean*update = self.assign*moving_average(
+                self.moving*mean, batch*mean)
+            variance*update = self.assign*moving_average(
+                self.moving*variance, batch*variance)
+            self.add*update(mean*update)
+            self.add*update(variance*update)
+            mean, variance = batch*mean, batch*variance
         else:
-            mean, variance = self.moving_mean, self.moving_variance
-        output = batch_norm(inputs, moving_mean=mean, moving_var=variance,
+            mean, variance = self.moving*mean, self.moving*variance
+        output = batch*norm(inputs, moving*mean=mean, moving_var=variance,
             beta=self.beta, gamma=self.gamma, eps=1e-5)
         return output
 ```
 
-## Applying Batch Normalization in LeNet
+# # Applying Batch Normalization in LeNet
 
 To see how to apply `BatchNorm` in context,
 below we apply it to a traditional LeNet model (:numref:`sec_lenet`).
@@ -466,11 +466,11 @@ net.add(nn.Conv2D(6, kernel_size=5),
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 net = nn.Sequential(
-    nn.Conv2d(1, 6, kernel_size=5), BatchNorm(6, num_dims=4), nn.Sigmoid(),
+    nn.Conv2d(1, 6, kernel*size=5), BatchNorm(6, num*dims=4), nn.Sigmoid(),
     nn.MaxPool2d(kernel_size=2, stride=2),
-    nn.Conv2d(6, 16, kernel_size=5), BatchNorm(16, num_dims=4), nn.Sigmoid(),
+    nn.Conv2d(6, 16, kernel*size=5), BatchNorm(16, num*dims=4), nn.Sigmoid(),
     nn.MaxPool2d(kernel_size=2, stride=2), nn.Flatten(),
     nn.Linear(16*4*4, 120), BatchNorm(120, num_dims=2), nn.Sigmoid(),
     nn.Linear(120, 84), BatchNorm(84, num_dims=2), nn.Sigmoid(),
@@ -478,7 +478,7 @@ net = nn.Sequential(
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 # Recall that this has to be a function that will be passed to `d2l.train_ch6`
 # so that model building or compiling need to be within `strategy.scope()` in
 # order to utilize the CPU/GPU devices that we have
@@ -509,17 +509,17 @@ This code is virtually identical to that when we first trained LeNet (:numref:`s
 The main difference is the considerably larger learning rate.
 
 ```{.python .input}
-#@tab mxnet, pytorch
-lr, num_epochs, batch_size = 1.0, 10, 256
-train_iter, test_iter = d2l.load_data_fashion_mnist(batch_size)
-d2l.train_ch6(net, train_iter, test_iter, num_epochs, lr)
+# @tab mxnet, pytorch
+lr, num*epochs, batch*size = 1.0, 10, 256
+train*iter, test*iter = d2l.load*data*fashion*mnist(batch*size)
+d2l.train*ch6(net, train*iter, test*iter, num*epochs, lr)
 ```
 
 ```{.python .input}
-#@tab tensorflow
-lr, num_epochs, batch_size = 1.0, 10, 256
-train_iter, test_iter = d2l.load_data_fashion_mnist(batch_size)
-net = d2l.train_ch6(net, train_iter, test_iter, num_epochs, lr)
+# @tab tensorflow
+lr, num*epochs, batch*size = 1.0, 10, 256
+train*iter, test*iter = d2l.load*data*fashion*mnist(batch*size)
+net = d2l.train*ch6(net, train*iter, test*iter, num*epochs, lr)
 ```
 
 Let us have a look at the scale parameter `gamma`
@@ -531,16 +531,16 @@ net[1].gamma.data().reshape(-1,), net[1].beta.data().reshape(-1,)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 net[1].gamma.reshape((-1,)), net[1].beta.reshape((-1,))
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 tf.reshape(net.layers[1].gamma, (-1,)), tf.reshape(net.layers[1].beta, (-1,))
 ```
 
-## Concise Implementation
+# # Concise Implementation
 
 Compared with the `BatchNorm` class,
 which we just defined ourselves,
@@ -568,7 +568,7 @@ net.add(nn.Conv2D(6, kernel_size=5),
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 net = nn.Sequential(
     nn.Conv2d(1, 6, kernel_size=5), nn.BatchNorm2d(6), nn.Sigmoid(),
     nn.MaxPool2d(kernel_size=2, stride=2),
@@ -580,7 +580,7 @@ net = nn.Sequential(
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 def net():
     return tf.keras.models.Sequential([
         tf.keras.layers.Conv2D(filters=6, kernel_size=5,
@@ -609,11 +609,11 @@ because its code has been compiled to C++ or CUDA
 while our custom implementation must be interpreted by Python.
 
 ```{.python .input}
-#@tab all
-d2l.train_ch6(net, train_iter, test_iter, num_epochs, lr)
+# @tab all
+d2l.train*ch6(net, train*iter, test*iter, num*epochs, lr)
 ```
 
-## Controversy
+# # Controversy
 
 Intuitively, batch normalization is thought
 to make the optimization landscape smoother.
@@ -680,14 +680,14 @@ earning the paper that introduced the technique
 tens of thousands of citations.
 
 
-## Summary
+# # Summary
 
 * During model training, batch normalization continuously adjusts the intermediate output of the neural network by utilizing the mean and standard deviation of the minibatch, so that the values of the intermediate output in each layer throughout the neural network are more stable.
 * The batch normalization methods for fully-connected layers and convolutional layers are slightly different.
 * Like a dropout layer, batch normalization layers have different computation results in training mode and prediction mode.
 * Batch normalization has many beneficial side effects, primarily that of regularization. On the other hand, the original motivation of reducing internal covariate shift seems not to be a valid explanation.
 
-## Exercises
+# # Exercises
 
 1. Can we remove the bias parameter from the fully-connected layer or the convolutional layer before the batch normalization? Why?
 1. Compare the learning rates for LeNet with and without batch normalization.

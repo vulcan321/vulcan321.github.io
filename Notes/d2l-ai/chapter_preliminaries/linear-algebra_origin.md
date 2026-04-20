@@ -11,7 +11,7 @@ and operations in linear algebra,
 expressing each of them through mathematical notation
 and the corresponding implementation in code.
 
-## Scalars
+# # Scalars
 
 If you never studied linear algebra or machine learning,
 then your past experience with math probably consisted
@@ -60,7 +60,7 @@ x + y, x * y, x / y, x ** y
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 import torch
 
 x = torch.tensor([3.0])
@@ -70,7 +70,7 @@ x + y, x * y, x / y, x**y
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 import tensorflow as tf
 
 x = tf.constant([3.0])
@@ -79,7 +79,7 @@ y = tf.constant([2.0])
 x + y, x * y, x / y, x**y
 ```
 
-## Vectors
+# # Vectors
 
 [**You can think of a vector as simply a list of scalar values.**]
 We call these values the *elements* (*entries* or *components*) of the vector.
@@ -107,13 +107,13 @@ x
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 x = torch.arange(4)
 x
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 x = tf.range(4)
 x
 ```
@@ -126,11 +126,11 @@ Extensive literature considers column vectors to be the default
 orientation of vectors, so does this book.
 In math, a vector $\mathbf{x}$ can be written as
 
-$$\mathbf{x} =\begin{bmatrix}x_{1}  \\x_{2}  \\ \vdots  \\x_{n}\end{bmatrix},$$
-:eqlabel:`eq_vec_def`
+$$\mathbf{x} =\begin{bmatrix}x*{1}  \\x*{2}  \\ \vdots  \\x_{n}\end{bmatrix},$$
+:eqlabel:`eq*vec*def`
 
 
-where $x_1, \ldots, x_n$ are elements of the vector.
+where $x*1, \ldots, x*n$ are elements of the vector.
 In code,
 we (**access any element by indexing into the tensor.**)
 
@@ -139,16 +139,16 @@ x[3]
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 x[3]
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 x[3]
 ```
 
-### Length, Dimensionality, and Shape
+## # Length, Dimensionality, and Shape
 
 Let us revisit some concepts from :numref:`sec_ndarray`.
 A vector is just an array of numbers.
@@ -167,12 +167,12 @@ len(x)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 len(x)
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 len(x)
 ```
 
@@ -187,12 +187,12 @@ x.shape
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 x.shape
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 x.shape
 ```
 
@@ -206,7 +206,7 @@ In this sense, the dimensionality of some axis of a tensor
 will be the length of that axis.
 
 
-## Matrices
+# # Matrices
 
 Just as vectors generalize scalars from order zero to order one,
 matrices generalize vectors from order one to order two.
@@ -219,8 +219,8 @@ to express that the matrix $\mathbf{A}$ consists of $m$ rows and $n$ columns of 
 Visually, we can illustrate any matrix $\mathbf{A} \in \mathbb{R}^{m \times n}$ as a table,
 where each element $a_{ij}$ belongs to the $i^{\mathrm{th}}$ row and $j^{\mathrm{th}}$ column:
 
-$$\mathbf{A}=\begin{bmatrix} a_{11} & a_{12} & \cdots & a_{1n} \\ a_{21} & a_{22} & \cdots & a_{2n} \\ \vdots & \vdots & \ddots & \vdots \\ a_{m1} & a_{m2} & \cdots & a_{mn} \\ \end{bmatrix}.$$
-:eqlabel:`eq_matrix_def`
+$$\mathbf{A}=\begin{bmatrix} a*{11} & a*{12} & \cdots & a*{1n} \\ a*{21} & a*{22} & \cdots & a*{2n} \\ \vdots & \vdots & \ddots & \vdots \\ a*{m1} & a*{m2} & \cdots & a_{mn} \\ \end{bmatrix}.$$
+:eqlabel:`eq*matrix*def`
 
 
 For any $\mathbf{A} \in \mathbb{R}^{m \times n}$, the shape of $\mathbf{A}$
@@ -238,42 +238,42 @@ A
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 A = torch.arange(20).reshape(5, 4)
 A
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 A = tf.reshape(tf.range(20), (5, 4))
 A
 ```
 
-We can access the scalar element $a_{ij}$ of a matrix $\mathbf{A}$ in :eqref:`eq_matrix_def`
+We can access the scalar element $a*{ij}$ of a matrix $\mathbf{A}$ in :eqref:`eq*matrix_def`
 by specifying the indices for the row ($i$) and column ($j$),
 such as $[\mathbf{A}]_{ij}$.
-When the scalar elements of a matrix $\mathbf{A}$, such as in :eqref:`eq_matrix_def`, are not given,
+When the scalar elements of a matrix $\mathbf{A}$, such as in :eqref:`eq*matrix*def`, are not given,
 we may simply use the lower-case letter of the matrix $\mathbf{A}$ with the index subscript, $a_{ij}$,
 to refer to $[\mathbf{A}]_{ij}$.
 To keep notation simple, commas are inserted to separate indices only when necessary,
-such as $a_{2, 3j}$ and $[\mathbf{A}]_{2i-1, 3}$.
+such as $a*{2, 3j}$ and $[\mathbf{A}]*{2i-1, 3}$.
 
 
 Sometimes, we want to flip the axes.
 When we exchange a matrix's rows and columns,
 the result is called the *transpose* of the matrix.
 Formally, we signify a matrix $\mathbf{A}$'s transpose by $\mathbf{A}^\top$
-and if $\mathbf{B} = \mathbf{A}^\top$, then $b_{ij} = a_{ji}$ for any $i$ and $j$.
-Thus, the transpose of $\mathbf{A}$ in :eqref:`eq_matrix_def` is
+and if $\mathbf{B} = \mathbf{A}^\top$, then $b*{ij} = a*{ji}$ for any $i$ and $j$.
+Thus, the transpose of $\mathbf{A}$ in :eqref:`eq*matrix*def` is
 a $n \times m$ matrix:
 
 $$
 \mathbf{A}^\top =
 \begin{bmatrix}
-    a_{11} & a_{21} & \dots  & a_{m1} \\
-    a_{12} & a_{22} & \dots  & a_{m2} \\
+    a*{11} & a*{21} & \dots  & a_{m1} \\
+    a*{12} & a*{22} & \dots  & a_{m2} \\
     \vdots & \vdots & \ddots  & \vdots \\
-    a_{1n} & a_{2n} & \dots  & a_{mn}
+    a*{1n} & a*{2n} & \dots  & a_{mn}
 \end{bmatrix}.
 $$
 
@@ -284,12 +284,12 @@ A.T
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 A.T
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 tf.transpose(A)
 ```
 
@@ -304,13 +304,13 @@ B
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 B = torch.tensor([[1, 2, 3], [2, 0, 4], [3, 4, 5]])
 B
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 B = tf.constant([[1, 2, 3], [2, 0, 4], [3, 4, 5]])
 B
 ```
@@ -323,12 +323,12 @@ B == B.T
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 B == B.T
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 B == tf.transpose(B)
 ```
 
@@ -348,7 +348,7 @@ we can access or enumerate minibatches of data examples,
 or just data examples if no minibatch exists.
 
 
-## Tensors
+# # Tensors
 
 Just as vectors generalize scalars, and matrices generalize vectors, we can build data structures with even more axes.
 [**Tensors**]
@@ -357,7 +357,7 @@ Just as vectors generalize scalars, and matrices generalize vectors, we can buil
 Vectors, for example, are first-order tensors, and matrices are second-order tensors.
 Tensors are denoted with capital letters of a special font face
 (e.g., $\mathsf{X}$, $\mathsf{Y}$, and $\mathsf{Z}$)
-and their indexing mechanism (e.g., $x_{ijk}$ and $[\mathsf{X}]_{1, 2i-1, 3}$) is similar to that of matrices.
+and their indexing mechanism (e.g., $x*{ijk}$ and $[\mathsf{X}]*{1, 2i-1, 3}$) is similar to that of matrices.
 
 Tensors will become more important when we start working with images,
  which arrive as $n$-dimensional arrays with 3 axes corresponding to the height, width, and a *channel* axis for stacking the color channels (red, green, and blue). For now, we will skip over higher order tensors and focus on the basics.
@@ -369,18 +369,18 @@ X
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 X = torch.arange(24).reshape(2, 3, 4)
 X
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 X = tf.reshape(tf.range(24), (2, 3, 4))
 X
 ```
 
-## Basic Properties of Tensor Arithmetic
+# # Basic Properties of Tensor Arithmetic
 
 Scalars, vectors, matrices, and tensors ("tensors" in this subsection refer to algebraic objects)
 of an arbitrary number of axes
@@ -402,14 +402,14 @@ A, A + B
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 A = torch.arange(20, dtype=torch.float32).reshape(5, 4)
 B = A.clone()  # Assign a copy of `A` to `B` by allocating new memory
 A, A + B
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 A = tf.reshape(tf.range(20, dtype=tf.float32), (5, 4))
 B = A  # No cloning of `A` to `B` by allocating new memory
 A, A + B
@@ -418,15 +418,15 @@ A, A + B
 Specifically,
 [**elementwise multiplication of two matrices is called their *Hadamard product***]
 (math notation $\odot$).
-Consider matrix $\mathbf{B} \in \mathbb{R}^{m \times n}$ whose element of row $i$ and column $j$ is $b_{ij}$. The Hadamard product of matrices $\mathbf{A}$ (defined in :eqref:`eq_matrix_def`) and $\mathbf{B}$
+Consider matrix $\mathbf{B} \in \mathbb{R}^{m \times n}$ whose element of row $i$ and column $j$ is $b*{ij}$. The Hadamard product of matrices $\mathbf{A}$ (defined in :eqref:`eq*matrix_def`) and $\mathbf{B}$
 
 $$
 \mathbf{A} \odot \mathbf{B} =
 \begin{bmatrix}
-    a_{11}  b_{11} & a_{12}  b_{12} & \dots  & a_{1n}  b_{1n} \\
-    a_{21}  b_{21} & a_{22}  b_{22} & \dots  & a_{2n}  b_{2n} \\
+    a*{11}  b*{11} & a*{12}  b*{12} & \dots  & a*{1n}  b*{1n} \\
+    a*{21}  b*{21} & a*{22}  b*{22} & \dots  & a*{2n}  b*{2n} \\
     \vdots & \vdots & \ddots & \vdots \\
-    a_{m1}  b_{m1} & a_{m2}  b_{m2} & \dots  & a_{mn}  b_{mn}
+    a*{m1}  b*{m1} & a*{m2}  b*{m2} & \dots  & a*{mn}  b*{mn}
 \end{bmatrix}.
 $$
 
@@ -435,12 +435,12 @@ A * B
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 A * B
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 A * B
 ```
 
@@ -454,20 +454,20 @@ a + X, (a * X).shape
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 a = 2
 X = torch.arange(24).reshape(2, 3, 4)
 a + X, (a * X).shape
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 a = 2
 X = tf.reshape(tf.range(24), (2, 3, 4))
 a + X, (a * X).shape
 ```
 
-## Reduction
+# # Reduction
 :label:`subseq_lin-alg-reduction`
 
 One useful operation that we can perform with arbitrary tensors
@@ -475,7 +475,7 @@ is to
 calculate [**the sum of their elements.**]
 In mathematical notation, we express sums using the $\sum$ symbol.
 To express the sum of the elements in a vector $\mathbf{x}$ of length $d$,
-we write $\sum_{i=1}^d x_i$.
+we write $\sum*{i=1}^d x*i$.
 In code, we can just call the function for calculating the sum.
 
 ```{.python .input}
@@ -484,31 +484,31 @@ x, x.sum()
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 x = torch.arange(4, dtype=torch.float32)
 x, x.sum()
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 x = tf.range(4, dtype=tf.float32)
 x, tf.reduce_sum(x)
 ```
 
 We can express [**sums over the elements of tensors of arbitrary shape.**]
-For example, the sum of the elements of an $m \times n$ matrix $\mathbf{A}$ could be written $\sum_{i=1}^{m} \sum_{j=1}^{n} a_{ij}$.
+For example, the sum of the elements of an $m \times n$ matrix $\mathbf{A}$ could be written $\sum*{i=1}^{m} \sum*{j=1}^{n} a_{ij}$.
 
 ```{.python .input}
 A.shape, A.sum()
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 A.shape, A.sum()
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 A.shape, tf.reduce_sum(A)
 ```
 
@@ -522,20 +522,20 @@ Since the input matrix reduces along axis 0 to generate the output vector,
 the dimension of axis 0 of the input is lost in the output shape.
 
 ```{.python .input}
-A_sum_axis0 = A.sum(axis=0)
-A_sum_axis0, A_sum_axis0.shape
+A*sum*axis0 = A.sum(axis=0)
+A*sum*axis0, A*sum*axis0.shape
 ```
 
 ```{.python .input}
-#@tab pytorch
-A_sum_axis0 = A.sum(axis=0)
-A_sum_axis0, A_sum_axis0.shape
+# @tab pytorch
+A*sum*axis0 = A.sum(axis=0)
+A*sum*axis0, A*sum*axis0.shape
 ```
 
 ```{.python .input}
-#@tab tensorflow
-A_sum_axis0 = tf.reduce_sum(A, axis=0)
-A_sum_axis0, A_sum_axis0.shape
+# @tab tensorflow
+A*sum*axis0 = tf.reduce_sum(A, axis=0)
+A*sum*axis0, A*sum*axis0.shape
 ```
 
 Specifying
@@ -543,20 +543,20 @@ Specifying
 Thus, the dimension of axis 1 of the input is lost in the output shape.
 
 ```{.python .input}
-A_sum_axis1 = A.sum(axis=1)
-A_sum_axis1, A_sum_axis1.shape
+A*sum*axis1 = A.sum(axis=1)
+A*sum*axis1, A*sum*axis1.shape
 ```
 
 ```{.python .input}
-#@tab pytorch
-A_sum_axis1 = A.sum(axis=1)
-A_sum_axis1, A_sum_axis1.shape
+# @tab pytorch
+A*sum*axis1 = A.sum(axis=1)
+A*sum*axis1, A*sum*axis1.shape
 ```
 
 ```{.python .input}
-#@tab tensorflow
-A_sum_axis1 = tf.reduce_sum(A, axis=1)
-A_sum_axis1, A_sum_axis1.shape
+# @tab tensorflow
+A*sum*axis1 = tf.reduce_sum(A, axis=1)
+A*sum*axis1, A*sum*axis1.shape
 ```
 
 Reducing a matrix along both rows and columns via summation
@@ -567,13 +567,13 @@ A.sum(axis=[0, 1])  # Same as `A.sum()`
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 A.sum(axis=[0, 1])  # Same as `A.sum()`
 ```
 
 ```{.python .input}
-#@tab tensorflow
-tf.reduce_sum(A, axis=[0, 1])  # Same as `tf.reduce_sum(A)`
+# @tab tensorflow
+tf.reduce*sum(A, axis=[0, 1])  # Same as `tf.reduce*sum(A)`
 ```
 
 [**A related quantity is the *mean*, which is also called the *average*.**]
@@ -586,13 +586,13 @@ A.mean(), A.sum() / A.size
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 A.mean(), A.sum() / A.numel()
 ```
 
 ```{.python .input}
-#@tab tensorflow
-tf.reduce_mean(A), tf.reduce_sum(A) / tf.size(A).numpy()
+# @tab tensorflow
+tf.reduce*mean(A), tf.reduce*sum(A) / tf.size(A).numpy()
 ```
 
 Likewise, the function for calculating the mean can also reduce a tensor along the specified axes.
@@ -602,16 +602,16 @@ A.mean(axis=0), A.sum(axis=0) / A.shape[0]
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 A.mean(axis=0), A.sum(axis=0) / A.shape[0]
 ```
 
 ```{.python .input}
-#@tab tensorflow
-tf.reduce_mean(A, axis=0), tf.reduce_sum(A, axis=0) / A.shape[0]
+# @tab tensorflow
+tf.reduce*mean(A, axis=0), tf.reduce*sum(A, axis=0) / A.shape[0]
 ```
 
-### Non-Reduction Sum
+## # Non-Reduction Sum
 :label:`subseq_lin-alg-non-reduction`
 
 However,
@@ -624,31 +624,31 @@ sum_A
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 sum_A = A.sum(axis=1, keepdims=True)
 sum_A
 ```
 
 ```{.python .input}
-#@tab tensorflow
-sum_A = tf.reduce_sum(A, axis=1, keepdims=True)
+# @tab tensorflow
+sum*A = tf.reduce*sum(A, axis=1, keepdims=True)
 sum_A
 ```
 
 For instance,
-since `sum_A` still keeps its two axes after summing each row, we can (**divide `A` by `sum_A` with broadcasting.**)
+since `sum*A` still keeps its two axes after summing each row, we can (**divide `A` by `sum*A` with broadcasting.**)
 
 ```{.python .input}
 A / sum_A
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 A / sum_A
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 A / sum_A
 ```
 
@@ -660,19 +660,19 @@ A.cumsum(axis=0)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 A.cumsum(axis=0)
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 tf.cumsum(A, axis=0)
 ```
 
-## Dot Products
+# # Dot Products
 
 So far, we have only performed elementwise operations, sums, and averages. And if this was all we could do, linear algebra probably would not deserve its own section. However, one of the most fundamental operations is the dot product.
-Given two vectors $\mathbf{x}, \mathbf{y} \in \mathbb{R}^d$, their *dot product* $\mathbf{x}^\top \mathbf{y}$ (or $\langle \mathbf{x}, \mathbf{y}  \rangle$) is a sum over the products of the elements at the same position: $\mathbf{x}^\top \mathbf{y} = \sum_{i=1}^{d} x_i y_i$.
+Given two vectors $\mathbf{x}, \mathbf{y} \in \mathbb{R}^d$, their *dot product* $\mathbf{x}^\top \mathbf{y}$ (or $\langle \mathbf{x}, \mathbf{y}  \rangle$) is a sum over the products of the elements at the same position: $\mathbf{x}^\top \mathbf{y} = \sum*{i=1}^{d} x*i y_i$.
 
 [~~The *dot product* of two vectors is a sum over the products of the elements at the same position~~]
 
@@ -682,13 +682,13 @@ x, y, np.dot(x, y)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 y = torch.ones(4, dtype = torch.float32)
 x, y, torch.dot(x, y)
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 y = tf.ones(4, dtype=tf.float32)
 x, y, tf.tensordot(x, y, axes=1)
 ```
@@ -701,12 +701,12 @@ np.sum(x * y)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 torch.sum(x * y)
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 tf.reduce_sum(x * y)
 ```
 
@@ -718,20 +718,20 @@ the weighted sum of the values in $\mathbf{x}$
 according to the weights $\mathbf{w}$
 could be expressed as the dot product $\mathbf{x}^\top \mathbf{w}$.
 When the weights are non-negative
-and sum to one (i.e., $\left(\sum_{i=1}^{d} {w_i} = 1\right)$),
+and sum to one (i.e., $\left(\sum*{i=1}^{d} {w*i} = 1\right)$),
 the dot product expresses a *weighted average*.
 After normalizing two vectors to have the unit length,
 the dot products express the cosine of the angle between them.
 We will formally introduce this notion of *length* later in this section.
 
 
-## Matrix-Vector Products
+# # Matrix-Vector Products
 
 Now that we know how to calculate dot products,
 we can begin to understand *matrix-vector products*.
 Recall the matrix $\mathbf{A} \in \mathbb{R}^{m \times n}$
 and the vector $\mathbf{x} \in \mathbb{R}^n$
-defined and visualized in :eqref:`eq_matrix_def` and :eqref:`eq_vec_def` respectively.
+defined and visualized in :eqref:`eq*matrix*def` and :eqref:`eq*vec*def` respectively.
 Let us start off by visualizing the matrix $\mathbf{A}$ in terms of its row vectors
 
 $$\mathbf{A}=
@@ -789,16 +789,16 @@ A.shape, x.shape, np.dot(A, x)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 A.shape, x.shape, torch.mv(A, x)
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 A.shape, x.shape, tf.linalg.matvec(A, x)
 ```
 
-## Matrix-Matrix Multiplication
+# # Matrix-Matrix Multiplication
 
 If you have gotten the hang of dot products and matrix-vector products,
 then *matrix-matrix multiplication* should be straightforward.
@@ -806,16 +806,16 @@ then *matrix-matrix multiplication* should be straightforward.
 Say that we have two matrices $\mathbf{A} \in \mathbb{R}^{n \times k}$ and $\mathbf{B} \in \mathbb{R}^{k \times m}$:
 
 $$\mathbf{A}=\begin{bmatrix}
- a_{11} & a_{12} & \cdots & a_{1k} \\
- a_{21} & a_{22} & \cdots & a_{2k} \\
+ a*{11} & a*{12} & \cdots & a_{1k} \\
+ a*{21} & a*{22} & \cdots & a_{2k} \\
 \vdots & \vdots & \ddots & \vdots \\
- a_{n1} & a_{n2} & \cdots & a_{nk} \\
+ a*{n1} & a*{n2} & \cdots & a_{nk} \\
 \end{bmatrix},\quad
 \mathbf{B}=\begin{bmatrix}
- b_{11} & b_{12} & \cdots & b_{1m} \\
- b_{21} & b_{22} & \cdots & b_{2m} \\
+ b*{11} & b*{12} & \cdots & b_{1m} \\
+ b*{21} & b*{22} & \cdots & b_{2m} \\
 \vdots & \vdots & \ddots & \vdots \\
- b_{k1} & b_{k2} & \cdots & b_{km} \\
+ b*{k1} & b*{k2} & \cdots & b_{km} \\
 \end{bmatrix}.$$
 
 
@@ -833,12 +833,12 @@ $$\mathbf{A}=
 \mathbf{a}^\top_n \\
 \end{bmatrix},
 \quad \mathbf{B}=\begin{bmatrix}
- \mathbf{b}_{1} & \mathbf{b}_{2} & \cdots & \mathbf{b}_{m} \\
+ \mathbf{b}*{1} & \mathbf{b}*{2} & \cdots & \mathbf{b}_{m} \\
 \end{bmatrix}.
 $$
 
 
-Then the matrix product $\mathbf{C} \in \mathbb{R}^{n \times m}$ is produced as we simply compute each element $c_{ij}$ as the dot product $\mathbf{a}^\top_i \mathbf{b}_j$:
+Then the matrix product $\mathbf{C} \in \mathbb{R}^{n \times m}$ is produced as we simply compute each element $c*{ij}$ as the dot product $\mathbf{a}^\top*i \mathbf{b}_j$:
 
 $$\mathbf{C} = \mathbf{AB} = \begin{bmatrix}
 \mathbf{a}^\top_{1} \\
@@ -847,13 +847,13 @@ $$\mathbf{C} = \mathbf{AB} = \begin{bmatrix}
 \mathbf{a}^\top_n \\
 \end{bmatrix}
 \begin{bmatrix}
- \mathbf{b}_{1} & \mathbf{b}_{2} & \cdots & \mathbf{b}_{m} \\
+ \mathbf{b}*{1} & \mathbf{b}*{2} & \cdots & \mathbf{b}_{m} \\
 \end{bmatrix}
 = \begin{bmatrix}
-\mathbf{a}^\top_{1} \mathbf{b}_1 & \mathbf{a}^\top_{1}\mathbf{b}_2& \cdots & \mathbf{a}^\top_{1} \mathbf{b}_m \\
- \mathbf{a}^\top_{2}\mathbf{b}_1 & \mathbf{a}^\top_{2} \mathbf{b}_2 & \cdots & \mathbf{a}^\top_{2} \mathbf{b}_m \\
+\mathbf{a}^\top*{1} \mathbf{b}*1 & \mathbf{a}^\top*{1}\mathbf{b}*2& \cdots & \mathbf{a}^\top*{1} \mathbf{b}*m \\
+ \mathbf{a}^\top*{2}\mathbf{b}*1 & \mathbf{a}^\top*{2} \mathbf{b}*2 & \cdots & \mathbf{a}^\top*{2} \mathbf{b}*m \\
  \vdots & \vdots & \ddots &\vdots\\
-\mathbf{a}^\top_{n} \mathbf{b}_1 & \mathbf{a}^\top_{n}\mathbf{b}_2& \cdots& \mathbf{a}^\top_{n} \mathbf{b}_m
+\mathbf{a}^\top*{n} \mathbf{b}*1 & \mathbf{a}^\top*{n}\mathbf{b}*2& \cdots& \mathbf{a}^\top*{n} \mathbf{b}*m
 \end{bmatrix}.
 $$
 
@@ -869,13 +869,13 @@ np.dot(A, B)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 B = torch.ones(4, 3)
 torch.mm(A, B)
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 B = tf.ones((4, 3), tf.float32)
 tf.matmul(A, B)
 ```
@@ -883,7 +883,7 @@ tf.matmul(A, B)
 Matrix-matrix multiplication can be simply called *matrix multiplication*, and should not be confused with the Hadamard product.
 
 
-## Norms
+# # Norms
 :label:`subsec_lin-algebra-norms`
 
 Some of the most useful operators in linear algebra are *norms*.
@@ -926,14 +926,14 @@ then the concepts of non-negativity and the triangle inequality might ring a bel
 In fact, the Euclidean distance is a norm:
 specifically it is the $L_2$ norm.
 Suppose that the elements in the $n$-dimensional vector
-$\mathbf{x}$ are $x_1, \ldots, x_n$.
+$\mathbf{x}$ are $x*1, \ldots, x*n$.
 
 [**The $L_2$ *norm* of $\mathbf{x}$ is the square root of the sum of the squares of the vector elements:**]
 
-(**$$\|\mathbf{x}\|_2 = \sqrt{\sum_{i=1}^n x_i^2},$$**)
+(**$$\|\mathbf{x}\|*2 = \sqrt{\sum*{i=1}^n x_i^2},$$**)
 
 
-where the subscript $2$ is often omitted in $L_2$ norms, i.e., $\|\mathbf{x}\|$ is equivalent to $\|\mathbf{x}\|_2$. In code,
+where the subscript $2$ is often omitted in $L*2$ norms, i.e., $\|\mathbf{x}\|$ is equivalent to $\|\mathbf{x}\|*2$. In code,
 we can calculate the $L_2$ norm of a vector as follows.
 
 ```{.python .input}
@@ -942,13 +942,13 @@ np.linalg.norm(u)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 u = torch.tensor([3.0, -4.0])
 torch.norm(u)
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 u = tf.constant([3.0, -4.0])
 tf.norm(u)
 ```
@@ -959,7 +959,7 @@ with the squared $L_2$ norm.
 You will also frequently encounter [**the $L_1$ *norm***],
 which is expressed as the sum of the absolute values of the vector elements:
 
-(**$$\|\mathbf{x}\|_1 = \sum_{i=1}^n \left|x_i \right|.$$**)
+(**$$\|\mathbf{x}\|*1 = \sum*{i=1}^n \left|x_i \right|.$$**)
 
 
 As compared with the $L_2$ norm,
@@ -972,26 +972,26 @@ np.abs(u).sum()
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 torch.abs(u).sum()
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 tf.reduce_sum(tf.abs(u))
 ```
 
 
-Both the $L_2$ norm and the $L_1$ norm
+Both the $L*2$ norm and the $L*1$ norm
 are special cases of the more general $L_p$ *norm*:
 
-$$\|\mathbf{x}\|_p = \left(\sum_{i=1}^n \left|x_i \right|^p \right)^{1/p}.$$
+$$\|\mathbf{x}\|*p = \left(\sum*{i=1}^n \left|x_i \right|^p \right)^{1/p}.$$
 
 Analogous to $L_2$ norms of vectors,
 [**the *Frobenius norm* of a matrix $\mathbf{X} \in \mathbb{R}^{m \times n}$**]
 is the square root of the sum of the squares of the matrix elements:
 
-[**$$\|\mathbf{X}\|_F = \sqrt{\sum_{i=1}^m \sum_{j=1}^n x_{ij}^2}.$$**]
+[**$$\|\mathbf{X}\|*F = \sqrt{\sum*{i=1}^m \sum*{j=1}^n x*{ij}^2}.$$**]
 
 The Frobenius norm satisfies all the properties of vector norms.
 It behaves as if it were an $L_2$ norm of a matrix-shaped vector.
@@ -1002,17 +1002,17 @@ np.linalg.norm(np.ones((4, 9)))
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 torch.norm(torch.ones((4, 9)))
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 tf.norm(tf.ones((4, 9)))
 ```
 
-### Norms and Objectives
-:label:`subsec_norms_and_objectives`
+## # Norms and Objectives
+:label:`subsec*norms*and_objectives`
 
 While we do not want to get too far ahead of ourselves,
 we can plant some intuition already about why these concepts are useful.
@@ -1029,7 +1029,7 @@ are expressed as norms.
 
 
 
-## More on Linear Algebra
+# # More on Linear Algebra
 
 In just this section,
 we have taught you all the linear algebra
@@ -1058,17 +1058,17 @@ or other excellent resources :cite:`Strang.1993,Kolter.2008,Petersen.Pedersen.ea
 
 
 
-## Summary
+# # Summary
 
 * Scalars, vectors, matrices, and tensors are basic mathematical objects in linear algebra.
 * Vectors generalize scalars, and matrices generalize vectors.
 * Scalars, vectors, matrices, and tensors have zero, one, two, and an arbitrary number of axes, respectively.
 * A tensor can be reduced along the specified axes by `sum` and `mean`.
 * Elementwise multiplication of two matrices is called their Hadamard product. It is different from matrix multiplication.
-* In deep learning, we often work with norms such as the $L_1$ norm, the $L_2$ norm, and the Frobenius norm.
+* In deep learning, we often work with norms such as the $L*1$ norm, the $L*2$ norm, and the Frobenius norm.
 * We can perform a variety of operations over scalars, vectors, matrices, and tensors.
 
-## Exercises
+# # Exercises
 
 1. Prove that the transpose of a matrix $\mathbf{A}$'s transpose is $\mathbf{A}$: $(\mathbf{A}^\top)^\top = \mathbf{A}$.
 1. Given two matrices $\mathbf{A}$ and $\mathbf{B}$, show that the sum of transposes is equal to the transpose of a sum: $\mathbf{A}^\top + \mathbf{B}^\top = (\mathbf{A} + \mathbf{B})^\top$.

@@ -1,21 +1,21 @@
-## How Flutter?
+# # How Flutter?
 
-#### 运行机制
+### # 运行机制
 
 Flutter 应用运行在一个用 C++ 写的引擎中，Flutter 应用可以看做是一个游戏 App，代码都是在引擎中运行。
 
-###### Android
+##### # Android
 
 -   引擎的C或C++代码是由Android NDK编译的，而框架的主要代码和应用的代码由Dart compiler编译成native code执行的。
     
 -   对于Android应用来说，Flutter框架在引擎中实现了一个继承于SurfaceView的 FlutterView。用户所看到的UI都是在这个SurfaceView中显示。如果要和原生平台功能交互，则可以在Activity中使用FlutterView，并通过Flutter提供的消息API和原生平台收发消息。
     
 
-###### ios
+##### # ios
 
 -   引擎的C或C++代码是由LLVM编译的，而所有Dart的代码会被AOT编译成native code，整个APP运行时使用的是机器指令（并不是拦截器）。
 
-#### 系统架构
+### # 系统架构
 
 ![](https://www.jianshu.com//upload-images.jianshu.io/upload_images/1216032-3490b45f2a8683af.png?imageMogr2/auto-orient/strip|imageView2/2/w/1200/format/webp)
 
@@ -56,9 +56,9 @@ Flutter渲染管道.png
 
 状态生命周期.png
 
-#### 绘制流程
+### # 绘制流程
 
-###### 入口
+##### # 入口
 
 -   界面的布局和绘制在每一帧都在发生着，甚至界面没有变化，它也会存在；可以想象每一帧里面，引擎都像流水线的一样重复着几个过程：build（构建控件树），layout（布局）, paint（绘制）和 composite（合成），周而复始。驱动整个流水线的入口是WidgetBinding.drawFrame方法。
 
@@ -77,21 +77,21 @@ Flutter渲染管道.png
   } 
 ```
 
-###### 布局约束
+##### # 布局约束
 
 -   根据parent给予的约束条件来计算size，而设置size只能在performResize或者performLayout中进行，如果设置sizedByParent为true，则只能在performResize中进行，否则就只能在performLayout中与child的布局同时进行。
 
-###### Layer层
+##### # Layer层
 
 ![](https://www.jianshu.com//upload-images.jianshu.io/upload_images/1216032-5df13f5b4a74d07b.png?imageMogr2/auto-orient/strip|imageView2/2/w/800/format/webp)
 
 Flutter Layer.png
 
-## Read More
+# # Read More
 
 -   [Flutter官网](https://flutter.io/)
 -   [Dart官网](https://www.dartlang.org/)
--   [安装Flutter](https://7449.github.io/2018/03/19/Android_Flutter_2)
+-   [安装Flutter](https://7449.github.io/2018/03/19/Android*Flutter*2)
 -   [LittleKernel GitHub](https://github.com/littlekernel/lk)
 -   [Fuchsia GitHub](https://github.com/fuchsia-mirror)
 -   [Flutter中文网](https://flutterchina.club/)

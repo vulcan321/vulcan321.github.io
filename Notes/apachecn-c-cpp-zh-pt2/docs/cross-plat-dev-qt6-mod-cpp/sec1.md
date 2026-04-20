@@ -4,7 +4,7 @@
 
 本节包括以下章节：
 
-*   [*第一章*](01.html#_idTextAnchor014)，*Qt6 简介*
-*   [*第 2 章*](02.html#_idTextAnchor032)，*Qt Creator 简介*
-*   [*第 3 章*](03.html#_idTextAnchor052)，*使用 Qt 小工具进行 GUI 设计*
-*   [*第 4 章*](04.html#_idTextAnchor072)、*Qt Quick 和 QML*
+*   [*第一章*](01.html# _idTextAnchor014)，*Qt6 简介*
+*   [*第 2 章*](02.html# _idTextAnchor032)，*Qt Creator 简介*
+*   [*第 3 章*](03.html# _idTextAnchor052)，*使用 Qt 小工具进行 GUI 设计*
+*   [*第 4 章*](04.html# _idTextAnchor072)、*Qt Quick 和 QML*

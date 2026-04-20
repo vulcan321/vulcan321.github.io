@@ -13,13 +13,13 @@ By design, apps are not rounded when maximized, snapped, running in a Virtual Ma
 
 ![The Notepad app on Windows 11 with rounded corners.](https://docs.microsoft.com/en-us/windows/apps/desktop/modernize/images/apply-design/notepad-rounded.png)
 
-## Why isn't my app rounded?
+# # Why isn't my app rounded?
 
 If your app's main window doesn't receive automatic rounding, it's because you've customized your frame in a way that prevents it. Apps fall into three main categories from the perspective of the Desktop Window Manager (DWM):
 
 1. Apps that are rounded by default.
 
-   This includes apps that want a complete system-provided frame and caption-controls (min/max/close buttons), like Notepad. It also includes apps that provide enough information to the system so it can properly round them, such as setting the WS_THICKFRAME and WS_CAPTION window styles or providing a 1-pixel non-client area border that the system can use to round the corners.
+   This includes apps that want a complete system-provided frame and caption-controls (min/max/close buttons), like Notepad. It also includes apps that provide enough information to the system so it can properly round them, such as setting the WS*THICKFRAME and WS*CAPTION window styles or providing a 1-pixel non-client area border that the system can use to round the corners.
 
 2. Apps that are not rounded by policy, but *can* be rounded.
 
@@ -40,11 +40,11 @@ If your app's main window doesn't receive automatic rounding, it's because you'v
 
    For example, an app might use per-pixel alpha layering to draw transparent pixels around its main window to achieve a custom shadow effect, which makes the window no longer a rectangle and therefore the system cannot round it.
 
-## How to opt in to rounded corners
+# # How to opt in to rounded corners
 
-### API definition
+## # API definition
 
-If your app is not rounded by policy, you can optionally call our new API to allow your app to opt in to rounded corners. This API is expressed as enumeration values to be passed to the [**DwmSetWindowAttribute**](https://docs.microsoft.com/en-us/windows/win32/api/dwmapi/nf-dwmapi-dwmsetwindowattribute) API, as shown in the new **DWM_WINDOW_CORNER_PREFERENCE** enumeration. **DWM_WINDOW_CORNER_PREFERENCE** is defined in the [dwmapi.h header](https://docs.microsoft.com/en-us/windows/win32/api/dwmapi/) and is available in the latest [Insider Preview SDK](https://www.microsoft.com/software-download/windowsinsiderpreviewSDK).
+If your app is not rounded by policy, you can optionally call our new API to allow your app to opt in to rounded corners. This API is expressed as enumeration values to be passed to the [**DwmSetWindowAttribute**](https://docs.microsoft.com/en-us/windows/win32/api/dwmapi/nf-dwmapi-dwmsetwindowattribute) API, as shown in the new **DWM*WINDOW*CORNER*PREFERENCE** enumeration. **DWM*WINDOW*CORNER*PREFERENCE** is defined in the [dwmapi.h header](https://docs.microsoft.com/en-us/windows/win32/api/dwmapi/) and is available in the latest [Insider Preview SDK](https://www.microsoft.com/software-download/windowsinsiderpreviewSDK).
 
 | Enum value            | Description                                                  |
 | :-------------------- | :----------------------------------------------------------- |
@@ -53,13 +53,13 @@ If your app is not rounded by policy, you can optionally call our new API to all
 | **DWMWCP_ROUND**      | Round the corners if appropriate.                            |
 | **DWMWCP_ROUNDSMALL** | Round the corners if appropriate, with a small radius.       |
 
-A pointer to the appropriate value from this enum is passed to the third parameter of DwmSetWindowAttribute. For the second parameter, which specifies which attribute you are setting, pass the new **DWMWA_WINDOW_CORNER_PREFERENCE** value defined in the [**DWMWINDOWATTRIBUTE**](https://docs.microsoft.com/en-us/windows/win32/api/dwmapi/ne-dwmapi-dwmwindowattribute) enumeration.
+A pointer to the appropriate value from this enum is passed to the third parameter of DwmSetWindowAttribute. For the second parameter, which specifies which attribute you are setting, pass the new **DWMWA*WINDOW*CORNER_PREFERENCE** value defined in the [**DWMWINDOWATTRIBUTE**](https://docs.microsoft.com/en-us/windows/win32/api/dwmapi/ne-dwmapi-dwmwindowattribute) enumeration.
 
-### For C# apps
+## # For C# apps
 
 DwmSetWindowAttribute is a native Win32 API and is not exposed directly to .NET code. You'll need to use your language's implementation of P/Invoke to declare the function (C# code is given in the example below). All standard WinForms and WPF apps are rounded automatically, but if you customize your window frame or use a third party framework, you might need to opt-in to rounded corners. See the Examples section for further details.
 
-## Examples
+# # Examples
 
 The following examples show how you can call [**DwmSetWindowAttribute**](https://docs.microsoft.com/en-us/windows/win32/api/dwmapi/nf-dwmapi-dwmsetwindowattribute) or [**DwmGetWindowAttribute**](https://docs.microsoft.com/en-us/windows/win32/api/dwmapi/nf-dwmapi-dwmgetwindowattribute) to control your app's rounding experience if your app is not rounded by policy.
 
@@ -67,7 +67,7 @@ The following examples show how you can call [**DwmSetWindowAttribute**](https:/
 
 Error handling has been left out of these examples for brevity and clarity.
 
-### Example 1 - Rounding an app's main window in C# - WPF
+## # Example 1 - Rounding an app's main window in C# - WPF
 
 This example shows how to call DwmSetWindowAttribute from C# by using the **[DllImport]** attribute. Note that this definition is specific to rounded corners; the DwmSetWindowAttribute function is designed to take different parameters depending on the flags provided, so this is not a general-purpose signature. The example also includes copies of the relevant enums from the dwmapi.h header file. Because the Win32 API takes a pointer for the third parameter, make sure to use the *ref* keyword so you can pass the address of a variable when you call the function. You can do this in your MainWindow class in MainWindow.xaml.cs.
 
@@ -83,13 +83,13 @@ public partial class MainWindow : Window
     // Copied from dwmapi.h
     public enum DWMWINDOWATTRIBUTE
     {
-        DWMWA_WINDOW_CORNER_PREFERENCE = 33
+        DWMWA*WINDOW*CORNER_PREFERENCE = 33
     }
 
-    // The DWM_WINDOW_CORNER_PREFERENCE enum for DwmSetWindowAttribute's third parameter, which tells the function
+    // The DWM*WINDOW*CORNER_PREFERENCE enum for DwmSetWindowAttribute's third parameter, which tells the function
     // what value of the enum to set.
     // Copied from dwmapi.h
-    public enum DWM_WINDOW_CORNER_PREFERENCE
+    public enum DWM*WINDOW*CORNER_PREFERENCE
     {
         DWMWCP_DEFAULT      = 0,
         DWMWCP_DONOTROUND   = 1,
@@ -101,7 +101,7 @@ public partial class MainWindow : Window
     [DllImport("dwmapi.dll", CharSet = CharSet.Unicode, PreserveSig = false)]
     internal static extern void DwmSetWindowAttribute(IntPtr hwnd,
                                                      DWMWINDOWATTRIBUTE attribute,
-                                                     ref DWM_WINDOW_CORNER_PREFERENCE pvAttribute,
+                                                     ref DWM*WINDOW*CORNER_PREFERENCE pvAttribute,
                                                      uint cbAttribute);
     // ...
     // Various other definitions
@@ -119,8 +119,8 @@ public MainWindow()
     InitializeComponent();
 
     IntPtr hWnd = new WindowInteropHelper(GetWindow(this)).EnsureHandle();
-    var attribute = DWMWINDOWATTRIBUTE.DWMWA_WINDOW_CORNER_PREFERENCE;
-    var preference = DWM_WINDOW_CORNER_PREFERENCE.DWMWCP_ROUND;
+    var attribute = DWMWINDOWATTRIBUTE.DWMWA*WINDOW*CORNER_PREFERENCE;
+    var preference = DWM*WINDOW*CORNER*PREFERENCE.DWMWCP*ROUND;
     DwmSetWindowAttribute(hWnd, attribute, ref preference, sizeof(uint));
     
     // ...
@@ -129,7 +129,7 @@ public MainWindow()
 }
 ```
 
-### Example 2 - Rounding an app's main window in C# - WinForms
+## # Example 2 - Rounding an app's main window in C# - WinForms
 
 Like with WPF, for a WinForms app you'll first need to import dwmapi.dll and the DwmSetWindowAttribute function signature with P/Invoke. You can do this in your primary Form class.
 
@@ -145,13 +145,13 @@ public partial class Form1 : Form
     // Copied from dwmapi.h
     public enum DWMWINDOWATTRIBUTE
     {
-        DWMWA_WINDOW_CORNER_PREFERENCE = 33
+        DWMWA*WINDOW*CORNER_PREFERENCE = 33
     }
 
-    // The DWM_WINDOW_CORNER_PREFERENCE enum for DwmSetWindowAttribute's third parameter, which tells the function
+    // The DWM*WINDOW*CORNER_PREFERENCE enum for DwmSetWindowAttribute's third parameter, which tells the function
     // what value of the enum to set.
     // Copied from dwmapi.h
-    public enum DWM_WINDOW_CORNER_PREFERENCE
+    public enum DWM*WINDOW*CORNER_PREFERENCE
     {
         DWMWCP_DEFAULT      = 0,
         DWMWCP_DONOTROUND   = 1,
@@ -163,7 +163,7 @@ public partial class Form1 : Form
     [DllImport("dwmapi.dll", CharSet = CharSet.Unicode, PreserveSig = false)]
     internal static extern void DwmSetWindowAttribute(IntPtr hwnd,
                                                      DWMWINDOWATTRIBUTE attribute, 
-                                                     ref DWM_WINDOW_CORNER_PREFERENCE pvAttribute, 
+                                                     ref DWM*WINDOW*CORNER_PREFERENCE pvAttribute, 
                                                      uint cbAttribute);
     
     // ...
@@ -181,8 +181,8 @@ public Form1()
 {
     InitializeComponent();
 
-    var attribute = DWMWINDOWATTRIBUTE.DWMWA_WINDOW_CORNER_PREFERENCE;
-    var preference = DWM_WINDOW_CORNER_PREFERENCE.DWMWCP_ROUND;
+    var attribute = DWMWINDOWATTRIBUTE.DWMWA*WINDOW*CORNER_PREFERENCE;
+    var preference = DWM*WINDOW*CORNER*PREFERENCE.DWMWCP*ROUND;
     DwmSetWindowAttribute(this.Handle, attribute, ref preference, sizeof(uint));
     
     // ...
@@ -191,7 +191,7 @@ public Form1()
 }
 ```
 
-### Example 3 - Rounding an app's main window in C++
+## # Example 3 - Rounding an app's main window in C++
 
 For a native C++ app, you can call DwmSetWindowAttribute in your message processing function after window creation to ask the system to round you.
 
@@ -213,8 +213,8 @@ LRESULT ExampleWndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         
         if(hWnd)
         {
-            DWM_WINDOW_CORNER_PREFERENCE preference = DWMWCP_ROUND;
-            DwmSetWindowAttribute(hWnd, DWMWA_WINDOW_CORNER_PREFERENCE, &preference, sizeof(preference));
+            DWM*WINDOW*CORNER*PREFERENCE preference = DWMWCP*ROUND;
+            DwmSetWindowAttribute(hWnd, DWMWA*WINDOW*CORNER_PREFERENCE, &preference, sizeof(preference));
         }
         break;
 
@@ -227,7 +227,7 @@ LRESULT ExampleWndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 }
 ```
 
-### Example 4 – Rounding the corners of a menu with a small radius - C++
+## # Example 4 – Rounding the corners of a menu with a small radius - C++
 
 By default, menus are pop-up windows, which do not get rounded. If your app creates a custom menu and you want it to follow the rounding policy of other standard menus, you can call the API to let the system know that this window should be rounded, even though it doesn't appear to match the default rounding policy.
 
@@ -243,8 +243,8 @@ HWND CreateCustomMenu()
     {
         // Make sure we round the window, using the small radius 
         // because menus are auxiliary UI.
-        DWM_WINDOW_CORNER_PREFERENCE preference = DWMWCP_ROUNDSMALL;
-        DwmSetWindowAttribute(hWnd, DWMWA_WINDOW_CORNER_PREFERENCE, &preference, sizeof(preference));
+        DWM*WINDOW*CORNER*PREFERENCE preference = DWMWCP*ROUNDSMALL;
+        DwmSetWindowAttribute(hWnd, DWMWA*WINDOW*CORNER_PREFERENCE, &preference, sizeof(preference));
     }
 
     return hWnd;

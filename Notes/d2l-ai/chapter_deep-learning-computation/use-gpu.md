@@ -1,7 +1,7 @@
 # GPU
-:label:`sec_use_gpu`
+:label:`sec*use*gpu`
 
-在 :numref:`tab_intro_decade`中，
+在 :numref:`tab*intro*decade`中，
 我们回顾了过去20年计算能力的快速增长。
 简而言之，自2000年以来，GPU性能每十年增长1000倍。
 
@@ -15,7 +15,7 @@
 当这些准备工作完成，就可以使用`nvidia-smi`命令来(**查看显卡信息。**)
 
 ```{.python .input}
-#@tab all
+# @tab all
 !nvidia-smi
 ```
 
@@ -74,7 +74,7 @@
 本书的其他章节大都不需要多个GPU，
 而本节只是为了展示数据如何在不同的设备之间传递。
 
-## [**计算设备**]
+# # [**计算设备**]
 
 我们可以指定用于存储和计算的设备，如CPU和GPU。
 默认情况下，张量是在内存中创建的，然后使用CPU计算它。
@@ -119,7 +119,7 @@ npx.cpu(), npx.gpu(), npx.gpu(1)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 import torch
 from torch import nn
 
@@ -127,14 +127,14 @@ torch.device('cpu'), torch.device('cuda'), torch.device('cuda:1')
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 import tensorflow as tf
 
 tf.device('/CPU:0'), tf.device('/GPU:0'), tf.device('/GPU:1')
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 import paddle
 from paddle import nn
 
@@ -148,17 +148,17 @@ npx.num_gpus()
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 torch.cuda.device_count()
 ```
 
 ```{.python .input}
-#@tab tensorflow
-len(tf.config.experimental.list_physical_devices('GPU'))
+# @tab tensorflow
+len(tf.config.experimental.list*physical*devices('GPU'))
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 paddle.device.cuda.device_count()
 ```
 
@@ -166,72 +166,72 @@ paddle.device.cuda.device_count()
 [**这两个函数允许我们在不存在所需所有GPU的情况下运行代码。**]
 
 ```{.python .input}
-def try_gpu(i=0):  #@save
+def try_gpu(i=0):  # @save
     """如果存在，则返回gpu(i)，否则返回cpu()"""
     return npx.gpu(i) if npx.num_gpus() >= i + 1 else npx.cpu()
 
-def try_all_gpus():  #@save
+def try*all*gpus():  # @save
     """返回所有可用的GPU，如果没有GPU，则返回[cpu()]"""
     devices = [npx.gpu(i) for i in range(npx.num_gpus())]
     return devices if devices else [npx.cpu()]
 
-try_gpu(), try_gpu(10), try_all_gpus()
+try*gpu(), try*gpu(10), try*all*gpus()
 ```
 
 ```{.python .input}
-#@tab pytorch
-def try_gpu(i=0):  #@save
+# @tab pytorch
+def try_gpu(i=0):  # @save
     """如果存在，则返回gpu(i)，否则返回cpu()"""
     if torch.cuda.device_count() >= i + 1:
         return torch.device(f'cuda:{i}')
     return torch.device('cpu')
 
-def try_all_gpus():  #@save
+def try*all*gpus():  # @save
     """返回所有可用的GPU，如果没有GPU，则返回[cpu(),]"""
     devices = [torch.device(f'cuda:{i}')
              for i in range(torch.cuda.device_count())]
     return devices if devices else [torch.device('cpu')]
 
-try_gpu(), try_gpu(10), try_all_gpus()
+try*gpu(), try*gpu(10), try*all*gpus()
 ```
 
 ```{.python .input}
-#@tab tensorflow
-def try_gpu(i=0):  #@save
+# @tab tensorflow
+def try_gpu(i=0):  # @save
     """如果存在，则返回gpu(i)，否则返回cpu()"""
-    if len(tf.config.experimental.list_physical_devices('GPU')) >= i + 1:
+    if len(tf.config.experimental.list*physical*devices('GPU')) >= i + 1:
         return tf.device(f'/GPU:{i}')
     return tf.device('/CPU:0')
 
-def try_all_gpus():  #@save
+def try*all*gpus():  # @save
     """返回所有可用的GPU，如果没有GPU，则返回[cpu(),]"""
-    num_gpus = len(tf.config.experimental.list_physical_devices('GPU'))
+    num*gpus = len(tf.config.experimental.list*physical_devices('GPU'))
     devices = [tf.device(f'/GPU:{i}') for i in range(num_gpus)]
     return devices if devices else [tf.device('/CPU:0')]
 
-try_gpu(), try_gpu(10), try_all_gpus()
+try*gpu(), try*gpu(10), try*all*gpus()
 ```
 
 ```{.python .input}
-#@tab paddle
-#@save
+# @tab paddle
+# @save
 def try_gpu(i=0):  
     """如果存在，则返回gpu(i)，否则返回cpu()。"""
     if paddle.device.cuda.device_count() >= i + 1:
         return paddle.CUDAPlace(i)
     return paddle.CPUPlace()
 
-#@save
-def try_all_gpus():  
+# @save
+def try*all*gpus():  
     """返回所有可用的GPU，如果没有GPU，则返回[cpu(),]。"""
     devices = [paddle.CUDAPlace(i)
                for i in range(paddle.device.cuda.device_count())]
     return devices if devices else paddle.CPUPlace()
 
-try_gpu(),try_gpu(10),try_all_gpus()
+try*gpu(),try*gpu(10),try*all*gpus()
 ```
 
-## 张量与GPU
+# # 张量与GPU
 
 我们可以[**查询张量所在的设备。**]
 默认情况下，张量是在CPU上创建的。
@@ -242,19 +242,19 @@ x.ctx
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 x = torch.tensor([1, 2, 3])
 x.device
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 x = tf.constant([1, 2, 3])
 x.device
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 x = paddle.to_tensor([1, 2, 3])
 x.place
 ```
@@ -265,7 +265,7 @@ x.place
 我们需要确保两个张量都位于同一个设备上，
 否则框架将不知道在哪里存储结果，甚至不知道在哪里执行计算。
 
-### [**存储在GPU上**]
+## # [**存储在GPU上**]
 
 有几种方法可以在GPU上存储张量。
 例如，我们可以在创建张量时指定存储设备。接
@@ -280,21 +280,21 @@ X
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 X = torch.ones(2, 3, device=try_gpu())
 X
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 with try_gpu():
     X = tf.ones((2, 3))
 X
 ```
 
 ```{.python .input}
-#@tab paddle
-X = paddle.to_tensor(paddle.ones(shape=[2, 3]), place=try_gpu())
+# @tab paddle
+X = paddle.to*tensor(paddle.ones(shape=[2, 3]), place=try*gpu())
 X
 ```
 
@@ -306,25 +306,25 @@ Y
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 Y = torch.rand(2, 3, device=try_gpu(1))
 Y
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 with try_gpu(1):
     Y = tf.random.uniform((2, 3))
 Y
 ```
 
 ```{.python .input}
-#@tab paddle
-Y = paddle.to_tensor(paddle.rand([2, 3]), place=try_gpu(1))
+# @tab paddle
+Y = paddle.to*tensor(paddle.rand([2, 3]), place=try*gpu(1))
 Y
 ```
 
-### 复制
+## # 复制
 
 如果我们[**要计算`X + Y`，我们需要决定在哪里执行这个操作**]。
 例如，如 :numref:`fig_copyto`所示，
@@ -344,14 +344,14 @@ print(Z)
 ```
 
 ```{.python .input}
-#@tab pytorch, paddle
+# @tab pytorch, paddle
 Z = X.cuda(1)
 print(X)
 print(Z)
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 with try_gpu(1):
     Z = X
 print(X)
@@ -361,7 +361,7 @@ print(Z)
 [**现在数据在同一个GPU上（`Z`和`Y`都在），我们可以将它们相加。**]
 
 ```{.python .input}
-#@tab all
+# @tab all
 Y + Z
 ```
 
@@ -371,9 +371,9 @@ Y + Z
 即使该变量已经存在于目标设备（第二个GPU）上，
 它仍将被复制并保存在新分配的显存中。
 有时，我们只想在变量存在于不同设备中时进行复制。
-在这种情况下，我们可以调用`as_in_ctx`。
+在这种情况下，我们可以调用`as*in*ctx`。
 如果变量已经存在于指定的设备中，则这不会进行任何操作。
-除非我们特别想创建一个复制，否则选择`as_in_ctx`方法。
+除非我们特别想创建一个复制，否则选择`as*in*ctx`方法。
 :end_tab:
 
 :begin_tab:`pytorch`
@@ -389,22 +389,22 @@ Y + Z
 :end_tab:
 
 ```{.python .input}
-Z.as_in_ctx(try_gpu(1)) is Z
+Z.as*in*ctx(try_gpu(1)) is Z
 ```
 
 ```{.python .input}
-#@tab pytorch, paddle
+# @tab pytorch, paddle
 Z.cuda(1) is Z
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 with try_gpu(1):
     Z2 = Z
 Z2 is Z
 ```
 
-### 旁注
+## # 旁注
 
 人们使用GPU来进行机器学习，因为单个GPU相对运行速度快。
 但是在设备（CPU、GPU和其他机器）之间传输数据比计算慢得多。
@@ -423,7 +423,7 @@ Z2 is Z
 这会导致额外的传输开销。
 更糟糕的是，它现在受制于全局解释器锁，使得一切都得等待Python完成。
 
-## [**神经网络与GPU**]
+# # [**神经网络与GPU**]
 
 类似地，神经网络模型可以指定设备。
 下面的代码将模型参数放在GPU上。
@@ -435,13 +435,13 @@ net.initialize(ctx=try_gpu())
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 net = nn.Sequential(nn.Linear(3, 1))
 net = net.to(device=try_gpu())
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 strategy = tf.distribute.MirroredStrategy()
 with strategy.scope():
     net = tf.keras.models.Sequential([
@@ -449,7 +449,7 @@ with strategy.scope():
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 net = nn.Sequential(nn.Linear(3, 1))
 net=net.to(try_gpu())
 ```
@@ -461,7 +461,7 @@ net=net.to(try_gpu())
 当输入为GPU上的张量时，模型将在同一GPU上计算结果。
 
 ```{.python .input}
-#@tab all
+# @tab all
 net(X)
 ```
 
@@ -472,17 +472,17 @@ net[0].weight.data().ctx
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 net[0].weight.data.device
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 net.layers[0].weights[0].device, net.layers[0].weights[1].device
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 net[0].weight.place
 ```
 
@@ -490,13 +490,13 @@ net[0].weight.place
 我们就可以有效地学习模型。
 在下面的章节中，我们将看到几个这样的例子。
 
-## 小结
+# # 小结
 
 * 我们可以指定用于存储和计算的设备，例如CPU或GPU。默认情况下，数据在主内存中创建，然后使用CPU进行计算。
 * 深度学习框架要求计算的所有输入数据都在同一设备上，无论是CPU还是GPU。
 * 不经意地移动数据可能会显著降低性能。一个典型的错误如下：计算GPU上每个小批量的损失，并在命令行中将其报告给用户（或将其记录在NumPy `ndarray`中）时，将触发全局解释器锁，从而使所有GPU阻塞。最好是为GPU内部的日志分配内存，并且只移动较大的日志。
 
-## 练习
+# # 练习
 
 1. 尝试一个计算量更大的任务，比如大矩阵的乘法，看看CPU和GPU之间的速度差异。再试一个计算量很小的任务呢？
 1. 我们应该如何在GPU上读写模型参数？

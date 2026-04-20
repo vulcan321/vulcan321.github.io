@@ -47,7 +47,7 @@ net(X)  # Forward computation
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 import torch
 from torch import nn
 
@@ -57,7 +57,7 @@ net(X)
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 import tensorflow as tf
 import numpy as np
 
@@ -71,7 +71,7 @@ X = tf.random.uniform((2, 4))
 net(X)
 ```
 
-## Parameter Access
+# # Parameter Access
 
 Let us start with how to access parameters
 from the models that you already know.
@@ -87,12 +87,12 @@ print(net[1].params)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 print(net[2].state_dict())
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 print(net.layers[2].weights)
 ```
 
@@ -108,7 +108,7 @@ each layer's parameters,
 even in a network containing hundreds of layers.
 
 
-### Targeted Parameters
+## # Targeted Parameters
 
 Note that each parameter is represented
 as an instance of the parameter class.
@@ -128,17 +128,17 @@ print(net[1].bias.data())
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 print(type(net[2].bias))
 print(net[2].bias)
 print(net[2].bias.data)
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 print(type(net.layers[2].weights[1]))
 print(net.layers[2].weights[1])
-print(tf.convert_to_tensor(net.layers[2].weights[1]))
+print(tf.convert*to*tensor(net.layers[2].weights[1]))
 ```
 
 :begin_tab:`mxnet,pytorch`
@@ -155,11 +155,11 @@ net[1].weight.grad()
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 net[2].weight.grad == None
 ```
 
-### All Parameters at Once
+## # All Parameters at Once
 
 When we need to perform operations on all parameters,
 accessing them one-by-one can grow tedious.
@@ -175,13 +175,13 @@ print(net.collect_params())
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 print(*[(name, param.shape) for name, param in net[0].named_parameters()])
 print(*[(name, param.shape) for name, param in net.named_parameters()])
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 print(net.layers[1].weights)
 print(net.get_weights())
 ```
@@ -189,20 +189,20 @@ print(net.get_weights())
 This provides us with another way of accessing the parameters of the network as follows.
 
 ```{.python .input}
-net.collect_params()['dense1_bias'].data()
+net.collect*params()['dense1*bias'].data()
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 net.state_dict()['2.bias'].data
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 net.get_weights()[1]
 ```
 
-### Collecting Parameters from Nested Blocks
+## # Collecting Parameters from Nested Blocks
 
 Let us see how the parameter naming conventions work
 if we nest multiple blocks inside each other.
@@ -232,7 +232,7 @@ rgnet(X)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 def block1():
     return nn.Sequential(nn.Linear(4, 8), nn.ReLU(),
                          nn.Linear(8, 4), nn.ReLU())
@@ -249,7 +249,7 @@ rgnet(X)
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 def block1(name):
     return tf.keras.Sequential([
         tf.keras.layers.Flatten(),
@@ -278,12 +278,12 @@ print(rgnet.collect_params())
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 print(rgnet)
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 print(rgnet.summary())
 ```
 
@@ -300,20 +300,20 @@ rgnet[0][1][0].bias.data()
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 rgnet[0][1][0].bias.data
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 rgnet.layers[0].layers[1].layers[1].weights[1]
 ```
 
-## Parameter Initialization
+# # Parameter Initialization
 
 Now that we know how to access the parameters,
 let us look at how to initialize them properly.
-We discussed the need for proper initialization in :numref:`sec_numerical_stability`.
+We discussed the need for proper initialization in :numref:`sec*numerical*stability`.
 The deep learning framework provides default random initializations to its layers.
 However, we often want to initialize our weights
 according to various other protocols. The framework provides most commonly
@@ -338,7 +338,7 @@ By default, Keras initializes weight matrices uniformly by drawing from a range 
 TensorFlow provides a variety of initialization methods both in the root module and the `keras.initializers` module.
 :end_tab:
 
-### Built-in Initialization
+## # Built-in Initialization
 
 Let us begin by calling on built-in initializers.
 The code below initializes all weight parameters
@@ -353,7 +353,7 @@ net[0].weight.data()[0]
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 def init_normal(m):
     if type(m) == nn.Linear:
         nn.init.normal_(m.weight, mean=0, std=0.01)
@@ -363,13 +363,13 @@ net[0].weight.data[0], net[0].bias.data[0]
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 net = tf.keras.models.Sequential([
     tf.keras.layers.Flatten(),
     tf.keras.layers.Dense(
         4, activation=tf.nn.relu,
-        kernel_initializer=tf.random_normal_initializer(mean=0, stddev=0.01),
-        bias_initializer=tf.zeros_initializer()),
+        kernel*initializer=tf.random*normal_initializer(mean=0, stddev=0.01),
+        bias*initializer=tf.zeros*initializer()),
     tf.keras.layers.Dense(1)])
 
 net(X)
@@ -385,7 +385,7 @@ net[0].weight.data()[0]
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 def init_constant(m):
     if type(m) == nn.Linear:
         nn.init.constant_(m.weight, 1)
@@ -395,13 +395,13 @@ net[0].weight.data[0], net[0].bias.data[0]
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 net = tf.keras.models.Sequential([
     tf.keras.layers.Flatten(),
     tf.keras.layers.Dense(
         4, activation=tf.nn.relu,
         kernel_initializer=tf.keras.initializers.Constant(1),
-        bias_initializer=tf.zeros_initializer()),
+        bias*initializer=tf.zeros*initializer()),
     tf.keras.layers.Dense(1),
 ])
 
@@ -423,10 +423,10 @@ print(net[1].weight.data())
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 def xavier(m):
     if type(m) == nn.Linear:
-        torch.nn.init.xavier_uniform_(m.weight)
+        torch.nn.init.xavier*uniform*(m.weight)
 def init_42(m):
     if type(m) == nn.Linear:
         torch.nn.init.constant_(m.weight, 42)
@@ -438,7 +438,7 @@ print(net[2].weight.data)
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 net = tf.keras.models.Sequential([
     tf.keras.layers.Flatten(),
     tf.keras.layers.Dense(
@@ -454,7 +454,7 @@ print(net.layers[1].weights[0])
 print(net.layers[2].weights[0])
 ```
 
-### Custom Initialization
+## # Custom Initialization
 
 Sometimes, the initialization methods we need
 are not provided by the deep learning framework.
@@ -473,7 +473,7 @@ $$
 
 :begin_tab:`mxnet`
 Here we define a subclass of the `Initializer` class.
-Usually, we only need to implement the `_init_weight` function
+Usually, we only need to implement the `*init*weight` function
 which takes a tensor argument (`data`)
 and assigns to it the desired initialized values.
 :end_tab:
@@ -483,13 +483,13 @@ Again, we implement a `my_init` function to apply to `net`.
 :end_tab:
 
 :begin_tab:`tensorflow`
-Here we define a subclass of `Initializer` and implement the `__call__`
+Here we define a subclass of `Initializer` and implement the `**call**`
 function that return a desired tensor given the shape and data type.
 :end_tab:
 
 ```{.python .input}
 class MyInit(init.Initializer):
-    def _init_weight(self, name, data):
+    def *init*weight(self, name, data):
         print('Init', name, data.shape)
         data[:] = np.random.uniform(-10, 10, data.shape)
         data *= np.abs(data) >= 5
@@ -499,7 +499,7 @@ net[0].weight.data()[:2]
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 def my_init(m):
     if type(m) == nn.Linear:
         print("Init", *[(name, param.shape) 
@@ -512,9 +512,9 @@ net[0].weight[:2]
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 class MyInit(tf.keras.initializers.Initializer):
-    def __call__(self, shape, dtype=None):
+    def **call**(self, shape, dtype=None):
         return tf.random.uniform(shape, dtype=dtype)
 
 net = tf.keras.models.Sequential([
@@ -540,14 +540,14 @@ net[0].weight.data()[0]
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 net[0].weight.data[:] += 1
 net[0].weight.data[0, 0] = 42
 net[0].weight.data[0]
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 net.layers[1].weights[0][:].assign(net.layers[1].weights[0] + 1)
 net.layers[1].weights[0][0, 0].assign(42)
 net.layers[1].weights[0]
@@ -560,7 +560,7 @@ you need to use `set_data` to avoid confusing
 the automatic differentiation mechanics.
 :end_tab:
 
-## Tied Parameters
+# # Tied Parameters
 
 Often, we want to share parameters across multiple layers.
 Let us see how to do this elegantly.
@@ -591,7 +591,7 @@ print(net[1].weight.data()[0] == net[2].weight.data()[0])
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 # We need to give the shared layer a name so that we can refer to its
 # parameters
 shared = nn.Linear(8, 8)
@@ -609,7 +609,7 @@ print(net[2].weight.data[0] == net[4].weight.data[0])
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 # tf.keras behaves a bit differently. It removes the duplicate layer
 # automatically
 shared = tf.keras.layers.Dense(4, activation=tf.nn.relu)
@@ -657,15 +657,15 @@ and the third hidden layer (i.e. the fifth neural network layer) are added toget
 during backpropagation.
 :end_tab:
 
-## Summary
+# # Summary
 
 * We have several ways to access, initialize, and tie model parameters.
 * We can use custom initialization.
 
 
-## Exercises
+# # Exercises
 
-1. Use the `FancyMLP` model defined in :numref:`sec_model_construction` and access the parameters of the various layers.
+1. Use the `FancyMLP` model defined in :numref:`sec*model*construction` and access the parameters of the various layers.
 1. Look at the initialization module document to explore different initializers.
 1. Construct an MLP containing a shared parameter layer and train it. During the training process, observe the model parameters and gradients of each layer.
 1. Why is sharing parameters a good idea?

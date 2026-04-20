@@ -2,7 +2,7 @@
 
 [![Build Status](http://ci.d2l.ai/job/d2l-zh/job/master/badge/icon)](http://ci.d2l.ai/job/d2l-zh/job/master/)
 
-[第二版：zh.D2L.ai](https://zh.d2l.ai)  | [第一版：zh-v1.D2L.ai](https://zh-v1.d2l.ai/) |  安装和使用书中源代码： [第二版](https://zh.d2l.ai/chapter_installation/index.html) [第一版](https://zh-v1.d2l.ai/chapter_prerequisite/install.html)
+[第二版：zh.D2L.ai](https://zh.d2l.ai)  | [第一版：zh-v1.D2L.ai](https://zh-v1.d2l.ai/) |  安装和使用书中源代码： [第二版](https://zh.d2l.ai/chapter*installation/index.html) [第一版](https://zh-v1.d2l.ai/chapter*prerequisite/install.html)
 
 <h5 align="center"><i>理解深度学习的最佳方法是学以致用。</i></h5>
 
@@ -38,17 +38,17 @@
 }
 ```
 
-## 本书的英文版
+# # 本书的英文版
 
 虽然纸质书已出版，但深度学习领域依然在迅速发展。为了得到来自更广泛的英文开源社区的帮助，从而提升本书质量，本书的新版将继续用英文编写，并搬回中文版。
 
 欢迎关注本书的[英文开源项目](https://github.com/d2l-ai/d2l-en)。
 
-## 中英文教学资源
+# # 中英文教学资源
 
 加州大学伯克利分校 2019 年春学期 [*Introduction to Deep Learning* 课程](http://courses.d2l.ai/berkeley-stat-157/index.html)教材（同时提供含教学视频地址的[中文版课件](https://github.com/d2l-ai/berkeley-stat-157/tree/master/slides-zh)）。
 
-## 学术界推荐
+# # 学术界推荐
 
 > <p>"Dive into this book if you want to dive into deep learning!"</p>
 > <b>&mdash; 韩家炜，ACM 院士、IEEE 院士，美国伊利诺伊大学香槟分校计算机系 Michael Aiken Chair 教授</b>
@@ -62,7 +62,7 @@
 > <p>"这本书可以帮助深度学习实践者快速提升自己的能力。"</p>
 > <b>&mdash; 张潼，ASA 院士、IMS 院士，香港科技大学计算机系和数学系教授</b>
 
-## 工业界推荐
+# # 工业界推荐
 
 > <p>"一本优秀的深度学习教材，值得任何想了解深度学习何以引爆人工智能革命的人关注。"</p>
 > <b>&mdash; 黄仁勋，NVIDIA创始人 & CEO</b>
@@ -76,8 +76,8 @@
 > <p>"《动手学深度学习》是一本很容易让学习者上瘾的书。"</p>
 > <b>&mdash; 沈强，将门创投创始合伙人</b>
 
-## 贡献
+# # 贡献
 
 感谢[社区贡献者们](https://github.com/d2l-ai/d2l-zh/graphs/contributors)为每一位读者改进这本开源书。
 
-[如何贡献](https://zh.d2l.ai/chapter_appendix-tools-for-deep-learning/contributing.html) | [致谢](https://zh.d2l.ai/chapter_preface/index.html) | [讨论或报告问题](https://discuss.d2l.ai/c/chinese-version/16) | [其他](INFO.md)
+[如何贡献](https://zh.d2l.ai/chapter*appendix-tools-for-deep-learning/contributing.html) | [致谢](https://zh.d2l.ai/chapter*preface/index.html) | [讨论或报告问题](https://discuss.d2l.ai/c/chinese-version/16) | [其他](INFO.md)

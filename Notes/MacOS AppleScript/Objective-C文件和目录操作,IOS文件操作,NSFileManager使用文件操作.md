@@ -68,7 +68,7 @@ NSFileManager常用的文件方法：
 //  Copyright (c) 2013年 swinglife. All rights reserved.
 //
  
-#import <Foundation/Foundation.h>
+# import <Foundation/Foundation.h>
  
 int main(int argc, const char * argv[])
 {
@@ -161,7 +161,7 @@ NSFileManager常用的目录方法
 //  Copyright (c) 2013年 swinglife. All rights reserved.
 //
  
-#import <Foundation/Foundation.h>
+# import <Foundation/Foundation.h>
  
 int main(int argc, const char * argv[])
 {

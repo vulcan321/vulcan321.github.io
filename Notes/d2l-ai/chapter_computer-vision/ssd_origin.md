@@ -1,7 +1,7 @@
 # Single Shot Multibox Detection
 :label:`sec_ssd`
 
-In :numref:`sec_bbox`--:numref:`sec_object-detection-dataset`,
+In :numref:`sec*bbox`--:numref:`sec*object-detection-dataset`,
 we introduced bounding boxes, anchor boxes,
 multiscale object detection, and the dataset for object detection.
 Now we are ready to use such background
@@ -16,7 +16,7 @@ and implementation details in this section
 are also applicable to other models.
 
 
-## Model
+# # Model
 
 :numref:`fig_ssd` provides an overview of 
 the design of single-shot multibox detection. 
@@ -79,7 +79,7 @@ the class and bounding box prediction.
 
 
 
-### Class Prediction Layer
+## # Class Prediction Layer
 
 Let the number of object classes be $q$.
 Then anchor boxes have $q+1$ classes,
@@ -122,7 +122,7 @@ the class $j$ ($0 \leq j \leq q$)
 for the anchor box $i$ ($0 \leq i < a$).
 
 Below we define such a class prediction layer,
-specifying $a$ and $q$ via arguments `num_anchors` and `num_classes`, respectively.
+specifying $a$ and $q$ via arguments `num*anchors` and `num*classes`, respectively.
 This layer uses a $3\times3$ convolutional layer with a
 padding of 1.
 The width and height of the input and output of this
@@ -136,13 +136,13 @@ from mxnet.gluon import nn
 
 npx.set_np()
 
-def cls_predictor(num_anchors, num_classes):
-    return nn.Conv2D(num_anchors * (num_classes + 1), kernel_size=3,
+def cls*predictor(num*anchors, num_classes):
+    return nn.Conv2D(num*anchors * (num*classes + 1), kernel_size=3,
                      padding=1)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 %matplotlib inline
 from d2l import torch as d2l
 import torch
@@ -150,29 +150,29 @@ import torchvision
 from torch import nn
 from torch.nn import functional as F
 
-def cls_predictor(num_inputs, num_anchors, num_classes):
-    return nn.Conv2d(num_inputs, num_anchors * (num_classes + 1),
+def cls*predictor(num*inputs, num*anchors, num*classes):
+    return nn.Conv2d(num*inputs, num*anchors * (num_classes + 1),
                      kernel_size=3, padding=1)
 ```
 
-### Bounding Box Prediction Layer
+## # Bounding Box Prediction Layer
 
 The design of the bounding box prediction layer is similar to that of the class prediction layer.
 The only difference lies in the number of outputs for each anchor box: 
 here we need to predict four offsets rather than $q+1$ classes.
 
 ```{.python .input}
-def bbox_predictor(num_anchors):
-    return nn.Conv2D(num_anchors * 4, kernel_size=3, padding=1)
+def bbox*predictor(num*anchors):
+    return nn.Conv2D(num*anchors * 4, kernel*size=3, padding=1)
 ```
 
 ```{.python .input}
-#@tab pytorch
-def bbox_predictor(num_inputs, num_anchors):
-    return nn.Conv2d(num_inputs, num_anchors * 4, kernel_size=3, padding=1)
+# @tab pytorch
+def bbox*predictor(num*inputs, num_anchors):
+    return nn.Conv2d(num*inputs, num*anchors * 4, kernel_size=3, padding=1)
 ```
 
-### Concatenating Predictions for Multiple Scales
+## # Concatenating Predictions for Multiple Scales
 
 As we mentioned, single-shot multibox detection
 uses multiscale feature maps to generate anchor boxes and predict their classes and offsets.
@@ -213,7 +213,7 @@ Y1.shape, Y2.shape
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 def forward(x, block):
     return block(x)
 
@@ -248,7 +248,7 @@ def concat_preds(preds):
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 def flatten_pred(pred):
     return torch.flatten(pred.permute(0, 2, 3, 1), start_dim=1)
 
@@ -262,14 +262,14 @@ in channels, heights, and widths,
 we can still concatenate these two prediction outputs at two different scales for the same minibatch.
 
 ```{.python .input}
-#@tab all
+# @tab all
 concat_preds([Y1, Y2]).shape
 ```
 
-### Downsampling Block
+## # Downsampling Block
 
 In order to detect objects at multiple scales,
-we define the following downsampling block `down_sample_blk` that
+we define the following downsampling block `down*sample*blk` that
 halves the height and width of input feature maps.
 In fact,
 this block applies the design of VGG blocks
@@ -287,26 +287,26 @@ has a $6\times6$ receptive field on the input.
 Therefore, the downsampling block enlarges the receptive field of each unit in its output feature maps.
 
 ```{.python .input}
-def down_sample_blk(num_channels):
+def down*sample*blk(num_channels):
     blk = nn.Sequential()
     for _ in range(2):
-        blk.add(nn.Conv2D(num_channels, kernel_size=3, padding=1),
-                nn.BatchNorm(in_channels=num_channels),
+        blk.add(nn.Conv2D(num*channels, kernel*size=3, padding=1),
+                nn.BatchNorm(in*channels=num*channels),
                 nn.Activation('relu'))
     blk.add(nn.MaxPool2D(2))
     return blk
 ```
 
 ```{.python .input}
-#@tab pytorch
-def down_sample_blk(in_channels, out_channels):
+# @tab pytorch
+def down*sample*blk(in*channels, out*channels):
     blk = []
     for _ in range(2):
-        blk.append(nn.Conv2d(in_channels, out_channels,
+        blk.append(nn.Conv2d(in*channels, out*channels,
                              kernel_size=3, padding=1))
         blk.append(nn.BatchNorm2d(out_channels))
         blk.append(nn.ReLU())
-        in_channels = out_channels
+        in*channels = out*channels
     blk.append(nn.MaxPool2d(2))
     return nn.Sequential(*blk)
 ```
@@ -314,15 +314,15 @@ def down_sample_blk(in_channels, out_channels):
 In the following example, our constructed downsampling block changes the number of input channels and halves the height and width of the input feature maps.
 
 ```{.python .input}
-forward(np.zeros((2, 3, 20, 20)), down_sample_blk(10)).shape
+forward(np.zeros((2, 3, 20, 20)), down*sample*blk(10)).shape
 ```
 
 ```{.python .input}
-#@tab pytorch
-forward(torch.zeros((2, 3, 20, 20)), down_sample_blk(3, 10)).shape
+# @tab pytorch
+forward(torch.zeros((2, 3, 20, 20)), down*sample*blk(3, 10)).shape
 ```
 
-### Base Network Block
+## # Base Network Block
 
 The base network block is used to extract features from input images.
 For simplicity,
@@ -336,25 +336,25 @@ this base network block outputs $32 \times 32$ feature maps ($256/2^3=32$).
 def base_net():
     blk = nn.Sequential()
     for num_filters in [16, 32, 64]:
-        blk.add(down_sample_blk(num_filters))
+        blk.add(down*sample*blk(num_filters))
     return blk
 
 forward(np.zeros((2, 3, 256, 256)), base_net()).shape
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 def base_net():
     blk = []
     num_filters = [3, 16, 32, 64]
     for i in range(len(num_filters) - 1):
-        blk.append(down_sample_blk(num_filters[i], num_filters[i+1]))
+        blk.append(down*sample*blk(num*filters[i], num*filters[i+1]))
     return nn.Sequential(*blk)
 
 forward(torch.zeros((2, 3, 256, 256)), base_net()).shape
 ```
 
-### The Complete Model
+## # The Complete Model
 
 
 The complete
@@ -386,21 +386,21 @@ def get_blk(i):
     elif i == 4:
         blk = nn.GlobalMaxPool2D()
     else:
-        blk = down_sample_blk(128)
+        blk = down*sample*blk(128)
     return blk
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 def get_blk(i):
     if i == 0:
         blk = base_net()
     elif i == 1:
-        blk = down_sample_blk(64, 128)
+        blk = down*sample*blk(64, 128)
     elif i == 4:
         blk = nn.AdaptiveMaxPool2d((1,1))
     else:
-        blk = down_sample_blk(128, 128)
+        blk = down*sample*blk(128, 128)
     return blk
 ```
 
@@ -415,22 +415,22 @@ and (iii) classes and offsets predicted (based on `Y`)
 for these anchor boxes.
 
 ```{.python .input}
-def blk_forward(X, blk, size, ratio, cls_predictor, bbox_predictor):
+def blk*forward(X, blk, size, ratio, cls*predictor, bbox_predictor):
     Y = blk(X)
     anchors = d2l.multibox_prior(Y, sizes=size, ratios=ratio)
-    cls_preds = cls_predictor(Y)
-    bbox_preds = bbox_predictor(Y)
-    return (Y, anchors, cls_preds, bbox_preds)
+    cls*preds = cls*predictor(Y)
+    bbox*preds = bbox*predictor(Y)
+    return (Y, anchors, cls*preds, bbox*preds)
 ```
 
 ```{.python .input}
-#@tab pytorch
-def blk_forward(X, blk, size, ratio, cls_predictor, bbox_predictor):
+# @tab pytorch
+def blk*forward(X, blk, size, ratio, cls*predictor, bbox_predictor):
     Y = blk(X)
     anchors = d2l.multibox_prior(Y, sizes=size, ratios=ratio)
-    cls_preds = cls_predictor(Y)
-    bbox_preds = bbox_predictor(Y)
-    return (Y, anchors, cls_preds, bbox_preds)
+    cls*preds = cls*predictor(Y)
+    bbox*preds = bbox*predictor(Y)
+    return (Y, anchors, cls*preds, bbox*preds)
 ```
 
 Recall that 
@@ -443,7 +443,7 @@ In the above forward propagation,
 at each multiscale feature map block
 we pass in a list of two scale values
 via the `sizes` argument
-of the invoked `multibox_prior` function (described in :numref:`sec_anchor`).
+of the invoked `multibox*prior` function (described in :numref:`sec*anchor`).
 In the following,
 the interval between 0.2 and 1.05
 is split evenly
@@ -454,7 +454,7 @@ are given by
 $\sqrt{0.2 \times 0.37} = 0.272$, $\sqrt{0.37 \times 0.54} = 0.447$, and so on.
 
 ```{.python .input}
-#@tab all
+# @tab all
 sizes = [[0.2, 0.272], [0.37, 0.447], [0.54, 0.619], [0.71, 0.79],
          [0.88, 0.961]]
 ratios = [[1, 2, 0.5]] * 5
@@ -465,58 +465,58 @@ Now we can define the complete model `TinySSD` as follows.
 
 ```{.python .input}
 class TinySSD(nn.Block):
-    def __init__(self, num_classes, **kwargs):
-        super(TinySSD, self).__init__(**kwargs)
-        self.num_classes = num_classes
+    def **init**(self, num_classes, **kwargs):
+        super(TinySSD, self).**init**(**kwargs)
+        self.num*classes = num*classes
         for i in range(5):
-            # Equivalent to the assignment statement `self.blk_i = get_blk(i)`
-            setattr(self, f'blk_{i}', get_blk(i))
-            setattr(self, f'cls_{i}', cls_predictor(num_anchors, num_classes))
-            setattr(self, f'bbox_{i}', bbox_predictor(num_anchors))
+            # Equivalent to the assignment statement `self.blk*i = get*blk(i)`
+            setattr(self, f'blk*{i}', get*blk(i))
+            setattr(self, f'cls*{i}', cls*predictor(num*anchors, num*classes))
+            setattr(self, f'bbox*{i}', bbox*predictor(num_anchors))
 
     def forward(self, X):
-        anchors, cls_preds, bbox_preds = [None] * 5, [None] * 5, [None] * 5
+        anchors, cls*preds, bbox*preds = [None] * 5, [None] * 5, [None] * 5
         for i in range(5):
-            # Here `getattr(self, 'blk_%d' % i)` accesses `self.blk_i`
-            X, anchors[i], cls_preds[i], bbox_preds[i] = blk_forward(
+            # Here `getattr(self, 'blk*%d' % i)` accesses `self.blk*i`
+            X, anchors[i], cls*preds[i], bbox*preds[i] = blk_forward(
                 X, getattr(self, f'blk_{i}'), sizes[i], ratios[i],
-                getattr(self, f'cls_{i}'), getattr(self, f'bbox_{i}'))
+                getattr(self, f'cls*{i}'), getattr(self, f'bbox*{i}'))
         anchors = np.concatenate(anchors, axis=1)
-        cls_preds = concat_preds(cls_preds)
-        cls_preds = cls_preds.reshape(
-            cls_preds.shape[0], -1, self.num_classes + 1)
-        bbox_preds = concat_preds(bbox_preds)
-        return anchors, cls_preds, bbox_preds
+        cls*preds = concat*preds(cls_preds)
+        cls*preds = cls*preds.reshape(
+            cls*preds.shape[0], -1, self.num*classes + 1)
+        bbox*preds = concat*preds(bbox_preds)
+        return anchors, cls*preds, bbox*preds
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 class TinySSD(nn.Module):
-    def __init__(self, num_classes, **kwargs):
-        super(TinySSD, self).__init__(**kwargs)
-        self.num_classes = num_classes
-        idx_to_in_channels = [64, 128, 128, 128, 128]
+    def **init**(self, num_classes, **kwargs):
+        super(TinySSD, self).**init**(**kwargs)
+        self.num*classes = num*classes
+        idx*to*in_channels = [64, 128, 128, 128, 128]
         for i in range(5):
-            # Equivalent to the assignment statement `self.blk_i = get_blk(i)`
-            setattr(self, f'blk_{i}', get_blk(i))
-            setattr(self, f'cls_{i}', cls_predictor(idx_to_in_channels[i],
-                                                    num_anchors, num_classes))
-            setattr(self, f'bbox_{i}', bbox_predictor(idx_to_in_channels[i],
+            # Equivalent to the assignment statement `self.blk*i = get*blk(i)`
+            setattr(self, f'blk*{i}', get*blk(i))
+            setattr(self, f'cls*{i}', cls*predictor(idx*to*in_channels[i],
+                                                    num*anchors, num*classes))
+            setattr(self, f'bbox*{i}', bbox*predictor(idx*to*in_channels[i],
                                                       num_anchors))
 
     def forward(self, X):
-        anchors, cls_preds, bbox_preds = [None] * 5, [None] * 5, [None] * 5
+        anchors, cls*preds, bbox*preds = [None] * 5, [None] * 5, [None] * 5
         for i in range(5):
-            # Here `getattr(self, 'blk_%d' % i)` accesses `self.blk_i`
-            X, anchors[i], cls_preds[i], bbox_preds[i] = blk_forward(
+            # Here `getattr(self, 'blk*%d' % i)` accesses `self.blk*i`
+            X, anchors[i], cls*preds[i], bbox*preds[i] = blk_forward(
                 X, getattr(self, f'blk_{i}'), sizes[i], ratios[i],
-                getattr(self, f'cls_{i}'), getattr(self, f'bbox_{i}'))
+                getattr(self, f'cls*{i}'), getattr(self, f'bbox*{i}'))
         anchors = torch.cat(anchors, dim=1)
-        cls_preds = concat_preds(cls_preds)
-        cls_preds = cls_preds.reshape(
-            cls_preds.shape[0], -1, self.num_classes + 1)
-        bbox_preds = concat_preds(bbox_preds)
-        return anchors, cls_preds, bbox_preds
+        cls*preds = concat*preds(cls_preds)
+        cls*preds = cls*preds.reshape(
+            cls*preds.shape[0], -1, self.num*classes + 1)
+        bbox*preds = concat*preds(bbox_preds)
+        return anchors, cls*preds, bbox*preds
 ```
 
 We create a model instance
@@ -539,7 +539,7 @@ a total of $(32^2 + 16^2 + 8^2 + 4^2 + 1)\times 4 = 5444$ anchor boxes are gener
 net = TinySSD(num_classes=1)
 net.initialize()
 X = np.zeros((32, 3, 256, 256))
-anchors, cls_preds, bbox_preds = net(X)
+anchors, cls*preds, bbox*preds = net(X)
 
 print('output anchors:', anchors.shape)
 print('output class preds:', cls_preds.shape)
@@ -547,24 +547,24 @@ print('output bbox preds:', bbox_preds.shape)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 net = TinySSD(num_classes=1)
 X = torch.zeros((32, 3, 256, 256))
-anchors, cls_preds, bbox_preds = net(X)
+anchors, cls*preds, bbox*preds = net(X)
 
 print('output anchors:', anchors.shape)
 print('output class preds:', cls_preds.shape)
 print('output bbox preds:', bbox_preds.shape)
 ```
 
-## Training
+# # Training
 
 Now we will explain 
 how to train the single shot multibox detection model
 for object detection.
 
 
-### Reading the Dataset and Initializing the Model
+## # Reading the Dataset and Initializing the Model
 
 To begin with,
 let us read 
@@ -572,9 +572,9 @@ the banana detection dataset
 described in :numref:`sec_object-detection-dataset`.
 
 ```{.python .input}
-#@tab all
+# @tab all
 batch_size = 32
-train_iter, _ = d2l.load_data_bananas(batch_size)
+train*iter, * = d2l.load*data*bananas(batch_size)
 ```
 
 There is only one class in the banana detection dataset. After defining the model,
@@ -582,19 +582,19 @@ we need to initialize its parameters and define
 the optimization algorithm.
 
 ```{.python .input}
-device, net = d2l.try_gpu(), TinySSD(num_classes=1)
+device, net = d2l.try*gpu(), TinySSD(num*classes=1)
 net.initialize(init=init.Xavier(), ctx=device)
 trainer = gluon.Trainer(net.collect_params(), 'sgd',
                         {'learning_rate': 0.2, 'wd': 5e-4})
 ```
 
 ```{.python .input}
-#@tab pytorch
-device, net = d2l.try_gpu(), TinySSD(num_classes=1)
+# @tab pytorch
+device, net = d2l.try*gpu(), TinySSD(num*classes=1)
 trainer = torch.optim.SGD(net.parameters(), lr=0.2, weight_decay=5e-4)
 ```
 
-### Defining Loss and Evaluation Functions
+## # Defining Loss and Evaluation Functions
 
 Object detection has two types of losses.
 The first loss concerns classes of anchor boxes:
@@ -608,7 +608,7 @@ this is a regression problem.
 For this regression problem,
 however,
 here we do not use the squared loss
-described in :numref:`subsec_normal_distribution_and_squared_loss`.
+described in :numref:`subsec*normal*distribution*and*squared_loss`.
 Instead,
 we use the $L_1$ norm loss,
 the absolute value of the difference between
@@ -625,23 +625,23 @@ to obtain the loss function for the model.
 cls_loss = gluon.loss.SoftmaxCrossEntropyLoss()
 bbox_loss = gluon.loss.L1Loss()
 
-def calc_loss(cls_preds, cls_labels, bbox_preds, bbox_labels, bbox_masks):
-    cls = cls_loss(cls_preds, cls_labels)
-    bbox = bbox_loss(bbox_preds * bbox_masks, bbox_labels * bbox_masks)
+def calc*loss(cls*preds, cls*labels, bbox*preds, bbox*labels, bbox*masks):
+    cls = cls*loss(cls*preds, cls_labels)
+    bbox = bbox*loss(bbox*preds * bbox*masks, bbox*labels * bbox_masks)
     return cls + bbox
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 cls_loss = nn.CrossEntropyLoss(reduction='none')
 bbox_loss = nn.L1Loss(reduction='none')
 
-def calc_loss(cls_preds, cls_labels, bbox_preds, bbox_labels, bbox_masks):
-    batch_size, num_classes = cls_preds.shape[0], cls_preds.shape[2]
-    cls = cls_loss(cls_preds.reshape(-1, num_classes),
-                   cls_labels.reshape(-1)).reshape(batch_size, -1).mean(dim=1)
-    bbox = bbox_loss(bbox_preds * bbox_masks,
-                     bbox_labels * bbox_masks).mean(dim=1)
+def calc*loss(cls*preds, cls*labels, bbox*preds, bbox*labels, bbox*masks):
+    batch*size, num*classes = cls*preds.shape[0], cls*preds.shape[2]
+    cls = cls*loss(cls*preds.reshape(-1, num_classes),
+                   cls*labels.reshape(-1)).reshape(batch*size, -1).mean(dim=1)
+    bbox = bbox*loss(bbox*preds * bbox_masks,
+                     bbox*labels * bbox*masks).mean(dim=1)
     return cls + bbox
 ```
 
@@ -654,34 +654,34 @@ from the generated anchor boxes and the
 predicted offsets for them.
 
 ```{.python .input}
-def cls_eval(cls_preds, cls_labels):
+def cls*eval(cls*preds, cls_labels):
     # Because the class prediction results are on the final dimension,
     # `argmax` needs to specify this dimension
     return float((cls_preds.argmax(axis=-1).astype(
-        cls_labels.dtype) == cls_labels).sum())
+        cls*labels.dtype) == cls*labels).sum())
 
-def bbox_eval(bbox_preds, bbox_labels, bbox_masks):
-    return float((np.abs((bbox_labels - bbox_preds) * bbox_masks)).sum())
+def bbox*eval(bbox*preds, bbox*labels, bbox*masks):
+    return float((np.abs((bbox*labels - bbox*preds) * bbox_masks)).sum())
 ```
 
 ```{.python .input}
-#@tab pytorch
-def cls_eval(cls_preds, cls_labels):
+# @tab pytorch
+def cls*eval(cls*preds, cls_labels):
     # Because the class prediction results are on the final dimension,
     # `argmax` needs to specify this dimension
     return float((cls_preds.argmax(dim=-1).type(
-        cls_labels.dtype) == cls_labels).sum())
+        cls*labels.dtype) == cls*labels).sum())
 
-def bbox_eval(bbox_preds, bbox_labels, bbox_masks):
-    return float((torch.abs((bbox_labels - bbox_preds) * bbox_masks)).sum())
+def bbox*eval(bbox*preds, bbox*labels, bbox*masks):
+    return float((torch.abs((bbox*labels - bbox*preds) * bbox_masks)).sum())
 ```
 
-### Training the Model
+## # Training the Model
 
 When training the model,
 we need to generate multiscale anchor boxes (`anchors`)
-and predict their classes (`cls_preds`) and offsets (`bbox_preds`) in the forward propagation.
-Then we label the classes (`cls_labels`) and offsets (`bbox_labels`) of such generated anchor boxes
+and predict their classes (`cls*preds`) and offsets (`bbox*preds`) in the forward propagation.
+Then we label the classes (`cls*labels`) and offsets (`bbox*labels`) of such generated anchor boxes
 based on the label information `Y`.
 Finally, we calculate the loss function
 using the predicted and labeled values
@@ -699,33 +699,33 @@ for epoch in range(num_epochs):
     metric = d2l.Accumulator(4)
     for features, target in train_iter:
         timer.start()
-        X = features.as_in_ctx(device)
-        Y = target.as_in_ctx(device)
+        X = features.as*in*ctx(device)
+        Y = target.as*in*ctx(device)
         with autograd.record():
             # Generate multiscale anchor boxes and predict their classes and
             # offsets
-            anchors, cls_preds, bbox_preds = net(X)
+            anchors, cls*preds, bbox*preds = net(X)
             # Label the classes and offsets of these anchor boxes
-            bbox_labels, bbox_masks, cls_labels = d2l.multibox_target(anchors,
+            bbox*labels, bbox*masks, cls*labels = d2l.multibox*target(anchors,
                                                                       Y)
             # Calculate the loss function using the predicted and labeled
             # values of the classes and offsets
-            l = calc_loss(cls_preds, cls_labels, bbox_preds, bbox_labels,
+            l = calc*loss(cls*preds, cls*labels, bbox*preds, bbox_labels,
                           bbox_masks)
         l.backward()
         trainer.step(batch_size)
-        metric.add(cls_eval(cls_preds, cls_labels), cls_labels.size,
-                   bbox_eval(bbox_preds, bbox_labels, bbox_masks),
+        metric.add(cls*eval(cls*preds, cls*labels), cls*labels.size,
+                   bbox*eval(bbox*preds, bbox*labels, bbox*masks),
                    bbox_labels.size)
-    cls_err, bbox_mae = 1 - metric[0] / metric[1], metric[2] / metric[3]
-    animator.add(epoch + 1, (cls_err, bbox_mae))
-print(f'class err {cls_err:.2e}, bbox mae {bbox_mae:.2e}')
-print(f'{len(train_iter._dataset) / timer.stop():.1f} examples/sec on '
+    cls*err, bbox*mae = 1 - metric[0] / metric[1], metric[2] / metric[3]
+    animator.add(epoch + 1, (cls*err, bbox*mae))
+print(f'class err {cls*err:.2e}, bbox mae {bbox*mae:.2e}')
+print(f'{len(train*iter.*dataset) / timer.stop():.1f} examples/sec on '
       f'{str(device)}')
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 num_epochs, timer = 20, d2l.Timer()
 animator = d2l.Animator(xlabel='epoch', xlim=[1, num_epochs],
                         legend=['class error', 'bbox mae'])
@@ -741,26 +741,26 @@ for epoch in range(num_epochs):
         X, Y = features.to(device), target.to(device)
         # Generate multiscale anchor boxes and predict their classes and
         # offsets
-        anchors, cls_preds, bbox_preds = net(X)
+        anchors, cls*preds, bbox*preds = net(X)
         # Label the classes and offsets of these anchor boxes
-        bbox_labels, bbox_masks, cls_labels = d2l.multibox_target(anchors, Y)
+        bbox*labels, bbox*masks, cls*labels = d2l.multibox*target(anchors, Y)
         # Calculate the loss function using the predicted and labeled values
         # of the classes and offsets
-        l = calc_loss(cls_preds, cls_labels, bbox_preds, bbox_labels,
+        l = calc*loss(cls*preds, cls*labels, bbox*preds, bbox_labels,
                       bbox_masks)
         l.mean().backward()
         trainer.step()
-        metric.add(cls_eval(cls_preds, cls_labels), cls_labels.numel(),
-                   bbox_eval(bbox_preds, bbox_labels, bbox_masks),
+        metric.add(cls*eval(cls*preds, cls*labels), cls*labels.numel(),
+                   bbox*eval(bbox*preds, bbox*labels, bbox*masks),
                    bbox_labels.numel())
-    cls_err, bbox_mae = 1 - metric[0] / metric[1], metric[2] / metric[3]
-    animator.add(epoch + 1, (cls_err, bbox_mae))
-print(f'class err {cls_err:.2e}, bbox mae {bbox_mae:.2e}')
+    cls*err, bbox*mae = 1 - metric[0] / metric[1], metric[2] / metric[3]
+    animator.add(epoch + 1, (cls*err, bbox*mae))
+print(f'class err {cls*err:.2e}, bbox mae {bbox*mae:.2e}')
 print(f'{len(train_iter.dataset) / timer.stop():.1f} examples/sec on '
       f'{str(device)}')
 ```
 
-## Prediction
+# # Prediction
 
 During prediction, 
 the goal is to detect all the objects of interest
@@ -778,7 +778,7 @@ X = np.expand_dims(feature.transpose(2, 0, 1), axis=0)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 X = torchvision.io.read_image('../img/banana.jpg').unsqueeze(0).float()
 img = X.squeeze(0).permute(1, 2, 0).long()
 ```
@@ -792,9 +792,9 @@ to remove similar predicted bounding boxes.
 
 ```{.python .input}
 def predict(X):
-    anchors, cls_preds, bbox_preds = net(X.as_in_ctx(device))
-    cls_probs = npx.softmax(cls_preds).transpose(0, 2, 1)
-    output = d2l.multibox_detection(cls_probs, bbox_preds, anchors)
+    anchors, cls*preds, bbox*preds = net(X.as*in*ctx(device))
+    cls*probs = npx.softmax(cls*preds).transpose(0, 2, 1)
+    output = d2l.multibox*detection(cls*probs, bbox_preds, anchors)
     idx = [i for i, row in enumerate(output[0]) if row[0] != -1]
     return output[0, idx]
 
@@ -802,12 +802,12 @@ output = predict(X)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 def predict(X):
     net.eval()
-    anchors, cls_preds, bbox_preds = net(X.to(device))
-    cls_probs = F.softmax(cls_preds, dim=2).permute(0, 2, 1)
-    output = d2l.multibox_detection(cls_probs, bbox_preds, anchors)
+    anchors, cls*preds, bbox*preds = net(X.to(device))
+    cls*probs = F.softmax(cls*preds, dim=2).permute(0, 2, 1)
+    output = d2l.multibox*detection(cls*probs, bbox_preds, anchors)
     idx = [i for i, row in enumerate(output[0]) if row[0] != -1]
     return output[0, idx]
 
@@ -835,7 +835,7 @@ display(img, output, threshold=0.9)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 def display(img, output, threshold):
     d2l.set_figsize((5, 5))
     fig = d2l.plt.imshow(img)
@@ -850,16 +850,16 @@ def display(img, output, threshold):
 display(img, output.cpu(), threshold=0.9)
 ```
 
-## Summary
+# # Summary
 
 * Single shot multibox detection is a multiscale object detection model. Via its base network and several multiscale feature map blocks, single-shot multibox detection generates a varying number of anchor boxes with different sizes, and detects varying-size objects by predicting classes and offsets of these anchor boxes (thus the bounding boxes).
 * When training the single-shot multibox detection model, the loss function is calculated based on the predicted and labeled values of the anchor box classes and offsets.
 
 
 
-## Exercises
+# # Exercises
 
-1. Can you improve the single-shot multibox detection by improving the loss function? For example, replace $L_1$ norm loss with smooth $L_1$ norm loss for the predicted offsets. This loss function uses a square function around zero for smoothness, which is controlled by the hyperparameter $\sigma$:
+1. Can you improve the single-shot multibox detection by improving the loss function? For example, replace $L*1$ norm loss with smooth $L*1$ norm loss for the predicted offsets. This loss function uses a square function around zero for smoothness, which is controlled by the hyperparameter $\sigma$:
 
 $$
 f(x) =
@@ -884,7 +884,7 @@ d2l.plt.legend();
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 def smooth_l1(data, scalar):
     out = []
     for i in data:
@@ -906,11 +906,11 @@ d2l.plt.legend();
 ```
 
 Besides, in the experiment we used cross-entropy loss for class prediction:
-denoting by $p_j$ the predicted probability for the ground-truth class $j$, the cross-entropy loss is $-\log p_j$. We can also use the focal loss
+denoting by $p*j$ the predicted probability for the ground-truth class $j$, the cross-entropy loss is $-\log p*j$. We can also use the focal loss
 :cite:`Lin.Goyal.Girshick.ea.2017`: given hyperparameters $\gamma > 0$
 and $\alpha > 0$, this loss is defined as:
 
-$$ - \alpha (1-p_j)^{\gamma} \log p_j.$$
+$$ - \alpha (1-p*j)^{\gamma} \log p*j.$$
 
 As we can see, increasing $\gamma$
 can effectively reduce the relative loss
@@ -930,7 +930,7 @@ d2l.plt.legend();
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 def focal_loss(gamma, x):
     return -(1 - x) ** gamma * torch.log(x)
 

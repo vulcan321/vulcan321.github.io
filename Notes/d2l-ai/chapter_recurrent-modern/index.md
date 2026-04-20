@@ -1,5 +1,5 @@
 # 现代循环神经网络
-:label:`chap_modern_rnn`
+:label:`chap*modern*rnn`
 
 前一章中我们介绍了循环神经网络的基础知识，
 这种网络可以更好地处理序列数据。

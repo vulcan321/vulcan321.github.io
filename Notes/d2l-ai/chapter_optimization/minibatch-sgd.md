@@ -1,5 +1,5 @@
 # 小批量随机梯度下降
-:label:`sec_minibatch_sgd`
+:label:`sec*minibatch*sgd`
 
 到目前为止，我们在基于梯度的学习方法中遇到了两个极端情况：
  :numref:`sec_gd`中使用完整数据集来计算梯度并更新参数，
@@ -8,7 +8,7 @@
 而由于CPU和GPU无法充分利用向量化，随机梯度下降并不特别“计算高效”。
 这暗示了两者之间可能有折中方案，这便涉及到*小批量随机梯度下降*（minibatch gradient descent）。
 
-## 向量化和缓存
+# # 向量化和缓存
 
 使用小批量的决策的核心是计算效率。
 当考虑与多个GPU和多台服务器并行处理时，这一点最容易被理解。在这种情况下，我们需要向每个GPU发送至少一张图像。
@@ -34,8 +34,8 @@
 举一个简单的例子：矩阵-矩阵乘法。
 比如$\mathbf{A} = \mathbf{B}\mathbf{C}$，我们有很多方法来计算$\mathbf{A}$。例如，我们可以尝试以下方法：
 
-1. 我们可以计算$\mathbf{A}_{ij} = \mathbf{B}_{i,:} \mathbf{C}_{:,j}^\top$，也就是说，我们可以通过点积进行逐元素计算。
-1. 我们可以计算$\mathbf{A}_{:,j} = \mathbf{B} \mathbf{C}_{:,j}^\top$，也就是说，我们可以一次计算一列。同样，我们可以一次计算$\mathbf{A}$一行$\mathbf{A}_{i,:}$。
+1. 我们可以计算$\mathbf{A}*{ij} = \mathbf{B}*{i,:} \mathbf{C}_{:,j}^\top$，也就是说，我们可以通过点积进行逐元素计算。
+1. 我们可以计算$\mathbf{A}*{:,j} = \mathbf{B} \mathbf{C}*{:,j}^\top$，也就是说，我们可以一次计算一列。同样，我们可以一次计算$\mathbf{A}$一行$\mathbf{A}_{i,:}$。
 1. 我们可以简单地计算$\mathbf{A} = \mathbf{B} \mathbf{C}$。
 1. 我们可以将$\mathbf{B}$和$\mathbf{C}$分成较小的区块矩阵，然后一次计算$\mathbf{A}$的一个区块。
 
@@ -66,7 +66,7 @@ C = np.random.normal(0, 1, (256, 256))
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 %matplotlib inline
 from d2l import torch as d2l
 import torch
@@ -80,7 +80,7 @@ C = torch.randn(256, 256)
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 %matplotlib inline
 from d2l import tensorflow as d2l
 import tensorflow as tf
@@ -93,7 +93,7 @@ C = tf.Variable(d2l.normal([256, 256], 0, 1))
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 %matplotlib inline
 from d2l import paddle as d2l
 import warnings
@@ -116,12 +116,12 @@ timer.start()
 for i in range(256):
     for j in range(256):
         A[i, j] = np.dot(B[i, :], C[:, j])
-A.wait_to_read()
+A.wait*to*read()
 timer.stop()
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 # 逐元素计算A=BC
 timer.start()
 for i in range(256):
@@ -131,7 +131,7 @@ timer.stop()
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 # 逐元素计算A=BC
 timer.start()
 for i in range(256):
@@ -141,7 +141,7 @@ timer.stop()
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 # 逐元素计算A=BC
 timer.start()
 for i in range(256):
@@ -157,12 +157,12 @@ timer.stop()
 timer.start()
 for j in range(256):
     A[:, j] = np.dot(B, C[:, j])
-A.wait_to_read()
+A.wait*to*read()
 timer.stop()
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 # 逐列计算A=BC
 timer.start()
 for j in range(256):
@@ -171,7 +171,7 @@ timer.stop()
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 timer.start()
 for j in range(256):
     A[:, j].assign(tf.tensordot(B, C[:, j], axes=1))
@@ -179,7 +179,7 @@ timer.stop()
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 # 逐列计算A=BC
 timer.start()
 for j in range(256):
@@ -193,7 +193,7 @@ timer.stop()
 # 一次性计算A=BC
 timer.start()
 A = np.dot(B, C)
-A.wait_to_read()
+A.wait*to*read()
 timer.stop()
 
 # 乘法和加法作为单独的操作（在实践中融合）
@@ -203,7 +203,7 @@ print(f'performance in Gigaflops: element {gigaflops[0]:.3f}, '
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 # 一次性计算A=BC
 timer.start()
 A = torch.mm(B, C)
@@ -216,7 +216,7 @@ print(f'performance in Gigaflops: element {gigaflops[0]:.3f}, '
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 # 一次性计算A=BC
 timer.start()
 A.assign(tf.tensordot(B, C, axes=1))
@@ -229,7 +229,7 @@ print(f'performance in Gigaflops: element {gigaflops[0]:.3f}, '
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 # 一次性计算A=BC
 timer.start()
 A = paddle.mm(B, C)
@@ -241,23 +241,23 @@ print(f'performance in Gigaflops: element {gigaflops[0]:.3f}, '
       f'column {gigaflops[1]:.3f}, full {gigaflops[2]:.3f}')
 ```
 
-## 小批量
+# # 小批量
 
 :label:`sec_minibatches`
 
 之前我们会理所当然地读取数据的*小批量*，而不是观测单个数据来更新参数，现在简要解释一下原因。
 处理单个观测值需要我们执行许多单一矩阵-矢量（甚至矢量-矢量）乘法，这耗费相当大，而且对应深度学习框架也要巨大的开销。
 这既适用于计算梯度以更新参数时，也适用于用神经网络预测。
-也就是说，每当我们执行$\mathbf{w} \leftarrow \mathbf{w} - \eta_t \mathbf{g}_t$时，消耗巨大。其中
+也就是说，每当我们执行$\mathbf{w} \leftarrow \mathbf{w} - \eta*t \mathbf{g}*t$时，消耗巨大。其中
 
-$$\mathbf{g}_t = \partial_{\mathbf{w}} f(\mathbf{x}_{t}, \mathbf{w}).$$
+$$\mathbf{g}*t = \partial*{\mathbf{w}} f(\mathbf{x}_{t}, \mathbf{w}).$$
 
 我们可以通过将其应用于一个小批量观测值来提高此操作的*计算*效率。
 也就是说，我们将梯度$\mathbf{g}_t$替换为一个小批量而不是单个观测值
 
-$$\mathbf{g}_t = \partial_{\mathbf{w}} \frac{1}{|\mathcal{B}_t|} \sum_{i \in \mathcal{B}_t} f(\mathbf{x}_{i}, \mathbf{w}).$$
+$$\mathbf{g}*t = \partial*{\mathbf{w}} \frac{1}{|\mathcal{B}*t|} \sum*{i \in \mathcal{B}*t} f(\mathbf{x}*{i}, \mathbf{w}).$$
 
-让我们看看这对$\mathbf{g}_t$的统计属性有什么影响：由于$\mathbf{x}_t$和小批量$\mathcal{B}_t$的所有元素都是从训练集中随机抽出的，因此梯度的期望保持不变。
+让我们看看这对$\mathbf{g}*t$的统计属性有什么影响：由于$\mathbf{x}*t$和小批量$\mathcal{B}_t$的所有元素都是从训练集中随机抽出的，因此梯度的期望保持不变。
 另一方面，方差显著降低。
 由于小批量梯度由正在被平均计算的$b := |\mathcal{B}_t|$个独立梯度组成，其标准差降低了$b^{-\frac{1}{2}}$。
 这本身就是一件好事，因为这意味着更新与完整的梯度更接近了。
@@ -277,7 +277,7 @@ print(f'performance in Gigaflops: block {2 / timer.times[3]:.3f}')
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 timer.start()
 for j in range(0, 256, 64):
     A[:, j:j+64] = torch.mm(B, C[:, j:j+64])
@@ -286,7 +286,7 @@ print(f'performance in Gigaflops: block {2 / timer.times[3]:.3f}')
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 timer.start()
 for j in range(0, 256, 64):
     A[:, j:j+64].assign(tf.tensordot(B, C[:, j:j+64], axes=1))
@@ -295,7 +295,7 @@ print(f'performance in Gigaflops: block {2 / timer.times[3]:.3f}')
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 timer.start()
 for j in range(0, 256, 64):
     A[:, j:j+64] = paddle.mm(B, C[:, j:j+64])
@@ -304,11 +304,11 @@ print(f'performance in Gigaflops: block {2 / timer.times[3]:.3f}')
 ```
 
 显而易见，小批量上的计算基本上与完整矩阵一样有效。
-需要注意的是，在 :numref:`sec_batch_norm`中，我们使用了一种在很大程度上取决于小批量中的方差的正则化。
+需要注意的是，在 :numref:`sec*batch*norm`中，我们使用了一种在很大程度上取决于小批量中的方差的正则化。
 随着后者增加，方差会减少，随之而来的是批量规范化带来的噪声注入的好处。
 关于实例，请参阅 :cite:`Ioffe.2017`，了解有关如何重新缩放并计算适当项目。
 
-## 读取数据集
+# # 读取数据集
 
 让我们来看看如何从数据中有效地生成小批量。
 下面我们使用NASA开发的测试机翼的数据集[不同飞行器产生的噪声](https://archive.ics.uci.edu/ml/datasets/Airfoil+Self-Noise)来比较这些优化算法。
@@ -316,71 +316,71 @@ print(f'performance in Gigaflops: block {2 / timer.times[3]:.3f}')
 数据已作预处理：我们移除了均值并将方差重新缩放到每个坐标为$1$。
 
 ```{.python .input}
-#@save
-d2l.DATA_HUB['airfoil'] = (d2l.DATA_URL + 'airfoil_self_noise.dat',
+# @save
+d2l.DATA*HUB['airfoil'] = (d2l.DATA*URL + 'airfoil*self*noise.dat',
                            '76e5be1548fd8222e5074cf0faae75edff8cf93f')
 
-#@save
-def get_data_ch11(batch_size=10, n=1500):
+# @save
+def get*data*ch11(batch_size=10, n=1500):
     data = np.genfromtxt(d2l.download('airfoil'),
                          dtype=np.float32, delimiter='\t')
     data = (data - data.mean(axis=0)) / data.std(axis=0)
-    data_iter = d2l.load_array(
-        (data[:n, :-1], data[:n, -1]), batch_size, is_train=True)
+    data*iter = d2l.load*array(
+        (data[:n, :-1], data[:n, -1]), batch*size, is*train=True)
     return data_iter, data.shape[1]-1
 ```
 
 ```{.python .input}
-#@tab pytorch
-#@save
-d2l.DATA_HUB['airfoil'] = (d2l.DATA_URL + 'airfoil_self_noise.dat',
+# @tab pytorch
+# @save
+d2l.DATA*HUB['airfoil'] = (d2l.DATA*URL + 'airfoil*self*noise.dat',
                            '76e5be1548fd8222e5074cf0faae75edff8cf93f')
 
-#@save
-def get_data_ch11(batch_size=10, n=1500):
+# @save
+def get*data*ch11(batch_size=10, n=1500):
     data = np.genfromtxt(d2l.download('airfoil'),
                          dtype=np.float32, delimiter='\t')
     data = torch.from_numpy((data - data.mean(axis=0)) / data.std(axis=0))
-    data_iter = d2l.load_array((data[:n, :-1], data[:n, -1]),
-                               batch_size, is_train=True)
+    data*iter = d2l.load*array((data[:n, :-1], data[:n, -1]),
+                               batch*size, is*train=True)
     return data_iter, data.shape[1]-1
 ```
 
 ```{.python .input}
-#@tab tensorflow
-#@save
-d2l.DATA_HUB['airfoil'] = (d2l.DATA_URL + 'airfoil_self_noise.dat',
+# @tab tensorflow
+# @save
+d2l.DATA*HUB['airfoil'] = (d2l.DATA*URL + 'airfoil*self*noise.dat',
                            '76e5be1548fd8222e5074cf0faae75edff8cf93f')
 
-#@save
-def get_data_ch11(batch_size=10, n=1500):
+# @save
+def get*data*ch11(batch_size=10, n=1500):
     data = np.genfromtxt(d2l.download('airfoil'),
                          dtype=np.float32, delimiter='\t')
     data = (data - data.mean(axis=0)) / data.std(axis=0)
-    data_iter = d2l.load_array((data[:n, :-1], data[:n, -1]),
-                               batch_size, is_train=True)
+    data*iter = d2l.load*array((data[:n, :-1], data[:n, -1]),
+                               batch*size, is*train=True)
     return data_iter, data.shape[1]-1
 ```
 
 ```{.python .input}
-#@tab paddle
-#@save
-d2l.DATA_HUB['airfoil'] = (d2l.DATA_URL + 'airfoil_self_noise.dat',
+# @tab paddle
+# @save
+d2l.DATA*HUB['airfoil'] = (d2l.DATA*URL + 'airfoil*self*noise.dat',
                            '76e5be1548fd8222e5074cf0faae75edff8cf93f')
 
-#@save
-def get_data_ch11(batch_size=10, n=1500):
+# @save
+def get*data*ch11(batch_size=10, n=1500):
     data = np.genfromtxt(d2l.download('airfoil'),
                          dtype=np.float32, delimiter='\t')
     data = d2l.tensor((data - data.mean(axis=0)) / data.std(axis=0))
-    data_iter = d2l.load_array((data[:n, :-1], data[:n, -1]),
-                               batch_size, is_train=True)
+    data*iter = d2l.load*array((data[:n, :-1], data[:n, -1]),
+                               batch*size, is*train=True)
     return data_iter, data.shape[1]-1
 ```
 
-## 从零开始实现
+# # 从零开始实现
 
- :numref:`sec_linear_scratch`一节中已经实现过小批量随机梯度下降算法。
+ :numref:`sec*linear*scratch`一节中已经实现过小批量随机梯度下降算法。
 我们在这里将它的输入参数变得更加通用，主要是为了方便本章后面介绍的其他优化算法也可以使用同样的输入。
 具体来说，我们添加了一个状态输入`states`并将超参数放在字典`hyperparams`中。
 此外，我们将在训练函数里对各个小批量样本的损失求平均，因此优化算法中的梯度不需要除以批量大小。
@@ -392,7 +392,7 @@ def sgd(params, states, hyperparams):
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 def sgd(params, states, hyperparams):
     for p in params:
         p.data.sub_(hyperparams['lr'] * p.grad)
@@ -400,14 +400,14 @@ def sgd(params, states, hyperparams):
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 def sgd(params, grads, states, hyperparams):
     for param, grad in zip(params, grads):
         param.assign_sub(hyperparams['lr']*grad)
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 def sgd(params, states, hyperparams):
     a = []
     with paddle.no_grad():
@@ -422,9 +422,9 @@ def sgd(params, states, hyperparams):
 它初始化了一个线性回归模型，然后可以使用小批量随机梯度下降以及后续小节介绍的其他算法来训练模型。
 
 ```{.python .input}
-#@save
-def train_ch11(trainer_fn, states, hyperparams, data_iter,
-               feature_dim, num_epochs=2):
+# @save
+def train*ch11(trainer*fn, states, hyperparams, data_iter,
+               feature*dim, num*epochs=2):
     # 初始化模型
     w = np.random.normal(scale=0.01, size=(feature_dim, 1))
     b = np.zeros(1)
@@ -435,7 +435,7 @@ def train_ch11(trainer_fn, states, hyperparams, data_iter,
     animator = d2l.Animator(xlabel='epoch', ylabel='loss',
                             xlim=[0, num_epochs], ylim=[0.22, 0.35])
     n, timer = 0, d2l.Timer()
-    for _ in range(num_epochs):
+    for * in range(num*epochs):
         for X, y in data_iter:
             with autograd.record():
                 l = loss(net(X), y).mean()
@@ -445,17 +445,17 @@ def train_ch11(trainer_fn, states, hyperparams, data_iter,
             if n % 200 == 0:
                 timer.stop()
                 animator.add(n/X.shape[0]/len(data_iter),
-                             (d2l.evaluate_loss(net, data_iter, loss),))
+                             (d2l.evaluate*loss(net, data*iter, loss),))
                 timer.start()
     print(f'loss: {animator.Y[0][-1]:.3f}, {timer.avg():.3f} sec/epoch')
     return timer.cumsum(), animator.Y[0]
 ```
 
 ```{.python .input}
-#@tab pytorch
-#@save
-def train_ch11(trainer_fn, states, hyperparams, data_iter,
-               feature_dim, num_epochs=2):
+# @tab pytorch
+# @save
+def train*ch11(trainer*fn, states, hyperparams, data_iter,
+               feature*dim, num*epochs=2):
     # 初始化模型
     w = torch.normal(mean=0.0, std=0.01, size=(feature_dim, 1),
                      requires_grad=True)
@@ -465,7 +465,7 @@ def train_ch11(trainer_fn, states, hyperparams, data_iter,
     animator = d2l.Animator(xlabel='epoch', ylabel='loss',
                             xlim=[0, num_epochs], ylim=[0.22, 0.35])
     n, timer = 0, d2l.Timer()
-    for _ in range(num_epochs):
+    for * in range(num*epochs):
         for X, y in data_iter:
             l = loss(net(X), y).mean()
             l.backward()
@@ -474,17 +474,17 @@ def train_ch11(trainer_fn, states, hyperparams, data_iter,
             if n % 200 == 0:
                 timer.stop()
                 animator.add(n/X.shape[0]/len(data_iter),
-                             (d2l.evaluate_loss(net, data_iter, loss),))
+                             (d2l.evaluate*loss(net, data*iter, loss),))
                 timer.start()
     print(f'loss: {animator.Y[0][-1]:.3f}, {timer.avg():.3f} sec/epoch')
     return timer.cumsum(), animator.Y[0]
 ```
 
 ```{.python .input}
-#@tab tensorflow
-#@save
-def train_ch11(trainer_fn, states, hyperparams, data_iter,
-               feature_dim, num_epochs=2):
+# @tab tensorflow
+# @save
+def train*ch11(trainer*fn, states, hyperparams, data_iter,
+               feature*dim, num*epochs=2):
     # 初始化模型
     w = tf.Variable(tf.random.normal(shape=(feature_dim, 1),
                                    mean=0, stddev=0.01),trainable=True)
@@ -496,7 +496,7 @@ def train_ch11(trainer_fn, states, hyperparams, data_iter,
                             xlim=[0, num_epochs], ylim=[0.22, 0.35])
     n, timer = 0, d2l.Timer()
 
-    for _ in range(num_epochs):
+    for * in range(num*epochs):
         for X, y in data_iter:
           with tf.GradientTape() as g:
             l = tf.math.reduce_mean(loss(net(X), y))
@@ -508,7 +508,7 @@ def train_ch11(trainer_fn, states, hyperparams, data_iter,
               timer.stop()
               p = n/X.shape[0]
               q = p/tf.data.experimental.cardinality(data_iter).numpy()
-              r = (d2l.evaluate_loss(net, data_iter, loss),)
+              r = (d2l.evaluate*loss(net, data*iter, loss),)
               animator.add(q, r)
               timer.start()
     print(f'loss: {animator.Y[0][-1]:.3f}, {timer.avg():.3f} sec/epoch')
@@ -516,19 +516,19 @@ def train_ch11(trainer_fn, states, hyperparams, data_iter,
 ```
 
 ```{.python .input}
-#@tab paddle
-#@save
-def train_ch11(trainer_fn, states, hyperparams, data_iter,
-               feature_dim, num_epochs=2):
+# @tab paddle
+# @save
+def train*ch11(trainer*fn, states, hyperparams, data_iter,
+               feature*dim, num*epochs=2):
     # 初始化模型
-    w = d2l.tensor(d2l.normal(mean=0.0, std=0.01, shape=(feature_dim, 1)), stop_gradient=False)
+    w = d2l.tensor(d2l.normal(mean=0.0, std=0.01, shape=(feature*dim, 1)), stop*gradient=False)
     b = d2l.tensor(d2l.zeros((1,)), stop_gradient=False)
     net, loss = lambda X: d2l.linreg(X, w, b), d2l.squared_loss
     # 训练模型
     animator = d2l.Animator(xlabel='epoch', ylabel='loss',
                             xlim=[0, num_epochs], ylim=[0.22, 0.35])
     n, timer = 0, d2l.Timer()
-    for _ in range(num_epochs):
+    for * in range(num*epochs):
         for X, y in data_iter:
             l = loss(net(X), y).mean()
             l.backward()
@@ -537,7 +537,7 @@ def train_ch11(trainer_fn, states, hyperparams, data_iter,
             if n % 200 == 0:
                 timer.stop()
                 animator.add(n/X.shape[0]/len(data_iter),
-                             (d2l.evaluate_loss(net, data_iter, loss),))
+                             (d2l.evaluate*loss(net, data*iter, loss),))
                 timer.start()
     print(f'loss: {animator.Y[0][-1]:.3f}, {timer.avg():.3f} sec/epoch')
     return timer.cumsum(), animator.Y[0]
@@ -548,13 +548,13 @@ def train_ch11(trainer_fn, states, hyperparams, data_iter,
 因此，模型参数每个迭代轮数只迭代一次。
 
 ```{.python .input}
-#@tab all
-def train_sgd(lr, batch_size, num_epochs=2):
-    data_iter, feature_dim = get_data_ch11(batch_size)
+# @tab all
+def train*sgd(lr, batch*size, num_epochs=2):
+    data*iter, feature*dim = get*data*ch11(batch_size)
     return train_ch11(
-        sgd, None, {'lr': lr}, data_iter, feature_dim, num_epochs)
+        sgd, None, {'lr': lr}, data*iter, feature*dim, num_epochs)
 
-gd_res = train_sgd(1, 1500, 10)
+gd*res = train*sgd(1, 1500, 10)
 ```
 
 当批量大小为1时，优化使用的是随机梯度下降。
@@ -566,23 +566,23 @@ gd_res = train_sgd(1, 1500, 10)
 这是因为随机梯度下降更频繁地更新了参数，而且一次处理单个观测值效率较低。
 
 ```{.python .input}
-#@tab all
-sgd_res = train_sgd(0.005, 1)
+# @tab all
+sgd*res = train*sgd(0.005, 1)
 ```
 
 最后，当批量大小等于100时，我们使用小批量随机梯度下降进行优化。
 每个迭代轮数所需的时间比随机梯度下降和批量梯度下降所需的时间短。
 
 ```{.python .input}
-#@tab all
-mini1_res = train_sgd(.4, 100)
+# @tab all
+mini1*res = train*sgd(.4, 100)
 ```
 
 将批量大小减少到10，每个迭代轮数的时间都会增加，因为每批工作负载的执行效率变得更低。
 
 ```{.python .input}
-#@tab all
-mini2_res = train_sgd(.05, 10)
+# @tab all
+mini2*res = train*sgd(.05, 10)
 ```
 
 现在我们可以比较前四个实验的时间与损失。
@@ -592,31 +592,31 @@ mini2_res = train_sgd(.05, 10)
 大小为100的小批量在运行时间上甚至优于梯度下降。
 
 ```{.python .input}
-#@tab all
+# @tab all
 d2l.set_figsize([6, 3])
-d2l.plot(*list(map(list, zip(gd_res, sgd_res, mini1_res, mini2_res))),
+d2l.plot(*list(map(list, zip(gd*res, sgd*res, mini1*res, mini2*res))),
          'time (sec)', 'loss', xlim=[1e-2, 10],
          legend=['gd', 'sgd', 'batch size=100', 'batch size=10'])
 d2l.plt.gca().set_xscale('log')
 ```
 
-## 简洁实现
+# # 简洁实现
 
 下面用深度学习框架自带算法实现一个通用的训练函数，我们将在本章中其它小节使用它。
 
 ```{.python .input}
-#@save
-def train_concise_ch11(tr_name, hyperparams, data_iter, num_epochs=2):
+# @save
+def train*concise*ch11(tr*name, hyperparams, data*iter, num_epochs=2):
     # 初始化模型
     net = nn.Sequential()
     net.add(nn.Dense(1))
     net.initialize(init.Normal(sigma=0.01))
-    trainer = gluon.Trainer(net.collect_params(), tr_name, hyperparams)
+    trainer = gluon.Trainer(net.collect*params(), tr*name, hyperparams)
     loss = gluon.loss.L2Loss()
     animator = d2l.Animator(xlabel='epoch', ylabel='loss',
                             xlim=[0, num_epochs], ylim=[0.22, 0.35])
     n, timer = 0, d2l.Timer()
-    for _ in range(num_epochs):
+    for * in range(num*epochs):
         for X, y in data_iter:
             with autograd.record():
                 l = loss(net(X), y)
@@ -626,15 +626,15 @@ def train_concise_ch11(tr_name, hyperparams, data_iter, num_epochs=2):
             if n % 200 == 0:
                 timer.stop()
                 animator.add(n/X.shape[0]/len(data_iter),
-                             (d2l.evaluate_loss(net, data_iter, loss),))
+                             (d2l.evaluate*loss(net, data*iter, loss),))
                 timer.start()
     print(f'loss: {animator.Y[0][-1]:.3f}, {timer.avg():.3f} sec/epoch')
 ```
 
 ```{.python .input}
-#@tab pytorch
-#@save
-def train_concise_ch11(trainer_fn, hyperparams, data_iter, num_epochs=4):
+# @tab pytorch
+# @save
+def train*concise*ch11(trainer*fn, hyperparams, data*iter, num_epochs=4):
     # 初始化模型
     net = nn.Sequential(nn.Linear(5, 1))
     def init_weights(m):
@@ -647,7 +647,7 @@ def train_concise_ch11(trainer_fn, hyperparams, data_iter, num_epochs=4):
     animator = d2l.Animator(xlabel='epoch', ylabel='loss',
                             xlim=[0, num_epochs], ylim=[0.22, 0.35])
     n, timer = 0, d2l.Timer()
-    for _ in range(num_epochs):
+    for * in range(num*epochs):
         for X, y in data_iter:
             optimizer.zero_grad()
             out = net(X)
@@ -660,25 +660,25 @@ def train_concise_ch11(trainer_fn, hyperparams, data_iter, num_epochs=4):
                 timer.stop()
                 # MSELoss计算平方误差时不带系数1/2
                 animator.add(n/X.shape[0]/len(data_iter),
-                             (d2l.evaluate_loss(net, data_iter, loss) / 2,))
+                             (d2l.evaluate*loss(net, data*iter, loss) / 2,))
                 timer.start()
     print(f'loss: {animator.Y[0][-1]:.3f}, {timer.avg():.3f} sec/epoch')
 ```
 
 ```{.python .input}
-#@tab tensorflow
-#@save
-def train_concise_ch11(trainer_fn, hyperparams, data_iter, num_epochs=2):
+# @tab tensorflow
+# @save
+def train*concise*ch11(trainer*fn, hyperparams, data*iter, num_epochs=2):
     # 初始化模型
     net = tf.keras.Sequential()
     net.add(tf.keras.layers.Dense(1,
-            kernel_initializer=tf.random_normal_initializer(stddev=0.01)))
+            kernel*initializer=tf.random*normal_initializer(stddev=0.01)))
     optimizer = trainer_fn(**hyperparams)
     loss = tf.keras.losses.MeanSquaredError()
     animator = d2l.Animator(xlabel='epoch', ylabel='loss',
                             xlim=[0, num_epochs], ylim=[0.22, 0.35])
     n, timer = 0, d2l.Timer()
-    for _ in range(num_epochs):
+    for * in range(num*epochs):
         for X, y in data_iter:
             with tf.GradientTape() as g:
                 out = net(X)
@@ -692,16 +692,16 @@ def train_concise_ch11(trainer_fn, hyperparams, data_iter, num_epochs=2):
                 p = n/X.shape[0]
                 q = p/tf.data.experimental.cardinality(data_iter).numpy()
                 # MeanSquaredError计算平方误差时不带系数1/2
-                r = (d2l.evaluate_loss(net, data_iter, loss) / 2,)
+                r = (d2l.evaluate*loss(net, data*iter, loss) / 2,)
                 animator.add(q, r)
                 timer.start()
     print(f'loss: {animator.Y[0][-1]:.3f}, {timer.avg():.3f} sec/epoch')
 ```
 
 ```{.python .input}
-#@tab paddle
-#@save
-def train_concise_ch11(trainer_fn, hyperparams, data_iter, num_epochs=4):
+# @tab paddle
+# @save
+def train*concise*ch11(trainer*fn, hyperparams, data*iter, num_epochs=4):
     # 初始化模型
     net = nn.Sequential(nn.Linear(5, 1))
     def init_weights(m):
@@ -715,7 +715,7 @@ def train_concise_ch11(trainer_fn, hyperparams, data_iter, num_epochs=4):
     animator = d2l.Animator(xlabel='epoch', ylabel='loss',
                             xlim=[0, num_epochs], ylim=[0.22, 0.35])
     n, timer = 0, d2l.Timer()
-    for _ in range(num_epochs):
+    for * in range(num*epochs):
         for X, y in data_iter:
             optimizer.clear_grad()
             out = net(X)
@@ -728,7 +728,7 @@ def train_concise_ch11(trainer_fn, hyperparams, data_iter, num_epochs=4):
                 timer.stop()
                 # MSELoss计算平方误差时不带系数1/2
                 animator.add(n/X.shape[0]/len(data_iter),
-                             (d2l.evaluate_loss(net, data_iter, loss) / 2,))
+                             (d2l.evaluate*loss(net, data*iter, loss) / 2,))
                 timer.start()
     print(f'loss: {animator.Y[0][-1]:.3f}, {timer.avg():.3f} sec/epoch')
 ```
@@ -736,32 +736,32 @@ def train_concise_ch11(trainer_fn, hyperparams, data_iter, num_epochs=4):
 下面使用这个训练函数，复现之前的实验。
 
 ```{.python .input}
-data_iter, _ = get_data_ch11(10)
-train_concise_ch11('sgd', {'learning_rate': 0.05}, data_iter)
+data*iter, * = get*data*ch11(10)
+train*concise*ch11('sgd', {'learning*rate': 0.05}, data*iter)
 ```
 
 ```{.python .input}
-#@tab pytorch
-data_iter, _ = get_data_ch11(10)
+# @tab pytorch
+data*iter, * = get*data*ch11(10)
 trainer = torch.optim.SGD
-train_concise_ch11(trainer, {'lr': 0.01}, data_iter)
+train*concise*ch11(trainer, {'lr': 0.01}, data_iter)
 ```
 
 ```{.python .input}
-#@tab tensorflow
-data_iter, _ = get_data_ch11(10)
+# @tab tensorflow
+data*iter, * = get*data*ch11(10)
 trainer = tf.keras.optimizers.SGD
-train_concise_ch11(trainer, {'learning_rate': 0.05}, data_iter)
+train*concise*ch11(trainer, {'learning*rate': 0.05}, data*iter)
 ```
 
 ```{.python .input}
-#@tab paddle
-data_iter, _ = get_data_ch11(10)
+# @tab paddle
+data*iter, * = get*data*ch11(10)
 trainer = paddle.optimizer.SGD
-train_concise_ch11(trainer, {'learning_rate': 0.01}, data_iter)
+train*concise*ch11(trainer, {'learning*rate': 0.01}, data*iter)
 ```
 
-## 小结
+# # 小结
 
 * 由于减少了深度学习框架的额外开销，使用更好的内存定位以及CPU和GPU上的缓存，向量化使代码更加高效。
 * 随机梯度下降的“统计效率”与大批量一次处理数据的“计算效率”之间存在权衡。小批量随机梯度下降提供了两全其美的答案：计算和统计效率。
@@ -769,7 +769,7 @@ train_concise_ch11(trainer, {'learning_rate': 0.01}, data_iter)
 * 在训练期间降低学习率有助于训练。
 * 一般来说，小批量随机梯度下降比随机梯度下降和梯度下降的速度快，收敛风险较小。
 
-## 练习
+# # 练习
 
 1. 修改批量大小和学习率，并观察目标函数值的下降率以及每个迭代轮数消耗的时间。
 1. 将小批量随机梯度下降与实际从训练集中*取样替换*的变体进行比较。会看出什么？

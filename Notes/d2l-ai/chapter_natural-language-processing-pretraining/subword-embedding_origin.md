@@ -26,7 +26,7 @@ the internal structure of words
 was neither explored in word2vec
 nor in GloVe.
 
-## The fastText Model
+# # The fastText Model
 
 Recall how words are represented in word2vec.
 In both the skip-gram model
@@ -67,7 +67,7 @@ word $w$ as a center word
 in the skip-gram model
 is the sum of its subword vectors:
 
-$$\mathbf{v}_w = \sum_{g\in\mathcal{G}_w} \mathbf{z}_g.$$
+$$\mathbf{v}*w = \sum*{g\in\mathcal{G}*w} \mathbf{z}*g.$$
 
 The rest of fastText is the same as the skip-gram model. Compared with the skip-gram model, 
 the vocabulary in fastText is larger,
@@ -84,8 +84,8 @@ may obtain better vector representations in fastText.
 
 
 
-## Byte Pair Encoding
-:label:`subsec_Byte_Pair_Encoding`
+# # Byte Pair Encoding
+:label:`subsec*Byte*Pair_Encoding`
 
 In fastText, all the extracted subwords have to be of the specified lengths, such as $3$ to $6$, thus the vocabulary size cannot be predefined.
 To allow for variable-length subwords in a fixed-size vocabulary,
@@ -104,7 +104,7 @@ In the following, we will illustrate how byte pair encoding works.
 First, we initialize the vocabulary of symbols as all the English lowercase characters, a special end-of-word symbol `'_'`, and a special unknown symbol `'[UNK]'`.
 
 ```{.python .input}
-#@tab all
+# @tab all
 import collections
 
 symbols = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
@@ -113,30 +113,30 @@ symbols = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
 ```
 
 Since we do not consider symbol pairs that cross boundaries of words,
-we only need a dictionary `raw_token_freqs` that maps words to their frequencies (number of occurrences)
+we only need a dictionary `raw*token*freqs` that maps words to their frequencies (number of occurrences)
 in a dataset.
 Note that the special symbol `'_'` is appended to each word so that
 we can easily recover a word sequence (e.g., "a taller man")
-from a sequence of output symbols ( e.g., "a_ tall er_ man").
+from a sequence of output symbols ( e.g., "a* tall er* man").
 Since we start the merging process from a vocabulary of only single characters and special symbols, space is inserted between every pair of consecutive characters within each word (keys of the dictionary `token_freqs`).
 In other words, space is the delimiter between symbols within a word.
 
 ```{.python .input}
-#@tab all
-raw_token_freqs = {'fast_': 4, 'faster_': 3, 'tall_': 5, 'taller_': 4}
+# @tab all
+raw*token*freqs = {'fast*': 4, 'faster*': 3, 'tall*': 5, 'taller*': 4}
 token_freqs = {}
-for token, freq in raw_token_freqs.items():
-    token_freqs[' '.join(list(token))] = raw_token_freqs[token]
+for token, freq in raw*token*freqs.items():
+    token*freqs[' '.join(list(token))] = raw*token_freqs[token]
 token_freqs
 ```
 
-We define the following `get_max_freq_pair` function that
+We define the following `get*max*freq_pair` function that
 returns the most frequent pair of consecutive symbols within a word,
 where words come from keys of the input dictionary `token_freqs`.
 
 ```{.python .input}
-#@tab all
-def get_max_freq_pair(token_freqs):
+# @tab all
+def get*max*freq*pair(token*freqs):
     pairs = collections.defaultdict(int)
     for token, freq in token_freqs.items():
         symbols = token.split()
@@ -150,42 +150,42 @@ As a greedy approach based on frequency of consecutive symbols,
 byte pair encoding will use the following `merge_symbols` function to merge the most frequent pair of consecutive symbols to produce new symbols.
 
 ```{.python .input}
-#@tab all
-def merge_symbols(max_freq_pair, token_freqs, symbols):
-    symbols.append(''.join(max_freq_pair))
-    new_token_freqs = dict()
+# @tab all
+def merge*symbols(max*freq*pair, token*freqs, symbols):
+    symbols.append(''.join(max*freq*pair))
+    new*token*freqs = dict()
     for token, freq in token_freqs.items():
-        new_token = token.replace(' '.join(max_freq_pair),
-                                  ''.join(max_freq_pair))
-        new_token_freqs[new_token] = token_freqs[token]
-    return new_token_freqs
+        new*token = token.replace(' '.join(max*freq_pair),
+                                  ''.join(max*freq*pair))
+        new*token*freqs[new*token] = token*freqs[token]
+    return new*token*freqs
 ```
 
 Now we iteratively perform the byte pair encoding algorithm over the keys of the dictionary `token_freqs`. In the first iteration, the most frequent pair of consecutive symbols are `'t'` and `'a'`, thus byte pair encoding merges them to produce a new symbol `'ta'`. In the second iteration, byte pair encoding continues to merge `'ta'` and `'l'` to result in another new symbol `'tal'`.
 
 ```{.python .input}
-#@tab all
+# @tab all
 num_merges = 10
 for i in range(num_merges):
-    max_freq_pair = get_max_freq_pair(token_freqs)
-    token_freqs = merge_symbols(max_freq_pair, token_freqs, symbols)
-    print(f'merge #{i + 1}:', max_freq_pair)
+    max*freq*pair = get*max*freq*pair(token*freqs)
+    token*freqs = merge*symbols(max*freq*pair, token_freqs, symbols)
+    print(f'merge # {i + 1}:', max*freq*pair)
 ```
 
 After 10 iterations of byte pair encoding, we can see that list `symbols` now contains 10 more symbols that are iteratively merged from other symbols.
 
 ```{.python .input}
-#@tab all
+# @tab all
 print(symbols)
 ```
 
-For the same dataset specified in the keys of the dictionary `raw_token_freqs`,
-each word in the dataset is now segmented by subwords "fast_", "fast", "er_", "tall_", and "tall"
+For the same dataset specified in the keys of the dictionary `raw*token*freqs`,
+each word in the dataset is now segmented by subwords "fast*", "fast", "er*", "tall_", and "tall"
 as a result of the byte pair encoding algorithm.
-For instance, words "faster_" and "taller_" are segmented as "fast er_" and "tall er_", respectively.
+For instance, words "faster*" and "taller*" are segmented as "fast er*" and "tall er*", respectively.
 
 ```{.python .input}
-#@tab all
+# @tab all
 print(list(token_freqs.keys()))
 ```
 
@@ -195,7 +195,7 @@ to segment words of another dataset.
 As a greedy approach, the following `segment_BPE` function tries to break words into the longest possible subwords from the input argument `symbols`.
 
 ```{.python .input}
-#@tab all
+# @tab all
 def segment_BPE(tokens, symbols):
     outputs = []
     for token in tokens:
@@ -219,18 +219,18 @@ In the following, we use the subwords in list `symbols`, which is learned from t
 to segment `tokens` that represent another dataset.
 
 ```{.python .input}
-#@tab all
-tokens = ['tallest_', 'fatter_']
+# @tab all
+tokens = ['tallest*', 'fatter*']
 print(segment_BPE(tokens, symbols))
 ```
 
-## Summary
+# # Summary
 
 * The fastText model proposes a subword embedding approach. Based on the skip-gram model in word2vec, it represents a center word as the sum of its subword vectors.
 * Byte pair encoding performs a statistical analysis of the training dataset to discover common symbols within a word. As a greedy approach, byte pair encoding iteratively merges the most frequent pair of consecutive symbols.
 * Subword embedding may improve the quality of representations of rare words and out-of-dictionary words.
 
-## Exercises
+# # Exercises
 
 1. As an example, there are about $3\times 10^8$ possible  $6$-grams in English. What is the issue when there are too many subwords? How to address the issue? Hint: refer to the end of Section 3.2 of the fastText paper :cite:`Bojanowski.Grave.Joulin.ea.2017`.
 1. How to design a subword embedding model based on the continuous bag-of-words model?

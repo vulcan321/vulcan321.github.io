@@ -1,8 +1,8 @@
 # Semantic Segmentation and the Dataset
-:label:`sec_semantic_segmentation`
+:label:`sec*semantic*segmentation`
 
 When discussing object detection tasks
-in :numref:`sec_bbox`--:numref:`sec_rcnn`,
+in :numref:`sec*bbox`--:numref:`sec*rcnn`,
 rectangular bounding boxes
 are used to label and predict objects in images.
 This section will discuss the problem of *semantic segmentation*,
@@ -24,7 +24,7 @@ in semantic segmentation are obviously more fine-grained.
 :label:`fig_segmentation`
 
 
-## Image Segmentation and Instance Segmentation
+# # Image Segmentation and Instance Segmentation
 
 There are also two important tasks
 in the field of computer vision that are similar to semantic segmentation,
@@ -37,7 +37,7 @@ distinguish them from semantic segmentation as follows.
 
 
 
-## The Pascal VOC2012 Semantic Segmentation Dataset
+# # The Pascal VOC2012 Semantic Segmentation Dataset
 
 [**On of the most important semantic segmentation dataset
 is [Pascal VOC2012](http://host.robots.ox.ac.uk/pascal/VOC/voc2012/).**]
@@ -54,7 +54,7 @@ npx.set_np()
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 %matplotlib inline
 from d2l import torch as d2l
 import torch
@@ -67,12 +67,12 @@ so it may take a while to download the file.
 The extracted dataset is located at `../data/VOCdevkit/VOC2012`.
 
 ```{.python .input}
-#@tab all
-#@save
-d2l.DATA_HUB['voc2012'] = (d2l.DATA_URL + 'VOCtrainval_11-May-2012.tar',
+# @tab all
+# @save
+d2l.DATA*HUB['voc2012'] = (d2l.DATA*URL + 'VOCtrainval_11-May-2012.tar',
                            '4e443f8a2eca6b1dac8a6c57641b67dd40621a49')
 
-voc_dir = d2l.download_extract('voc2012', 'VOCdevkit/VOC2012')
+voc*dir = d2l.download*extract('voc2012', 'VOCdevkit/VOC2012')
 ```
 
 After entering the path `../data/VOCdevkit/VOC2012`,
@@ -86,13 +86,13 @@ with the same size
 as its labeled input image.
 Besides,
 pixels with the same color in any label image belong to the same semantic class.
-The following defines the `read_voc_images` function to [**read all the input images and labels into the memory**].
+The following defines the `read*voc*images` function to [**read all the input images and labels into the memory**].
 
 ```{.python .input}
-#@save
-def read_voc_images(voc_dir, is_train=True):
+# @save
+def read*voc*images(voc*dir, is*train=True):
     """Read all VOC feature and label images."""
-    txt_fname = os.path.join(voc_dir, 'ImageSets', 'Segmentation',
+    txt*fname = os.path.join(voc*dir, 'ImageSets', 'Segmentation',
                              'train.txt' if is_train else 'val.txt')
     with open(txt_fname, 'r') as f:
         images = f.read().split()
@@ -104,15 +104,15 @@ def read_voc_images(voc_dir, is_train=True):
             voc_dir, 'SegmentationClass', f'{fname}.png')))
     return features, labels
 
-train_features, train_labels = read_voc_images(voc_dir, True)
+train*features, train*labels = read*voc*images(voc_dir, True)
 ```
 
 ```{.python .input}
-#@tab pytorch
-#@save
-def read_voc_images(voc_dir, is_train=True):
+# @tab pytorch
+# @save
+def read*voc*images(voc*dir, is*train=True):
     """Read all VOC feature and label images."""
-    txt_fname = os.path.join(voc_dir, 'ImageSets', 'Segmentation',
+    txt*fname = os.path.join(voc*dir, 'ImageSets', 'Segmentation',
                              'train.txt' if is_train else 'val.txt')
     mode = torchvision.io.image.ImageReadMode.RGB
     with open(txt_fname, 'r') as f:
@@ -125,7 +125,7 @@ def read_voc_images(voc_dir, is_train=True):
             voc_dir, 'SegmentationClass' ,f'{fname}.png'), mode))
     return features, labels
 
-train_features, train_labels = read_voc_images(voc_dir, True)
+train*features, train*labels = read*voc*images(voc_dir, True)
 ```
 
 We [**draw the first five input images and their labels**].
@@ -133,14 +133,14 @@ In the label images, white and black represent borders and  background, respecti
 
 ```{.python .input}
 n = 5
-imgs = train_features[0:n] + train_labels[0:n]
+imgs = train*features[0:n] + train*labels[0:n]
 d2l.show_images(imgs, 2, n);
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 n = 5
-imgs = train_features[0:n] + train_labels[0:n]
+imgs = train*features[0:n] + train*labels[0:n]
 imgs = [img.permute(1,2,0) for img in imgs]
 d2l.show_images(imgs, 2, n);
 ```
@@ -150,8 +150,8 @@ the RGB color values and class names**]
 for all the labels in this dataset.
 
 ```{.python .input}
-#@tab all
-#@save
+# @tab all
+# @save
 VOC_COLORMAP = [[0, 0, 0], [128, 0, 0], [0, 128, 0], [128, 128, 0],
                 [0, 0, 128], [128, 0, 128], [0, 128, 128], [128, 128, 128],
                 [64, 0, 0], [192, 0, 0], [64, 128, 0], [192, 128, 0],
@@ -159,7 +159,7 @@ VOC_COLORMAP = [[0, 0, 0], [128, 0, 0], [0, 128, 0], [128, 128, 0],
                 [0, 64, 0], [128, 64, 0], [0, 192, 0], [128, 192, 0],
                 [0, 64, 128]]
 
-#@save
+# @save
 VOC_CLASSES = ['background', 'aeroplane', 'bicycle', 'bird', 'boat',
                'bottle', 'bus', 'car', 'cat', 'chair', 'cow',
                'diningtable', 'dog', 'horse', 'motorbike', 'person',
@@ -172,11 +172,11 @@ we can conveniently
 We define the `voc_colormap2label` function
 to build the mapping from the above RGB color values
 to class indices,
-and the `voc_label_indices` function
+and the `voc*label*indices` function
 to map any RGB values to their class indices in this Pascal VOC2012 dataset.
 
 ```{.python .input}
-#@save
+# @save
 def voc_colormap2label():
     """Build the mapping from RGB to class indices for VOC labels."""
     colormap2label = np.zeros(256 ** 3)
@@ -185,8 +185,8 @@ def voc_colormap2label():
             (colormap[0] * 256 + colormap[1]) * 256 + colormap[2]] = i
     return colormap2label
 
-#@save
-def voc_label_indices(colormap, colormap2label):
+# @save
+def voc*label*indices(colormap, colormap2label):
     """Map any RGB values in VOC labels to their class indices."""
     colormap = colormap.astype(np.int32)
     idx = ((colormap[:, :, 0] * 256 + colormap[:, :, 1]) * 256
@@ -195,8 +195,8 @@ def voc_label_indices(colormap, colormap2label):
 ```
 
 ```{.python .input}
-#@tab pytorch
-#@save
+# @tab pytorch
+# @save
 def voc_colormap2label():
     """Build the mapping from RGB to class indices for VOC labels."""
     colormap2label = torch.zeros(256 ** 3, dtype=torch.long)
@@ -205,8 +205,8 @@ def voc_colormap2label():
             (colormap[0] * 256 + colormap[1]) * 256 + colormap[2]] = i
     return colormap2label
 
-#@save
-def voc_label_indices(colormap, colormap2label):
+# @save
+def voc*label*indices(colormap, colormap2label):
     """Map any RGB values in VOC labels to their class indices."""
     colormap = colormap.permute(1, 2, 0).numpy().astype('int32')
     idx = ((colormap[:, :, 0] * 256 + colormap[:, :, 1]) * 256
@@ -219,15 +219,15 @@ the class index for the front part of the airplane is 1,
 while the background index is 0.
 
 ```{.python .input}
-#@tab all
-y = voc_label_indices(train_labels[0], voc_colormap2label())
+# @tab all
+y = voc*label*indices(train*labels[0], voc*colormap2label())
 y[105:115, 130:140], VOC_CLASSES[1]
 ```
 
-### Data Preprocessing
+## # Data Preprocessing
 
 In previous experiments
-such as in :numref:`sec_alexnet`--:numref:`sec_googlenet`,
+such as in :numref:`sec*alexnet`--:numref:`sec*googlenet`,
 images are rescaled 
 to fit the model's required input shape.
 However, in semantic segmentation,
@@ -240,8 +240,8 @@ we crop the image to a *fixed* shape instead of rescaling. Specifically, [**usin
 the input image and the label**].
 
 ```{.python .input}
-#@save
-def voc_rand_crop(feature, label, height, width):
+# @save
+def voc*rand*crop(feature, label, height, width):
     """Randomly crop both feature and label images."""
     feature, rect = image.random_crop(feature, (width, height))
     label = image.fixed_crop(label, *rect)
@@ -249,9 +249,9 @@ def voc_rand_crop(feature, label, height, width):
 ```
 
 ```{.python .input}
-#@tab pytorch
-#@save
-def voc_rand_crop(feature, label, height, width):
+# @tab pytorch
+# @save
+def voc*rand*crop(feature, label, height, width):
     """Randomly crop both feature and label images."""
     rect = torchvision.transforms.RandomCrop.get_params(
         feature, (height, width))
@@ -263,24 +263,24 @@ def voc_rand_crop(feature, label, height, width):
 ```{.python .input}
 imgs = []
 for _ in range(n):
-    imgs += voc_rand_crop(train_features[0], train_labels[0], 200, 300)
+    imgs += voc*rand*crop(train*features[0], train*labels[0], 200, 300)
 d2l.show_images(imgs[::2] + imgs[1::2], 2, n);
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 imgs = []
 for _ in range(n):
-    imgs += voc_rand_crop(train_features[0], train_labels[0], 200, 300)
+    imgs += voc*rand*crop(train*features[0], train*labels[0], 200, 300)
 
 imgs = [img.permute(1, 2, 0) for img in imgs]
 d2l.show_images(imgs[::2] + imgs[1::2], 2, n);
 ```
 
-### [**Custom Semantic Segmentation Dataset Class**]
+## # [**Custom Semantic Segmentation Dataset Class**]
 
 We define a custom semantic segmentation dataset class `VOCSegDataset` by inheriting the `Dataset` class provided by high-level APIs.
-By implementing the `__getitem__` function,
+By implementing the `**getitem**` function,
 we can arbitrarily access the input image indexed as `idx` in the dataset and the class index of each pixel in this image.
 Since some images in the dataset
 have a smaller size
@@ -292,14 +292,14 @@ define the `normalize_image` function to
 standardize the values of the three RGB channels of input images.
 
 ```{.python .input}
-#@save
+# @save
 class VOCSegDataset(gluon.data.Dataset):
     """A customized dataset to load the VOC dataset."""
-    def __init__(self, is_train, crop_size, voc_dir):
+    def **init**(self, is*train, crop*size, voc_dir):
         self.rgb_mean = np.array([0.485, 0.456, 0.406])
         self.rgb_std = np.array([0.229, 0.224, 0.225])
-        self.crop_size = crop_size
-        features, labels = read_voc_images(voc_dir, is_train=is_train)
+        self.crop*size = crop*size
+        features, labels = read*voc*images(voc*dir, is*train=is_train)
         self.features = [self.normalize_image(feature)
                          for feature in self.filter(features)]
         self.labels = self.filter(labels)
@@ -307,34 +307,34 @@ class VOCSegDataset(gluon.data.Dataset):
         print('read ' + str(len(self.features)) + ' examples')
 
     def normalize_image(self, img):
-        return (img.astype('float32') / 255 - self.rgb_mean) / self.rgb_std
+        return (img.astype('float32') / 255 - self.rgb*mean) / self.rgb*std
 
     def filter(self, imgs):
         return [img for img in imgs if (
             img.shape[0] >= self.crop_size[0] and
             img.shape[1] >= self.crop_size[1])]
 
-    def __getitem__(self, idx):
-        feature, label = voc_rand_crop(self.features[idx], self.labels[idx],
+    def **getitem**(self, idx):
+        feature, label = voc*rand*crop(self.features[idx], self.labels[idx],
                                        *self.crop_size)
         return (feature.transpose(2, 0, 1),
-                voc_label_indices(label, self.colormap2label))
+                voc*label*indices(label, self.colormap2label))
 
-    def __len__(self):
+    def **len**(self):
         return len(self.features)
 ```
 
 ```{.python .input}
-#@tab pytorch
-#@save
+# @tab pytorch
+# @save
 class VOCSegDataset(torch.utils.data.Dataset):
     """A customized dataset to load the VOC dataset."""
 
-    def __init__(self, is_train, crop_size, voc_dir):
+    def **init**(self, is*train, crop*size, voc_dir):
         self.transform = torchvision.transforms.Normalize(
             mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
-        self.crop_size = crop_size
-        features, labels = read_voc_images(voc_dir, is_train=is_train)
+        self.crop*size = crop*size
+        features, labels = read*voc*images(voc*dir, is*train=is_train)
         self.features = [self.normalize_image(feature)
                          for feature in self.filter(features)]
         self.labels = self.filter(labels)
@@ -349,16 +349,16 @@ class VOCSegDataset(torch.utils.data.Dataset):
             img.shape[1] >= self.crop_size[0] and
             img.shape[2] >= self.crop_size[1])]
 
-    def __getitem__(self, idx):
-        feature, label = voc_rand_crop(self.features[idx], self.labels[idx],
+    def **getitem**(self, idx):
+        feature, label = voc*rand*crop(self.features[idx], self.labels[idx],
                                        *self.crop_size)
-        return (feature, voc_label_indices(label, self.colormap2label))
+        return (feature, voc*label*indices(label, self.colormap2label))
 
-    def __len__(self):
+    def **len**(self):
         return len(self.features)
 ```
 
-### [**Reading the Dataset**]
+## # [**Reading the Dataset**]
 
 We use the custom `VOCSegDatase`t class to
 create instances of the training set and test set, respectively.
@@ -368,10 +368,10 @@ Below we can view the number of examples
 that are retained in the training set and test set.
 
 ```{.python .input}
-#@tab all
+# @tab all
 crop_size = (320, 480)
-voc_train = VOCSegDataset(True, crop_size, voc_dir)
-voc_test = VOCSegDataset(False, crop_size, voc_dir)
+voc*train = VOCSegDataset(True, crop*size, voc_dir)
+voc*test = VOCSegDataset(False, crop*size, voc_dir)
 ```
 
 Setting the batch size to 64,
@@ -381,9 +381,9 @@ Different from in image classification or object detection, labels here are thre
 
 ```{.python .input}
 batch_size = 64
-train_iter = gluon.data.DataLoader(voc_train, batch_size, shuffle=True,
+train*iter = gluon.data.DataLoader(voc*train, batch_size, shuffle=True,
                                    last_batch='discard',
-                                   num_workers=d2l.get_dataloader_workers())
+                                   num*workers=d2l.get*dataloader_workers())
 for X, Y in train_iter:
     print(X.shape)
     print(Y.shape)
@@ -391,67 +391,67 @@ for X, Y in train_iter:
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 batch_size = 64
-train_iter = torch.utils.data.DataLoader(voc_train, batch_size, shuffle=True,
+train*iter = torch.utils.data.DataLoader(voc*train, batch_size, shuffle=True,
                                     drop_last=True,
-                                    num_workers=d2l.get_dataloader_workers())
+                                    num*workers=d2l.get*dataloader_workers())
 for X, Y in train_iter:
     print(X.shape)
     print(Y.shape)
     break
 ```
 
-### [**Putting All Things Together**]
+## # [**Putting All Things Together**]
 
-Finally, we define the following `load_data_voc` function
+Finally, we define the following `load*data*voc` function
 to download and read the Pascal VOC2012 semantic segmentation dataset. 
 It returns data loaders for both the training and test datasets.
 
 ```{.python .input}
-#@save
-def load_data_voc(batch_size, crop_size):
+# @save
+def load*data*voc(batch*size, crop*size):
     """Load the VOC semantic segmentation dataset."""
-    voc_dir = d2l.download_extract('voc2012', os.path.join(
+    voc*dir = d2l.download*extract('voc2012', os.path.join(
         'VOCdevkit', 'VOC2012'))
-    num_workers = d2l.get_dataloader_workers()
+    num*workers = d2l.get*dataloader_workers()
     train_iter = gluon.data.DataLoader(
-        VOCSegDataset(True, crop_size, voc_dir), batch_size,
-        shuffle=True, last_batch='discard', num_workers=num_workers)
+        VOCSegDataset(True, crop*size, voc*dir), batch_size,
+        shuffle=True, last*batch='discard', num*workers=num_workers)
     test_iter = gluon.data.DataLoader(
-        VOCSegDataset(False, crop_size, voc_dir), batch_size,
-        last_batch='discard', num_workers=num_workers)
-    return train_iter, test_iter
+        VOCSegDataset(False, crop*size, voc*dir), batch_size,
+        last*batch='discard', num*workers=num_workers)
+    return train*iter, test*iter
 ```
 
 ```{.python .input}
-#@tab pytorch
-#@save
-def load_data_voc(batch_size, crop_size):
+# @tab pytorch
+# @save
+def load*data*voc(batch*size, crop*size):
     """Load the VOC semantic segmentation dataset."""
-    voc_dir = d2l.download_extract('voc2012', os.path.join(
+    voc*dir = d2l.download*extract('voc2012', os.path.join(
         'VOCdevkit', 'VOC2012'))
-    num_workers = d2l.get_dataloader_workers()
+    num*workers = d2l.get*dataloader_workers()
     train_iter = torch.utils.data.DataLoader(
-        VOCSegDataset(True, crop_size, voc_dir), batch_size,
-        shuffle=True, drop_last=True, num_workers=num_workers)
+        VOCSegDataset(True, crop*size, voc*dir), batch_size,
+        shuffle=True, drop*last=True, num*workers=num_workers)
     test_iter = torch.utils.data.DataLoader(
-        VOCSegDataset(False, crop_size, voc_dir), batch_size,
-        drop_last=True, num_workers=num_workers)
-    return train_iter, test_iter
+        VOCSegDataset(False, crop*size, voc*dir), batch_size,
+        drop*last=True, num*workers=num_workers)
+    return train*iter, test*iter
 ```
 
-## Summary
+# # Summary
 
 * Semantic segmentation recognizes and understands what are in an image in pixel level by dividing the image into regions belonging to different semantic classes.
 * On of the most important semantic segmentation dataset is Pascal VOC2012.
 * In semantic segmentation, since the input image and  label correspond one-to-one on the pixel, the input image is randomly cropped to a fixed shape rather than rescaled.
 
 
-## Exercises
+# # Exercises
 
 1. How can semantic segmentation be applied in autonomous vehicles and medical image diagnostics? Can you think of other applications? 
-1. Recall the descriptions of data augmentation in :numref:`sec_image_augmentation`. Which of the image augmentation methods used in image classification would be infeasible to be applied in semantic segmentation?
+1. Recall the descriptions of data augmentation in :numref:`sec*image*augmentation`. Which of the image augmentation methods used in image classification would be infeasible to be applied in semantic segmentation?
 
 
 :begin_tab:`mxnet`

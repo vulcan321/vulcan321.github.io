@@ -6,12 +6,12 @@ In the previous example of :numref:`fig_correlation`,
 our input had both a height and width of 3
 and our convolution kernel had both a height and width of 2,
 yielding an output representation with dimension $2\times2$.
-As we generalized in :numref:`sec_conv_layer`,
+As we generalized in :numref:`sec*conv*layer`,
 assuming that
-the input shape is $n_h\times n_w$
-and the convolution kernel shape is $k_h\times k_w$,
+the input shape is $n*h\times n*w$
+and the convolution kernel shape is $k*h\times k*w$,
 then the output shape will be
-$(n_h-k_h+1) \times (n_w-k_w+1)$.
+$(n*h-k*h+1) \times (n*w-k*w+1)$.
 Therefore, the output shape of the convolutional layer
 is determined by the shape of the input
 and the shape of the convolution kernel.
@@ -36,7 +36,7 @@ In other cases, we may want to reduce the dimensionality drastically,
 e.g., if we find the original input resolution to be unwieldy.
 *Strided convolutions* are a popular technique that can help in these instances.
 
-## Padding
+# # Padding
 
 As described above, one tricky issue when applying convolutional layers
 is that we tend to lose pixels on the perimeter of our image.
@@ -49,13 +49,13 @@ One straightforward solution to this problem
 is to add extra pixels of filler around the boundary of our input image,
 thus increasing the effective size of the image.
 Typically, we set the values of the extra pixels to zero.
-In :numref:`img_conv_pad`, we pad a $3 \times 3$ input,
+In :numref:`img*conv*pad`, we pad a $3 \times 3$ input,
 increasing its size to $5 \times 5$.
 The corresponding output then increases to a $4 \times 4$ matrix.
 The shaded portions are the first output element as well as the input and kernel tensor elements used for the output computation: $0\times0+0\times1+0\times2+0\times3=0$.
 
 ![Two-dimensional cross-correlation with padding.](../img/conv-pad.svg)
-:label:`img_conv_pad`
+:label:`img*conv*pad`
 
 In general, if we add a total of $p_h$ rows of padding
 (roughly half on top and half on bottom)
@@ -63,12 +63,12 @@ and a total of $p_w$ columns of padding
 (roughly half on the left and half on the right),
 the output shape will be
 
-$$(n_h-k_h+p_h+1)\times(n_w-k_w+p_w+1).$$
+$$(n*h-k*h+p*h+1)\times(n*w-k*w+p*w+1).$$
 
 This means that the height and width of the output
-will increase by $p_h$ and $p_w$, respectively.
+will increase by $p*h$ and $p*w$, respectively.
 
-In many cases, we will want to set $p_h=k_h-1$ and $p_w=k_w-1$
+In many cases, we will want to set $p*h=k*h-1$ and $p*w=k*w-1$
 to give the input and output the same height and width.
 This will make it easier to predict the output shape of each layer
 when constructing the network.
@@ -131,7 +131,7 @@ comp_conv2d(conv2d, X).shape
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 import torch
 from torch import nn
 
@@ -155,7 +155,7 @@ comp_conv2d(conv2d, X).shape
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 import tensorflow as tf
 
 # We define a convenience function to calculate the convolutional layer. This
@@ -190,7 +190,7 @@ comp_conv2d(conv2d, X).shape
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 # Here, we use a convolution kernel with a height of 5 and a width of 3. The
 # padding numbers on either side of the height and width are 2 and 1,
 # respectively
@@ -199,7 +199,7 @@ comp_conv2d(conv2d, X).shape
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 # Here, we use a convolution kernel with a height of 5 and a width of 3. The
 # padding numbers on either side of the height and width are 2 and 1,
 # respectively
@@ -207,7 +207,7 @@ conv2d = tf.keras.layers.Conv2D(1, kernel_size=(5, 3), padding='valid')
 comp_conv2d(conv2d, X).shape
 ```
 
-## Stride
+# # Stride
 
 When computing the cross-correlation,
 we start with the convolution window
@@ -222,7 +222,7 @@ skipping the intermediate locations.
 We refer to the number of rows and columns traversed per slide as the *stride*.
 So far, we have used strides of 1, both for height and width.
 Sometimes, we may want to use a larger stride.
-:numref:`img_conv_stride` shows a two-dimensional cross-correlation operation
+:numref:`img*conv*stride` shows a two-dimensional cross-correlation operation
 with a stride of 3 vertically and 2 horizontally.
 The shaded portions are the output elements as well as the input and kernel tensor elements used for the output computation: $0\times0+0\times1+1\times2+2\times3=8$, $0\times0+6\times1+0\times2+0\times3=6$.
 We can see that when the second element of the first column is outputted,
@@ -234,19 +234,19 @@ there is no output because the input element cannot fill the window
 (unless we add another column of padding).
 
 ![Cross-correlation with strides of 3 and 2 for height and width, respectively.](../img/conv-stride.svg)
-:label:`img_conv_stride`
+:label:`img*conv*stride`
 
 In general, when the stride for the height is $s_h$
 and the stride for the width is $s_w$, the output shape is
 
-$$\lfloor(n_h-k_h+p_h+s_h)/s_h\rfloor \times \lfloor(n_w-k_w+p_w+s_w)/s_w\rfloor.$$
+$$\lfloor(n*h-k*h+p*h+s*h)/s*h\rfloor \times \lfloor(n*w-k*w+p*w+s*w)/s*w\rfloor.$$
 
-If we set $p_h=k_h-1$ and $p_w=k_w-1$,
+If we set $p*h=k*h-1$ and $p*w=k*w-1$,
 then the output shape will be simplified to
-$\lfloor(n_h+s_h-1)/s_h\rfloor \times \lfloor(n_w+s_w-1)/s_w\rfloor$.
+$\lfloor(n*h+s*h-1)/s*h\rfloor \times \lfloor(n*w+s*w-1)/s*w\rfloor$.
 Going a step further, if the input height and width
 are divisible by the strides on the height and width,
-then the output shape will be $(n_h/s_h) \times (n_w/s_w)$.
+then the output shape will be $(n*h/s*h) \times (n*w/s*w)$.
 
 Below, we set the strides on both the height and width to 2,
 thus halving the input height and width.
@@ -257,13 +257,13 @@ comp_conv2d(conv2d, X).shape
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 conv2d = nn.Conv2d(1, 1, kernel_size=3, padding=1, stride=2)
 comp_conv2d(conv2d, X).shape
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 conv2d = tf.keras.layers.Conv2D(1, kernel_size=3, padding='same', strides=2)
 comp_conv2d(conv2d, X).shape
 ```
@@ -276,35 +276,35 @@ comp_conv2d(conv2d, X).shape
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 conv2d = nn.Conv2d(1, 1, kernel_size=(3, 5), padding=(0, 1), stride=(3, 4))
 comp_conv2d(conv2d, X).shape
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 conv2d = tf.keras.layers.Conv2D(1, kernel_size=(3,5), padding='valid',
                                 strides=(3, 4))
 comp_conv2d(conv2d, X).shape
 ```
 
 For the sake of brevity, when the padding number
-on both sides of the input height and width are $p_h$ and $p_w$ respectively, we call the padding $(p_h, p_w)$.
-Specifically, when $p_h = p_w = p$, the padding is $p$.
-When the strides on the height and width are $s_h$ and $s_w$, respectively,
-we call the stride $(s_h, s_w)$.
-Specifically, when $s_h = s_w = s$, the stride is $s$.
+on both sides of the input height and width are $p*h$ and $p*w$ respectively, we call the padding $(p*h, p*w)$.
+Specifically, when $p*h = p*w = p$, the padding is $p$.
+When the strides on the height and width are $s*h$ and $s*w$, respectively,
+we call the stride $(s*h, s*w)$.
+Specifically, when $s*h = s*w = s$, the stride is $s$.
 By default, the padding is 0 and the stride is 1.
 In practice, we rarely use inhomogeneous strides or padding,
-i.e., we usually have $p_h = p_w$ and $s_h = s_w$.
+i.e., we usually have $p*h = p*w$ and $s*h = s*w$.
 
-## Summary
+# # Summary
 
 * Padding can increase the height and width of the output. This is often used to give the output the same height and width as the input.
 * The stride can reduce the resolution of the output, for example reducing the height and width of the output to only $1/n$ of the height and width of the input ($n$ is an integer greater than $1$).
 * Padding and stride can be used to adjust the dimensionality of the data effectively.
 
-## Exercises
+# # Exercises
 
 1. For the last example in this section, use mathematics to calculate the output shape to see if it is consistent with the experimental result.
 1. Try other padding and stride combinations on the experiments in this section.

@@ -114,7 +114,7 @@
 
   
 
-2.【强制】普通索引命名格式：idx\_表名\_索引字段名（如果以首个字段名为索引有多个，可以加上第二个字段名，太长可以考虑缩写），唯一索引命名格式：uk\_表名\_索引字段名（索引名必须全部小写，长度太长可以利用缩写），主键索引命名：pk\_ 字段名
+2.【强制】普通索引命名格式：idx\*表名\*索引字段名（如果以首个字段名为索引有多个，可以加上第二个字段名，太长可以考虑缩写），唯一索引命名格式：uk\*表名\*索引字段名（索引名必须全部小写，长度太长可以利用缩写），主键索引命名：pk\_ 字段名
 
   
 
@@ -146,7 +146,7 @@
 
   
 
-10.【推荐】使用时间散表，表名后缀必须使用特定格式，比如按日散表user\_20110209、按月散表user\_201102
+10.【推荐】使用时间散表，表名后缀必须使用特定格式，比如按日散表user\*20110209、按月散表user\*201102
 
   
 
@@ -191,7 +191,7 @@
   
 
 ```
-CREATE TABLE `student_info` (    `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',    `stu_name` varchar(10) NOT NULL DEFAULT '' COMMENT '姓名',    `stu_score` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '总分',    `stu_num` int(11) NOT NULL COMMENT '学号',    `gmt_create` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',    `gmt_modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',    `status` tinyint(4) DEFAULT '1' COMMENT '1代表记录有效，0代表记录无效',      PRIMARY KEY (`id`),      UNIQUE KEY `uk_student_info_stu_num` (`stu_num`) USING BTREE,    KEY `idx_student_info_stu_name` (`stu_name`) USING BTREE) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='学生信息表';
+CREATE TABLE `student*info` (    `id` int(11) unsigned NOT NULL AUTO*INCREMENT COMMENT '主键',    `stu*name` varchar(10) NOT NULL DEFAULT '' COMMENT '姓名',    `stu*score` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '总分',    `stu*num` int(11) NOT NULL COMMENT '学号',    `gmt*create` timestamp NOT NULL DEFAULT CURRENT*TIMESTAMP COMMENT '创建时间',    `gmt*modified` timestamp NOT NULL DEFAULT CURRENT*TIMESTAMP ON UPDATE CURRENT*TIMESTAMP COMMENT '更新时间',    `status` tinyint(4) DEFAULT '1' COMMENT '1代表记录有效，0代表记录无效',      PRIMARY KEY (`id`),      UNIQUE KEY `uk*student*info*stu*num` (`stu*num`) USING BTREE,    KEY `idx*student*info*stu*name` (`stu*name`) USING BTREE) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='学生信息表';
 ```
 
 2.【强制】禁止使用外键，如果有外键完整性约束，需要应用程序控制
@@ -304,11 +304,11 @@ CREATE TABLE `student_info` (    `id` int(11) unsigned NOT NULL AUTO
 
   
 
-说明：用UNSINGED INT存储IP地址占用4字节，CHAR(15)则占用15字节。另外，计算机处理整数类型比字符串类型快。使用INT UNSIGNED而不是CHAR(15)来存储IPV4地址，通过MySQL函数inet\_ntoa和inet\_aton来进行转化。IPv6地址目前没有转化函数，需要使用DECIMAL或两个BIGINT来存储。例如:
+说明：用UNSINGED INT存储IP地址占用4字节，CHAR(15)则占用15字节。另外，计算机处理整数类型比字符串类型快。使用INT UNSIGNED而不是CHAR(15)来存储IPV4地址，通过MySQL函数inet\*ntoa和inet\*aton来进行转化。IPv6地址目前没有转化函数，需要使用DECIMAL或两个BIGINT来存储。例如:
 
   
 
-SELECT INET\_ATON('192.168.172.3'); 3232279555 SELECT INET\_NTOA(3232279555); 192.168.172.3
+SELECT INET\*ATON('192.168.172.3'); 3232279555 SELECT INET\*NTOA(3232279555); 192.168.172.3
 
   
 
@@ -360,7 +360,7 @@ DATETIME和TIMESTAMP都是精确到秒，优先选择TIMESTAMP，因为TIMESTAMP
 
   
 
-自动初始化，而且自动更新：column1 TIMESTAMP DEFAULT CURRENT\_TIMESTAMP ON UPDATECURRENT\_TIMESTAMP 只是自动初始化：column1 TIMESTAMP DEFAULT CURRENT\_TIMESTAMP 自动更新，初始化的值为0：column1 TIMESTAMP DEFAULT 0 ON UPDATE CURRENT\_TIMESTAMP 初始化的值为0：column1 TIMESTAMP DEFAULT 0
+自动初始化，而且自动更新：column1 TIMESTAMP DEFAULT CURRENT\*TIMESTAMP ON UPDATECURRENT\*TIMESTAMP 只是自动初始化：column1 TIMESTAMP DEFAULT CURRENT\*TIMESTAMP 自动更新，初始化的值为0：column1 TIMESTAMP DEFAULT 0 ON UPDATE CURRENT\*TIMESTAMP 初始化的值为0：column1 TIMESTAMP DEFAULT 0
 
   
 
@@ -516,11 +516,11 @@ DATETIME和TIMESTAMP都是精确到秒，优先选择TIMESTAMP，因为TIMESTAMP
 
   
 
-说明：下面的表增加一列url\_crc32，然后对url\_crc32建立索引，减少索引字段的长度，提高效率
+说明：下面的表增加一列url\*crc32，然后对url\*crc32建立索引，减少索引字段的长度，提高效率
 
   
 
-CREATE TABLE url(   ...   url VARCHAR(255) NOT NULL DEFAULT 0,   url\_crc32 INT UNSIGNED NOT NULL DEFAULT 0,   ...   index idx\_url(url\_crc32) ）
+CREATE TABLE url(   ...   url VARCHAR(255) NOT NULL DEFAULT 0,   url\*crc32 INT UNSIGNED NOT NULL DEFAULT 0,   ...   index idx\*url(url\_crc32) ）
 
   
 

@@ -13,10 +13,10 @@ try GetProcessForPID() followed by GetProcessInformation()
 You can map process name to bundle id using `NSWorkspace`.
 
 ```objc
-#include <sys/sysctl.h>
-#include <pwd.h>
-typedef struct kinfo_proc kinfo_proc;
-static int GetBSDProcessList(kinfo_proc **procList, size_t *procCount)
+# include <sys/sysctl.h>
+# include <pwd.h>
+typedef struct kinfo*proc kinfo*proc;
+static int GetBSDProcessList(kinfo*proc **procList, size*t *procCount)
 // Returns a list of all BSD processes on the system.  This routine
 // allocates the list and puts it in *procList and a count of the
 // number of entries in *procCount.  You are responsible for freeing
@@ -27,7 +27,7 @@ static int GetBSDProcessList(kinfo_proc **procList, size_t *procCount)
     int                 err;
     kinfo_proc *        result;
     bool                done;
-    static const int    name[] = { CTL_KERN, KERN_PROC, KERN_PROC_ALL, 0 };
+    static const int    name[] = { CTL*KERN, KERN*PROC, KERN*PROC*ALL, 0 };
     // Declaring name as const requires us to cast it when passing it to
     // sysctl because the prototype doesn't include the const modifier.
     size_t              length;
@@ -120,11 +120,11 @@ static int GetBSDProcessList(kinfo_proc **procList, size_t *procCount)
 
     for (int i = 0; i < mycount; i++) {
         struct kinfo_proc *currentProcess = &mylist[i];
-        struct passwd *user = getpwuid(currentProcess->kp_eproc.e_ucred.cr_uid);
+        struct passwd *user = getpwuid(currentProcess->kp*eproc.e*ucred.cr_uid);
         NSMutableDictionary *entry = [NSMutableDictionary dictionaryWithCapacity:4];
 
-        NSNumber *processID = [NSNumber numberWithInt:currentProcess->kp_proc.p_pid];
-        NSString *processName = [NSString stringWithFormat: @"%s",currentProcess->kp_proc.p_comm];
+        NSNumber *processID = [NSNumber numberWithInt:currentProcess->kp*proc.p*pid];
+        NSString *processName = [NSString stringWithFormat: @"%s",currentProcess->kp*proc.p*comm];
         if (processID)[entry setObject:processID forKey:@"processID"];
         if (processName)[entry setObject:processName forKey:@"processName"];
         if (processName)
@@ -134,7 +134,7 @@ static int GetBSDProcessList(kinfo_proc **procList, size_t *procCount)
                 [entry setObject:bunldeID forKey:@"bundleId"];
         }
         if (user){
-            NSNumber *userID = [NSNumber numberWithUnsignedInt:currentProcess->kp_eproc.e_ucred.cr_uid];
+            NSNumber *userID = [NSNumber numberWithUnsignedInt:currentProcess->kp*eproc.e*ucred.cr_uid];
             NSString *userName = [NSString stringWithFormat: @"%s",user->pw_name];
 
             if (userID)[entry setObject:userID forKey:@"userID"];

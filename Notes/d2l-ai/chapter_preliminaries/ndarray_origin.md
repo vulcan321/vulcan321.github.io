@@ -23,7 +23,7 @@ These properties make the tensor class suitable for deep learning.
 Throughout the book, when we say tensors,
 we are referring to instances of the tensor class unless otherwise stated.
 
-## Getting Started
+# # Getting Started
 
 In this section, we aim to get you up and running,
 equipping you with the basic math and numerical computing tools
@@ -61,12 +61,12 @@ npx.set_np()
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 import torch
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 import tensorflow as tf
 ```
 
@@ -91,13 +91,13 @@ x
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 x = torch.arange(12)
 x
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 x = tf.range(12)
 x
 ```
@@ -106,7 +106,7 @@ x
 by inspecting its `shape` property.
 
 ```{.python .input}
-#@tab all
+# @tab all
 x.shape
 ```
 
@@ -121,12 +121,12 @@ x.size
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 x.numel()
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 tf.size(x)
 ```
 
@@ -143,13 +143,13 @@ Note that the size is unaltered by reshaping.
 
 
 ```{.python .input}
-#@tab mxnet, pytorch
+# @tab mxnet, pytorch
 X = x.reshape(3, 4)
 X
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 X = tf.reshape(x, (3, 4))
 X
 ```
@@ -170,7 +170,7 @@ Typically, we will want our matrices initialized
 either with zeros, ones, some other constants,
 or numbers randomly sampled from a specific distribution.
 [**We can create a tensor representing a tensor with all elements
-set to 0**] (~~or 1~~)
+set to 0**](~~or 1~~)
 and a shape of (2, 3, 4) as follows:
 
 
@@ -179,12 +179,12 @@ np.zeros((2, 3, 4))
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 torch.zeros((2, 3, 4))
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 tf.zeros((2, 3, 4))
 ```
 
@@ -195,12 +195,12 @@ np.ones((2, 3, 4))
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 torch.ones((2, 3, 4))
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 tf.ones((2, 3, 4))
 ```
 
@@ -221,12 +221,12 @@ np.random.normal(0, 1, size=(3, 4))
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 torch.randn(3, 4)
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 tf.random.normal(shape=[3, 4])
 ```
 
@@ -240,16 +240,16 @@ np.array([[2, 1, 4, 3], [1, 2, 3, 4], [4, 3, 2, 1]])
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 torch.tensor([[2, 1, 4, 3], [1, 2, 3, 4], [4, 3, 2, 1]])
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 tf.constant([[2, 1, 4, 3], [1, 2, 3, 4], [4, 3, 2, 1]])
 ```
 
-## Operations
+# # Operations
 
 This book is not about software engineering.
 Our interests are not limited to simply
@@ -276,8 +276,8 @@ by the signature $f: \mathbb{R}, \mathbb{R} \rightarrow \mathbb{R}$.
 Given any two vectors $\mathbf{u}$ and $\mathbf{v}$ *of the same shape*,
 and a binary operator $f$, we can produce a vector
 $\mathbf{c} = F(\mathbf{u},\mathbf{v})$
-by setting $c_i \gets f(u_i, v_i)$ for all $i$,
-where $c_i, u_i$, and $v_i$ are the $i^\mathrm{th}$ elements
+by setting $c*i \gets f(u*i, v_i)$ for all $i$,
+where $c*i, u*i$, and $v_i$ are the $i^\mathrm{th}$ elements
 of vectors $\mathbf{c}, \mathbf{u}$, and $\mathbf{v}$.
 Here, we produced the vector-valued
 $F: \mathbb{R}^d, \mathbb{R}^d \rightarrow \mathbb{R}^d$
@@ -291,7 +291,7 @@ We can call elementwise operations on any two tensors of the same shape.
 In the following example, we use commas to formulate a 5-element tuple,
 where each element is the result of an elementwise operation.
 
-### Operations
+## # Operations
 
 [**The common standard arithmetic operators
 (`+`, `-`, `*`, `/`, and `**`)
@@ -304,14 +304,14 @@ x + y, x - y, x * y, x / y, x ** y  # The ** operator is exponentiation
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 x = torch.tensor([1.0, 2, 4, 8])
 y = torch.tensor([2, 2, 2, 2])
 x + y, x - y, x * y, x / y, x ** y  # The ** operator is exponentiation
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 x = tf.constant([1.0, 2, 4, 8])
 y = tf.constant([2.0, 2, 2, 2])
 x + y, x - y, x * y, x / y, x ** y  # The ** operator is exponentiation
@@ -325,12 +325,12 @@ np.exp(x)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 torch.exp(x)
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 tf.exp(x)
 ```
 
@@ -359,14 +359,14 @@ np.concatenate([X, Y], axis=0), np.concatenate([X, Y], axis=1)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 X = torch.arange(12, dtype=torch.float32).reshape((3,4))
 Y = torch.tensor([[2.0, 1, 4, 3], [1, 2, 3, 4], [4, 3, 2, 1]])
 torch.cat((X, Y), dim=0), torch.cat((X, Y), dim=1)
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 X = tf.reshape(tf.range(12, dtype=tf.float32), (3, 4))
 Y = tf.constant([[2.0, 1, 4, 3], [1, 2, 3, 4], [4, 3, 2, 1]])
 tf.concat([X, Y], axis=0), tf.concat([X, Y], axis=1)
@@ -381,23 +381,23 @@ meaning that the logical statement `X == Y` is true at that position;
 otherwise that position takes 0.
 
 ```{.python .input}
-#@tab all
+# @tab all
 X == Y
 ```
 
 [**Summing all the elements in the tensor**] yields a tensor with only one element.
 
 ```{.python .input}
-#@tab mxnet, pytorch
+# @tab mxnet, pytorch
 X.sum()
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 tf.reduce_sum(X)
 ```
 
-## Broadcasting Mechanism
+# # Broadcasting Mechanism
 :label:`subsec_broadcasting`
 
 In the above section, we saw how to perform elementwise operations
@@ -423,14 +423,14 @@ a, b
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 a = torch.arange(3).reshape((3, 1))
 b = torch.arange(2).reshape((1, 2))
 a, b
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 a = tf.reshape(tf.range(3), (3, 1))
 b = tf.reshape(tf.range(2), (1, 2))
 a, b
@@ -445,11 +445,11 @@ before adding up both elementwise.
 
 
 ```{.python .input}
-#@tab all
+# @tab all
 a + b
 ```
 
-## Indexing and Slicing
+# # Indexing and Slicing
 
 Just as in any other Python array, elements in a tensor can be accessed by index.
 As in any Python array, the first element has index 0
@@ -463,7 +463,7 @@ selects the second and the third elements**] as follows:
 
 
 ```{.python .input}
-#@tab all
+# @tab all
 X[-1], X[1:3]
 ```
 
@@ -482,13 +482,13 @@ Beyond assigning a value to the entire `Variable`, we can write elements of a
 :end_tab:
 
 ```{.python .input}
-#@tab mxnet, pytorch
+# @tab mxnet, pytorch
 X[1, 2] = 9
 X
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 X_var = tf.Variable(X)
 X_var[1, 2].assign(9)
 X_var
@@ -504,19 +504,19 @@ this obviously also works for vectors
 and for tensors of more than 2 dimensions.
 
 ```{.python .input}
-#@tab mxnet, pytorch
+# @tab mxnet, pytorch
 X[0:2, :] = 12
 X
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 X_var = tf.Variable(X)
-X_var[0:2, :].assign(tf.ones(X_var[0:2,:].shape, dtype = tf.float32) * 12)
+X*var[0:2, :].assign(tf.ones(X*var[0:2,:].shape, dtype = tf.float32) * 12)
 X_var
 ```
 
-## Saving Memory
+# # Saving Memory
 
 [**Running operations can cause new memory to be
 allocated to host results.**]
@@ -531,7 +531,7 @@ allocating new memory for the result and then makes `Y`
 point to this new location in memory.
 
 ```{.python .input}
-#@tab all
+# @tab all
 before = id(Y)
 Y = Y + X
 id(Y) == before
@@ -577,7 +577,7 @@ print('id(Z):', id(Z))
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 Z = torch.zeros_like(Y)
 print('id(Z):', id(Z))
 Z[:] = X + Y
@@ -585,7 +585,7 @@ print('id(Z):', id(Z))
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 Z = tf.Variable(tf.zeros_like(Y))
 print('id(Z):', id(Z))
 Z.assign(X + Y)
@@ -615,14 +615,14 @@ overhead of TensorFlow computations.
 :end_tab:
 
 ```{.python .input}
-#@tab mxnet, pytorch
+# @tab mxnet, pytorch
 before = id(X)
 X += Y
 id(X) == before
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 @tf.function
 def computation(X, Y):
     Z = tf.zeros_like(Y)  # This unused value will be pruned out
@@ -635,7 +635,7 @@ computation(X, Y)
 ```
 
 
-## Conversion to Other Python Objects
+# # Conversion to Other Python Objects
 
 [**Converting to a NumPy tensor**], or vice versa, is easy.
 The converted result does not share memory.
@@ -653,14 +653,14 @@ type(A), type(B)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 A = X.numpy()
 B = torch.tensor(A)
 type(A), type(B)
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 A = X.numpy()
 B = tf.constant(A)
 type(A), type(B)
@@ -676,23 +676,23 @@ a, a.item(), float(a), int(a)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 a = torch.tensor([3.5])
 a, a.item(), float(a), int(a)
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 a = tf.constant([3.5]).numpy()
 a, a.item(), float(a), int(a)
 ```
 
-## Summary
+# # Summary
 
 * The main interface to store and manipulate data for deep learning is the tensor ($n$-dimensional array). It provides a variety of functionalities including basic mathematics operations, broadcasting, indexing, slicing, memory saving, and conversion to other Python objects.
 
 
-## Exercises
+# # Exercises
 
 1. Run the code in this section. Change the conditional statement `X == Y` in this section to `X < Y` or `X > Y`, and then see what kind of tensor you can get.
 1. Replace the two tensors that operate by element in the broadcasting mechanism with other shapes, e.g., 3-dimensional tensors. Is the result the same as expected?

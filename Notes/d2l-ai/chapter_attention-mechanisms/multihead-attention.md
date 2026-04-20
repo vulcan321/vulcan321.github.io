@@ -25,7 +25,7 @@
 ![多头注意力：多个头连结然后线性变换](../img/multi-head-attention.svg)
 :label:`fig_multi-head-attention`
 
-## 模型
+# # 模型
 
 在实现多头注意力之前，让我们用数学语言将这个模型形式化地描述出来。
 给定查询$\mathbf{q} \in \mathbb{R}^{d_q}$、
@@ -33,20 +33,20 @@
 值$\mathbf{v} \in \mathbb{R}^{d_v}$，
 每个注意力头$\mathbf{h}_i$（$i = 1, \ldots, h$）的计算方法为：
 
-$$\mathbf{h}_i = f(\mathbf W_i^{(q)}\mathbf q, \mathbf W_i^{(k)}\mathbf k,\mathbf W_i^{(v)}\mathbf v) \in \mathbb R^{p_v},$$
+$$\mathbf{h}*i = f(\mathbf W*i^{(q)}\mathbf q, \mathbf W*i^{(k)}\mathbf k,\mathbf W*i^{(v)}\mathbf v) \in \mathbb R^{p_v},$$
 
 其中，可学习的参数包括
-$\mathbf W_i^{(q)}\in\mathbb R^{p_q\times d_q}$、
-$\mathbf W_i^{(k)}\in\mathbb R^{p_k\times d_k}$和
-$\mathbf W_i^{(v)}\in\mathbb R^{p_v\times d_v}$，
+$\mathbf W*i^{(q)}\in\mathbb R^{p*q\times d_q}$、
+$\mathbf W*i^{(k)}\in\mathbb R^{p*k\times d_k}$和
+$\mathbf W*i^{(v)}\in\mathbb R^{p*v\times d_v}$，
 以及代表注意力汇聚的函数$f$。
 $f$可以是 :numref:`sec_attention-scoring-functions`中的
 加性注意力和缩放点积注意力。
 多头注意力的输出需要经过另一个线性转换，
 它对应着$h$个头连结后的结果，因此其可学习参数是
-$\mathbf W_o\in\mathbb R^{p_o\times h p_v}$：
+$\mathbf W*o\in\mathbb R^{p*o\times h p_v}$：
 
-$$\mathbf W_o \begin{bmatrix}\mathbf h_1\\\vdots\\\mathbf h_h\end{bmatrix} \in \mathbb{R}^{p_o}.$$
+$$\mathbf W*o \begin{bmatrix}\mathbf h*1\\\vdots\\\mathbf h*h\end{bmatrix} \in \mathbb{R}^{p*o}.$$
 
 基于这种设计，每个头都可能会关注输入的不同部分，
 可以表示比简单加权平均值更复杂的函数。
@@ -60,7 +60,7 @@ npx.set_np()
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 from d2l import torch as d2l
 import math
 import torch
@@ -68,13 +68,13 @@ from torch import nn
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 from d2l import tensorflow as d2l
 import tensorflow as tf
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 from d2l import paddle as d2l
 import warnings
 warnings.filterwarnings("ignore")
@@ -83,203 +83,203 @@ import paddle
 from paddle import nn
 ```
 
-## 实现
+# # 实现
 
 在实现过程中通常[**选择缩放点积注意力作为每一个注意力头**]。
 为了避免计算代价和参数代价的大幅增长，
-我们设定$p_q = p_k = p_v = p_o / h$。
+我们设定$p*q = p*k = p*v = p*o / h$。
 值得注意的是，如果将查询、键和值的线性变换的输出数量设置为
-$p_q h = p_k h = p_v h = p_o$，
+$p*q h = p*k h = p*v h = p*o$，
 则可以并行计算$h$个头。
-在下面的实现中，$p_o$是通过参数`num_hiddens`指定的。
+在下面的实现中，$p*o$是通过参数`num*hiddens`指定的。
 
 ```{.python .input}
-#@save
+# @save
 class MultiHeadAttention(nn.Block):
     """多头注意力"""
-    def __init__(self, num_hiddens, num_heads, dropout, use_bias=False,
+    def **init**(self, num*hiddens, num*heads, dropout, use_bias=False,
                  **kwargs):
-        super(MultiHeadAttention, self).__init__(**kwargs)
-        self.num_heads = num_heads
+        super(MultiHeadAttention, self).**init**(**kwargs)
+        self.num*heads = num*heads
         self.attention = d2l.DotProductAttention(dropout)
-        self.W_q = nn.Dense(num_hiddens, use_bias=use_bias, flatten=False)
-        self.W_k = nn.Dense(num_hiddens, use_bias=use_bias, flatten=False)
-        self.W_v = nn.Dense(num_hiddens, use_bias=use_bias, flatten=False)
-        self.W_o = nn.Dense(num_hiddens, use_bias=use_bias, flatten=False)
+        self.W*q = nn.Dense(num*hiddens, use*bias=use*bias, flatten=False)
+        self.W*k = nn.Dense(num*hiddens, use*bias=use*bias, flatten=False)
+        self.W*v = nn.Dense(num*hiddens, use*bias=use*bias, flatten=False)
+        self.W*o = nn.Dense(num*hiddens, use*bias=use*bias, flatten=False)
 
     def forward(self, queries, keys, values, valid_lens):
         # queries，keys，values的形状:
-        # (batch_size，查询或者“键－值”对的个数，num_hiddens)
+        # (batch*size，查询或者“键－值”对的个数，num*hiddens)
         # valid_lens　的形状:
-        # (batch_size，)或(batch_size，查询的个数)
+        # (batch*size，)或(batch*size，查询的个数)
         # 经过变换后，输出的queries，keys，values　的形状:
-        # (batch_size*num_heads，查询或者“键－值”对的个数，
-        # num_hiddens/num_heads)
-        queries = transpose_qkv(self.W_q(queries), self.num_heads)
-        keys = transpose_qkv(self.W_k(keys), self.num_heads)
-        values = transpose_qkv(self.W_v(values), self.num_heads)
+        # (batch*size*num*heads，查询或者“键－值”对的个数，
+        # num*hiddens/num*heads)
+        queries = transpose*qkv(self.W*q(queries), self.num_heads)
+        keys = transpose*qkv(self.W*k(keys), self.num_heads)
+        values = transpose*qkv(self.W*v(values), self.num_heads)
 
         if valid_lens is not None:
             # 在轴0，将第一项（标量或者矢量）复制num_heads次，
             # 然后如此复制第二项，然后诸如此类。
-            valid_lens = valid_lens.repeat(self.num_heads, axis=0)
+            valid*lens = valid*lens.repeat(self.num_heads, axis=0)
 
-        # output的形状:(batch_size*num_heads，查询的个数，
-        # num_hiddens/num_heads)
+        # output的形状:(batch*size*num*heads，查询的个数，
+        # num*hiddens/num*heads)
         output = self.attention(queries, keys, values, valid_lens)
         
-        # output_concat的形状:(batch_size，查询的个数，num_hiddens)
-        output_concat = transpose_output(output, self.num_heads)
-        return self.W_o(output_concat)
+        # output*concat的形状:(batch*size，查询的个数，num_hiddens)
+        output*concat = transpose*output(output, self.num_heads)
+        return self.W*o(output*concat)
 ```
 
 ```{.python .input}
-#@tab pytorch
-#@save
+# @tab pytorch
+# @save
 class MultiHeadAttention(nn.Module):
     """多头注意力"""
-    def __init__(self, key_size, query_size, value_size, num_hiddens,
+    def **init**(self, key*size, query*size, value*size, num*hiddens,
                  num_heads, dropout, bias=False, **kwargs):
-        super(MultiHeadAttention, self).__init__(**kwargs)
-        self.num_heads = num_heads
+        super(MultiHeadAttention, self).**init**(**kwargs)
+        self.num*heads = num*heads
         self.attention = d2l.DotProductAttention(dropout)
-        self.W_q = nn.Linear(query_size, num_hiddens, bias=bias)
-        self.W_k = nn.Linear(key_size, num_hiddens, bias=bias)
-        self.W_v = nn.Linear(value_size, num_hiddens, bias=bias)
-        self.W_o = nn.Linear(num_hiddens, num_hiddens, bias=bias)
+        self.W*q = nn.Linear(query*size, num_hiddens, bias=bias)
+        self.W*k = nn.Linear(key*size, num_hiddens, bias=bias)
+        self.W*v = nn.Linear(value*size, num_hiddens, bias=bias)
+        self.W*o = nn.Linear(num*hiddens, num_hiddens, bias=bias)
 
     def forward(self, queries, keys, values, valid_lens):
         # queries，keys，values的形状:
-        # (batch_size，查询或者“键－值”对的个数，num_hiddens)
+        # (batch*size，查询或者“键－值”对的个数，num*hiddens)
         # valid_lens　的形状:
-        # (batch_size，)或(batch_size，查询的个数)
+        # (batch*size，)或(batch*size，查询的个数)
         # 经过变换后，输出的queries，keys，values　的形状:
-        # (batch_size*num_heads，查询或者“键－值”对的个数，
-        # num_hiddens/num_heads)
-        queries = transpose_qkv(self.W_q(queries), self.num_heads)
-        keys = transpose_qkv(self.W_k(keys), self.num_heads)
-        values = transpose_qkv(self.W_v(values), self.num_heads)
+        # (batch*size*num*heads，查询或者“键－值”对的个数，
+        # num*hiddens/num*heads)
+        queries = transpose*qkv(self.W*q(queries), self.num_heads)
+        keys = transpose*qkv(self.W*k(keys), self.num_heads)
+        values = transpose*qkv(self.W*v(values), self.num_heads)
 
         if valid_lens is not None:
             # 在轴0，将第一项（标量或者矢量）复制num_heads次，
             # 然后如此复制第二项，然后诸如此类。
-            valid_lens = torch.repeat_interleave(
-                valid_lens, repeats=self.num_heads, dim=0)
+            valid*lens = torch.repeat*interleave(
+                valid*lens, repeats=self.num*heads, dim=0)
 
-        # output的形状:(batch_size*num_heads，查询的个数，
-        # num_hiddens/num_heads)
+        # output的形状:(batch*size*num*heads，查询的个数，
+        # num*hiddens/num*heads)
         output = self.attention(queries, keys, values, valid_lens)
 
-        # output_concat的形状:(batch_size，查询的个数，num_hiddens)
-        output_concat = transpose_output(output, self.num_heads)
-        return self.W_o(output_concat)
+        # output*concat的形状:(batch*size，查询的个数，num_hiddens)
+        output*concat = transpose*output(output, self.num_heads)
+        return self.W*o(output*concat)
 ```
 
 ```{.python .input}
-#@tab tensorflow
-#@save
+# @tab tensorflow
+# @save
 class MultiHeadAttention(tf.keras.layers.Layer):
     """多头注意力"""
-    def __init__(self, key_size, query_size, value_size, num_hiddens,
+    def **init**(self, key*size, query*size, value*size, num*hiddens,
                  num_heads, dropout, bias=False, **kwargs):
-        super().__init__(**kwargs)
-        self.num_heads = num_heads
+        super().**init**(**kwargs)
+        self.num*heads = num*heads
         self.attention = d2l.DotProductAttention(dropout)
-        self.W_q = tf.keras.layers.Dense(num_hiddens, use_bias=bias)
-        self.W_k = tf.keras.layers.Dense(num_hiddens, use_bias=bias)
-        self.W_v = tf.keras.layers.Dense(num_hiddens, use_bias=bias)
-        self.W_o = tf.keras.layers.Dense(num_hiddens, use_bias=bias)
+        self.W*q = tf.keras.layers.Dense(num*hiddens, use_bias=bias)
+        self.W*k = tf.keras.layers.Dense(num*hiddens, use_bias=bias)
+        self.W*v = tf.keras.layers.Dense(num*hiddens, use_bias=bias)
+        self.W*o = tf.keras.layers.Dense(num*hiddens, use_bias=bias)
     
     def call(self, queries, keys, values, valid_lens, **kwargs):
         # queries，keys，values的形状:
-        # (batch_size，查询或者“键－值”对的个数，num_hiddens)
+        # (batch*size，查询或者“键－值”对的个数，num*hiddens)
         # valid_lens　的形状:
-        # (batch_size，)或(batch_size，查询的个数)
+        # (batch*size，)或(batch*size，查询的个数)
         # 经过变换后，输出的queries，keys，values　的形状:
-        # (batch_size*num_heads，查询或者“键－值”对的个数，
-        # num_hiddens/num_heads)
-        queries = transpose_qkv(self.W_q(queries), self.num_heads)
-        keys = transpose_qkv(self.W_k(keys), self.num_heads)
-        values = transpose_qkv(self.W_v(values), self.num_heads)
+        # (batch*size*num*heads，查询或者“键－值”对的个数，
+        # num*hiddens/num*heads)
+        queries = transpose*qkv(self.W*q(queries), self.num_heads)
+        keys = transpose*qkv(self.W*k(keys), self.num_heads)
+        values = transpose*qkv(self.W*v(values), self.num_heads)
         
         if valid_lens is not None:
             # 在轴0，将第一项（标量或者矢量）复制num_heads次，
             # 然后如此复制第二项，然后诸如此类。
-            valid_lens = tf.repeat(valid_lens, repeats=self.num_heads, axis=0)
+            valid*lens = tf.repeat(valid*lens, repeats=self.num_heads, axis=0)
             
-        # output的形状:(batch_size*num_heads，查询的个数，
-        # num_hiddens/num_heads)
+        # output的形状:(batch*size*num*heads，查询的个数，
+        # num*hiddens/num*heads)
         output = self.attention(queries, keys, values, valid_lens, **kwargs)
         
-        # output_concat的形状:(batch_size，查询的个数，num_hiddens)
-        output_concat = transpose_output(output, self.num_heads)
-        return self.W_o(output_concat)
+        # output*concat的形状:(batch*size，查询的个数，num_hiddens)
+        output*concat = transpose*output(output, self.num_heads)
+        return self.W*o(output*concat)
 ```
 
 ```{.python .input}
-#@tab paddle
-#@save
+# @tab paddle
+# @save
 class MultiHeadAttention(nn.Layer):
-    def __init__(self, key_size, query_size, value_size, num_hiddens,
+    def **init**(self, key*size, query*size, value*size, num*hiddens,
                  num_heads, dropout, bias=False, **kwargs):
-        super(MultiHeadAttention, self).__init__(**kwargs)
-        self.num_heads = num_heads
+        super(MultiHeadAttention, self).**init**(**kwargs)
+        self.num*heads = num*heads
         self.attention = d2l.DotProductAttention(dropout)
-        self.W_q = nn.Linear(query_size, num_hiddens, bias_attr=bias)
-        self.W_k = nn.Linear(key_size, num_hiddens, bias_attr=bias)
-        self.W_v = nn.Linear(value_size, num_hiddens, bias_attr=bias)
-        self.W_o = nn.Linear(num_hiddens, num_hiddens, bias_attr=bias)
+        self.W*q = nn.Linear(query*size, num*hiddens, bias*attr=bias)
+        self.W*k = nn.Linear(key*size, num*hiddens, bias*attr=bias)
+        self.W*v = nn.Linear(value*size, num*hiddens, bias*attr=bias)
+        self.W*o = nn.Linear(num*hiddens, num*hiddens, bias*attr=bias)
 
     def forward(self, queries, keys, values, valid_lens):
         # queries，keys，values的形状:
-        # (batch_size，查询或者“键－值”对的个数，num_hiddens)
+        # (batch*size，查询或者“键－值”对的个数，num*hiddens)
         # valid_lens　的形状:
-        # (batch_size，)或(batch_size，查询的个数)
+        # (batch*size，)或(batch*size，查询的个数)
         # 经过变换后，输出的queries，keys，values　的形状:
-        # (batch_size*num_heads，查询或者“键－值”对的个数，
-        # num_hiddens/num_heads)
-        queries = transpose_qkv(self.W_q(queries), self.num_heads)
-        keys = transpose_qkv(self.W_k(keys), self.num_heads)
-        values = transpose_qkv(self.W_v(values), self.num_heads)
+        # (batch*size*num*heads，查询或者“键－值”对的个数，
+        # num*hiddens/num*heads)
+        queries = transpose*qkv(self.W*q(queries), self.num_heads)
+        keys = transpose*qkv(self.W*k(keys), self.num_heads)
+        values = transpose*qkv(self.W*v(values), self.num_heads)
         if valid_lens is not None:
             # 在轴0，将第一项（标量或者矢量）复制num_heads次，
             # 然后如此复制第二项，然后诸如此类。
-            valid_lens = paddle.repeat_interleave(
-                valid_lens, repeats=self.num_heads, axis=0)
+            valid*lens = paddle.repeat*interleave(
+                valid*lens, repeats=self.num*heads, axis=0)
 
-        # output的形状:(batch_size*num_heads，查询的个数，
-        # num_hiddens/num_heads)
+        # output的形状:(batch*size*num*heads，查询的个数，
+        # num*hiddens/num*heads)
         output = self.attention(queries, keys, values, valid_lens)
 
-        # output_concat的形状:(batch_size，查询的个数，num_hiddens)
-        output_concat = transpose_output(output, self.num_heads)
-        return self.W_o(output_concat)
+        # output*concat的形状:(batch*size，查询的个数，num_hiddens)
+        output*concat = transpose*output(output, self.num_heads)
+        return self.W*o(output*concat)
 ```
 
 为了能够[**使多个头并行计算**]，
 上面的`MultiHeadAttention`类将使用下面定义的两个转置函数。
-具体来说，`transpose_output`函数反转了`transpose_qkv`函数的操作。
+具体来说，`transpose*output`函数反转了`transpose*qkv`函数的操作。
 
 ```{.python .input}
-#@save
-def transpose_qkv(X, num_heads):
+# @save
+def transpose*qkv(X, num*heads):
     """为了多注意力头的并行计算而变换形状"""
-    # 输入X的形状:(batch_size，查询或者“键－值”对的个数，num_hiddens)
-    # 输出X的形状:(batch_size，查询或者“键－值”对的个数，num_heads，
-    # num_hiddens/num_heads)
+    # 输入X的形状:(batch*size，查询或者“键－值”对的个数，num*hiddens)
+    # 输出X的形状:(batch*size，查询或者“键－值”对的个数，num*heads，
+    # num*hiddens/num*heads)
     X = X.reshape(X.shape[0], X.shape[1], num_heads, -1)
 
-    # 输出X的形状:(batch_size，num_heads，查询或者“键－值”对的个数,
-    # num_hiddens/num_heads)
+    # 输出X的形状:(batch*size，num*heads，查询或者“键－值”对的个数,
+    # num*hiddens/num*heads)
     X = X.transpose(0, 2, 1, 3)
 
-    # 最终输出的形状:(batch_size*num_heads,查询或者“键－值”对的个数,
-    # num_hiddens/num_heads)
+    # 最终输出的形状:(batch*size*num*heads,查询或者“键－值”对的个数,
+    # num*hiddens/num*heads)
     return X.reshape(-1, X.shape[2], X.shape[3])
 
 
-#@save
-def transpose_output(X, num_heads):
+# @save
+def transpose*output(X, num*heads):
     """逆转transpose_qkv函数的操作"""
     X = X.reshape(-1, num_heads, X.shape[1], X.shape[2])
     X = X.transpose(0, 2, 1, 3)
@@ -287,26 +287,26 @@ def transpose_output(X, num_heads):
 ```
 
 ```{.python .input}
-#@tab pytorch
-#@save
-def transpose_qkv(X, num_heads):
+# @tab pytorch
+# @save
+def transpose*qkv(X, num*heads):
     """为了多注意力头的并行计算而变换形状"""
-    # 输入X的形状:(batch_size，查询或者“键－值”对的个数，num_hiddens)
-    # 输出X的形状:(batch_size，查询或者“键－值”对的个数，num_heads，
-    # num_hiddens/num_heads)
+    # 输入X的形状:(batch*size，查询或者“键－值”对的个数，num*hiddens)
+    # 输出X的形状:(batch*size，查询或者“键－值”对的个数，num*heads，
+    # num*hiddens/num*heads)
     X = X.reshape(X.shape[0], X.shape[1], num_heads, -1)
 
-    # 输出X的形状:(batch_size，num_heads，查询或者“键－值”对的个数,
-    # num_hiddens/num_heads)
+    # 输出X的形状:(batch*size，num*heads，查询或者“键－值”对的个数,
+    # num*hiddens/num*heads)
     X = X.permute(0, 2, 1, 3)
 
-    # 最终输出的形状:(batch_size*num_heads,查询或者“键－值”对的个数,
-    # num_hiddens/num_heads)
+    # 最终输出的形状:(batch*size*num*heads,查询或者“键－值”对的个数,
+    # num*hiddens/num*heads)
     return X.reshape(-1, X.shape[2], X.shape[3])
 
 
-#@save
-def transpose_output(X, num_heads):
+# @save
+def transpose*output(X, num*heads):
     """逆转transpose_qkv函数的操作"""
     X = X.reshape(-1, num_heads, X.shape[1], X.shape[2])
     X = X.permute(0, 2, 1, 3)
@@ -314,26 +314,26 @@ def transpose_output(X, num_heads):
 ```
 
 ```{.python .input}
-#@tab tensorflow
-#@save
-def transpose_qkv(X, num_heads):
+# @tab tensorflow
+# @save
+def transpose*qkv(X, num*heads):
     """为了多注意力头的并行计算而变换形状"""
-    # 输入X的形状:(batch_size，查询或者“键－值”对的个数，num_hiddens)
-    # 输出X的形状:(batch_size，查询或者“键－值”对的个数，num_heads，
-    # num_hiddens/num_heads)
+    # 输入X的形状:(batch*size，查询或者“键－值”对的个数，num*hiddens)
+    # 输出X的形状:(batch*size，查询或者“键－值”对的个数，num*heads，
+    # num*hiddens/num*heads)
     X = tf.reshape(X, shape=(X.shape[0], X.shape[1], num_heads, -1))
 
-    # 输出X的形状:(batch_size，num_heads，查询或者“键－值”对的个数,
-    # num_hiddens/num_heads)
+    # 输出X的形状:(batch*size，num*heads，查询或者“键－值”对的个数,
+    # num*hiddens/num*heads)
     X = tf.transpose(X, perm=(0, 2, 1, 3))
 
-    # 最终输出的形状:(batch_size*num_heads,查询或者“键－值”对的个数,
-    # num_hiddens/num_heads)
+    # 最终输出的形状:(batch*size*num*heads,查询或者“键－值”对的个数,
+    # num*hiddens/num*heads)
     return tf.reshape(X, shape=(-1, X.shape[2], X.shape[3]))
 
 
-#@save
-def transpose_output(X, num_heads):
+# @save
+def transpose*output(X, num*heads):
     """逆转transpose_qkv函数的操作"""
     X = tf.reshape(X, shape=(-1, num_heads, X.shape[1], X.shape[2]))
     X = tf.transpose(X, perm=(0, 2, 1, 3))
@@ -341,26 +341,26 @@ def transpose_output(X, num_heads):
 ```
 
 ```{.python .input}
-#@tab paddle
-#@save
-def transpose_qkv(X, num_heads):
+# @tab paddle
+# @save
+def transpose*qkv(X, num*heads):
     """为了多注意力头的并行计算而变换形状"""
-    # 输入X的形状:(batch_size，查询或者“键－值”对的个数，num_hiddens)
-    # 输出X的形状:(batch_size，查询或者“键－值”对的个数，num_heads，
-    # num_hiddens/num_heads)
+    # 输入X的形状:(batch*size，查询或者“键－值”对的个数，num*hiddens)
+    # 输出X的形状:(batch*size，查询或者“键－值”对的个数，num*heads，
+    # num*hiddens/num*heads)
     X = X.reshape((X.shape[0], X.shape[1], num_heads, -1))
 
-    # 输出X的形状:(batch_size，num_heads，查询或者“键－值”对的个数,
-    # num_hiddens/num_heads)
+    # 输出X的形状:(batch*size，num*heads，查询或者“键－值”对的个数,
+    # num*hiddens/num*heads)
     X = X.transpose((0, 2, 1, 3))
 
-    # 最终输出的形状:(batch_size*num_heads,查询或者“键－值”对的个数,
-    # num_hiddens/num_heads)
+    # 最终输出的形状:(batch*size*num*heads,查询或者“键－值”对的个数,
+    # num*hiddens/num*heads)
     return X.reshape((-1, X.shape[2], X.shape[3]))
 
 
-#@save
-def transpose_output(X, num_heads):
+# @save
+def transpose*output(X, num*heads):
     """逆转transpose_qkv函数的操作"""
     X = X.reshape((-1, num_heads, X.shape[1], X.shape[2]))
     X = X.transpose((0, 2, 1, 3))
@@ -368,61 +368,61 @@ def transpose_output(X, num_heads):
 ```
 
 下面使用键和值相同的小例子来[**测试**]我们编写的`MultiHeadAttention`类。
-多头注意力输出的形状是（`batch_size`，`num_queries`，`num_hiddens`）。
+多头注意力输出的形状是（`batch*size`，`num*queries`，`num_hiddens`）。
 
 ```{.python .input}
-num_hiddens, num_heads = 100, 5
-attention = MultiHeadAttention(num_hiddens, num_heads, 0.5)
+num*hiddens, num*heads = 100, 5
+attention = MultiHeadAttention(num*hiddens, num*heads, 0.5)
 attention.initialize()
 ```
 
 ```{.python .input}
-#@tab pytorch
-num_hiddens, num_heads = 100, 5
-attention = MultiHeadAttention(num_hiddens, num_hiddens, num_hiddens,
-                               num_hiddens, num_heads, 0.5)
+# @tab pytorch
+num*hiddens, num*heads = 100, 5
+attention = MultiHeadAttention(num*hiddens, num*hiddens, num_hiddens,
+                               num*hiddens, num*heads, 0.5)
 attention.eval()
 ```
 
 ```{.python .input}
-#@tab tensorflow
-num_hiddens, num_heads = 100, 5
-attention = MultiHeadAttention(num_hiddens, num_hiddens, num_hiddens,
-                               num_hiddens, num_heads, 0.5)
+# @tab tensorflow
+num*hiddens, num*heads = 100, 5
+attention = MultiHeadAttention(num*hiddens, num*hiddens, num_hiddens,
+                               num*hiddens, num*heads, 0.5)
 ```
 
 ```{.python .input}
-#@tab paddle
-num_hiddens, num_heads = 100, 5
-attention = MultiHeadAttention(num_hiddens, num_hiddens, num_hiddens,
-                               num_hiddens, num_heads, 0.5)
+# @tab paddle
+num*hiddens, num*heads = 100, 5
+attention = MultiHeadAttention(num*hiddens, num*hiddens, num_hiddens,
+                               num*hiddens, num*heads, 0.5)
 attention.eval()
 ```
 
 ```{.python .input}
-#@tab mxnet, pytorch, paddle
-batch_size, num_queries = 2, 4
-num_kvpairs, valid_lens =  6, d2l.tensor([3, 2])
-X = d2l.ones((batch_size, num_queries, num_hiddens))
-Y = d2l.ones((batch_size, num_kvpairs, num_hiddens))
+# @tab mxnet, pytorch, paddle
+batch*size, num*queries = 2, 4
+num*kvpairs, valid*lens =  6, d2l.tensor([3, 2])
+X = d2l.ones((batch*size, num*queries, num_hiddens))
+Y = d2l.ones((batch*size, num*kvpairs, num_hiddens))
 attention(X, Y, Y, valid_lens).shape
 ```
 
 ```{.python .input}
-#@tab tensorflow
-batch_size, num_queries = 2, 4
-num_kvpairs, valid_lens = 6, d2l.tensor([3, 2])
-X = tf.ones((batch_size, num_queries, num_hiddens))
-Y = tf.ones((batch_size, num_kvpairs, num_hiddens))
+# @tab tensorflow
+batch*size, num*queries = 2, 4
+num*kvpairs, valid*lens = 6, d2l.tensor([3, 2])
+X = tf.ones((batch*size, num*queries, num_hiddens))
+Y = tf.ones((batch*size, num*kvpairs, num_hiddens))
 attention(X, Y, Y, valid_lens, training=False).shape
 ```
 
-## 小结
+# # 小结
 
 * 多头注意力融合了来自于多个注意力汇聚的不同知识，这些知识的不同来源于相同的查询、键和值的不同的子空间表示。
 * 基于适当的张量操作，可以实现多头注意力的并行计算。
 
-## 练习
+# # 练习
 
 1. 分别可视化这个实验中的多个头的注意力权重。
 1. 假设有一个完成训练的基于多头注意力的模型，现在希望修剪最不重要的注意力头以提高预测速度。如何设计实验来衡量注意力头的重要性呢？

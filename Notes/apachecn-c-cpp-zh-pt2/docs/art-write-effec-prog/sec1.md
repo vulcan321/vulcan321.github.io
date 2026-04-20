@@ -4,8 +4,8 @@
 
 本节包括以下章节:
 
-*   [*第一章*](01.html#_idTextAnchor014)、*性能与并发介绍*
-*   [*第二章*](02.html#_idTextAnchor026)、*性能测量*
-*   [*第三章*](03.html#_idTextAnchor047)，*CPU 架构、资源和性能含义*
-*   [*第四章*](04.html#_idTextAnchor064)，*内存架构与性能*
-*   [*第五章*](05.html#_idTextAnchor084)，*线程、内存和并发*
+*   [*第一章*](01.html# _idTextAnchor014)、*性能与并发介绍*
+*   [*第二章*](02.html# _idTextAnchor026)、*性能测量*
+*   [*第三章*](03.html# _idTextAnchor047)，*CPU 架构、资源和性能含义*
+*   [*第四章*](04.html# _idTextAnchor064)，*内存架构与性能*
+*   [*第五章*](05.html# _idTextAnchor084)，*线程、内存和并发*

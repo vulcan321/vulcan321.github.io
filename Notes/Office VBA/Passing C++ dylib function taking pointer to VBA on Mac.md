@@ -25,7 +25,7 @@ Now the VBA should reference the dylib as follows :
 Declare Sub multarray Lib "/Users/XXXXXX/Documents/GITHUBRepos/DYLIBS/MyFirstDylib/tmp4.dylib" (ByRef firstcoeff As Double, ByVal size As Long, ByVal coeff As Double)
 ```
 
-The first parameter of `multarray` represent the first coefficient of the array, _and must be passed by reference_. Here is an exemple of utilisation :
+The first parameter of `multarray` represent the first coefficient of the array, *and must be passed by reference*. Here is an exemple of utilisation :
 
 ```vb
 Public Sub DoIt()

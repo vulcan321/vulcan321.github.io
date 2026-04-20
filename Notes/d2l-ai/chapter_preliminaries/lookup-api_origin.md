@@ -12,7 +12,7 @@ Due to constraints on the length of this book, we cannot possibly introduce ever
 :end_tab:
 
 
-## Finding All the Functions and Classes in a Module
+# # Finding All the Functions and Classes in a Module
 
 In order to know which functions and classes can be called in a module, we
 invoke the `dir` function. For instance, we can (**query all properties in the
@@ -24,20 +24,20 @@ print(dir(np.random))
 ```
 
 ```{.python .input  n=1}
-#@tab pytorch
+# @tab pytorch
 import torch
 print(dir(torch.distributions))
 ```
 
 ```{.python .input  n=1}
-#@tab tensorflow
+# @tab tensorflow
 import tensorflow as tf
 print(dir(tf.random))
 ```
 
 Generally, we can ignore functions that start and end with `__` (special objects in Python) or functions that start with a single `_`(usually internal functions). Based on the remaining function or attribute names, we might hazard a guess that this module offers various methods for generating random numbers, including sampling from the uniform distribution (`uniform`), normal distribution (`normal`), and multinomial distribution  (`multinomial`).
 
-## Finding the Usage of Specific Functions and Classes
+# # Finding the Usage of Specific Functions and Classes
 
 For more specific instructions on how to use a given function or class, we can invoke the  `help` function. As an example, let us [**explore the usage instructions for tensors' `ones` function**].
 
@@ -46,12 +46,12 @@ help(np.ones)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 help(torch.ones)
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 help(tf.ones)
 ```
 
@@ -62,12 +62,12 @@ np.ones(4)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 torch.ones(4)
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 tf.ones(4)
 ```
 
@@ -79,13 +79,13 @@ window. In addition, if we use two question marks, such as
 displayed.
 
 
-## Summary
+# # Summary
 
 * The official documentation provides plenty of descriptions and examples that are beyond this book.
 * We can look up documentation for the usage of an API by calling the `dir` and `help` functions, or `?` and `??` in Jupyter notebooks.
 
 
-## Exercises
+# # Exercises
 
 1. Look up the documentation for any function or class in the deep learning framework. Can you also find the documentation on the official website of the framework?
 

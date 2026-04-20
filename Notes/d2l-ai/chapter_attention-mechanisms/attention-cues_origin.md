@@ -54,7 +54,7 @@ such as detecting predators, preys, and mates.
 
 
 
-## Attention Cues in Biology
+# # Attention Cues in Biology
 
 To explain how our attention is deployed in the visual world,
 a two-component framework has emerged
@@ -101,7 +101,7 @@ It is also more powerful with the subject's voluntary effort.
 :label:`fig_eye-book`
 
 
-## Queries, Keys, and Values
+# # Queries, Keys, and Values
 
 Inspired by the nonvolitional and volitional attention cues that explain the attentional deployment,
 in the following we will
@@ -149,7 +149,7 @@ models under this framework
 will be the center of our attention in this chapter.
 
 
-## Visualization of Attention
+# # Visualization of Attention
 
 Average pooling
 can be treated as a weighted average of inputs,
@@ -164,13 +164,13 @@ npx.set_np()
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 from d2l import torch as d2l
 import torch
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 from d2l import tensorflow as d2l
 import tensorflow as tf
 ```
@@ -179,16 +179,16 @@ we define the `show_heatmaps` function.
 Its input `matrices` has the shape (number of rows for display, number of columns for display, number of queries, number of keys).
 
 ```{.python .input}
-#@tab all
-#@save
+# @tab all
+# @save
 def show_heatmaps(matrices, xlabel, ylabel, titles=None, figsize=(2.5, 2.5),
                   cmap='Reds'):
-    d2l.use_svg_display()
-    num_rows, num_cols = matrices.shape[0], matrices.shape[1]
-    fig, axes = d2l.plt.subplots(num_rows, num_cols, figsize=figsize,
+    d2l.use*svg*display()
+    num*rows, num*cols = matrices.shape[0], matrices.shape[1]
+    fig, axes = d2l.plt.subplots(num*rows, num*cols, figsize=figsize,
                                  sharex=True, sharey=True, squeeze=False)
-    for i, (row_axes, row_matrices) in enumerate(zip(axes, matrices)):
-        for j, (ax, matrix) in enumerate(zip(row_axes, row_matrices)):
+    for i, (row*axes, row*matrices) in enumerate(zip(axes, matrices)):
+        for j, (ax, matrix) in enumerate(zip(row*axes, row*matrices)):
             pcm = ax.imshow(d2l.numpy(matrix), cmap=cmap)
             if i == num_rows - 1:
                 ax.set_xlabel(xlabel)
@@ -204,15 +204,15 @@ we consider a simple case where
 the attention weight is one only when the query and the key are the same; otherwise it is zero.
 
 ```{.python .input}
-#@tab all
+# @tab all
 attention_weights = d2l.reshape(d2l.eye(10), (1, 1, 10, 10))
-show_heatmaps(attention_weights, xlabel='Keys', ylabel='Queries')
+show*heatmaps(attention*weights, xlabel='Keys', ylabel='Queries')
 ```
 
 In the subsequent sections,
 we will often invoke this function to visualize attention weights.
 
-## Summary
+# # Summary
 
 * Human attention is a limited, valuable, and scarce resource.
 * Subjects selectively direct attention using both the nonvolitional and volitional cues. The former is based on saliency and the latter is task-dependent.
@@ -220,7 +220,7 @@ we will often invoke this function to visualize attention weights.
 * Attention mechanisms bias selection over values (sensory inputs) via attention pooling, which incorporates queries (volitional cues) and keys (nonvolitional cues). Keys and values are paired.
 * We can visualize attention weights between queries and keys.
 
-## Exercises
+# # Exercises
 
 1. What can be the volitional cue when decoding a sequence token by token in machine translation? What are the nonvolitional cues and the sensory inputs?
 1. Randomly generate a $10 \times 10$ matrix and use the softmax operation to ensure each row is a valid probability distribution. Visualize the output attention weights.

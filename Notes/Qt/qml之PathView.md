@@ -1,10 +1,10 @@
-## **QML之PathView使用和理解**
+# # **QML之PathView使用和理解**
 
 通过学习委托，涉及到 **ListView**、**GridView**、**PathView**等等；其中 **PathView** 的画风明显和 **ListView** 和 **GridView** 不一样，它的使用方式比较复杂，当然实现的效果真的很棒。那什么是 **PathView** 呢？
 
 
 
-## PathView的定义
+# # PathView的定义
 
 首先先看 **Qt** 对**PathView**的描述如下：
 
@@ -18,7 +18,7 @@ The view has a model, which defines the data to be displayed, and a delegate, wh
 
 
 
-## PathView的使用
+# # PathView的使用
 
 代码如下：
 
@@ -72,6 +72,6 @@ PathView {
 
 
 
-#### PathLine使用
+### # PathLine使用
 
 **PathLine** 顾名思义描述一条直线路径，其起点是上一条路径终点。

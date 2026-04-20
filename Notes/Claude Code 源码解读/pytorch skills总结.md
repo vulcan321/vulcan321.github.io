@@ -10,7 +10,7 @@ tags:
 ---
 [https://github.com/pytorch/pytorch/tree/main/.claude/skills](https://github.com/pytorch/pytorch/tree/main/.claude/skills)
 
-## 1\. 概述
+# # 1\. 概述
 
 PyTorch 仓库中共有 **12 个 Claude Skills**，分布在 `.claude/skills/` 目录下：
 

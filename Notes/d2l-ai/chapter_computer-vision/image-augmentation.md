@@ -1,5 +1,5 @@
 # 图像增广
-:label:`sec_image_augmentation`
+:label:`sec*image*augmentation`
 
  :numref:`sec_alexnet`提到过大型数据集是成功应用深度神经网络的先决条件。
 图像增广在对训练图像进行一系列的随机变化之后，生成相似但不同的训练样本，从而扩大了训练集的规模。
@@ -18,7 +18,7 @@ npx.set_np()
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 %matplotlib inline
 from d2l import torch as d2l
 import torch
@@ -27,7 +27,7 @@ from torch import nn
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 %matplotlib inline
 from d2l import paddle as d2l
 import warnings
@@ -37,7 +37,7 @@ import paddle.vision as paddlevision
 from paddle import nn
 ```
 
-## 常用的图像增广方法
+# # 常用的图像增广方法
 
 在对常用图像增广方法的探索时，我们将使用下面这个尺寸为$400\times 500$的图像作为示例。
 
@@ -48,7 +48,7 @@ d2l.plt.imshow(img.asnumpy());
 ```
 
 ```{.python .input}
-#@tab pytorch, paddle
+# @tab pytorch, paddle
 d2l.set_figsize()
 img = d2l.Image.open('../img/cat1.jpg')
 d2l.plt.imshow(img);
@@ -58,13 +58,13 @@ d2l.plt.imshow(img);
 此函数在输入图像`img`上多次运行图像增广方法`aug`并显示所有结果。
 
 ```{.python .input}
-#@tab all
-def apply(img, aug, num_rows=2, num_cols=4, scale=1.5):
-    Y = [aug(img) for _ in range(num_rows * num_cols)]
-    d2l.show_images(Y, num_rows, num_cols, scale=scale)
+# @tab all
+def apply(img, aug, num*rows=2, num*cols=4, scale=1.5):
+    Y = [aug(img) for * in range(num*rows * num_cols)]
+    d2l.show*images(Y, num*rows, num_cols, scale=scale)
 ```
 
-### 翻转和裁剪
+## # 翻转和裁剪
 
 [**左右翻转图像**]通常不会改变对象的类别。这是最早且最广泛使用的图像增广方法之一。
 接下来，我们使用`transforms`模块来创建`RandomFlipLeftRight`实例，这样就各有50%的几率使图像向左或向右翻转。
@@ -74,12 +74,12 @@ apply(img, gluon.data.vision.transforms.RandomFlipLeftRight())
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 apply(img, torchvision.transforms.RandomHorizontalFlip())
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 apply(img, paddlevision.transforms.RandomHorizontalFlip())
 ```
 
@@ -90,12 +90,12 @@ apply(img, gluon.data.vision.transforms.RandomFlipTopBottom())
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 apply(img, torchvision.transforms.RandomVerticalFlip())
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 apply(img,  paddlevision.transforms.RandomVerticalFlip())
 ```
 
@@ -115,20 +115,20 @@ apply(img, shape_aug)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 shape_aug = torchvision.transforms.RandomResizedCrop(
     (200, 200), scale=(0.1, 1), ratio=(0.5, 2))
 apply(img, shape_aug)
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 shape_aug =  paddlevision.transforms.RandomResizedCrop(
     (200, 200), scale=(0.1, 1), ratio=(0.5, 2))
 apply(img, shape_aug)
 ```
 
-### 改变颜色
+## # 改变颜色
 
 另一种增广方法是改变颜色。
 我们可以改变图像颜色的四个方面：亮度、对比度、饱和度和色调。
@@ -139,13 +139,13 @@ apply(img, gluon.data.vision.transforms.RandomBrightness(0.5))
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 apply(img, torchvision.transforms.ColorJitter(
     brightness=0.5, contrast=0, saturation=0, hue=0))
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 apply(img,  paddlevision.transforms.ColorJitter(
     brightness=0.5, contrast=0, saturation=0, hue=0))
 ```
@@ -157,13 +157,13 @@ apply(img, gluon.data.vision.transforms.RandomHue(0.5))
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 apply(img, torchvision.transforms.ColorJitter(
     brightness=0, contrast=0, saturation=0, hue=0.5))
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 apply(img,  paddlevision.transforms.ColorJitter(
     brightness=0, contrast=0, saturation=0, hue=0.5))
 ```
@@ -177,44 +177,44 @@ apply(img, color_aug)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 color_aug = torchvision.transforms.ColorJitter(
     brightness=0.5, contrast=0.5, saturation=0.5, hue=0.5)
 apply(img, color_aug)
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 color_aug =  paddlevision.transforms.ColorJitter(
     brightness=0.5, contrast=0.5, saturation=0.5, hue=0.5)
 apply(img, color_aug)
 ```
 
-### [**结合多种图像增广方法**]
+## # [**结合多种图像增广方法**]
 
 在实践中，我们将结合多种图像增广方法。比如，我们可以通过使用一个`Compose`实例来综合上面定义的不同的图像增广方法，并将它们应用到每个图像。
 
 ```{.python .input}
 augs = gluon.data.vision.transforms.Compose([
-    gluon.data.vision.transforms.RandomFlipLeftRight(), color_aug, shape_aug])
+    gluon.data.vision.transforms.RandomFlipLeftRight(), color*aug, shape*aug])
 apply(img, augs)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 augs = torchvision.transforms.Compose([
-    torchvision.transforms.RandomHorizontalFlip(), color_aug, shape_aug])
+    torchvision.transforms.RandomHorizontalFlip(), color*aug, shape*aug])
 apply(img, augs)
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 augs =  paddlevision.transforms.Compose([
-     paddle.vision.transforms.RandomHorizontalFlip(), color_aug, shape_aug])
+     paddle.vision.transforms.RandomHorizontalFlip(), color*aug, shape*aug])
 apply(img, augs)
 ```
 
-## [**使用图像增广进行训练**]
+# # [**使用图像增广进行训练**]
 
 让我们使用图像增广来训练模型。
 这里，我们使用CIFAR-10数据集，而不是我们之前使用的Fashion-MNIST数据集。
@@ -227,17 +227,17 @@ d2l.show_images(gluon.data.vision.CIFAR10(
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 all_images = torchvision.datasets.CIFAR10(train=True, root="../data",
                                           download=True)
-d2l.show_images([all_images[i][0] for i in range(32)], 4, 8, scale=0.8);
+d2l.show*images([all*images[i][0] for i in range(32)], 4, 8, scale=0.8);
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 all_images =  paddlevision.datasets.Cifar10(mode='train' , download=True)
 print(len(all_images))
-d2l.show_images([all_images[i][0] for i in range(32)], 4, 8, scale=0.8);
+d2l.show*images([all*images[i][0] for i in range(32)], 4, 8, scale=0.8);
 ```
 
 为了在预测过程中得到确切的结果，我们通常对训练样本只进行图像增广，且在预测过程中不使用随机操作的图像增广。
@@ -254,7 +254,7 @@ test_augs = gluon.data.vision.transforms.Compose([
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 train_augs = torchvision.transforms.Compose([
      torchvision.transforms.RandomHorizontalFlip(),
      torchvision.transforms.ToTensor()])
@@ -264,7 +264,7 @@ test_augs = torchvision.transforms.Compose([
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 train_augs = paddlevision.transforms.Compose([
      paddlevision.transforms.RandomHorizontalFlip(),
      paddlevision.transforms.ToTensor()])
@@ -274,71 +274,71 @@ test_augs = paddlevision.transforms.Compose([
 ```
 
 :begin_tab:`mxnet`
-接下来，我们定义了一个辅助函数，以便于读取图像和应用图像增广。Gluon数据集提供的`transform_first`函数将图像增广应用于每个训练样本的第一个元素（由图像和标签组成），即应用在图像上。有关`DataLoader`的详细介绍，请参阅 :numref:`sec_fashion_mnist`。
+接下来，我们定义了一个辅助函数，以便于读取图像和应用图像增广。Gluon数据集提供的`transform*first`函数将图像增广应用于每个训练样本的第一个元素（由图像和标签组成），即应用在图像上。有关`DataLoader`的详细介绍，请参阅 :numref:`sec*fashion_mnist`。
 :end_tab:
 
 :begin_tab:`pytorch`
-接下来，我们[**定义一个辅助函数，以便于读取图像和应用图像增广**]。PyTorch数据集提供的`transform`参数应用图像增广来转化图像。有关`DataLoader`的详细介绍，请参阅 :numref:`sec_fashion_mnist`。
+接下来，我们[**定义一个辅助函数，以便于读取图像和应用图像增广**]。PyTorch数据集提供的`transform`参数应用图像增广来转化图像。有关`DataLoader`的详细介绍，请参阅 :numref:`sec*fashion*mnist`。
 :end_tab:
 
 ```{.python .input}
-def load_cifar10(is_train, augs, batch_size):
+def load*cifar10(is*train, augs, batch_size):
     return gluon.data.DataLoader(
-        gluon.data.vision.CIFAR10(train=is_train).transform_first(augs),
-        batch_size=batch_size, shuffle=is_train,
-        num_workers=d2l.get_dataloader_workers())
+        gluon.data.vision.CIFAR10(train=is*train).transform*first(augs),
+        batch*size=batch*size, shuffle=is_train,
+        num*workers=d2l.get*dataloader_workers())
 ```
 
 ```{.python .input}
-#@tab pytorch
-def load_cifar10(is_train, augs, batch_size):
+# @tab pytorch
+def load*cifar10(is*train, augs, batch_size):
     dataset = torchvision.datasets.CIFAR10(root="../data", train=is_train,
                                            transform=augs, download=True)
-    dataloader = torch.utils.data.DataLoader(dataset, batch_size=batch_size,
-                    shuffle=is_train, num_workers=d2l.get_dataloader_workers())
+    dataloader = torch.utils.data.DataLoader(dataset, batch*size=batch*size,
+                    shuffle=is*train, num*workers=d2l.get*dataloader*workers())
     return dataloader
 ```
 
 ```{.python .input}
-#@tab paddle
-def load_cifar10(is_train, augs, batch_size):
+# @tab paddle
+def load*cifar10(is*train, augs, batch_size):
     dataset = paddlevision.datasets.Cifar10(mode="train", 
                                             transform=augs, download=True)
-    dataloader = paddle.io.DataLoader(dataset, batch_size=batch_size, 
-                    num_workers=d2l.get_dataloader_workers(), shuffle=is_train)
+    dataloader = paddle.io.DataLoader(dataset, batch*size=batch*size, 
+                    num*workers=d2l.get*dataloader*workers(), shuffle=is*train)
     return dataloader
 ```
 
-### 多GPU训练
+## # 多GPU训练
 
 我们在CIFAR-10数据集上训练 :numref:`sec_resnet`中的ResNet-18模型。
-回想一下 :numref:`sec_multi_gpu_concise`中对多GPU训练的介绍。
+回想一下 :numref:`sec*multi*gpu_concise`中对多GPU训练的介绍。
 接下来，我们[**定义一个函数，使用多GPU对模型进行训练和评估**]。
 
 ```{.python .input}
-#@save
-def train_batch_ch13(net, features, labels, loss, trainer, devices,
-                     split_f=d2l.split_batch):
+# @save
+def train*batch*ch13(net, features, labels, loss, trainer, devices,
+                     split*f=d2l.split*batch):
     """用多GPU进行小批量训练"""
-    X_shards, y_shards = split_f(features, labels, devices)
+    X*shards, y*shards = split_f(features, labels, devices)
     with autograd.record():
-        pred_shards = [net(X_shard) for X_shard in X_shards]
-        ls = [loss(pred_shard, y_shard) for pred_shard, y_shard
-              in zip(pred_shards, y_shards)]
+        pred*shards = [net(X*shard) for X*shard in X*shards]
+        ls = [loss(pred*shard, y*shard) for pred*shard, y*shard
+              in zip(pred*shards, y*shards)]
     for l in ls:
         l.backward()
     # True标志允许使用过时的梯度，这很有用（例如，在微调BERT中）
-    trainer.step(labels.shape[0], ignore_stale_grad=True)
-    train_loss_sum = sum([float(l.sum()) for l in ls])
-    train_acc_sum = sum(d2l.accuracy(pred_shard, y_shard)
-                        for pred_shard, y_shard in zip(pred_shards, y_shards))
-    return train_loss_sum, train_acc_sum
+    trainer.step(labels.shape[0], ignore*stale*grad=True)
+    train*loss*sum = sum([float(l.sum()) for l in ls])
+    train*acc*sum = sum(d2l.accuracy(pred*shard, y*shard)
+                        for pred*shard, y*shard in zip(pred*shards, y*shards))
+    return train*loss*sum, train*acc*sum
 ```
 
 ```{.python .input}
-#@tab pytorch
-#@save
-def train_batch_ch13(net, X, y, loss, trainer, devices):
+# @tab pytorch
+# @save
+def train*batch*ch13(net, X, y, loss, trainer, devices):
     """用多GPU进行小批量训练"""
     if isinstance(X, list):
         # 微调BERT中所需
@@ -352,18 +352,18 @@ def train_batch_ch13(net, X, y, loss, trainer, devices):
     l = loss(pred, y)
     l.sum().backward()
     trainer.step()
-    train_loss_sum = l.sum()
-    train_acc_sum = d2l.accuracy(pred, y)
-    return train_loss_sum, train_acc_sum
+    train*loss*sum = l.sum()
+    train*acc*sum = d2l.accuracy(pred, y)
+    return train*loss*sum, train*acc*sum
 ```
 
 ```{.python .input}
-#@tab paddle
-#@save
-def train_batch_ch13(net, X, y, loss, trainer, devices):
+# @tab paddle
+# @save
+def train*batch*ch13(net, X, y, loss, trainer, devices):
     """用多GPU进行小批量训练
     飞桨不支持在notebook上进行多GPU训练
-    Defined in :numref:`sec_image_augmentation`"""
+    Defined in :numref:`sec*image*augmentation`"""
     if isinstance(X, list):
         # 微调BERT中所需（稍后讨论）
         X = [paddle.to_tensor(x, place=devices[0]) for x in X]
@@ -376,17 +376,17 @@ def train_batch_ch13(net, X, y, loss, trainer, devices):
     l = loss(pred, y)
     l.sum().backward()
     trainer.step()
-    train_loss_sum = l.sum()
-    train_acc_sum = d2l.accuracy(pred, y)
-    return train_loss_sum, train_acc_sum
+    train*loss*sum = l.sum()
+    train*acc*sum = d2l.accuracy(pred, y)
+    return train*loss*sum, train*acc*sum
 ```
 
 ```{.python .input}
-#@save
-def train_ch13(net, train_iter, test_iter, loss, trainer, num_epochs,
-               devices=d2l.try_all_gpus(), split_f=d2l.split_batch):
+# @save
+def train*ch13(net, train*iter, test*iter, loss, trainer, num*epochs,
+               devices=d2l.try*all*gpus(), split*f=d2l.split*batch):
     """用多GPU进行模型训练"""
-    timer, num_batches = d2l.Timer(), len(train_iter)
+    timer, num*batches = d2l.Timer(), len(train*iter)
     animator = d2l.Animator(xlabel='epoch', xlim=[1, num_epochs], ylim=[0, 1],
                             legend=['train loss', 'train acc', 'test acc'])
     for epoch in range(num_epochs):
@@ -394,15 +394,15 @@ def train_ch13(net, train_iter, test_iter, loss, trainer, num_epochs,
         metric = d2l.Accumulator(4)
         for i, (features, labels) in enumerate(train_iter):
             timer.start()
-            l, acc = train_batch_ch13(
+            l, acc = train*batch*ch13(
                 net, features, labels, loss, trainer, devices, split_f)
             metric.add(l, acc, labels.shape[0], labels.size)
             timer.stop()
-            if (i + 1) % (num_batches // 5) == 0 or i == num_batches - 1:
+            if (i + 1) % (num*batches // 5) == 0 or i == num*batches - 1:
                 animator.add(epoch + (i + 1) / num_batches,
                              (metric[0] / metric[2], metric[1] / metric[3],
                               None))
-        test_acc = d2l.evaluate_accuracy_gpus(net, test_iter, split_f)
+        test*acc = d2l.evaluate*accuracy*gpus(net, test*iter, split_f)
         animator.add(epoch + 1, (None, None, test_acc))
     print(f'loss {metric[0] / metric[2]:.3f}, train acc '
           f'{metric[1] / metric[3]:.3f}, test acc {test_acc:.3f}')
@@ -411,12 +411,12 @@ def train_ch13(net, train_iter, test_iter, loss, trainer, num_epochs,
 ```
 
 ```{.python .input}
-#@tab pytorch
-#@save
-def train_ch13(net, train_iter, test_iter, loss, trainer, num_epochs,
-               devices=d2l.try_all_gpus()):
+# @tab pytorch
+# @save
+def train*ch13(net, train*iter, test*iter, loss, trainer, num*epochs,
+               devices=d2l.try*all*gpus()):
     """用多GPU进行模型训练"""
-    timer, num_batches = d2l.Timer(), len(train_iter)
+    timer, num*batches = d2l.Timer(), len(train*iter)
     animator = d2l.Animator(xlabel='epoch', xlim=[1, num_epochs], ylim=[0, 1],
                             legend=['train loss', 'train acc', 'test acc'])
     net = nn.DataParallel(net, device_ids=devices).to(devices[0])
@@ -425,15 +425,15 @@ def train_ch13(net, train_iter, test_iter, loss, trainer, num_epochs,
         metric = d2l.Accumulator(4)
         for i, (features, labels) in enumerate(train_iter):
             timer.start()
-            l, acc = train_batch_ch13(
+            l, acc = train*batch*ch13(
                 net, features, labels, loss, trainer, devices)
             metric.add(l, acc, labels.shape[0], labels.numel())
             timer.stop()
-            if (i + 1) % (num_batches // 5) == 0 or i == num_batches - 1:
+            if (i + 1) % (num*batches // 5) == 0 or i == num*batches - 1:
                 animator.add(epoch + (i + 1) / num_batches,
                              (metric[0] / metric[2], metric[1] / metric[3],
                               None))
-        test_acc = d2l.evaluate_accuracy_gpu(net, test_iter)
+        test*acc = d2l.evaluate*accuracy*gpu(net, test*iter)
         animator.add(epoch + 1, (None, None, test_acc))
     print(f'loss {metric[0] / metric[2]:.3f}, train acc '
           f'{metric[1] / metric[3]:.3f}, test acc {test_acc:.3f}')
@@ -442,13 +442,13 @@ def train_ch13(net, train_iter, test_iter, loss, trainer, num_epochs,
 ```
 
 ```{.python .input}
-#@tab paddle
-#@save
-def train_ch13(net, train_iter, test_iter, loss, trainer, num_epochs,
-               devices=d2l.try_all_gpus()):
+# @tab paddle
+# @save
+def train*ch13(net, train*iter, test*iter, loss, trainer, num*epochs,
+               devices=d2l.try*all*gpus()):
     """用多GPU进行模型训练
-    Defined in :numref:`sec_image_augmentation`"""
-    timer, num_batches = d2l.Timer(), len(train_iter)
+    Defined in :numref:`sec*image*augmentation`"""
+    timer, num*batches = d2l.Timer(), len(train*iter)
     animator = d2l.Animator(xlabel='epoch', xlim=[1, num_epochs], ylim=[0, 1],
                             legend=['train loss', 'train acc', 'test acc'])
     net = paddle.DataParallel(net)
@@ -457,15 +457,15 @@ def train_ch13(net, train_iter, test_iter, loss, trainer, num_epochs,
         metric = d2l.Accumulator(4)
         for i, (features, labels) in enumerate(train_iter):
             timer.start()
-            l, acc = train_batch_ch13(
+            l, acc = train*batch*ch13(
                 net, features, labels, loss, trainer, devices)
             metric.add(l, acc, labels.shape[0], labels.numel())
             timer.stop()
-            if (i + 1) % (num_batches // 5) == 0 or i == num_batches - 1:
+            if (i + 1) % (num*batches // 5) == 0 or i == num*batches - 1:
                 animator.add(epoch + (i + 1) / num_batches,
                              (metric[0] / metric[2], metric[1] / metric[3],
                               None))
-        test_acc = d2l.evaluate_accuracy_gpu(net, test_iter)
+        test*acc = d2l.evaluate*accuracy*gpu(net, test*iter)
         animator.add(epoch + 1, (None, None, test_acc))
     print(f'loss {metric[0] / metric[2]:.3f}, train acc '
           f'{metric[1] / metric[3]:.3f}, test acc {test_acc:.3f}')
@@ -473,42 +473,42 @@ def train_ch13(net, train_iter, test_iter, loss, trainer, num_epochs,
           f'{str(devices)}')
 ```
 
-现在，我们可以[**定义`train_with_data_aug`函数，使用图像增广来训练模型**]。该函数获取所有的GPU，并使用Adam作为训练的优化算法，将图像增广应用于训练集，最后调用刚刚定义的用于训练和评估模型的`train_ch13`函数。
+现在，我们可以[**定义`train*with*data*aug`函数，使用图像增广来训练模型**]。该函数获取所有的GPU，并使用Adam作为训练的优化算法，将图像增广应用于训练集，最后调用刚刚定义的用于训练和评估模型的`train*ch13`函数。
 
 ```{.python .input}
-batch_size, devices, net = 256, d2l.try_all_gpus(), d2l.resnet18(10)
+batch*size, devices, net = 256, d2l.try*all_gpus(), d2l.resnet18(10)
 net.initialize(init=init.Xavier(), ctx=devices)
 
-def train_with_data_aug(train_augs, test_augs, net, lr=0.001):
-    train_iter = load_cifar10(True, train_augs, batch_size)
-    test_iter = load_cifar10(False, test_augs, batch_size)
+def train*with*data*aug(train*augs, test_augs, net, lr=0.001):
+    train*iter = load*cifar10(True, train*augs, batch*size)
+    test*iter = load*cifar10(False, test*augs, batch*size)
     loss = gluon.loss.SoftmaxCrossEntropyLoss()
     trainer = gluon.Trainer(net.collect_params(), 'adam',
                             {'learning_rate': lr})
-    train_ch13(net, train_iter, test_iter, loss, trainer, 10, devices)
+    train*ch13(net, train*iter, test_iter, loss, trainer, 10, devices)
 ```
 
 ```{.python .input}
-#@tab pytorch
-batch_size, devices, net = 256, d2l.try_all_gpus(), d2l.resnet18(10, 3)
+# @tab pytorch
+batch*size, devices, net = 256, d2l.try*all_gpus(), d2l.resnet18(10, 3)
 
 def init_weights(m):
     if type(m) in [nn.Linear, nn.Conv2d]:
-        nn.init.xavier_uniform_(m.weight)
+        nn.init.xavier*uniform*(m.weight)
 
 net.apply(init_weights)
 
-def train_with_data_aug(train_augs, test_augs, net, lr=0.001):
-    train_iter = load_cifar10(True, train_augs, batch_size)
-    test_iter = load_cifar10(False, test_augs, batch_size)
+def train*with*data*aug(train*augs, test_augs, net, lr=0.001):
+    train*iter = load*cifar10(True, train*augs, batch*size)
+    test*iter = load*cifar10(False, test*augs, batch*size)
     loss = nn.CrossEntropyLoss(reduction="none")
     trainer = torch.optim.Adam(net.parameters(), lr=lr)
-    train_ch13(net, train_iter, test_iter, loss, trainer, 10, devices)
+    train*ch13(net, train*iter, test_iter, loss, trainer, 10, devices)
 ```
 
 ```{.python .input}
-#@tab paddle
-batch_size, devices, net = 256, d2l.try_all_gpus(), d2l.resnet18(10, 3)
+# @tab paddle
+batch*size, devices, net = 256, d2l.try*all_gpus(), d2l.resnet18(10, 3)
 
 def init_weights(m):
     if type(m) in [nn.Linear, nn.Conv2D]:
@@ -516,30 +516,30 @@ def init_weights(m):
 
 net.apply(init_weights)
 
-def train_with_data_aug(train_augs, test_augs, net, lr=0.001):
-    train_iter = load_cifar10(True, train_augs, batch_size)
-    test_iter = load_cifar10(False, test_augs, batch_size)
+def train*with*data*aug(train*augs, test_augs, net, lr=0.001):
+    train*iter = load*cifar10(True, train*augs, batch*size)
+    test*iter = load*cifar10(False, test*augs, batch*size)
     loss = nn.CrossEntropyLoss(reduction="none")
     trainer = paddle.optimizer.Adam(learning_rate=lr, parameters=net.parameters())
-    train_ch13(net, train_iter, test_iter, loss, trainer, 10, devices[:1])
+    train*ch13(net, train*iter, test_iter, loss, trainer, 10, devices[:1])
 ```
 
 让我们使用基于随机左右翻转的图像增广来[**训练模型**]。
 
 ```{.python .input}
-#@tab all
-train_with_data_aug(train_augs, test_augs, net)
+# @tab all
+train*with*data*aug(train*augs, test_augs, net)
 ```
 
-## 小结
+# # 小结
 
 * 图像增广基于现有的训练数据生成随机图像，来提高模型的泛化能力。
 * 为了在预测过程中得到确切的结果，我们通常对训练样本只进行图像增广，而在预测过程中不使用带随机操作的图像增广。
 * 深度学习框架提供了许多不同的图像增广方法，这些方法可以被同时应用。
 
-## 练习
+# # 练习
 
-1. 在不使用图像增广的情况下训练模型：`train_with_data_aug(no_aug, no_aug)`。比较使用和不使用图像增广的训练结果和测试精度。这个对比实验能支持图像增广可以减轻过拟合的论点吗？为什么？
+1. 在不使用图像增广的情况下训练模型：`train*with*data*aug(no*aug, no_aug)`。比较使用和不使用图像增广的训练结果和测试精度。这个对比实验能支持图像增广可以减轻过拟合的论点吗？为什么？
 2. 在基于CIFAR-10数据集的模型训练中结合多种不同的图像增广方法。它能提高测试准确性吗？
 3. 参阅深度学习框架的在线文档。它还提供了哪些其他的图像增广方法？
 

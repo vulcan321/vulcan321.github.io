@@ -1,10 +1,10 @@
-## **3 Ways to Convert String to Number in Excel VBA**
+# # **3 Ways to Convert String to Number in Excel VBA**
 
-### **1\.** **Convert String to Number Using Type Conversion Functions**
+## # **1\.** **Convert String to Number Using Type Conversion Functions**
 
 Excel provides several built-in [**type conversion functions**](https://docs.microsoft.com/en-us/office/vba/language/concepts/getting-started/type-conversion-functions). We can use them in our VBA code to easily convert from string datatype to different datatypes.
 
-#### **1.1 String to Integer**
+### # **1.1 String to Integer**
 
 To convert **string** to **integer**, we can use the **CInt function** in our code. The **CInt function** takes only **one argument** and that should be a **numeric value**. Let’s try the following code in the Visual Code Editor.
 
@@ -43,9 +43,9 @@ The CInt function **converted 25.5** to the **next integer number 26**. On the o
 
 The integer value has a range between **\-32,768** to **32,767**. If we put a numeric value that is **out of this range**, Excel will show an **error**.
 
-___
+---
 
-#### **1.2 String to Long**
+### # **1.2 String to Long**
 
 The **CLng function** converts a numeric string value to a **long datatype**. It works similarly to the CInt function. The key difference lies in its **range** which is between **\-2,147,483,648** and **2,147,483,647.**
 
@@ -60,9 +60,9 @@ End Sub
 
 Here, cells **B3:B9** contain some **numerical string value**, and **converted** l**ong numbers** are in cells **C3:C9.** The **CLng function** **converted** **\-32800** and **32800** successfully to **long numbers** which the **CInt function** couldn’t. But it’ll also get an **error** if the input **numeric value** is **out of range.**
 
-___
+---
 
-#### **1.3 String to Decimal**
+### # **1.3 String to Decimal**
 
 Using the **CDec function** we can **convert** a **numerical string value** to a **decimal datatype. Run** the following code to **convert** the **numerical values** in cells **B3:B7** to the **decimal datatype.**
 
@@ -74,9 +74,9 @@ Next
 End Sub
 ```
 
-___
+---
 
-#### **1.4 String to Single**
+### # **1.4 String to Single**
 
 In this example, we’ll turn the input strings into [**single datatype**](https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/single-data-type) (single-precision floating-point) numbers. For this, we need to use the **CSng function**.
 
@@ -95,7 +95,7 @@ End Sub
 
 In the output, cells **B3:B9** contain some **numerical string value,** and **converted single datatype numbers** are in cells **C3:C9.**  But it’ll also get an **error** if the input **numeric value** is **out of range.**
 
-#### **1.5 String to Double**
+### # **1.5 String to Double**
 
 In this example, we’ll turn the input strings into [**double datatype**](https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/double-data-type) (double-precision floating-point) numbers. For this, we need to use the **CDbl function**.
 
@@ -114,9 +114,9 @@ End Sub
 
 In the output, cells **B3:B9** contain some **numerical string value** and **converted double datatype numbers** are in cells **C3:C9.**  But it’ll also get an **error** if the input **numeric value** is **out of range.**
 
-___
+---
 
-#### **1.6 String to Currency**
+### # **1.6 String to Currency**
 
 The **currency data type** is handy when calculations are related to **money**. Moreover, if we want more accuracy in **fixed**–**point** **calculation**, the use of the currency data type is a good choice. We need to use the **CCur function** to convert a string into a **currency data type**. The data type **ranges** from **\-922,337,203,685,477.5808** to **922,337,203,685,477.5808.**
 
@@ -130,9 +130,9 @@ Next
 End Sub
 ```
 
-___
+---
 
-#### **1.7 String to Byte**
+### # **1.7 String to Byte**
 
 The **CByte function** converts numerical string values to the **byte data type** which ranges from **0 to 255.  
 ****Code** is as follows**:**

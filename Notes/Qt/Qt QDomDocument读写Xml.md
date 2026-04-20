@@ -3,9 +3,9 @@
 Qt中实现对xml读写操作的类是QDomDocument相关的类，一般情况下需要包含下列三个头文件：
 
 ```cpp
-#include <QFile>   
-#include <QtXml\QtXml>
-#include <QtXml\QDomDocument>
+# include <QFile>   
+# include <QtXml\QtXml>
+# include <QtXml\QDomDocument>
 ```
 1.写入xml
 

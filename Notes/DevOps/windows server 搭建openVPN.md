@@ -1,6 +1,6 @@
 # Windows server 2012、2016、2019上搭建openVPN
 
-## 步骤一：安装OpenVPN服务[](https://javabase.cn/docs/devops/windows/install-openvpn-server//#步骤一安装openvpn服务 "Direct link to heading")
+# # 步骤一：安装OpenVPN服务[](https://javabase.cn/docs/devops/windows/install-openvpn-server//# 步骤一安装openvpn服务 "Direct link to heading")
 
 下载最新版本的OpenVPN服务端，可以从这个地址下载：
 
@@ -27,31 +27,31 @@
 
 ![1.png](https://oss.javabase.cn/1665971353089?watermark/4/text/amF2YWJhc2UuY24=/rotate/-20/font/6buR5L2T/fontsize/200/fill/I0ZGRkZGRg==/dissolve/50/dx/100/dy/100)
 
-## 步骤二：设置CA证书、生成服务端和客户端的证书和私钥等[](https://javabase.cn/docs/devops/windows/install-openvpn-server//#步骤二设置ca证书生成服务端和客户端的证书和私钥等 "Direct link to heading")
+# # 步骤二：设置CA证书、生成服务端和客户端的证书和私钥等[](https://javabase.cn/docs/devops/windows/install-openvpn-server//# 步骤二设置ca证书生成服务端和客户端的证书和私钥等 "Direct link to heading")
 
 找到目录“C:\\Program Files\\OpenVPN\\easy-rsa”，将文件vars.example复制一份改名为vars，“vars”文件包含内置的Easy-RSA配置设置。可以保持默认设置，也可以自定义更改。
 
 | 属性 | 默认值 | 作用 |
 | --- | --- | --- |
 | set\_var EASYRSA | C:\\Program Files\\OpenVPN\\easy-rsa | Defines the folder location of easy-rsa scripts |
-| set\_var EASYRSA\_OPENSSL | C:\\Program Files\\OpenVPN\\bin\\openssl.exe | Defines the OpenSSL binary path |
-| set\_var EASYRSA\_PKI | C:\\Program Files\\OpenVPN\\easy-rsa\\pki | The folder location of SSL/TLS file exists after creation |
-| set\_var EASYRSA\_DN | cn\_only | This is used to adjust what elements are included in the Subject field as the DN |
-| set\_var EASYRSA\_REQ\_COUNTRY | “US” | Our Organisation Country |
-| set\_var EASYRSA\_REQ\_PROVINCE | “California” | Our Organisation Province |
-| set\_var EASYRSA\_REQ\_CITY | “San Francisco” | Our Organisation City |
-| set\_var EASYRSA\_REQ\_ORG | “Copyleft Certificate Co” | Our Organisation Name |
-| set\_var EASYRSA\_REQ\_EMAIL | “[me@example.net](mailto:me@example.net)” | Our Organisation contact email |
-| set\_var EASYRSA\_REQ\_OU | “My Organizational Unit” | Our Organisation Unit name |
-| set\_var EASYRSA\_KEY\_SIZE | 2048 | Define the key pair size in bits |
-| set\_var EASYRSA\_ALGO | rsa | The default crypt mode |
-| set\_var EASYRSA\_CA\_EXPIRE | 3650 | The CA key expire days |
-| set\_var EASYRSA\_CERT\_EXPIRE | 825 | The Server certificate key expire days |
-| set\_var EASYRSA\_NS\_SUPPORT | “no” | Support deprecated Netscape extension |
-| set\_var EASYRSA\_NS\_COMMENT | “HAKASE-LABS CERTIFICATE AUTHORITY” | Defines NS comment |
-| set\_var EASYRSA\_EXT\_DIR | "$EASYRSA/x509-types" | Defines the x509 extension directory |
-| set\_var EASYRSA\_SSL\_CONF | "$EASYRSA/openssl-easyrsa.cnf" | Defines the openssl config file location |
-| set\_var EASYRSA\_DIGEST | "sha256" | Defines the cryptographic digest to use |
+| set\*var EASYRSA\*OPENSSL | C:\\Program Files\\OpenVPN\\bin\\openssl.exe | Defines the OpenSSL binary path |
+| set\*var EASYRSA\*PKI | C:\\Program Files\\OpenVPN\\easy-rsa\\pki | The folder location of SSL/TLS file exists after creation |
+| set\*var EASYRSA\*DN | cn\_only | This is used to adjust what elements are included in the Subject field as the DN |
+| set\*var EASYRSA\*REQ\_COUNTRY | “US” | Our Organisation Country |
+| set\*var EASYRSA\*REQ\_PROVINCE | “California” | Our Organisation Province |
+| set\*var EASYRSA\*REQ\_CITY | “San Francisco” | Our Organisation City |
+| set\*var EASYRSA\*REQ\_ORG | “Copyleft Certificate Co” | Our Organisation Name |
+| set\*var EASYRSA\*REQ\_EMAIL | “[me@example.net](mailto:me@example.net)” | Our Organisation contact email |
+| set\*var EASYRSA\*REQ\_OU | “My Organizational Unit” | Our Organisation Unit name |
+| set\*var EASYRSA\*KEY\_SIZE | 2048 | Define the key pair size in bits |
+| set\*var EASYRSA\*ALGO | rsa | The default crypt mode |
+| set\*var EASYRSA\*CA\_EXPIRE | 3650 | The CA key expire days |
+| set\*var EASYRSA\*CERT\_EXPIRE | 825 | The Server certificate key expire days |
+| set\*var EASYRSA\*NS\_SUPPORT | “no” | Support deprecated Netscape extension |
+| set\*var EASYRSA\*NS\_COMMENT | “HAKASE-LABS CERTIFICATE AUTHORITY” | Defines NS comment |
+| set\*var EASYRSA\*EXT\_DIR | "$EASYRSA/x509-types" | Defines the x509 extension directory |
+| set\*var EASYRSA\*SSL\_CONF | "$EASYRSA/openssl-easyrsa.cnf" | Defines the openssl config file location |
+| set\*var EASYRSA\*DIGEST | "sha256" | Defines the cryptographic digest to use |
 
 如没有特殊要求，则vars文件保持默认即可。
 
@@ -117,7 +117,7 @@ openssl verify -CAfile pki/ca.crt pki/issued/SERVER.crt
 openssl verify -CAfile pki/ca.crt pki/issued/CLIENT.crt
 ```
 
-#### 到这里就完成了CA证书，服务器和客户端证书的生成和密钥。这些密钥将用于OpenVPN服务器和客户端之间的身份验证。现在生成一个用于标准RSA证书/密钥之外的共享密钥。文件名为tls-auth.key。[](https://javabase.cn/docs/devops/windows/install-openvpn-server//#到这里就完成了ca证书服务器和客户端证书的生成和密钥这些密钥将用于openvpn服务器和客户端之间的身份验证现在生成一个用于标准rsa证书密钥之外的共享密钥文件名为tls-authkey "Direct link to heading")
+### # 到这里就完成了CA证书，服务器和客户端证书的生成和密钥。这些密钥将用于OpenVPN服务器和客户端之间的身份验证。现在生成一个用于标准RSA证书/密钥之外的共享密钥。文件名为tls-auth.key。[](https://javabase.cn/docs/devops/windows/install-openvpn-server//# 到这里就完成了ca证书服务器和客户端证书的生成和密钥这些密钥将用于openvpn服务器和客户端之间的身份验证现在生成一个用于标准rsa证书密钥之外的共享密钥文件名为tls-authkey "Direct link to heading")
 
 > 使用这个密钥，我们启用TLS -auth指令，它添加一个额外的HMAC签名到所有SSL/TLS握手包的完整性验证。任何不带有正确HMAC签名的UDP包可以被丢弃而无需进一步处理。 启用tls-auth可以保护我们免受：
 > 
@@ -126,7 +126,7 @@ openssl verify -CAfile pki/ca.crt pki/issued/CLIENT.crt
 > -   SSL/TLS实现中的缓冲区溢出漏洞。
 > -   从未经授权的机器发起SSL/TLS握手。
 
-#### 首先使用GitHub链接[https://github.com/TinCanTech/easy-tls](https://github.com/TinCanTech/easy-tls)下载Easy-TLS。它是一个Easy-RSA扩展工具，我们正在使用它来生成tls-auth密钥。单击code选项卡下的Download zip选项。请参考下面的截图。[](https://javabase.cn/docs/devops/windows/install-openvpn-server//#首先使用github链接httpsgithubcomtincantecheasy-tls下载easy-tls它是一个easy-rsa扩展工具我们正在使用它来生成tls-auth密钥单击code选项卡下的download-zip选项请参考下面的截图 "Direct link to heading")
+### # 首先使用GitHub链接[https://github.com/TinCanTech/easy-tls](https://github.com/TinCanTech/easy-tls)下载Easy-TLS。它是一个Easy-RSA扩展工具，我们正在使用它来生成tls-auth密钥。单击code选项卡下的Download zip选项。请参考下面的截图。[](https://javabase.cn/docs/devops/windows/install-openvpn-server//# 首先使用github链接httpsgithubcomtincantecheasy-tls下载easy-tls它是一个easy-rsa扩展工具我们正在使用它来生成tls-auth密钥单击code选项卡下的download-zip选项请参考下面的截图 "Direct link to heading")
 
 ![1.png](https://oss.javabase.cn/1665972224805?watermark/4/text/amF2YWJhc2UuY24=/rotate/-20/font/6buR5L2T/fontsize/200/fill/I0ZGRkZGRg==/dissolve/50/dx/100/dy/100)
 
@@ -134,19 +134,19 @@ openssl verify -CAfile pki/ca.crt pki/issued/CLIENT.crt
 
 ![image-20220120182324122.png](https://oss.javabase.cn/1665972254174?watermark/4/text/amF2YWJhc2UuY24=/rotate/-20/font/6buR5L2T/fontsize/200/fill/I0ZGRkZGRg==/dissolve/50/dx/100/dy/100)
 
-#### 现在回到EasyRSA shell提示符并输入下面的命令。初始化easy-tls脚本程序。[](https://javabase.cn/docs/devops/windows/install-openvpn-server//#现在回到easyrsa-shell提示符并输入下面的命令初始化easy-tls脚本程序 "Direct link to heading")
+### # 现在回到EasyRSA shell提示符并输入下面的命令。初始化easy-tls脚本程序。[](https://javabase.cn/docs/devops/windows/install-openvpn-server//# 现在回到easyrsa-shell提示符并输入下面的命令初始化easy-tls脚本程序 "Direct link to heading")
 
 ```
 ./easytls init-tls
 ```
 
-#### 现在，使用下面的命令生成tls-auth密钥。[](https://javabase.cn/docs/devops/windows/install-openvpn-server//#现在使用下面的命令生成tls-auth密钥 "Direct link to heading")
+### # 现在，使用下面的命令生成tls-auth密钥。[](https://javabase.cn/docs/devops/windows/install-openvpn-server//# 现在使用下面的命令生成tls-auth密钥 "Direct link to heading")
 
 ```
 ./easytls build-tls-auth
 ```
 
-#### 该命令将生成名为“tls-auth”的密钥文件。在“C:\\Program Files\\OpenVPN\\easy-rsa\\pki\\easytls”文件夹下。请参考下面的截图。[](https://javabase.cn/docs/devops/windows/install-openvpn-server//#该命令将生成名为tls-auth的密钥文件在cprogram-filesopenvpneasy-rsapkieasytls文件夹下请参考下面的截图 "Direct link to heading")
+### # 该命令将生成名为“tls-auth”的密钥文件。在“C:\\Program Files\\OpenVPN\\easy-rsa\\pki\\easytls”文件夹下。请参考下面的截图。[](https://javabase.cn/docs/devops/windows/install-openvpn-server//# 该命令将生成名为tls-auth的密钥文件在cprogram-filesopenvpneasy-rsapkieasytls文件夹下请参考下面的截图 "Direct link to heading")
 
 ![1.png](https://oss.javabase.cn/1665972330196?watermark/4/text/amF2YWJhc2UuY24=/rotate/-20/font/6buR5L2T/fontsize/200/fill/I0ZGRkZGRg==/dissolve/50/dx/100/dy/100)
 
@@ -190,9 +190,9 @@ openssl verify -CAfile pki/ca.crt pki/issued/CLIENT.crt
 | CLIENT.key | Client only | Client Key | Yes |
 | tls-auth.key | server + all | clients Used for tls-auth directive | No |
 
-## 步骤三：配置ip转发和网络共享[](https://javabase.cn/docs/devops/windows/install-openvpn-server//#步骤三配置ip转发和网络共享 "Direct link to heading")
+# # 步骤三：配置ip转发和网络共享[](https://javabase.cn/docs/devops/windows/install-openvpn-server//# 步骤三配置ip转发和网络共享 "Direct link to heading")
 
-打开注册表，win+R，输入regedit.exe，依次找到：HKEY\_LOCAL\_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\Tcpip\\Parameters将IPEableRouter值改为1，如下图
+打开注册表，win+R，输入regedit.exe，依次找到：HKEY\*LOCAL\*MACHINE\\SYSTEM\\CurrentControlSet\\Services\\Tcpip\\Parameters将IPEableRouter值改为1，如下图
 
 ![1.png](https://oss.javabase.cn/1665972652297?watermark/4/text/amF2YWJhc2UuY24=/rotate/-20/font/6buR5L2T/fontsize/200/fill/I0ZGRkZGRg==/dissolve/50/dx/100/dy/100)
 
@@ -202,7 +202,7 @@ openssl verify -CAfile pki/ca.crt pki/issued/CLIENT.crt
 
 ![1.png](https://oss.javabase.cn/1665972701099?watermark/4/text/amF2YWJhc2UuY24=/rotate/-20/font/6buR5L2T/fontsize/200/fill/I0ZGRkZGRg==/dissolve/50/dx/100/dy/100)
 
-## 步骤四：创建服务端配置文件[](https://javabase.cn/docs/devops/windows/install-openvpn-server//#步骤四创建服务端配置文件 "Direct link to heading")
+# # 步骤四：创建服务端配置文件[](https://javabase.cn/docs/devops/windows/install-openvpn-server//# 步骤四创建服务端配置文件 "Direct link to heading")
 
 首先打开Windows资源管理器，进入C:\\Program Files\\OpenVPN\\sample-config文件夹，将server.ovpn文件复制一份到C:\\Program Files\\OpenVPN\\config目录下。
 
@@ -235,7 +235,7 @@ cipher AES-256-GCM
 
 ![1.png](https://oss.javabase.cn/1665972820715?watermark/4/text/amF2YWJhc2UuY24=/rotate/-20/font/6buR5L2T/fontsize/200/fill/I0ZGRkZGRg==/dissolve/50/dx/100/dy/100)
 
-## 配置客户端[](https://javabase.cn/docs/devops/windows/install-openvpn-server//#配置客户端 "Direct link to heading")
+# # 配置客户端[](https://javabase.cn/docs/devops/windows/install-openvpn-server//# 配置客户端 "Direct link to heading")
 
 复制以下文件到你的客户端，并且在同一目录下
 
@@ -274,7 +274,7 @@ cipher AES-256-GCM
 
 这就成功了。
 
-## 吊销客户端证书[](https://javabase.cn/docs/devops/windows/install-openvpn-server//#吊销客户端证书 "Direct link to heading")
+# # 吊销客户端证书[](https://javabase.cn/docs/devops/windows/install-openvpn-server//# 吊销客户端证书 "Direct link to heading")
 
 当我们创建了多个用户使用，然后某些原因，个别用户需要禁用的时候，我们就可以使用吊销证书的方式来处理。
 

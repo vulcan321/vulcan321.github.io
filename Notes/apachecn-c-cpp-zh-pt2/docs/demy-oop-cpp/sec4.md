@@ -14,8 +14,8 @@
 
 本节包括以下章节:
 
-*   [*第 16 章*](16.html#_idTextAnchor622)*，使用观察者模式*
-*   [*第 17 章*](17.html#_idTextAnchor649)*，应用工厂模式*
-*   [*第 18 章*](18.html#_idTextAnchor682)*，应用适配器模式*
-*   [*第 19 章*](19.html#_idTextAnchor718)*，使用单例模式*
-*   [*第 20 章*](20.html#_idTextAnchor756)*，使用 pImpl 模式删除实现细节*
+*   [*第 16 章*](16.html# _idTextAnchor622)*，使用观察者模式*
+*   [*第 17 章*](17.html# _idTextAnchor649)*，应用工厂模式*
+*   [*第 18 章*](18.html# _idTextAnchor682)*，应用适配器模式*
+*   [*第 19 章*](19.html# _idTextAnchor718)*，使用单例模式*
+*   [*第 20 章*](20.html# _idTextAnchor756)*，使用 pImpl 模式删除实现细节*

@@ -28,7 +28,7 @@ We will use neural networks
 to modify the content image
 to make it close to the style image in style.
 For example,
-the content image in :numref:`fig_style_transfer` is a landscape photo taken by us
+the content image in :numref:`fig*style*transfer` is a landscape photo taken by us
 in Mount Rainier National Park in the suburbs of Seattle, while the style image is an oil painting
 with the theme of autumn oak trees.
 In the output synthesized image,
@@ -38,11 +38,11 @@ while preserving the main shape of the objects
 in the content image.
 
 ![Given content and style images, style transfer outputs a synthesized image.](../img/style-transfer.svg)
-:label:`fig_style_transfer`
+:label:`fig*style*transfer`
 
-## Method
+# # Method
 
-:numref:`fig_style_transfer_model` illustrates
+:numref:`fig*style*transfer_model` illustrates
 the CNN-based style transfer method with a simplified example.
 First, we initialize the synthesized image,
 for example, into the content image. 
@@ -55,13 +55,13 @@ This deep CNN uses multiple layers
 to extract
 hierarchical features for images.
 We can choose the output of some of these layers as content features or style features.
-Take :numref:`fig_style_transfer_model` as an example.
+Take :numref:`fig*style*transfer_model` as an example.
 The pretrained neural network here has 3 convolutional layers,
 where the second layer outputs the content features,
 and the first and third layers output the style features. 
 
 ![CNN-based style transfer process. Solid lines show the direction of forward propagation and dotted lines show backward propagation. ](../img/neural-style.svg)
-:label:`fig_style_transfer_model`
+:label:`fig*style*transfer_model`
 
 Next, we calculate the loss function of style transfer through forward propagation (direction of solid arrows), and update the model parameters (the synthesized image for output) through backpropagation (direction of dashed arrows).
 The loss function commonly used in style transfer consists of three parts:
@@ -77,7 +77,7 @@ In the following,
 we will explain the technical details of style transfer via a concrete experiment.
 
 
-## [**Reading the Content and Style Images**]
+# # [**Reading the Content and Style Images**]
 
 First, we read the content and style images. 
 From their printed coordinate axes,
@@ -97,7 +97,7 @@ d2l.plt.imshow(content_img.asnumpy());
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 %matplotlib inline
 from d2l import torch as d2l
 import torch
@@ -115,12 +115,12 @@ d2l.plt.imshow(style_img.asnumpy());
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 style_img = d2l.Image.open('../img/autumn-oak.jpg')
 d2l.plt.imshow(style_img);
 ```
 
-## [**Preprocessing and Postprocessing**]
+# # [**Preprocessing and Postprocessing**]
 
 Below, we define two functions for preprocessing and postprocessing images. 
 The `preprocess` function standardizes
@@ -135,16 +135,16 @@ rgb_std = np.array([0.229, 0.224, 0.225])
 
 def preprocess(img, image_shape):
     img = image.imresize(img, *image_shape)
-    img = (img.astype('float32') / 255 - rgb_mean) / rgb_std
+    img = (img.astype('float32') / 255 - rgb*mean) / rgb*std
     return np.expand_dims(img.transpose(2, 0, 1), axis=0)
 
 def postprocess(img):
-    img = img[0].as_in_ctx(rgb_std.ctx)
-    return (img.transpose(1, 2, 0) * rgb_std + rgb_mean).clip(0, 1)
+    img = img[0].as*in*ctx(rgb_std.ctx)
+    return (img.transpose(1, 2, 0) * rgb*std + rgb*mean).clip(0, 1)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 rgb_mean = torch.tensor([0.485, 0.456, 0.406])
 rgb_std = torch.tensor([0.229, 0.224, 0.225])
 
@@ -152,25 +152,25 @@ def preprocess(img, image_shape):
     transforms = torchvision.transforms.Compose([
         torchvision.transforms.Resize(image_shape),
         torchvision.transforms.ToTensor(),
-        torchvision.transforms.Normalize(mean=rgb_mean, std=rgb_std)])
+        torchvision.transforms.Normalize(mean=rgb*mean, std=rgb*std)])
     return transforms(img).unsqueeze(0)
 
 def postprocess(img):
     img = img[0].to(rgb_std.device)
-    img = torch.clamp(img.permute(1, 2, 0) * rgb_std + rgb_mean, 0, 1)
+    img = torch.clamp(img.permute(1, 2, 0) * rgb*std + rgb*mean, 0, 1)
     return torchvision.transforms.ToPILImage()(img.permute(2, 0, 1))
 ```
 
-## [**Extracting Features**]
+# # [**Extracting Features**]
 
 We use the VGG-19 model pretrained on the ImageNet dataset to extract image features :cite:`Gatys.Ecker.Bethge.2016`.
 
 ```{.python .input}
-pretrained_net = gluon.model_zoo.vision.vgg19(pretrained=True)
+pretrained*net = gluon.model*zoo.vision.vgg19(pretrained=True)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 pretrained_net = torchvision.models.vgg19(pretrained=True)
 ```
 
@@ -186,8 +186,8 @@ In the experiment, we choose the last convolutional layer of the fourth convolut
 The indices of these layers can be obtained by printing the `pretrained_net` instance.
 
 ```{.python .input}
-#@tab all
-style_layers, content_layers = [0, 5, 10, 19, 28], [25]
+# @tab all
+style*layers, content*layers = [0, 5, 10, 19, 28], [25]
 ```
 
 When extracting features using VGG layers,
@@ -198,14 +198,14 @@ used for feature extraction.
 
 ```{.python .input}
 net = nn.Sequential()
-for i in range(max(content_layers + style_layers) + 1):
+for i in range(max(content*layers + style*layers) + 1):
     net.add(pretrained_net.features[i])
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 net = nn.Sequential(*[pretrained_net.features[i] for i in
-                      range(max(content_layers + style_layers) + 1)])
+                      range(max(content*layers + style*layers) + 1)])
 ```
 
 Given the input `X`, if we simply invoke
@@ -215,8 +215,8 @@ we need to perform layer-by-layer computation and keep
 the content and style layer outputs.
 
 ```{.python .input}
-#@tab all
-def extract_features(X, content_layers, style_layers):
+# @tab all
+def extract*features(X, content*layers, style_layers):
     contents = []
     styles = []
     for i in range(len(net)):
@@ -240,36 +240,36 @@ for style transfer,
 we can only extract the content and style features of the synthesized image by calling the `extract_features` function during training.
 
 ```{.python .input}
-def get_contents(image_shape, device):
-    content_X = preprocess(content_img, image_shape).copyto(device)
-    contents_Y, _ = extract_features(content_X, content_layers, style_layers)
-    return content_X, contents_Y
+def get*contents(image*shape, device):
+    content*X = preprocess(content*img, image_shape).copyto(device)
+    contents*Y, * = extract*features(content*X, content*layers, style*layers)
+    return content*X, contents*Y
 
-def get_styles(image_shape, device):
-    style_X = preprocess(style_img, image_shape).copyto(device)
-    _, styles_Y = extract_features(style_X, content_layers, style_layers)
-    return style_X, styles_Y
+def get*styles(image*shape, device):
+    style*X = preprocess(style*img, image_shape).copyto(device)
+    *, styles*Y = extract*features(style*X, content*layers, style*layers)
+    return style*X, styles*Y
 ```
 
 ```{.python .input}
-#@tab pytorch
-def get_contents(image_shape, device):
-    content_X = preprocess(content_img, image_shape).to(device)
-    contents_Y, _ = extract_features(content_X, content_layers, style_layers)
-    return content_X, contents_Y
+# @tab pytorch
+def get*contents(image*shape, device):
+    content*X = preprocess(content*img, image_shape).to(device)
+    contents*Y, * = extract*features(content*X, content*layers, style*layers)
+    return content*X, contents*Y
 
-def get_styles(image_shape, device):
-    style_X = preprocess(style_img, image_shape).to(device)
-    _, styles_Y = extract_features(style_X, content_layers, style_layers)
-    return style_X, styles_Y
+def get*styles(image*shape, device):
+    style*X = preprocess(style*img, image_shape).to(device)
+    *, styles*Y = extract*features(style*X, content*layers, style*layers)
+    return style*X, styles*Y
 ```
 
-## [**Defining the Loss Function**]
+# # [**Defining the Loss Function**]
 
 Now we will describe the loss function for style transfer. The loss function consists of
 the content loss, style loss, and total variation loss.
 
-### Content Loss
+## # Content Loss
 
 Similar to the loss function in linear regression,
 the content loss measures the difference
@@ -281,20 +281,20 @@ are both
 outputs of the content layer computed by the `extract_features` function.
 
 ```{.python .input}
-def content_loss(Y_hat, Y):
+def content*loss(Y*hat, Y):
     return np.square(Y_hat - Y).mean()
 ```
 
 ```{.python .input}
-#@tab pytorch
-def content_loss(Y_hat, Y):
+# @tab pytorch
+def content*loss(Y*hat, Y):
     # We detach the target content from the tree used to dynamically compute
     # the gradient: this is a stated value, not a variable. Otherwise the loss
     # will throw an error.
     return torch.square(Y_hat - Y.detach()).mean()
 ```
 
-### Style Loss
+## # Style Loss
 
 Style loss, similar to content loss,
 also uses the squared loss function to measure the difference in style between the synthesized image and the style image. 
@@ -308,11 +308,11 @@ we can transform this output into
 matrix $\mathbf{X}$ with $c$ rows and $hw$ columns.
 This matrix can be thought of as
 the concatenation of 
-$c$ vectors $\mathbf{x}_1, \ldots, \mathbf{x}_c$, 
+$c$ vectors $\mathbf{x}*1, \ldots, \mathbf{x}*c$, 
 each of which has a length of $hw$. 
 Here, vector $\mathbf{x}_i$ represents the style feature of channel $i$. 
 
-In the *Gram matrix* of these vectors $\mathbf{X}\mathbf{X}^\top \in \mathbb{R}^{c \times c}$, element $x_{ij}$ in row $i$ and column $j$ is the inner product of vectors $\mathbf{x}_i$ and $\mathbf{x}_j$.
+In the *Gram matrix* of these vectors $\mathbf{X}\mathbf{X}^\top \in \mathbb{R}^{c \times c}$, element $x*{ij}$ in row $i$ and column $j$ is the inner product of vectors $\mathbf{x}*i$ and $\mathbf{x}_j$.
 It represents the correlation of the style features of channels $i$ and $j$. 
 We use this Gram matrix to represent the style output of any style layer. 
 Note that when the value of $hw$ is larger, 
@@ -324,7 +324,7 @@ the `gram` function below divides
 the Gram matrix by the number of its elements, i.e., $chw$.
 
 ```{.python .input}
-#@tab all
+# @tab all
 def gram(X):
     num_channels, n = X.shape[1], d2l.size(X) // X.shape[1]
     X = d2l.reshape(X, (num_channels, n))
@@ -338,17 +338,17 @@ the synthesized image and the style image.
 It is assumed here that the Gram matrix `gram_Y` based on the style image has been precomputed.
 
 ```{.python .input}
-def style_loss(Y_hat, gram_Y):
-    return np.square(gram(Y_hat) - gram_Y).mean()
+def style*loss(Y*hat, gram_Y):
+    return np.square(gram(Y*hat) - gram*Y).mean()
 ```
 
 ```{.python .input}
-#@tab pytorch
-def style_loss(Y_hat, gram_Y):
-    return torch.square(gram(Y_hat) - gram_Y.detach()).mean()
+# @tab pytorch
+def style*loss(Y*hat, gram_Y):
+    return torch.square(gram(Y*hat) - gram*Y.detach()).mean()
 ```
 
-### Total Variation Loss
+## # Total Variation Loss
 
 Sometimes, the learned synthesized image
 has a lot of high-frequency noise, 
@@ -358,18 +358,18 @@ One common noise reduction method is
 Denote by $x_{i, j}$ the pixel value at coordinate $(i, j)$.
 Reducing total variation loss
 
-$$\sum_{i, j} \left|x_{i, j} - x_{i+1, j}\right| + \left|x_{i, j} - x_{i, j+1}\right|$$
+$$\sum*{i, j} \left|x*{i, j} - x*{i+1, j}\right| + \left|x*{i, j} - x_{i, j+1}\right|$$
 
 makes values of neighboring pixels on the synthesized image closer.
 
 ```{.python .input}
-#@tab all
-def tv_loss(Y_hat):
-    return 0.5 * (d2l.abs(Y_hat[:, :, 1:, :] - Y_hat[:, :, :-1, :]).mean() +
-                  d2l.abs(Y_hat[:, :, :, 1:] - Y_hat[:, :, :, :-1]).mean())
+# @tab all
+def tv*loss(Y*hat):
+    return 0.5 * (d2l.abs(Y*hat[:, :, 1:, :] - Y*hat[:, :, :-1, :]).mean() +
+                  d2l.abs(Y*hat[:, :, :, 1:] - Y*hat[:, :, :, :-1]).mean())
 ```
 
-### Loss Function
+## # Loss Function
 
 [**The loss function of style transfer is the weighted sum of content loss, style loss, and total variation loss**].
 By adjusting these weight hyperparameters,
@@ -379,22 +379,22 @@ style transfer,
 and noise reduction on the synthesized image.
 
 ```{.python .input}
-#@tab all
-content_weight, style_weight, tv_weight = 1, 1e3, 10
+# @tab all
+content*weight, style*weight, tv_weight = 1, 1e3, 10
 
-def compute_loss(X, contents_Y_hat, styles_Y_hat, contents_Y, styles_Y_gram):
+def compute*loss(X, contents*Y*hat, styles*Y*hat, contents*Y, styles*Y*gram):
     # Calculate the content, style, and total variance losses respectively
-    contents_l = [content_loss(Y_hat, Y) * content_weight for Y_hat, Y in zip(
-        contents_Y_hat, contents_Y)]
-    styles_l = [style_loss(Y_hat, Y) * style_weight for Y_hat, Y in zip(
-        styles_Y_hat, styles_Y_gram)]
-    tv_l = tv_loss(X) * tv_weight
+    contents*l = [content*loss(Y*hat, Y) * content*weight for Y_hat, Y in zip(
+        contents*Y*hat, contents_Y)]
+    styles*l = [style*loss(Y*hat, Y) * style*weight for Y_hat, Y in zip(
+        styles*Y*hat, styles*Y*gram)]
+    tv*l = tv*loss(X) * tv_weight
     # Add up all the losses
-    l = sum(10 * styles_l + contents_l + [tv_l])
-    return contents_l, styles_l, tv_l, l
+    l = sum(10 * styles*l + contents*l + [tv_l])
+    return contents*l, styles*l, tv_l, l
 ```
 
-## [**Initializing the Synthesized Image**]
+# # [**Initializing the Synthesized Image**]
 
 In style transfer,
 the synthesized image is the only variable that needs to be updated during training.
@@ -403,8 +403,8 @@ In this model, forward propagation just returns the model parameters.
 
 ```{.python .input}
 class SynthesizedImage(nn.Block):
-    def __init__(self, img_shape, **kwargs):
-        super(SynthesizedImage, self).__init__(**kwargs)
+    def **init**(self, img_shape, **kwargs):
+        super(SynthesizedImage, self).**init**(**kwargs)
         self.weight = self.params.get('weight', shape=img_shape)
 
     def forward(self):
@@ -412,10 +412,10 @@ class SynthesizedImage(nn.Block):
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 class SynthesizedImage(nn.Module):
-    def __init__(self, img_shape, **kwargs):
-        super(SynthesizedImage, self).__init__(**kwargs)
+    def **init**(self, img_shape, **kwargs):
+        super(SynthesizedImage, self).**init**(**kwargs)
         self.weight = nn.Parameter(torch.rand(*img_shape))
 
     def forward(self):
@@ -424,29 +424,29 @@ class SynthesizedImage(nn.Module):
 
 Next, we define the `get_inits` function.
 This function creates a synthesized image model instance and initializes it to the image `X`.
-Gram matrices for the style image at various style layers, `styles_Y_gram`, are computed prior to training.
+Gram matrices for the style image at various style layers, `styles*Y*gram`, are computed prior to training.
 
 ```{.python .input}
-def get_inits(X, device, lr, styles_Y):
+def get*inits(X, device, lr, styles*Y):
     gen_img = SynthesizedImage(X.shape)
-    gen_img.initialize(init.Constant(X), ctx=device, force_reinit=True)
-    trainer = gluon.Trainer(gen_img.collect_params(), 'adam',
+    gen*img.initialize(init.Constant(X), ctx=device, force*reinit=True)
+    trainer = gluon.Trainer(gen*img.collect*params(), 'adam',
                             {'learning_rate': lr})
-    styles_Y_gram = [gram(Y) for Y in styles_Y]
-    return gen_img(), styles_Y_gram, trainer
+    styles*Y*gram = [gram(Y) for Y in styles_Y]
+    return gen*img(), styles*Y_gram, trainer
 ```
 
 ```{.python .input}
-#@tab pytorch
-def get_inits(X, device, lr, styles_Y):
+# @tab pytorch
+def get*inits(X, device, lr, styles*Y):
     gen_img = SynthesizedImage(X.shape).to(device)
-    gen_img.weight.data.copy_(X.data)
+    gen*img.weight.data.copy*(X.data)
     trainer = torch.optim.Adam(gen_img.parameters(), lr=lr)
-    styles_Y_gram = [gram(Y) for Y in styles_Y]
-    return gen_img(), styles_Y_gram, trainer
+    styles*Y*gram = [gram(Y) for Y in styles_Y]
+    return gen*img(), styles*Y_gram, trainer
 ```
 
-## [**Training**]
+# # [**Training**]
 
 
 When training the model for style transfer,
@@ -455,51 +455,51 @@ content features and style features of the synthesized image, and calculate the 
 Below defines the training loop.
 
 ```{.python .input}
-def train(X, contents_Y, styles_Y, device, lr, num_epochs, lr_decay_epoch):
-    X, styles_Y_gram, trainer = get_inits(X, device, lr, styles_Y)
+def train(X, contents*Y, styles*Y, device, lr, num*epochs, lr*decay_epoch):
+    X, styles*Y*gram, trainer = get*inits(X, device, lr, styles*Y)
     animator = d2l.Animator(xlabel='epoch', ylabel='loss',
                             xlim=[10, num_epochs], ylim=[0, 20],
                             legend=['content', 'style', 'TV'],
                             ncols=2, figsize=(7, 2.5))
     for epoch in range(num_epochs):
         with autograd.record():
-            contents_Y_hat, styles_Y_hat = extract_features(
-                X, content_layers, style_layers)
-            contents_l, styles_l, tv_l, l = compute_loss(
-                X, contents_Y_hat, styles_Y_hat, contents_Y, styles_Y_gram)
+            contents*Y*hat, styles*Y*hat = extract_features(
+                X, content*layers, style*layers)
+            contents*l, styles*l, tv*l, l = compute*loss(
+                X, contents*Y*hat, styles*Y*hat, contents*Y, styles*Y_gram)
         l.backward()
         trainer.step(1)
-        if (epoch + 1) % lr_decay_epoch == 0:
-            trainer.set_learning_rate(trainer.learning_rate * 0.8)
+        if (epoch + 1) % lr*decay*epoch == 0:
+            trainer.set*learning*rate(trainer.learning_rate * 0.8)
         if (epoch + 1) % 10 == 0:
             animator.axes[1].imshow(postprocess(X).asnumpy())
             animator.add(epoch + 1, [float(sum(contents_l)),
-                                     float(sum(styles_l)), float(tv_l)])
+                                     float(sum(styles*l)), float(tv*l)])
     return X
 ```
 
 ```{.python .input}
-#@tab pytorch
-def train(X, contents_Y, styles_Y, device, lr, num_epochs, lr_decay_epoch):
-    X, styles_Y_gram, trainer = get_inits(X, device, lr, styles_Y)
-    scheduler = torch.optim.lr_scheduler.StepLR(trainer, lr_decay_epoch, 0.8)
+# @tab pytorch
+def train(X, contents*Y, styles*Y, device, lr, num*epochs, lr*decay_epoch):
+    X, styles*Y*gram, trainer = get*inits(X, device, lr, styles*Y)
+    scheduler = torch.optim.lr*scheduler.StepLR(trainer, lr*decay_epoch, 0.8)
     animator = d2l.Animator(xlabel='epoch', ylabel='loss',
                             xlim=[10, num_epochs],
                             legend=['content', 'style', 'TV'],
                             ncols=2, figsize=(7, 2.5))
     for epoch in range(num_epochs):
         trainer.zero_grad()
-        contents_Y_hat, styles_Y_hat = extract_features(
-            X, content_layers, style_layers)
-        contents_l, styles_l, tv_l, l = compute_loss(
-            X, contents_Y_hat, styles_Y_hat, contents_Y, styles_Y_gram)
+        contents*Y*hat, styles*Y*hat = extract_features(
+            X, content*layers, style*layers)
+        contents*l, styles*l, tv*l, l = compute*loss(
+            X, contents*Y*hat, styles*Y*hat, contents*Y, styles*Y_gram)
         l.backward()
         trainer.step()
         scheduler.step()
         if (epoch + 1) % 10 == 0:
             animator.axes[1].imshow(postprocess(X))
             animator.add(epoch + 1, [float(sum(contents_l)),
-                                     float(sum(styles_l)), float(tv_l)])
+                                     float(sum(styles*l)), float(tv*l)])
     return X
 ```
 
@@ -508,20 +508,20 @@ We rescale the height and width of the content and style images to 300 by 450 pi
 We use the content image to initialize the synthesized image.
 
 ```{.python .input}
-device, image_shape = d2l.try_gpu(), (450, 300)
-net.collect_params().reset_ctx(device)
-content_X, contents_Y = get_contents(image_shape, device)
-_, styles_Y = get_styles(image_shape, device)
-output = train(content_X, contents_Y, styles_Y, device, 0.9, 500, 50)
+device, image*shape = d2l.try*gpu(), (450, 300)
+net.collect*params().reset*ctx(device)
+content*X, contents*Y = get*contents(image*shape, device)
+*, styles*Y = get*styles(image*shape, device)
+output = train(content*X, contents*Y, styles_Y, device, 0.9, 500, 50)
 ```
 
 ```{.python .input}
-#@tab pytorch
-device, image_shape = d2l.try_gpu(), (300, 450)  # PIL Image (h, w)
+# @tab pytorch
+device, image*shape = d2l.try*gpu(), (300, 450)  # PIL Image (h, w)
 net = net.to(device)
-content_X, contents_Y = get_contents(image_shape, device)
-_, styles_Y = get_styles(image_shape, device)
-output = train(content_X, contents_Y, styles_Y, device, 0.3, 500, 50)
+content*X, contents*Y = get*contents(image*shape, device)
+*, styles*Y = get*styles(image*shape, device)
+output = train(content*X, contents*Y, styles_Y, device, 0.3, 500, 50)
 ```
 
 We can see that the synthesized image
@@ -536,14 +536,14 @@ Some of these blocks even have the subtle texture of brush strokes.
 
 
 
-## Summary
+# # Summary
 
 * The loss function commonly used in style transfer consists of three parts: (i) content loss makes the synthesized image and the content image close in content features; (ii) style loss makes the synthesized image and style image close in style features; and (iii) total variation loss helps to reduce the noise in the synthesized image.
 * We can use a pretrained CNN to extract image features and minimize the loss function to continuously update the synthesized image as model parameters during training.
 * We use Gram matrices to represent the style outputs from the style layers.
 
 
-## Exercises
+# # Exercises
 
 1. How does the output change when you select different content and style layers?
 1. Adjust the weight hyperparameters in the loss function. Does the output retain more content or have less noise?

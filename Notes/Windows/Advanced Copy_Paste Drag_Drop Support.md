@@ -60,7 +60,7 @@ Table 1 - Source for initiating RTF and Csv clipboard formats
 void CClipExamView::Word2Clipboard(COleDataSource * pSource)
 {
     UINT format = ::RegisterClipboardFormat(_T("Rich Text Format"));
-    CSharedFile sf(GMEM_MOVEABLE|GMEM_DDESHARE|GMEM_ZEROINIT);
+    CSharedFile sf(GMEM*MOVEABLE|GMEM*DDESHARE|GMEM_ZEROINIT);
     CString   text = _T("{\\rtf1 {1\\tab 2\\tab 3\\par 4\\tab }{\\b\\i 5}{\\tab   6\\par}}");
     sf.Write(text, text.GetLength());
     HGLOBAL hMem = sf.Detach();
@@ -70,7 +70,7 @@ void CClipExamView::Word2Clipboard(COleDataSource * pSource)
 void CClipExamView::Excel2Clipboard(COleDataSource * pSource)
 {
     UINT format = ::RegisterClipboardFormat(_T("Csv"));
-    CSharedFile sf(GMEM_MOVEABLE|GMEM_DDESHARE|GMEM_ZEROINIT);
+    CSharedFile sf(GMEM*MOVEABLE|GMEM*DDESHARE|GMEM_ZEROINIT);
     CString   text = _T("6,5,4\n2,=1+1,1");
     sf.Write(text, text.GetLength());
     HGLOBAL hMem = sf.Detach();
@@ -146,7 +146,7 @@ BOOL OnRenderGlobalData(LPFORMATETC lpFormatEtc, HGLOBAL* phGlobal)
 {
     if (lpFormatEtc->cfFormat == ::RegisterClipboardFormat("Csv")) {
         // Handle Csv format
-        CSharedFile sf(GMEM_MOVEABLE|GMEM_DDESHARE|GMEM_ZEROINIT);
+        CSharedFile sf(GMEM*MOVEABLE|GMEM*DDESHARE|GMEM_ZEROINIT);
         CString   text = _T("Excel2Clipboard\n6,5,4\n3,2,1");
         sf.Write(text, text.GetLength());
         HGLOBAL hMem = sf.Detach();
@@ -155,7 +155,7 @@ BOOL OnRenderGlobalData(LPFORMATETC lpFormatEtc, HGLOBAL* phGlobal)
     }
     else if (lpFormatEtc->cfFormat == ::RegisterClipboardFormat(CF_RTF)) {
         // Handle Rich Text Format
-        CSharedFile sf(GMEM_MOVEABLE|GMEM_DDESHARE|GMEM_ZEROINIT);
+        CSharedFile sf(GMEM*MOVEABLE|GMEM*DDESHARE|GMEM_ZEROINIT);
         CString   text = _T("{\\rtf1 {Word2Clipboard\\par 1\\tab 2\\tab 3\\par    4\\tab 5\\tab 6}}");
         sf.Write(text, text.GetLength());
         HGLOBAL hMem = sf.Detach();
@@ -172,7 +172,7 @@ void SetClipboard()
     // Initiate a cut/copy to the clipboard
     COleDataSource::SetClipboard();
 }
-DROPEFFECT DoDragDrop(DWORD dwEffects = DROPEFFECT_COPY|DROPEFFECT_MOVE|DROPEFFECT_LINK, LPCRECT lpRectStartDrag = NULL, COleDropSource* pDropSource = NULL)
+DROPEFFECT DoDragDrop(DWORD dwEffects = DROPEFFECT*COPY|DROPEFFECT*MOVE|DROPEFFECT_LINK, LPCRECT lpRectStartDrag = NULL, COleDropSource* pDropSource = NULL)
 {
     // Place available formats on the clipboard
     DelayRenderData(::RegisterClipboardFormat("Csv"));
@@ -212,7 +212,7 @@ CF_TEXT
 
 The CF_TEXT format is probably the most used of the clipboard formats commonly used by developers. This format simply defines a text string that is placed on the clipboard.
 
-See http://www.codeguru.com/clipboard/copypaste_dragdrop.shtml for a simple example of how to read and write CF_TEXT from the clipboard.
+See http://www.codeguru.com/clipboard/copypaste*dragdrop.shtml for a simple example of how to read and write CF*TEXT from the clipboard.
 
 
 
@@ -292,7 +292,7 @@ UINT rtfformat = ::RegisterClipboardFormat(CF_RTF);
 
 CF_BITMAP
 
-Randy More's article (http://www.codeguru.com/clipboard/bitmap_to_clipboard.shtml) discusses how to create and place a CF_BITMAP object the clipboard. I won't revisit that here, but the following example shows how to use the technique Randy described with Delayed Rendering.
+Randy More's article (http://www.codeguru.com/clipboard/bitmap*to*clipboard.shtml) discusses how to create and place a CF_BITMAP object the clipboard. I won't revisit that here, but the following example shows how to use the technique Randy described with Delayed Rendering.
 
 Table 4 - Delayed Rendering a CBitmap
 
@@ -334,7 +334,7 @@ BOOL OnRenderData(LPFORMATETC lpFormatEtc, LPSTGMEDIUM lpStgMedium)
 
 CF_ENHMETAFILE
 
-Randy More's article (http://www.codeguru.com/clipboard/emf_to_clipboard.shtml) discusses how to create and place a CF_ENHMETAFILE object the clipboard. I won't revisit that here, but the following code example shows how to use the technique Randy described with Delayed Rendering.
+Randy More's article (http://www.codeguru.com/clipboard/emf*to*clipboard.shtml) discusses how to create and place a CF_ENHMETAFILE object the clipboard. I won't revisit that here, but the following code example shows how to use the technique Randy described with Delayed Rendering.
 
 Table 5 - Delayed Rendering a Metafile
 

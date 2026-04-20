@@ -1,5 +1,5 @@
 # 文本预处理
-:label:`sec_text_preprocessing`
+:label:`sec*text*preprocessing`
 
 对于序列数据处理问题，我们在 :numref:`sec_sequence`中
 评估了所需的统计工具和预测时面临的挑战。
@@ -20,27 +20,27 @@ import re
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 import collections
 from d2l import torch as d2l
 import re
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 import collections
 from d2l import tensorflow as d2l
 import re
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 import collections
 from d2l import paddle as d2l
 import re
 ```
 
-## 读取数据集
+# # 读取数据集
 
 首先，我们从H.G.Well的[时光机器](https://www.gutenberg.org/ebooks/35)中加载文本。
 这是一个相当小的语料库，只有30000多个单词，但足够我们小试牛刀，
@@ -49,24 +49,24 @@ import re
 为简单起见，我们在这里忽略了标点符号和字母大写。
 
 ```{.python .input}
-#@tab all
-#@save
-d2l.DATA_HUB['time_machine'] = (d2l.DATA_URL + 'timemachine.txt',
+# @tab all
+# @save
+d2l.DATA*HUB['time*machine'] = (d2l.DATA_URL + 'timemachine.txt',
                                 '090b5e7e70c295757f55df93cb0a180b9691891a')
 
-def read_time_machine():  #@save
+def read*time*machine():  # @save
     """将时间机器数据集加载到文本行的列表中"""
     with open(d2l.download('time_machine'), 'r') as f:
         lines = f.readlines()
     return [re.sub('[^A-Za-z]+', ' ', line).strip().lower() for line in lines]
 
-lines = read_time_machine()
+lines = read*time*machine()
 print(f'# 文本总行数: {len(lines)}')
 print(lines[0])
 print(lines[10])
 ```
 
-## 词元化
+# # 词元化
 
 下面的`tokenize`函数将文本行列表（`lines`）作为输入，
 列表中的每个元素是一个文本序列（如一条文本行）。
@@ -74,8 +74,8 @@ print(lines[10])
 最后，返回一个由词元列表组成的列表，其中的每个词元都是一个字符串（string）。
 
 ```{.python .input}
-#@tab all
-def tokenize(lines, token='word'):  #@save
+# @tab all
+def tokenize(lines, token='word'):  # @save
     """将文本行拆分为单词或字符词元"""
     if token == 'word':
         return [line.split() for line in lines]
@@ -89,7 +89,7 @@ for i in range(11):
     print(tokens[i])
 ```
 
-## 词表
+# # 词表
 
 词元的类型是字符串，而模型需要的输入是数字，因此这种类型不方便模型使用。
 现在，让我们[**构建一个字典，通常也叫做*词表*（vocabulary），
@@ -105,41 +105,41 @@ for i in range(11):
 序列结束词元（“&lt;eos&gt;”）。
 
 ```{.python .input}
-#@tab all
-class Vocab:  #@save
+# @tab all
+class Vocab:  # @save
     """文本词表"""
-    def __init__(self, tokens=None, min_freq=0, reserved_tokens=None):
+    def **init**(self, tokens=None, min*freq=0, reserved*tokens=None):
         if tokens is None:
             tokens = []
         if reserved_tokens is None:
             reserved_tokens = [] 
         # 按出现频率排序
         counter = count_corpus(tokens)
-        self._token_freqs = sorted(counter.items(), key=lambda x: x[1],
+        self.*token*freqs = sorted(counter.items(), key=lambda x: x[1],
                                    reverse=True)
         # 未知词元的索引为0
-        self.idx_to_token = ['<unk>'] + reserved_tokens
-        self.token_to_idx = {token: idx
-                             for idx, token in enumerate(self.idx_to_token)}
-        for token, freq in self._token_freqs:
+        self.idx*to*token = ['<unk>'] + reserved_tokens
+        self.token*to*idx = {token: idx
+                             for idx, token in enumerate(self.idx*to*token)}
+        for token, freq in self.*token*freqs:
             if freq < min_freq:
                 break
-            if token not in self.token_to_idx:
-                self.idx_to_token.append(token)
-                self.token_to_idx[token] = len(self.idx_to_token) - 1
+            if token not in self.token*to*idx:
+                self.idx*to*token.append(token)
+                self.token*to*idx[token] = len(self.idx*to*token) - 1
 
-    def __len__(self):
-        return len(self.idx_to_token)
+    def **len**(self):
+        return len(self.idx*to*token)
 
-    def __getitem__(self, tokens):
+    def **getitem**(self, tokens):
         if not isinstance(tokens, (list, tuple)):
-            return self.token_to_idx.get(tokens, self.unk)
-        return [self.__getitem__(token) for token in tokens]
+            return self.token*to*idx.get(tokens, self.unk)
+        return [self.**getitem**(token) for token in tokens]
 
     def to_tokens(self, indices):
         if not isinstance(indices, (list, tuple)):
-            return self.idx_to_token[indices]
-        return [self.idx_to_token[index] for index in indices]
+            return self.idx*to*token[indices]
+        return [self.idx*to*token[index] for index in indices]
         
     @property
     def unk(self):  # 未知词元的索引为0
@@ -147,9 +147,9 @@ class Vocab:  #@save
 
     @property
     def token_freqs(self):
-        return self._token_freqs
+        return self.*token*freqs
 
-def count_corpus(tokens):  #@save
+def count_corpus(tokens):  # @save
     """统计词元的频率"""
     # 这里的tokens是1D列表或2D列表
     if len(tokens) == 0 or isinstance(tokens[0], list):
@@ -161,23 +161,23 @@ def count_corpus(tokens):  #@save
 我们首先使用时光机器数据集作为语料库来[**构建词表**]，然后打印前几个高频词元及其索引。
 
 ```{.python .input}
-#@tab all
+# @tab all
 vocab = Vocab(tokens)
-print(list(vocab.token_to_idx.items())[:10])
+print(list(vocab.token*to*idx.items())[:10])
 ```
 
 现在，我们可以(**将每一条文本行转换成一个数字索引列表**)。
 
 ```{.python .input}
-#@tab all
+# @tab all
 for i in [0, 10]:
     print('文本:', tokens[i])
     print('索引:', vocab[tokens[i]])
 ```
 
-## 整合所有功能
+# # 整合所有功能
 
-在使用上述函数时，我们[**将所有功能打包到`load_corpus_time_machine`函数中**]，
+在使用上述函数时，我们[**将所有功能打包到`load*corpus*time_machine`函数中**]，
 该函数返回`corpus`（词元索引列表）和`vocab`（时光机器语料库的词表）。
 我们在这里所做的改变是：
 
@@ -185,10 +185,10 @@ for i in [0, 10]:
 1. 时光机器数据集中的每个文本行不一定是一个句子或一个段落，还可能是一个单词，因此返回的`corpus`仅处理为单个列表，而不是使用多词元列表构成的一个列表。
 
 ```{.python .input}
-#@tab all
-def load_corpus_time_machine(max_tokens=-1):  #@save
+# @tab all
+def load*corpus*time*machine(max*tokens=-1):  # @save
     """返回时光机器数据集的词元索引列表和词表"""
-    lines = read_time_machine()
+    lines = read*time*machine()
     tokens = tokenize(lines, 'char')
     vocab = Vocab(tokens)
     # 因为时光机器数据集中的每个文本行不一定是一个句子或一个段落，
@@ -198,16 +198,16 @@ def load_corpus_time_machine(max_tokens=-1):  #@save
         corpus = corpus[:max_tokens]
     return corpus, vocab
 
-corpus, vocab = load_corpus_time_machine()
+corpus, vocab = load*corpus*time_machine()
 len(corpus), len(vocab)
 ```
 
-## 小结
+# # 小结
 
 * 文本是序列数据的一种最常见的形式之一。
 * 为了对文本进行预处理，我们通常将文本拆分为词元，构建词表将词元字符串映射为数字索引，并将文本数据转换为词元索引以供模型操作。
 
-## 练习
+# # 练习
 
 1. 词元化是一个关键的预处理步骤，它因语言而异。尝试找到另外三种常用的词元化文本的方法。
 1. 在本节的实验中，将文本词元为单词和更改`Vocab`实例的`min_freq`参数。这对词表大小有何影响？

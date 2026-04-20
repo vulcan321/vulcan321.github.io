@@ -1,12 +1,12 @@
 # 多层感知机的从零开始实现
-:label:`sec_mlp_scratch`
+:label:`sec*mlp*scratch`
 
 我们已经在 :numref:`sec_mlp`中描述了多层感知机（MLP），
 现在让我们尝试自己实现一个多层感知机。
-为了与之前softmax回归（ :numref:`sec_softmax_scratch` ）
+为了与之前softmax回归（ :numref:`sec*softmax*scratch` ）
 获得的结果进行比较，
 我们将继续使用Fashion-MNIST图像分类数据集
-（ :numref:`sec_fashion_mnist`）。
+（ :numref:`sec*fashion*mnist`）。
 
 ```{.python .input}
 from d2l import mxnet as d2l
@@ -15,20 +15,20 @@ npx.set_np()
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 from d2l import torch as d2l
 import torch
 from torch import nn
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 from d2l import tensorflow as d2l
 import tensorflow as tf
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 from d2l import paddle as d2l
 import warnings
 warnings.filterwarnings("ignore")
@@ -37,12 +37,12 @@ from paddle import nn
 ```
 
 ```{.python .input}
-#@tab all
+# @tab all
 batch_size = 256
-train_iter, test_iter = d2l.load_data_fashion_mnist(batch_size)
+train*iter, test*iter = d2l.load*data*fashion*mnist(batch*size)
 ```
 
-## 初始化模型参数
+# # 初始化模型参数
 
 回想一下，Fashion-MNIST中的每个图像由
 $28 \times 28 = 784$个灰度像素值组成。
@@ -61,11 +61,11 @@ $28 \times 28 = 784$个灰度像素值组成。
 跟以前一样，我们要为损失关于这些参数的梯度分配内存。
 
 ```{.python .input}
-num_inputs, num_outputs, num_hiddens = 784, 10, 256
+num*inputs, num*outputs, num_hiddens = 784, 10, 256
 
-W1 = np.random.normal(scale=0.01, size=(num_inputs, num_hiddens))
+W1 = np.random.normal(scale=0.01, size=(num*inputs, num*hiddens))
 b1 = np.zeros(num_hiddens)
-W2 = np.random.normal(scale=0.01, size=(num_hiddens, num_outputs))
+W2 = np.random.normal(scale=0.01, size=(num*hiddens, num*outputs))
 b2 = np.zeros(num_outputs)
 params = [W1, b1, W2, b2]
 
@@ -74,42 +74,42 @@ for param in params:
 ```
 
 ```{.python .input}
-#@tab pytorch
-num_inputs, num_outputs, num_hiddens = 784, 10, 256
+# @tab pytorch
+num*inputs, num*outputs, num_hiddens = 784, 10, 256
 
 W1 = nn.Parameter(torch.randn(
-    num_inputs, num_hiddens, requires_grad=True) * 0.01)
-b1 = nn.Parameter(torch.zeros(num_hiddens, requires_grad=True))
+    num*inputs, num*hiddens, requires_grad=True) * 0.01)
+b1 = nn.Parameter(torch.zeros(num*hiddens, requires*grad=True))
 W2 = nn.Parameter(torch.randn(
-    num_hiddens, num_outputs, requires_grad=True) * 0.01)
-b2 = nn.Parameter(torch.zeros(num_outputs, requires_grad=True))
+    num*hiddens, num*outputs, requires_grad=True) * 0.01)
+b2 = nn.Parameter(torch.zeros(num*outputs, requires*grad=True))
 
 params = [W1, b1, W2, b2]
 ```
 
 ```{.python .input}
-#@tab tensorflow
-num_inputs, num_outputs, num_hiddens = 784, 10, 256
+# @tab tensorflow
+num*inputs, num*outputs, num_hiddens = 784, 10, 256
 
 W1 = tf.Variable(tf.random.normal(
-    shape=(num_inputs, num_hiddens), mean=0, stddev=0.01))
+    shape=(num*inputs, num*hiddens), mean=0, stddev=0.01))
 b1 = tf.Variable(tf.zeros(num_hiddens))
 W2 = tf.Variable(tf.random.normal(
-    shape=(num_hiddens, num_outputs), mean=0, stddev=0.01))
+    shape=(num*hiddens, num*outputs), mean=0, stddev=0.01))
 b2 = tf.Variable(tf.zeros(num_outputs))
 
 params = [W1, b1, W2, b2]
 ```
 
 ```{.python .input}
-#@tab paddle
-num_inputs, num_outputs, num_hiddens = 784, 10, 256
+# @tab paddle
+num*inputs, num*outputs, num_hiddens = 784, 10, 256
 
-W1 = paddle.randn([num_inputs, num_hiddens]) * 0.01
+W1 = paddle.randn([num*inputs, num*hiddens]) * 0.01
 W1.stop_gradient = False
 b1 = paddle.zeros([num_hiddens])
 b1.stop_gradient = False
-W2 = paddle.randn([num_hiddens, num_outputs]) * 0.01
+W2 = paddle.randn([num*hiddens, num*outputs]) * 0.01
 W2.stop_gradient = False
 b2 = paddle.zeros([num_outputs])
 b2.stop_gradient = False
@@ -117,7 +117,7 @@ b2.stop_gradient = False
 params = [W1, b1, W2, b2]
 ```
 
-## 激活函数
+# # 激活函数
 
 为了确保我们对模型的细节了如指掌，
 我们将[**实现ReLU激活函数**]，
@@ -129,26 +129,26 @@ def relu(X):
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 def relu(X):
     a = torch.zeros_like(X)
     return torch.max(X, a)
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 def relu(X):
     return tf.math.maximum(X, 0)
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 def relu(X):
     a = paddle.zeros_like(X)
     return paddle.maximum(X, a)
 ```
 
-## 模型
+# # 模型
 
 因为我们忽略了空间结构，
 所以我们使用`reshape`将每个二维图像转换为一个长度为`num_inputs`的向量。
@@ -162,7 +162,7 @@ def net(X):
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 def net(X):
     X = d2l.reshape(X, (-1, num_inputs))
     H = relu(X@W1 + b1)  # 这里“@”代表矩阵乘法
@@ -170,7 +170,7 @@ def net(X):
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 def net(X):
     X = d2l.reshape(X, (-1, num_inputs))
     H = relu(tf.matmul(X, W1) + b1)
@@ -178,16 +178,16 @@ def net(X):
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 def net(X):
     X = X.reshape((-1, num_inputs))
     H = relu(X@W1 + b1)  # 这里“@”代表矩阵乘法
     return (H@W2 + b2)
 ```
 
-## 损失函数
+# # 损失函数
 
-由于我们已经从零实现过softmax函数（ :numref:`sec_softmax_scratch`），
+由于我们已经从零实现过softmax函数（ :numref:`sec*softmax*scratch`），
 因此在这里我们直接使用高级API中的内置函数来计算softmax和交叉熵损失。
 回想一下我们之前在 :numref:`subsec_softmax-implementation-revisited`中
 对这些复杂问题的讨论。
@@ -198,62 +198,62 @@ loss = gluon.loss.SoftmaxCrossEntropyLoss()
 ```
 
 ```{.python .input}
-#@tab pytorch, paddle
+# @tab pytorch, paddle
 loss = nn.CrossEntropyLoss(reduction='none')
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 def loss(y_hat, y):
-    return tf.losses.sparse_categorical_crossentropy(
-        y, y_hat, from_logits=True)
+    return tf.losses.sparse*categorical*crossentropy(
+        y, y*hat, from*logits=True)
 ```
 
-## 训练
+# # 训练
 
 幸运的是，[**多层感知机的训练过程与softmax回归的训练过程完全相同**]。
-可以直接调用`d2l`包的`train_ch3`函数（参见 :numref:`sec_softmax_scratch` ），
+可以直接调用`d2l`包的`train*ch3`函数（参见 :numref:`sec*softmax_scratch` ），
 将迭代周期数设置为10，并将学习率设置为0.1.
 
 ```{.python .input}
 num_epochs, lr = 10, 0.1
-d2l.train_ch3(net, train_iter, test_iter, loss, num_epochs,
-              lambda batch_size: d2l.sgd(params, lr, batch_size))
+d2l.train*ch3(net, train*iter, test*iter, loss, num*epochs,
+              lambda batch*size: d2l.sgd(params, lr, batch*size))
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 num_epochs, lr = 10, 0.1
 updater = torch.optim.SGD(params, lr=lr)
-d2l.train_ch3(net, train_iter, test_iter, loss, num_epochs, updater)
+d2l.train*ch3(net, train*iter, test*iter, loss, num*epochs, updater)
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 num_epochs, lr = 10, 0.1
 updater = d2l.Updater([W1, W2, b1, b2], lr)
-d2l.train_ch3(net, train_iter, test_iter, loss, num_epochs, updater)
+d2l.train*ch3(net, train*iter, test*iter, loss, num*epochs, updater)
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 num_epochs, lr = 10, 0.1
 updater = paddle.optimizer.SGD(learning_rate=lr, parameters=params)
-d2l.train_ch3(net, train_iter, test_iter, loss, num_epochs, updater)
+d2l.train*ch3(net, train*iter, test*iter, loss, num*epochs, updater)
 ```
 
 为了对学习到的模型进行评估，我们将[**在一些测试数据上应用这个模型**]。
 
 ```{.python .input}
-#@tab all
-d2l.predict_ch3(net, test_iter)
+# @tab all
+d2l.predict*ch3(net, test*iter)
 ```
 
-## 小结
+# # 小结
 
 * 手动实现一个简单的多层感知机是很容易的。然而如果有大量的层，从零开始实现多层感知机会变得很麻烦（例如，要命名和记录模型的参数）。
 
-## 练习
+# # 练习
 
 1. 在所有其他参数保持不变的情况下，更改超参数`num_hiddens`的值，并查看此超参数的变化对结果有何影响。确定此超参数的最佳值。
 1. 尝试添加更多的隐藏层，并查看它对结果有何影响。

@@ -2,7 +2,7 @@
 :label:`sec_bbox`
 
 
-In earlier sections (e.g., :numref:`sec_alexnet`--:numref:`sec_googlenet`),
+In earlier sections (e.g., :numref:`sec*alexnet`--:numref:`sec*googlenet`),
 we introduced various models for image classification.
 In image classification tasks,
 we assume that there is only *one*
@@ -42,14 +42,14 @@ npx.set_np()
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 %matplotlib inline
 from d2l import torch as d2l
 import torch
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 %matplotlib inline
 from d2l import tensorflow as d2l
 import tensorflow as tf
@@ -65,13 +65,13 @@ d2l.plt.imshow(img);
 ```
 
 ```{.python .input}
-#@tab pytorch, tensorflow
+# @tab pytorch, tensorflow
 d2l.set_figsize()
 img = d2l.plt.imread('../img/catdog.jpg')
 d2l.plt.imshow(img);
 ```
 
-## Bounding Boxes
+# # Bounding Boxes
 
 
 In object detection,
@@ -82,16 +82,16 @@ coordinates of the bounding box center, and the width and height of the box.
 
 Here we define functions to convert between these two
 representations: 
-`box_corner_to_center` converts from the two-corner
+`box*corner*to_center` converts from the two-corner
 representation to the center-width-height presentation,
-and `box_center_to_corner` vice versa.
+and `box*center*to_corner` vice versa.
 The input argument `boxes` can be either a tensor of length 4,
 or a two-dimensional tensor of shape ($n$, 4), where $n$ is the number of bounding boxes.
 
 ```{.python .input}
-#@tab all
-#@save
-def box_corner_to_center(boxes):
+# @tab all
+# @save
+def box*corner*to_center(boxes):
     """Convert from (upper-left, lower-right) to (center, width, height)."""
     x1, y1, x2, y2 = boxes[:, 0], boxes[:, 1], boxes[:, 2], boxes[:, 3]
     cx = (x1 + x2) / 2
@@ -101,8 +101,8 @@ def box_corner_to_center(boxes):
     boxes = d2l.stack((cx, cy, w, h), axis=-1)
     return boxes
 
-#@save
-def box_center_to_corner(boxes):
+# @save
+def box*center*to_corner(boxes):
     """Convert from (center, width, height) to (upper-left, lower-right)."""
     cx, cy, w, h = boxes[:, 0], boxes[:, 1], boxes[:, 2], boxes[:, 3]
     x1 = cx - 0.5 * w
@@ -120,27 +120,27 @@ is the upper-left corner of the image, and to the right and down are the
 positive directions of the $x$ and $y$ axes, respectively.
 
 ```{.python .input}
-#@tab all
+# @tab all
 # Here `bbox` is the abbreviation for bounding box
-dog_bbox, cat_bbox = [60.0, 45.0, 378.0, 516.0], [400.0, 112.0, 655.0, 493.0]
+dog*bbox, cat*bbox = [60.0, 45.0, 378.0, 516.0], [400.0, 112.0, 655.0, 493.0]
 ```
 
 We can verify the correctness of the two
 bounding box conversion functions by converting twice.
 
 ```{.python .input}
-#@tab all
-boxes = d2l.tensor((dog_bbox, cat_bbox))
-box_center_to_corner(box_corner_to_center(boxes)) == boxes
+# @tab all
+boxes = d2l.tensor((dog*bbox, cat*bbox))
+box*center*to*corner(box*corner*to*center(boxes)) == boxes
 ```
 
 Let us draw the bounding boxes in the image to check if they are accurate.
-Before drawing, we will define a helper function `bbox_to_rect`. It represents the bounding box in the bounding box format of the  `matplotlib` package.
+Before drawing, we will define a helper function `bbox*to*rect`. It represents the bounding box in the bounding box format of the  `matplotlib` package.
 
 ```{.python .input}
-#@tab all
-#@save
-def bbox_to_rect(bbox, color):
+# @tab all
+# @save
+def bbox*to*rect(bbox, color):
     """Convert bounding box to matplotlib format."""
     # Convert the bounding box (upper-left x, upper-left y, lower-right x,
     # lower-right y) format to the matplotlib format: ((upper-left x,
@@ -154,21 +154,21 @@ After adding the bounding boxes on the image,
 we can see that the main outline of the two objects are basically inside the two boxes.
 
 ```{.python .input}
-#@tab all
+# @tab all
 fig = d2l.plt.imshow(img)
-fig.axes.add_patch(bbox_to_rect(dog_bbox, 'blue'))
-fig.axes.add_patch(bbox_to_rect(cat_bbox, 'red'));
+fig.axes.add*patch(bbox*to*rect(dog*bbox, 'blue'))
+fig.axes.add*patch(bbox*to*rect(cat*bbox, 'red'));
 ```
 
-## Summary
+# # Summary
 
 * Object detection not only recognizes all the objects of interest in the image, but also their positions. The position is generally represented by a rectangular bounding box.
 * We can convert between two commonly used bounding box representations.
 
-## Exercises
+# # Exercises
 
 1. Find another image and try to label a bounding box that contains the object. Compare labeling bounding boxes and categories: which usually takes longer?
-1. Why is the innermost dimension of the input argument `boxes` of `box_corner_to_center` and `box_center_to_corner` always 4?
+1. Why is the innermost dimension of the input argument `boxes` of `box*corner*to*center` and `box*center*to*corner` always 4?
 
 
 :begin_tab:`mxnet`

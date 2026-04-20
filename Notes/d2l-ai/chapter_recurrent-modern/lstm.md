@@ -8,7 +8,7 @@
 有趣的是，长短期记忆网络的设计比门控循环单元稍微复杂一些，
 却比门控循环单元早诞生了近20年。
 
-## 门控记忆元
+# # 门控记忆元
 
 可以说，长短期记忆网络的设计灵感来自于计算机的逻辑门。
 长短期记忆网络引入了*记忆元*（memory cell），或简称为*单元*（cell）。
@@ -22,7 +22,7 @@
 能够通过专用机制决定什么时候记忆或忽略隐状态中的输入。
 让我们看看这在实践中是如何运作的。
 
-### 输入门、忘记门和输出门
+## # 输入门、忘记门和输出门
 
 就如在门控循环单元中一样，
 当前时间步的输入和前一个时间步的隐状态
@@ -47,17 +47,17 @@
 
 $$
 \begin{aligned}
-\mathbf{I}_t &= \sigma(\mathbf{X}_t \mathbf{W}_{xi} + \mathbf{H}_{t-1} \mathbf{W}_{hi} + \mathbf{b}_i),\\
-\mathbf{F}_t &= \sigma(\mathbf{X}_t \mathbf{W}_{xf} + \mathbf{H}_{t-1} \mathbf{W}_{hf} + \mathbf{b}_f),\\
-\mathbf{O}_t &= \sigma(\mathbf{X}_t \mathbf{W}_{xo} + \mathbf{H}_{t-1} \mathbf{W}_{ho} + \mathbf{b}_o),
+\mathbf{I}*t &= \sigma(\mathbf{X}*t \mathbf{W}*{xi} + \mathbf{H}*{t-1} \mathbf{W}*{hi} + \mathbf{b}*i),\\
+\mathbf{F}*t &= \sigma(\mathbf{X}*t \mathbf{W}*{xf} + \mathbf{H}*{t-1} \mathbf{W}*{hf} + \mathbf{b}*f),\\
+\mathbf{O}*t &= \sigma(\mathbf{X}*t \mathbf{W}*{xo} + \mathbf{H}*{t-1} \mathbf{W}*{ho} + \mathbf{b}*o),
 \end{aligned}
 $$
 
-其中$\mathbf{W}_{xi}, \mathbf{W}_{xf}, \mathbf{W}_{xo} \in \mathbb{R}^{d \times h}$
-和$\mathbf{W}_{hi}, \mathbf{W}_{hf}, \mathbf{W}_{ho} \in \mathbb{R}^{h \times h}$是权重参数，
-$\mathbf{b}_i, \mathbf{b}_f, \mathbf{b}_o \in \mathbb{R}^{1 \times h}$是偏置参数。
+其中$\mathbf{W}*{xi}, \mathbf{W}*{xf}, \mathbf{W}_{xo} \in \mathbb{R}^{d \times h}$
+和$\mathbf{W}*{hi}, \mathbf{W}*{hf}, \mathbf{W}_{ho} \in \mathbb{R}^{h \times h}$是权重参数，
+$\mathbf{b}*i, \mathbf{b}*f, \mathbf{b}_o \in \mathbb{R}^{1 \times h}$是偏置参数。
 
-### 候选记忆元
+## # 候选记忆元
 
 由于还没有指定各种门的操作，所以先介绍*候选记忆元*（candidate memory cell）
 $\tilde{\mathbf{C}}_t \in \mathbb{R}^{n \times h}$。
@@ -65,7 +65,7 @@ $\tilde{\mathbf{C}}_t \in \mathbb{R}^{n \times h}$。
 但是使用$\tanh$函数作为激活函数，函数的值范围为$(-1, 1)$。
 下面导出在时间步$t$处的方程：
 
-$$\tilde{\mathbf{C}}_t = \text{tanh}(\mathbf{X}_t \mathbf{W}_{xc} + \mathbf{H}_{t-1} \mathbf{W}_{hc} + \mathbf{b}_c),$$
+$$\tilde{\mathbf{C}}*t = \text{tanh}(\mathbf{X}*t \mathbf{W}*{xc} + \mathbf{H}*{t-1} \mathbf{W}*{hc} + \mathbf{b}*c),$$
 
 其中$\mathbf{W}_{xc} \in \mathbb{R}^{d \times h}$和
 $\mathbf{W}_{hc} \in \mathbb{R}^{h \times h}$是权重参数，
@@ -76,16 +76,16 @@ $\mathbf{b}_c \in \mathbb{R}^{1 \times h}$是偏置参数。
 ![长短期记忆模型中的候选记忆元](../img/lstm-1.svg)
 :label:`lstm_1`
 
-### 记忆元
+## # 记忆元
 
 在门控循环单元中，有一种机制来控制输入和遗忘（或跳过）。
 类似地，在长短期记忆网络中，也有两个门用于这样的目的：
-输入门$\mathbf{I}_t$控制采用多少来自$\tilde{\mathbf{C}}_t$的新数据，
+输入门$\mathbf{I}*t$控制采用多少来自$\tilde{\mathbf{C}}*t$的新数据，
 而遗忘门$\mathbf{F}_t$控制保留多少过去的
 记忆元$\mathbf{C}_{t-1} \in \mathbb{R}^{n \times h}$的内容。
 使用按元素乘法，得出：
 
-$$\mathbf{C}_t = \mathbf{F}_t \odot \mathbf{C}_{t-1} + \mathbf{I}_t \odot \tilde{\mathbf{C}}_t.$$
+$$\mathbf{C}*t = \mathbf{F}*t \odot \mathbf{C}*{t-1} + \mathbf{I}*t \odot \tilde{\mathbf{C}}_t.$$
 
 如果遗忘门始终为$1$且输入门始终为$0$，
 则过去的记忆元$\mathbf{C}_{t-1}$
@@ -99,7 +99,7 @@ $$\mathbf{C}_t = \mathbf{F}_t \odot \mathbf{C}_{t-1} + \mathbf{I}_t \odot \tilde
 
 :label:`lstm_2`
 
-### 隐状态
+## # 隐状态
 
 最后，我们需要定义如何计算隐状态
 $\mathbf{H}_t \in \mathbb{R}^{n \times h}$，
@@ -107,7 +107,7 @@ $\mathbf{H}_t \in \mathbb{R}^{n \times h}$，
 在长短期记忆网络中，它仅仅是记忆元的$\tanh$的门控版本。
 这就确保了$\mathbf{H}_t$的值始终在区间$(-1, 1)$内：
 
-$$\mathbf{H}_t = \mathbf{O}_t \odot \tanh(\mathbf{C}_t).$$
+$$\mathbf{H}*t = \mathbf{O}*t \odot \tanh(\mathbf{C}_t).$$
 
 只要输出门接近$1$，我们就能够有效地将所有记忆信息传递给预测部分，
 而对于输出门接近$0$，我们只保留记忆元内的所有信息，而不需要更新隐状态。
@@ -117,10 +117,10 @@ $$\mathbf{H}_t = \mathbf{O}_t \odot \tanh(\mathbf{C}_t).$$
 ![在长短期记忆模型中计算隐状态](../img/lstm-3.svg)
 :label:`lstm_3`
 
-## 从零开始实现
+# # 从零开始实现
 
 现在，我们从零开始实现长短期记忆网络。
-与 :numref:`sec_rnn_scratch`中的实验相同，
+与 :numref:`sec*rnn*scratch`中的实验相同，
 我们首先加载时光机器数据集。
 
 ```{.python .input}
@@ -129,30 +129,30 @@ from mxnet import np, npx
 from mxnet.gluon import rnn
 npx.set_np()
 
-batch_size, num_steps = 32, 35
-train_iter, vocab = d2l.load_data_time_machine(batch_size, num_steps)
+batch*size, num*steps = 32, 35
+train*iter, vocab = d2l.load*data*time*machine(batch*size, num*steps)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 from d2l import torch as d2l
 import torch
 from torch import nn
 
-batch_size, num_steps = 32, 35
-train_iter, vocab = d2l.load_data_time_machine(batch_size, num_steps)
+batch*size, num*steps = 32, 35
+train*iter, vocab = d2l.load*data*time*machine(batch*size, num*steps)
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 from d2l import tensorflow as d2l
 import tensorflow as tf
-batch_size, num_steps = 32, 35
-train_iter, vocab = d2l.load_data_time_machine(batch_size, num_steps)
+batch*size, num*steps = 32, 35
+train*iter, vocab = d2l.load*data*time*machine(batch*size, num*steps)
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 from d2l import paddle as d2l
 import warnings
 warnings.filterwarnings("ignore")
@@ -160,126 +160,126 @@ import paddle
 from paddle import nn
 import paddle.nn.functional as Function
 
-batch_size, num_steps = 32, 35
-train_iter, vocab = d2l.load_data_time_machine(batch_size, num_steps)
+batch*size, num*steps = 32, 35
+train*iter, vocab = d2l.load*data*time*machine(batch*size, num*steps)
 ```
 
-### [**初始化模型参数**]
+## # [**初始化模型参数**]
 
 接下来，我们需要定义和初始化模型参数。
 如前所述，超参数`num_hiddens`定义隐藏单元的数量。
 我们按照标准差$0.01$的高斯分布初始化权重，并将偏置项设为$0$。
 
 ```{.python .input}
-def get_lstm_params(vocab_size, num_hiddens, device):
-    num_inputs = num_outputs = vocab_size
+def get*lstm*params(vocab*size, num*hiddens, device):
+    num*inputs = num*outputs = vocab_size
 
     def normal(shape):
         return np.random.normal(scale=0.01, size=shape, ctx=device)
 
     def three():
-        return (normal((num_inputs, num_hiddens)),
-                normal((num_hiddens, num_hiddens)),
+        return (normal((num*inputs, num*hiddens)),
+                normal((num*hiddens, num*hiddens)),
                 np.zeros(num_hiddens, ctx=device))
 
-    W_xi, W_hi, b_i = three()  # 输入门参数
-    W_xf, W_hf, b_f = three()  # 遗忘门参数
-    W_xo, W_ho, b_o = three()  # 输出门参数
-    W_xc, W_hc, b_c = three()  # 候选记忆元参数
+    W*xi, W*hi, b_i = three()  # 输入门参数
+    W*xf, W*hf, b_f = three()  # 遗忘门参数
+    W*xo, W*ho, b_o = three()  # 输出门参数
+    W*xc, W*hc, b_c = three()  # 候选记忆元参数
     # 输出层参数
-    W_hq = normal((num_hiddens, num_outputs))
-    b_q = np.zeros(num_outputs, ctx=device)
+    W*hq = normal((num*hiddens, num_outputs))
+    b*q = np.zeros(num*outputs, ctx=device)
     # 附加梯度
-    params = [W_xi, W_hi, b_i, W_xf, W_hf, b_f, W_xo, W_ho, b_o, W_xc, W_hc,
-              b_c, W_hq, b_q]
+    params = [W*xi, W*hi, b*i, W*xf, W*hf, b*f, W*xo, W*ho, b*o, W*xc, W_hc,
+              b*c, W*hq, b_q]
     for param in params:
         param.attach_grad()
     return params
 ```
 
 ```{.python .input}
-#@tab pytorch
-def get_lstm_params(vocab_size, num_hiddens, device):
-    num_inputs = num_outputs = vocab_size
+# @tab pytorch
+def get*lstm*params(vocab*size, num*hiddens, device):
+    num*inputs = num*outputs = vocab_size
 
     def normal(shape):
         return torch.randn(size=shape, device=device)*0.01
 
     def three():
-        return (normal((num_inputs, num_hiddens)),
-                normal((num_hiddens, num_hiddens)),
+        return (normal((num*inputs, num*hiddens)),
+                normal((num*hiddens, num*hiddens)),
                 d2l.zeros(num_hiddens, device=device))
 
-    W_xi, W_hi, b_i = three()  # 输入门参数
-    W_xf, W_hf, b_f = three()  # 遗忘门参数
-    W_xo, W_ho, b_o = three()  # 输出门参数
-    W_xc, W_hc, b_c = three()  # 候选记忆元参数
+    W*xi, W*hi, b_i = three()  # 输入门参数
+    W*xf, W*hf, b_f = three()  # 遗忘门参数
+    W*xo, W*ho, b_o = three()  # 输出门参数
+    W*xc, W*hc, b_c = three()  # 候选记忆元参数
     # 输出层参数
-    W_hq = normal((num_hiddens, num_outputs))
-    b_q = d2l.zeros(num_outputs, device=device)
+    W*hq = normal((num*hiddens, num_outputs))
+    b*q = d2l.zeros(num*outputs, device=device)
     # 附加梯度
-    params = [W_xi, W_hi, b_i, W_xf, W_hf, b_f, W_xo, W_ho, b_o, W_xc, W_hc,
-              b_c, W_hq, b_q]
+    params = [W*xi, W*hi, b*i, W*xf, W*hf, b*f, W*xo, W*ho, b*o, W*xc, W_hc,
+              b*c, W*hq, b_q]
     for param in params:
-        param.requires_grad_(True)
+        param.requires*grad*(True)
     return params
 ```
 
 ```{.python .input}
-#@tab tensorflow
-def get_lstm_params(vocab_size, num_hiddens):
-    num_inputs = num_outputs = vocab_size
+# @tab tensorflow
+def get*lstm*params(vocab*size, num*hiddens):
+    num*inputs = num*outputs = vocab_size
 
     def normal(shape):
         return tf.Variable(tf.random.normal(shape=shape, stddev=0.01,
                                             mean=0, dtype=tf.float32))
     def three():
-        return (normal((num_inputs, num_hiddens)),
-                normal((num_hiddens, num_hiddens)),
+        return (normal((num*inputs, num*hiddens)),
+                normal((num*hiddens, num*hiddens)),
                 tf.Variable(tf.zeros(num_hiddens), dtype=tf.float32))
 
-    W_xi, W_hi, b_i = three()  # 输入门参数
-    W_xf, W_hf, b_f = three()  # 遗忘门参数
-    W_xo, W_ho, b_o = three()  # 输出门参数
-    W_xc, W_hc, b_c = three()  # 候选记忆元参数
+    W*xi, W*hi, b_i = three()  # 输入门参数
+    W*xf, W*hf, b_f = three()  # 遗忘门参数
+    W*xo, W*ho, b_o = three()  # 输出门参数
+    W*xc, W*hc, b_c = three()  # 候选记忆元参数
     # 输出层参数
-    W_hq = normal((num_hiddens, num_outputs))
-    b_q = tf.Variable(tf.zeros(num_outputs), dtype=tf.float32)
+    W*hq = normal((num*hiddens, num_outputs))
+    b*q = tf.Variable(tf.zeros(num*outputs), dtype=tf.float32)
     # 附加梯度
-    params = [W_xi, W_hi, b_i, W_xf, W_hf, b_f, W_xo, W_ho, b_o, W_xc, W_hc,
-              b_c, W_hq, b_q]
+    params = [W*xi, W*hi, b*i, W*xf, W*hf, b*f, W*xo, W*ho, b*o, W*xc, W_hc,
+              b*c, W*hq, b_q]
     return params
 ```
 
 ```{.python .input}
-#@tab paddle
-def get_lstm_params(vocab_size, num_hiddens):
-    num_inputs = num_outputs = vocab_size
+# @tab paddle
+def get*lstm*params(vocab*size, num*hiddens):
+    num*inputs = num*outputs = vocab_size
 
     def normal(shape):
         return paddle.randn(shape=shape)*0.01
 
     def three():
-        return (normal((num_inputs, num_hiddens)),
-                normal((num_hiddens, num_hiddens)),
+        return (normal((num*inputs, num*hiddens)),
+                normal((num*hiddens, num*hiddens)),
                 d2l.zeros([num_hiddens]))
 
-    W_xi, W_hi, b_i = three()  # 输入门参数
-    W_xf, W_hf, b_f = three()  # 遗忘门参数
-    W_xo, W_ho, b_o = three()  # 输出门参数
-    W_xc, W_hc, b_c = three()  # 候选记忆元参数
+    W*xi, W*hi, b_i = three()  # 输入门参数
+    W*xf, W*hf, b_f = three()  # 遗忘门参数
+    W*xo, W*ho, b_o = three()  # 输出门参数
+    W*xc, W*hc, b_c = three()  # 候选记忆元参数
     # 输出层参数
-    W_hq = normal((num_hiddens, num_outputs))
-    b_q = d2l.zeros([num_outputs])
+    W*hq = normal((num*hiddens, num_outputs))
+    b*q = d2l.zeros([num*outputs])
     # 附加梯度
-    params = [W_xi, W_hi, b_i, W_xf, W_hf, b_f, W_xo, W_ho, b_o, W_xc, W_hc,
-              b_c, W_hq, b_q]
+    params = [W*xi, W*hi, b*i, W*xf, W*hf, b*f, W*xo, W*ho, b*o, W*xc, W_hc,
+              b*c, W*hq, b_q]
     for param in params:
         param.stop_gradient = False
     return params
 ```
 
-### 定义模型
+## # 定义模型
 
 在[**初始化函数**]中，
 长短期记忆网络的隐状态需要返回一个*额外*的记忆元，
@@ -287,30 +287,30 @@ def get_lstm_params(vocab_size, num_hiddens):
 因此，我们得到以下的状态初始化。
 
 ```{.python .input}
-def init_lstm_state(batch_size, num_hiddens, device):
-    return (np.zeros((batch_size, num_hiddens), ctx=device),
-            np.zeros((batch_size, num_hiddens), ctx=device))
+def init*lstm*state(batch*size, num*hiddens, device):
+    return (np.zeros((batch*size, num*hiddens), ctx=device),
+            np.zeros((batch*size, num*hiddens), ctx=device))
 ```
 
 ```{.python .input}
-#@tab pytorch
-def init_lstm_state(batch_size, num_hiddens, device):
-    return (torch.zeros((batch_size, num_hiddens), device=device),
-            torch.zeros((batch_size, num_hiddens), device=device))
+# @tab pytorch
+def init*lstm*state(batch*size, num*hiddens, device):
+    return (torch.zeros((batch*size, num*hiddens), device=device),
+            torch.zeros((batch*size, num*hiddens), device=device))
 ```
 
 ```{.python .input}
-#@tab tensorflow
-def init_lstm_state(batch_size, num_hiddens):
-    return (tf.zeros(shape=(batch_size, num_hiddens)),
-            tf.zeros(shape=(batch_size, num_hiddens)))
+# @tab tensorflow
+def init*lstm*state(batch*size, num*hiddens):
+    return (tf.zeros(shape=(batch*size, num*hiddens)),
+            tf.zeros(shape=(batch*size, num*hiddens)))
 ```
 
 ```{.python .input}
-#@tab paddle
-def init_lstm_state(batch_size, num_hiddens):
-    return (paddle.zeros([batch_size, num_hiddens]),
-            paddle.zeros([batch_size, num_hiddens]))
+# @tab paddle
+def init*lstm*state(batch*size, num*hiddens):
+    return (paddle.zeros([batch*size, num*hiddens]),
+            paddle.zeros([batch*size, num*hiddens]))
 ```
 
 [**实际模型**]的定义与我们前面讨论的一样：
@@ -320,114 +320,114 @@ def init_lstm_state(batch_size, num_hiddens):
 
 ```{.python .input}
 def lstm(inputs, state, params):
-    [W_xi, W_hi, b_i, W_xf, W_hf, b_f, W_xo, W_ho, b_o, W_xc, W_hc, b_c,
-     W_hq, b_q] = params
+    [W*xi, W*hi, b*i, W*xf, W*hf, b*f, W*xo, W*ho, b*o, W*xc, W*hc, b*c,
+     W*hq, b*q] = params
     (H, C) = state
     outputs = []
     for X in inputs:
-        I = npx.sigmoid(np.dot(X, W_xi) + np.dot(H, W_hi) + b_i)
-        F = npx.sigmoid(np.dot(X, W_xf) + np.dot(H, W_hf) + b_f)
-        O = npx.sigmoid(np.dot(X, W_xo) + np.dot(H, W_ho) + b_o)
-        C_tilda = np.tanh(np.dot(X, W_xc) + np.dot(H, W_hc) + b_c)
+        I = npx.sigmoid(np.dot(X, W*xi) + np.dot(H, W*hi) + b_i)
+        F = npx.sigmoid(np.dot(X, W*xf) + np.dot(H, W*hf) + b_f)
+        O = npx.sigmoid(np.dot(X, W*xo) + np.dot(H, W*ho) + b_o)
+        C*tilda = np.tanh(np.dot(X, W*xc) + np.dot(H, W*hc) + b*c)
         C = F * C + I * C_tilda
         H = O * np.tanh(C)
-        Y = np.dot(H, W_hq) + b_q
+        Y = np.dot(H, W*hq) + b*q
         outputs.append(Y)
     return np.concatenate(outputs, axis=0), (H, C)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 def lstm(inputs, state, params):
-    [W_xi, W_hi, b_i, W_xf, W_hf, b_f, W_xo, W_ho, b_o, W_xc, W_hc, b_c,
-     W_hq, b_q] = params
+    [W*xi, W*hi, b*i, W*xf, W*hf, b*f, W*xo, W*ho, b*o, W*xc, W*hc, b*c,
+     W*hq, b*q] = params
     (H, C) = state
     outputs = []
     for X in inputs:
-        I = torch.sigmoid((X @ W_xi) + (H @ W_hi) + b_i)
-        F = torch.sigmoid((X @ W_xf) + (H @ W_hf) + b_f)
-        O = torch.sigmoid((X @ W_xo) + (H @ W_ho) + b_o)
-        C_tilda = torch.tanh((X @ W_xc) + (H @ W_hc) + b_c)
+        I = torch.sigmoid((X @ W*xi) + (H @ W*hi) + b_i)
+        F = torch.sigmoid((X @ W*xf) + (H @ W*hf) + b_f)
+        O = torch.sigmoid((X @ W*xo) + (H @ W*ho) + b_o)
+        C*tilda = torch.tanh((X @ W*xc) + (H @ W*hc) + b*c)
         C = F * C + I * C_tilda
         H = O * torch.tanh(C)
-        Y = (H @ W_hq) + b_q
+        Y = (H @ W*hq) + b*q
         outputs.append(Y)
     return torch.cat(outputs, dim=0), (H, C)
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 def lstm(inputs, state, params):
-    W_xi, W_hi, b_i, W_xf, W_hf, b_f, W_xo, W_ho, b_o, W_xc, W_hc, b_c, W_hq, b_q = params
+    W*xi, W*hi, b*i, W*xf, W*hf, b*f, W*xo, W*ho, b*o, W*xc, W*hc, b*c, W*hq, b*q = params
     (H, C) = state
     outputs = []
     for X in inputs:
         X=tf.reshape(X,[-1,W_xi.shape[0]])
-        I = tf.sigmoid(tf.matmul(X, W_xi) + tf.matmul(H, W_hi) + b_i)
-        F = tf.sigmoid(tf.matmul(X, W_xf) + tf.matmul(H, W_hf) + b_f)
-        O = tf.sigmoid(tf.matmul(X, W_xo) + tf.matmul(H, W_ho) + b_o)
-        C_tilda = tf.tanh(tf.matmul(X, W_xc) + tf.matmul(H, W_hc) + b_c)
+        I = tf.sigmoid(tf.matmul(X, W*xi) + tf.matmul(H, W*hi) + b_i)
+        F = tf.sigmoid(tf.matmul(X, W*xf) + tf.matmul(H, W*hf) + b_f)
+        O = tf.sigmoid(tf.matmul(X, W*xo) + tf.matmul(H, W*ho) + b_o)
+        C*tilda = tf.tanh(tf.matmul(X, W*xc) + tf.matmul(H, W*hc) + b*c)
         C = F * C + I * C_tilda
         H = O * tf.tanh(C)
-        Y = tf.matmul(H, W_hq) + b_q
+        Y = tf.matmul(H, W*hq) + b*q
         outputs.append(Y)
     return tf.concat(outputs, axis=0), (H,C)
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 def lstm(inputs, state, params):
-    [W_xi, W_hi, b_i, W_xf, W_hf, b_f, W_xo, W_ho, b_o, W_xc, W_hc, b_c,
-     W_hq, b_q] = params
+    [W*xi, W*hi, b*i, W*xf, W*hf, b*f, W*xo, W*ho, b*o, W*xc, W*hc, b*c,
+     W*hq, b*q] = params
     (H, C) = state
     outputs = []
     for X in inputs:
-        I = Function.sigmoid((X @ W_xi) + (H @ W_hi) + b_i)
-        F = Function.sigmoid((X @ W_xf) + (H @ W_hf) + b_f)
-        O = Function.sigmoid((X @ W_xo) + (H @ W_ho) + b_o)
-        C_tilda = paddle.tanh((X @ W_xc) + (H @ W_hc) + b_c)
+        I = Function.sigmoid((X @ W*xi) + (H @ W*hi) + b_i)
+        F = Function.sigmoid((X @ W*xf) + (H @ W*hf) + b_f)
+        O = Function.sigmoid((X @ W*xo) + (H @ W*ho) + b_o)
+        C*tilda = paddle.tanh((X @ W*xc) + (H @ W*hc) + b*c)
         C = F * C + I * C_tilda
         H = O * paddle.tanh(C)
-        Y = (H @ W_hq) + b_q
+        Y = (H @ W*hq) + b*q
         outputs.append(Y)
     return paddle.concat(outputs, axis=0), (H, C)
 ```
 
-### [**训练**]和预测
+## # [**训练**]和预测
 
-让我们通过实例化 :numref:`sec_rnn_scratch`中
+让我们通过实例化 :numref:`sec*rnn*scratch`中
 引入的`RNNModelScratch`类来训练一个长短期记忆网络，
 就如我们在 :numref:`sec_gru`中所做的一样。
 
 ```{.python .input}
-#@tab mxnet, pytorch
-vocab_size, num_hiddens, device = len(vocab), 256, d2l.try_gpu()
+# @tab mxnet, pytorch
+vocab*size, num*hiddens, device = len(vocab), 256, d2l.try_gpu()
 num_epochs, lr = 500, 1
-model = d2l.RNNModelScratch(len(vocab), num_hiddens, device, get_lstm_params,
-                            init_lstm_state, lstm)
-d2l.train_ch8(model, train_iter, vocab, lr, num_epochs, device)
+model = d2l.RNNModelScratch(len(vocab), num*hiddens, device, get*lstm_params,
+                            init*lstm*state, lstm)
+d2l.train*ch8(model, train*iter, vocab, lr, num_epochs, device)
 ```
 
 ```{.python .input}
-#@tab tensorflow
-vocab_size, num_hiddens, device_name = len(vocab), 256, d2l.try_gpu()._device_name
+# @tab tensorflow
+vocab*size, num*hiddens, device*name = len(vocab), 256, d2l.try*gpu().*device*name
 num_epochs, lr = 500, 1
 strategy = tf.distribute.OneDeviceStrategy(device_name)
 with strategy.scope():
-    model = d2l.RNNModelScratch(len(vocab), num_hiddens, init_lstm_state, lstm, get_lstm_params)
-d2l.train_ch8(model, train_iter, vocab, lr, num_epochs, strategy)
+    model = d2l.RNNModelScratch(len(vocab), num*hiddens, init*lstm*state, lstm, get*lstm_params)
+d2l.train*ch8(model, train*iter, vocab, lr, num_epochs, strategy)
 ```
 
 ```{.python .input}
-#@tab paddle
-vocab_size, num_hiddens, device = len(vocab), 256, d2l.try_gpu()
+# @tab paddle
+vocab*size, num*hiddens, device = len(vocab), 256, d2l.try_gpu()
 num_epochs, lr = 500, 1.0
-model = d2l.RNNModelScratch(len(vocab), num_hiddens, get_lstm_params,
-                            init_lstm_state, lstm)
-d2l.train_ch8(model, train_iter, vocab, lr, num_epochs, device)
+model = d2l.RNNModelScratch(len(vocab), num*hiddens, get*lstm_params,
+                            init*lstm*state, lstm)
+d2l.train*ch8(model, train*iter, vocab, lr, num_epochs, device)
 ```
 
-## [**简洁实现**]
+# # [**简洁实现**]
 
 使用高级API，我们可以直接实例化`LSTM`模型。
 高级API封装了前文介绍的所有配置细节。
@@ -435,39 +435,39 @@ d2l.train_ch8(model, train_iter, vocab, lr, num_epochs, device)
 因为它使用的是编译好的运算符而不是Python来处理之前阐述的许多细节。
 
 ```{.python .input}
-lstm_layer = rnn.LSTM(num_hiddens)
+lstm*layer = rnn.LSTM(num*hiddens)
 model = d2l.RNNModel(lstm_layer, len(vocab))
-d2l.train_ch8(model, train_iter, vocab, lr, num_epochs, device)
+d2l.train*ch8(model, train*iter, vocab, lr, num_epochs, device)
 ```
 
 ```{.python .input}
-#@tab pytorch
-num_inputs = vocab_size
-lstm_layer = nn.LSTM(num_inputs, num_hiddens)
+# @tab pytorch
+num*inputs = vocab*size
+lstm*layer = nn.LSTM(num*inputs, num_hiddens)
 model = d2l.RNNModel(lstm_layer, len(vocab))
 model = model.to(device)
-d2l.train_ch8(model, train_iter, vocab, lr, num_epochs, device)
+d2l.train*ch8(model, train*iter, vocab, lr, num_epochs, device)
 ```
 
 ```{.python .input}
-#@tab tensorflow
-lstm_cell = tf.keras.layers.LSTMCell(num_hiddens,
-    kernel_initializer='glorot_uniform')
-lstm_layer = tf.keras.layers.RNN(lstm_cell, time_major=True,
-    return_sequences=True, return_state=True)
-device_name = d2l.try_gpu()._device_name
+# @tab tensorflow
+lstm*cell = tf.keras.layers.LSTMCell(num*hiddens,
+    kernel*initializer='glorot*uniform')
+lstm*layer = tf.keras.layers.RNN(lstm*cell, time_major=True,
+    return*sequences=True, return*state=True)
+device*name = d2l.try*gpu().*device*name
 strategy = tf.distribute.OneDeviceStrategy(device_name)
 with strategy.scope():
-    model = d2l.RNNModel(lstm_layer, vocab_size=len(vocab))
-d2l.train_ch8(model, train_iter, vocab, lr, num_epochs, strategy)
+    model = d2l.RNNModel(lstm*layer, vocab*size=len(vocab))
+d2l.train*ch8(model, train*iter, vocab, lr, num_epochs, strategy)
 ```
 
 ```{.python .input}
-#@tab paddle
-num_inputs = vocab_size
-lstm_layer = nn.LSTM(num_inputs, num_hiddens, time_major=True)
+# @tab paddle
+num*inputs = vocab*size
+lstm*layer = nn.LSTM(num*inputs, num*hiddens, time*major=True)
 model = d2l.RNNModel(lstm_layer, len(vocab))
-d2l.train_ch8(model, train_iter, vocab, lr, num_epochs, device)
+d2l.train*ch8(model, train*iter, vocab, lr, num_epochs, device)
 ```
 
 长短期记忆网络是典型的具有重要状态控制的隐变量自回归模型。
@@ -476,14 +476,14 @@ d2l.train_ch8(model, train_iter, vocab, lr, num_epochs, device)
 和其他序列模型（例如门控循环单元）的成本是相当高的。
 在后面的内容中，我们将讲述更高级的替代模型，如Transformer。
 
-## 小结
+# # 小结
 
 * 长短期记忆网络有三种类型的门：输入门、遗忘门和输出门。
 * 长短期记忆网络的隐藏层输出包括“隐状态”和“记忆元”。只有隐状态会传递到输出层，而记忆元完全属于内部信息。
 * 长短期记忆网络可以缓解梯度消失和梯度爆炸。
 
 
-## 练习
+# # 练习
 
 1. 调整和分析超参数对运行时间、困惑度和输出顺序的影响。
 1. 如何更改模型以生成适当的单词，而不是字符序列？

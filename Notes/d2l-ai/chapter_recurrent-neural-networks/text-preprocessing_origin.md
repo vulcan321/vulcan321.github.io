@@ -1,5 +1,5 @@
 # Text Preprocessing
-:label:`sec_text_preprocessing`
+:label:`sec*text*preprocessing`
 
 We have reviewed and evaluated
 statistical tools 
@@ -30,20 +30,20 @@ import re
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 import collections
 from d2l import torch as d2l
 import re
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 import collections
 from d2l import tensorflow as d2l
 import re
 ```
 
-## Reading the Dataset
+# # Reading the Dataset
 
 To get started we load text from H. G. Wells' [*The Time Machine*](http://www.gutenberg.org/ebooks/35).
 This is a fairly small corpus of just over 30000 words, but for the purpose of what we want to illustrate this is just fine.
@@ -52,24 +52,24 @@ The following function reads the dataset into a list of text lines, where each l
 For simplicity, here we ignore punctuation and capitalization.
 
 ```{.python .input}
-#@tab all
-#@save
-d2l.DATA_HUB['time_machine'] = (d2l.DATA_URL + 'timemachine.txt',
+# @tab all
+# @save
+d2l.DATA*HUB['time*machine'] = (d2l.DATA_URL + 'timemachine.txt',
                                 '090b5e7e70c295757f55df93cb0a180b9691891a')
 
-def read_time_machine():  #@save
+def read*time*machine():  # @save
     """Load the time machine dataset into a list of text lines."""
     with open(d2l.download('time_machine'), 'r') as f:
         lines = f.readlines()
     return [re.sub('[^A-Za-z]+', ' ', line).strip().lower() for line in lines]
 
-lines = read_time_machine()
+lines = read*time*machine()
 print(f'# text lines: {len(lines)}')
 print(lines[0])
 print(lines[10])
 ```
 
-## Tokenization
+# # Tokenization
 
 The following `tokenize` function
 takes a list (`lines`) as the input,
@@ -81,8 +81,8 @@ a list of token lists are returned,
 where each token is a string.
 
 ```{.python .input}
-#@tab all
-def tokenize(lines, token='word'):  #@save
+# @tab all
+def tokenize(lines, token='word'):  # @save
     """Split text lines into word or character tokens."""
     if token == 'word':
         return [line.split() for line in lines]
@@ -96,7 +96,7 @@ for i in range(11):
     print(tokens[i])
 ```
 
-## Vocabulary
+# # Vocabulary
 
 The string type of the token is inconvenient to be used by models, which take numerical inputs.
 Now let us build a dictionary, often called *vocabulary* as well, to map string tokens into numerical indices starting from 0.
@@ -110,10 +110,10 @@ We optionally add a list of reserved tokens, such as
 “&lt;bos&gt;” to present the beginning for a sequence, and “&lt;eos&gt;” for the end of a sequence.
 
 ```{.python .input}
-#@tab all
-class Vocab:  #@save
+# @tab all
+class Vocab:  # @save
     """Vocabulary for text."""
-    def __init__(self, tokens=None, min_freq=0, reserved_tokens=None):
+    def **init**(self, tokens=None, min*freq=0, reserved*tokens=None):
         if tokens is None:
             tokens = []
         if reserved_tokens is None:
@@ -123,27 +123,27 @@ class Vocab:  #@save
         self.token_freqs = sorted(counter.items(), key=lambda x: x[0])
         self.token_freqs.sort(key=lambda x: x[1], reverse=True)
         # The index for the unknown token is 0
-        self.unk, uniq_tokens = 0, ['<unk>'] + reserved_tokens
-        uniq_tokens += [token for token, freq in self.token_freqs
-                        if freq >= min_freq and token not in uniq_tokens]
+        self.unk, uniq*tokens = 0, ['<unk>'] + reserved*tokens
+        uniq*tokens += [token for token, freq in self.token*freqs
+                        if freq >= min*freq and token not in uniq*tokens]
         for token in uniq_tokens:
-            self.idx_to_token.append(token)
-            self.token_to_idx[token] = len(self.idx_to_token) - 1
+            self.idx*to*token.append(token)
+            self.token*to*idx[token] = len(self.idx*to*token) - 1
 
-    def __len__(self):
-        return len(self.idx_to_token)
+    def **len**(self):
+        return len(self.idx*to*token)
 
-    def __getitem__(self, tokens):
+    def **getitem**(self, tokens):
         if not isinstance(tokens, (list, tuple)):
-            return self.token_to_idx.get(tokens, self.unk)
-        return [self.__getitem__(token) for token in tokens]
+            return self.token*to*idx.get(tokens, self.unk)
+        return [self.**getitem**(token) for token in tokens]
 
     def to_tokens(self, indices):
         if not isinstance(indices, (list, tuple)):
-            return self.idx_to_token[indices]
-        return [self.idx_to_token[index] for index in indices]
+            return self.idx*to*token[indices]
+        return [self.idx*to*token[index] for index in indices]
 
-def count_corpus(tokens):  #@save
+def count_corpus(tokens):  # @save
     """Count token frequencies."""
     # Here `tokens` is a 1D list or 2D list
     if len(tokens) == 0 or isinstance(tokens[0], list):
@@ -156,32 +156,32 @@ We construct a vocabulary using the time machine dataset as the corpus.
 Then we print the first few frequent tokens with their indices.
 
 ```{.python .input}
-#@tab all
+# @tab all
 vocab = Vocab(tokens)
-print(list(vocab.token_to_idx.items())[:10])
+print(list(vocab.token*to*idx.items())[:10])
 ```
 
 Now we can convert each text line into a list of numerical indices.
 
 ```{.python .input}
-#@tab all
+# @tab all
 for i in [0, 10]:
     print('words:', tokens[i])
     print('indices:', vocab[tokens[i]])
 ```
 
-## Putting All Things Together
+# # Putting All Things Together
 
-Using the above functions, we package everything into the `load_corpus_time_machine` function, which returns `corpus`, a list of token indices, and `vocab`, the vocabulary of the time machine corpus.
+Using the above functions, we package everything into the `load*corpus*time_machine` function, which returns `corpus`, a list of token indices, and `vocab`, the vocabulary of the time machine corpus.
 The modifications we did here are:
 i) we tokenize text into characters, not words, to simplify the training in later sections;
 ii) `corpus` is a single list, not a list of token lists, since each text line in the time machine dataset is not necessarily a sentence or a paragraph.
 
 ```{.python .input}
-#@tab all
-def load_corpus_time_machine(max_tokens=-1):  #@save
+# @tab all
+def load*corpus*time*machine(max*tokens=-1):  # @save
     """Return token indices and the vocabulary of the time machine dataset."""
-    lines = read_time_machine()
+    lines = read*time*machine()
     tokens = tokenize(lines, 'char')
     vocab = Vocab(tokens)
     # Since each text line in the time machine dataset is not necessarily a
@@ -191,17 +191,17 @@ def load_corpus_time_machine(max_tokens=-1):  #@save
         corpus = corpus[:max_tokens]
     return corpus, vocab
 
-corpus, vocab = load_corpus_time_machine()
+corpus, vocab = load*corpus*time_machine()
 len(corpus), len(vocab)
 ```
 
-## Summary
+# # Summary
 
 * Text is an important form of sequence data.
 * To preprocess text, we usually split text into tokens, build a vocabulary to map token strings into numerical indices, and convert text data into token indices for  models to manipulate.
 
 
-## Exercises
+# # Exercises
 
 1. Tokenization is a key preprocessing step. It varies for different languages. Try to find another three commonly used methods to tokenize text.
 1. In the experiment of this section, tokenize text into words and vary the `min_freq` arguments of the `Vocab` instance. How does this affect the vocabulary size? 

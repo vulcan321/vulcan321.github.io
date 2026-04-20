@@ -1,4 +1,4 @@
-## Installing GCC on Ubuntu 20.04
+# # Installing GCC on Ubuntu 20.04
 
 The default Ubuntu repositories contain a meta-package named “build-essential” that includes the GNU compiler collection, GNU debugger, and other development libraries and tools required for compiling software.
 
@@ -35,7 +35,7 @@ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 That’s it. GCC tools and libraries have been installed on your Ubuntu system.
 
-## Compiling a Hello World Example
+# # Compiling a Hello World Example
 
 Compiling a basic C or C++ program using GCC is pretty easy. Open your [text editor](https://linuxize.com/post/how-to-install-visual-studio-code-on-ubuntu-18-04/) and create the following file:
 
@@ -47,7 +47,7 @@ hello.c
 
 ```c
 // hello.c
-#include <stdio.h>
+# include <stdio.h>
  
 int main() {
     printf("Hello, world!\n");
@@ -75,7 +75,7 @@ The program should print:
 Hello World!
 ```
 
-## Installing Multiple GCC Versions
+# # Installing Multiple GCC Versions
 
 This section provides instructions about how to install and use multiple versions of GCC on Ubuntu 20.04. The newer versions of the GCC compiler include new functions and optimization improvements.
 
@@ -104,7 +104,7 @@ sudo update-alternatives --config gccCopy
 There are 3 choices for the alternative gcc (providing /usr/bin/gcc).
 
   Selection    Path            Priority   Status
-------------------------------------------------------------
+---
 * 0            /usr/bin/gcc-10   100       auto mode
   1            /usr/bin/gcc-10   100       manual mode
   2            /usr/bin/gcc-8    80        manual mode
@@ -117,7 +117,7 @@ You will be presented with a list of all installed GCC versions on your Ubuntu s
 
 The command will create [symbolic links](https://linuxize.com/post/how-to-create-symbolic-links-in-linux-using-the-ln-command/) to the specific versions of GCC and G++.
 
-## Conclusion
+# # Conclusion
 
 We’ve shown you how to installed GCC on Ubuntu 20.04. You can now visit the official [GCC Documentation](https://gcc.gnu.org/onlinedocs/) page and learn how to use GCC and G++ to compile your C and C++ programs.
 
@@ -125,7 +125,7 @@ If you hit a problem or have feedback, leave a comment below.
 
 
 
-## Clear Linux terminal with clear command
+# # Clear Linux terminal with clear command
 
 how do you clear terminal in Linux? The simplest and the most common way is to use the clear command:
 

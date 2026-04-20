@@ -5,15 +5,15 @@ Developing custom functionality for Microsoft Office 2011 for Mac in C and VBA
 -   [Download source - 59.6 KB](https://www.codeproject.com/KB/office/810282/vba2themacs_src.zip)
 -   [Download demo - 53.6 KB](https://www.codeproject.com/KB/office/810282/vba2themacs_demo.zip)
 
-## Introduction
+# # Introduction
 
 With the release of Microsoft Office 2011 for Mac, VBA made a welcome return to the Apple platform.
 
 Alas, though the VBA implementation in Microsoft Office 2011 closely mirrors the implementation found on the Windows platform, none of the many features that are provided through COM and ActiveX on the Windows platform made the journey across. Add to that, a total absence of anything resembling an SDK, and developer reference documentation that can at best be described as rudimentary – and the prospect of developing custom Office 2011 solutions quickly appear daunting.
 
-In this article, I will demonstrate how it is possible to develop dynamic libraries (_dylib_ files) in C to provide custom functionality for Office 2011 through VBA from simple input and output operations using basic types such as booleans, numbers, strings, arrays and VBA User Defined Types, to the implementation of simple RegEx and HTTP POST and GET functionality.
+In this article, I will demonstrate how it is possible to develop dynamic libraries (*dylib* files) in C to provide custom functionality for Office 2011 through VBA from simple input and output operations using basic types such as booleans, numbers, strings, arrays and VBA User Defined Types, to the implementation of simple RegEx and HTTP POST and GET functionality.
 
-## Background
+# # Background
 
 On the Windows platform, the Microsoft Office suite can be extended using a series of technologies such as ActiveX/COM, application specific components such as the XLL – even accessing DLL functions directly following registration of these using the Excel `REGISTER` function, are all viable approaches. On the Apple OS X platform, without the SDK, these options are not available.
 
@@ -23,7 +23,7 @@ For a VBA developer not familiar with the Apple OS X platform, there is very lit
 
 It is assumed that the reader is familiar with VBA and interfacing to external functions and libraries. This article is not attempting to teach you VBA - but rather show you how your existing VBA skills can be applied to the Apple OS X platform.
 
-## Getting Started
+# # Getting Started
 
 The configuration used for this article is as follows:
 
@@ -41,7 +41,7 @@ Before getting started, there are a few things to keep in mind for those more fa
 
 In summary, the custom library (`dylib`) we are developing for OS X must be a 32bit dynamic library. As far as VBA syntax is concerned, we should be able to refer to the developer reference documentation for Microsoft Office 2007 for Windows for pointers and samples.
 
-### The Xcode Project
+## # The Xcode Project
 
 In Xcode, create a new project and specify the C/C++ Library template.
 
@@ -55,9 +55,9 @@ Once your project has been created, ensure that the **Architectures** setting sp
 
 ![Sample Image - maximum width is 600 pixels](data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==)
 
-### Basic Input/Output
+## # Basic Input/Output
 
-The basics of any input and output revolve around booleans, numbers and strings. In the _introduction.c_ source file in the project for this article, you will find the following C functions that perform basic operations on numbers and strings.
+The basics of any input and output revolve around booleans, numbers and strings. In the *introduction.c* source file in the project for this article, you will find the following C functions that perform basic operations on numbers and strings.
 
 
 ```c
@@ -100,11 +100,11 @@ void CIntroArrayUpdate(long *arrayElement, long arrayLength) {
 
 None of these functions are in any way OS X specific, they will function identically on the Windows platform and as such should be familiar to Windows developers that have been developing and/or interfacing to DLL files from VBA.
 
-### The VBA Code
+## # The VBA Code
 
-As part of the `declare` syntax, it is necessary to provide the full path to the _dylib_ file, unless the file is placed on one of the default search paths for _dylib_ files. I would recommend that you copy the file _libvba2themacs.dylib_ to one of the standard search paths, _/usr/lib_, _/usr/local/lib_ or alternatively _/Users/\[Username\]/lib_. Doing so ensures that the declarations can be limited to providing the _dylib_ file name only. These three paths are search by default by all the OS X versions available to me, when looking for a specified _dylib_ file. There may well be others – but I haven’t gotten around to locating them yet.
+As part of the `declare` syntax, it is necessary to provide the full path to the *dylib* file, unless the file is placed on one of the default search paths for *dylib* files. I would recommend that you copy the file *libvba2themacs.dylib* to one of the standard search paths, */usr/lib*, */usr/local/lib* or alternatively */Users/\[Username\]/lib*. Doing so ensures that the declarations can be limited to providing the *dylib* file name only. These three paths are search by default by all the OS X versions available to me, when looking for a specified *dylib* file. There may well be others – but I haven’t gotten around to locating them yet.
 
-Assuming that the _dylib_ has been placed in one of the search paths, the VBA declare statement for the basic functions and commands above, will look as follows:
+Assuming that the *dylib* has been placed in one of the search paths, the VBA declare statement for the basic functions and commands above, will look as follows:
 
 VB.NET
 
@@ -123,7 +123,7 @@ Private Declare Sub CIntroArrayUpdate Lib "libvba2themacs.dylib" _
 
 In summary, passing parameters from VBA to our `dylib` for basic types can be done `ByVal`. For arrays, the first array element must be passed `ByRef` while the array length should be passed `ByVal`.
 
-### Getting Strings from the dylib
+## # Getting Strings from the dylib
 
 Passing and returning numerical types, as well as passing `string`s is simple enough, but when it comes to returning `string` values from the `dylib`, a different approach is needed. In VBA, any `string` appears to be a BSTR (an OLE `string`, but this is an assumption on my behalf, there is no documentation to refer to), so any attempt at returning a C `string` directly to VBA will result in memory access errors and cause Office to crash. One way around for this problem, is to allocate and initialise a `string` to hold the returned value in VBA, ensuring that its sized so as being large enough to hold the expected response, then pass the response `string` as a parameter to the external function or sub in the `dylib` where it can be updated.
 
@@ -174,20 +174,20 @@ End Function
 
 In this VBA function, a 256-character `string` is allocated and initialised using `vbNullChar`. This `string` is then passed as a parameter to the `CUnameRelease` function in our `dylib` where the `string` is populated with the `uname` release parameter details. The long returned from `CUnameRelease` enables the implementation of error trapping, should the string in the `dylib` be longer than the VBA allocated `string`.
 
-### The VBA Type and C struct
+## # The VBA Type and C struct
 
 As you may have noticed, uname actually returns a `struct` called `utsname`. This `struct` is defined as follows:
 
 C
 
 ```
-#define    _SYS_NAMELEN    256
+# define    *SYS*NAMELEN    256
 struct utsname {
-    char    sysname[_SYS_NAMELEN];    /* [XSI] Name of OS */
-    char    nodename[_SYS_NAMELEN];    /* [XSI] Name of this network node */
-    char    release[_SYS_NAMELEN];    /* [XSI] Release level */
-    char    version[_SYS_NAMELEN];    /* [XSI] Version level */
-    char    machine[_SYS_NAMELEN];    /* [XSI] Hardware type */
+    char    sysname[*SYS*NAMELEN];    /* [XSI] Name of OS */
+    char    nodename[*SYS*NAMELEN];    /* [XSI] Name of this network node */
+    char    release[*SYS*NAMELEN];    /* [XSI] Release level */
+    char    version[*SYS*NAMELEN];    /* [XSI] Version level */
+    char    machine[*SYS*NAMELEN];    /* [XSI] Hardware type */
 };
 ```
 
@@ -235,7 +235,7 @@ End Function
 
 In summary, numerical values can be passed between a `dylib` and VBA without issues in a way familiar to those used to the Windows platform, `string`s can be passed as well – but only as pre allocated and initialised parameters, and finally a VBA UDT/C `struct` can be used to pass data between VBA and the `dylib`.
 
-### Implementing RegEx Match
+## # Implementing RegEx Match
 
 You now know how to go about getting data in and out of custom libraries using VBA. So what can we do with this knowledge?
 
@@ -245,7 +245,7 @@ Implementing this kind of validation logic using only VBA can often be a challen
 
 The following C function shows an example of such a function, accepting two `string` inputs – the `string` we want to check (`regexString`), and the regex pattern we want to check against (`regexPattern`). If the regex pattern is valid and there is a match against the `string`, it returns `true`, otherwise it returns `false`.
 ```c
-#include <regex.h>
+# include <regex.h>
 bool CRegexMatchBool(char *regexString, char *regexPattern)
 {
     int status;
@@ -284,15 +284,15 @@ End Function
 
 If you consider what would be involved in creating a VBA only generic validation function, implementing a simple `dylib` function as shown above is well worth the time and effort.
 
-### Implementing HTTP GET and POST
+## # Implementing HTTP GET and POST
 
-In OS X a number of open source components are readily available as part of the core OS, and for HTTP functionality, we can utilize `libcurl` to implement custom functions for HTTP `GET` and `POST` operations that can be called from VBA. The `dylib` project will require a reference to the `libcurl` library – in this case, _libcurl.4.dylib_ is used.
+In OS X a number of open source components are readily available as part of the core OS, and for HTTP functionality, we can utilize `libcurl` to implement custom functions for HTTP `GET` and `POST` operations that can be called from VBA. The `dylib` project will require a reference to the `libcurl` library – in this case, *libcurl.4.dylib* is used.
 
 For more details on `libcurl`, refer to [http://curl.haxx.se/libcurl](http://curl.haxx.se/libcurl).
 
 For simplicity, HTTP `GET` and `POST` are implemented as two distinct functions in the sample code base. For more details, refer to the source code in the Xcode project.
 ```c
-#include <curl/curl.h>
+# include <curl/curl.h>
 
 int CCurlHttpGet(char *url, char *httpResponse)
 {...
@@ -309,11 +309,11 @@ int CCurlHttpPost(char *url, char *fields, char *httpResponse)
 
 Both HTTP functions return the length of the HTTP response as an integer (VBA long) allowing for error trapping in VBA. In case of errors, the HTTP functions will return a `0`, and the response `string` (`httpResponse`) will contain the error message.
 
-## Using the Code
+# # Using the Code
 
-The download for this article contains in addition to the Xcode 5.1 project files, an Excel 2011 XLSM file containing examples of all the functions mentioned in this article and a compiled dylib file _libvba2themacs.dylib_. The `declare` statements used in the Excel VBA code do not reference a full path name to the dylib, so in order to run these functions, the _libvba2themacs.dylib_ file must be copied to either _/usr/lib_, _usr/local/lib_ or _/Users/\[user name\]/lib_.
+The download for this article contains in addition to the Xcode 5.1 project files, an Excel 2011 XLSM file containing examples of all the functions mentioned in this article and a compiled dylib file *libvba2themacs.dylib*. The `declare` statements used in the Excel VBA code do not reference a full path name to the dylib, so in order to run these functions, the *libvba2themacs.dylib* file must be copied to either */usr/lib*, *usr/local/lib* or */Users/\[user name\]/lib*.
 
-## Points of Interest
+# # Points of Interest
 
 The process of developing custom libraries for VBA on Apple OS X may be hampered by the absence of an SDK, and developer documentation may be rudimentary - but once the basic techniques are understood, you can focus on locating the right header file and getting your C code right. The Apple OS X platform has a large number of open source components readily available as part of the standard OS install, in addition to a number of powerful OS X specific APIs.
 

@@ -11,7 +11,7 @@
 struct CCreateContext  
 {
     CRuntimeClass* m_pNewViewClass; //新建视图的动态创建类
-    CDocument* m_pCurrentDoc;//当前的文档类，这文档类将和m_pNewViewClass动态创建类创建的视图类关联
+    CDocument* m*pCurrentDoc;//当前的文档类，这文档类将和m*pNewViewClass动态创建类创建的视图类关联
     CDocTemplate* m_pNewDocTemplate;//和框架窗口关联的文档模版
     CView* m_pLastView;//原先的视图类，通常在切分窗口的视图类中使用（splitterWnd）
     CFrameWnd* m_pCurrentFrame;//当前框架窗口
@@ -36,7 +36,7 @@ CFrameWnd::LoadFrame(...);
 
 7、在上面的函数调用过程中我们没有发现有创建CMyView的代码。
 
-8、CreateWindowEx函数会发出一个ON\_WM\_CREATE消息,CFrameWnd::OnCreate函数响应这个消息，并创建CMyView：
+8、CreateWindowEx函数会发出一个ON\*WM\*CREATE消息,CFrameWnd::OnCreate函数响应这个消息，并创建CMyView：
 
 　　OnCreate()函数的参数是一个CREATESTRUCT结构指针，这个结构的第一个参数lpCreateParamer是一个void\*类型的指针，
 
@@ -52,6 +52,6 @@ CFrameWnd::LoadFrame(...);
 
 　　然后用下面一句话，创建视图窗口：
 
-　　pView->Create(NULL, NULL, AFX\_WS\_DEFAULT\_VIEW, CRect(0, 0, 0, 0), this, nID, pContext);
+　　pView->Create(NULL, NULL, AFX\*WS\*DEFAULT\_VIEW, CRect(0, 0, 0, 0), this, nID, pContext);
 
 10、通过这个结构，我们可以让系统，给我们自动创建视图类，并且附加到框架窗口上。

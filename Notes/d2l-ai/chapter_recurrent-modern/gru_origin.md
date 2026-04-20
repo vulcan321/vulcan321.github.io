@@ -35,7 +35,7 @@ variant that often offers comparable performance and is significantly faster to
 compute  :cite:`Chung.Gulcehre.Cho.ea.2014`.
 Due to its simplicity, let us start with the GRU.
 
-## Gated Hidden State
+# # Gated Hidden State
 
 The key distinction between vanilla RNNs and GRUs
 is that the latter support gating of the hidden state.
@@ -50,7 +50,7 @@ Last, we will learn to reset the latent state whenever needed.
 We discuss this in detail below.
 
 
-### Reset Gate and Update Gate
+## # Reset Gate and Update Gate
 
 The first thing we need to introduce are
 the *reset gate* and the *update gate*.
@@ -61,7 +61,7 @@ a reset gate would allow us to control how much of the previous state we might s
 Likewise, an update gate would allow us to control how much of the new state is just a copy of the old state.
 
 We begin by engineering these gates.
-:numref:`fig_gru_1` illustrates the inputs for both
+:numref:`fig*gru*1` illustrates the inputs for both
 the reset and update gates in a GRU, given the input
 of the current time step
 and the hidden state of the previous time step.
@@ -70,42 +70,42 @@ are given by two fully-connected layers
 with a sigmoid activation function.
 
 ![Computing the reset gate and the update gate in a GRU model.](../img/gru-1.svg)
-:label:`fig_gru_1`
+:label:`fig*gru*1`
 
 Mathematically,
 for a given time step $t$,
 suppose that the input is
 a minibatch
-$\mathbf{X}_t \in \mathbb{R}^{n \times d}$ (number of examples: $n$, number of inputs: $d$) and the hidden state of the previous time step is $\mathbf{H}_{t-1} \in \mathbb{R}^{n \times h}$ (number of hidden units: $h$). Then, the reset gate $\mathbf{R}_t \in \mathbb{R}^{n \times h}$ and update gate $\mathbf{Z}_t \in \mathbb{R}^{n \times h}$ are computed as follows:
+$\mathbf{X}*t \in \mathbb{R}^{n \times d}$ (number of examples: $n$, number of inputs: $d$) and the hidden state of the previous time step is $\mathbf{H}*{t-1} \in \mathbb{R}^{n \times h}$ (number of hidden units: $h$). Then, the reset gate $\mathbf{R}*t \in \mathbb{R}^{n \times h}$ and update gate $\mathbf{Z}*t \in \mathbb{R}^{n \times h}$ are computed as follows:
 
 $$
 \begin{aligned}
-\mathbf{R}_t = \sigma(\mathbf{X}_t \mathbf{W}_{xr} + \mathbf{H}_{t-1} \mathbf{W}_{hr} + \mathbf{b}_r),\\
-\mathbf{Z}_t = \sigma(\mathbf{X}_t \mathbf{W}_{xz} + \mathbf{H}_{t-1} \mathbf{W}_{hz} + \mathbf{b}_z),
+\mathbf{R}*t = \sigma(\mathbf{X}*t \mathbf{W}*{xr} + \mathbf{H}*{t-1} \mathbf{W}*{hr} + \mathbf{b}*r),\\
+\mathbf{Z}*t = \sigma(\mathbf{X}*t \mathbf{W}*{xz} + \mathbf{H}*{t-1} \mathbf{W}*{hz} + \mathbf{b}*z),
 \end{aligned}
 $$
 
-where $\mathbf{W}_{xr}, \mathbf{W}_{xz} \in \mathbb{R}^{d \times h}$ and
-$\mathbf{W}_{hr}, \mathbf{W}_{hz} \in \mathbb{R}^{h \times h}$ are weight
-parameters and $\mathbf{b}_r, \mathbf{b}_z \in \mathbb{R}^{1 \times h}$ are
+where $\mathbf{W}*{xr}, \mathbf{W}*{xz} \in \mathbb{R}^{d \times h}$ and
+$\mathbf{W}*{hr}, \mathbf{W}*{hz} \in \mathbb{R}^{h \times h}$ are weight
+parameters and $\mathbf{b}*r, \mathbf{b}*z \in \mathbb{R}^{1 \times h}$ are
 biases. 
 Note that broadcasting (see :numref:`subsec_broadcasting`) is triggered during the summation.
 We use sigmoid functions (as introduced in :numref:`sec_mlp`) to transform input values to the interval $(0, 1)$.
 
-### Candidate Hidden State
+## # Candidate Hidden State
 
 Next, let us
 integrate the reset gate $\mathbf{R}_t$ with
 the regular latent state updating mechanism
-in :eqref:`rnn_h_with_state`.
+in :eqref:`rnn*h*with_state`.
 It leads to the following
 *candidate hidden state*
 $\tilde{\mathbf{H}}_t \in \mathbb{R}^{n \times h}$ at time step $t$:
 
-$$\tilde{\mathbf{H}}_t = \tanh(\mathbf{X}_t \mathbf{W}_{xh} + \left(\mathbf{R}_t \odot \mathbf{H}_{t-1}\right) \mathbf{W}_{hh} + \mathbf{b}_h),$$
-:eqlabel:`gru_tilde_H`
+$$\tilde{\mathbf{H}}*t = \tanh(\mathbf{X}*t \mathbf{W}*{xh} + \left(\mathbf{R}*t \odot \mathbf{H}*{t-1}\right) \mathbf{W}*{hh} + \mathbf{b}_h),$$
+:eqlabel:`gru*tilde*H`
 
-where $\mathbf{W}_{xh} \in \mathbb{R}^{d \times h}$ and $\mathbf{W}_{hh} \in \mathbb{R}^{h \times h}$
+where $\mathbf{W}*{xh} \in \mathbb{R}^{d \times h}$ and $\mathbf{W}*{hh} \in \mathbb{R}^{h \times h}$
 are weight parameters,
 $\mathbf{b}_h \in \mathbb{R}^{1 \times h}$
 is the bias,
@@ -113,31 +113,31 @@ and the symbol $\odot$ is the Hadamard (elementwise) product operator.
 Here we use a nonlinearity in the form of tanh to ensure that the values in the candidate hidden state remain in the interval $(-1, 1)$.
 
 The result is a *candidate* since we still need to incorporate the action of the update gate.
-Comparing with :eqref:`rnn_h_with_state`,
+Comparing with :eqref:`rnn*h*with_state`,
 now the influence of the previous states
 can be reduced with the
 elementwise multiplication of
-$\mathbf{R}_t$ and $\mathbf{H}_{t-1}$
-in :eqref:`gru_tilde_H`.
-Whenever the entries in the reset gate $\mathbf{R}_t$ are close to 1, we recover a vanilla RNN such as in :eqref:`rnn_h_with_state`.
-For all entries of the reset gate $\mathbf{R}_t$ that are close to 0, the candidate hidden state is the result of an MLP with $\mathbf{X}_t$ as the input. Any pre-existing hidden state is thus *reset* to defaults.
+$\mathbf{R}*t$ and $\mathbf{H}*{t-1}$
+in :eqref:`gru*tilde*H`.
+Whenever the entries in the reset gate $\mathbf{R}*t$ are close to 1, we recover a vanilla RNN such as in :eqref:`rnn*h*with*state`.
+For all entries of the reset gate $\mathbf{R}*t$ that are close to 0, the candidate hidden state is the result of an MLP with $\mathbf{X}*t$ as the input. Any pre-existing hidden state is thus *reset* to defaults.
 
-:numref:`fig_gru_2` illustrates the computational flow after applying the reset gate.
+:numref:`fig*gru*2` illustrates the computational flow after applying the reset gate.
 
 ![Computing the candidate hidden state in a GRU model.](../img/gru-2.svg)
-:label:`fig_gru_2`
+:label:`fig*gru*2`
 
 
-### Hidden State
+## # Hidden State
 
-Finally, we need to incorporate the effect of the update gate $\mathbf{Z}_t$. This determines the extent to which the new hidden state $\mathbf{H}_t \in \mathbb{R}^{n \times h}$ is just the old state $\mathbf{H}_{t-1}$ and by how much the new candidate state $\tilde{\mathbf{H}}_t$ is used.
-The update gate $\mathbf{Z}_t$ can be used for this purpose, simply by taking elementwise convex combinations between both $\mathbf{H}_{t-1}$ and $\tilde{\mathbf{H}}_t$.
+Finally, we need to incorporate the effect of the update gate $\mathbf{Z}*t$. This determines the extent to which the new hidden state $\mathbf{H}*t \in \mathbb{R}^{n \times h}$ is just the old state $\mathbf{H}*{t-1}$ and by how much the new candidate state $\tilde{\mathbf{H}}*t$ is used.
+The update gate $\mathbf{Z}*t$ can be used for this purpose, simply by taking elementwise convex combinations between both $\mathbf{H}*{t-1}$ and $\tilde{\mathbf{H}}_t$.
 This leads to the final update equation for the GRU:
 
-$$\mathbf{H}_t = \mathbf{Z}_t \odot \mathbf{H}_{t-1}  + (1 - \mathbf{Z}_t) \odot \tilde{\mathbf{H}}_t.$$
+$$\mathbf{H}*t = \mathbf{Z}*t \odot \mathbf{H}*{t-1}  + (1 - \mathbf{Z}*t) \odot \tilde{\mathbf{H}}_t.$$
 
 
-Whenever the update gate $\mathbf{Z}_t$ is close to 1, we simply retain the old state. In this case the information from $\mathbf{X}_t$ is essentially ignored, effectively skipping time step $t$ in the dependency chain. In contrast, whenever $\mathbf{Z}_t$ is close to 0, the new latent state $\mathbf{H}_t$ approaches the candidate latent state $\tilde{\mathbf{H}}_t$. These designs can help us cope with the vanishing gradient problem in RNNs and better capture dependencies for sequences with large time step distances.
+Whenever the update gate $\mathbf{Z}*t$ is close to 1, we simply retain the old state. In this case the information from $\mathbf{X}*t$ is essentially ignored, effectively skipping time step $t$ in the dependency chain. In contrast, whenever $\mathbf{Z}*t$ is close to 0, the new latent state $\mathbf{H}*t$ approaches the candidate latent state $\tilde{\mathbf{H}}_t$. These designs can help us cope with the vanishing gradient problem in RNNs and better capture dependencies for sequences with large time step distances.
 For instance,
 if the update gate has been close to 1
 for all the time steps of an entire subsequence,
@@ -148,10 +148,10 @@ regardless of the length of the subsequence.
 
 
 
-:numref:`fig_gru_3` illustrates the computational flow after the update gate is in action.
+:numref:`fig*gru*3` illustrates the computational flow after the update gate is in action.
 
 ![Computing the hidden state in a GRU model.](../img/gru-3.svg)
-:label:`fig_gru_3`
+:label:`fig*gru*3`
 
 
 In summary, GRUs have the following two distinguishing features:
@@ -159,9 +159,9 @@ In summary, GRUs have the following two distinguishing features:
 * Reset gates help capture short-term dependencies in sequences.
 * Update gates help capture long-term dependencies in sequences.
 
-## Implementation from Scratch
+# # Implementation from Scratch
 
-To gain a better understanding of the GRU model, let us implement it from scratch. We begin by reading the time machine dataset that we used in :numref:`sec_rnn_scratch`. The code for reading the dataset is given below.
+To gain a better understanding of the GRU model, let us implement it from scratch. We begin by reading the time machine dataset that we used in :numref:`sec*rnn*scratch`. The code for reading the dataset is given below.
 
 ```{.python .input}
 from d2l import mxnet as d2l
@@ -169,21 +169,21 @@ from mxnet import np, npx
 from mxnet.gluon import rnn
 npx.set_np()
 
-batch_size, num_steps = 32, 35
-train_iter, vocab = d2l.load_data_time_machine(batch_size, num_steps)
+batch*size, num*steps = 32, 35
+train*iter, vocab = d2l.load*data*time*machine(batch*size, num*steps)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 from d2l import torch as d2l
 import torch
 from torch import nn
 
-batch_size, num_steps = 32, 35
-train_iter, vocab = d2l.load_data_time_machine(batch_size, num_steps)
+batch*size, num*steps = 32, 35
+train*iter, vocab = d2l.load*data*time*machine(batch*size, num*steps)
 ```
 
-### Initializing Model Parameters
+## # Initializing Model Parameters
 
 The next step is to initialize the model parameters.
 We draw the weights from a Gaussian distribution
@@ -192,69 +192,69 @@ We instantiate all weights and biases relating to the update gate, the reset gat
 and the output layer.
 
 ```{.python .input}
-def get_params(vocab_size, num_hiddens, device):
-    num_inputs = num_outputs = vocab_size
+def get*params(vocab*size, num_hiddens, device):
+    num*inputs = num*outputs = vocab_size
 
     def normal(shape):
         return np.random.normal(scale=0.01, size=shape, ctx=device)
 
     def three():
-        return (normal((num_inputs, num_hiddens)),
-                normal((num_hiddens, num_hiddens)),
+        return (normal((num*inputs, num*hiddens)),
+                normal((num*hiddens, num*hiddens)),
                 np.zeros(num_hiddens, ctx=device))
 
-    W_xz, W_hz, b_z = three()  # Update gate parameters
-    W_xr, W_hr, b_r = three()  # Reset gate parameters
-    W_xh, W_hh, b_h = three()  # Candidate hidden state parameters
+    W*xz, W*hz, b_z = three()  # Update gate parameters
+    W*xr, W*hr, b_r = three()  # Reset gate parameters
+    W*xh, W*hh, b_h = three()  # Candidate hidden state parameters
     # Output layer parameters
-    W_hq = normal((num_hiddens, num_outputs))
-    b_q = np.zeros(num_outputs, ctx=device)
+    W*hq = normal((num*hiddens, num_outputs))
+    b*q = np.zeros(num*outputs, ctx=device)
     # Attach gradients
-    params = [W_xz, W_hz, b_z, W_xr, W_hr, b_r, W_xh, W_hh, b_h, W_hq, b_q]
+    params = [W*xz, W*hz, b*z, W*xr, W*hr, b*r, W*xh, W*hh, b*h, W*hq, b_q]
     for param in params:
         param.attach_grad()
     return params
 ```
 
 ```{.python .input}
-#@tab pytorch
-def get_params(vocab_size, num_hiddens, device):
-    num_inputs = num_outputs = vocab_size
+# @tab pytorch
+def get*params(vocab*size, num_hiddens, device):
+    num*inputs = num*outputs = vocab_size
 
     def normal(shape):
         return torch.randn(size=shape, device=device)*0.01
 
     def three():
-        return (normal((num_inputs, num_hiddens)),
-                normal((num_hiddens, num_hiddens)),
+        return (normal((num*inputs, num*hiddens)),
+                normal((num*hiddens, num*hiddens)),
                 d2l.zeros(num_hiddens, device=device))
 
-    W_xz, W_hz, b_z = three()  # Update gate parameters
-    W_xr, W_hr, b_r = three()  # Reset gate parameters
-    W_xh, W_hh, b_h = three()  # Candidate hidden state parameters
+    W*xz, W*hz, b_z = three()  # Update gate parameters
+    W*xr, W*hr, b_r = three()  # Reset gate parameters
+    W*xh, W*hh, b_h = three()  # Candidate hidden state parameters
     # Output layer parameters
-    W_hq = normal((num_hiddens, num_outputs))
-    b_q = d2l.zeros(num_outputs, device=device)
+    W*hq = normal((num*hiddens, num_outputs))
+    b*q = d2l.zeros(num*outputs, device=device)
     # Attach gradients
-    params = [W_xz, W_hz, b_z, W_xr, W_hr, b_r, W_xh, W_hh, b_h, W_hq, b_q]
+    params = [W*xz, W*hz, b*z, W*xr, W*hr, b*r, W*xh, W*hh, b*h, W*hq, b_q]
     for param in params:
-        param.requires_grad_(True)
+        param.requires*grad*(True)
     return params
 ```
 
-### Defining the Model
+## # Defining the Model
 
-Now we will define the hidden state initialization function `init_gru_state`. Just like the `init_rnn_state` function defined in :numref:`sec_rnn_scratch`, this function returns a tensor with a shape (batch size, number of hidden units) whose values are all zeros.
+Now we will define the hidden state initialization function `init*gru*state`. Just like the `init*rnn*state` function defined in :numref:`sec*rnn*scratch`, this function returns a tensor with a shape (batch size, number of hidden units) whose values are all zeros.
 
 ```{.python .input}
-def init_gru_state(batch_size, num_hiddens, device):
-    return (np.zeros(shape=(batch_size, num_hiddens), ctx=device), )
+def init*gru*state(batch*size, num*hiddens, device):
+    return (np.zeros(shape=(batch*size, num*hiddens), ctx=device), )
 ```
 
 ```{.python .input}
-#@tab pytorch
-def init_gru_state(batch_size, num_hiddens, device):
-    return (torch.zeros((batch_size, num_hiddens), device=device), )
+# @tab pytorch
+def init*gru*state(batch*size, num*hiddens, device):
+    return (torch.zeros((batch*size, num*hiddens), device=device), )
 ```
 
 Now we are ready to define the GRU model.
@@ -262,53 +262,53 @@ Its structure is the same as that of the basic RNN cell, except that the update 
 
 ```{.python .input}
 def gru(inputs, state, params):
-    W_xz, W_hz, b_z, W_xr, W_hr, b_r, W_xh, W_hh, b_h, W_hq, b_q = params
+    W*xz, W*hz, b*z, W*xr, W*hr, b*r, W*xh, W*hh, b*h, W*hq, b_q = params
     H, = state
     outputs = []
     for X in inputs:
-        Z = npx.sigmoid(np.dot(X, W_xz) + np.dot(H, W_hz) + b_z)
-        R = npx.sigmoid(np.dot(X, W_xr) + np.dot(H, W_hr) + b_r)
-        H_tilda = np.tanh(np.dot(X, W_xh) + np.dot(R * H, W_hh) + b_h)
+        Z = npx.sigmoid(np.dot(X, W*xz) + np.dot(H, W*hz) + b_z)
+        R = npx.sigmoid(np.dot(X, W*xr) + np.dot(H, W*hr) + b_r)
+        H*tilda = np.tanh(np.dot(X, W*xh) + np.dot(R * H, W*hh) + b*h)
         H = Z * H + (1 - Z) * H_tilda
-        Y = np.dot(H, W_hq) + b_q
+        Y = np.dot(H, W*hq) + b*q
         outputs.append(Y)
     return np.concatenate(outputs, axis=0), (H,)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 def gru(inputs, state, params):
-    W_xz, W_hz, b_z, W_xr, W_hr, b_r, W_xh, W_hh, b_h, W_hq, b_q = params
+    W*xz, W*hz, b*z, W*xr, W*hr, b*r, W*xh, W*hh, b*h, W*hq, b_q = params
     H, = state
     outputs = []
     for X in inputs:
-        Z = torch.sigmoid((X @ W_xz) + (H @ W_hz) + b_z)
-        R = torch.sigmoid((X @ W_xr) + (H @ W_hr) + b_r)
-        H_tilda = torch.tanh((X @ W_xh) + ((R * H) @ W_hh) + b_h)
+        Z = torch.sigmoid((X @ W*xz) + (H @ W*hz) + b_z)
+        R = torch.sigmoid((X @ W*xr) + (H @ W*hr) + b_r)
+        H*tilda = torch.tanh((X @ W*xh) + ((R * H) @ W*hh) + b*h)
         H = Z * H + (1 - Z) * H_tilda
-        Y = H @ W_hq + b_q
+        Y = H @ W*hq + b*q
         outputs.append(Y)
     return torch.cat(outputs, dim=0), (H,)
 ```
 
-### Training and Prediction
+## # Training and Prediction
 
-Training and prediction work in exactly the same manner as in :numref:`sec_rnn_scratch`.
+Training and prediction work in exactly the same manner as in :numref:`sec*rnn*scratch`.
 After training,
 we print out the perplexity on the training set
 and the predicted sequence following
 the provided prefixes "time traveller" and "traveller", respectively.
 
 ```{.python .input}
-#@tab all
-vocab_size, num_hiddens, device = len(vocab), 256, d2l.try_gpu()
+# @tab all
+vocab*size, num*hiddens, device = len(vocab), 256, d2l.try_gpu()
 num_epochs, lr = 500, 1
-model = d2l.RNNModelScratch(len(vocab), num_hiddens, device, get_params,
-                            init_gru_state, gru)
-d2l.train_ch8(model, train_iter, vocab, lr, num_epochs, device)
+model = d2l.RNNModelScratch(len(vocab), num*hiddens, device, get*params,
+                            init*gru*state, gru)
+d2l.train*ch8(model, train*iter, vocab, lr, num_epochs, device)
 ```
 
-## Concise Implementation
+# # Concise Implementation
 
 In high-level APIs,
 we can directly
@@ -317,21 +317,21 @@ This encapsulates all the configuration detail that we made explicit above.
 The code is significantly faster as it uses compiled operators rather than Python for many details that we spelled out before.
 
 ```{.python .input}
-gru_layer = rnn.GRU(num_hiddens)
+gru*layer = rnn.GRU(num*hiddens)
 model = d2l.RNNModel(gru_layer, len(vocab))
-d2l.train_ch8(model, train_iter, vocab, lr, num_epochs, device)
+d2l.train*ch8(model, train*iter, vocab, lr, num_epochs, device)
 ```
 
 ```{.python .input}
-#@tab pytorch
-num_inputs = vocab_size
-gru_layer = nn.GRU(num_inputs, num_hiddens)
+# @tab pytorch
+num*inputs = vocab*size
+gru*layer = nn.GRU(num*inputs, num_hiddens)
 model = d2l.RNNModel(gru_layer, len(vocab))
 model = model.to(device)
-d2l.train_ch8(model, train_iter, vocab, lr, num_epochs, device)
+d2l.train*ch8(model, train*iter, vocab, lr, num_epochs, device)
 ```
 
-## Summary
+# # Summary
 
 * Gated RNNs can better capture dependencies for sequences with large time step distances.
 * Reset gates help capture short-term dependencies in sequences.
@@ -339,7 +339,7 @@ d2l.train_ch8(model, train_iter, vocab, lr, num_epochs, device)
 * GRUs contain basic RNNs as their extreme case whenever the reset gate is switched on. They can also skip subsequences by turning on the update gate.
 
 
-## Exercises
+# # Exercises
 
 1. Assume that we only want to use the input at time step $t'$ to predict the output at time step $t > t'$. What are the best values for the reset and update gates for each time step?
 1. Adjust the hyperparameters and analyze the their influence on running time, perplexity, and the output sequence.

@@ -24,7 +24,7 @@
 使人类的大脑能够更明智地分配资源来生存、成长和社交，
 例如发现天敌、找寻食物和伴侣。
 
-## 生物学中的注意力提示
+# # 生物学中的注意力提示
 
 注意力是如何应用于视觉世界中的呢？
 这要从当今十分普及的*双组件*（two-component）的框架开始讲起：
@@ -59,7 +59,7 @@
 :width:`400px`
 :label:`fig_eye-book`
 
-## 查询、键和值
+# # 查询、键和值
 
 自主性的与非自主性的注意力提示解释了人类的注意力的方式，
 下面来看看如何通过这两种注意力提示，
@@ -91,7 +91,7 @@
 例如可以设计一个不可微的注意力模型，
 该模型可以使用强化学习方法 :cite:`Mnih.Heess.Graves.ea.2014`进行训练。
 
-## 注意力的可视化
+# # 注意力的可视化
 
 平均汇聚层可以被视为输入的加权平均值，
 其中各输入的权重是一样的。
@@ -105,19 +105,19 @@ npx.set_np()
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 from d2l import torch as d2l
 import torch
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 from d2l import tensorflow as d2l
 import tensorflow as tf
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 from d2l import paddle as d2l
 import warnings
 warnings.filterwarnings("ignore")
@@ -129,17 +129,17 @@ import paddle
 （要显示的行数，要显示的列数，查询的数目，键的数目）。
 
 ```{.python .input}
-#@tab all
-#@save
+# @tab all
+# @save
 def show_heatmaps(matrices, xlabel, ylabel, titles=None, figsize=(2.5, 2.5),
                   cmap='Reds'):
     """显示矩阵热图"""
-    d2l.use_svg_display()
-    num_rows, num_cols = matrices.shape[0], matrices.shape[1]
-    fig, axes = d2l.plt.subplots(num_rows, num_cols, figsize=figsize,
+    d2l.use*svg*display()
+    num*rows, num*cols = matrices.shape[0], matrices.shape[1]
+    fig, axes = d2l.plt.subplots(num*rows, num*cols, figsize=figsize,
                                  sharex=True, sharey=True, squeeze=False)
-    for i, (row_axes, row_matrices) in enumerate(zip(axes, matrices)):
-        for j, (ax, matrix) in enumerate(zip(row_axes, row_matrices)):
+    for i, (row*axes, row*matrices) in enumerate(zip(axes, matrices)):
+        for j, (ax, matrix) in enumerate(zip(row*axes, row*matrices)):
             pcm = ax.imshow(d2l.numpy(matrix), cmap=cmap)
             if i == num_rows - 1:
                 ax.set_xlabel(xlabel)
@@ -154,14 +154,14 @@ def show_heatmaps(matrices, xlabel, ylabel, titles=None, figsize=(2.5, 2.5),
 在本例子中，仅当查询和键相同时，注意力权重为1，否则为0。
 
 ```{.python .input}
-#@tab all
+# @tab all
 attention_weights = d2l.reshape(d2l.eye(10), (1, 1, 10, 10))
-show_heatmaps(attention_weights, xlabel='Keys', ylabel='Queries')
+show*heatmaps(attention*weights, xlabel='Keys', ylabel='Queries')
 ```
 
 后面的章节内容将经常调用`show_heatmaps`函数来显示注意力权重。
 
-## 小结
+# # 小结
 
 * 人类的注意力是有限的、有价值和稀缺的资源。
 * 受试者使用非自主性和自主性提示有选择性地引导注意力。前者基于突出性，后者则依赖于意识。
@@ -170,7 +170,7 @@ show_heatmaps(attention_weights, xlabel='Keys', ylabel='Queries')
 * 注意力机制通过注意力汇聚使选择偏向于值（感官输入），其中包含查询（自主性提示）和键（非自主性提示）。键和值是成对的。
 * 可视化查询和键之间的注意力权重是可行的。
 
-## 练习
+# # 练习
 
 1. 在机器翻译中通过解码序列词元时，其自主性提示可能是什么？非自主性提示和感官输入又是什么？
 1. 随机生成一个$10 \times 10$矩阵并使用`softmax`运算来确保每行都是有效的概率分布，然后可视化输出注意力权重。

@@ -9,15 +9,15 @@ In this competition,
 In fact,
 the dataset for this competition is
 a subset of the ImageNet dataset.
-Unlike the images in the CIFAR-10 dataset in :numref:`sec_kaggle_cifar10`, 
+Unlike the images in the CIFAR-10 dataset in :numref:`sec*kaggle*cifar10`, 
 the images in the ImageNet dataset are both higher and wider in varying dimensions.
-:numref:`fig_kaggle_dog` shows the information on the competition's webpage. You need a Kaggle account
+:numref:`fig*kaggle*dog` shows the information on the competition's webpage. You need a Kaggle account
 to submit your results.
 
 
 ![The dog breed identification competition website. The competition dataset can be obtained by clicking the "Data" tab.](../img/kaggle-dog.jpg)
 :width:`400px`
-:label:`fig_kaggle_dog`
+:label:`fig*kaggle*dog`
 
 ```{.python .input}
 from d2l import mxnet as d2l
@@ -29,7 +29,7 @@ npx.set_np()
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 from d2l import torch as d2l
 import torch
 import torchvision
@@ -37,7 +37,7 @@ from torch import nn
 import os
 ```
 
-## Obtaining and Organizing the Dataset
+# # Obtaining and Organizing the Dataset
 
 The competition dataset is divided into a training set and a test set, which contain 10222 and 10357 JPEG images
 of three RGB (color) channels, respectively.
@@ -46,11 +46,11 @@ there are 120 breeds of dogs
 such as Labradors, Poodles, Dachshunds, Samoyeds, Huskies, Chihuahuas, and Yorkshire Terriers.
 
 
-### Downloading the Dataset
+## # Downloading the Dataset
 
 After logging into Kaggle,
 you can click on the "Data" tab on the 
-competition webpage shown in :numref:`fig_kaggle_dog` and download the dataset by clicking the "Download All" button. 
+competition webpage shown in :numref:`fig*kaggle*dog` and download the dataset by clicking the "Download All" button. 
 After unzipping the downloaded file in `../data`, you will find the entire dataset in the following paths:
 
 * ../data/dog-breed-identification/labels.csv
@@ -59,54 +59,54 @@ After unzipping the downloaded file in `../data`, you will find the entire datas
 * ../data/dog-breed-identification/test
 
 You may have noticed that the above structure is
-similar to that of the CIFAR-10 competition in :numref:`sec_kaggle_cifar10`, where folders `train/` and `test/` contain training and testing dog images, respectively, and `labels.csv` contains
+similar to that of the CIFAR-10 competition in :numref:`sec*kaggle*cifar10`, where folders `train/` and `test/` contain training and testing dog images, respectively, and `labels.csv` contains
 the labels for the training images.
-Similarly, to make it easier to get started, we provide a small sample of the dataset mentioned above: `train_valid_test_tiny.zip`.
+Similarly, to make it easier to get started, we provide a small sample of the dataset mentioned above: `train*valid*test_tiny.zip`.
 If you are going to use the full dataset for the Kaggle competition, you need to change the `demo` variable below to `False`.
 
 ```{.python .input}
-#@tab all
-#@save 
-d2l.DATA_HUB['dog_tiny'] = (d2l.DATA_URL + 'kaggle_dog_tiny.zip',
+# @tab all
+# @save 
+d2l.DATA*HUB['dog*tiny'] = (d2l.DATA*URL + 'kaggle*dog_tiny.zip',
                             '0cb91d09b814ecdc07b50f31f8dcad3e81d6a86d')
 
 # If you use the full dataset downloaded for the Kaggle competition, change
 # the variable below to `False`
 demo = True
 if demo:
-    data_dir = d2l.download_extract('dog_tiny')
+    data*dir = d2l.download*extract('dog_tiny')
 else:
     data_dir = os.path.join('..', 'data', 'dog-breed-identification')
 ```
 
-### Organizing the Dataset
+## # Organizing the Dataset
 
-We can organize the dataset similarly to what we did in :numref:`sec_kaggle_cifar10`, namely splitting out
+We can organize the dataset similarly to what we did in :numref:`sec*kaggle*cifar10`, namely splitting out
 a validation set from the original training set, and moving images into subfolders grouped by labels.
 
-The `reorg_dog_data` function below reads
+The `reorg*dog*data` function below reads
 the training data labels, splits out the validation set, and organizes the training set.
 
 ```{.python .input}
-#@tab all
-def reorg_dog_data(data_dir, valid_ratio):
-    labels = d2l.read_csv_labels(os.path.join(data_dir, 'labels.csv'))
-    d2l.reorg_train_valid(data_dir, labels, valid_ratio)
-    d2l.reorg_test(data_dir)
+# @tab all
+def reorg*dog*data(data*dir, valid*ratio):
+    labels = d2l.read*csv*labels(os.path.join(data_dir, 'labels.csv'))
+    d2l.reorg*train*valid(data*dir, labels, valid*ratio)
+    d2l.reorg*test(data*dir)
 
 
 batch_size = 4 if demo else 128
 valid_ratio = 0.1
-reorg_dog_data(data_dir, valid_ratio)
+reorg*dog*data(data*dir, valid*ratio)
 ```
 
-## Image Augmentation
+# # Image Augmentation
 
 Recall that this dog breed dataset
 is a subset of the ImageNet dataset,
 whose images
 are larger than those of the CIFAR-10 dataset
-in :numref:`sec_kaggle_cifar10`.
+in :numref:`sec*kaggle*cifar10`.
 The following 
 lists a few image augmentation operations
 that might be useful for relatively larger images.
@@ -132,7 +132,7 @@ transform_train = gluon.data.vision.transforms.Compose([
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 transform_train = torchvision.transforms.Compose([
     # Randomly crop the image to obtain an image with an area of 0.08 to 1 of
     # the original area and height-to-width ratio between 3/4 and 4/3. Then,
@@ -166,7 +166,7 @@ transform_test = gluon.data.vision.transforms.Compose([
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 transform_test = torchvision.transforms.Compose([
     torchvision.transforms.Resize(256),
     # Crop a 224 x 224 square area from the center of the image
@@ -176,67 +176,67 @@ transform_test = torchvision.transforms.Compose([
                                      [0.229, 0.224, 0.225])])
 ```
 
-## Reading the Dataset
+# # Reading the Dataset
 
-As in :numref:`sec_kaggle_cifar10`,
+As in :numref:`sec*kaggle*cifar10`,
 we can read the organized dataset
 consisting of raw image files.
 
 ```{.python .input}
-train_ds, valid_ds, train_valid_ds, test_ds = [
+train*ds, valid*ds, train*valid*ds, test_ds = [
     gluon.data.vision.ImageFolderDataset(
-        os.path.join(data_dir, 'train_valid_test', folder))
+        os.path.join(data*dir, 'train*valid_test', folder))
     for folder in ('train', 'valid', 'train_valid', 'test')]
 ```
 
 ```{.python .input}
-#@tab pytorch
-train_ds, train_valid_ds = [torchvision.datasets.ImageFolder(
-    os.path.join(data_dir, 'train_valid_test', folder),
-    transform=transform_train) for folder in ['train', 'train_valid']]
+# @tab pytorch
+train*ds, train*valid_ds = [torchvision.datasets.ImageFolder(
+    os.path.join(data*dir, 'train*valid_test', folder),
+    transform=transform*train) for folder in ['train', 'train*valid']]
 
-valid_ds, test_ds = [torchvision.datasets.ImageFolder(
-    os.path.join(data_dir, 'train_valid_test', folder),
+valid*ds, test*ds = [torchvision.datasets.ImageFolder(
+    os.path.join(data*dir, 'train*valid_test', folder),
     transform=transform_test) for folder in ['valid', 'test']]
 ```
 
 Below we create data loader instances
 the same way
-as in :numref:`sec_kaggle_cifar10`.
+as in :numref:`sec*kaggle*cifar10`.
 
 ```{.python .input}
-train_iter, train_valid_iter = [gluon.data.DataLoader(
-    dataset.transform_first(transform_train), batch_size, shuffle=True, 
-    last_batch='discard') for dataset in (train_ds, train_valid_ds)]
+train*iter, train*valid_iter = [gluon.data.DataLoader(
+    dataset.transform*first(transform*train), batch_size, shuffle=True, 
+    last*batch='discard') for dataset in (train*ds, train*valid*ds)]
 
 valid_iter = gluon.data.DataLoader(
-    valid_ds.transform_first(transform_test), batch_size, shuffle=False, 
+    valid*ds.transform*first(transform*test), batch*size, shuffle=False, 
     last_batch='discard')
 
 test_iter = gluon.data.DataLoader(
-    test_ds.transform_first(transform_test), batch_size, shuffle=False, 
+    test*ds.transform*first(transform*test), batch*size, shuffle=False, 
     last_batch='keep')
 ```
 
 ```{.python .input}
-#@tab pytorch
-train_iter, train_valid_iter = [torch.utils.data.DataLoader(
-    dataset, batch_size, shuffle=True, drop_last=True)
-    for dataset in (train_ds, train_valid_ds)]
+# @tab pytorch
+train*iter, train*valid_iter = [torch.utils.data.DataLoader(
+    dataset, batch*size, shuffle=True, drop*last=True)
+    for dataset in (train*ds, train*valid_ds)]
 
-valid_iter = torch.utils.data.DataLoader(valid_ds, batch_size, shuffle=False,
+valid*iter = torch.utils.data.DataLoader(valid*ds, batch_size, shuffle=False,
                                          drop_last=True)
 
-test_iter = torch.utils.data.DataLoader(test_ds, batch_size, shuffle=False,
+test*iter = torch.utils.data.DataLoader(test*ds, batch_size, shuffle=False,
                                         drop_last=False)
 ```
 
-## Fine-Tuning a Pretrained Model
+# # Fine-Tuning a Pretrained Model
 
 Again,
 the dataset for this competition is a subset of the ImageNet dataset. 
 Therefore, we can use the approach discussed in
-:numref:`sec_fine_tuning`
+:numref:`sec*fine*tuning`
 to select a model pretrained on the
 full ImageNet dataset and use it to extract image features to be fed into a
 custom small-scale output network. 
@@ -254,7 +254,7 @@ output network that can be trained,
 such as stacking two
 fully-connected layers.
 Different from the experiment in
-:numref:`sec_fine_tuning`, 
+:numref:`sec*fine*tuning`, 
 the following does 
 not retrain the pretrained model used for feature
 extraction. This reduces training time and
@@ -269,30 +269,30 @@ by the pretrained model on ImageNet.
 
 ```{.python .input}
 def get_net(devices):
-    finetune_net = gluon.model_zoo.vision.resnet34_v2(pretrained=True)
+    finetune*net = gluon.model*zoo.vision.resnet34_v2(pretrained=True)
     # Define a new output network
-    finetune_net.output_new = nn.HybridSequential(prefix='')
-    finetune_net.output_new.add(nn.Dense(256, activation='relu'))
+    finetune*net.output*new = nn.HybridSequential(prefix='')
+    finetune*net.output*new.add(nn.Dense(256, activation='relu'))
     # There are 120 output categories
-    finetune_net.output_new.add(nn.Dense(120))
+    finetune*net.output*new.add(nn.Dense(120))
     # Initialize the output network
-    finetune_net.output_new.initialize(init.Xavier(), ctx=devices)
+    finetune*net.output*new.initialize(init.Xavier(), ctx=devices)
     # Distribute the model parameters to the CPUs or GPUs used for computation
-    finetune_net.collect_params().reset_ctx(devices)
+    finetune*net.collect*params().reset_ctx(devices)
     return finetune_net
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 def get_net(devices):
     finetune_net = nn.Sequential()
     finetune_net.features = torchvision.models.resnet34(pretrained=True)
     # Define a new output network (there are 120 output categories)
-    finetune_net.output_new = nn.Sequential(nn.Linear(1000, 256),
+    finetune*net.output*new = nn.Sequential(nn.Linear(1000, 256),
                                             nn.ReLU(),
                                             nn.Linear(256, 120))
     # Move the model to devices
-    finetune_net = finetune_net.to(devices[0])
+    finetune*net = finetune*net.to(devices[0])
     # Freeze parameters of feature layers
     for param in finetune_net.features.parameters():
         param.requires_grad = False
@@ -306,13 +306,13 @@ Then we use this feature as the input for our small custom output network to cal
 ```{.python .input}
 loss = gluon.loss.SoftmaxCrossEntropyLoss()
 
-def evaluate_loss(data_iter, net, devices):
+def evaluate*loss(data*iter, net, devices):
     l_sum, n = 0.0, 0
     for features, labels in data_iter:
-        X_shards, y_shards = d2l.split_batch(features, labels, devices)
-        output_features = [net.features(X_shard) for X_shard in X_shards]
-        outputs = [net.output_new(feature) for feature in output_features]
-        ls = [loss(output, y_shard).sum() for output, y_shard
+        X*shards, y*shards = d2l.split_batch(features, labels, devices)
+        output*features = [net.features(X*shard) for X*shard in X*shards]
+        outputs = [net.output*new(feature) for feature in output*features]
+        ls = [loss(output, y*shard).sum() for output, y*shard
               in zip(outputs, y_shards)]
         l_sum += sum([float(l.sum()) for l in ls])
         n += labels.size
@@ -320,10 +320,10 @@ def evaluate_loss(data_iter, net, devices):
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 loss = nn.CrossEntropyLoss(reduction='none')
 
-def evaluate_loss(data_iter, net, devices):
+def evaluate*loss(data*iter, net, devices):
     l_sum, n = 0.0, 0
     for features, labels in data_iter:
         features, labels = features.to(devices[0]), labels.to(devices[0])
@@ -334,43 +334,43 @@ def evaluate_loss(data_iter, net, devices):
     return l_sum / n
 ```
 
-## Defining the Training Function
+# # Defining the Training Function
 
 We will select the model and tune hyperparameters according to the model's performance on the validation set. The model training function `train` only
 iterates parameters of the small custom output network.
 
 ```{.python .input}
-def train(net, train_iter, valid_iter, num_epochs, lr, wd, devices, lr_period,
+def train(net, train*iter, valid*iter, num*epochs, lr, wd, devices, lr*period,
           lr_decay):
     # Only train the small custom output network
-    trainer = gluon.Trainer(net.output_new.collect_params(), 'sgd',
+    trainer = gluon.Trainer(net.output*new.collect*params(), 'sgd',
                             {'learning_rate': lr, 'momentum': 0.9, 'wd': wd})
-    num_batches, timer = len(train_iter), d2l.Timer()
+    num*batches, timer = len(train*iter), d2l.Timer()
     animator = d2l.Animator(xlabel='epoch', xlim=[1, num_epochs],
                             legend=['train loss', 'valid loss'])
     for epoch in range(num_epochs):
         metric = d2l.Accumulator(2)
         if epoch > 0 and epoch % lr_period == 0:
-            trainer.set_learning_rate(trainer.learning_rate * lr_decay)
+            trainer.set*learning*rate(trainer.learning*rate * lr*decay)
         for i, (features, labels) in enumerate(train_iter):
             timer.start()
-            X_shards, y_shards = d2l.split_batch(features, labels, devices)
-            output_features = [net.features(X_shard) for X_shard in X_shards]
+            X*shards, y*shards = d2l.split_batch(features, labels, devices)
+            output*features = [net.features(X*shard) for X*shard in X*shards]
             with autograd.record():
                 outputs = [net.output_new(feature)
                            for feature in output_features]
-                ls = [loss(output, y_shard).sum() for output, y_shard
+                ls = [loss(output, y*shard).sum() for output, y*shard
                       in zip(outputs, y_shards)]
             for l in ls:
                 l.backward()
             trainer.step(batch_size)
             metric.add(sum([float(l.sum()) for l in ls]), labels.shape[0])
             timer.stop()
-            if (i + 1) % (num_batches // 5) == 0 or i == num_batches - 1:
+            if (i + 1) % (num*batches // 5) == 0 or i == num*batches - 1:
                 animator.add(epoch + (i + 1) / num_batches, 
                              (metric[0] / metric[1], None))
         if valid_iter is not None:
-            valid_loss = evaluate_loss(valid_iter, net, devices)
+            valid*loss = evaluate*loss(valid_iter, net, devices)
             animator.add(epoch + 1, (None, valid_loss))
     if valid_iter is not None:
         print(f'train loss {metric[0] / metric[1]:.3f}, '
@@ -382,16 +382,16 @@ def train(net, train_iter, valid_iter, num_epochs, lr, wd, devices, lr_period,
 ```
 
 ```{.python .input}
-#@tab pytorch
-def train(net, train_iter, valid_iter, num_epochs, lr, wd, devices, lr_period,
+# @tab pytorch
+def train(net, train*iter, valid*iter, num*epochs, lr, wd, devices, lr*period,
           lr_decay):
     # Only train the small custom output network
     net = nn.DataParallel(net, device_ids=devices).to(devices[0])
     trainer = torch.optim.SGD((param for param in net.parameters()
                                if param.requires_grad), lr=lr,
                               momentum=0.9, weight_decay=wd)
-    scheduler = torch.optim.lr_scheduler.StepLR(trainer, lr_period, lr_decay)
-    num_batches, timer = len(train_iter), d2l.Timer()
+    scheduler = torch.optim.lr*scheduler.StepLR(trainer, lr*period, lr_decay)
+    num*batches, timer = len(train*iter), d2l.Timer()
     animator = d2l.Animator(xlabel='epoch', xlim=[1, num_epochs],
                             legend=['train loss', 'valid loss'])
     for epoch in range(num_epochs):
@@ -406,11 +406,11 @@ def train(net, train_iter, valid_iter, num_epochs, lr, wd, devices, lr_period,
             trainer.step()
             metric.add(l, labels.shape[0])
             timer.stop()
-            if (i + 1) % (num_batches // 5) == 0 or i == num_batches - 1:
+            if (i + 1) % (num*batches // 5) == 0 or i == num*batches - 1:
                 animator.add(epoch + (i + 1) / num_batches, 
                              (metric[0] / metric[1], None))
         if valid_iter is not None:
-            valid_loss = evaluate_loss(valid_iter, net, devices)
+            valid*loss = evaluate*loss(valid_iter, net, devices)
             animator.add(epoch + 1, (None, valid_loss))
         scheduler.step()
     if valid_iter is not None:
@@ -422,32 +422,32 @@ def train(net, train_iter, valid_iter, num_epochs, lr, wd, devices, lr_period,
           f'on {str(devices)}')
 ```
 
-## Training and Validating the Model
+# # Training and Validating the Model
 
 Now we can train and validate the model.
 The following hyperparameters are all tunable.
-For example, the number of epochs can be increased. Because `lr_period` and `lr_decay` are set to 10 and 0.1, respectively, the learning rate of the optimization algorithm will be multiplied by 0.1 after every 10 epochs.
+For example, the number of epochs can be increased. Because `lr*period` and `lr*decay` are set to 10 and 0.1, respectively, the learning rate of the optimization algorithm will be multiplied by 0.1 after every 10 epochs.
 
 ```{.python .input}
-devices, num_epochs, lr, wd = d2l.try_all_gpus(), 5, 0.01, 1e-4
-lr_period, lr_decay, net = 10, 0.1, get_net(devices)
+devices, num*epochs, lr, wd = d2l.try*all_gpus(), 5, 0.01, 1e-4
+lr*period, lr*decay, net = 10, 0.1, get_net(devices)
 net.hybridize()
-train(net, train_iter, valid_iter, num_epochs, lr, wd, devices, lr_period,
+train(net, train*iter, valid*iter, num*epochs, lr, wd, devices, lr*period,
       lr_decay)
 ```
 
 ```{.python .input}
-#@tab pytorch
-devices, num_epochs, lr, wd = d2l.try_all_gpus(), 5, 0.001, 1e-4
-lr_period, lr_decay, net = 10, 0.1, get_net(devices)
-train(net, train_iter, valid_iter, num_epochs, lr, wd, devices, lr_period,
+# @tab pytorch
+devices, num*epochs, lr, wd = d2l.try*all_gpus(), 5, 0.001, 1e-4
+lr*period, lr*decay, net = 10, 0.1, get_net(devices)
+train(net, train*iter, valid*iter, num*epochs, lr, wd, devices, lr*period,
       lr_decay)
 ```
 
-## Classifying the Testing Set and Submitting Results on Kaggle
+# # Classifying the Testing Set and Submitting Results on Kaggle
 
 
-Similar to the final step in :numref:`sec_kaggle_cifar10`,
+Similar to the final step in :numref:`sec*kaggle*cifar10`,
 in the end all the labeled data (including the validation set) are used for training the model and classifying the testing set.
 We will use the trained custom output network
 for classification.
@@ -455,27 +455,27 @@ for classification.
 ```{.python .input}
 net = get_net(devices)
 net.hybridize()
-train(net, train_valid_iter, None, num_epochs, lr, wd, devices, lr_period,
+train(net, train*valid*iter, None, num*epochs, lr, wd, devices, lr*period,
       lr_decay)
 
 preds = []
 for data, label in test_iter:
-    output_features = net.features(data.as_in_ctx(devices[0]))
-    output = npx.softmax(net.output_new(output_features))
+    output*features = net.features(data.as*in_ctx(devices[0]))
+    output = npx.softmax(net.output*new(output*features))
     preds.extend(output.asnumpy())
 ids = sorted(os.listdir(
-    os.path.join(data_dir, 'train_valid_test', 'test', 'unknown')))
+    os.path.join(data*dir, 'train*valid_test', 'test', 'unknown')))
 with open('submission.csv', 'w') as f:
-    f.write('id,' + ','.join(train_valid_ds.synsets) + '\n')
+    f.write('id,' + ','.join(train*valid*ds.synsets) + '\n')
     for i, output in zip(ids, preds):
         f.write(i.split('.')[0] + ',' + ','.join(
             [str(num) for num in output]) + '\n')
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 net = get_net(devices)
-train(net, train_valid_iter, None, num_epochs, lr, wd, devices, lr_period,
+train(net, train*valid*iter, None, num*epochs, lr, wd, devices, lr*period,
       lr_decay)
 
 preds = []
@@ -483,9 +483,9 @@ for data, label in test_iter:
     output = torch.nn.functional.softmax(net(data.to(devices[0])), dim=0)
     preds.extend(output.cpu().detach().numpy())
 ids = sorted(os.listdir(
-    os.path.join(data_dir, 'train_valid_test', 'test', 'unknown')))
+    os.path.join(data*dir, 'train*valid_test', 'test', 'unknown')))
 with open('submission.csv', 'w') as f:
-    f.write('id,' + ','.join(train_valid_ds.classes) + '\n')
+    f.write('id,' + ','.join(train*valid*ds.classes) + '\n')
     for i, output in zip(ids, preds):
         f.write(i.split('.')[0] + ',' + ','.join(
             [str(num) for num in output]) + '\n')
@@ -494,19 +494,19 @@ with open('submission.csv', 'w') as f:
 The above code
 will generate a `submission.csv` file
 to be submitted 
-to Kaggle in the same way described in :numref:`sec_kaggle_house`.
+to Kaggle in the same way described in :numref:`sec*kaggle*house`.
 
 
-## Summary
+# # Summary
 
 
 * Images in the ImageNet dataset are larger (with varying dimensions) than CIFAR-10 images. We may modify image augmentation operations for tasks on a different dataset. 
 * To classify a subset of the ImageNet dataset, we can leverage pre-trained models on the full ImageNet dataset to extract features and only train a custom small-scale output network. This will lead to less computational time and memory cost.
 
 
-## Exercises
+# # Exercises
 
-1. When using the fill Kaggle competition dataset, what results can you achieve when you increase the `batch_size` (batch size) and `num_epochs` (number of epochs)?
+1. When using the fill Kaggle competition dataset, what results can you achieve when you increase the `batch*size` (batch size) and `num*epochs` (number of epochs)?
 1. Do you get better results if you use a deeper pretrained model? How do you tune hyperparameters? Can you further improve the results?
 
 :begin_tab:`mxnet`

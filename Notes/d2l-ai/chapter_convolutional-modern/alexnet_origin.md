@@ -55,7 +55,7 @@ that a slightly bigger or cleaner dataset
 or a slightly improved feature-extraction pipeline
 mattered far more to the final accuracy than any learning algorithm.
 
-## Learning Representations
+# # Learning Representations
 
 Another way to cast the state of affairs is that
 the most important part of the pipeline was the representation.
@@ -64,7 +64,7 @@ In fact, engineering a new set of feature functions, improving results, and writ
 SIFT :cite:`Lowe.2004`,
 SURF :cite:`Bay.Tuytelaars.Van-Gool.2006`,
 HOG (histograms of oriented gradient) :cite:`Dalal.Triggs.2005`,
-[bags of visual words](https://en.wikipedia.org/wiki/Bag-of-words_model_in_computer_vision)
+[bags of visual words](https://en.wikipedia.org/wiki/Bag-of-words*model*in*computer*vision)
 and similar feature extractors ruled the roost.
 
 Another group of researchers,
@@ -108,7 +108,7 @@ to this idea, attempting to learn hierarchical representations of visual data
 for many years.
 The ultimate breakthrough in 2012 can be attributed to two key factors.
 
-### Missing Ingredient: Data
+## # Missing Ingredient: Data
 
 Deep models with many layers require large amounts of data
 in order to enter the regime
@@ -136,7 +136,7 @@ pushed computer vision and machine learning research forward,
 challenging researchers to identify which models performed best
 at a greater scale than academics had previously considered.
 
-### Missing Ingredient: Hardware
+## # Missing Ingredient: Hardware
 
 Deep learning models are voracious consumers of compute cycles.
 Training can take hundreds of epochs, and each iteration
@@ -210,7 +210,7 @@ was good enough that for several years
 it was the industry standard and powered
 the first couple years of the deep learning boom.
 
-## AlexNet
+# # AlexNet
 
 AlexNet, which employed an 8-layer CNN,
 won the ImageNet Large Scale Visual Recognition Challenge 2012
@@ -235,7 +235,7 @@ two fully-connected hidden layers, and one fully-connected output layer. Second,
 as its activation function.
 Let us delve into the details below.
 
-### Architecture
+## # Architecture
 
 In AlexNet's first layer, the convolution window shape is $11\times11$.
 Since most images in ImageNet are more than ten times higher and wider
@@ -261,12 +261,12 @@ so we rarely need to break up models across GPUs these days
 (our version of the AlexNet model deviates
 from the original paper in this aspect).
 
-### Activation Functions
+## # Activation Functions
 
 Besides, AlexNet changed the sigmoid activation function to a simpler ReLU activation function. On one hand, the computation of the ReLU activation function is simpler. For example, it does not have the exponentiation operation found in the sigmoid activation function.
  On the other hand, the ReLU activation function makes model training easier when using different parameter initialization methods. This is because, when the output of the sigmoid activation function is very close to 0 or 1, the gradient of these regions is almost 0, so that backpropagation cannot continue to update some of the model parameters. In contrast, the gradient of the ReLU activation function in the positive interval is always 1. Therefore, if the model parameters are not properly initialized, the sigmoid function may obtain a gradient of almost 0 in the positive interval, so that the model cannot be effectively trained.
 
-### Capacity Control and Preprocessing
+## # Capacity Control and Preprocessing
 
 AlexNet controls the model complexity of the fully-connected layer
 by dropout (:numref:`sec_dropout`),
@@ -275,7 +275,7 @@ To augment the data even further, the training loop of AlexNet
 added a great deal of image augmentation,
 such as flipping, clipping, and color changes.
 This makes the model more robust and the larger sample size effectively reduces overfitting.
-We will discuss data augmentation in greater detail in :numref:`sec_image_augmentation`.
+We will discuss data augmentation in greater detail in :numref:`sec*image*augmentation`.
 
 ```{.python .input}
 from d2l import mxnet as d2l
@@ -314,7 +314,7 @@ net.add(nn.Conv2D(96, kernel_size=11, strides=4, activation='relu'),
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 from d2l import torch as d2l
 import torch
 from torch import nn
@@ -353,7 +353,7 @@ net = nn.Sequential(
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 from d2l import tensorflow as d2l
 import tensorflow as tf
 
@@ -409,22 +409,22 @@ for layer in net:
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 X = torch.randn(1, 1, 224, 224)
 for layer in net:
     X=layer(X)
-    print(layer.__class__.__name__,'Output shape:\t',X.shape)
+    print(layer.**class**.**name**,'Output shape:\t',X.shape)
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 X = tf.random.uniform((1, 224, 224, 1))
 for layer in net().layers:
     X = layer(X)
-    print(layer.__class__.__name__, 'Output shape:\t', X.shape)
+    print(layer.**class**.**name**, 'Output shape:\t', X.shape)
 ```
 
-## Reading the Dataset
+# # Reading the Dataset
 
 Although AlexNet is trained on ImageNet in the paper, we use Fashion-MNIST here
 since training an ImageNet model to convergence could take hours or days
@@ -435,15 +435,15 @@ than ImageNet images.
 To make things work, we upsample them to $224 \times 224$
 (generally not a smart practice,
 but we do it here to be faithful to the AlexNet architecture).
-We perform this resizing with the `resize` argument in the `d2l.load_data_fashion_mnist` function.
+We perform this resizing with the `resize` argument in the `d2l.load*data*fashion_mnist` function.
 
 ```{.python .input}
-#@tab all
+# @tab all
 batch_size = 128
-train_iter, test_iter = d2l.load_data_fashion_mnist(batch_size, resize=224)
+train*iter, test*iter = d2l.load*data*fashion*mnist(batch*size, resize=224)
 ```
 
-## Training
+# # Training
 
 Now, we can start training AlexNet.
 Compared with LeNet in :numref:`sec_lenet`,
@@ -452,19 +452,19 @@ and much slower training due to the deeper and wider network,
 the higher image resolution, and the more costly convolutions.
 
 ```{.python .input}
-#@tab all
+# @tab all
 lr, num_epochs = 0.01, 10
-d2l.train_ch6(net, train_iter, test_iter, num_epochs, lr)
+d2l.train*ch6(net, train*iter, test*iter, num*epochs, lr)
 ```
 
-## Summary
+# # Summary
 
 * AlexNet has a similar structure to that of LeNet, but uses more convolutional layers and a larger parameter space to fit the large-scale ImageNet dataset.
 * Today AlexNet has been surpassed by much more effective architectures but it is a key step from shallow to deep networks that are used nowadays.
 * Although it seems that there are only a few more lines in AlexNet's implementation than in LeNet, it took the academic community many years to embrace this conceptual change and take advantage of its excellent experimental results. This was also due to the lack of efficient computational tools.
 * Dropout, ReLU, and preprocessing were the other key steps in achieving excellent performance in computer vision tasks.
 
-## Exercises
+# # Exercises
 
 1. Try increasing the number of epochs. Compared with LeNet, how are the results different? Why?
 1. AlexNet may be too complex for the Fashion-MNIST dataset.

@@ -1,9 +1,9 @@
 # 图像卷积
-:label:`sec_conv_layer`
+:label:`sec*conv*layer`
 
 上节我们解析了卷积层的原理，现在我们看看它的实际应用。由于卷积神经网络的设计是用于探索图像数据，本节我们将以图像为例。
 
-## 互相关运算
+# # 互相关运算
 
 严格来说，卷积层是个错误的叫法，因为它所表达的运算其实是*互相关运算*（cross-correlation），而不是卷积运算。
 根据 :numref:`sec_why-conv`中的描述，在卷积层中，输入张量和核张量通过(**互相关运算**)产生输出张量。
@@ -26,9 +26,9 @@ $$
 
 注意，输出大小略小于输入大小。这是因为卷积核的宽度和高度大于1，
 而卷积核只与图像中每个大小完全适合的位置进行互相关运算。
-所以，输出大小等于输入大小$n_h \times n_w$减去卷积核大小$k_h \times k_w$，即：
+所以，输出大小等于输入大小$n*h \times n*w$减去卷积核大小$k*h \times k*w$，即：
 
-$$(n_h-k_h+1) \times (n_w-k_w+1).$$
+$$(n*h-k*h+1) \times (n*w-k*w+1).$$
 
 这是因为我们需要足够的空间在图像上“移动”卷积核。稍后，我们将看到如何通过在图像边界周围填充零来保证有足够的空间移动卷积核，从而保持输出大小不变。
 接下来，我们在`corr2d`函数中实现如上过程，该函数接受输入张量`X`和卷积核张量`K`，并返回输出张量`Y`。
@@ -41,14 +41,14 @@ npx.set_np()
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 from d2l import torch as d2l
 import torch
 from torch import nn
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 from d2l import paddle as d2l
 import warnings
 warnings.filterwarnings("ignore")
@@ -57,8 +57,8 @@ from paddle import nn
 ```
 
 ```{.python .input}
-#@tab mxnet, pytorch, paddle
-def corr2d(X, K):  #@save
+# @tab mxnet, pytorch, paddle
+def corr2d(X, K):  # @save
     """计算二维互相关运算"""
     h, w = K.shape
     Y = d2l.zeros((X.shape[0] - h + 1, X.shape[1] - w + 1))
@@ -69,11 +69,11 @@ def corr2d(X, K):  #@save
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 from d2l import tensorflow as d2l
 import tensorflow as tf
 
-def corr2d(X, K):  #@save
+def corr2d(X, K):  # @save
     """计算二维互相关运算"""
     h, w = K.shape
     Y = tf.Variable(tf.zeros((X.shape[0] - h + 1, X.shape[1] - w + 1)))
@@ -87,24 +87,24 @@ def corr2d(X, K):  #@save
 通过 :numref:`fig_correlation`的输入张量`X`和卷积核张量`K`，我们来[**验证上述二维互相关运算的输出**]。
 
 ```{.python .input}
-#@tab all
+# @tab all
 X = d2l.tensor([[0.0, 1.0, 2.0], [3.0, 4.0, 5.0], [6.0, 7.0, 8.0]])
 K = d2l.tensor([[0.0, 1.0], [2.0, 3.0]])
 corr2d(X, K)
 ```
 
-## 卷积层
+# # 卷积层
 
 卷积层对输入和卷积核权重进行互相关运算，并在添加标量偏置之后产生输出。
 所以，卷积层中的两个被训练的参数是卷积核权重和标量偏置。
 就像我们之前随机初始化全连接层一样，在训练基于卷积层的模型时，我们也随机初始化卷积核权重。
 
-基于上面定义的`corr2d`函数[**实现二维卷积层**]。在`__init__`构造函数中，将`weight`和`bias`声明为两个模型参数。前向传播函数调用`corr2d`函数并添加偏置。
+基于上面定义的`corr2d`函数[**实现二维卷积层**]。在`**init**`构造函数中，将`weight`和`bias`声明为两个模型参数。前向传播函数调用`corr2d`函数并添加偏置。
 
 ```{.python .input}
 class Conv2D(nn.Block):
-    def __init__(self, kernel_size, **kwargs):
-        super().__init__(**kwargs)
+    def **init**(self, kernel_size, **kwargs):
+        super().**init**(**kwargs)
         self.weight = self.params.get('weight', shape=kernel_size)
         self.bias = self.params.get('bias', shape=(1,))
 
@@ -113,10 +113,10 @@ class Conv2D(nn.Block):
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 class Conv2D(nn.Module):
-    def __init__(self, kernel_size):
-        super().__init__()
+    def **init**(self, kernel_size):
+        super().**init**()
         self.weight = nn.Parameter(torch.rand(kernel_size))
         self.bias = nn.Parameter(torch.zeros(1))
 
@@ -125,14 +125,14 @@ class Conv2D(nn.Module):
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 class Conv2D(tf.keras.layers.Layer):
-    def __init__(self):
-        super().__init__()
+    def **init**(self):
+        super().**init**()
 
     def build(self, kernel_size):
-        initializer = tf.random_normal_initializer()
-        self.weight = self.add_weight(name='w', shape=kernel_size,
+        initializer = tf.random*normal*initializer()
+        self.weight = self.add*weight(name='w', shape=kernel*size,
                                       initializer=initializer)
         self.bias = self.add_weight(name='b', shape=(1, ),
                                     initializer=initializer)
@@ -142,10 +142,10 @@ class Conv2D(tf.keras.layers.Layer):
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 class Conv2D(nn.Layer):
-    def __init__(self, kernel_size):
-        super().__init__()
+    def **init**(self, kernel_size):
+        super().**init**()
         self.weight = paddle.ParamAttr(paddle.rand(kernel_size))
         self.bias = paddle.ParamAttr(paddle.zeros(1))
 
@@ -156,20 +156,20 @@ class Conv2D(nn.Layer):
 高度和宽度分别为$h$和$w$的卷积核可以被称为$h \times w$卷积或$h \times w$卷积核。
 我们也将带有$h \times w$卷积核的卷积层称为$h \times w$卷积层。
 
-## 图像中目标的边缘检测
+# # 图像中目标的边缘检测
 
 如下是[**卷积层的一个简单应用：**]通过找到像素变化的位置，来(**检测图像中不同颜色的边缘**)。
 首先，我们构造一个$6\times 8$像素的黑白图像。中间四列为黑色（$0$），其余像素为白色（$1$）。
 
 ```{.python .input}
-#@tab mxnet, pytorch, paddle
+# @tab mxnet, pytorch, paddle
 X = d2l.ones((6, 8))
 X[:, 2:6] = 0
 X
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 X = tf.Variable(tf.ones((6, 8)))
 X[:, 2:6].assign(tf.zeros(X[:, 2:6].shape))
 X
@@ -178,7 +178,7 @@ X
 接下来，我们构造一个高度为$1$、宽度为$2$的卷积核`K`。当进行互相关运算时，如果水平相邻的两元素相同，则输出为零，否则输出为非零。
 
 ```{.python .input}
-#@tab all
+# @tab all
 K = d2l.tensor([[1.0, -1.0]])
 ```
 
@@ -186,7 +186,7 @@ K = d2l.tensor([[1.0, -1.0]])
 如下所示，[**输出`Y`中的1代表从白色到黑色的边缘，-1代表从黑色到白色的边缘**]，其他情况的输出为$0$。
 
 ```{.python .input}
-#@tab all
+# @tab all
 Y = corr2d(X, K)
 Y
 ```
@@ -196,11 +196,11 @@ Y
 不出所料，这个[**卷积核`K`只可以检测垂直边缘**]，无法检测水平边缘。
 
 ```{.python .input}
-#@tab all
+# @tab all
 corr2d(d2l.transpose(X), K)
 ```
 
-## 学习卷积核
+# # 学习卷积核
 
 如果我们只需寻找黑白边缘，那么以上`[1, -1]`的边缘检测器足以。然而，当有了更复杂数值的卷积核，或者连续的卷积层时，我们不可能手动设计滤波器。那么我们是否可以[**学习由`X`生成`Y`的卷积核**]呢？
 
@@ -209,7 +209,7 @@ corr2d(d2l.transpose(X), K)
 
 ```{.python .input}
 # 构造一个二维卷积层，它具有1个输出通道和形状为（1，2）的卷积核
-conv2d = nn.Conv2D(1, kernel_size=(1, 2), use_bias=False)
+conv2d = nn.Conv2D(1, kernel*size=(1, 2), use*bias=False)
 conv2d.initialize()
 
 # 这个二维卷积层使用四维输入和输出格式（批量大小、通道、高度、宽度），
@@ -232,7 +232,7 @@ for i in range(10):
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 # 构造一个二维卷积层，它具有1个输出通道和形状为（1，2）的卷积核
 conv2d = nn.Conv2d(1,1, kernel_size=(1, 2), bias=False)
 
@@ -254,7 +254,7 @@ for i in range(10):
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 # 构造一个二维卷积层，它具有1个输出通道和形状为（1，2）的卷积核
 conv2d = tf.keras.layers.Conv2D(1, (1, 2), use_bias=False)
 
@@ -266,7 +266,7 @@ lr = 3e-2  # 学习率
 
 Y_hat = conv2d(X)
 for i in range(10):
-    with tf.GradientTape(watch_accessed_variables=False) as g:
+    with tf.GradientTape(watch*accessed*variables=False) as g:
         g.watch(conv2d.weights[0])
         Y_hat = conv2d(X)
         l = (abs(Y_hat - Y)) ** 2
@@ -280,7 +280,7 @@ for i in range(10):
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 # 构造一个二维卷积层，它具有1个输出通道和形状为（1，2）的卷积核
 conv2d = nn.Conv2D(1, 1, kernel_size=(1, 2))
 
@@ -309,23 +309,23 @@ d2l.reshape(conv2d.weight.data(), (1, 2))
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 d2l.reshape(conv2d.weight.data, (1, 2))
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 d2l.reshape(conv2d.get_weights()[0], (1, 2))
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 d2l.reshape(conv2d.weight, (1, 2))
 ```
 
 细心的读者一定会发现，我们学习到的卷积核权重非常接近我们之前定义的卷积核`K`。
 
-## 互相关和卷积
+# # 互相关和卷积
 
 回想一下我们在 :numref:`sec_why-conv`中观察到的互相关和卷积运算之间的对应关系。
 为了得到正式的*卷积*运算输出，我们需要执行 :eqref:`eq_2d-conv-discrete`中定义的严格卷积运算，而不是互相关运算。
@@ -334,14 +334,14 @@ d2l.reshape(conv2d.weight, (1, 2))
 值得注意的是，由于卷积核是从数据中学习到的，因此无论这些层执行严格的卷积运算还是互相关运算，卷积层的输出都不会受到影响。
 为了说明这一点，假设卷积层执行*互相关*运算并学习 :numref:`fig_correlation`中的卷积核，该卷积核在这里由矩阵$\mathbf{K}$表示。
 假设其他条件不变，当这个层执行严格的*卷积*时，学习的卷积核$\mathbf{K}'$在水平和垂直翻转之后将与$\mathbf{K}$相同。
-也就是说，当卷积层对 :numref:`fig_correlation`中的输入和$\mathbf{K}'$执行严格*卷积*运算时，将得到与互相关运算 :numref:`fig_correlation`中相同的输出。
+也就是说，当卷积层对 :numref:`fig*correlation`中的输入和$\mathbf{K}'$执行严格*卷积*运算时，将得到与互相关运算 :numref:`fig*correlation`中相同的输出。
 
 为了与深度学习文献中的标准术语保持一致，我们将继续把“互相关运算”称为卷积运算，尽管严格地说，它们略有不同。
 此外，对于卷积核张量上的权重，我们称其为*元素*。
 
-## 特征映射和感受野
+# # 特征映射和感受野
 
-如在 :numref:`subsec_why-conv-channels`中所述， :numref:`fig_correlation`中输出的卷积层有时被称为*特征映射*（feature map），因为它可以被视为一个输入映射到下一层的空间维度的转换器。
+如在 :numref:`subsec*why-conv-channels`中所述， :numref:`fig*correlation`中输出的卷积层有时被称为*特征映射*（feature map），因为它可以被视为一个输入映射到下一层的空间维度的转换器。
 在卷积神经网络中，对于某一层的任意元素$x$，其*感受野*（receptive field）是指在前向传播期间可能影响$x$计算的所有元素（来自所有先前层）。
 
 请注意，感受野可能大于输入的实际大小。让我们用 :numref:`fig_correlation`为例来解释感受野：
@@ -350,7 +350,7 @@ d2l.reshape(conv2d.weight, (1, 2))
 在这种情况下，$\mathbf{Y}$上的$z$的感受野包括$\mathbf{Y}$的所有四个元素，而输入的感受野包括最初所有九个输入元素。
 因此，当一个特征图中的任意元素需要检测更广区域的输入特征时，我们可以构建一个更深的网络。
 
-## 小结
+# # 小结
 
 * 二维卷积层的核心计算是二维互相关运算。最简单的形式是，对二维输入数据和卷积核执行互相关操作，然后添加一个偏置。
 * 我们可以设计一个卷积核来检测图像的边缘。
@@ -358,7 +358,7 @@ d2l.reshape(conv2d.weight, (1, 2))
 * 学习卷积核时，无论用严格卷积运算或互相关运算，卷积层的输出不会受太大影响。
 * 当需要检测输入特征中更广区域时，我们可以构建一个更深的卷积网络。
 
-## 练习
+# # 练习
 
 1. 构建一个具有对角线边缘的图像`X`。
     1. 如果将本节中举例的卷积核`K`应用于`X`，会发生什么情况？

@@ -18,7 +18,7 @@ film still, \[film grain\], large crowds, cyberpunk street, street level photogr
 
 关于近期各个模型的惊人结果现在应该已经有很多文章介绍了，本文主要想尽可能直白地解释 AI 画画的原理。因为这块也是最近才开始涉及，有些地方如果没理解对，欢迎指正和交流。
 
-### **一、计算机如何生成图画**
+## # **一、计算机如何生成图画**
 
 让我们言归正传，AI 是怎么学会画图的呢？
 
@@ -62,7 +62,7 @@ U-net 是一个类似 auto-encoder 的漏斗状网络，但在相同尺寸的 de
 
 以上就是 diffusion model 生成图片的原理，是不是很简单呢！
 
-### **二、如何控制画面内容**
+## # **二、如何控制画面内容**
 
 上面解释了计算机如何生成和真实图片相似的图画。接下来解释一下模型是如何理解我们想要它生成什么并给出对应的结果的。
 
@@ -111,7 +111,7 @@ U-net 是一个类似 auto-encoder 的漏斗状网络，但在相同尺寸的 de
 
 ![](..\..\images\4b58f1f4-4c27-45cc-8d98-830d07655868.webp)
 
-### **三、为什么 AI 画画效果如此惊人**
+## # **三、为什么 AI 画画效果如此惊人**
 
 上面解释了计算机如何生成和真实图片相似的图画，以及模型是如何听懂我们想要它生成什么并给出对应的结果的。到此为止 AI 画画的基本原理已经介绍得差不多了。只想知道 AI 画画原理的话看到这里就可以结束了。
 
@@ -135,7 +135,7 @@ U-net 是一个类似 auto-encoder 的漏斗状网络，但在相同尺寸的 de
 
 ![](..\..\images\be331c75-b91c-415f-b0f0-6ea0d932d7f1.webp)
 
-课程截图来自：**[YouTube - How does Stable Diffusion work?](https://link.zhihu.com/?target=https%3A//www.youtube.com/watch%3Fv%3DJ87hffSMB60)**
+课程截图来自：**[YouTube - How does Stable Diffusion work?](https://www.youtube.com/watch?v=J87hffSMB60)**
 
 图片先用训练好的 VAE 的 encoder 得到一个维度小得多的图片隐编码（可以理解为将图片信息压缩到一个尺度更小的空间中），diffusion model 不再直接处理原图，而是处理这些隐编码，最后生成的新的隐编码再用对应的 decoder 还原成图片。相较于直接生成图片像素，大幅度减少计算量与显存。
 
@@ -153,4 +153,4 @@ U-net 是一个类似 auto-encoder 的漏斗状网络，但在相同尺寸的 de
 
 最后相比 Latent Diffusion Model 的改进是用上文提到的 CLIP 来让文本控制图片的生成方向。
 
-最后提一下二次元画风的 NovelAI，其实在技术上没有非常新的内容，就是拿巨量二次元图片去 finetune 原始 Stable Diffusion 模型。主要一些改进是 CLIP 用了倒数第二层更贴近文本内容的特征、把训练数据扩展为长宽比不限（为了能容纳下完整的人像）、增加了可支持文本输入长度从而让咒语变得更灵活也更复杂。我个人认为效果好还是因为吞了巨量的图片外加宅宅们的热情让这个模型迅速发扬光大，甚至还有《**[元素法典](https://link.zhihu.com/?target=https%3A//docs.qq.com/doc/DWHl3am5Zb05QbGVs)**》、《**[参同真解](https://www.zhihu.com/question/558019952/answer/2710009035)**》等众多咒语书，更衍生出了众多辅助绘制工具，可能这就是爱吧！
+最后提一下二次元画风的 NovelAI，其实在技术上没有非常新的内容，就是拿巨量二次元图片去 finetune 原始 Stable Diffusion 模型。主要一些改进是 CLIP 用了倒数第二层更贴近文本内容的特征、把训练数据扩展为长宽比不限（为了能容纳下完整的人像）、增加了可支持文本输入长度从而让咒语变得更灵活也更复杂。我个人认为效果好还是因为吞了巨量的图片外加宅宅们的热情让这个模型迅速发扬光大，甚至还有《**[元素法典](https://docs.qq.com/doc/DWHl3am5Zb05QbGVs)**》、《**[参同真解](https://www.zhihu.com/question/558019952/answer/2710009035)**》等众多咒语书，更衍生出了众多辅助绘制工具，可能这就是爱吧！

@@ -15,12 +15,12 @@ a layer that does not exist yet in the deep learning framework.
 In these cases, you must build a custom layer.
 In this section, we show you how.
 
-## Layers without Parameters
+# # Layers without Parameters
 
 To start, we construct a custom layer
 that does not have any parameters of its own.
 This should look familiar if you recall our
-introduction to block in :numref:`sec_model_construction`.
+introduction to block in :numref:`sec*model*construction`.
 The following `CenteredLayer` class simply
 subtracts the mean from its input.
 To build it, we simply need to inherit
@@ -32,33 +32,33 @@ from mxnet.gluon import nn
 npx.set_np()
 
 class CenteredLayer(nn.Block):
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+    def **init**(self, **kwargs):
+        super().**init**(**kwargs)
 
     def forward(self, X):
         return X - X.mean()
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 import torch
 from torch import nn
 
 class CenteredLayer(nn.Module):
-    def __init__(self):
-        super().__init__()
+    def **init**(self):
+        super().**init**()
 
     def forward(self, X):
         return X - X.mean()
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 import tensorflow as tf
 
 class CenteredLayer(tf.keras.Model):
-    def __init__(self):
-        super().__init__()
+    def **init**(self):
+        super().**init**()
 
     def call(self, inputs):
         return inputs - tf.reduce_mean(inputs)
@@ -72,13 +72,13 @@ layer(np.array([1, 2, 3, 4, 5]))
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 layer = CenteredLayer()
 layer(torch.FloatTensor([1, 2, 3, 4, 5]))
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 layer = CenteredLayer()
 layer(tf.constant([1, 2, 3, 4, 5]))
 ```
@@ -93,12 +93,12 @@ net.initialize()
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 net = nn.Sequential(nn.Linear(8, 128), CenteredLayer())
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 net = tf.keras.Sequential([tf.keras.layers.Dense(128), CenteredLayer()])
 ```
 
@@ -114,18 +114,18 @@ Y.mean()
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 Y = net(torch.rand(4, 8))
 Y.mean()
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 Y = net(tf.random.uniform((4, 8)))
 tf.reduce_mean(Y)
 ```
 
-## Layers with Parameters
+# # Layers with Parameters
 
 Now that we know how to define simple layers,
 let us move on to defining layers with parameters
@@ -146,8 +146,8 @@ denote the number of inputs and outputs, respectively.
 
 ```{.python .input}
 class MyDense(nn.Block):
-    def __init__(self, units, in_units, **kwargs):
-        super().__init__(**kwargs)
+    def **init**(self, units, in_units, **kwargs):
+        super().**init**(**kwargs)
         self.weight = self.params.get('weight', shape=(in_units, units))
         self.bias = self.params.get('bias', shape=(units,))
 
@@ -158,10 +158,10 @@ class MyDense(nn.Block):
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 class MyLinear(nn.Module):
-    def __init__(self, in_units, units):
-        super().__init__()
+    def **init**(self, in_units, units):
+        super().**init**()
         self.weight = nn.Parameter(torch.randn(in_units, units))
         self.bias = nn.Parameter(torch.randn(units,))
     def forward(self, X):
@@ -169,16 +169,16 @@ class MyLinear(nn.Module):
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 class MyDense(tf.keras.Model):
-    def __init__(self, units):
-        super().__init__()
+    def **init**(self, units):
+        super().**init**()
         self.units = units
 
     def build(self, X_shape):
         self.weight = self.add_weight(name='weight',
             shape=[X_shape[-1], self.units],
-            initializer=tf.random_normal_initializer())
+            initializer=tf.random*normal*initializer())
         self.bias = self.add_weight(
             name='bias', shape=[self.units],
             initializer=tf.zeros_initializer())
@@ -196,13 +196,13 @@ dense.params
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 dense = MyLinear(5, 3)
 dense.weight
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 dense = MyDense(3)
 dense(tf.random.uniform((2, 5)))
 dense.get_weights()
@@ -216,12 +216,12 @@ dense(np.random.uniform(size=(2, 5)))
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 dense(torch.randn(2, 5))
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 dense(tf.random.uniform((2, 5)))
 ```
 
@@ -237,28 +237,28 @@ net(np.random.uniform(size=(2, 64)))
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 net = nn.Sequential(MyLinear(64, 8), nn.ReLU(), MyLinear(8, 1))
 net(torch.randn(2, 64))
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 net = tf.keras.models.Sequential([MyDense(8), MyDense(1)])
 net(tf.random.uniform((2, 64)))
 ```
 
-## Summary
+# # Summary
 
 * We can design custom layers via the basic layer class. This allows us to define flexible new layers that behave differently from any existing layers in the library.
 * Once defined, custom layers can be invoked in arbitrary contexts and architectures.
 * Layers can have local parameters, which can be created through built-in functions.
 
 
-## Exercises
+# # Exercises
 
 1. Design a layer that takes an input and computes a tensor reduction,
-   i.e., it returns $y_k = \sum_{i, j} W_{ijk} x_i x_j$.
+   i.e., it returns $y*k = \sum*{i, j} W*{ijk} x*i x_j$.
 1. Design a layer that returns the leading half of the Fourier coefficients of the data.
 
 

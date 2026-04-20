@@ -1,11 +1,11 @@
 # Automatic Parallelism
-:label:`sec_auto_para`
+:label:`sec*auto*para`
 
 
 Deep learning frameworks (e.g., MXNet and PyTorch) automatically construct computational graphs at the backend. Using a
 computational graph, the system is aware of all the dependencies,
 and can selectively execute multiple non-interdependent tasks in parallel to
-improve speed. For instance, :numref:`fig_asyncgraph` in :numref:`sec_async` initializes two variables independently. Consequently the system can choose to execute them in parallel.
+improve speed. For instance, :numref:`fig*asyncgraph` in :numref:`sec*async` initializes two variables independently. Consequently the system can choose to execute them in parallel.
 
 
 Typically, a single operator will use all the computational resources on all CPUs or on a single GPU. For example, the `dot` operator will use all cores (and threads) on all CPUs, even if there are multiple CPU processors on a single machine. The same applies to a single GPU. Hence parallelization is not quite so useful for single-device computers. With multiple devices things matter more. While parallelization is typically most relevant between multiple GPUs, adding the local CPU will increase performance slightly. For example, see :cite:`Hadjis.Zhang.Mitliagkas.ea.2016` that focuses on training computer vision models combining a GPU and a CPU. With the convenience of an automatically parallelizing framework we can accomplish the same goal in a few lines of Python code. More broadly, our discussion of automatic parallel computation focuses on parallel computation using both CPUs and GPUs, as well as the parallelization of computation and communication.
@@ -19,17 +19,17 @@ npx.set_np()
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 from d2l import torch as d2l
 import torch
 ```
 
-## Parallel Computation on GPUs
+# # Parallel Computation on GPUs
 
-Let us start by defining a reference workload to test: the `run` function below performs 10 matrix-matrix multiplications on the device of our choice using data allocated into two variables: `x_gpu1` and `x_gpu2`.
+Let us start by defining a reference workload to test: the `run` function below performs 10 matrix-matrix multiplications on the device of our choice using data allocated into two variables: `x*gpu1` and `x*gpu2`.
 
 ```{.python .input}
-devices = d2l.try_all_gpus()
+devices = d2l.try*all*gpus()
 def run(x):
     return [x.dot(x) for _ in range(50)]
 
@@ -38,8 +38,8 @@ x_gpu2 = np.random.uniform(size=(4000, 4000), ctx=devices[1])
 ```
 
 ```{.python .input}
-#@tab pytorch
-devices = d2l.try_all_gpus()
+# @tab pytorch
+devices = d2l.try*all*gpus()
 def run(x):
     return [x.mm(x) for _ in range(50)]
 
@@ -70,7 +70,7 @@ with d2l.Benchmark('GPU2 time'):
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 run(x_gpu1)
 run(x_gpu2)  # Warm-up all devices
 torch.cuda.synchronize(devices[0])
@@ -101,7 +101,7 @@ with d2l.Benchmark('GPU1 & GPU2'):
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 with d2l.Benchmark('GPU1 & GPU2'):
     run(x_gpu1)
     run(x_gpu2)
@@ -112,14 +112,14 @@ In the above case the total execution time is less than the sum of its parts, si
 
 
 
-## Parallel Computation and Communication
+# # Parallel Computation and Communication
 
 In many cases we need to move data between different devices, say between the CPU and GPU, or between different GPUs. 
 For instance,
 this occurs when we want to perform distributed optimization where we need to aggregate the gradients over multiple accelerator cards. Let us simulate this by computing on the GPU and then copying the results back to the CPU.
 
 ```{.python .input}
-def copy_to_cpu(x):
+def copy*to*cpu(x):
     return [y.copyto(npx.cpu()) for y in x]
 
 with d2l.Benchmark('Run on GPU1'):
@@ -127,21 +127,21 @@ with d2l.Benchmark('Run on GPU1'):
     npx.waitall()
 
 with d2l.Benchmark('Copy to CPU'):
-    y_cpu = copy_to_cpu(y)
+    y*cpu = copy*to_cpu(y)
     npx.waitall()
 ```
 
 ```{.python .input}
-#@tab pytorch
-def copy_to_cpu(x, non_blocking=False):
-    return [y.to('cpu', non_blocking=non_blocking) for y in x]
+# @tab pytorch
+def copy*to*cpu(x, non_blocking=False):
+    return [y.to('cpu', non*blocking=non*blocking) for y in x]
 
 with d2l.Benchmark('Run on GPU1'):
     y = run(x_gpu1)
     torch.cuda.synchronize()
 
 with d2l.Benchmark('Copy to CPU'):
-    y_cpu = copy_to_cpu(y)
+    y*cpu = copy*to_cpu(y)
     torch.cuda.synchronize()
 ```
 
@@ -150,21 +150,21 @@ This is somewhat inefficient. Note that we could already start copying parts of 
 :end_tab:
 
 :begin_tab:`pytorch`
-This is somewhat inefficient. Note that we could already start copying parts of `y` to the CPU while the remainder of the list is still being computed. This situation occurs, e.g., when we compute the (backprop) gradient on a minibatch. The gradients of some of the parameters will be available earlier than that of others. Hence it works to our advantage to start using PCI-Express bus bandwidth while the GPU is still running. In PyTorch, several functions such as `to()` and `copy_()` admit an explicit `non_blocking` argument, which lets the caller bypass synchronization when it is unnecessary. Setting `non_blocking=True` allows us to simulate this scenario.
+This is somewhat inefficient. Note that we could already start copying parts of `y` to the CPU while the remainder of the list is still being computed. This situation occurs, e.g., when we compute the (backprop) gradient on a minibatch. The gradients of some of the parameters will be available earlier than that of others. Hence it works to our advantage to start using PCI-Express bus bandwidth while the GPU is still running. In PyTorch, several functions such as `to()` and `copy*()` admit an explicit `non*blocking` argument, which lets the caller bypass synchronization when it is unnecessary. Setting `non_blocking=True` allows us to simulate this scenario.
 :end_tab:
 
 ```{.python .input}
 with d2l.Benchmark('Run on GPU1 and copy to CPU'):
     y = run(x_gpu1)
-    y_cpu = copy_to_cpu(y)
+    y*cpu = copy*to_cpu(y)
     npx.waitall()
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 with d2l.Benchmark('Run on GPU1 and copy to CPU'):
     y = run(x_gpu1)
-    y_cpu = copy_to_cpu(y, True)
+    y*cpu = copy*to_cpu(y, True)
     torch.cuda.synchronize()
 ```
 
@@ -177,13 +177,13 @@ We conclude with an illustration of the computational graph and its dependencies
 :label:`fig_twogpu`
 
 
-## Summary
+# # Summary
 
 * Modern systems have a variety of devices, such as multiple GPUs and CPUs. They can be used in parallel, asynchronously. 
 * Modern systems also have a variety of resources for communication, such as PCI Express, storage (typically solid-state drives or via networks), and network bandwidth. They can be used in parallel for peak efficiency. 
 * The backend can improve performance through automatic parallel computation and communication. 
 
-## Exercises
+# # Exercises
 
 1. Eight operations were performed in the `run` function defined in this section. There are no dependencies between them. Design an experiment to see if the deep learning framework will automatically execute them in parallel.
 1. When the workload of an individual operator is sufficiently small, parallelization can help even on a single CPU or GPU. Design an experiment to verify this. 

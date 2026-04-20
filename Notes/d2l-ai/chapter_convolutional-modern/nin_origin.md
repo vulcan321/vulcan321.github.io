@@ -16,7 +16,7 @@ They were proposed based on a very simple insight:
 to use an MLP on the channels for each pixel separately :cite:`Lin.Chen.Yan.2013`.
 
 
-## NiN Blocks
+# # NiN Blocks
 
 Recall that the inputs and outputs of convolutional layers
 consist of four-dimensional tensors with axes
@@ -51,45 +51,45 @@ from mxnet import np, npx
 from mxnet.gluon import nn
 npx.set_np()
 
-def nin_block(num_channels, kernel_size, strides, padding):
+def nin*block(num*channels, kernel_size, strides, padding):
     blk = nn.Sequential()
-    blk.add(nn.Conv2D(num_channels, kernel_size, strides, padding,
+    blk.add(nn.Conv2D(num*channels, kernel*size, strides, padding,
                       activation='relu'),
-            nn.Conv2D(num_channels, kernel_size=1, activation='relu'),
-            nn.Conv2D(num_channels, kernel_size=1, activation='relu'))
+            nn.Conv2D(num*channels, kernel*size=1, activation='relu'),
+            nn.Conv2D(num*channels, kernel*size=1, activation='relu'))
     return blk
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 from d2l import torch as d2l
 import torch
 from torch import nn
 
-def nin_block(in_channels, out_channels, kernel_size, strides, padding):
+def nin*block(in*channels, out*channels, kernel*size, strides, padding):
     return nn.Sequential(
-        nn.Conv2d(in_channels, out_channels, kernel_size, strides, padding),
+        nn.Conv2d(in*channels, out*channels, kernel_size, strides, padding),
         nn.ReLU(),
-        nn.Conv2d(out_channels, out_channels, kernel_size=1), nn.ReLU(),
-        nn.Conv2d(out_channels, out_channels, kernel_size=1), nn.ReLU())
+        nn.Conv2d(out*channels, out*channels, kernel_size=1), nn.ReLU(),
+        nn.Conv2d(out*channels, out*channels, kernel_size=1), nn.ReLU())
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 from d2l import tensorflow as d2l
 import tensorflow as tf
 
-def nin_block(num_channels, kernel_size, strides, padding):
+def nin*block(num*channels, kernel_size, strides, padding):
     return tf.keras.models.Sequential([
-        tf.keras.layers.Conv2D(num_channels, kernel_size, strides=strides,
+        tf.keras.layers.Conv2D(num*channels, kernel*size, strides=strides,
                                padding=padding, activation='relu'),
-        tf.keras.layers.Conv2D(num_channels, kernel_size=1,
+        tf.keras.layers.Conv2D(num*channels, kernel*size=1,
                                activation='relu'),
-        tf.keras.layers.Conv2D(num_channels, kernel_size=1,
+        tf.keras.layers.Conv2D(num*channels, kernel*size=1,
                                activation='relu')])
 ```
 
-## NiN Model
+# # NiN Model
 
 The original NiN network was proposed shortly after AlexNet
 and clearly draws some inspiration.
@@ -109,15 +109,15 @@ increased model training time.
 
 ```{.python .input}
 net = nn.Sequential()
-net.add(nin_block(96, kernel_size=11, strides=4, padding=0),
+net.add(nin*block(96, kernel*size=11, strides=4, padding=0),
         nn.MaxPool2D(pool_size=3, strides=2),
-        nin_block(256, kernel_size=5, strides=1, padding=2),
+        nin*block(256, kernel*size=5, strides=1, padding=2),
         nn.MaxPool2D(pool_size=3, strides=2),
-        nin_block(384, kernel_size=3, strides=1, padding=1),
+        nin*block(384, kernel*size=3, strides=1, padding=1),
         nn.MaxPool2D(pool_size=3, strides=2),
         nn.Dropout(0.5),
         # There are 10 label classes
-        nin_block(10, kernel_size=3, strides=1, padding=1),
+        nin*block(10, kernel*size=3, strides=1, padding=1),
         # The global average pooling layer automatically sets the window shape
         # to the height and width of the input
         nn.GlobalAvgPool2D(),
@@ -127,17 +127,17 @@ net.add(nin_block(96, kernel_size=11, strides=4, padding=0),
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 net = nn.Sequential(
-    nin_block(1, 96, kernel_size=11, strides=4, padding=0),
+    nin*block(1, 96, kernel*size=11, strides=4, padding=0),
     nn.MaxPool2d(3, stride=2),
-    nin_block(96, 256, kernel_size=5, strides=1, padding=2),
+    nin*block(96, 256, kernel*size=5, strides=1, padding=2),
     nn.MaxPool2d(3, stride=2),
-    nin_block(256, 384, kernel_size=3, strides=1, padding=1),
+    nin*block(256, 384, kernel*size=3, strides=1, padding=1),
     nn.MaxPool2d(3, stride=2),
     nn.Dropout(0.5),
     # There are 10 label classes
-    nin_block(384, 10, kernel_size=3, strides=1, padding=1),
+    nin*block(384, 10, kernel*size=3, strides=1, padding=1),
     nn.AdaptiveAvgPool2d((1, 1)),
     # Transform the four-dimensional output into two-dimensional output with a
     # shape of (batch size, 10)
@@ -145,18 +145,18 @@ net = nn.Sequential(
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 def net():
     return tf.keras.models.Sequential([
-        nin_block(96, kernel_size=11, strides=4, padding='valid'),
+        nin*block(96, kernel*size=11, strides=4, padding='valid'),
         tf.keras.layers.MaxPool2D(pool_size=3, strides=2),
-        nin_block(256, kernel_size=5, strides=1, padding='same'),
+        nin*block(256, kernel*size=5, strides=1, padding='same'),
         tf.keras.layers.MaxPool2D(pool_size=3, strides=2),
-        nin_block(384, kernel_size=3, strides=1, padding='same'),
+        nin*block(384, kernel*size=3, strides=1, padding='same'),
         tf.keras.layers.MaxPool2D(pool_size=3, strides=2),
         tf.keras.layers.Dropout(0.5),
         # There are 10 label classes
-        nin_block(10, kernel_size=3, strides=1, padding='same'),
+        nin*block(10, kernel*size=3, strides=1, padding='same'),
         tf.keras.layers.GlobalAveragePooling2D(),
         tf.keras.layers.Reshape((1, 1, 10)),
         # Transform the four-dimensional output into two-dimensional output
@@ -176,41 +176,41 @@ for layer in net:
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 X = torch.rand(size=(1, 1, 224, 224))
 for layer in net:
     X = layer(X)
-    print(layer.__class__.__name__,'output shape:\t', X.shape)
+    print(layer.**class**.**name**,'output shape:\t', X.shape)
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 X = tf.random.uniform((1, 224, 224, 1))
 for layer in net().layers:
     X = layer(X)
-    print(layer.__class__.__name__,'output shape:\t', X.shape)
+    print(layer.**class**.**name**,'output shape:\t', X.shape)
 ```
 
-## Training
+# # Training
 
 As before we use Fashion-MNIST to train the model.
 NiN's training is similar to that for AlexNet and VGG.
 
 ```{.python .input}
-#@tab all
-lr, num_epochs, batch_size = 0.1, 10, 128
-train_iter, test_iter = d2l.load_data_fashion_mnist(batch_size, resize=224)
-d2l.train_ch6(net, train_iter, test_iter, num_epochs, lr)
+# @tab all
+lr, num*epochs, batch*size = 0.1, 10, 128
+train*iter, test*iter = d2l.load*data*fashion*mnist(batch*size, resize=224)
+d2l.train*ch6(net, train*iter, test*iter, num*epochs, lr)
 ```
 
-## Summary
+# # Summary
 
 * NiN uses blocks consisting of a convolutional layer and multiple $1\times 1$ convolutional layers. This can be used within the convolutional stack to allow for more per-pixel nonlinearity.
 * NiN removes the fully-connected layers and replaces them with global average pooling (i.e., summing over all locations) after reducing the number of channels to the desired number of outputs (e.g., 10 for Fashion-MNIST).
 * Removing the fully-connected layers reduces overfitting. NiN has dramatically fewer parameters.
 * The NiN design influenced many subsequent CNN designs.
 
-## Exercises
+# # Exercises
 
 1. Tune the hyperparameters to improve the classification accuracy.
 1. Why are there two $1\times 1$ convolutional layers in the NiN block? Remove one of them, and then observe and analyze the experimental phenomena.

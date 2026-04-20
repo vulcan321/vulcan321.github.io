@@ -1,5 +1,5 @@
 # Modern Convolutional Neural Networks
-:label:`chap_modern_cnn`
+:label:`chap*modern*cnn`
 
 Now that we understand the basics of wiring together CNNs, 
 we will take you through a tour of modern CNN architectures.

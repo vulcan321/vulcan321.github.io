@@ -1,5 +1,5 @@
 # Deferred Initialization
-:label:`sec_deferred_init`
+:label:`sec*deferred*init`
 
 So far, it might seem that we got away
 with being sloppy in setting up our networks.
@@ -37,7 +37,7 @@ and subsequently modifying our models.
 Next, we go deeper into the mechanics of initialization.
 
 
-## Instantiating a Network
+# # Instantiating a Network
 
 To begin, let us instantiate an MLP.
 
@@ -56,7 +56,7 @@ net = get_net()
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 import tensorflow as tf
 
 net = tf.keras.models.Sequential([
@@ -77,7 +77,7 @@ print(net.collect_params())
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 [net.layers[i].get_weights() for i in range(len(net.layers))]
 ```
 
@@ -124,7 +124,7 @@ net.collect_params()
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 X = tf.random.uniform((2, 20))
 net(X)
 [w.shape for w in net.get_weights()]
@@ -143,13 +143,13 @@ but the framework initializes sequentially.
 Once all parameter shapes are known,
 the framework can finally initialize the parameters.
 
-## Summary
+# # Summary
 
 * Deferred initialization can be convenient, allowing the framework to infer parameter shapes automatically, making it easy to modify architectures and eliminating one common source of errors.
 * We can pass data through the model to make the framework finally initialize parameters.
 
 
-## Exercises
+# # Exercises
 
 1. What happens if you specify the input dimensions to the first layer but not to subsequent layers? Do you get immediate initialization?
 1. What happens if you specify mismatching dimensions?

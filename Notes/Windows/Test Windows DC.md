@@ -62,7 +62,7 @@ void MultipleFilesThumbnailView::OnPaint()
 	CString csLog;
 	csLog.Format(L"CRect: %d, %d, %d, %d\n", rect.left, rect.top, rect.Width(), rect.Height());
 	OutputDebugString(csLog);
-	csLog.Format(L"CalcScrollPos Position: %d, %d\n", m_nScrollPosX, m_nScrollPosY);
+	csLog.Format(L"CalcScrollPos Position: %d, %d\n", m*nScrollPosX, m*nScrollPosY);
 	OutputDebugString(csLog);*/
 	
 	pMemDC->GetClipBox(rcClipBox);
@@ -73,7 +73,7 @@ void MultipleFilesThumbnailView::OnPaint()
 
 	pMemDC->FillRect(rect, &brush1);
 
-	pMemDC->SetMapMode(MM_TEXT);//设定映射模式为MM_TEXT 
+	pMemDC->SetMapMode(MM*TEXT);//设定映射模式为MM*TEXT 
 	pMemDC->SetWindowOrg(CPoint(100, 100));//设定逻辑坐标原点为（100，100） 
 	pMemDC->Rectangle(CRect(100, 100, 300, 300));//画一个宽和高为200象素的方块
 
@@ -86,7 +86,7 @@ void MultipleFilesThumbnailView::OnPaint()
 	pMemDC->SetGraphicsMode(GM_ADVANCED);
 	pMemDC->GetWorldTransform(&xfrom);
 	
-	pMemDC->SetMapMode(MM_ANISOTROPIC); // MM_ISOTROPIC MM_ANISOTROPIC
+	pMemDC->SetMapMode(MM*ANISOTROPIC); // MM*ISOTROPIC MM_ANISOTROPIC
 	pMemDC->SetWindowExt(2000, 2000);
 	pMemDC->SetViewportExt(500, 500);
 	
@@ -142,7 +142,7 @@ void MultipleFilesThumbnailView::OnPaint()
 	/*									Draw PDF Page                       */
 	/************************************************************************/
 	CRect rectVisible = rect;
-	CPoint ptOffset(m_nScrollPosX, m_nScrollPosY);
+	CPoint ptOffset(m*nScrollPosX, m*nScrollPosY);
 	rectVisible.MoveToXY(ptOffset);
 	//CUtilities::LogElapseTime([&]()
 	//{
@@ -153,7 +153,7 @@ void MultipleFilesThumbnailView::OnPaint()
 			if (pItem->Intersect(rectVisible))
 			{
 				// ???TODO: Visible Or Not
-				if (auto it = m_vItemsSelected.find(pItem); it != m_vItemsSelected.end())
+				if (auto it = m*vItemsSelected.find(pItem); it != m*vItemsSelected.end())
 					pItem->m_bSelected = true;
 				else
 					pItem->m_bSelected = false;
@@ -171,7 +171,7 @@ void MultipleFilesThumbnailView::OnPaint()
 	//	// get render data from PDF
 	//	
 	//	if (nullptr == m_pFXBitmap)
-	//		m_pFXBitmap = std::make_unique<CFX_DIBitmap>();
+	//		m*pFXBitmap = std::make*unique<CFX_DIBitmap>();
 	//	if (m_pFXBitmap)
 	//	{
 	//		m_pFXBitmap->Copy(pDIBitmap);

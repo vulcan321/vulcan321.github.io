@@ -5,6 +5,6 @@
 本节包含以下章节:
 
 *   [第 12 章](12.html)，*面向服务的体系结构*
-*   [第 13 章](13.html)[，*设计微服务*](https://cdp.packtpub.com/hands_on_software_architecture_with_c__/wp-admin/post.php?post=39&action=edit)
+*   [第 13 章](13.html)[，*设计微服务*](https://cdp.packtpub.com/hands*on*software*architecture*with_c__/wp-admin/post.php?post=39&action=edit)
 *   [第 14 章](14.html)、*集装箱*
 *   [第 15 章](15.html)，*云原生设计*

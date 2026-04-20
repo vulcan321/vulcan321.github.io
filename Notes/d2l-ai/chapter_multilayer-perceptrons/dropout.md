@@ -1,14 +1,14 @@
 # 暂退法（Dropout）
 :label:`sec_dropout`
 
-在 :numref:`sec_weight_decay` 中，
+在 :numref:`sec*weight*decay` 中，
 我们介绍了通过惩罚权重的$L_2$范数来正则化统计模型的经典方法。
 在概率角度看，我们可以通过以下论证来证明这一技术的合理性：
 我们已经假设了一个先验，即权重的值取自均值为0的高斯分布。
 更直观的是，我们希望模型深度挖掘特征，即将其权重分散到许多特征中，
 而不是过于依赖少数潜在的虚假关联。
 
-## 重新审视过拟合
+# # 重新审视过拟合
 
 当面对更多的特征而样本不足时，线性模型往往会过拟合。
 相反，当给出更多样本而不是特征，通常线性模型不会过拟合。
@@ -37,14 +37,14 @@
 我们鼓励喜好研究理论的读者更深入地研究这个主题。
 本节，我们将着重对实际工具的探究，这些工具倾向于改进深层网络的泛化性。
 
-## 扰动的稳健性
+# # 扰动的稳健性
 
 在探究泛化性之前，我们先来定义一下什么是一个“好”的预测模型？
 我们期待“好”的预测模型能在未知的数据上有很好的表现：
 经典泛化理论认为，为了缩小训练和测试性能之间的差距，应该以简单的模型为目标。
 简单性以较小维度的形式展现，
-我们在 :numref:`sec_model_selection` 讨论线性模型的单项式函数时探讨了这一点。
-此外，正如我们在 :numref:`sec_weight_decay` 中讨论权重衰减（$L_2$正则化）时看到的那样，
+我们在 :numref:`sec*model*selection` 讨论线性模型的单项式函数时探讨了这一点。
+此外，正如我们在 :numref:`sec*weight*decay` 中讨论权重衰减（$L_2$正则化）时看到的那样，
 参数的范数也代表了一种有用的简单性度量。
 
 简单性的另一个角度是平滑性，即函数不应该对其输入的微小变化敏感。
@@ -92,14 +92,14 @@ $$
 
 根据此模型的设计，其期望值保持不变，即$E[h'] = h$。
 
-## 实践中的暂退法
+# # 实践中的暂退法
 
 回想一下 :numref:`fig_mlp`中带有1个隐藏层和5个隐藏单元的多层感知机。
 当我们将暂退法应用到隐藏层，以$p$的概率将隐藏单元置为零时，
 结果可以看作一个只包含原始神经元子集的网络。
-比如在 :numref:`fig_dropout2`中，删除了$h_2$和$h_5$，
-因此输出的计算不再依赖于$h_2$或$h_5$，并且它们各自的梯度在执行反向传播时也会消失。
-这样，输出层的计算不能过度依赖于$h_1, \ldots, h_5$的任何一个元素。
+比如在 :numref:`fig*dropout2`中，删除了$h*2$和$h_5$，
+因此输出的计算不再依赖于$h*2$或$h*5$，并且它们各自的梯度在执行反向传播时也会消失。
+这样，输出层的计算不能过度依赖于$h*1, \ldots, h*5$的任何一个元素。
 
 ![dropout前后的多层感知机](../img/dropout2.svg)
 :label:`fig_dropout2`
@@ -110,7 +110,7 @@ $$
 用于估计神经网络预测的“不确定性”：
 如果通过许多不同的暂退法遮盖后得到的预测结果都是一致的，那么我们可以说网络发挥更稳定。
 
-## 从零开始实现
+# # 从零开始实现
 
 要实现单层的暂退法函数，
 我们从均匀分布$U[0, 1]$中抽取样本，样本数与这层神经网络的维度一致。
@@ -139,7 +139,7 @@ def dropout_layer(X, dropout):
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 from d2l import torch as d2l
 import torch
 from torch import nn
@@ -157,7 +157,7 @@ def dropout_layer(X, dropout):
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 from d2l import tensorflow as d2l
 import tensorflow as tf
 
@@ -175,7 +175,7 @@ def dropout_layer(X, dropout):
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 import warnings
 warnings.filterwarnings(action='ignore')
 import paddle
@@ -209,7 +209,7 @@ print(dropout_layer(X, 1))
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 X= torch.arange(16, dtype = torch.float32).reshape((2, 8))
 print(X)
 print(dropout_layer(X, 0.))
@@ -218,7 +218,7 @@ print(dropout_layer(X, 1.))
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 X = tf.reshape(tf.range(16, dtype=tf.float32), (2, 8))
 print(X)
 print(dropout_layer(X, 0.))
@@ -227,7 +227,7 @@ print(dropout_layer(X, 1.))
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 X= paddle.arange(16, dtype = paddle.float32).reshape((2, 8))
 print(X)
 print(dropout_layer(X, 0.))
@@ -235,19 +235,19 @@ print(dropout_layer(X, 0.5))
 print(dropout_layer(X, 1.))
 ```
 
-### 定义模型参数
+## # 定义模型参数
 
-同样，我们使用 :numref:`sec_fashion_mnist`中引入的Fashion-MNIST数据集。
+同样，我们使用 :numref:`sec*fashion*mnist`中引入的Fashion-MNIST数据集。
 我们[**定义具有两个隐藏层的多层感知机，每个隐藏层包含256个单元**]。
 
 ```{.python .input}
-num_inputs, num_outputs, num_hiddens1, num_hiddens2 = 784, 10, 256, 256
+num*inputs, num*outputs, num*hiddens1, num*hiddens2 = 784, 10, 256, 256
 
-W1 = np.random.normal(scale=0.01, size=(num_inputs, num_hiddens1))
+W1 = np.random.normal(scale=0.01, size=(num*inputs, num*hiddens1))
 b1 = np.zeros(num_hiddens1)
-W2 = np.random.normal(scale=0.01, size=(num_hiddens1, num_hiddens2))
+W2 = np.random.normal(scale=0.01, size=(num*hiddens1, num*hiddens2))
 b2 = np.zeros(num_hiddens2)
-W3 = np.random.normal(scale=0.01, size=(num_hiddens2, num_outputs))
+W3 = np.random.normal(scale=0.01, size=(num*hiddens2, num*outputs))
 b3 = np.zeros(num_outputs)
 
 params = [W1, b1, W2, b2, W3, b3]
@@ -256,16 +256,16 @@ for param in params:
 ```
 
 ```{.python .input}
-#@tab pytorch, paddle
-num_inputs, num_outputs, num_hiddens1, num_hiddens2 = 784, 10, 256, 256
+# @tab pytorch, paddle
+num*inputs, num*outputs, num*hiddens1, num*hiddens2 = 784, 10, 256, 256
 ```
 
 ```{.python .input}
-#@tab tensorflow
-num_outputs, num_hiddens1, num_hiddens2 = 10, 256, 256
+# @tab tensorflow
+num*outputs, num*hiddens1, num_hiddens2 = 10, 256, 256
 ```
 
-### 定义模型
+## # 定义模型
 
 我们可以将暂退法应用于每个隐藏层的输出（在激活函数之后），
 并且可以为每一层分别设置暂退概率：
@@ -291,18 +291,18 @@ def net(X):
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 dropout1, dropout2 = 0.2, 0.5
 
 class Net(nn.Module):
-    def __init__(self, num_inputs, num_outputs, num_hiddens1, num_hiddens2,
+    def **init**(self, num*inputs, num*outputs, num*hiddens1, num*hiddens2,
                  is_training = True):
-        super(Net, self).__init__()
-        self.num_inputs = num_inputs
+        super(Net, self).**init**()
+        self.num*inputs = num*inputs
         self.training = is_training
-        self.lin1 = nn.Linear(num_inputs, num_hiddens1)
-        self.lin2 = nn.Linear(num_hiddens1, num_hiddens2)
-        self.lin3 = nn.Linear(num_hiddens2, num_outputs)
+        self.lin1 = nn.Linear(num*inputs, num*hiddens1)
+        self.lin2 = nn.Linear(num*hiddens1, num*hiddens2)
+        self.lin3 = nn.Linear(num*hiddens2, num*outputs)
         self.relu = nn.ReLU()
 
     def forward(self, X):
@@ -319,20 +319,20 @@ class Net(nn.Module):
         return out
 
 
-net = Net(num_inputs, num_outputs, num_hiddens1, num_hiddens2)
+net = Net(num*inputs, num*outputs, num*hiddens1, num*hiddens2)
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 dropout1, dropout2 = 0.2, 0.5
 
 class Net(tf.keras.Model):
-    def __init__(self, num_outputs, num_hiddens1, num_hiddens2):
-        super().__init__()
+    def **init**(self, num*outputs, num*hiddens1, num_hiddens2):
+        super().**init**()
         self.input_layer = tf.keras.layers.Flatten()
         self.hidden1 = tf.keras.layers.Dense(num_hiddens1, activation='relu')
         self.hidden2 = tf.keras.layers.Dense(num_hiddens2, activation='relu')
-        self.output_layer = tf.keras.layers.Dense(num_outputs)
+        self.output*layer = tf.keras.layers.Dense(num*outputs)
 
     def call(self, inputs, training=None):
         x = self.input_layer(inputs)
@@ -348,22 +348,22 @@ class Net(tf.keras.Model):
         x = self.output_layer(x)
         return x
 
-net = Net(num_outputs, num_hiddens1, num_hiddens2)
+net = Net(num*outputs, num*hiddens1, num_hiddens2)
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 dropout1, dropout2 = 0.2, 0.5
 
 class Net(nn.Layer):
-    def __init__(self, num_inputs, num_outputs, num_hiddens1, num_hiddens2,
+    def **init**(self, num*inputs, num*outputs, num*hiddens1, num*hiddens2,
                  is_training = True):
-        super(Net, self).__init__()
-        self.num_inputs = num_inputs
+        super(Net, self).**init**()
+        self.num*inputs = num*inputs
         self.training = is_training
-        self.lin1 = nn.Linear(num_inputs, num_hiddens1)
-        self.lin2 = nn.Linear(num_hiddens1, num_hiddens2)
-        self.lin3 = nn.Linear(num_hiddens2, num_outputs)
+        self.lin1 = nn.Linear(num*inputs, num*hiddens1)
+        self.lin2 = nn.Linear(num*hiddens1, num*hiddens2)
+        self.lin3 = nn.Linear(num*hiddens2, num*outputs)
         self.relu = nn.ReLU()
 
     def forward(self, X):
@@ -379,49 +379,49 @@ class Net(nn.Layer):
         out = self.lin3(H2)
         return out
 
-net = Net(num_inputs, num_outputs, num_hiddens1, num_hiddens2)
+net = Net(num*inputs, num*outputs, num*hiddens1, num*hiddens2)
 ```
 
-### [**训练和测试**]
+## # [**训练和测试**]
 
 这类似于前面描述的多层感知机训练和测试。
 
 ```{.python .input}
-num_epochs, lr, batch_size = 10, 0.5, 256
+num*epochs, lr, batch*size = 10, 0.5, 256
 loss = gluon.loss.SoftmaxCrossEntropyLoss()
-train_iter, test_iter = d2l.load_data_fashion_mnist(batch_size)
-d2l.train_ch3(net, train_iter, test_iter, loss, num_epochs,
-              lambda batch_size: d2l.sgd(params, lr, batch_size))
+train*iter, test*iter = d2l.load*data*fashion*mnist(batch*size)
+d2l.train*ch3(net, train*iter, test*iter, loss, num*epochs,
+              lambda batch*size: d2l.sgd(params, lr, batch*size))
 ```
 
 ```{.python .input}
-#@tab pytorch
-num_epochs, lr, batch_size = 10, 0.5, 256
+# @tab pytorch
+num*epochs, lr, batch*size = 10, 0.5, 256
 loss = nn.CrossEntropyLoss(reduction='none')
-train_iter, test_iter = d2l.load_data_fashion_mnist(batch_size)
+train*iter, test*iter = d2l.load*data*fashion*mnist(batch*size)
 trainer = torch.optim.SGD(net.parameters(), lr=lr)
-d2l.train_ch3(net, train_iter, test_iter, loss, num_epochs, trainer)
+d2l.train*ch3(net, train*iter, test*iter, loss, num*epochs, trainer)
 ```
 
 ```{.python .input}
-#@tab tensorflow
-num_epochs, lr, batch_size = 10, 0.5, 256
+# @tab tensorflow
+num*epochs, lr, batch*size = 10, 0.5, 256
 loss = tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True)
-train_iter, test_iter = d2l.load_data_fashion_mnist(batch_size)
+train*iter, test*iter = d2l.load*data*fashion*mnist(batch*size)
 trainer = tf.keras.optimizers.SGD(learning_rate=lr)
-d2l.train_ch3(net, train_iter, test_iter, loss, num_epochs, trainer)
+d2l.train*ch3(net, train*iter, test*iter, loss, num*epochs, trainer)
 ```
 
 ```{.python .input}
-#@tab paddle
-num_epochs, lr, batch_size = 10, 0.5, 256
+# @tab paddle
+num*epochs, lr, batch*size = 10, 0.5, 256
 loss = nn.CrossEntropyLoss(reduction='none')
-train_iter, test_iter = d2l.load_data_fashion_mnist(batch_size)
+train*iter, test*iter = d2l.load*data*fashion*mnist(batch*size)
 trainer = paddle.optimizer.SGD(learning_rate=lr, parameters=net.parameters())
-d2l.train_ch3(net, train_iter, test_iter, loss, num_epochs, trainer)
+d2l.train*ch3(net, train*iter, test*iter, loss, num*epochs, trainer)
 ```
 
-## [**简洁实现**]
+# # [**简洁实现**]
 
 对于深度学习框架的高级API，我们只需在每个全连接层之后添加一个`Dropout`层，
 将暂退概率作为唯一的参数传递给它的构造函数。
@@ -441,7 +441,7 @@ net.initialize(init.Normal(sigma=0.01))
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 net = nn.Sequential(nn.Flatten(),
         nn.Linear(784, 256),
         nn.ReLU(),
@@ -461,7 +461,7 @@ net.apply(init_weights);
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 net = tf.keras.models.Sequential([
     tf.keras.layers.Flatten(),
     tf.keras.layers.Dense(256, activation=tf.nn.relu),
@@ -475,54 +475,54 @@ net = tf.keras.models.Sequential([
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 weight_attr = paddle.ParamAttr(initializer=paddle.nn.initializer.Normal(std=0.01)) 
 
 net = nn.Sequential(nn.Flatten(),
-        nn.Linear(784, 256, weight_attr=weight_attr),
+        nn.Linear(784, 256, weight*attr=weight*attr),
         nn.ReLU(),
         # 在第一个全连接层之后添加一个dropout层
         nn.Dropout(dropout1),
-        nn.Linear(256, 256, weight_attr=weight_attr),
+        nn.Linear(256, 256, weight*attr=weight*attr),
         nn.ReLU(),
         # 在第二个全连接层之后添加一个dropout层
         nn.Dropout(dropout2),
-        nn.Linear(256, 10, weight_attr=weight_attr))
+        nn.Linear(256, 10, weight*attr=weight*attr))
 ```
 
 接下来，我们[**对模型进行训练和测试**]。
 
 ```{.python .input}
-trainer = gluon.Trainer(net.collect_params(), 'sgd', {'learning_rate': lr})
-d2l.train_ch3(net, train_iter, test_iter, loss, num_epochs, trainer)
+trainer = gluon.Trainer(net.collect*params(), 'sgd', {'learning*rate': lr})
+d2l.train*ch3(net, train*iter, test*iter, loss, num*epochs, trainer)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 trainer = torch.optim.SGD(net.parameters(), lr=lr)
-d2l.train_ch3(net, train_iter, test_iter, loss, num_epochs, trainer)
+d2l.train*ch3(net, train*iter, test*iter, loss, num*epochs, trainer)
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 trainer = tf.keras.optimizers.SGD(learning_rate=lr)
-d2l.train_ch3(net, train_iter, test_iter, loss, num_epochs, trainer)
+d2l.train*ch3(net, train*iter, test*iter, loss, num*epochs, trainer)
 ```
 
 ```{.python .input}
-#@tab paddle
+# @tab paddle
 trainer = paddle.optimizer.SGD(learning_rate=0.5, parameters=net.parameters())
-d2l.train_ch3(net, train_iter, test_iter, loss, num_epochs, trainer)
+d2l.train*ch3(net, train*iter, test*iter, loss, num*epochs, trainer)
 ```
 
-## 小结
+# # 小结
 
 * 暂退法在前向传播过程中，计算每一内部层的同时丢弃一些神经元。
 * 暂退法可以避免过拟合，它通常与控制权重向量的维数和大小结合使用的。
 * 暂退法将活性值$h$替换为具有期望值$h$的随机变量。
 * 暂退法仅在训练期间使用。
 
-## 练习
+# # 练习
 
 1. 如果更改第一层和第二层的暂退法概率，会发生什么情况？具体地说，如果交换这两个层，会发生什么情况？设计一个实验来回答这些问题，定量描述该结果，并总结定性的结论。
 1. 增加训练轮数，并将使用暂退法和不使用暂退法时获得的结果进行比较。

@@ -1,5 +1,5 @@
 
-## Appendix A Reporting Bugs附录 A 报告错误
+# # Appendix A Reporting Bugs附录 A 报告错误
 
 Please report all bugs you find in Bash. But first, you should make sure that it really is a bug, and that it appears in the latest version of Bash. The latest version of Bash is always available for FTP from [ftp://ftp.gnu.org/pub/gnu/bash/](ftp://ftp.gnu.org/pub/gnu/bash/) and from [http://git.savannah.gnu.org/cgit/bash.git/snapshot/bash-master.tar.gz](http://git.savannah.gnu.org/cgit/bash.git/snapshot/bash-master.tar.gz). [ftp://ftp.gnu.org/pub/gnu/bash/](ftp://ftp.gnu.org/pub/gnu/bash/)[http://git.savannah.gnu.org/cgit/bash.git/snapshot/bash-master.tar.gz](http://git.savannah.gnu.org/cgit/bash.git/snapshot/bash-master.tar.gz)请报告您在 Bash 中发现的所有错误。 但首先，你应该 确保它确实是一个错误，并且它出现在最新的 Bash 版本。 最新版本的 Bash 始终可用于 FTP 。
 

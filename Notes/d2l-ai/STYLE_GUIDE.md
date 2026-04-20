@@ -1,6 +1,6 @@
 # 样式规范
 
-## 文本
+# # 文本
 
 * 章节
     * 每章开头对全章做介绍
@@ -46,10 +46,10 @@
     * 中英文对照统一标准
         * https://github.com/mli/gluon-tutorials-zh/blob/master/README.md
 
-## 数学
+# # 数学
 
 * 数学符号样式一致
-    * https://github.com/goodfeli/dlbook_notation/blob/master/notation_example.pdf
+    * https://github.com/goodfeli/dlbook*notation/blob/master/notation*example.pdf
 * 书本页宽限制
     * 每行长度
 * 引用
@@ -61,7 +61,7 @@
 * 赋值符号
     * \leftarrow
 
-## 图片
+# # 图片
 
 * 软件
     * 使用OmniGraffle制图，以100%的大小导出pdf（infinite canvas），再使用pdf2svg转成svg
@@ -98,13 +98,13 @@
     * 大小
     * 分辨率
 
-## 代码
+# # 代码
 
 * 使用utils.py封装多次使用函数
     * 首次出现函数，书里给出函数实现
 * Python规范一致
     * PEP8
-        * 二元操作符换行：操作符和后一元一起换行 (https://www.python.org/dev/peps/pep-0008/#should-a-line-break-before-or-after-a-binary-operator)
+        * 二元操作符换行：操作符和后一元一起换行 (https://www.python.org/dev/peps/pep-0008/# should-a-line-break-before-or-after-a-binary-operator)
 * 将相邻赋值语句尽可能合并为同一行
 	* 如 num_epochs, lr = 5, 0.1
 * 变量名一致
@@ -124,12 +124,12 @@
         * 准确率
     * 迭代中
         * 特征：X
-        * 标签：y, y_hat 或 Y, Y_hat
+        * 标签：y, y*hat 或 Y, Y*hat
         * for X, y in data_iter
     * 数据集：
         * 特征：features或images
         * 标签：labels
-        * DataLoader实例：train_iter, test_iter, data_iter
+        * DataLoader实例：train*iter, test*iter, data_iter
 * 注释
     * 中文
     * 句末不加句号
@@ -156,7 +156,7 @@
     * 1. → 1.0
     * remove namescope
 
-## 超链接
+# # 超链接
 
 * 内链格式
     * [“线性回归”](linear-reg.md)一节
@@ -164,7 +164,7 @@
     * [层](http:bla)
     * 无须暴露URL
 
-## 英翻汉的常见问题
+# # 英翻汉的常见问题
 
 * 遇到不确定的地方，可以翻阅中文版第一版的处理方法（即我们需要遵照的出版标准），以及查阅人工翻译 http://www.jukuu.com/
 * 建立中英文术语对照表，全书术语翻译要完全一致。

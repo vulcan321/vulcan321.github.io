@@ -26,22 +26,22 @@ npx.set_np()
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 from d2l import torch as d2l
 import torch
 from torch import nn
 ```
 
-## Generating the Dataset
+# # Generating the Dataset
 
 To keep things simple,
 let us consider the following regression problem:
-given a dataset of input-output pairs $\{(x_1, y_1), \ldots, (x_n, y_n)\}$,
+given a dataset of input-output pairs $\{(x*1, y*1), \ldots, (x*n, y*n)\}$,
 how to learn $f$ to predict the output $\hat{y} = f(x)$ for any new input $x$?
 
 Here we generate an artificial dataset according to the following nonlinear function with the noise term $\epsilon$:
 
-$$y_i = 2\sin(x_i) + x_i^{0.8} + \epsilon,$$
+$$y*i = 2\sin(x*i) + x_i^{0.8} + \epsilon,$$
 
 where $\epsilon$ obeys a normal distribution with zero mean and standard deviation 0.5.
 Both 50 training examples and 50 testing examples
@@ -50,24 +50,24 @@ To better visualize the pattern of attention later, the training inputs are sort
 
 ```{.python .input}
 n_train = 50  # No. of training examples
-x_train = np.sort(d2l.rand(n_train) * 5)   # Training inputs
+x*train = np.sort(d2l.rand(n*train) * 5)   # Training inputs
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 n_train = 50  # No. of training examples
-x_train, _ = torch.sort(d2l.rand(n_train) * 5)   # Training inputs
+x*train, * = torch.sort(d2l.rand(n_train) * 5)   # Training inputs
 ```
 
 ```{.python .input}
-#@tab all
+# @tab all
 def f(x):
     return 2 * d2l.sin(x) + x**0.8
 
-y_train = f(x_train) + d2l.normal(0.0, 0.5, (n_train,))  # Training outputs
+y*train = f(x*train) + d2l.normal(0.0, 0.5, (n_train,))  # Training outputs
 x_test = d2l.arange(0, 5, 0.1)  # Testing examples
-y_truth = f(x_test)  # Ground-truth outputs for the testing examples
-n_test = len(x_test)  # No. of testing examples
+y*truth = f(x*test)  # Ground-truth outputs for the testing examples
+n*test = len(x*test)  # No. of testing examples
 n_test
 ```
 
@@ -75,35 +75,35 @@ The following function plots all the training examples (represented by circles),
 the ground-truth data generation function `f` without the noise term (labeled by "Truth"), and the learned prediction function (labeled by "Pred").
 
 ```{.python .input}
-#@tab all
-def plot_kernel_reg(y_hat):
-    d2l.plot(x_test, [y_truth, y_hat], 'x', 'y', legend=['Truth', 'Pred'],
+# @tab all
+def plot*kernel*reg(y_hat):
+    d2l.plot(x*test, [y*truth, y_hat], 'x', 'y', legend=['Truth', 'Pred'],
              xlim=[0, 5], ylim=[-1, 5])
-    d2l.plt.plot(x_train, y_train, 'o', alpha=0.5);
+    d2l.plt.plot(x*train, y*train, 'o', alpha=0.5);
 ```
 
-## Average Pooling
+# # Average Pooling
 
 We begin with perhaps the world's "dumbest" estimator for this regression problem:
 using average pooling to average over all the training outputs:
 
-$$f(x) = \frac{1}{n}\sum_{i=1}^n y_i,$$
+$$f(x) = \frac{1}{n}\sum*{i=1}^n y*i,$$
 :eqlabel:`eq_avg-pooling`
 
 which is plotted below. As we can see, this estimator is indeed not so smart.
 
 ```{.python .input}
-y_hat = y_train.mean().repeat(n_test)
-plot_kernel_reg(y_hat)
+y*hat = y*train.mean().repeat(n_test)
+plot*kernel*reg(y_hat)
 ```
 
 ```{.python .input}
-#@tab pytorch
-y_hat = torch.repeat_interleave(y_train.mean(), n_test)
-plot_kernel_reg(y_hat)
+# @tab pytorch
+y*hat = torch.repeat*interleave(y*train.mean(), n*test)
+plot*kernel*reg(y_hat)
 ```
 
-## Nonparametric Attention Pooling
+# # Nonparametric Attention Pooling
 
 Obviously,
 average pooling omits the inputs $x_i$.
@@ -112,7 +112,7 @@ by Nadaraya :cite:`Nadaraya.1964`
 and Waston :cite:`Watson.1964`
 to weigh the outputs $y_i$ according to their input locations:
 
-$$f(x) = \sum_{i=1}^n \frac{K(x - x_i)}{\sum_{j=1}^n K(x - x_j)} y_i,$$
+$$f(x) = \sum*{i=1}^n \frac{K(x - x*i)}{\sum*{j=1}^n K(x - x*j)} y_i,$$
 :eqlabel:`eq_nadaraya-waston`
 
 where $K$ is a *kernel*.
@@ -124,12 +124,12 @@ From the perspective of attention,
 we can rewrite :eqref:`eq_nadaraya-waston`
 in a more generalized form of *attention pooling*:
 
-$$f(x) = \sum_{i=1}^n \alpha(x, x_i) y_i,$$
+$$f(x) = \sum*{i=1}^n \alpha(x, x*i) y_i,$$
 :eqlabel:`eq_attn-pooling`
 
 
-where $x$ is the query and $(x_i, y_i)$ is the key-value pair.
-Comparing :eqref:`eq_attn-pooling` and :eqref:`eq_avg-pooling`,
+where $x$ is the query and $(x*i, y*i)$ is the key-value pair.
+Comparing :eqref:`eq*attn-pooling` and :eqref:`eq*avg-pooling`,
 the attention pooling here
 is a weighted average of values $y_i$.
 The *attention weight* $\alpha(x, x_i)$
@@ -152,7 +152,7 @@ Plugging the Gaussian kernel into
 :eqref:`eq_attn-pooling` and
 :eqref:`eq_nadaraya-waston` gives
 
-$$\begin{aligned} f(x) &=\sum_{i=1}^n \alpha(x, x_i) y_i\\ &= \sum_{i=1}^n \frac{\exp\left(-\frac{1}{2}(x - x_i)^2\right)}{\sum_{j=1}^n \exp\left(-\frac{1}{2}(x - x_j)^2\right)} y_i \\&= \sum_{i=1}^n \mathrm{softmax}\left(-\frac{1}{2}(x - x_i)^2\right) y_i. \end{aligned}$$
+$$\begin{aligned} f(x) &=\sum*{i=1}^n \alpha(x, x*i) y*i\\ &= \sum*{i=1}^n \frac{\exp\left(-\frac{1}{2}(x - x*i)^2\right)}{\sum*{j=1}^n \exp\left(-\frac{1}{2}(x - x*j)^2\right)} y*i \\&= \sum*{i=1}^n \mathrm{softmax}\left(-\frac{1}{2}(x - x*i)^2\right) y_i. \end{aligned}$$
 :eqlabel:`eq_nadaraya-waston-gaussian`
 
 In :eqref:`eq_nadaraya-waston-gaussian`,
@@ -167,32 +167,32 @@ nonparametric attention model.
 The predicted line is smooth and closer to the ground-truth than that produced by average pooling.
 
 ```{.python .input}
-# Shape of `X_repeat`: (`n_test`, `n_train`), where each row contains the
+# Shape of `X*repeat`: (`n*test`, `n_train`), where each row contains the
 # same testing inputs (i.e., same queries)
-X_repeat = d2l.reshape(x_test.repeat(n_train), (-1, n_train))
-# Note that `x_train` contains the keys. Shape of `attention_weights`:
-# (`n_test`, `n_train`), where each row contains attention weights to be
+X*repeat = d2l.reshape(x*test.repeat(n*train), (-1, n*train))
+# Note that `x*train` contains the keys. Shape of `attention*weights`:
+# (`n*test`, `n*train`), where each row contains attention weights to be
 # assigned among the values (`y_train`) given each query
-attention_weights = npx.softmax(-(X_repeat - x_train)**2 / 2)
+attention*weights = npx.softmax(-(X*repeat - x_train)**2 / 2)
 # Each element of `y_hat` is weighted average of values, where weights are
 # attention weights
-y_hat = d2l.matmul(attention_weights, y_train)
-plot_kernel_reg(y_hat)
+y*hat = d2l.matmul(attention*weights, y_train)
+plot*kernel*reg(y_hat)
 ```
 
 ```{.python .input}
-#@tab pytorch
-# Shape of `X_repeat`: (`n_test`, `n_train`), where each row contains the
+# @tab pytorch
+# Shape of `X*repeat`: (`n*test`, `n_train`), where each row contains the
 # same testing inputs (i.e., same queries)
-X_repeat = d2l.reshape(x_test.repeat_interleave(n_train), (-1, n_train))
-# Note that `x_train` contains the keys. Shape of `attention_weights`:
-# (`n_test`, `n_train`), where each row contains attention weights to be
+X*repeat = d2l.reshape(x*test.repeat*interleave(n*train), (-1, n_train))
+# Note that `x*train` contains the keys. Shape of `attention*weights`:
+# (`n*test`, `n*train`), where each row contains attention weights to be
 # assigned among the values (`y_train`) given each query
-attention_weights = nn.functional.softmax(-(X_repeat - x_train)**2 / 2, dim=1)
+attention*weights = nn.functional.softmax(-(X*repeat - x_train)**2 / 2, dim=1)
 # Each element of `y_hat` is weighted average of values, where weights are
 # attention weights
-y_hat = d2l.matmul(attention_weights, y_train)
-plot_kernel_reg(y_hat)
+y*hat = d2l.matmul(attention*weights, y_train)
+plot*kernel*reg(y_hat)
 ```
 
 Now let us take a look at the attention weights.
@@ -202,19 +202,19 @@ we can see that the closer the query-key pair is,
 the higher attention weight is in the attention pooling.
 
 ```{.python .input}
-d2l.show_heatmaps(np.expand_dims(np.expand_dims(attention_weights, 0), 0),
+d2l.show*heatmaps(np.expand*dims(np.expand*dims(attention*weights, 0), 0),
                   xlabel='Sorted training inputs',
                   ylabel='Sorted testing inputs')
 ```
 
 ```{.python .input}
-#@tab pytorch
-d2l.show_heatmaps(attention_weights.unsqueeze(0).unsqueeze(0),
+# @tab pytorch
+d2l.show*heatmaps(attention*weights.unsqueeze(0).unsqueeze(0),
                   xlabel='Sorted training inputs',
                   ylabel='Sorted testing inputs')
 ```
 
-## Parametric Attention Pooling
+# # Parametric Attention Pooling
 
 Nonparametric Nadaraya-Watson kernel regression
 enjoys the *consistency* benefit:
@@ -228,7 +228,7 @@ the distance between the query $x$ and the key $x_i$
 is multiplied a learnable parameter $w$:
 
 
-$$\begin{aligned}f(x) &= \sum_{i=1}^n \alpha(x, x_i) y_i \\&= \sum_{i=1}^n \frac{\exp\left(-\frac{1}{2}((x - x_i)w)^2\right)}{\sum_{j=1}^n \exp\left(-\frac{1}{2}((x - x_i)w)^2\right)} y_i \\&= \sum_{i=1}^n \mathrm{softmax}\left(-\frac{1}{2}((x - x_i)w)^2\right) y_i.\end{aligned}$$
+$$\begin{aligned}f(x) &= \sum*{i=1}^n \alpha(x, x*i) y*i \\&= \sum*{i=1}^n \frac{\exp\left(-\frac{1}{2}((x - x*i)w)^2\right)}{\sum*{j=1}^n \exp\left(-\frac{1}{2}((x - x*i)w)^2\right)} y*i \\&= \sum*{i=1}^n \mathrm{softmax}\left(-\frac{1}{2}((x - x*i)w)^2\right) y_i.\end{aligned}$$
 :eqlabel:`eq_nadaraya-waston-gaussian-para`
 
 In the rest of the section,
@@ -236,8 +236,8 @@ we will train this model by learning the parameter of
 the attention pooling in :eqref:`eq_nadaraya-waston-gaussian-para`.
 
 
-### Batch Matrix Multiplication
-:label:`subsec_batch_dot`
+## # Batch Matrix Multiplication
+:label:`subsec*batch*dot`
 
 To more efficiently compute attention
 for minibatches,
@@ -245,9 +245,9 @@ we can leverage batch matrix multiplication utilities
 provided by deep learning frameworks.
 
 
-Suppose that the first minibatch contains $n$ matrices $\mathbf{X}_1, \ldots, \mathbf{X}_n$ of shape $a\times b$, and the second minibatch contains $n$ matrices $\mathbf{Y}_1, \ldots, \mathbf{Y}_n$ of shape $b\times c$. Their batch matrix multiplication
+Suppose that the first minibatch contains $n$ matrices $\mathbf{X}*1, \ldots, \mathbf{X}*n$ of shape $a\times b$, and the second minibatch contains $n$ matrices $\mathbf{Y}*1, \ldots, \mathbf{Y}*n$ of shape $b\times c$. Their batch matrix multiplication
 results in
-$n$ matrices $\mathbf{X}_1\mathbf{Y}_1, \ldots, \mathbf{X}_n\mathbf{Y}_n$ of shape $a\times c$. Therefore, given two tensors of shape ($n$, $a$, $b$) and ($n$, $b$, $c$), the shape of their batch matrix multiplication output is ($n$, $a$, $c$).
+$n$ matrices $\mathbf{X}*1\mathbf{Y}*1, \ldots, \mathbf{X}*n\mathbf{Y}*n$ of shape $a\times c$. Therefore, given two tensors of shape ($n$, $a$, $b$) and ($n$, $b$, $c$), the shape of their batch matrix multiplication output is ($n$, $a$, $c$).
 
 ```{.python .input}
 X = d2l.ones((2, 1, 4))
@@ -256,7 +256,7 @@ npx.batch_dot(X, Y).shape
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 X = d2l.ones((2, 1, 4))
 Y = d2l.ones((2, 4, 6))
 torch.bmm(X, Y).shape
@@ -267,17 +267,17 @@ In the context of attention mechanisms, we can use minibatch matrix multiplicati
 ```{.python .input}
 weights = d2l.ones((2, 10)) * 0.1
 values = d2l.reshape(d2l.arange(20), (2, 10))
-npx.batch_dot(np.expand_dims(weights, 1), np.expand_dims(values, -1))
+npx.batch*dot(np.expand*dims(weights, 1), np.expand_dims(values, -1))
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 weights = d2l.ones((2, 10)) * 0.1
 values = d2l.reshape(d2l.arange(20.0), (2, 10))
 torch.bmm(weights.unsqueeze(1), values.unsqueeze(-1))
 ```
 
-### Defining the Model
+## # Defining the Model
 
 Using minibatch matrix multiplication,
 below we define the parametric version
@@ -287,8 +287,8 @@ based on the parametric attention pooling in
 
 ```{.python .input}
 class NWKernelRegression(nn.Block):
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+    def **init**(self, **kwargs):
+        super().**init**(**kwargs)
         self.w = self.params.get('w', shape=(1,))
 
     def forward(self, queries, keys, values):
@@ -299,15 +299,15 @@ class NWKernelRegression(nn.Block):
         self.attention_weights = npx.softmax(
             -((queries - keys) * self.w.data())**2 / 2)
         # Shape of `values`: (no. of queries, no. of key-value pairs)
-        return npx.batch_dot(np.expand_dims(self.attention_weights, 1),
+        return npx.batch*dot(np.expand*dims(self.attention_weights, 1),
                              np.expand_dims(values, -1)).reshape(-1)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 class NWKernelRegression(nn.Module):
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+    def **init**(self, **kwargs):
+        super().**init**(**kwargs)
         self.w = nn.Parameter(torch.rand((1,), requires_grad=True))
 
     def forward(self, queries, keys, values):
@@ -322,7 +322,7 @@ class NWKernelRegression(nn.Module):
                          values.unsqueeze(-1)).reshape(-1)
 ```
 
-### Training
+## # Training
 
 In the following, we transform the training dataset
 to keys and values to train the attention model.
@@ -330,33 +330,33 @@ In the parametric attention pooling,
 any training input takes key-value pairs from all the training examples except for itself to predict its output.
 
 ```{.python .input}
-# Shape of `X_tile`: (`n_train`, `n_train`), where each column contains the
+# Shape of `X*tile`: (`n*train`, `n_train`), where each column contains the
 # same training inputs
-X_tile = np.tile(x_train, (n_train, 1))
-# Shape of `Y_tile`: (`n_train`, `n_train`), where each column contains the
+X*tile = np.tile(x*train, (n_train, 1))
+# Shape of `Y*tile`: (`n*train`, `n_train`), where each column contains the
 # same training outputs
-Y_tile = np.tile(y_train, (n_train, 1))
-# Shape of `keys`: ('n_train', 'n_train' - 1)
-keys = d2l.reshape(X_tile[(1 - d2l.eye(n_train)).astype('bool')],
+Y*tile = np.tile(y*train, (n_train, 1))
+# Shape of `keys`: ('n*train', 'n*train' - 1)
+keys = d2l.reshape(X*tile[(1 - d2l.eye(n*train)).astype('bool')],
                    (n_train, -1))
-# Shape of `values`: ('n_train', 'n_train' - 1)
-values = d2l.reshape(Y_tile[(1 - d2l.eye(n_train)).astype('bool')],
+# Shape of `values`: ('n*train', 'n*train' - 1)
+values = d2l.reshape(Y*tile[(1 - d2l.eye(n*train)).astype('bool')],
                      (n_train, -1))
 ```
 
 ```{.python .input}
-#@tab pytorch
-# Shape of `X_tile`: (`n_train`, `n_train`), where each column contains the
+# @tab pytorch
+# Shape of `X*tile`: (`n*train`, `n_train`), where each column contains the
 # same training inputs
-X_tile = x_train.repeat((n_train, 1))
-# Shape of `Y_tile`: (`n_train`, `n_train`), where each column contains the
+X*tile = x*train.repeat((n_train, 1))
+# Shape of `Y*tile`: (`n*train`, `n_train`), where each column contains the
 # same training outputs
-Y_tile = y_train.repeat((n_train, 1))
-# Shape of `keys`: ('n_train', 'n_train' - 1)
-keys = d2l.reshape(X_tile[(1 - d2l.eye(n_train)).type(torch.bool)],
+Y*tile = y*train.repeat((n_train, 1))
+# Shape of `keys`: ('n*train', 'n*train' - 1)
+keys = d2l.reshape(X*tile[(1 - d2l.eye(n*train)).type(torch.bool)],
                    (n_train, -1))
-# Shape of `values`: ('n_train', 'n_train' - 1)
-values = d2l.reshape(Y_tile[(1 - d2l.eye(n_train)).type(torch.bool)],
+# Shape of `values`: ('n*train', 'n*train' - 1)
+values = d2l.reshape(Y*tile[(1 - d2l.eye(n*train)).type(torch.bool)],
                      (n_train, -1))
 ```
 
@@ -367,12 +367,12 @@ we train the parametric attention model.
 net = NWKernelRegression()
 net.initialize()
 loss = gluon.loss.L2Loss()
-trainer = gluon.Trainer(net.collect_params(), 'sgd', {'learning_rate': 0.5})
+trainer = gluon.Trainer(net.collect*params(), 'sgd', {'learning*rate': 0.5})
 animator = d2l.Animator(xlabel='epoch', ylabel='loss', xlim=[1, 5])
 
 for epoch in range(5):
     with autograd.record():
-        l = loss(net(x_train, keys, values), y_train)
+        l = loss(net(x*train, keys, values), y*train)
     l.backward()
     trainer.step(1)
     print(f'epoch {epoch + 1}, loss {float(l.sum()):.6f}')
@@ -380,7 +380,7 @@ for epoch in range(5):
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 net = NWKernelRegression()
 loss = nn.MSELoss(reduction='none')
 trainer = torch.optim.SGD(net.parameters(), lr=0.5)
@@ -390,7 +390,7 @@ for epoch in range(5):
     trainer.zero_grad()
     # Note: L2 Loss = 1/2 * MSE Loss. PyTorch has MSE Loss which is slightly
     # different from MXNet's L2Loss by a factor of 2. Hence we halve the loss
-    l = loss(net(x_train, keys, values), y_train) / 2
+    l = loss(net(x*train, keys, values), y*train) / 2
     l.sum().backward()
     trainer.step()
     print(f'epoch {epoch + 1}, loss {float(l.sum()):.6f}')
@@ -404,24 +404,24 @@ the predicted line is less smooth
 than its nonparametric counterpart that was plotted earlier.
 
 ```{.python .input}
-# Shape of `keys`: (`n_test`, `n_train`), where each column contains the same
+# Shape of `keys`: (`n*test`, `n*train`), where each column contains the same
 # training inputs (i.e., same keys)
-keys = np.tile(x_train, (n_test, 1))
-# Shape of `value`: (`n_test`, `n_train`)
-values = np.tile(y_train, (n_test, 1))
-y_hat = net(x_test, keys, values)
-plot_kernel_reg(y_hat)
+keys = np.tile(x*train, (n*test, 1))
+# Shape of `value`: (`n*test`, `n*train`)
+values = np.tile(y*train, (n*test, 1))
+y*hat = net(x*test, keys, values)
+plot*kernel*reg(y_hat)
 ```
 
 ```{.python .input}
-#@tab pytorch
-# Shape of `keys`: (`n_test`, `n_train`), where each column contains the same
+# @tab pytorch
+# Shape of `keys`: (`n*test`, `n*train`), where each column contains the same
 # training inputs (i.e., same keys)
-keys = x_train.repeat((n_test, 1))
-# Shape of `value`: (`n_test`, `n_train`)
-values = y_train.repeat((n_test, 1))
-y_hat = net(x_test, keys, values).unsqueeze(1).detach()
-plot_kernel_reg(y_hat)
+keys = x*train.repeat((n*test, 1))
+# Shape of `value`: (`n*test`, `n*train`)
+values = y*train.repeat((n*test, 1))
+y*hat = net(x*test, keys, values).unsqueeze(1).detach()
+plot*kernel*reg(y_hat)
 ```
 
 Comparing with nonparametric attention pooling,
@@ -429,26 +429,26 @@ the region with large attention weights becomes sharper
 in the learnable and parametric setting.
 
 ```{.python .input}
-d2l.show_heatmaps(np.expand_dims(np.expand_dims(net.attention_weights, 0), 0),
+d2l.show*heatmaps(np.expand*dims(np.expand*dims(net.attention*weights, 0), 0),
                   xlabel='Sorted training inputs',
                   ylabel='Sorted testing inputs')
 ```
 
 ```{.python .input}
-#@tab pytorch
-d2l.show_heatmaps(net.attention_weights.unsqueeze(0).unsqueeze(0),
+# @tab pytorch
+d2l.show*heatmaps(net.attention*weights.unsqueeze(0).unsqueeze(0),
                   xlabel='Sorted training inputs',
                   ylabel='Sorted testing inputs')
 ```
 
-## Summary
+# # Summary
 
 * Nadaraya-Watson kernel regression is an example of machine learning with attention mechanisms.
 * The attention pooling of Nadaraya-Watson kernel regression is a weighted average of the training outputs. From the attention perspective, the attention weight is assigned to a value based on a function of a query and the key that is paired with the value.
 * Attention pooling can be either nonparametric or parametric.
 
 
-## Exercises
+# # Exercises
 
 1. Increase the number of training examples. Can you learn  nonparametric Nadaraya-Watson kernel regression better?
 1. What is the value of our learned $w$ in the parametric attention pooling experiment? Why does it make the weighted region sharper when visualizing the attention weights?

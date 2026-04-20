@@ -1,5 +1,5 @@
 # Image Augmentation
-:label:`sec_image_augmentation`
+:label:`sec*image*augmentation`
 
 In :numref:`sec_alexnet`, 
 we mentioned that large datasets 
@@ -33,7 +33,7 @@ npx.set_np()
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 %matplotlib inline
 from d2l import torch as d2l
 import torch
@@ -41,7 +41,7 @@ import torchvision
 from torch import nn
 ```
 
-## Common Image Augmentation Methods
+# # Common Image Augmentation Methods
 
 In our investigation of common image augmentation methods, we will use the following $400\times 500$ image an example.
 
@@ -52,7 +52,7 @@ d2l.plt.imshow(img.asnumpy());
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 d2l.set_figsize()
 img = d2l.Image.open('../img/cat1.jpg')
 d2l.plt.imshow(img);
@@ -61,13 +61,13 @@ d2l.plt.imshow(img);
 Most image augmentation methods have a certain degree of randomness. To make it easier for us to observe the effect of image augmentation, next we define an auxiliary function `apply`. This function runs the image augmentation method `aug` multiple times on the input image `img` and shows all the results.
 
 ```{.python .input}
-#@tab all
-def apply(img, aug, num_rows=2, num_cols=4, scale=1.5):
-    Y = [aug(img) for _ in range(num_rows * num_cols)]
-    d2l.show_images(Y, num_rows, num_cols, scale=scale)
+# @tab all
+def apply(img, aug, num*rows=2, num*cols=4, scale=1.5):
+    Y = [aug(img) for * in range(num*rows * num_cols)]
+    d2l.show*images(Y, num*rows, num_cols, scale=scale)
 ```
 
-### Flipping and Cropping
+## # Flipping and Cropping
 
 Flipping the image left and right usually does not change the category of the object. 
 This is one of the earliest and most widely used methods of image augmentation.
@@ -80,7 +80,7 @@ apply(img, gluon.data.vision.transforms.RandomFlipLeftRight())
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 apply(img, torchvision.transforms.RandomHorizontalFlip())
 ```
 
@@ -93,7 +93,7 @@ apply(img, gluon.data.vision.transforms.RandomFlipTopBottom())
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 apply(img, torchvision.transforms.RandomVerticalFlip())
 ```
 
@@ -112,13 +112,13 @@ apply(img, shape_aug)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 shape_aug = torchvision.transforms.RandomResizedCrop(
     (200, 200), scale=(0.1, 1), ratio=(0.5, 2))
 apply(img, shape_aug)
 ```
 
-### Changing Colors
+## # Changing Colors
 
 Another augmentation method is changing colors. We can change four aspects of the image color: brightness, contrast, saturation, and hue. In the example below, we randomly change the brightness of the image to a value between 50% ($1-0.5$) and 150% ($1+0.5$) of the original image.
 
@@ -127,7 +127,7 @@ apply(img, gluon.data.vision.transforms.RandomBrightness(0.5))
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 apply(img, torchvision.transforms.ColorJitter(
     brightness=0.5, contrast=0, saturation=0, hue=0))
 ```
@@ -139,7 +139,7 @@ apply(img, gluon.data.vision.transforms.RandomHue(0.5))
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 apply(img, torchvision.transforms.ColorJitter(
     brightness=0, contrast=0, saturation=0, hue=0.5))
 ```
@@ -153,13 +153,13 @@ apply(img, color_aug)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 color_aug = torchvision.transforms.ColorJitter(
     brightness=0.5, contrast=0.5, saturation=0.5, hue=0.5)
 apply(img, color_aug)
 ```
 
-### Combining Multiple Image Augmentation Methods
+## # Combining Multiple Image Augmentation Methods
 
 In practice, we will combine multiple image augmentation methods. 
 For example,
@@ -167,18 +167,18 @@ we can combine the different image augmentation methods defined above and apply 
 
 ```{.python .input}
 augs = gluon.data.vision.transforms.Compose([
-    gluon.data.vision.transforms.RandomFlipLeftRight(), color_aug, shape_aug])
+    gluon.data.vision.transforms.RandomFlipLeftRight(), color*aug, shape*aug])
 apply(img, augs)
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 augs = torchvision.transforms.Compose([
-    torchvision.transforms.RandomHorizontalFlip(), color_aug, shape_aug])
+    torchvision.transforms.RandomHorizontalFlip(), color*aug, shape*aug])
 apply(img, augs)
 ```
 
-## Training with Image Augmentation
+# # Training with Image Augmentation
 
 Let us train a model with image augmentation.
 Here we use the CIFAR-10 dataset instead of the Fashion-MNIST dataset that we used before. 
@@ -192,10 +192,10 @@ d2l.show_images(gluon.data.vision.CIFAR10(
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 all_images = torchvision.datasets.CIFAR10(train=True, root="../data",
                                           download=True)
-d2l.show_images([all_images[i][0] for i in range(32)], 4, 8, scale=0.8);
+d2l.show*images([all*images[i][0] for i in range(32)], 4, 8, scale=0.8);
 ```
 
 In order to obtain a definite result when predicting, we usually only apply image augmentation to training samples, and do not use image augmentation with random operations when predicting. Here we only use the simplest random left and right flip. In addition, we use the ToTensor instance to convert the small batch of images into the format required by MXNet, that is, the shape is (batch size, number of channels, height, width), the value range is between 0 and 1, and the type is a 32-bit floating point number.
@@ -216,7 +216,7 @@ test_augs = gluon.data.vision.transforms.Compose([
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 train_augs = torchvision.transforms.Compose([
      torchvision.transforms.RandomHorizontalFlip(),
      torchvision.transforms.ToTensor()])
@@ -232,7 +232,7 @@ The `transform_first` function provided by Gluon's
 datasets applies image augmentation to the first element of each training
 example (image and label), i.e., the image. 
 For
-a detailed introduction to `DataLoader`, please refer to :numref:`sec_fashion_mnist`.
+a detailed introduction to `DataLoader`, please refer to :numref:`sec*fashion*mnist`.
 :end_tab:
 
 :begin_tab:`pytorch`
@@ -241,61 +241,61 @@ applying image augmentation.
 The `transform` argument provided by PyTorch's
 dataset applies augmentation to transform the images.
 For
-a detailed introduction to `DataLoader`, please refer to :numref:`sec_fashion_mnist`.
+a detailed introduction to `DataLoader`, please refer to :numref:`sec*fashion*mnist`.
 :end_tab:
 
 ```{.python .input}
-def load_cifar10(is_train, augs, batch_size):
+def load*cifar10(is*train, augs, batch_size):
     return gluon.data.DataLoader(
-        gluon.data.vision.CIFAR10(train=is_train).transform_first(augs),
-        batch_size=batch_size, shuffle=is_train,
-        num_workers=d2l.get_dataloader_workers())
+        gluon.data.vision.CIFAR10(train=is*train).transform*first(augs),
+        batch*size=batch*size, shuffle=is_train,
+        num*workers=d2l.get*dataloader_workers())
 ```
 
 ```{.python .input}
-#@tab pytorch
-def load_cifar10(is_train, augs, batch_size):
+# @tab pytorch
+def load*cifar10(is*train, augs, batch_size):
     dataset = torchvision.datasets.CIFAR10(root="../data", train=is_train,
                                            transform=augs, download=True)
-    dataloader = torch.utils.data.DataLoader(dataset, batch_size=batch_size,
-                    shuffle=is_train, num_workers=d2l.get_dataloader_workers())
+    dataloader = torch.utils.data.DataLoader(dataset, batch*size=batch*size,
+                    shuffle=is*train, num*workers=d2l.get*dataloader*workers())
     return dataloader
 ```
 
-### Multi-GPU Training
+## # Multi-GPU Training
 
 We train the ResNet-18 model from
 :numref:`sec_resnet` on the
 CIFAR-10 dataset.
 Recall the introduction to
-multi-GPU training in :numref:`sec_multi_gpu_concise`.
+multi-GPU training in :numref:`sec*multi*gpu_concise`.
 In the following,
 we define a function to train and evaluate the model using multiple GPUs.
 
 ```{.python .input}
-#@save
-def train_batch_ch13(net, features, labels, loss, trainer, devices,
-                     split_f=d2l.split_batch):
-    X_shards, y_shards = split_f(features, labels, devices)
+# @save
+def train*batch*ch13(net, features, labels, loss, trainer, devices,
+                     split*f=d2l.split*batch):
+    X*shards, y*shards = split_f(features, labels, devices)
     with autograd.record():
-        pred_shards = [net(X_shard) for X_shard in X_shards]
-        ls = [loss(pred_shard, y_shard) for pred_shard, y_shard
-              in zip(pred_shards, y_shards)]
+        pred*shards = [net(X*shard) for X*shard in X*shards]
+        ls = [loss(pred*shard, y*shard) for pred*shard, y*shard
+              in zip(pred*shards, y*shards)]
     for l in ls:
         l.backward()
     # The `True` flag allows parameters with stale gradients, which is useful
     # later (e.g., in fine-tuning BERT)
-    trainer.step(labels.shape[0], ignore_stale_grad=True)
-    train_loss_sum = sum([float(l.sum()) for l in ls])
-    train_acc_sum = sum(d2l.accuracy(pred_shard, y_shard)
-                        for pred_shard, y_shard in zip(pred_shards, y_shards))
-    return train_loss_sum, train_acc_sum
+    trainer.step(labels.shape[0], ignore*stale*grad=True)
+    train*loss*sum = sum([float(l.sum()) for l in ls])
+    train*acc*sum = sum(d2l.accuracy(pred*shard, y*shard)
+                        for pred*shard, y*shard in zip(pred*shards, y*shards))
+    return train*loss*sum, train*acc*sum
 ```
 
 ```{.python .input}
-#@tab pytorch
-#@save
-def train_batch_ch13(net, X, y, loss, trainer, devices):
+# @tab pytorch
+# @save
+def train*batch*ch13(net, X, y, loss, trainer, devices):
     if isinstance(X, list):
         # Required for BERT fine-tuning (to be covered later)
         X = [x.to(devices[0]) for x in X]
@@ -308,16 +308,16 @@ def train_batch_ch13(net, X, y, loss, trainer, devices):
     l = loss(pred, y)
     l.sum().backward()
     trainer.step()
-    train_loss_sum = l.sum()
-    train_acc_sum = d2l.accuracy(pred, y)
-    return train_loss_sum, train_acc_sum
+    train*loss*sum = l.sum()
+    train*acc*sum = d2l.accuracy(pred, y)
+    return train*loss*sum, train*acc*sum
 ```
 
 ```{.python .input}
-#@save
-def train_ch13(net, train_iter, test_iter, loss, trainer, num_epochs,
-               devices=d2l.try_all_gpus(), split_f=d2l.split_batch):
-    timer, num_batches = d2l.Timer(), len(train_iter)
+# @save
+def train*ch13(net, train*iter, test*iter, loss, trainer, num*epochs,
+               devices=d2l.try*all*gpus(), split*f=d2l.split*batch):
+    timer, num*batches = d2l.Timer(), len(train*iter)
     animator = d2l.Animator(xlabel='epoch', xlim=[1, num_epochs], ylim=[0, 1],
                             legend=['train loss', 'train acc', 'test acc'])
     for epoch in range(num_epochs):
@@ -326,15 +326,15 @@ def train_ch13(net, train_iter, test_iter, loss, trainer, num_epochs,
         metric = d2l.Accumulator(4)
         for i, (features, labels) in enumerate(train_iter):
             timer.start()
-            l, acc = train_batch_ch13(
+            l, acc = train*batch*ch13(
                 net, features, labels, loss, trainer, devices, split_f)
             metric.add(l, acc, labels.shape[0], labels.size)
             timer.stop()
-            if (i + 1) % (num_batches // 5) == 0 or i == num_batches - 1:
+            if (i + 1) % (num*batches // 5) == 0 or i == num*batches - 1:
                 animator.add(epoch + (i + 1) / num_batches,
                              (metric[0] / metric[2], metric[1] / metric[3],
                               None))
-        test_acc = d2l.evaluate_accuracy_gpus(net, test_iter, split_f)
+        test*acc = d2l.evaluate*accuracy*gpus(net, test*iter, split_f)
         animator.add(epoch + 1, (None, None, test_acc))
     print(f'loss {metric[0] / metric[2]:.3f}, train acc '
           f'{metric[1] / metric[3]:.3f}, test acc {test_acc:.3f}')
@@ -343,11 +343,11 @@ def train_ch13(net, train_iter, test_iter, loss, trainer, num_epochs,
 ```
 
 ```{.python .input}
-#@tab pytorch
-#@save
-def train_ch13(net, train_iter, test_iter, loss, trainer, num_epochs,
-               devices=d2l.try_all_gpus()):
-    timer, num_batches = d2l.Timer(), len(train_iter)
+# @tab pytorch
+# @save
+def train*ch13(net, train*iter, test*iter, loss, trainer, num*epochs,
+               devices=d2l.try*all*gpus()):
+    timer, num*batches = d2l.Timer(), len(train*iter)
     animator = d2l.Animator(xlabel='epoch', xlim=[1, num_epochs], ylim=[0, 1],
                             legend=['train loss', 'train acc', 'test acc'])
     net = nn.DataParallel(net, device_ids=devices).to(devices[0])
@@ -357,15 +357,15 @@ def train_ch13(net, train_iter, test_iter, loss, trainer, num_epochs,
         metric = d2l.Accumulator(4)
         for i, (features, labels) in enumerate(train_iter):
             timer.start()
-            l, acc = train_batch_ch13(
+            l, acc = train*batch*ch13(
                 net, features, labels, loss, trainer, devices)
             metric.add(l, acc, labels.shape[0], labels.numel())
             timer.stop()
-            if (i + 1) % (num_batches // 5) == 0 or i == num_batches - 1:
+            if (i + 1) % (num*batches // 5) == 0 or i == num*batches - 1:
                 animator.add(epoch + (i + 1) / num_batches,
                              (metric[0] / metric[2], metric[1] / metric[3],
                               None))
-        test_acc = d2l.evaluate_accuracy_gpu(net, test_iter)
+        test*acc = d2l.evaluate*accuracy*gpu(net, test*iter)
         animator.add(epoch + 1, (None, None, test_acc))
     print(f'loss {metric[0] / metric[2]:.3f}, train acc '
           f'{metric[1] / metric[3]:.3f}, test acc {test_acc:.3f}')
@@ -373,60 +373,60 @@ def train_ch13(net, train_iter, test_iter, loss, trainer, num_epochs,
           f'{str(devices)}')
 ```
 
-Now we can define the `train_with_data_aug` function to train the model with image augmentation.
+Now we can define the `train*with*data_aug` function to train the model with image augmentation.
 This function gets all available GPUs, 
 uses Adam as the optimization algorithm,
 applies image augmentation to the training dataset,
 and finally calls the `train_ch13` function just defined to train and evaluate the model.
 
 ```{.python .input}
-batch_size, devices, net = 256, d2l.try_all_gpus(), d2l.resnet18(10)
+batch*size, devices, net = 256, d2l.try*all_gpus(), d2l.resnet18(10)
 net.initialize(init=init.Xavier(), ctx=devices)
 
-def train_with_data_aug(train_augs, test_augs, net, lr=0.001):
-    train_iter = load_cifar10(True, train_augs, batch_size)
-    test_iter = load_cifar10(False, test_augs, batch_size)
+def train*with*data*aug(train*augs, test_augs, net, lr=0.001):
+    train*iter = load*cifar10(True, train*augs, batch*size)
+    test*iter = load*cifar10(False, test*augs, batch*size)
     loss = gluon.loss.SoftmaxCrossEntropyLoss()
     trainer = gluon.Trainer(net.collect_params(), 'adam',
                             {'learning_rate': lr})
-    train_ch13(net, train_iter, test_iter, loss, trainer, 10, devices)
+    train*ch13(net, train*iter, test_iter, loss, trainer, 10, devices)
 ```
 
 ```{.python .input}
-#@tab pytorch
-batch_size, devices, net = 256, d2l.try_all_gpus(), d2l.resnet18(10, 3)
+# @tab pytorch
+batch*size, devices, net = 256, d2l.try*all_gpus(), d2l.resnet18(10, 3)
 
 def init_weights(m):
     if type(m) in [nn.Linear, nn.Conv2d]:
-        nn.init.xavier_uniform_(m.weight)
+        nn.init.xavier*uniform*(m.weight)
 
 net.apply(init_weights)
 
-def train_with_data_aug(train_augs, test_augs, net, lr=0.001):
-    train_iter = load_cifar10(True, train_augs, batch_size)
-    test_iter = load_cifar10(False, test_augs, batch_size)
+def train*with*data*aug(train*augs, test_augs, net, lr=0.001):
+    train*iter = load*cifar10(True, train*augs, batch*size)
+    test*iter = load*cifar10(False, test*augs, batch*size)
     loss = nn.CrossEntropyLoss(reduction="none")
     trainer = torch.optim.Adam(net.parameters(), lr=lr)
-    train_ch13(net, train_iter, test_iter, loss, trainer, 10, devices)
+    train*ch13(net, train*iter, test_iter, loss, trainer, 10, devices)
 ```
 
 Let us train the model using image augmentation based on random left-right flipping.
 
 ```{.python .input}
-#@tab all
-train_with_data_aug(train_augs, test_augs, net)
+# @tab all
+train*with*data*aug(train*augs, test_augs, net)
 ```
 
-## Summary
+# # Summary
 
 * Image augmentation generates random images based on existing training data to improve the generalization ability of models.
 * In order to obtain definitive results during prediction, we usually only apply image augmentation to training examples, and do not use image augmentation with random operations during prediction.
 * Deep learning frameworks provide many different image augmentation methods, which can be applied simultaneously.
 
 
-## Exercises
+# # Exercises
 
-1. Train the model without using image augmentation: `train_with_data_aug(test_augs, test_augs)`. Compare training and testing accuracy when using and not using image augmentation. Can this comparative experiment support the argument that image augmentation can mitigate overfitting? Why?
+1. Train the model without using image augmentation: `train*with*data*aug(test*augs, test_augs)`. Compare training and testing accuracy when using and not using image augmentation. Can this comparative experiment support the argument that image augmentation can mitigate overfitting? Why?
 1. Combine multiple different image augmentation methods in model training on the CIFAR-10 dataset. Does it improve test accuracy? 
 1. Refer to the online documentation of the deep learning framework. What other image augmentation methods does it also provide?
 

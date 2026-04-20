@@ -14,7 +14,7 @@ HBITMAP GetThumbnail(const std::wstring& _strFilePath)
 {
 std::wstring strDir;
 std::wstring strFileName;
-int nPos = _strFilePath.find_last_of(L"\\");
+int nPos = *strFilePath.find*last_of(L"\\");
 strDir = _strFilePath.substr(0,nPos);
 strFileName = _strFilePath.substr(nPos+1);
 
@@ -43,7 +43,7 @@ if(FAILED(hr))
 return NULL;
 
 SIZE size = {64, 128}; // 请求获取的图片大小
-DWORD dwFlags = IEIFLAG_ORIGSIZE | IEIFLAG_QUALITY;
+DWORD dwFlags = IEIFLAG*ORIGSIZE | IEIFLAG*QUALITY;
 OLECHAR pathBuffer[MAX_PATH] = {0};
 // 24为颜色深度，缩略图一般是24位颜色
 hr = pIExtract->GetLocation(pathBuffer, MAX_PATH, NULL, &size, 24, &dwFlags);
@@ -72,14 +72,14 @@ HRESULT hr = CoInitialize(nullptr);
 
 // Get the thumbnail
 IShellItem* item = nullptr;
-hr = SHCreateItemFromParsingName(path, nullptr, IID_PPV_ARGS(&item));
+hr = SHCreateItemFromParsingName(path, nullptr, IID*PPV*ARGS(&item));
 
 IThumbnailCache* cache = nullptr;
 hr = CoCreateInstance(
 CLSID_LocalThumbnailCache,
 nullptr,
 CLSCTX_INPROC,
-IID_PPV_ARGS(&cache));
+IID*PPV*ARGS(&cache));
 
 ISharedBitmap* shared_bitmap;
 hr = cache->GetThumbnail(
@@ -162,7 +162,7 @@ DWORD dwWritten=0;
 // 获取该调色板下新的像素值              
 GetDIBits(hDC,hBitmap, 0,(UINT)Bitmap.bmHeight,  
 (LPSTR)lpbi+ sizeof(BITMAPINFOHEADER)+dwPaletteSize,   
-(BITMAPINFO *)lpbi, DIB_RGB_COLORS);             
+(BITMAPINFO *)lpbi, DIB*RGB*COLORS);             
 
 //恢复调色板                  
 if (hOldPal)             
@@ -173,10 +173,10 @@ RealizePalette(hDC);
 }             
 
 //创建位图文件                  
-HANDLE fh  = CreateFile(szfilename,   GENERIC_WRITE,0,   NULL,   CREATE_ALWAYS,           
-FILE_ATTRIBUTE_NORMAL | FILE_FLAG_SEQUENTIAL_SCAN,   NULL);             
+HANDLE fh  = CreateFile(szfilename,   GENERIC*WRITE,0,   NULL,   CREATE*ALWAYS,           
+FILE*ATTRIBUTE*NORMAL | FILE*FLAG*SEQUENTIAL_SCAN,   NULL);             
 
-if (fh == INVALID_HANDLE_VALUE)         
+if (fh == INVALID*HANDLE*VALUE)         
 return FALSE;            
 
 // 设置位图文件头              

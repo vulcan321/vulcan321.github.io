@@ -4,15 +4,15 @@
 
 **Contents:**
 
-**[Empty](https://www.excelanytime.com/excel/index.php?option=com_content&view=article&id=267:excel-vba-empty-zls-null-nothing-missing&catid=79&Itemid=475#Empty)**
+**[Empty](https://www.excelanytime.com/excel/index.php?option=com_content&view=article&id=267:excel-vba-empty-zls-null-nothing-missing&catid=79&Itemid=475# Empty)**
 
-**[VarType Function](https://www.excelanytime.com/excel/index.php?option=com_content&view=article&id=267:excel-vba-empty-zls-null-nothing-missing&catid=79&Itemid=475#VarType Function)**
+**[VarType Function](https://www.excelanytime.com/excel/index.php?option=com_content&view=article&id=267:excel-vba-empty-zls-null-nothing-missing&catid=79&Itemid=475# VarType Function)**
 
-**[Null](https://www.excelanytime.com/excel/index.php?option=com_content&view=article&id=267:excel-vba-empty-zls-null-nothing-missing&catid=79&Itemid=475#Null)**
+**[Null](https://www.excelanytime.com/excel/index.php?option=com_content&view=article&id=267:excel-vba-empty-zls-null-nothing-missing&catid=79&Itemid=475# Null)**
 
-**[Nothing](https://www.excelanytime.com/excel/index.php?option=com_content&view=article&id=267:excel-vba-empty-zls-null-nothing-missing&catid=79&Itemid=475#Nothing)**
+**[Nothing](https://www.excelanytime.com/excel/index.php?option=com_content&view=article&id=267:excel-vba-empty-zls-null-nothing-missing&catid=79&Itemid=475# Nothing)**
 
-**[Missing](https://www.excelanytime.com/excel/index.php?option=com_content&view=article&id=267:excel-vba-empty-zls-null-nothing-missing&catid=79&Itemid=475#Missing)**
+**[Missing](https://www.excelanytime.com/excel/index.php?option=com_content&view=article&id=267:excel-vba-empty-zls-null-nothing-missing&catid=79&Itemid=475# Missing)**
 
 \-----------------------------------
 
@@ -32,7 +32,7 @@ The **Empty keyword** indicates an uninitialized variable value. It is used as a
 
 **IsEmpty Function**
 
-Use the **IsEmpty Function** to check whether a variable has been initialized. The function returns a Boolean value - returns True for an uninitialized variable or if a variable is explicitly set to Empty, otherwise the function returns False. _**Syntax: IsEmpty(expression)**_, where expression is a Variant variable which you want to check. See below example(s) where we use this function to check if a variant variable is empty.
+Use the **IsEmpty Function** to check whether a variable has been initialized. The function returns a Boolean value - returns True for an uninitialized variable or if a variable is explicitly set to Empty, otherwise the function returns False. ***Syntax: IsEmpty(expression)***, where expression is a Variant variable which you want to check. See below example(s) where we use this function to check if a variant variable is empty.
 
 **Empty, Blank, ZLS (zero-length string), null string & vbNullString**
 
@@ -40,7 +40,7 @@ Use the **IsEmpty Function** to check whether a variable has been initialized. T
 
 **VarType Function**
 
-Use the **VarType Function** to determine the subtype of a variable. _**Syntax: VarType(variable\_name)**_. The function returns an Integer indicating the variable's subtype. The variable\_name can be any variable except a user-defined data type (data type defined using the Type statement) variable. Examples of return values are: _value_ 0 (_VarType constant_ - vbEmpty, _uninitialized / default_), value 1 (VarType constant - vbNull, contains no valid data), value 2 (VarType constant - vbInteger, Integer), value 3 (VarType constant - vbLong, Long Integer), and so on. The VarType constants can be used anywhere in your code in place of the actual values.
+Use the **VarType Function** to determine the subtype of a variable. ***Syntax: VarType(variable\*name)***. The function returns an Integer indicating the variable's subtype. The variable\*name can be any variable except a user-defined data type (data type defined using the Type statement) variable. Examples of return values are: *value* 0 (*VarType constant* - vbEmpty, *uninitialized / default*), value 1 (VarType constant - vbNull, contains no valid data), value 2 (VarType constant - vbInteger, Integer), value 3 (VarType constant - vbLong, Long Integer), and so on. The VarType constants can be used anywhere in your code in place of the actual values.
 
 **Example - Empty variable:**
 ```vbnet
@@ -215,7 +215,7 @@ In VBA, **Null keyword** is used to indicate that a variable contains no valid d
 
 If you try to get the value of a Null variable or an expression that is Null, you will get an  error of 'Invalid use of Null' (Run-time Error 94). You will need to ensure the variable contains a valid value. Refer Image 1.
 
-**![](https://www.excelanytime.com/excel/index.php?option=com_content&view=article&id=267:excel-vba-empty-zls-null-nothing-missing&catid=79&Itemid=475images/ExcelVBA/EmptyNull/null_1.gif "Image 1")
+**![](https://www.excelanytime.com/excel/index.php?option=com*content&view=article&id=267:excel-vba-empty-zls-null-nothing-missing&catid=79&Itemid=475images/ExcelVBA/EmptyNull/null*1.gif "Image 1")
 
 Image 1
 
@@ -223,7 +223,7 @@ Image 1
 
 **IsNull Function**
 
-The **IsNull Function** returns a Boolean value - True for an expression that is Null (containing no valid data), or else False for an expression that contains valid data. _**Syntax: IsNull(expression)**_. The expression argument is a variant that contains a numeric or string value, and is necessary to specify.
+The **IsNull Function** returns a Boolean value - True for an expression that is Null (containing no valid data), or else False for an expression that contains valid data. ***Syntax: IsNull(expression)***. The expression argument is a variant that contains a numeric or string value, and is necessary to specify.
 
 **Example - Integer variable:**
 ```vbnet
@@ -360,7 +360,7 @@ End Sub
 ```
 **Example - Check worksheet cell for Empty, ZLS, Null:**
 ```vbnet
-Sub WorksheetCell\_ZLS\_Empty\_Null()
+Sub WorksheetCell\*ZLS\*Empty\_Null()
     'check worksheet cell for Empty, ZLS, Null
     Dim var1 As Variant
     'returns True:
@@ -395,7 +395,7 @@ End Sub
 
 Assigning the **Nothing keyword** to an **object variable** disassociates the variable from an actual object. Nothing is assigned to an object variable by using the Set statement. You can assign the same actual object to multiple object variables in vba code, and this association uses your system resources and memory. The system resources and memory get released only either after you assign Nothing to all object variables using the Set statement which disassociates these variables from the actual object, or when all object variables go out of scope and get destroyed. It is advisable to explicity set all object variables to Nothing at the end of your procedure or even earlier while running your code when you finish using them, and this will release memory allocated to these variables.
 
-**Determine if the object variable is initialized - use Is Nothing for objects**: To check if an object has been assigned or set, use the **Is** keyword with **Nothing**, viz. If object\_variable Is Nothing. For objects, you cannot test if an object\_variable is equal to something, and using = instead of Is will give an error.
+**Determine if the object variable is initialized - use Is Nothing for objects**: To check if an object has been assigned or set, use the **Is** keyword with **Nothing**, viz. If object\*variable Is Nothing. For objects, you cannot test if an object\*variable is equal to something, and using = instead of Is will give an error.
 
 **Example - Using the Nothing keyword with an object variable:**
 ```vbnet
@@ -426,7 +426,7 @@ also be specified as Optional. Note that specifying the Optional keyword makes a
 
 **Check if an argument is Missing, using the IsMissing function**: The Optional argument should be (though not necessary) declared as Variant data type to enable use of the **IsMissing function** which works only when used with variables declared as Variant data type. The IsMissing function is used to determine whether the optional argument was passed in the procedure or not and then you can adjust your code accordingly without returning an error. If the Optional argument is not declared as Variant in which case the IsMissing function will not work, the Optional argument will be assigned the default value for its data type which is 0 for numeric data type variables (viz. Integer, Double, etc) and Nothing (a null reference) for String or Object data type variables.
 
-**IsMissing function**: The **IsMissing function** is used to check whether optional Variant arguments have been passed in the procedure or not. _**Syntax: IsMissing(argname)**_. The function returns a Boolean value - True if no value is passed for the optional argument, and False if a value has been passed for the optional argument. If the IsMissing function returns True for an argument, using the missing argument in the code will cause an error, and thus using this function will help in adjusting your code accordingly.
+**IsMissing function**: The **IsMissing function** is used to check whether optional Variant arguments have been passed in the procedure or not. ***Syntax: IsMissing(argname)***. The function returns a Boolean value - True if no value is passed for the optional argument, and False if a value has been passed for the optional argument. If the IsMissing function returns True for an argument, using the missing argument in the code will cause an error, and thus using this function will help in adjusting your code accordingly.
 
 **Example of using the IsMissing function to check if an argument is Missing:**
 ```vbnet

@@ -4,7 +4,7 @@ ResNet significantly changed the view of how to parametrize the functions in dee
 To understand how to arrive at it, let us take a small detour to mathematics.
 
 
-## From ResNet to DenseNet
+# # From ResNet to DenseNet
 
 Recall the Taylor expansion for functions. For the point $x = 0$ it can be written as
 
@@ -22,15 +22,15 @@ One solution was
 DenseNet :cite:`Huang.Liu.Van-Der-Maaten.ea.2017`.
 
 ![The main difference between ResNet (left) and DenseNet (right) in cross-layer connections: use of addition and use of concatenation. ](../img/densenet-block.svg)
-:label:`fig_densenet_block`
+:label:`fig*densenet*block`
 
-As shown in :numref:`fig_densenet_block`, the key difference between ResNet and DenseNet is that in the latter case outputs are *concatenated* (denoted by $[,]$) rather than added.
+As shown in :numref:`fig*densenet*block`, the key difference between ResNet and DenseNet is that in the latter case outputs are *concatenated* (denoted by $[,]$) rather than added.
 As a result, we perform a mapping from $\mathbf{x}$ to its values after applying an increasingly complex sequence of functions:
 
 $$\mathbf{x} \to \left[
 \mathbf{x},
 f_1(\mathbf{x}),
-f_2([\mathbf{x}, f_1(\mathbf{x})]), f_3([\mathbf{x}, f_1(\mathbf{x}), f_2([\mathbf{x}, f_1(\mathbf{x})])]), \ldots\right].$$
+f*2([\mathbf{x}, f*1(\mathbf{x})]), f*3([\mathbf{x}, f*1(\mathbf{x}), f*2([\mathbf{x}, f*1(\mathbf{x})])]), \ldots\right].$$
 
 In the end, all these functions are combined in MLP to reduce the number of features again. In terms of implementation this is quite simple:
 rather than adding terms, we concatenate them. The name DenseNet arises from the fact that the dependency graph between variables becomes quite dense. The last layer of such a chain is densely connected to all previous layers. The dense connections are shown in :numref:`fig_densenet`.
@@ -42,7 +42,7 @@ rather than adding terms, we concatenate them. The name DenseNet arises from the
 The main components that compose a DenseNet are *dense blocks* and *transition layers*. The former define how the inputs and outputs are concatenated, while the latter control the number of channels so that it is not too large.
 
 
-## Dense Blocks
+# # Dense Blocks
 
 DenseNet uses the modified "batch normalization, activation, and convolution"
 structure of ResNet (see the exercise in :numref:`sec_resnet`).
@@ -54,38 +54,38 @@ from mxnet import np, npx
 from mxnet.gluon import nn
 npx.set_np()
 
-def conv_block(num_channels):
+def conv*block(num*channels):
     blk = nn.Sequential()
     blk.add(nn.BatchNorm(),
             nn.Activation('relu'),
-            nn.Conv2D(num_channels, kernel_size=3, padding=1))
+            nn.Conv2D(num*channels, kernel*size=3, padding=1))
     return blk
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 from d2l import torch as d2l
 import torch
 from torch import nn
 
-def conv_block(input_channels, num_channels):
+def conv*block(input*channels, num_channels):
     return nn.Sequential(
         nn.BatchNorm2d(input_channels), nn.ReLU(),
-        nn.Conv2d(input_channels, num_channels, kernel_size=3, padding=1))
+        nn.Conv2d(input*channels, num*channels, kernel_size=3, padding=1))
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 from d2l import tensorflow as d2l
 import tensorflow as tf
 
 class ConvBlock(tf.keras.layers.Layer):
-    def __init__(self, num_channels):
-        super(ConvBlock, self).__init__()
+    def **init**(self, num_channels):
+        super(ConvBlock, self).**init**()
         self.bn = tf.keras.layers.BatchNormalization()
         self.relu = tf.keras.layers.ReLU()
         self.conv = tf.keras.layers.Conv2D(
-            filters=num_channels, kernel_size=(3, 3), padding='same')
+            filters=num*channels, kernel*size=(3, 3), padding='same')
 
         self.listLayers = [self.bn, self.relu, self.conv]
 
@@ -101,11 +101,11 @@ A *dense block* consists of multiple convolution blocks, each using the same num
 
 ```{.python .input}
 class DenseBlock(nn.Block):
-    def __init__(self, num_convs, num_channels, **kwargs):
-        super().__init__(**kwargs)
+    def **init**(self, num*convs, num*channels, **kwargs):
+        super().**init**(**kwargs)
         self.net = nn.Sequential()
-        for _ in range(num_convs):
-            self.net.add(conv_block(num_channels))
+        for * in range(num*convs):
+            self.net.add(conv*block(num*channels))
 
     def forward(self, X):
         for blk in self.net:
@@ -117,14 +117,14 @@ class DenseBlock(nn.Block):
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 class DenseBlock(nn.Module):
-    def __init__(self, num_convs, input_channels, num_channels):
-        super(DenseBlock, self).__init__()
+    def **init**(self, num*convs, input*channels, num_channels):
+        super(DenseBlock, self).**init**()
         layer = []
         for i in range(num_convs):
             layer.append(conv_block(
-                num_channels * i + input_channels, num_channels))
+                num*channels * i + input*channels, num_channels))
         self.net = nn.Sequential(*layer)
 
     def forward(self, X):
@@ -137,12 +137,12 @@ class DenseBlock(nn.Module):
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 class DenseBlock(tf.keras.layers.Layer):
-    def __init__(self, num_convs, num_channels):
-        super(DenseBlock, self).__init__()
+    def **init**(self, num*convs, num*channels):
+        super(DenseBlock, self).**init**()
         self.listLayers = []
-        for _ in range(num_convs):
+        for * in range(num*convs):
             self.listLayers.append(ConvBlock(num_channels))
 
     def call(self, x):
@@ -164,7 +164,7 @@ Y.shape
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 blk = DenseBlock(2, 3, 10)
 X = torch.randn(4, 3, 8, 8)
 Y = blk(X)
@@ -172,44 +172,44 @@ Y.shape
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 blk = DenseBlock(2, 10)
 X = tf.random.uniform((4, 8, 8, 3))
 Y = blk(X)
 Y.shape
 ```
 
-## Transition Layers
+# # Transition Layers
 
 Since each dense block will increase the number of channels, adding too many of them will lead to an excessively complex model. A *transition layer* is used to control the complexity of the model. It reduces the number of channels by using the $1\times 1$ convolutional layer and halves the height and width of the average pooling layer with a stride of 2, further reducing the complexity of the model.
 
 ```{.python .input}
-def transition_block(num_channels):
+def transition*block(num*channels):
     blk = nn.Sequential()
     blk.add(nn.BatchNorm(), nn.Activation('relu'),
-            nn.Conv2D(num_channels, kernel_size=1),
+            nn.Conv2D(num*channels, kernel*size=1),
             nn.AvgPool2D(pool_size=2, strides=2))
     return blk
 ```
 
 ```{.python .input}
-#@tab pytorch
-def transition_block(input_channels, num_channels):
+# @tab pytorch
+def transition*block(input*channels, num_channels):
     return nn.Sequential(
         nn.BatchNorm2d(input_channels), nn.ReLU(),
-        nn.Conv2d(input_channels, num_channels, kernel_size=1),
+        nn.Conv2d(input*channels, num*channels, kernel_size=1),
         nn.AvgPool2d(kernel_size=2, stride=2))
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 class TransitionBlock(tf.keras.layers.Layer):
-    def __init__(self, num_channels, **kwargs):
-        super(TransitionBlock, self).__init__(**kwargs)
+    def **init**(self, num_channels, **kwargs):
+        super(TransitionBlock, self).**init**(**kwargs)
         self.batch_norm = tf.keras.layers.BatchNormalization()
         self.relu = tf.keras.layers.ReLU()
-        self.conv = tf.keras.layers.Conv2D(num_channels, kernel_size=1)
-        self.avg_pool = tf.keras.layers.AvgPool2D(pool_size=2, strides=2)
+        self.conv = tf.keras.layers.Conv2D(num*channels, kernel*size=1)
+        self.avg*pool = tf.keras.layers.AvgPool2D(pool*size=2, strides=2)
 
     def call(self, x):
         x = self.batch_norm(x)
@@ -227,18 +227,18 @@ blk(Y).shape
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 blk = transition_block(23, 10)
 blk(Y).shape
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 blk = TransitionBlock(10)
 blk(Y).shape
 ```
 
-## DenseNet Model
+# # DenseNet Model
 
 Next, we will construct a DenseNet model. DenseNet first uses the same single convolutional layer and maximum pooling layer as in ResNet.
 
@@ -250,7 +250,7 @@ net.add(nn.Conv2D(64, kernel_size=7, strides=2, padding=3),
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 b1 = nn.Sequential(
     nn.Conv2d(1, 64, kernel_size=7, stride=2, padding=3),
     nn.BatchNorm2d(64), nn.ReLU(),
@@ -258,7 +258,7 @@ b1 = nn.Sequential(
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 def block_1():
     return tf.keras.Sequential([
        tf.keras.layers.Conv2D(64, kernel_size=7, strides=2, padding='same'),
@@ -275,52 +275,52 @@ In ResNet, the height and width are reduced between each module by a residual bl
 
 ```{.python .input}
 # `num_channels`: the current number of channels
-num_channels, growth_rate = 64, 32
-num_convs_in_dense_blocks = [4, 4, 4, 4]
+num*channels, growth*rate = 64, 32
+num*convs*in*dense*blocks = [4, 4, 4, 4]
 
-for i, num_convs in enumerate(num_convs_in_dense_blocks):
-    net.add(DenseBlock(num_convs, growth_rate))
+for i, num*convs in enumerate(num*convs*in*dense_blocks):
+    net.add(DenseBlock(num*convs, growth*rate))
     # This is the number of output channels in the previous dense block
-    num_channels += num_convs * growth_rate
+    num*channels += num*convs * growth_rate
     # A transition layer that halves the number of channels is added between
     # the dense blocks
-    if i != len(num_convs_in_dense_blocks) - 1:
+    if i != len(num*convs*in*dense*blocks) - 1:
         num_channels //= 2
-        net.add(transition_block(num_channels))
+        net.add(transition*block(num*channels))
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 # `num_channels`: the current number of channels
-num_channels, growth_rate = 64, 32
-num_convs_in_dense_blocks = [4, 4, 4, 4]
+num*channels, growth*rate = 64, 32
+num*convs*in*dense*blocks = [4, 4, 4, 4]
 blks = []
-for i, num_convs in enumerate(num_convs_in_dense_blocks):
-    blks.append(DenseBlock(num_convs, num_channels, growth_rate))
+for i, num*convs in enumerate(num*convs*in*dense_blocks):
+    blks.append(DenseBlock(num*convs, num*channels, growth_rate))
     # This is the number of output channels in the previous dense block
-    num_channels += num_convs * growth_rate
+    num*channels += num*convs * growth_rate
     # A transition layer that haves the number of channels is added between
     # the dense blocks
-    if i != len(num_convs_in_dense_blocks) - 1:
-        blks.append(transition_block(num_channels, num_channels // 2))
-        num_channels = num_channels // 2
+    if i != len(num*convs*in*dense*blocks) - 1:
+        blks.append(transition*block(num*channels, num_channels // 2))
+        num*channels = num*channels // 2
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 def block_2():
     net = block_1()
     # `num_channels`: the current number of channels
-    num_channels, growth_rate = 64, 32
-    num_convs_in_dense_blocks = [4, 4, 4, 4]
+    num*channels, growth*rate = 64, 32
+    num*convs*in*dense*blocks = [4, 4, 4, 4]
 
-    for i, num_convs in enumerate(num_convs_in_dense_blocks):
-        net.add(DenseBlock(num_convs, growth_rate))
+    for i, num*convs in enumerate(num*convs*in*dense_blocks):
+        net.add(DenseBlock(num*convs, growth*rate))
         # This is the number of output channels in the previous dense block
-        num_channels += num_convs * growth_rate
+        num*channels += num*convs * growth_rate
         # A transition layer that haves the number of channels is added
         # between the dense blocks
-        if i != len(num_convs_in_dense_blocks) - 1:
+        if i != len(num*convs*in*dense*blocks) - 1:
             num_channels //= 2
             net.add(TransitionBlock(num_channels))
     return net
@@ -336,7 +336,7 @@ net.add(nn.BatchNorm(),
 ```
 
 ```{.python .input}
-#@tab pytorch
+# @tab pytorch
 net = nn.Sequential(
     b1, *blks,
     nn.BatchNorm2d(num_channels), nn.ReLU(),
@@ -346,7 +346,7 @@ net = nn.Sequential(
 ```
 
 ```{.python .input}
-#@tab tensorflow
+# @tab tensorflow
 def net():
     net = block_2()
     net.add(tf.keras.layers.BatchNormalization())
@@ -357,24 +357,24 @@ def net():
     return net
 ```
 
-## Training
+# # Training
 
 Since we are using a deeper network here, in this section, we will reduce the input height and width from 224 to 96 to simplify the computation.
 
 ```{.python .input}
-#@tab all
-lr, num_epochs, batch_size = 0.1, 10, 256
-train_iter, test_iter = d2l.load_data_fashion_mnist(batch_size, resize=96)
-d2l.train_ch6(net, train_iter, test_iter, num_epochs, lr)
+# @tab all
+lr, num*epochs, batch*size = 0.1, 10, 256
+train*iter, test*iter = d2l.load*data*fashion*mnist(batch*size, resize=96)
+d2l.train*ch6(net, train*iter, test*iter, num*epochs, lr)
 ```
 
-## Summary
+# # Summary
 
 * In terms of cross-layer connections, unlike ResNet, where inputs and outputs are added together, DenseNet concatenates inputs and outputs on the channel dimension.
 * The main components that compose DenseNet are dense blocks and transition layers.
 * We need to keep the dimensionality under control when composing the network by adding transition layers that shrink the number of channels again.
 
-## Exercises
+# # Exercises
 
 1. Why do we use average pooling rather than maximum pooling in the transition layer?
 1. One of the advantages mentioned in the DenseNet paper is that its model parameters are smaller than those of ResNet. Why is this the case?
@@ -382,7 +382,7 @@ d2l.train_ch6(net, train_iter, test_iter, num_epochs, lr)
     1. Is this really the case? Try to change the input shape to $224\times 224$ to see the actual GPU memory consumption.
     1. Can you think of an alternative means of reducing the memory consumption? How would you need to change the framework?
 1. Implement the various DenseNet versions presented in Table 1 of the DenseNet paper :cite:`Huang.Liu.Van-Der-Maaten.ea.2017`.
-1. Design an MLP-based model by applying the DenseNet idea. Apply it to the housing price prediction task in :numref:`sec_kaggle_house`.
+1. Design an MLP-based model by applying the DenseNet idea. Apply it to the housing price prediction task in :numref:`sec*kaggle*house`.
 
 :begin_tab:`mxnet`
 [Discussions](https://discuss.d2l.ai/t/87)
