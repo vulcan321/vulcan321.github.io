@@ -266,9 +266,9 @@ def txt2csv(txt_all):
 
   
 
-![](https://pic1.zhimg.com/v2-3732f7a952374afec6b790e05f88e560_b.jpg)
+![](..\..\images\1c79f5ca-9727-4537-a57f-b25157b2fa19.jpg)
 
-![](https://pic1.zhimg.com/80/v2-3732f7a952374afec6b790e05f88e560_720w.webp)
+![](..\..\images\2dd2c746-aedd-4466-b6d2-10bea987996b.webp)
 
   
 

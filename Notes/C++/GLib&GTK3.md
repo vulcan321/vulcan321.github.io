@@ -14,7 +14,7 @@
 
 GObject实现中， 类是两个结构体的组合，一个是**实例结构体**（保存所有对象私有数据），另一个是**类结构体**（保存所有对象共享的数据），其结构关系图如下：
 
-![image-01](https://github.com/mingxingren/Notes/raw/master/resource/photo/image-2021080601.png)
+![image-01](..\..\images\3a319249-ea7d-4a8c-999f-fe360af493f0.png)
 
 #### GObject 构造和析构大致过程
 

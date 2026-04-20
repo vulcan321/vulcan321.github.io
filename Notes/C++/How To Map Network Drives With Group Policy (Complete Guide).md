@@ -2,7 +2,7 @@
 
 Last Updated: December 11, 2022 by [Robert Allen](https://activedirectorypro.com/author/mug/ "View all posts by Robert Allen")
 
-![](https://activedirectorypro.com/wp-content/uploads/2018/07/GPO-Map-Drives-Featured.jpg)
+![](..\..\images\8b59aa97-3cf7-46da-ad86-556337078501.jpg)
 
 In this guide, I’ll show you step by step instructions on how to map network drives with Group Policy.
 
@@ -45,9 +45,9 @@ You could also use a Security Group to target a specific group of users. This wi
 
 1\. Open the Group Policy Management Console
 
-[![](https://activedirectorypro.com/wp-content/uploads/2018/07/GPO-Map-Drives-1.jpg)
+[![](..\..\images\c8d271ed-0a84-46a8-bb4e-3aa17bd2a230.jpg)
 
-![](https://activedirectorypro.com/wp-content/uploads/2018/07/GPO-Map-Drives-1.jpg)
+![](..\..\images\c8d271ed-0a84-46a8-bb4e-3aa17bd2a230.jpg)
 
 ](https://activedirectorypro.com/wp-content/uploads/2018/07/GPO-Map-Drives-1.jpg)
 
@@ -55,9 +55,9 @@ You could also use a Security Group to target a specific group of users. This wi
 
 **TIP:** This will be a user based GPO so make sure you link the GPO to a location that will target the users.  I have all of my users separated into an OU called ADPRO Users, I’ll create and link the GPO there.
 
-[![](https://activedirectorypro.com/wp-content/uploads/2018/07/GPO-Map-Drives-2.jpg)
+[![](..\..\images\b8af2c3a-e75c-4111-b974-dfe047dbf9f9.jpg)
 
-![](https://activedirectorypro.com/wp-content/uploads/2018/07/GPO-Map-Drives-2.jpg)
+![](..\..\images\b8af2c3a-e75c-4111-b974-dfe047dbf9f9.jpg)
 
 ](https://activedirectorypro.com/wp-content/uploads/2018/07/GPO-Map-Drives-2.jpg)
 
@@ -67,9 +67,9 @@ You can name the new GPO whatever you like, I’ve named mine “Users – Mappe
 
 I can later add additional drive mappings to this GPO.
 
-[![](https://activedirectorypro.com/wp-content/uploads/2018/07/GPO-Map-Drives-3.jpg)
+[![](..\..\images\1d3d7f29-3b9a-4e77-aaa7-29570e6b4fdd.jpg)
 
-![](https://activedirectorypro.com/wp-content/uploads/2018/07/GPO-Map-Drives-3.jpg)
+![](..\..\images\1d3d7f29-3b9a-4e77-aaa7-29570e6b4fdd.jpg)
 
 ](https://activedirectorypro.com/wp-content/uploads/2018/07/GPO-Map-Drives-3.jpg)
 
@@ -79,25 +79,25 @@ The new GPO is now created and linked, now it’s time to configure the settings
 
 1\. On the GPO right click and select edit
 
-[![](https://activedirectorypro.com/wp-content/uploads/2018/07/GPO-Map-Drives-4.jpg)
+[![](..\..\images\7a389682-cb50-48ff-9476-855d20b55f62.jpg)
 
-![](https://activedirectorypro.com/wp-content/uploads/2018/07/GPO-Map-Drives-4.jpg)
+![](..\..\images\7a389682-cb50-48ff-9476-855d20b55f62.jpg)
 
 ](https://activedirectorypro.com/wp-content/uploads/2018/07/GPO-Map-Drives-4.jpg)
 
 2\. Navigate to User Configuration -> Preferences -> Windows Settings -> Drive Mappings
 
-[![](https://activedirectorypro.com/wp-content/uploads/2018/07/GPO-Map-Drives-5.jpg)
+[![](..\..\images\db8c8d68-cf2a-4e75-8111-f56047d8d345.jpg)
 
-![](https://activedirectorypro.com/wp-content/uploads/2018/07/GPO-Map-Drives-5.jpg)
+![](..\..\images\db8c8d68-cf2a-4e75-8111-f56047d8d345.jpg)
 
 ](https://activedirectorypro.com/wp-content/uploads/2018/07/GPO-Map-Drives-5.jpg)
 
 3\. Right Click Drive Mappings, Select New – > Mapped Drive
 
-[![](https://activedirectorypro.com/wp-content/uploads/2018/07/GPO-Map-Drives-6.jpg)
+[![](..\..\images\fb2b559f-d583-4e50-ac39-5c5fc70b726e.jpg)
 
-![](https://activedirectorypro.com/wp-content/uploads/2018/07/GPO-Map-Drives-6.jpg)
+![](..\..\images\fb2b559f-d583-4e50-ac39-5c5fc70b726e.jpg)
 
 ](https://activedirectorypro.com/wp-content/uploads/2018/07/GPO-Map-Drives-6.jpg)
 
@@ -110,9 +110,9 @@ General Tab Settings
 -   Choose Update for action
 -   Label as: This is optional but may be beneficial for users.
 
-[![](https://activedirectorypro.com/wp-content/uploads/2018/07/GPO-Map-Drives-7.jpg)
+[![](..\..\images\1b97140d-1900-41a7-b63a-750ef311ea86.jpg)
 
-![](https://activedirectorypro.com/wp-content/uploads/2018/07/GPO-Map-Drives-7.jpg)
+![](..\..\images\1b97140d-1900-41a7-b63a-750ef311ea86.jpg)
 
 ](https://activedirectorypro.com/wp-content/uploads/2018/07/GPO-Map-Drives-7.jpg)
 
@@ -124,9 +124,9 @@ Select Item-level Targeting
 
 Click the Targeting Button
 
-[![](https://activedirectorypro.com/wp-content/uploads/2018/07/GPO-Map-item-level-targeting-2.jpg)
+[![](..\..\images\39a689e6-4f4a-46e2-bb81-194527f11757.jpg)
 
-![](https://activedirectorypro.com/wp-content/uploads/2018/07/GPO-Map-item-level-targeting-2.jpg)
+![](..\..\images\39a689e6-4f4a-46e2-bb81-194527f11757.jpg)
 
 ](https://activedirectorypro.com/wp-content/uploads/2018/07/GPO-Map-item-level-targeting-2.jpg)
 
@@ -134,9 +134,9 @@ Select New Item
 
 Select Organization Unit then select the OU you want to target
 
-[![](https://activedirectorypro.com/wp-content/uploads/2018/07/GPO-Map-item-level-targeting.jpg)
+[![](..\..\images\debdab72-4831-4464-991c-f580542bc2ea.jpg)
 
-![](https://activedirectorypro.com/wp-content/uploads/2018/07/GPO-Map-item-level-targeting.jpg)
+![](..\..\images\debdab72-4831-4464-991c-f580542bc2ea.jpg)
 
 ](https://activedirectorypro.com/wp-content/uploads/2018/07/GPO-Map-item-level-targeting.jpg)
 
@@ -150,17 +150,17 @@ For the GPO to run I will need to reboot the users PC or run gpupdate /force. Th
 
 I’ve rebooted the computer, now I’ll log in with an account that is in the HR organizational unit.
 
-[![](https://activedirectorypro.com/wp-content/uploads/2018/07/GPO-MAP-Drive-Test-1.jpg)
+[![](..\..\images\9bc4bf85-0850-420b-91c6-d1d219944640.jpg)
 
-![](https://activedirectorypro.com/wp-content/uploads/2018/07/GPO-MAP-Drive-Test-1.jpg)
+![](..\..\images\9bc4bf85-0850-420b-91c6-d1d219944640.jpg)
 
 ](https://activedirectorypro.com/wp-content/uploads/2018/07/GPO-MAP-Drive-Test-1.jpg)
 
 Once logged I will go to file explorer and check for the mapped drive.
 
-[![](https://activedirectorypro.com/wp-content/uploads/2018/07/GPO-MAP-Drive-Test-2.jpg)
+[![](..\..\images\c3811f27-766e-43ed-a992-0f3b4424942d.jpg)
 
-![](https://activedirectorypro.com/wp-content/uploads/2018/07/GPO-MAP-Drive-Test-2.jpg)
+![](..\..\images\c3811f27-766e-43ed-a992-0f3b4424942d.jpg)
 
 ](https://activedirectorypro.com/wp-content/uploads/2018/07/GPO-MAP-Drive-Test-2.jpg)
 
@@ -186,9 +186,9 @@ Here are the drive map settings for mapping a drive for an individual user
 
 The %UserName% is a variable that will match the user’s logon name.
 
-[![](https://activedirectorypro.com/wp-content/uploads/2018/07/GPO-Map-Personal-Drive.jpg)
+[![](..\..\images\93804ebf-c1b2-4009-83ed-d79eb9431f87.jpg)
 
-![](https://activedirectorypro.com/wp-content/uploads/2018/07/GPO-Map-Personal-Drive.jpg)
+![](..\..\images\93804ebf-c1b2-4009-83ed-d79eb9431f87.jpg)
 
 ](https://activedirectorypro.com/wp-content/uploads/2018/07/GPO-Map-Personal-Drive.jpg)
 
@@ -196,9 +196,9 @@ Just to be clear you must have folders setup on a network share that matches the
 
 My file server is file1, the share is users and in the user’s folder is a folder for each user. Screenshot below of users folder on file1 server.
 
-[![](https://activedirectorypro.com/wp-content/uploads/2018/07/GPO-Map-File-Servers-Users.jpg)
+[![](..\..\images\13f1b396-cd19-402a-ad4e-81791c9a03f9.jpg)
 
-![](https://activedirectorypro.com/wp-content/uploads/2018/07/GPO-Map-File-Servers-Users.jpg)
+![](..\..\images\13f1b396-cd19-402a-ad4e-81791c9a03f9.jpg)
 
 ](https://activedirectorypro.com/wp-content/uploads/2018/07/GPO-Map-File-Servers-Users.jpg)
 
@@ -206,9 +206,9 @@ That is it.
 
 Just have the user log off and back on and it should map the M drive
 
-[![](https://activedirectorypro.com/wp-content/uploads/2018/07/GPO-Map-Personal-Drive-2.jpg)
+[![](..\..\images\6f896151-6a83-42ba-bea3-ea73c8f5f938.jpg)
 
-![](https://activedirectorypro.com/wp-content/uploads/2018/07/GPO-Map-Personal-Drive-2.jpg)
+![](..\..\images\6f896151-6a83-42ba-bea3-ea73c8f5f938.jpg)
 
 ](https://activedirectorypro.com/wp-content/uploads/2018/07/GPO-Map-Personal-Drive-2.jpg)
 

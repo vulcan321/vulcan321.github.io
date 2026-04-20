@@ -9,7 +9,7 @@
 ### 二、创建待测项目配套的Google Test项目
 
 1.  在VS2019中创建新项目 Practice  
-    ![在这里插入图片描述](https://img-blog.csdnimg.cn/20210311114339625.png)  
+    ![在这里插入图片描述](..\..\images\4c0b0e6e-738a-4a25-89d8-edcb3036acfd.png)  
     其中的Practice.cpp包含main()函数
 
 ```cpp
@@ -26,18 +26,18 @@ int main()
     （1）文件-新建-项目，打开 创建新项目 窗口  
     （2）选择创建Google Test，然后点击下一步  
     （3）在 配置新项目 窗口，项目名称自定，解决方案选择：添加到解决方案。然后点击创建  
-    ![在这里插入图片描述](https://img-blog.csdnimg.cn/20210311114710816.png)
+    ![在这里插入图片描述](..\..\images\80e82879-aa8a-4662-9065-4ae4dedcb7c5.png)
 
 （4）选择要测试的项目后，点击OK  
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210311114751628.png)
+![在这里插入图片描述](..\..\images\b4610215-0b67-4316-aae7-aa73d5cc017e.png)
 
 （5）如图所示，已经创建好了 项目Practice 对应的 gtest项目practice\_gtest  
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210311115405526.png)
+![在这里插入图片描述](..\..\images\ec9baa1e-ddbf-4fb7-b439-11b0d79a5f7c.png)
 
 ### 三、测试已有项目中的函数
 
 1.  在已有项目practice中新建文件 factorial.cpp  
-    ![在这里插入图片描述](https://img-blog.csdnimg.cn/20210311115529274.png)  
+    ![在这里插入图片描述](..\..\images\5af74da7-602a-42c6-b5df-b5467516e086.png)  
     factorial.cpp包含函数factorial( )，用于计算正整数的阶乘。注意：这里要加 关键字 inline，否则引用factorial.cpp时会触发fatal error LNK1169: 找到一个或多个多重定义的符号
 
 ```cpp
@@ -78,16 +78,16 @@ EXPECT_EQ(2, factorial(4)); //预期是2，实际结果是24
 ```
 
 3.  运行单元测试用例：测试–测试资源管理器 或者 视图–测试资源管理器，点击 在视图中运行所有测试用例  
-    ![在这里插入图片描述](https://img-blog.csdnimg.cn/20210311140015808.png)  
+    ![在这里插入图片描述](..\..\images\b692addc-bf3b-4b30-9bf1-ad85b287989d.png)  
     运行结果如下，可以看到与预期是一致的  
-    ![在这里插入图片描述](https://img-blog.csdnimg.cn/20210311142603577.png)  
+    ![在这里插入图片描述](..\..\images\7f5dc8f1-bec6-404f-a1bf-79a8fe550185.png)  
     由于在测试用例BeyondZero 中使用了ASSERT断言，ASSERT运行失败后，同一用例中，ASSERT后的测试项没有被执行，因此这里只出现了一个报错  
-    ![在这里插入图片描述](https://img-blog.csdnimg.cn/20210311142620794.png)
+    ![在这里插入图片描述](..\..\images\0827216e-c25a-4138-9214-b52a32549713.png)
 
 ### 四、测试项目中的类
 
 1.新建类Calc，模拟加减乘除运算  
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210311163725848.png)  
+![在这里插入图片描述](..\..\images\7113a16f-eb99-40c2-9e5c-03d2b63dc7a7.png)  
 其中：Calc.h
 
 ```cpp
@@ -161,16 +161,16 @@ EXPECT_FLOAT_EQ(calculation.Divide(1, 2),0.5);
     (1) 进入 测试工程Practice\_gtest的属性设定界面(右键点击项目，在弹出菜单中选择属性)  
     (2) 依次定位到链接器-输入-附加依赖项，点击下拉框，进行编辑  
     (3) 输入类Calc的目标文件 Calc.obj的地址  
-    ![在这里插入图片描述](https://img-blog.csdnimg.cn/2021031116462954.png)  
-    ![在这里插入图片描述](https://img-blog.csdnimg.cn/20210311164955154.png)
+    ![在这里插入图片描述](..\..\images\7e5ada4d-9cb2-42fa-a434-146736539ad7.png)  
+    ![在这里插入图片描述](..\..\images\4ae6a4e7-49c6-4603-966e-963e3f6a3cdc.png)
 4.  打开测试资源管理器，执行测试  
-    ![在这里插入图片描述](https://img-blog.csdnimg.cn/2021031116534358.png)
+    ![在这里插入图片描述](..\..\images\95b779ff-f19c-4708-b42c-359016a49b55.png)
 
 ### 五、一些疑惑和分析
 
 1.  测试类时，为什么一定要设定目标文件的地址？另外，设定目标文件地址的方法感觉有些低效，是否有更好的办法？
 2.  当测试多个类时，需要分别添加对应的obj文件，该场景下不能使用通配符 \* ，否则执行测试时会报错  
-    ![在这里插入图片描述](https://img-blog.csdnimg.cn/20210311170508944.png)
+    ![在这里插入图片描述](..\..\images\c793e32c-c348-49dd-a4b8-cc4a449990e5.png)
 
 ### 六、改进点
 
@@ -192,11 +192,11 @@ EXPECT_EQ(3,calculation.Add(1, 2));
 2.  设置Project依赖关系的方法  
     (1) 右键点击 Practice\_gtest，选择 属性  
     (2) 在属性页中，依次定位到：配置属性 - C/C++ - 常规 - 附加包含目录，点击下拉框后选择编辑  
-    ![在这里插入图片描述](https://img-blog.csdnimg.cn/20210312113331282.png)  
+    ![在这里插入图片描述](..\..\images\2341b696-ecb6-45b6-9acb-514b579ed3fa.png)  
     (3) 在弹出的附加包含目录窗口中设定依赖关系：输入待测项目的目录地址  
-    ![在这里插入图片描述](https://img-blog.csdnimg.cn/20210312113536340.png)
+    ![在这里插入图片描述](..\..\images\c6510866-41d7-476b-9551-6688eac4eae2.png)
 3.  下图中的include方式需要修改：正确的做法是 include 头文件。因为需要依赖接口(.h头文件)，而不是依赖实现（.cpp文件）  
-    ![在这里插入图片描述](https://img-blog.csdnimg.cn/20210312114018238.png)  
+    ![在这里插入图片描述](..\..\images\a0876ba4-b75e-48d8-9c49-517ac0508c58.png)  
     针对问题3的修改过程：
 
 (1) 在 Practice项目 中新建头文件 factorial.h ，内容如下
@@ -219,7 +219,7 @@ return n * factorial(n - 1);
 }
 ```
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210316100905235.png)  
+![在这里插入图片描述](..\..\images\18f05532-7cc3-4c70-bdf2-e0f67419d099.png)  
 （3）对应的 Practice\_gtest – test.cpp也进行调整，包含对应的头文件factorial.h
 
 ```cpp
@@ -234,7 +234,7 @@ EXPECT_EQ(1, factorial(-3));
 ```
 
 （4）依次进入Practice\_gtest-属性-链接器-输入-附加依赖项-编辑，添加对应的obj文件  
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210316101351834.png)  
+![在这里插入图片描述](..\..\images\27c334a7-3052-4641-add3-0a96b4a31717.png)  
 （5）随后通过测试资源管理器运行测试即可  
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210316101952240.png)
+![在这里插入图片描述](..\..\images\b76be6ec-4376-4df0-8a02-827a545b5b17.png)
 

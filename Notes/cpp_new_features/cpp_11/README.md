@@ -1,6 +1,6 @@
 ## <h1 id="cpp_11">C++11新特性</h1>
 
-![C++11思维导图](https://www.0voice.com/uiwebsite/cpp_new_features/C++11_new_features.png)
+![C++11思维导图](..\..\..\images\a1b62e04-0689-4fd5-a502-ab07c5cb0ca7.png)
 -----------
 <!--
   * [关键字](https://github.com/0voice/cpp_new_features/tree/main/cpp_11#cpp_11_keywords)

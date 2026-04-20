@@ -292,10 +292,10 @@ Use the [Title](url) syntax to insert a link:
 This is a link to the Mathpix website
 Images (Markdown)
 Use the ![Title](url) syntax to insert an image:
-![Michelson–Morley experiment](https://cdn.mathpix.com/snip/images/awccdJC5T8qaH8EAA7-Y0PpPG_RbMVLTc2_-YgewedE.original.fullsize.png)
+![Michelson–Morley experiment](../../images/3c261670-dd11-436e-9463-61ca13705a30.png)
 Michelson–Morley experiment
 Include text in quotes after the url for a tooltip (hover over the image to see):
-![Michelson–Morley experiment](https://cdn.mathpix.com/snip/images/awccdJC5T8qaH8EAA7-Y0PpPG_RbMVLTc2_-YgewedE.original.fullsize.png "Michelson-Morley experiment")
+![Michelson–Morley experiment](../../images/1fc485a1-4563-494a-bf3f-58c4a737e119.png)
 Michelson–Morley experiment
 Images (LaTeX)
 You can also insert images using LaTeX’s figure environment.

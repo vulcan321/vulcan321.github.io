@@ -1,6 +1,6 @@
 # openssl 查看证书
 
-[![](https://cdn2.jianshu.io/assets/default_avatar/6-fd30f34c8641f6f32f5494df5d6b8f3c.jpg)](https://www.jianshu.com/u/9568f0dd8c56)
+[![](..\..\images\6baf726e-856c-493d-91ae-302bd6094d36.jpg)](https://www.jianshu.com/u/9568f0dd8c56)
 
 [liang\_echo](https://www.jianshu.com/u/9568f0dd8c56)关注IP属地: 浙江
 

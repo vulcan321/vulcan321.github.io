@@ -60,4 +60,4 @@ apachecn-c-cpp-zh-pt2 <port>
 
 ## 赞助我们
 
-![](http://data.apachecn.org/img/about/donate.jpg)
+![](..\..\..\..\images\e69a4678-712b-407b-ac55-f05549120cb2.jpg)

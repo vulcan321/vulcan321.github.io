@@ -114,7 +114,7 @@ b、debug 观察下数据变化，和 手撸版 对比着去理解
 
   
 
-![Image](https://mmbiz.qpic.cn/mmbiz_png/Z6bicxIx5naIpdC56FO4cIqEVZIvSAsK2sXPjKyL2fKdvzUpGqbDKgA2cSHT6TTtLVmIPWmPTiaH6EDWfC4Ya0CA/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1)
+![Image](..\..\images\baa9fb7e-3c0e-4776-bddd-5259216889a6.png)
 
 上面这是一个"逻辑"示意图。印象中，第1次看时，以为 "inputs & outputs" 是并行计算、但上面又有依赖，很糊涂。
 
@@ -124,7 +124,7 @@ b、debug 观察下数据变化，和 手撸版 对比着去理解
 
   
 
-![Image](https://mmbiz.qpic.cn/mmbiz_png/Z6bicxIx5naIpdC56FO4cIqEVZIvSAsK2ddeFl4s4K2YlXMfr37UDHib7XGRyiaNOCNEHN6aU0Ow5SrgPUVCawhNw/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1)
+![Image](..\..\images\7fd14844-3801-474f-a9af-45f828130c69.png)
 
 **2.1 例子：翻译**
 
@@ -150,9 +150,9 @@ class ScaledDotProductAttention(nn.Module):    def __init__(self):    
 
   
 
-![Image](https://mmbiz.qpic.cn/mmbiz_png/Z6bicxIx5naIpdC56FO4cIqEVZIvSAsK2ZOF7KXOHNLibFszgnmIibQBBPtztNOsiayq5zqq1UAU7R1OVl3RFbKQRQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1)
+![Image](..\..\images\768fd5d9-eb59-47a9-96e0-c97d02d73534.png)
 
-![Image](https://mmbiz.qpic.cn/mmbiz_png/Z6bicxIx5naIpdC56FO4cIqEVZIvSAsK2Lx0lsnBSSqcdUjlfb4gfSx4l1JXJEIUqGfGk65HeKzkRRvOiaoBRUJQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1)
+![Image](..\..\images\ba4c5653-2299-45b0-a051-89f25e6eb9fd.png)
 
 #### 2 MultiHeadAttention
 

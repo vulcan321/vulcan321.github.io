@@ -19,7 +19,7 @@ The _Apple Event Manager_ supplies the underlying support for creating scriptabl
 
 Figure 2-1 shows how OSA elements work together in OS X.
 
-**Figure 2-1**The Open Scripting Architecture workflow ![image: ../Art/execute_script_2x.png](https://developer.apple.com/library/archive/documentation/LanguagesUtilities/Conceptual/MacAutomationScriptingGuide/HowMacScriptingWorks.htmlArt/execute_script_2x.png)
+**Figure 2-1**The Open Scripting Architecture workflow ![image: ../Art/execute_script_2x.png](..\..\images\fa310010-f991-4ad4-b591-efd0f8f1694e.png)
 
 ### Extending the Reach of Scripting
 

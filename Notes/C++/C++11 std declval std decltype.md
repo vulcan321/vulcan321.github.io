@@ -134,7 +134,7 @@ cout << "mydeclval<A>().myfunc()的返回类型=" << type_id_with_cvr<decltype(m
 
 -   输出
 
-![](https://img-blog.csdnimg.cn/20201114181648315.png)
+![](..\..\images\0bbc8f41-1cd1-4085-b2b6-7f5b2cb1f726.png)
 
 **在A类中增加析构函数，引出问题**
 
@@ -160,7 +160,7 @@ private:
 
 -   再次编译，报错
 
-![](https://img-blog.csdnimg.cn/20201114183358448.png)
+![](..\..\images\ce611263-4504-4e54-8b19-99bdd26cb34c.png)
 
 -   注释掉decltype(mydeclval<A>().myfunc())所在行代码，则编译不报错。
     -   因为要遵循语义限制，mydeclval<A>().myfunc()语义上要创建一个临时对象（虽然实际上没有创建，是假象创建对象的），然后由这个假象的对象去调用myfunc函数。
@@ -171,7 +171,7 @@ private:
 cout << "sizeof(mydeclval<A>())=" << sizeof(mydeclval<_nmsp1::A>()) << endl;
 ```
 
-![](https://img-blog.csdnimg.cn/20201114183358448.png)
+![](..\..\images\ce611263-4504-4e54-8b19-99bdd26cb34c.png)
 
 -   **返回类型本身是不好的**
     -   因为返回类型本身，导致**为了遵循语义限制，编译器内部创建了临时的A类对象**。

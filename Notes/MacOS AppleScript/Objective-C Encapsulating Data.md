@@ -231,7 +231,7 @@ By calling `[super init]` as the first line in the method, an object is initiali
 **Figure 3-1**  The initialization process  
 **图 3-1** 初始化过程
 
-![](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/EncapsulatingData/EncapsulatingData.html#//apple_ref/doc/uid/TP40011210-CH5-SW1../Art/initflow.png)![](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/EncapsulatingData/EncapsulatingData.html#//apple_ref/doc/uid/TP40011210-CH5-SW1../Art/initflow.png)
+![](..\..\images\294f932c-7df7-4e05-b20b-77bb2e9288c4.html)![](..\..\images\294f932c-7df7-4e05-b20b-77bb2e9288c4.html)
 
 As you saw in the previous chapter, an object is initialized either by calling `init`, or by calling a method that initializes the object with specific values.  
 正如您在上一章中看到的，对象是通过调用 `init` 或调用使用特定值初始化对象的方法来初始化的。
@@ -411,7 +411,7 @@ A common scenario is that the table view has a reference to its delegate and the
 **Figure 3-7**  Strong references between a table view and its delegate  
 **图 3-7** 表视图与其委托之间的强引用
 
-![](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/EncapsulatingData/EncapsulatingData.html#//apple_ref/doc/uid/TP40011210-CH5-SW1../Art/strongreferencecycle1.png)
+![](..\..\images\0747eb1a-57d5-4df7-a7bc-56c123736def.html)
 
 A problem occurs if the other objects give up their strong relationships to the table view and delegate, as shown in [Figure 3-8](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/EncapsulatingData/EncapsulatingData.html#//apple_ref/doc/uid/TP40011210-CH5-SW1#//apple_ref/doc/uid/TP40011210-CH5-SW26).  
 如果其他对象放弃了与表视图和委托的强关系，则会出现问题，如[图 3-8](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/EncapsulatingData/EncapsulatingData.html#//apple_ref/doc/uid/TP40011210-CH5-SW1#//apple_ref/doc/uid/TP40011210-CH5-SW26) 所示。
@@ -419,7 +419,7 @@ A problem occurs if the other objects give up their strong relationships to the 
 **Figure 3-8**  A strong reference cycle  
 **图 3-8** 强大的参考周期
 
-![](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/EncapsulatingData/EncapsulatingData.html#//apple_ref/doc/uid/TP40011210-CH5-SW1../Art/strongreferencecycle2.png)
+![](..\..\images\ceff4d58-4215-4e44-8653-103bd0f52bfb.html)
 
 Even though there is no need for the objects to be kept in memory—there are no strong relationships to the table view or delegate other than the relationships between the two objects—the two remaining strong relationships keep the two objects alive. This is known as a _strong reference cycle_.  
 即使不需要将对象保留在内存中（除了两个对象之间的关系之外，与表视图或委托没有强关系），但剩下的两个强关系会使两个对象保持活动状态。这被称为_强参考周期_。
@@ -433,7 +433,7 @@ If the table view is modified to use a weak relationship to its delegate (which 
 **Figure 3-9**  The correct relationship between a table view and its delegate  
 **图 3-9** 表视图与其委托之间的正确关系
 
-![](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/EncapsulatingData/EncapsulatingData.html#//apple_ref/doc/uid/TP40011210-CH5-SW1../Art/strongreferencecycle3.png)
+![](..\..\images\7dd7fe29-a3f6-4c77-bc37-cc363fd5a056.html)
 
 When the other objects in the graph give up their strong relationships to the table view and delegate this time, there are no strong references left to the delegate object, as shown in [Figure 3-10](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/EncapsulatingData/EncapsulatingData.html#//apple_ref/doc/uid/TP40011210-CH5-SW1#//apple_ref/doc/uid/TP40011210-CH5-SW28).  
 当图中的其他对象放弃其与表视图的强关系并委托时，没有对委托对象留下强引用，如[图 3-10](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/EncapsulatingData/EncapsulatingData.html#//apple_ref/doc/uid/TP40011210-CH5-SW1#//apple_ref/doc/uid/TP40011210-CH5-SW28) 所示。
@@ -441,7 +441,7 @@ When the other objects in the graph give up their strong relationships to the ta
 **Figure 3-10**  Avoiding a strong reference cycle  
 **图 3-10** 避免强参考周期
 
-![](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/EncapsulatingData/EncapsulatingData.html#//apple_ref/doc/uid/TP40011210-CH5-SW1../Art/strongreferencecycle4.png)
+![](..\..\images\408d7ae4-681a-4f85-90ea-5babc09eac69.html)
 
 This means that the delegate object will be deallocated, thereby releasing the strong reference on the table view, as shown in [Figure 3-11](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/EncapsulatingData/EncapsulatingData.html#//apple_ref/doc/uid/TP40011210-CH5-SW1#//apple_ref/doc/uid/TP40011210-CH5-SW29).  
 这意味着委托对象将被解除分配，从而在表视图上释放强引用，如[图 3-11](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/EncapsulatingData/EncapsulatingData.html#//apple_ref/doc/uid/TP40011210-CH5-SW1#//apple_ref/doc/uid/TP40011210-CH5-SW29) 所示。
@@ -449,7 +449,7 @@ This means that the delegate object will be deallocated, thereby releasing the s
 **Figure 3-11**  Deallocating the delegate  
 **图 3-11** 解除分配委托
 
-![](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/EncapsulatingData/EncapsulatingData.html#//apple_ref/doc/uid/TP40011210-CH5-SW1../Art/strongreferencecycle5.png)
+![](..\..\images\ee4e142e-f024-422b-b7dd-0332e9bbaa82.html)
 
 Once the delegate is deallocated, there are no longer any strong references to the table view, so it too is deallocated.  
 解除分配委托后，不再有任何对表视图的强引用，因此它也会被释放。

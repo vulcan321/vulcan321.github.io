@@ -13,7 +13,7 @@ LRU一般采用[链表](https://so.csdn.net/so/search?q=%E9%93%BE%E8%A1%A8&spm=1
 
   
 
-![](https://img-blog.csdn.net/20170901161029050?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhb19NcnNfbGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)  
+![](..\..\images\05910fea-b6ee-48a7-ac90-e873336db8e2.jpeg)  
 
 LRU的实现有两种方式：缓存命中后，是否要这个数据缓存项到LRU队列的最前端。
 

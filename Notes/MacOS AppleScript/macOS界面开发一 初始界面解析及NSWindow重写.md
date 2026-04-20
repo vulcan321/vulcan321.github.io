@@ -1,12 +1,12 @@
 写文章
 
-![点击打开vulcan321的主页](https://picx.zhimg.com/v2-abed1a8c04700ba7d72b45195223e0ff_is.jpg?source=32738c0c)
+![点击打开vulcan321的主页](..\..\images\c7c595e7-0143-412d-bb67-b3c912ea1557.jpg)
 
-![macOS界面开发一 初始界面解析及NSWindow重写](https://pica.zhimg.com/v2-f087a8189be1c6a577fec16f01ad244c_1440w.jpg?source=172ae18b)
+![macOS界面开发一 初始界面解析及NSWindow重写](..\..\images\c1086f0e-5880-4f83-8fdc-00037a22f8e3.jpg)
 
 # macOS界面开发一 初始界面解析及NSWindow重写
 
-[![克莱夫鹏](https://pica.zhimg.com/v2-abed1a8c04700ba7d72b45195223e0ff_xs.jpg?source=172ae18b)](https://zhuanlan.zhihu.com//www.zhihu.com/people/ke-lai-fu-peng)
+[![克莱夫鹏](..\..\images\98293aa0-7e4b-4583-9709-9f46a1b52117.jpg)](https://zhuanlan.zhihu.com//www.zhihu.com/people/ke-lai-fu-peng)
 
 [克莱夫鹏](https://zhuanlan.zhihu.com//www.zhihu.com/people/ke-lai-fu-peng)
 
@@ -26,15 +26,15 @@ Mac开发者
 
 我们新建一个项目，希望把大部分常用的原生视图组件写入，对于常用的控件按功能大致上可以分为文本类、图像类、按钮类、菜单/工具栏类、容器类、时间、视图窗口类、多数据展示类，下图是控件家族类图
 
-![](https://pic2.zhimg.com/v2-367c60fbd2ff0bc16fad3abfe69a6129_b.jpg)
+![](..\..\images\52702e73-11c5-4b8c-82f2-e87bfc5e14f7.jpg)
 
-![](https://pic2.zhimg.com/80/v2-367c60fbd2ff0bc16fad3abfe69a6129_720w.webp)
+![](..\..\images\4efa1674-84d5-4792-bbc6-57973ca3611f.webp)
 
 我们新建的项目写一些常用的，按照 的思维导图做：
 
-![](https://pic1.zhimg.com/v2-b6ddac682493d931ab3345d24eb4641c_b.jpg)
+![](..\..\images\11b7ebf2-16ec-49e8-81b8-30bad4b2d546.jpg)
 
-![](https://pic1.zhimg.com/80/v2-b6ddac682493d931ab3345d24eb4641c_720w.webp)
+![](..\..\images\5b2d55f2-bf9c-40fe-bbd2-6e79b1ae25f5.webp)
 
 现在开始吧，打开Xcode，新建一个项目命名为macAllControllersView， 在ViewController.h中创建
 
@@ -185,9 +185,9 @@ textDome的点击事件:
 
 可将点击事件注释掉，运行看看效果
 
-![](https://pic4.zhimg.com/v2-cc724bc2fae2e6a0c864dcac24cf63e7_b.jpg)
+![](..\..\images\eeb40697-b105-40cf-8179-a66828102f1e.jpg)
 
-![](https://pic4.zhimg.com/80/v2-cc724bc2fae2e6a0c864dcac24cf63e7_720w.webp)
+![](..\..\images\43281488-16ac-4e70-964f-230b16a26493.webp)
 
   
 
@@ -197,9 +197,9 @@ textDome的点击事件:
 
 窗口对象包括titleBar,contentView内容视图,contentBoder底部边框区。titleBar上面包括控制按钮,标题。
 
-![](https://pic2.zhimg.com/v2-6f0a5ef8c04e1e11afc452bc835cc961_b.jpg)
+![](..\..\images\f478c371-4b6c-47c2-892f-f67d240b983d.jpg)
 
-![](https://pic2.zhimg.com/80/v2-6f0a5ef8c04e1e11afc452bc835cc961_720w.webp)
+![](..\..\images\7c45e27b-1e8a-4014-91ad-44f890de34c7.webp)
 
 ## 二、NSWindow、NSWindowController、NSViewController、NSView 之间的关系
 
@@ -323,7 +323,7 @@ Objective-C
 
 
 
-![](https://picx.zhimg.com/v2-abed1a8c04700ba7d72b45195223e0ff_l.jpg?source=32738c0c)
+![](..\..\images\a49da7b3-0354-4108-9c9a-ba1ef2da2f19.jpg)
 
 写下你的评论...
 
@@ -355,7 +355,7 @@ Android程序分析环境搭建-macOS篇在实际的Android软件开发过程中
 
 ](https://zhuanlan.zhihu.com/p/41845867)[
 
-![刚从 Windows 转到 macOS，如何快速上手操作？](https://picx.zhimg.com/v2-b4d4fdb0cb69905e4622427565007d73_250x0.jpg?source=172ae18b)
+![刚从 Windows 转到 macOS，如何快速上手操作？](..\..\images\430245ed-5458-4771-8c1c-49c84c1a0cd9.jpg)
 
 # 刚从 Windows 转到 macOS，如何快速上手操作？
 
@@ -365,7 +365,7 @@ Android程序分析环境搭建-macOS篇在实际的Android软件开发过程中
 
 ](https://zhuanlan.zhihu.com/p/30399128)[
 
-![Mac版本 - 2020最新版Intellij IDEA 新手开发环境安装使用教程](https://picx.zhimg.com/v2-5ec2e5fa20a897dbe3e2fab671a7381a_250x0.jpg?source=172ae18b)
+![Mac版本 - 2020最新版Intellij IDEA 新手开发环境安装使用教程](..\..\images\6da05fbc-b915-44bf-b947-3f56854ed502.jpg)
 
 # Mac版本 - 2020最新版Intellij IDEA 新手开发环境安装使用教程
 

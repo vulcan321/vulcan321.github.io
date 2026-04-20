@@ -4,7 +4,7 @@
 
 收录于合集
 
-![Image](https://mmbiz.qpic.cn/mmbiz_png/heS6wRSHVMmbq1qLbfTGuk3jmOPpGT7D5XWia0mA8twb2poibaBnypJvy5dMj7FGbQAjz6ic69NSHthvJ7jQqgz2g/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1)  
+![Image](..\..\images\4614489c-5d1b-4899-9f7b-3387273a5255.png)  
 
 ```
 来源：Python数据科学本文约7200字，建议阅读14分钟在本文中，我们将研究Transformer模型，理解它的工作原理。
@@ -53,7 +53,7 @@ https://arxiv.org/abs/1706.03762
 
   
 
-![Image](https://mmbiz.qpic.cn/mmbiz_jpg/87HjJEl4c1s46s60FhpZjFU2TicuJ3zh1qibrHPUMjIYEzV0Slzw2tT0Uy5WGlzfI8xfWpJXMFmY1Qk0Cd45MiaMQ/640?wxfrom=5&wx_fmt=jpeg&wx_lazy=1&wx_co=1)
+![Image](..\..\images\1bd62798-8619-457a-ad59-44430e6ee225.jpeg)
 
   
 
@@ -61,7 +61,7 @@ https://arxiv.org/abs/1706.03762
 
   
 
-![Image](https://mmbiz.qpic.cn/mmbiz_jpg/87HjJEl4c1s46s60FhpZjFU2TicuJ3zh1Pc6gbGelYsXxLykUgiaUhEvonsvvfWPlwGXdAkmtGauB7QozlsPE80Q/640?wxfrom=5&wx_fmt=jpeg&wx_lazy=1&wx_co=1)
+![Image](..\..\images\0edb3b61-671e-43e0-8313-7cf2bcc30fb4.jpeg)
 
   
 
@@ -69,13 +69,13 @@ https://arxiv.org/abs/1706.03762
 
   
 
-![Image](https://mmbiz.qpic.cn/mmbiz_jpg/87HjJEl4c1s46s60FhpZjFU2TicuJ3zh1QuicTiaMXNndia7wjA4OyMibNFUkxNM1oPQ2Lao2NUiaTIxn6lezTtsYgMg/640?wxfrom=5&wx_fmt=jpeg&wx_lazy=1&wx_co=1)
+![Image](..\..\images\dec0e7c7-280a-440d-94d1-9296e82804f1.jpeg)
 
   
 
 所有的编码器在结构上都是相同的，但它们没有共享参数。每个解码器都可以分解成两个子层。
 
-![Image](https://mmbiz.qpic.cn/mmbiz_jpg/87HjJEl4c1s46s60FhpZjFU2TicuJ3zh1Ndj3woJMjso67kkWiapo0qw8eSqhNSZI6R7KyjUL2qKicqOeHBBMWyYQ/640?wxfrom=5&wx_lazy=1&wx_co=1&wx_fmt=jpeg)
+![Image](..\..\images\7947552c-2f7d-428b-9e67-56e5df291e89.jpeg)
 
 从编码器输入的句子首先会经过一个自注意力（self-attention）层，这层帮助编码器在对每个单词编码时关注输入句子的其他单词。我们将在稍后的文章中更深入地研究自注意力。
 
@@ -87,7 +87,7 @@ https://arxiv.org/abs/1706.03762
 
 解码器中也有编码器的自注意力（self-attention）层和前馈（feed-forward）层。除此之外，这两个层之间还有一个注意力层，用来关注输入句子的相关部分（和seq2seq模型的注意力作用相似）。
 
-![Image](https://mmbiz.qpic.cn/mmbiz_jpg/87HjJEl4c1s46s60FhpZjFU2TicuJ3zh13wnX913lHNj8RqmibplWyEmlZjZO4oNh37N4Q9icNtiatYic7SyrrFLM8w/640?wxfrom=5&wx_lazy=1&wx_co=1&wx_fmt=jpeg)
+![Image](..\..\images\112f2085-aa37-49e9-8331-4bea860a60ab.jpeg)
 
 **将张量引入图景**
 
@@ -100,7 +100,7 @@ https://arxiv.org/abs/1706.03762
 像大部分NLP应用一样，我们首先将每个输入单词通过词嵌入算法转换为词向量。
 
   
-![Image](https://mmbiz.qpic.cn/mmbiz_png/87HjJEl4c1s46s60FhpZjFU2TicuJ3zh1Idz5ABIXz9sIh8uZ9kSceHXNG3ZSBFiasQCO5EKU2lvia3XWLm9p7WhA/640?wxfrom=5&wx_lazy=1&wx_co=1&wx_fmt=png)
+![Image](..\..\images\812b110e-aaf8-4e27-800b-c46bf750c6f2.png)
 
 每个单词都被嵌入为512维的向量，我们用这些简单的方框来表示这些向量。
 
@@ -110,7 +110,7 @@ https://arxiv.org/abs/1706.03762
 
   
 
-将输入序列进行词嵌入之后，每个单词都会流经编码器中的两个子层。![Image](https://mmbiz.qpic.cn/mmbiz_jpg/87HjJEl4c1s46s60FhpZjFU2TicuJ3zh1ecK3GMVek2WON5FgepA7RKD6aEkmgPMO1QvADqmicqxWMwHb7ia984wg/640?wxfrom=5&wx_lazy=1&wx_co=1&wx_fmt=jpeg)
+将输入序列进行词嵌入之后，每个单词都会流经编码器中的两个子层。![Image](..\..\images\b1732d29-f828-4b35-bbdd-4bbe65bad796.jpeg)
 
 接下来我们看看Transformer的一个核心特性，在这里输入序列中每个位置的单词都有自己独特的路径流入编码器。在自注意力层中，这些路径之间存在依赖关系。而前馈（feed-forward）层没有这些依赖关系。因此在前馈（feed-forward）层时可以并行执行各种路径。
 
@@ -160,7 +160,7 @@ https://arxiv.org/abs/1706.03762
 
 如果你熟悉RNN（循环神经网络），回忆一下它是如何维持隐藏层的。RNN会将它已经处理过的前面的所有单词/向量的表示与它正在处理的当前单词/向量结合起来。而自注意力机制会将所有相关单词的理解融入到我们正在处理的单词中。
 
-![Image](https://mmbiz.qpic.cn/mmbiz_jpg/87HjJEl4c1s46s60FhpZjFU2TicuJ3zh1PuVHqQyp7cYEic6WOGia2cF6UibGyFW6EY7DMia42cAOsqwoM0RMnrwHNQ/640?wxfrom=5&wx_lazy=1&wx_co=1)当我们在编码器#5（栈中最上层编码器）中编码“it”这个单词的时，注意力机制的部分会去关注“The Animal”，将它的表示的一部分编入“it”的编码中。
+![Image](..\..\images\d8a3d093-752f-42b1-9b12-61917c875775.jpeg)当我们在编码器#5（栈中最上层编码器）中编码“it”这个单词的时，注意力机制的部分会去关注“The Animal”，将它的表示的一部分编入“it”的编码中。
 
   
 
@@ -182,7 +182,7 @@ https://arxiv.org/abs/1706.03762
 
   
 
-![Image](https://mmbiz.qpic.cn/mmbiz_jpg/87HjJEl4c1s46s60FhpZjFU2TicuJ3zh1Ft8gN7VBjlKetGIzZF5xicNuaLQnj6UNtObhHRCM1Y3E5jo0NIrfa6w/640?wxfrom=5&wx_lazy=1&wx_co=1&wx_fmt=jpeg)
+![Image](..\..\images\4bf50a54-8792-4d03-839e-cf8fe6b480ab.jpeg)
 
 X1与WQ权重矩阵相乘得到q1, 就是与这个单词相关的查询向量。最终使得输入序列的每个单词的创建一个查询向量、一个键向量和一个值向量。
 
@@ -202,11 +202,11 @@ X1与WQ权重矩阵相乘得到q1, 就是与这个单词相关的查询向量。
 
 这些分数是通过打分单词（所有输入句子的单词）的键向量与“Thinking”的查询向量相点积来计算的。所以如果我们是处理位置最靠前的词的自注意力的话，第一个分数是q1和k1的点积，第二个分数是q1和k2的点积。
 
-![Image](https://mmbiz.qpic.cn/mmbiz_jpg/87HjJEl4c1s46s60FhpZjFU2TicuJ3zh1iclicl0FjCrfltP1S5o6k9fcjcgPiceiarAZRF855iafoWIC9sSKFH8SHJA/640?wxfrom=5&wx_lazy=1&wx_co=1&wx_fmt=jpeg)
+![Image](..\..\images\2d9439e6-3204-49c9-b782-675f89748932.jpeg)
 
 第三步和第四步是将分数除以8(8是论文中使用的键向量的维数64的平方根，这会让梯度更稳定。这里也可以使用其它值，8只是默认值)，然后通过softmax传递结果。softmax的作用是使所有单词的分数归一化，得到的分数都是正值且和为1。
 
-![Image](https://mmbiz.qpic.cn/mmbiz_jpg/87HjJEl4c1s46s60FhpZjFU2TicuJ3zh1iaC4w5OVJ7IhDUy6OULwBbfibFMAMFw2smQ45t2yh90DiasnBUfItxHTw/640?wxfrom=5&wx_lazy=1&wx_co=1&wx_fmt=jpeg)
+![Image](..\..\images\338dc970-f711-43e6-b711-c5bf0a5f4b80.jpeg)
 
 这个softmax分数决定了每个单词对编码当下位置（“Thinking”）的贡献。显然，已经在这个位置上的单词将获得最高的softmax分数，但有时关注另一个与当前单词相关的单词也会有帮助。
 
@@ -324,13 +324,13 @@ https://arxiv.org/abs/1607.06450
 
 如果我们去可视化这些向量以及这个和自注意力相关联的层-归一化操作，那么看起来就像下面这张图描述一样：
 
-![Image](https://mmbiz.qpic.cn/mmbiz_jpg/87HjJEl4c1s46s60FhpZjFU2TicuJ3zh1URxpIoMhKstGBlUMvcic6MG6SxzN0OEeDuMAjkC14h3XafK7ibFVw0sA/640?wxfrom=5&wx_lazy=1&wx_co=1&wx_fmt=jpeg)
+![Image](..\..\images\29856bae-adc5-4296-bbdf-fae962cdcbd5.jpeg)
 
 解码器的子层也是这样样的。如果我们想象一个2 层编码-解码结构的transformer，它看起来会像下面这张图一样：
 
   
 
-![Image](https://mmbiz.qpic.cn/mmbiz_jpg/87HjJEl4c1s46s60FhpZjFU2TicuJ3zh1ACCzay5vQM3v1QPOXOFdFCiaqqicuyAV7xwzrAqc245HjFa0M3R03OAQ/640?wxfrom=5&wx_lazy=1&wx_co=1&wx_fmt=jpeg)解码组件
+![Image](..\..\images\3420587c-15ba-450c-a951-9a3e4c59191f.jpeg)解码组件
 
   
 
@@ -340,7 +340,7 @@ https://arxiv.org/abs/1607.06450
 
 编码器通过处理输入序列开启工作。顶端编码器的输出之后会变转化为一个包含向量K（键向量）和V（值向量）的注意力向量集 。这些向量将被每个解码器用于自身的“编码-解码注意力层”，而这些层可以帮助解码器关注输入序列哪些位置合适：
 
-![Image](https://mmbiz.qpic.cn/mmbiz_png/87HjJEl4c1s46s60FhpZjFU2TicuJ3zh1zHGcNnXbApkthYvWtH6skiawVZtda1ahSatRcnOsVvOXIn64bxzYYtg/640?wxfrom=5&wx_lazy=1&wx_co=1&wx_fmt=jpeg)
+![Image](..\..\images\f8fa6f27-6b85-44d3-a6d5-6c1d2bf46708.jpeg)
 
 在完成编码阶段后，则开始解码阶段。解码阶段的每个步骤都会输出一个输出序列（在这个例子里，是英语翻译的句子）的元素
 
@@ -465,7 +465,7 @@ https://www.countbayesie.com/blog/2017/5/9/kullback-leibler-divergence-explained
 
   
 
-在一个足够大的数据集上充分训练后，我们希望模型输出的概率分布看起来像这个样子：![Image](https://mmbiz.qpic.cn/mmbiz_jpg/87HjJEl4c1s46s60FhpZjFU2TicuJ3zh1SdVNrF92ZUNFiaBQQTIyuSDpiay1kEz4NS11UeRPYhOSXKqzibBViaOTFw/640?wxfrom=5&wx_lazy=1&wx_co=1&wx_fmt=jpeg)
+在一个足够大的数据集上充分训练后，我们希望模型输出的概率分布看起来像这个样子：![Image](..\..\images\f3fb947d-1c41-4841-b9f7-4e60896ea53c.jpeg)
 
 我们期望训练过后，模型会输出正确的翻译。当然如果这段话完全来自训练集，它并不是一个很好的评估指标。注意到每个位置（词）都得到了一点概率，即使它不太可能成为那个时间步的输出——这是softmax的一个很有用的性质，它可以帮助模型训练。
 

@@ -11,12 +11,12 @@ RealVNC/TightVNC
 
 1、在 系统偏好设置-共享-勾选“远端管理”,点击电脑设置
 
-[![image](https://images0.cnblogs.com/blog/363476/201410/111709567187736.png "image")](https://images0.cnblogs.com/blog/363476/201410/111709560151121.png)
+[![image](../../images/6617e17a-c1d9-471e-9af5-5d7de6d30745.png)](https://images0.cnblogs.com/blog/363476/201410/111709560151121.png)
 
 2、勾选“VNC显示程序可以使用密码控制屏幕“在文本框中输入8位密码,点击”好“，这样就可以通过其它PC或Mac上的VNC Viewer来连接这台Mac进行远程控制了。
 
-[![image](https://images0.cnblogs.com/blog/363476/201410/111709597028481.png "image")](https://images0.cnblogs.com/blog/363476/201410/111709585302024.png)
+[![image](../../images/b759a166-6d06-44aa-8c15-bf85f6c7e4ec.png)](https://images0.cnblogs.com/blog/363476/201410/111709585302024.png)
 
 3、选择可以远程登录的用户
 
-[![image](https://images0.cnblogs.com/blog/363476/201410/111710015157068.png "image")](https://images0.cnblogs.com/blog/363476/201410/111710006716411.png)
+[![image](../../images/c8945fa8-f7a7-41ef-a48d-ee0080873b65.png)](https://images0.cnblogs.com/blog/363476/201410/111710006716411.png)

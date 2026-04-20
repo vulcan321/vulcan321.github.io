@@ -84,16 +84,16 @@ LRU Cache
 为了能够快速删除最久没有访问的数据项和插入最新的数据项，我们使用 双向链表 连接Cache中的数据项，并且保证链表维持数据项从最近访问到最旧访问的顺序。
 
 -   插入(insert)  
-    当Cache未满时，新的数据项只需插到双链表头部即可。时间复杂度为![O(1)](https://math.jianshu.com/math?formula=O(1)).
+    当Cache未满时，新的数据项只需插到双链表头部即可。时间复杂度为![O(1)](..\..\images\dd47e29a-402c-44f3-899a-323e8b2d0549.svg+xml; charset=utf-8)).
     
 -   替换(replace) = insert + delete  
-    当Cache已满时，将新的数据项插到双链表头部，并删除双链表的尾结点即可。时间复杂度为![O(1)](https://math.jianshu.com/math?formula=O(1)).
+    当Cache已满时，将新的数据项插到双链表头部，并删除双链表的尾结点即可。时间复杂度为![O(1)](..\..\images\dd47e29a-402c-44f3-899a-323e8b2d0549.svg+xml; charset=utf-8)).
     
 -   查找（lookup）  
     每次数据项被查询到时，都将此数据项移动到链表头部。
     
 
-经过分析，我们知道使用双向链表可以保证插入和替换的时间复杂度是![O(1)](https://math.jianshu.com/math?formula=O(1))，但查询的时间复杂度是![O(n)](https://math.jianshu.com/math?formula=O(n))，因为需要对双链表进行遍历。为了让查找效率也达到![O(1)](https://math.jianshu.com/math?formula=O(1))，很自然的会想到使用 hash table 。
+经过分析，我们知道使用双向链表可以保证插入和替换的时间复杂度是![O(1)](..\..\images\dd47e29a-402c-44f3-899a-323e8b2d0549.svg+xml; charset=utf-8))，但查询的时间复杂度是![O(n)](..\..\images\cc04c834-0306-4dae-ad66-266cf90b0616.svg+xml; charset=utf-8))，因为需要对双链表进行遍历。为了让查找效率也达到![O(1)](..\..\images\dd47e29a-402c-44f3-899a-323e8b2d0549.svg+xml; charset=utf-8))，很自然的会想到使用 hash table 。
 
 ## 双向链表+HashMap
 
@@ -131,7 +131,7 @@ class Node {
 
 为了能够快速删除最久没有访问的数据项和插入最新的数据项，我们将双向链表连接Cache中的数据项，并且保证链表维持数据项从最近访问到最旧访问的顺序。
 
-**每次数据项被查询到时，都将此数据项移动到链表头部（![O(1)](https://math.jianshu.com/math?formula=O(1))的时间复杂度）**
+**每次数据项被查询到时，都将此数据项移动到链表头部（![O(1)](..\..\images\dd47e29a-402c-44f3-899a-323e8b2d0549.svg+xml; charset=utf-8))的时间复杂度）**
 
 这样，在进行过多次查找操作后，最近被使用过的内容就向链表的头移动，而没有被使用的内容就向链表的后面移动。
 

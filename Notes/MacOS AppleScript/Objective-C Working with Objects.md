@@ -28,7 +28,7 @@ Sending an Objective-C message is conceptually very much like calling a C functi
 
 **Figure 2-1**  Basic messaging program flow  
 **图 2-1** 基本消息传递程序流程
-![Program Flow](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/Art/programflow1.png "Program Flow")
+![Program Flow](../../images/5683037f-946c-4ffe-af67-9edac21d04d9.png)
 
 ### You Can Pass Objects for Method Parameters  
 
@@ -131,7 +131,7 @@ If you sent an `XYZPerson` object the `sayHello` message for this updated implem
 **Figure 2-2**  Program flow when messaging self  
 **图 2-2** 消息传递自身时的程序流
 
-![](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/Art/programflow2.png)
+![](../../images/f997ba34-a044-472c-b465-895bbb3a3d10.png)
 
 ### Objects Can Call Methods Implemented by Their Superclasses  
 
@@ -177,7 +177,7 @@ The effective program flow that now results from sending an `XYZShoutingPerson` 
 **Figure 2-4**  Program flow when messaging super  
 **图 2-4** 消息传递超级时的程序流
 
-![](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/Art/programflow4.png)
+![](../../images/57018273-a459-45d1-b4ea-baa1d1172952.png)
 
 ## Objects Are Created Dynamically  
 对象是动态创建的
@@ -219,7 +219,7 @@ The innermost call is carried out first, so the `NSObject` class is sent the `al
 **Figure 2-5**  Nesting the alloc and init message  
 **图 2-5** 嵌套 alloc 和 init 消息
 
-![](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/Art/nestedallocinit.png)
+![](../../images/bf3079cf-f7cd-44c3-8028-1114dcab3a72.png)
 
 ### Initializer Methods Can Take Arguments
 

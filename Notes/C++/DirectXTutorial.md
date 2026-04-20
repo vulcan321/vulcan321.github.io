@@ -85,7 +85,7 @@ HRESULT D3D11CreateDeviceAndSwapChain(
 
 ⑥ 在渲染管线的光栅化阶段设置好渲染的视图区域
 
-![image-01](https://github.com/mingxingren/Notes/raw/master/resource/photo/image-2022031601.png)
+![image-01](..\..\images\1ec6d74e-a3bb-473a-a3f1-00ff474c34df.png)
 
 
 

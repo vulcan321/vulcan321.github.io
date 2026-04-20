@@ -382,7 +382,7 @@ At this point, you'll see a Standard Suite and System Preferences listed in a tr
 
 When you look at "application," you'll see two things: elements and properties. Elements are collections of objects that are managed by the selected object. The properties list data maintained by the selected object.
 
-![](https://www.objc.io/images/issue-14/Scripting_Dictionary_9c257dc.png)
+![](../../images/689e923e-5143-464a-b4ab-4b79655cefe3.png)
 
 So an application contains panes. That sounds promising. In a new Script Editor window, create a simple script to show all the pane objects:
 

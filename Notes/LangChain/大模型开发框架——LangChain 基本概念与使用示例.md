@@ -3,9 +3,9 @@
 
 一图胜千言，`LangChain`已经成为当前 LLM 应用框架的事实标准，这篇文章就来对 LangChain 基本概念以及其具体使用场景做一个整理。
 
-![](https://pic1.zhimg.com/v2-adfb55f57e20fe793ae12592f07b84a4_b.jpg)
+![](..\..\images\990177cb-55a6-4d9d-b539-dbc2a0e7901f.jpg)
 
-![](https://pic1.zhimg.com/80/v2-adfb55f57e20fe793ae12592f07b84a4_720w.webp)
+![](..\..\images\feb88d00-3825-493e-a036-7766ba1d421a.webp)
 
 ### **LangChain 是什么**
 
@@ -25,13 +25,13 @@ LangChain 的优点包括:
 这是一张`LangChain`的组件与架构图（`langchain python`和`langchain JS/TS`的架构基本一致，本文中以`langchain python`来完成相关介绍），基本完整描述了`LangChain`的组件与抽象层（`callback`不在这张图中，在下方我们会另外介绍），以及它们之间的相关联系。
 
 
-![](https://pic1.zhimg.com/80/v2-52599b14c7bca6b70da65d7337ac9990_720w.webp)
+![](..\..\images\eb86ac5e-b061-4cce-ada8-67d396fd87bb.webp)
 
 ### **Model I/O**
 
 首先我们从最基本面的部分讲起，Model I/O 指的是和 LLM 直接进行交互的过程。
 
-![](https://pic2.zhimg.com/80/v2-13134e409d5226eca48ed2f0610277dd_720w.webp)
+![](..\..\images\2ac8e41b-fc28-49c4-932a-8e7bb1d6348f.webp)
 
 在 Model I/O 这一流程中，LangChain 抽象的组件主要有三个：
 
@@ -96,9 +96,9 @@ _\# AIMessage(content='Generic Language Models, Instruction-Tuned Models, and Di
 -   Example selectors: 在很多场景下，单纯的**instruction + input**的`prompt`不足以让`LLM`完成高质量的推理回答，这时候我们就还需要为`prompt`补充一些针对具体问题的示例，LangChain 将这一功能抽象为了`Example selectors`这一组件，我们可以基于关键字，相似度(通常使用**MMR/cosine similarity/ngram**来计算相似度, 在后面的向量数据库章节中会提到)。为了让最终的`prompt`不超过`Language Model`的 token 上限（各个模型的 token 上限见下表），`LangChain`还提供了`LengthBasedExampleSelector`，根据长度来限制 example 数量，对于较长的输入，它会选择包含较少示例的提示，而对于较短的输入，它会选择包含更多示例。  
     
 
-![](https://pic4.zhimg.com/v2-fc4c49bf2dfd3ca75c37db9340bd2133_b.jpg)
+![](..\..\images\5222d03c-eea1-497f-9291-67e2ca9344a1.jpg)
 
-![](https://pic4.zhimg.com/80/v2-fc4c49bf2dfd3ca75c37db9340bd2133_720w.webp)
+![](..\..\images\ef8ebc88-c509-4087-9f6e-6fd132bb2703.webp)
 
 | Model | Max Tokens | Training Data |
 | --- | --- | --- |
@@ -196,7 +196,7 @@ print (json.dumps(output, indent=4))
 -   **[Vector stores](https://link.zhihu.com/?target=https%3A//python.langchain.com/docs/modules/data_connection/vectorstores/)**
 -   **[Retrievers](https://link.zhihu.com/?target=https%3A//python.langchain.com/docs/modules/data_connection/retrievers/)**
 
-![](https://pic2.zhimg.com/80/v2-0dcfa0642e32f29f4628cfb1ec4fe51d_720w.webp)
+![](..\..\images\28dd0c5f-3f0e-4ae4-bd33-f02c84a9fa4d.webp)
 
 下面我们展开介绍一下
 
@@ -249,7 +249,7 @@ docs[0].page_content[:100]
 在前面的 Prompt 一节中我们提到了 Example selectors，那么我们要如何找到相关示例呢？通常这个答案就是向量数据库。
 
 
-![](https://pic2.zhimg.com/80/v2-6fe834da368b5916e451deb9207765c5_720w.webp)
+![](..\..\images\88a7bc68-ec2e-4b1e-9d6e-5093cf157ef9.webp)
 
 存储和搜索非结构化数据的最常见方式之一是将其向量化(embedding)并存储所得到的嵌入向量，然后在查询时向量化非结构化查询并检索与嵌入的查询最相似的向量。**Vector stores**负责存储向量化数据并提供向量搜索的功能，常见的向量数据库包括 FAISS, Milvus, Pinecone, Weaviate, Chroma 等，日常使用更常用的是 FAISS。
 
@@ -339,7 +339,7 @@ Router Chain 由两部分组成：
 Map-reduce Chain 主要用于 summary 的场景，针对那些超长的文档，首先我们通过前面提到过的 TextSpliter 按一定规则分割文档为更小的 Chunks（通常使用 RecursiveCharacterTextSplitter，如果 Document 是结构化的可以考虑使用指定的 TextSpliter）,然后对每个分割的部分执行”map-chain”，收集全部”map-chain”的输出后，再执行”reduce-chain”，获得最终的 summary 输出。
 
 
-![](https://pic3.zhimg.com/80/v2-7a3802ab740986c818de77ac880f7136_720w.webp)
+![](..\..\images\bb7a71d2-9cea-4310-9f22-5ee6a5aaf8b6.webp)
 
 ### **使用示例**
 
@@ -446,7 +446,7 @@ chain.run("What is black body radiation?")
 通常 Memory 用于较长的 Chain，能一定程度上提高模型的推理表现。
 
 
-![](https://pic3.zhimg.com/80/v2-e6b8788123dbb5d3ded6fe6d200585a6_720w.webp)
+![](..\..\images\72c55693-c55a-4cf1-bc6f-4b55386486d3.webp)
 
 常用的 Memory 类型如下：
 
@@ -566,7 +566,7 @@ conversation_with_summary.predict(input="Is there a substitutes for Kubernetes i
 
 结合对 LLM 输出的归因和执行，类似 OpenAI functions Agent，提供了一个更加明确的框架以及由论文支撑的方法。
 
-![](https://pic4.zhimg.com/80/v2-83e9711e0c82688cc15d52f015c3eb3b_720w.webp)
+![](..\..\images\e62ebdd7-23cb-4281-a330-67cade54e0ab.webp)
 
 ### **Self ask with search**
 

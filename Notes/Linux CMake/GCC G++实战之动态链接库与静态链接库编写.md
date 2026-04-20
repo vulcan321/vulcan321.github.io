@@ -115,7 +115,7 @@ g++ main.cpp -L. -ldynamic -o main
 ldd main
 ```
 
-![](https://images2015.cnblogs.com/blog/966989/201606/966989-20160603205721117-1980980135.png)
+![](..\..\images\55774060-40d9-4f5d-a64e-44197f746438.png)
 
 如果运行：
 
@@ -175,7 +175,7 @@ ld.so.cache的更新是递增式的，就像PATH系统环境变量一样，不�
 ./main
 ```
 
-![](https://images2015.cnblogs.com/blog/966989/201606/966989-20160603210351367-714431487.png)
+![](..\..\images\cb183152-1562-4328-8f37-52056bc53e33.png)
 
 # **静态库的编译:**
 
@@ -210,7 +210,7 @@ ar cr libstatic.a dynamic_a.o dynamic_b.o dynamic_c.o  //cr标志告诉ar将obje
 nm -s libstatic.a 
 ```
 
-![](https://images2015.cnblogs.com/blog/966989/201606/966989-20160603211303383-591019221.png)
+![](..\..\images\cef05f56-b422-49ec-a609-3ca058b09aa3.png)
 
 **3.链接静态库**  
 
@@ -224,4 +224,4 @@ g++ main.cpp -lstatic -L. -static -o main//这里的-static选项是告诉编译
 ./main
 ```
 
-![](https://images2015.cnblogs.com/blog/966989/201606/966989-20160603211334242-81528379.png)
+![](..\..\images\277a3eaf-d5ea-4e9c-a4b9-d8316ae53ddd.png)

@@ -4,7 +4,7 @@ LLVM的命名最早起源于底层语言虚拟机（Low Level Virtual Machine）
 
 传统的静态编译器分为三个阶段：前端、中端（优化）、后端，LLVM 也不例外，只是 LLVM 实现了一种**与源编程语言和目标机器架构无关的通用中间表示——LLVM IR**， 这样如果支持一种新的编程语言只需重新实现一个前端，支持一种新的目标架构只需重新实现一个后端，前端和后端的链接枢纽就是**LLVM IR**
 
-![image-01](https://github.com/mingxingren/Notes/raw/master/resource/photo/image-2021071801.jpg)
+![image-01](..\..\images\f168f37f-62e0-4c69-89e6-cd11014a137d.jpg)
 
 
 

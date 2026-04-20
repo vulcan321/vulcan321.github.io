@@ -4,7 +4,7 @@
 
 该项目是使用 **QWidget** 进行渲染, 所以需要将解码出来 **YUV** 图像格式转换成 **RGB** 格式。视频的解码流程如下图:
 
-![image-01](https://github.com/mingxingren/Notes/raw/master/resource/photo/image-2021051701.png)
+![image-01](../../images/3912cf53-39c5-4229-94a9-631057fc6624.png)
 
 ### 二、音频解码流程
 
